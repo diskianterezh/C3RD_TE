@@ -1,0 +1,127 @@
+﻿culture_decisions = {
+
+	#Primary Culture Rights and Privileges:
+	exemption_from_census_tax = {
+		potential = {
+			primary_culture = scope:target_culture.culture
+			NOT = { has_country_modifier = citizen_exemption_from_census_tax } #Has revoke version.
+		}
+		allow = {
+			NOT = {
+				has_country_modifier = citizen_exemption_from_census_tax
+			}
+			NOT = { has_country_modifier = tax_inspection }
+		}
+		effect = {
+			add_country_modifier = {
+				name = "citizen_exemption_from_census_tax" #Applies to all integrated cultures
+				duration = -1
+			}
+			approval_effect = {
+				PARTY = optimates_party
+				VALUE = party_approval_medium_svalue
+			}
+			approval_effect = {
+				PARTY = populares_party
+				VALUE = party_disapproval_medium_svalue
+			}
+			approval_effect = {
+				PARTY = oligarchic_party
+				VALUE = party_approval_medium_svalue
+			}
+			approval_effect = {
+				PARTY = democratic_party
+				VALUE = party_disapproval_medium_svalue
+			}
+		}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	revoke_exemption_from_census_tax = {
+		potential = {
+			primary_culture = scope:target_culture.culture
+			has_country_modifier = citizen_exemption_from_census_tax
+			NOT = {
+				has_variable = census_exemption_given_recently
+			}
+		}
+		allow = {
+			has_country_modifier = citizen_exemption_from_census_tax
+		}
+		effect = {
+			remove_country_modifier = citizen_exemption_from_census_tax
+			every_integrated_culture = {
+				add_country_culture_modifier = {
+					name = "revoked_tax_exemption"
+					duration = 1825
+				}
+			}
+			approval_effect = {
+				PARTY = optimates_party
+				VALUE = party_disapproval_medium_svalue
+			}
+			approval_effect = {
+				PARTY = populares_party
+				VALUE = party_approval_medium_svalue
+			}
+			approval_effect = {
+				PARTY = oligarchic_party
+				VALUE = party_disapproval_medium_svalue
+			}
+			approval_effect = {
+				PARTY = democratic_party
+				VALUE = party_approval_medium_svalue
+			}
+		}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	
+	strengthen_tax_inspection = {
+		potential = {
+			primary_culture = scope:target_culture.culture
+			NOR = { 
+				has_country_modifier = tax_inspection 
+				has_variable = tax_inspection_stopped
+				has_country_modifier = citizen_exemption_from_census_tax
+			}
+		}
+		allow = {
+			NOR = { 
+				has_country_modifier = tax_inspection
+				has_country_modifier = citizen_exemption_from_census_tax
+			}	
+			stability > 10
+			}
+			
+		effect = {
+			add_country_modifier = {
+					name = "tax_inspection"
+					duration = -1
+			}			
+			custom_tooltip = tax_inspection_tt
+        }	
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	revoke_strengthen_tax_inspection = {
+		potential = {
+			primary_culture = scope:target_culture.culture
+			has_country_modifier = tax_inspection
+		}
+		allow = {
+			has_country_modifier = tax_inspection
+		}
+		effect = {
+			remove_country_modifier = tax_inspection
+		}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	
+	
+}

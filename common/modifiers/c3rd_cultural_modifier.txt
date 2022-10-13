@@ -1,0 +1,37 @@
+
+
+
+unworthy_ruler_tradition = {
+	culture_happiness_modifier = -0.05
+}
+
+new_culture_elite = {
+	culture_happiness_modifier = 0.05
+	culture_nobles_output = 0.1
+	culture_freemen_output = -0.10
+	culture_slaves_output = -0.10
+}
+
+new_elite_refused = {
+	culture_happiness_modifier = -0.1
+}
+
+simili_elite = {
+	culture_nobles_output = -0.2
+	culture_citizen_output = -0.2
+	culture_freemen_output = -0.2
+	culture_slaves_output = -0.2
+}
+
+on_going_revolt = {
+	culture_happiness_modifier = -0.1
+}
+
+emancipation_c3rd = {
+	culture_slaves_output = -0.1
+}
+
+slaves_massacre_c3rd = {
+	culture_happiness_modifier = 0.05
+	culture_slaves_output = 0.1
+}

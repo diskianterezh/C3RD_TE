@@ -1,0 +1,264 @@
+
+
+internal_collapse = {
+	global_population_happiness = -0.2
+	governor_loyalty = -10
+	stability_monthly_change = -0.15
+	monthly_legitimacy = -0.1
+	subject_loyalty = -20
+	monthly_corruption = 0.05
+}
+
+general_corruption = {
+	monthly_corruption = 0.2
+}
+
+nobility_turmoils = {
+	global_nobles_happyness = -0.1
+	global_freemen_output = -0.1
+}
+
+priest_unrestricted = {
+	omen_power = -0.5
+	happiness_for_wrong_culture_group_modifier = -0.1
+	happiness_for_wrong_culture_modifier = -0.1
+}
+
+autonomy_granted = {
+	loyalty_to_overlord = 20
+}
+
+crisis_of_the_third_century = {
+	global_nobles_output = -0.1
+	global_citizen_output = -0.1
+	stability_monthly_change = -0.05
+	subject_loyalty = -20
+	tribute_income_modifier = -0.35
+	happiness_for_same_culture_modifier = -0.1
+	monthly_legitimacy = -0.1
+	agressive_expansion_impact = 0.25
+	global_monthly_state_loyalty = -0.01
+	integrate_speed = -0.5
+	diplomatic_relations = -1
+}
+
+military_anarchy = {
+	general_loyalty = -10
+	loyalty_gain_chance_modifier = 0.05
+	monthly_wage_modifier = 0.1
+	monthly_corruption = 0.05
+	land_morale_modifier = 0.05
+	governor_loyalty = -5
+	diplomatic_relations = -1
+}
+
+stability_boosted_mother = {
+	stability_monthly_change = 0.1
+}
+
+political_unstability = {
+	monthly_tyranny = 0.05
+	monthly_corruption = 0.05
+	stability_monthly_change = -0.05
+	happiness_for_same_culture_modifier = -0.1
+	subject_loyalty = -10
+	monthly_political_influence_modifier = -0.25
+	diplomatic_relations = -1
+}
+
+deep_reforms = {
+	stability_monthly_change = 0.03
+	monthly_legitimacy = 0.06
+	happiness_for_same_culture_modifier = 0.1
+	tribute_income_modifier = 0.3
+	monthly_corruption = -0.02
+	monthly_political_influence_modifier = 0.1
+}
+
+military_advantages = {
+	loyalty_gain_chance_modifier = 0.05
+	army_maintenance_cost = 0.2
+	discipline = -0.1
+	land_morale_modifier = 0.05
+	manpower_recovery_speed = 0.02
+}
+
+
+reform_to_monarchy_modifier = { 
+    stability_monthly_change = -0.01
+    civil_war_threshold = -0.05
+}
+
+dictatorial_extension_c3rd = {
+    election_term_duration = 2
+	monthly_tyranny = 0.01
+}
+
+civil_war_stab = {
+	stability_monthly_change = -0.25
+}
+
+unworthy_leader_1 = {
+	monthly_legitimacy = -0.1
+	land_morale_modifier = -0.05
+}
+
+unworthy_leader_2 = {
+	monthly_legitimacy = -0.15
+	land_morale_modifier = -0.05
+}
+
+unworthy_leader_3 = {
+	monthly_legitimacy = -0.2
+	land_morale_modifier = -0.05
+}
+
+administrative_difficulty = {
+	happiness_for_wrong_culture_group_modifier = -0.15
+	global_slaves_output = -0.2
+	global_tribesmen_output = -0.2
+	monthly_governor_wage = 0.1
+	monthly_corruption = 0.02
+}
+administrative_difficulty_small = {
+	happiness_for_wrong_culture_group_modifier = -0.08
+	global_slaves_output = -0.1
+	global_tribesmen_output = -0.1
+	monthly_governor_wage = 0.05
+}
+
+collapse_avoided_dec = {
+	monthly_centralization = -0.5
+	global_citizen_output = -0.3
+	global_nobles_output = -0.2
+}
+
+collapse_avoided_decdec = {
+	global_tribesmen_happyness = -0.3
+	monthly_corruption = 0.15
+	global_tribesmen_output = -0.5
+}
+
+deep_mining = {
+	local_population_growth = -0.1
+	local_goods_from_slaves = 10
+	local_slaves_happyness = -0.15
+}
+
+
+citizen_exemption_from_census_tax = { #vanilla one nerfed
+	happiness_for_same_culture_modifier = 0.08
+	global_citizen_output = -0.06
+	global_nobles_output = -0.06
+	monthly_corruption = 0.01
+}
+
+tax_inspection = {
+	global_citizen_happyness = -0.1
+	global_nobles_happyness = -0.1
+	character_loyalty = -7
+	global_tax_modifier = 0.1
+	monthly_corruption = -0.05
+}
+
+government_support_movement = {
+	stability_monthly_change = 0.05
+	character_loyalty = 5
+}
+
+mines_control_assessed = {
+	global_nobles_happyness = -0.1
+	global_slaves_happyness = 0.05
+}
+
+stric_control_assessed = {
+	stability_monthly_change = -0.02
+	monthly_governor_wage = 0.05
+}
+
+public_games_modifier = {
+	stability_monthly_change = 0.02
+	happiness_for_same_culture_modifier = 0.05
+}
+
+no_games_modifier = {
+	global_citizen_happyness = -0.1
+	happiness_for_same_culture_modifier = -0.1
+}
+
+small_deflation = {
+	global_freemen_output = -0.2
+	happiness_for_same_culture_modifier = 0.05
+	global_commerce_modifier = -0.05
+	build_time = 0.1
+	build_cost = -0.1
+}
+
+medium_deflation = {
+	global_freemen_output = -0.5
+	global_commerce_modifier = -0.15
+	global_citizen_output = -0.2
+	global_nobles_happyness = -0.10
+	build_time = 0.4
+}
+
+high_deflation = {
+	global_freemen_output = -1
+	global_commerce_modifier = -0.50
+	global_citizen_output = -0.5
+	global_nobles_happyness = -0.3
+	global_citizen_happyness = -0.15
+	build_time = 1
+	happiness_for_same_culture_modifier = -0.2
+	stability_monthly_change = -0.05
+	character_loyalty = -5
+}
+
+solidus_introduced = {
+	global_nobles_happyness = 0.1
+	global_nobles_output = -0.15
+	global_freemen_happyness = -0.1
+}
+
+big_monetary_control = {
+	global_tax_modifier = -0.25
+}
+
+big_monetary_change = {
+	global_commerce_modifier = -0.2
+}
+
+small_monetary_crash = {
+	global_freemen_happyness = -0.05
+	happiness_for_same_culture_modifier = -0.05
+	global_commerce_modifier = 0.1
+	build_time = -0.1
+}
+
+medium_monetary_crash = {
+	global_freemen_happyness = -0.25
+	global_citizen_happyness = -0.1
+	happiness_for_same_culture_modifier = -0.1
+	happiness_for_wrong_culture_group_modifier = -0.1
+	global_monthly_state_loyalty = -0.02
+	build_cost = 0.2
+}
+
+high_monetary_crash = {
+	global_freemen_happyness = -0.5
+	global_citizen_happyness = -0.25
+	happiness_for_same_culture_modifier = -0.25
+	happiness_for_wrong_culture_group_modifier = -0.25
+	global_monthly_state_loyalty = -0.1
+	stability_monthly_change = -0.05
+	build_cost = 0.5
+}
+
+local_autonomy_c3rd = {
+	local_pop_assimilation_speed_modifier = -0.25
+}
+
+revolt_preparation = {
+	local_unrest = 2
+}
+

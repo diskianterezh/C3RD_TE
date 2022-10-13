@@ -1,0 +1,57 @@
+﻿namespace = friend_rival
+
+#Generic friendship Events
+friend_rival.11 = { 
+	type = character_event
+	title = "friend_rival.11.t"
+	desc = "friend_rival.11.desc"
+	picture = senate_debate
+	
+	left_portrait = root
+	right_portrait = scope:targeter
+	
+	trigger = {
+		exists = scope:targeter
+		scope:targeter = { is_alive = yes }
+	}
+	
+	immediate = {
+
+	}
+	
+	option = {
+		name = "friend_rival.11.a"
+		if = {
+			limit = {
+				char_can_have_friends_trigger = yes
+			}
+			add_friend = scope:targeter
+		}
+		ai_chance = {
+			modifier = {
+				factor = 10
+				root.employer = {
+					has_country_modifier = crisis_of_the_third_century
+				}
+				root = {
+					is_governor = yes
+				}
+				scope:targeter = {
+					is_general = yes
+				}
+			}
+		}
+	}
+	
+	option = {
+		name = "friend_rival.11.b"
+		if = {
+			limit = {
+				is_ruler = yes
+			}
+			scope:targeter = {
+				add_loyalty = loyalty_friendship_overruled
+			}
+		}
+	}
+}

@@ -1,0 +1,17 @@
+﻿# All global modifiers are here.  They are applied from certain game-features.
+#
+# Effects are fully scriptable here.
+
+
+#these names can NOT be removed or changes, as the code uses them....
+
+looted = {
+	local_hostile_food_multiplier = -0.15
+	local_population_growth = -0.1
+	max_attrition = 5			#Maximum Attrition is increased by 5
+	local_tax_modifier = -0.5		#50% less tax income.
+	local_monthly_civilization = -0.03
+	local_migration_attraction = -2
+	local_pop_assimilation_speed_modifier = -1
+	global_pop_promotion_speed_modifier = -0.5
+}

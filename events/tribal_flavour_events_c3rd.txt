@@ -1,0 +1,340 @@
+﻿namespace = tribal_flavour_events
+# this is a copy of the original file
+# Stability cap needed decreased to 20 to reduce the number of collapse through time, added condition of not high centralization
+tribal_flavour_events.1 = {
+	type = country_event
+	title = "tribal_flavour_event.1.t"
+	desc =  "tribal_flavour_event.1.desc"
+	picture = celtic_diplomacy
+	
+	left_portrait = root.current_ruler
+	right_portrait = scope:duelist_1
+	right_portrait = scope:duelist_2
+	
+	trigger = {
+		is_tribal = yes
+	}
+	
+	immediate = {
+		random_character = {
+			limit = {
+				is_ruler = no
+				is_adult = yes
+			}
+			save_scope_as = duelist_1
+		}
+		random_character = {
+			limit = {
+				is_ruler = no
+				is_adult = yes
+				NOT = { this = scope:duelist_1 }
+			}
+			save_scope_as = duelist_2
+		}
+	}
+	
+	option = {
+		name = "tribal_flavour_event.1.a"
+		scope:duelist_1 = {
+			add_loyalty = loyalty_picked_side
+			add_gold = add_gold_small
+			
+		}
+		scope:duelist_2 = {
+			add_loyalty = loyalty_picked_other_side
+		}
+	}
+	
+	option = {
+		name = "tribal_flavour_event.1.b"
+		scope:duelist_2 = {
+			add_loyalty = loyalty_picked_side
+			add_gold = add_gold_small
+			
+		}
+		scope:duelist_1 = {
+			add_loyalty = loyalty_picked_other_side
+		}
+	}
+	
+	option = {
+		name = "tribal_flavour_event.1.c"
+		add_tyranny = 5
+		add_treasury = add_gold_small
+		scope:duelist_1 = {
+			add_loyalty = loyalty_chided_bickering
+			
+		}
+		scope:duelist_2 = {
+			add_loyalty = loyalty_chided_bickering
+		}
+	}
+	
+	option = {
+		name = "tribal_flavour_event.1.d"
+		add_stability_effect = yes
+		
+		scope:duelist_1 = {
+			add_loyalty = loyalty_chided_bickering_2
+		}
+		scope:duelist_2 = {
+			add_loyalty = loyalty_chided_bickering_2
+		}	
+	}
+}
+
+tribal_flavour_events.2 = {
+	type = country_event
+	hidden = yes
+	
+	trigger = {
+		is_ai = yes
+		is_tribal = yes
+		num_of_cities >= 120
+		war = no
+		has_civil_war = no
+		NOT = {
+			country_culture_group = scythia
+		}
+		OR = {
+			stability <= 20
+			centralization < -90
+		}
+		NOT = {
+			centralization > 90
+		}
+		current_date < 760.1.1 #yeah, now tribals are allowed to grow
+	}
+	
+	immediate = {
+		save_scope_as = origin_crisis
+		every_country_state = {
+			limit = {
+				NOT = {
+					this = root.capital_scope.state
+				}
+			}
+			save_scope_as = sbgnq1
+			capital_scope = {
+				create_country = {
+					change_government = tribal_kingdom
+					save_scope_as = sbgnq2
+					if = {
+						limit = {
+							exists = scope:sbgnq1
+						}
+						scope:sbgnq1 = {
+							every_state_province = {
+								set_owned_by = scope:sbgnq2
+							}
+						}
+					}
+					if = {
+						limit = {
+							any_neighbour_country = {
+								this = root
+							}
+						}
+						root = {
+							make_subject = {
+								target = scope:sbgnq2
+								type = feudatory
+							}
+						}
+					}
+				}
+			}
+		}
+		every_country = {
+			limit = {
+				is_ai = no
+			}
+			trigger_event = {
+				id = tribal_flavour_events.3
+			}
+		}
+	}
+	
+}
+
+tribal_flavour_events.3 = {
+	type = country_event
+	title = "tribal_flavour_events.3.t" 
+	desc =  "tribal_flavour_events.3.desc"
+	picture = celtic_diplomacy
+	goto_location = scope:origin_crisis.capital_scope
+	
+	left_portrait = root.current_ruler
+	right_portrait = scope:origin_crisis.current_ruler
+	
+	trigger = {
+	}
+	
+	option = {
+		name = "tribal_flavour_events.3.a"
+		custom_tooltip = "target_fallen_tfe3"
+	}
+}
+
+tribal_flavour_events.4 = {
+	type = country_event
+	title = "tribal_flavour_events.4.t" 
+	desc =  "tribal_flavour_events.4.desc"
+	picture = celtic_diplomacy
+	goto_location = scope:origin_crisis.capital_scope
+	
+	left_portrait = root.current_ruler
+	trigger = {
+		is_tribal = yes
+		num_of_cities >= 500
+		war = no
+		has_civil_war = no
+		OR = {
+			stability <= 20
+			AND = {
+				centralization < -90
+				stability < 30
+			}
+		}
+		current_date > 750.1.1 #to replace the deleted tribalxplosion
+		NOT = {
+			has_variable = tribal_xplosion
+		}
+	}
+
+	immediate = {
+		set_variable = {
+			name = tribal_xplosion
+			days = 3650
+		}
+	}
+	
+	option = {
+		name = "tribal_flavour_events.4.a"
+        custom_tooltip = tribal_flavour_events.4.a.tt1
+		random_list = {
+			50 = {
+				modifier = {
+					add = current_ruler.popularity
+				}
+				add_stability = 10
+			}
+			100 = {
+				custom_tooltip = tribal_flavour_events.4.a.tt2
+				modifier = {
+					add = 100
+					is_ai = yes
+				}
+				modifier = {
+					add = 25
+					stability < 10
+				}
+				modifier = {
+					add = 25
+					centralization < -75
+				}
+				trigger_event = {
+					id = tribal_flavour_events.5
+				}
+			}
+		}
+	}
+	option = {
+		name = "tribal_flavour_events.4.b"
+        custom_tooltip = tribal_flavour_events.4.b.tt1
+		trigger = {
+			is_ai = no
+			centralization >= 0
+		}
+		add_political_influence = -50
+		add_country_modifier = {
+			name = collapse_avoided_dec
+			duration = 3650 #5y
+		}
+	}
+	option = {
+		name = "tribal_flavour_events.4.c"
+        custom_tooltip = tribal_flavour_events.4.c.tt1
+		trigger = {
+			is_ai = no
+			centralization <= 0
+		}
+		add_political_influence = -25
+		add_stability = -5
+		add_country_modifier = {
+			name = collapse_avoided_decdec
+			duration = 3650 #5y
+		}
+	}
+}
+
+tribal_flavour_events.5 = {
+	type = country_event
+	title = "tribal_flavour_events.5.t" 
+	desc =  "tribal_flavour_events.5.desc"
+	picture = celtic_diplomacy
+	
+	trigger = {
+		
+	}
+	
+	immediate = {
+		save_scope_as = origin_crisis
+		every_governorships = {
+			limit = {
+				NOT = {
+					this = root.capital_scope.governorship
+				}
+			}
+			save_scope_as = sbgnq1
+			capital_scope = {
+				create_country = {
+					change_government = tribal_kingdom
+					save_scope_as = sbgnq2
+					if = {
+						limit = {
+							exists = scope:sbgnq1
+						}
+						scope:sbgnq1 = {
+							every_governorship_state = {
+								every_state_province = {
+									set_owned_by = scope:sbgnq2
+								}
+							}
+						}
+					}
+					if = {
+						limit = {
+							any_neighbour_country = {
+								this = root
+							}
+						}
+						root = {
+							make_subject = {
+								target = scope:sbgnq2
+								type = feudatory
+							}
+						}
+					}
+				}
+			}
+		}
+		every_country = {
+			limit = {
+				is_ai = no
+				NOT = {
+					this = root
+				}
+			}
+			trigger_event = {
+				id = tribal_flavour_events.3
+			}
+		}
+	}
+
+	option = {
+		name = "tribal_flavour_events.5.a"
+        custom_tooltip = tribal_flavour_events.5.a.tt1
+		
+	}
+}

@@ -1,0 +1,10 @@
+
+
+king_maker = {
+	monthly_character_popularity = 0.50
+	monthly_character_fam_prestige = 0.50
+}
+
+popular_general = {
+	monthly_character_popularity = 0.15
+}

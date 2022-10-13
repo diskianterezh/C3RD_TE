@@ -1,0 +1,335 @@
+﻿
+
+scheme_provoke_rival_start = {
+	effect = {
+		employer = {
+			random_character = {
+				limit = {
+					is_adult = yes
+					NOR = {
+						this = root
+						is_rival = root
+						is_friend = root
+					}
+					OR = {
+						is_ruler = no
+						AND = {
+							is_ruler = yes
+							root.power_base >= 20
+						}
+					}
+					can_get_rivals = yes
+					trigger_if = {
+						limit = {
+							employer = {
+								is_republic = yes
+							}
+						}
+						NOT = {
+							is_same_party_as = root
+						}
+					}
+					OR = {
+						NOT = {
+							has_variable_list = targeted_by
+						}
+						AND = {
+							has_variable_list = targeted_by
+							variable_list_size = {
+								name = targeted_by
+								value <= 6  
+							}
+						}
+					}
+				}
+				weight = {
+					modifier = {
+						factor = 4
+						power_base >= root.power_base
+					}
+					modifier = {
+						factor = 4
+						wealth >= root.wealth
+					}
+					modifier = {
+						factor = 0.1
+						exists = spouse
+						spouse = root
+					}
+					modifier = {
+						factor = 0.1
+						has_same_family = root
+					}
+					modifier = {
+						factor = 6
+						is_head_of_family = yes
+						root = {
+							is_head_of_family = yes
+						}
+					}
+					modifier = {
+						factor = 2
+						is_party_leader = yes
+					}
+					modifier = {
+						factor = 2
+						has_any_office = yes
+					}
+					modifier = {
+						factor = 5
+						root.employer = {
+							has_country_modifier = crisis_of_the_third_century	
+						}
+						root = {
+							is_general = yes
+						}
+						is_general = yes
+					}
+					modifier = {
+						factor = 10
+						root.employer = {
+							has_country_modifier = military_anarchy
+						}
+						root = {
+							has_character_modifier = king_maker
+						}
+						has_character_modifier = king_maker
+					}
+				}
+				save_scope_as = ongoing_scheme_target
+			}
+		}
+		set_variable = {
+			name = ongoing_scheme_target
+			value = scope:ongoing_scheme_target
+			days = 400
+		}
+		scope:ongoing_scheme_target = {
+			add_to_variable_list = {
+				name = targeted_by
+				target = root
+			}
+		}
+	} 
+}
+
+scheme_make_friends_start = {
+	effect = {
+		employer = {
+			random_character = {
+				limit = {
+					is_adult = yes
+					NOR = {
+						this = root
+						is_rival = root
+						is_friend = root
+					}
+					OR = {
+						is_ruler = no
+						AND = {
+							is_ruler = yes
+							root.power_base >= 20
+						}
+					}
+					can_get_friends = yes
+					OR = {
+						NOT = {
+							has_variable_list = targeted_by
+						}
+						AND = {
+							has_variable_list = targeted_by
+							variable_list_size = {
+								name = targeted_by
+								value <= 6  
+							}
+						}
+					}
+				}
+				weight = {
+					modifier = {
+						factor = 2
+						power_base >= root.power_base
+					}
+					modifier = {
+						factor = 2
+						wealth >= root.wealth
+					}
+					modifier = {
+						factor = 0.1
+						has_same_family = root
+					}
+					modifier = {
+						factor = 0.25
+						employer = {
+							is_republic = yes	
+						}
+						NOT = {
+							is_same_party_as = root
+						}
+					}
+					modifier = {
+						factor = 5
+						root.employer = {
+							has_country_modifier = crisis_of_the_third_century	
+						}
+						root = {
+							OR = {
+								is_general = yes
+								has_character_modifier = king_maker
+							}
+						}
+						is_governor = yes
+					}
+					modifier = {
+						factor = 10
+						root.employer = {
+							has_country_modifier = crisis_of_the_third_century	
+						}
+						root = {
+							OR = {
+								is_general = yes
+								has_character_modifier = king_maker
+							}
+						}
+						is_governor = yes
+						save_temporary_scope_as = actual_gover
+						root.employer = {
+							any_owned_province = {
+								exists = governor
+								governor = {
+									this = scope:actual_gover
+								}
+								region = {
+									any_neighbor_region = {
+										any_region_province = {
+											owner = root.employer
+											exists = governor
+											governor = { 
+												OR = {
+													is_friend = root 
+													this = root
+												}
+											}
+
+										}
+									}
+								}
+							}
+						}
+
+					}
+					modifier = {
+						factor = 5
+						root.employer = {
+							has_country_modifier = crisis_of_the_third_century	
+						}
+						root = {
+							is_governor = yes
+						}
+						OR = {
+							is_general = yes
+							has_character_modifier = king_maker
+						}
+						popularity > 40
+					}
+				}
+				save_scope_as = ongoing_scheme_target
+			}
+		}
+		set_variable = {
+			name = ongoing_scheme_target
+			value = scope:ongoing_scheme_target
+			days = 400
+		}
+		scope:ongoing_scheme_target = {
+			add_to_variable_list = {
+				name = targeted_by
+				target = root
+			}
+		}
+	} 
+}
+
+
+scheme_disloyalty_other_start = {
+	effect = {
+		employer = {
+			random_character = {
+				limit = {
+					power_base >= root.power_base
+					wealth < root.wealth
+					is_ruler = no
+					NOT = {
+						this = root
+					}
+					NOT = {
+						is_rival = root
+					}
+					OR = {
+						NOT = {
+							has_variable_list = targeted_by
+						}
+						AND = {
+							has_variable_list = targeted_by
+							variable_list_size = {
+								name = targeted_by
+								value <= 6  
+							}
+						}
+					}
+				}
+				weight = {
+					modifier = {
+						factor = 5
+						root.employer = {
+							has_country_modifier = military_anarchy	
+						}
+						root = {
+							OR = {
+								is_general = yes
+								has_character_modifier = king_maker
+							}
+						}
+						is_governor = yes
+						save_temporary_scope_as = actual_gover
+						root.employer = {
+							any_owned_province = {
+								exists = governor
+								governor = {
+									this = scope:actual_gover
+								}
+								region = {
+									any_neighbor_region = {
+										any_region_province = {
+											owner = root.employer
+											exists = governor
+											governor = { is_friend = root }
+
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+				save_scope_as = ongoing_scheme_target
+			}
+		}
+		if = {
+			limit = {
+				exists = scope:ongoing_scheme_target
+			}
+			set_variable = {
+				name = ongoing_scheme_target
+				value = scope:ongoing_scheme_target
+				days = 400
+			}
+			scope:ongoing_scheme_target = {
+				add_to_variable_list = {
+					name = targeted_by
+					target = root
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,371 @@
+﻿#mod values
+
+num_of_pops_integrated = {
+	value = 0
+	ROOT = {
+		every_integrated_culture = {
+			add = country_culture_pop_count
+		}
+	}
+}
+
+num_of_pops_noble = {
+	value = 0
+	ROOT = {
+		every_integrated_culture = {
+			limit = {
+				has_pop_type_right = nobles
+			}
+			add = country_culture_pop_count
+		}
+	}
+}
+
+
+noble_country_check = {
+	value = num_of_pops_noble
+	multiply = 7
+}
+
+noble_country_check_italian = {
+	value = num_of_pops_noble
+	multiply = 6
+}
+
+noble_country_check_resolve = {
+	value = num_of_pops_noble
+	multiply = 5
+}
+
+noble_country_check_a_lot = {
+	value = num_of_pops_noble
+	multiply = 9
+}
+
+c3rd_base_economic_value = {
+	value = 0
+	ROOT = {
+		every_country_culture = {
+			limit = {
+				has_pop_type_right = slaves
+				is_integrated = no
+			}
+			add = country_culture_pop_count
+			add = country_culture_pop_count
+		}
+		every_country_culture = {
+			limit = {
+				NOT = {has_pop_type_right = slaves}
+				is_integrated = no
+			}
+			add = country_culture_pop_count
+		}
+		add = {
+			value = c3rd_gold_number
+			multiply = 200
+		}
+		if = {
+			limit = {
+				has_law = subject_exploitation_law
+			}
+			every_subject = {
+				add = {
+					value = country_population
+					multiply = 1
+				}
+			}
+		}
+	}
+}
+
+c3rd_gold_number = {
+	value = 0
+	ROOT = {
+		every_governorships = {
+			every_governorship_state = {
+				if = {
+					limit = {
+						trade_good_surplus = { target = precious_metals value > 0 }
+						trade_good_surplus = { target = precious_metals value <= 1 }
+					}
+					add = 1
+				}
+				else_if = {
+					limit = {
+						trade_good_surplus = { target = precious_metals value > 1 }
+						trade_good_surplus = { target = precious_metals value <= 2 }
+					}
+					add = 2
+				}
+				else_if = {
+					limit = {
+						trade_good_surplus = { target = precious_metals value > 2 }
+						trade_good_surplus = { target = precious_metals value <= 3 }
+					}
+					add = 3
+				}
+				else_if = {
+					limit = {
+						trade_good_surplus = { target = precious_metals value > 3 }
+						trade_good_surplus = { target = precious_metals value <= 4 }
+					}
+					add = 4
+				}
+				else_if = {
+					limit = {
+						trade_good_surplus = { target = precious_metals value > 4 }
+						trade_good_surplus = { target = precious_metals value <= 5 }
+					}
+					add = 5
+				}
+				else_if = {
+					limit = {
+						trade_good_surplus = { target = precious_metals value > 5 }
+						trade_good_surplus = { target = precious_metals value <= 6 }
+					}
+					add = 6
+				}
+				else_if = {
+					limit = {
+						trade_good_surplus = { target = precious_metals value > 6 }
+						trade_good_surplus = { target = precious_metals value <= 7 }
+					}
+					add = 7
+				}
+				else_if = {
+					limit = {
+						trade_good_surplus = { target = precious_metals value > 7 }
+					}
+					add = 8
+				}
+			}
+		}
+	}
+
+}
+
+#the various economic value decreasing with time is here to reprsent the popoulation reluctant to pay taxes with time - thus needing more slaves/precious metals
+c3rd_economic_0_value = {
+	value = c3rd_base_economic_value
+	multiply = 3.5
+	ROOT = {
+		divide = country_population
+	}
+}
+
+c3rd_economic_1_value = {
+	value = c3rd_base_economic_value
+	multiply = 3
+	ROOT = {
+		divide = country_population
+	}
+}
+
+c3rd_economic_2_value = {
+	value = c3rd_base_economic_value
+	multiply = 2.5
+	ROOT = {
+		divide = country_population
+	}
+}
+
+
+c3rd_economic_3_value = {
+	value = c3rd_base_economic_value
+	multiply = 2.3
+	ROOT = {
+		divide = country_population
+	}
+}
+c3rd_economic_4_value = {
+	value = c3rd_base_economic_value
+	multiply = 2.1
+	ROOT = {
+		divide = country_population
+	}
+}
+c3rd_economic_5_value = {
+	value = c3rd_base_economic_value
+	multiply = 2
+	ROOT = {
+		divide = country_population
+	}
+}
+c3rd_economic_6_value = {
+	value = c3rd_base_economic_value
+	multiply = 1.9
+	ROOT = {
+		divide = country_population
+	}
+}
+c3rd_economic_7_value = {
+	value = c3rd_base_economic_value
+	multiply = 1.8
+	ROOT = {
+		divide = country_population
+	}
+}
+c3rd_economic_8_value = {
+	value = c3rd_base_economic_value
+	multiply = 1.7
+	ROOT = {
+		divide = country_population
+	}
+}
+c3rd_economic_9_value = {
+	value = c3rd_base_economic_value
+	multiply = 1.6
+	ROOT = {
+		divide = country_population
+	}
+}
+c3rd_economic_10_value = {
+	value = c3rd_base_economic_value
+	multiply = 1.5
+	ROOT = {
+		divide = country_population
+	}
+}
+
+c3rd_economic_factor = {
+	value = 2
+	if = {
+		limit = {
+			NOT = {has_global_variable = is_playing_invictus}
+		}
+		add = -2 #without Invictus, the assimilation is faster
+	}
+	if = {
+		limit = {
+			root.culture_group = culture_group:latin
+		}
+		add = 1 #fuck Rome :p
+	}
+	if = {
+		limit = {
+			current_date >= 1200.1.1
+		}
+		add = 1
+	}
+	if = {
+		limit = {
+			current_date >= 1100.1.1
+		}
+		add = 1
+	}
+	if = {
+		limit = {
+			current_date >= 1000.1.1
+		}
+		add = 1
+	}
+	if = {
+		limit = {
+			current_date >= 900.1.1
+		}
+		add = 1
+	}
+	if = {
+		limit = {
+			current_date >= 800.1.1
+		}
+		add = 1
+	}
+	if = {
+		limit = {
+			has_country_modifier = citizen_exemption_from_census_tax
+		}
+		add = 2
+	}
+	if = {
+		limit = {
+			has_country_modifier = military_advantages
+		}
+		add = 1
+	}
+	if = {
+		limit = {
+			has_country_modifier = tax_inspection
+		}
+		add = -2
+	}
+	if = {
+		limit = {
+			has_law = second_reform_law
+		}
+		add = -1
+	}
+
+}
+
+c3rd_economic_value = {
+	if = {
+		limit = {
+			c3rd_economic_factor <= 0
+		}
+		value = c3rd_economic_0_value
+	}
+	else_if = {
+		limit = {
+			c3rd_economic_factor = 1
+		}
+		value = c3rd_economic_1_value
+	}
+	else_if = {
+		limit = {
+			c3rd_economic_factor = 2
+		}
+		value = c3rd_economic_2_value
+	}
+	else_if = {
+		limit = {
+			c3rd_economic_factor = 3
+		}
+		value = c3rd_economic_3_value
+	}
+	else_if = {
+		limit = {
+			c3rd_economic_factor = 4
+		}
+		value = c3rd_economic_4_value
+	}
+	else_if = {
+		limit = {
+			c3rd_economic_factor = 5
+		}
+		value = c3rd_economic_5_value
+	}
+	else_if = {
+		limit = {
+			c3rd_economic_factor = 6
+		}
+		value = c3rd_economic_6_value
+	}
+	else_if = {
+		limit = {
+			c3rd_economic_factor = 7
+		}
+		value = c3rd_economic_7_value
+	}
+	else_if = {
+		limit = {
+			c3rd_economic_factor = 8
+		}
+		value = c3rd_economic_8_value
+	}
+	else_if = {
+		limit = {
+			c3rd_economic_factor = 9
+		}
+		value = c3rd_economic_9_value
+	}
+	else_if = {
+		limit = {
+			c3rd_economic_factor >= 10
+		}
+		value = c3rd_economic_10_value
+	}
+	else = {
+		value = c3rd_economic_5_value
+	}
+}

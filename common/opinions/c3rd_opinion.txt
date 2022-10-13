@@ -1,0 +1,5 @@
+﻿
+empire_rivals = {
+	value = -100
+	yearly_decay = 1
+}

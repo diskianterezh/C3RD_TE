@@ -1,0 +1,25 @@
+﻿monthly_country_pulse = {
+
+	events = {
+		low_stab_event.2
+		c3rd_events.19
+		low_stab_event.5
+		low_stab_event.6
+	}
+	on_actions = {
+		c3rd_custom_on_actions_rival_empire_civil_war
+		c3rd_custom_on_actions_rival_empire_in_war
+		c3rd_custom_on_actions_rival_unstable
+		c3rd_custom_on_actions_rival_legitimate
+		delay = { days = { 1 15 } }
+		c3rd_custom_on_actions_instability
+		delay = { days = { 1 20 } }
+		c3rd_custom_on_actions_low_stab_event
+		delay = { days = { 1 30 } }
+		c3rd_custom_on_actions_subject_leaving
+		delay = { days = { 3 30 } }
+		c3rd_events_monthly_pulse
+		delay = { days = { 3 30 } }
+		c3rd_other_events_monthly_pulse
+	}
+}

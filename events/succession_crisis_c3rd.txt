@@ -1,0 +1,365 @@
+﻿namespace = succession_crisis
+
+
+succession_crisis.1 = {
+	type = country_event
+	title = "succession_crisis.1.t"
+	desc = "succession_crisis.1.desc"
+	
+	picture = successors
+	
+	right_portrait = scope:successor_general_1
+	right_portrait = scope:successor_general_2
+	right_portrait = scope:successor_general_3
+	left_portrait = current_ruler
+	left_portrait = scope:former_ruler
+	
+	goto_location = scope:neighbor_succession_target.capital_scope
+	
+	trigger = { 
+		any_owned_province = {
+			controller = root
+		}
+		num_of_cohorts >= 5
+	}
+	immediate = {
+		set_variable = {
+			name = recent_succession_crisis
+			days = 3650
+		}
+		save_scope_as = neighbor_succession_target
+		if = {
+			limit = {
+				exists = scope:successor_general_1
+				scope:successor_general_1 = { is_alive = yes }
+			}
+			scope:successor_general_1 = {
+				hidden_effect = {
+					set_variable = {
+						name = disloyal_successor_trig_mod_cooldown
+						days = 5
+					}
+					add_triggered_character_modifier = {
+						name = disloyal_successor_cmod
+						duration = 3650
+					}
+					add_gold = 1000
+					remove_loyalty = loyalty_office_gained
+				}
+				hidden_effect = {
+					while = {
+						limit = { num_loyal_veterans < country_size_revolt_value }
+						add_loyal_veterans = 1
+					}
+				}
+				save_scope_as = guy
+				custom_tooltip = succession_veteran_tt
+			}
+		}
+		if = {
+			limit = {
+				exists = scope:successor_general_2
+				scope:successor_general_2 = { is_alive = yes }
+			}
+			scope:successor_general_2 = {
+				hidden_effect = {
+					set_variable = {
+						name = disloyal_successor_trig_mod_cooldown
+						days = 5
+					}
+					add_triggered_character_modifier = {
+						name = disloyal_successor_cmod
+						duration = 3650
+					}
+					add_gold = 1000
+					remove_loyalty = loyalty_office_gained
+				}
+				hidden_effect = {
+					while = {
+						limit = { num_loyal_veterans < country_size_revolt_value }
+						add_loyal_veterans = 1
+					}
+				}
+				save_scope_as = guy
+				custom_tooltip = succession_veteran_tt
+			}
+		}
+		if = {
+			limit = {
+				exists = scope:successor_general_3
+				scope:successor_general_3 = { is_alive = yes }
+			}
+			scope:successor_general_3 = {
+				hidden_effect = {
+					set_variable = {
+						name = disloyal_successor_trig_mod_cooldown
+						days = 5
+					}
+					add_triggered_character_modifier = {
+						name = disloyal_successor_cmod
+						duration = 3650
+					}
+					add_gold = 1000
+					remove_loyalty = loyalty_office_gained
+				}
+				hidden_effect = {
+					while = {
+						limit = { num_loyal_veterans < country_size_revolt_value }
+						add_loyal_veterans = 1
+					}
+				}
+				save_scope_as = guy
+				custom_tooltip = succession_veteran_tt
+			}
+		}
+		if = {
+			limit = {
+				exists = scope:successor_general_4
+				scope:successor_general_4 = { is_alive = yes }
+			}
+			scope:successor_general_4 = {
+				hidden_effect = {
+					set_variable = {
+						name = disloyal_successor_trig_mod_cooldown
+						days = 5
+					}
+					add_triggered_character_modifier = {
+						name = disloyal_successor_cmod
+						duration = 3650
+					}
+					add_gold = 1000
+					remove_loyalty = loyalty_office_gained
+				}
+				hidden_effect = {
+					while = {
+						limit = { num_loyal_veterans < country_size_revolt_value }
+						add_loyal_veterans = 1
+					}
+				}
+				save_scope_as = guy
+				custom_tooltip = succession_veteran_tt
+			}
+		}
+		add_stability = -20
+		custom_tooltip = special_successor_interactions_available
+	}
+	
+	option = {
+		name = "succession_crisis.1.a"		
+		hidden_effect = {
+			if = {
+				limit = {
+					NOR = {
+						tag = TRE
+						tag = EGY
+						tag = PRY
+						tag = MAC
+						tag = SEL
+					}
+					any_neighbour_country = {
+						count >= 1
+						NOT = {
+							alliance_with = root
+						}
+					}
+				}
+				every_neighbour_country = {
+					limit = {
+						NOT = {
+							alliance_with = root
+						}
+					}
+					trigger_event = {
+						id = succession_crisis.2
+						days = 25
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					OR = {
+						tag = TRE
+						tag = EGY
+						tag = PRY
+						tag = MAC
+						tag = SEL
+					}
+					any_neighbour_country = {
+						count >= 1
+						NOT = {
+							alliance_with = root
+						}
+					}
+				}
+				every_neighbour_country = {
+					limit = {
+						NOR = {
+							tag = TRE
+							tag = EGY
+							tag = PRY
+							tag = MAC
+							tag = SEL
+						}
+						NOT = {
+							alliance_with = root
+						}
+					}
+					trigger_event = {
+						id = succession_crisis.2
+						days = 25
+					}
+				}
+				c:TRE = {
+					if = {
+						limit = {
+							has_land = yes
+							NOR = {
+								this = root
+								alliance_with = root
+							}
+						}
+						trigger_event = {
+							id = succession_crisis.2
+							days = 25
+						}
+					}
+				}
+				c:EGY = {
+					if = {
+						limit = {
+							has_land = yes
+							NOR = {
+								this = root
+								alliance_with = root
+							}
+						}
+						trigger_event = {
+							id = succession_crisis.2
+							days = 25
+						}
+					}
+				}
+				c:PRY = {
+					if = {
+						limit = {
+							has_land = yes
+							NOR = {
+								this = root
+								alliance_with = root
+							}
+						}
+						trigger_event = {
+							id = succession_crisis.2
+							days = 25
+						}
+					}
+				}
+				c:MAC = {
+					if = {
+						limit = {
+							has_land = yes
+							NOR = {
+								this = root
+								alliance_with = root
+							}
+						}
+						trigger_event = {
+							id = succession_crisis.2
+							days = 25
+						}
+					}
+				}
+				c:SEL = {
+					if = {
+						limit = {
+							has_land = yes
+							NOR = {
+								this = root 
+								alliance_with = root
+							}
+						}
+						trigger_event = {
+							id = succession_crisis.2
+							days = 25
+						}
+					}
+				}
+			}
+		}
+	}
+	after = {
+		if = {
+			limit = {
+				OR = {
+					has_country_modifier = military_anarchy
+					NOT = { has_variable = recent_military_anarchy }
+				}
+				has_country_modifier = crisis_of_the_third_century
+				any_character = {
+					is_general = yes
+					OR = {
+						AND = {
+							is_governor = yes
+							any_friend = {
+								employer = root
+								has_any_office = yes
+							}
+						}
+						any_friend = {
+                            employer = root
+							is_governor = yes
+						}
+					}
+					any_rival = {
+						OR = {
+							is_ruler = yes
+							has_character_modifier = disloyal_successor_cmod
+						}
+					}
+				}
+			}
+			random_character = {
+				limit = {
+					is_general = yes
+					OR = {
+						AND = {
+							is_governor = yes
+							any_friend = {
+								employer = root
+								has_any_office = yes
+							}
+						}
+						any_friend = {
+                            employer = root
+							is_governor = yes
+						}
+					}
+					any_rival = {
+						OR = {
+							is_ruler = yes
+							has_character_modifier = disloyal_successor_cmod
+						}
+					}
+				}
+				save_scope_as = king_maker_general
+				random_rival = {
+					limit = {
+						OR = {
+							is_ruler = yes
+							has_character_modifier = disloyal_successor_cmod
+						}
+					}
+					save_scope_as = general_target
+				}
+			}
+			trigger_event = {
+				id = c3rd_events.3
+				days = { 15 30 }
+			}
+		
+		}	
+		
+
+	}
+	
+}

@@ -1,0 +1,73 @@
+﻿
+culture_state_loyalty_effect_c3rd = {
+	#custom_tooltip = decision_state_loyalty_tt
+	#Biggest 5 are displayed 
+	ordered_country_state = {
+		limit = {
+			any_state_province = {
+				state_loyalty < 98
+				dominant_province_culture = scope:chosen_new_nobles.culture
+			}
+		}
+		order_by = {
+			every_state_province = {
+				add = total_population
+			}
+		}
+		max = 4
+		check_range_bounds = no
+		set_variable = displayed_state_variable
+		capital_scope = {
+			add_state_loyalty = {
+				value = 0
+				PREV = {
+					every_state_province = {
+						limit = { dominant_province_culture = scope:chosen_new_nobles.culture }
+						add = 1.5
+					}
+				}
+			}
+		}
+	}
+	#Remaining are hidden:
+	if = {
+		limit = {
+			any_country_state = {
+				count > 4
+				any_state_province = {
+					state_loyalty < 98
+					dominant_province_culture = scope:chosen_new_nobles.culture
+				}
+			}
+		}
+		custom_tooltip = decision_state_loyalty_tt
+	}
+	hidden_effect = {
+		every_country_state = {
+			limit = {
+				any_state_province = {
+					state_loyalty < 98
+					dominant_province_culture = scope:chosen_new_nobles.culture
+				}
+				NOT = { has_variable = displayed_state_variable }
+			}
+			capital_scope = {
+				add_state_loyalty = {
+					value = 0
+					PREV = {
+						every_state_province = {
+							limit = { dominant_province_culture = scope:chosen_new_nobles.culture }
+							add = 1.5
+						}
+					}
+				}
+			}
+		}
+		every_country_state = {
+			limit = {
+				has_variable = displayed_state_variable
+			}
+			remove_variable = displayed_state_variable
+		}
+	}
+}

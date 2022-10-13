@@ -1,0 +1,21 @@
+﻿
+
+yearly_country_pulse = {
+	on_actions = {
+		c3rd_culture_noble_assimilation
+		c3rd_mines_exhaustion_pulse
+		c3rd_custom_on_actions_rival_empire_opinion
+		c3rd_calculate_deflation
+		c3rd_aurelien
+		c3rd_province_revolt_gain
+		delay = { days = { 1 364 } }
+		c3rd_custom_on_actions_third_century
+		delay = { days = { 1 364 } }
+		c3rd_mines_exhaustion_trigger
+		delay = { days = { 1 364 } }
+		c3rd_economic_warning
+		delay = { days = { 1 364 } }
+		c3rd_apply_deflation
+
+	}
+}

@@ -1,0 +1,165 @@
+﻿country_decisions = {
+	stop_political_unstability_small = {
+		potential = {
+			num_of_cities >= 1
+			has_country_modifier = political_unstability
+		}
+		allow = {
+			num_of_cities <= 15
+		}
+		effect = {
+			remove_country_modifier = political_unstability
+		}
+		
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	
+	stop_political_unstability_huge = {
+		potential = {
+			num_of_cities >= 1
+			has_country_modifier = political_unstability
+			is_republic = yes
+		}
+		allow = {
+			has_senate_approval >= 0.90
+			stability >= 80
+		}
+		effect = {
+			remove_country_modifier = political_unstability
+		}
+		
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	
+	stop_political_unstability_what = {
+		potential = {
+			num_of_cities >= 1
+			has_country_modifier = political_unstability
+			is_republic = no
+		}
+		allow = {
+			is_republic = no
+		}
+		effect = {
+			remove_country_modifier = political_unstability
+		}
+		
+		ai_will_do = {
+			factor = 1000
+		}
+	}
+		
+	start_the_reform = {
+		potential = {
+			num_of_cities >= 1
+			has_country_modifier = crisis_of_the_third_century
+			is_republic = yes
+		}
+		allow = {
+			stability >= 60
+			current_ruler = {
+				popularity >= 80
+			}
+			has_senate_approval >= 80
+		}
+		effect = {
+			add_political_influence = -80
+			add_stability = -10
+			add_tyranny = 10
+			trigger_event = {
+				id = c3rd_events.41
+				days = { 90 190 }
+			}
+		}
+		
+		ai_will_do = {
+			modifier = {
+				factor = 10
+				current_date >= 1100.1.1
+			}
+		}
+	}
+
+	resolve_administrative_problem = {
+		potential = {
+			OR = {
+				has_country_modifier = administrative_difficulty
+				has_country_modifier = administrative_difficulty_small
+			}
+		}
+		allow = {
+			custom_tooltip = {
+				text = "has_noble_decision"
+				country_population < noble_country_check_resolve
+			}
+		}
+		effect = {
+			if = {
+				limit = { has_country_modifier = administrative_difficulty}
+				add_political_influence = -25
+				remove_country_modifier = administrative_difficulty
+			}
+			if = {
+				limit = { has_country_modifier = administrative_difficulty_small}
+				remove_country_modifier = administrative_difficulty_small
+			}
+
+		}
+		
+		ai_will_do = {
+			factor = 100
+		}
+	}
+
+	check_the_great_book = {
+		potential = {
+			current_date >= 750.1.1
+		}
+		allow = {
+			current_date >= 750.1.1
+			is_ai = no
+		}
+		effect = {
+			trigger_event = {
+				id = c3rd_other_events.10
+			}
+
+		}
+
+	}
+	establish_solidus = {
+		potential = {
+			current_date >= 750.1.1
+			has_law = second_reform_law
+			NOR = {
+				has_country_modifier = solidus_introduced
+				has_variable = solidus_ongoing
+			}
+		}
+		allow = {
+			has_law = second_reform_law
+			NOR = {
+				has_country_modifier = small_deflation
+				has_country_modifier = medium_deflation
+				has_country_modifier = high_deflation
+				has_country_modifier = small_monetary_crash
+				has_country_modifier = medium_monetary_crash
+				has_country_modifier = high_monetary_crash
+			}
+			political_influence >= 50
+		}
+		effect = {
+			trigger_event = {
+				id = c3rd_other_events.13
+			}
+
+		}
+
+	}
+	
+}
+

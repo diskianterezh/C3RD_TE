@@ -1,0 +1,13 @@
+﻿########################################
+# Added from Events
+########################################
+
+#5 years is considered the standard duration.
+
+#Ordered by Namespace
+
+
+loyalty_civil_war_loyalist = {
+	value = 15
+	yearly_decay = 1
+}

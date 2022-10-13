@@ -1,0 +1,143 @@
+﻿#character interaction script values
+
+get_trial_success_chance_character = {
+	value = 55
+	subtract = power_base
+	add = {
+		value = corruption
+		divide = 2
+	}
+	if = {
+		limit = {
+			is_co_ruler = yes
+		} #While co ruler this is harder.
+		subtract = 20
+	}
+	if = {
+		limit = {
+			employer = {
+				is_tribal = yes
+			}
+			is_head_of_family = yes
+		} #Tribes have it a bit harder - compensates for less powerbase from being head of family
+		subtract = 30
+	}
+	if = {
+		limit = {
+			OR = {
+				has_any_office = yes
+				has_job = yes
+			}
+		} #Office Holder has harder trial (closer to before when original value was 40)
+		subtract = 10
+	}
+	if = {
+		limit = {
+			NOT = { has_culture = employer.culture }
+			employer = {
+				any_country_culture = {
+					has_country_culture_modifier = trial_right
+				}
+			}
+		} #If special trial rights have been granted to employer culture - and this is not a character of employer culture - the conviction will be easier
+		add = 10
+	}
+	if = {
+		limit = {
+			has_variable = trial_chance_modifier
+		}
+		add = var:trial_chance_modifier
+	}
+	if = {
+		limit = {
+			employer = {
+				has_variable = trial_better_variable
+			}
+		}
+		add = 10
+	}
+	if = {
+		limit = {
+			has_character_modifier = king_maker
+		} #not so easy ;)
+		subtract = 10
+	}
+	min = 1
+}
+
+get_trial_success_chance = {
+	value = 55
+	subtract = scope:target.power_base
+	add = {
+		value = scope:target.corruption
+		divide = 2
+	}
+	if = {
+		limit = {
+			scope:target = {
+				is_co_ruler = yes #While co ruler this is harder.
+			}
+		}
+		subtract = 20
+	}
+	if = {
+		limit = {
+			scope:target = {
+				employer = {
+					is_tribal = yes
+				}
+				is_head_of_family = yes
+			}
+		} #Tribes have it a bit harder - compensates for less powerbase from being head of family
+		subtract = 30
+	}
+	if = {
+		limit = {
+			scope:target = {
+				OR = {
+					has_any_office = yes
+					has_job = yes
+				}
+			}
+		} #Office holder has harder trial (same as before when original value was 40)
+		subtract = 10
+	}
+	if = {
+		limit = {
+			scope:target = {
+				NOT = { has_culture = employer.culture }
+				employer = {
+					any_country_culture = {
+						has_country_culture_modifier = trial_right
+					}
+				}
+			}
+		} #If special trial rights have been granted to employer culture - and this is not a character of employer culture - the conviction will be easier
+		add = 10
+	}
+	if = {
+		limit = {
+			scope:target = {
+				has_variable = trial_chance_modifier
+			}
+		}
+		add = scope:target.var:trial_chance_modifier
+	}
+	if = {
+		limit = {
+			scope:actor = {
+				has_variable = trial_better_variable
+			}
+		}
+		add = 10
+	}
+	if = {
+		limit = {
+			scope:target = {
+				has_character_modifier = king_maker
+			}
+		} #not so easy ;)
+		subtract = 10
+	}
+	min = 1
+}

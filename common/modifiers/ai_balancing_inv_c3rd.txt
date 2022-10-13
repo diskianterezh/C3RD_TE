@@ -1,0 +1,17 @@
+﻿
+#Used to give released nations mil traditions - taken from Invictus and expanded
+released_country_mil_tradition_1_ai_mod = {
+	buy_military_tradition_cost_modifier = -0.1
+}
+released_country_mil_tradition_2_ai_mod = {
+	buy_military_tradition_cost_modifier = -0.2
+}
+released_country_mil_tradition_3_ai_mod = {
+	buy_military_tradition_cost_modifier = -0.3
+}
+released_country_mil_tradition_4_ai_mod = {
+	buy_military_tradition_cost_modifier = -0.4
+}
+released_country_mil_tradition_5_ai_mod = {
+	buy_military_tradition_cost_modifier = -0.5
+}

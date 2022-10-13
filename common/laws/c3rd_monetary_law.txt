@@ -1,0 +1,55 @@
+﻿monetary_law = {
+	potential = {
+		is_tribal = no
+	}
+	
+	basic_monetary_law = {
+		allow = {
+		}
+		
+	}
+	
+	subject_exploitation_law = {
+		allow = {
+			invention = subject_exploitation_c3rd
+			NOT = {
+				has_country_modifier = solidus_introduced
+			}
+		}
+		modifier = {
+			subject_opinions = -50
+			tribute_income_modifier = -0.5
+		}
+	}
+	
+	monetary_reform_law = {
+		allow = {
+			OR = {
+				has_country_modifier = medium_deflation
+				has_country_modifier = high_deflation
+				invention = devaluate_silver
+			}
+			NOT = {
+				has_country_modifier = solidus_introduced
+			}
+		}
+		modifier = {
+			happiness_for_same_culture_modifier = 0.2
+			global_commerce_modifier = 0.1
+			build_time = -0.2
+		}
+	}
+	
+	second_reform_law = {
+		allow = {
+			invention = monetary_reform
+			NOT = {
+				has_country_modifier = solidus_introduced
+			}
+		}
+		modifier = {
+			happiness_for_same_culture_modifier = -0.2
+			global_commerce_modifier = -0.2
+		}
+	}
+}

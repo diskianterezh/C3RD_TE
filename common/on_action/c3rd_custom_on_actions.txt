@@ -1,0 +1,969 @@
+﻿
+c3rd_custom_on_actions_instability = {
+	trigger = {
+		current_date > 900.1.1
+		num_of_cities >= 1
+		NOT = {
+			tag = BAR
+		}
+	}
+	events = {
+		low_stab_event.1
+	}
+}
+
+c3rd_custom_on_actions_low_stab_event = {
+
+	trigger = {
+        
+        has_country_modifier = internal_collapse
+        NOT = {
+            stability >= 25
+        }
+
+    }
+	random_events = {
+		60 = 0
+        15 = low_stab_event.4
+        1 = low_stab_event.3
+	}
+}
+
+c3rd_custom_on_actions_subject_leaving = {
+	trigger = {
+		current_date > 900.1.1
+		num_of_cities >= 1
+		NOT = {
+			tag = BAR
+		}
+		
+	}
+	events = {
+		c3rd_events.1
+	}
+}
+
+c3rd_custom_on_actions_third_century = {
+	trigger = {
+		current_date > 900.1.1
+		num_of_cities >= 1
+		NOT = {
+			tag = BAR
+		}
+		
+	}
+	events = {
+		c3rd_events.2
+	}
+	
+	random_events = {
+		500 = 0
+		100 = tribal_flavour_events.4
+	}
+}
+
+c3rd_custom_on_actions_rival_empire_opinion = {
+	trigger = {
+		has_variable = mother_empire
+		has_variable = unification_value
+		var:mother_empire = {
+			has_land = yes
+		}
+	}
+	effect = {
+		if = {
+			limit = {
+				opinion = {
+					target = var:mother_empire
+					value >= 100
+				}
+			}
+			change_variable = {
+				name = unification_value
+				add = 3
+			}
+		}
+		else_if = {
+			limit = {
+				opinion = {
+					target = var:mother_empire
+					value >= 0
+				}
+			}
+			change_variable = {
+				name = unification_value
+				add = 1
+			}
+		}
+		else_if = {
+			limit = {
+				opinion = {
+					target = var:mother_empire
+					value <= -100
+				}
+			}
+			change_variable = {
+				name = unification_value
+				subtract = 5
+			}
+		}
+		else_if = {
+			limit = {
+				opinion = {
+					target = var:mother_empire
+					value <= 0
+				}
+			}
+			change_variable = {
+				name = unification_value
+				subtract = 2
+			}
+		}
+		if = {
+			limit = { 
+				num_of_provinces >= var:mother_empire.num_of_provinces
+			}
+			change_variable = {
+				name = unification_value
+				subtract = 3
+			}
+		}
+	}
+}
+
+c3rd_custom_on_actions_rival_empire_civil_war = {
+	trigger = {
+		has_variable = mother_empire
+		has_variable = unification_value
+		NOT = {has_variable = civil_war_help}
+		NOT = {war_with = var:mother_empire}
+		var:mother_empire = {
+			has_land = yes
+		}
+		towards_civil_war = yes
+	}
+
+	effect = {
+		save_scope_as = rival_empire
+		random_list = {
+			80 = {
+			}
+			20 = {
+				set_variable = {
+					name = civil_war_help
+					days = 730 #2years
+				}
+				var:mother_empire = {
+					trigger_event = {
+						id = c3rd_events.15
+						days = 5
+					}
+				}
+			}
+		}
+	}
+}
+
+
+c3rd_custom_on_actions_rival_empire_in_war = {
+	trigger = {
+		has_variable = mother_empire
+		has_variable = unification_value
+		NOT = {has_variable = war_aid_asked}
+		var:mother_empire = {
+			has_land = yes
+		}
+		NOT = {war_with = var:mother_empire}
+		any_current_war = {
+			NOT = {
+				any_war_participant = {
+					this = var:mother_empire
+				}
+			}
+			war_score = {
+                target = root
+                value <= -30
+			}
+		}
+	}
+
+	effect = {
+		save_scope_as = rival_empire
+		random_current_war = {
+			limit = {
+				NOT = {
+					any_war_participant = {
+						this = var:mother_empire
+					}
+				}
+				war_score = {
+					target = root
+					value <= -30
+				}
+			}
+			save_scope_as = rival_empire_war
+		}
+		random_list = {
+			70 = {
+			}
+			30 = {
+				set_variable = {
+					name = war_aid_asked
+					days = 1825 #5years
+				}
+				var:mother_empire = {
+					trigger_event = {
+						id = c3rd_events.16
+						days = 7
+					}
+				}
+			}
+		}
+	}
+}
+
+
+c3rd_custom_on_actions_rival_unstable = {
+	trigger = {
+		has_variable = mother_empire
+		has_variable = unification_value
+		NOT = {has_variable = stab_asked}
+		var:mother_empire = {
+			has_land = yes
+		}
+		NOT = {war_with = var:mother_empire}
+		stability < 20
+	}
+
+	effect = {
+		save_scope_as = rival_empire
+		random_list = {
+			80 = {
+			}
+			20 = {
+				modifier = {
+					add = 25
+					stability < 10
+				}
+				set_variable = {
+					name = stab_asked
+					days = 730 #2years
+				}
+				var:mother_empire = {
+					trigger_event = {
+						id = c3rd_events.17
+						days = 9
+					}
+				}
+			}
+		}
+	}
+}
+
+c3rd_custom_on_actions_rival_legitimate = {
+	trigger = {
+		has_variable = mother_empire
+		has_variable = unification_value
+		NOT = {has_variable = legitimy_problem}
+		var:mother_empire = {
+			has_land = yes
+		}
+		NOT = {war_with = var:mother_empire}
+		legitimacy < 30
+	}
+
+	effect = {
+		save_scope_as = rival_empire
+		random_list = {
+			90 = {
+			}
+			10 = {
+				modifier = {
+					add = 15
+					legitimacy < 0
+				}
+				set_variable = {
+					name = legitimy_problem
+					days = 3650 #10years
+				}
+				var:mother_empire = {
+					trigger_event = {
+						id = c3rd_events.18
+						days = 11
+					}
+				}
+			}
+		}
+	}
+}
+
+c3rd_events_monthly_pulse = { #check if people in country can fuck shit up
+	trigger = {
+		num_of_cities >= 1
+		NOR = {
+			tag = REB
+			tag = BAR
+		}
+		has_country_modifier = crisis_of_the_third_century
+	}
+	effect = {
+		if = {
+			limit = { #enrich the generals
+				has_country_modifier = military_anarchy 
+				any_character = {
+					is_general = yes
+					wealth < 1000
+					any_friend = {
+						wealth >= 100
+					}
+					popularity >= 40
+
+				}
+			}
+			random_character = {
+				limit = {
+					is_general = yes
+					wealth < 1000
+					any_friend = {
+						wealth >= 100
+					}
+					any_friend = {
+						wealth >= 100
+					}
+					popularity >= 40
+					
+				}
+				save_temporary_scope_as = give_me_gold
+				every_friend = {
+					limit = {
+						wealth >= 100
+					}
+					add_gold = -100
+					prev = {
+						add_gold = 100
+					}
+				}
+			}
+
+			
+		}
+	}
+	random_events = {
+		500 = 0
+		40 = c3rd_events.30 #military coup *5 civilwar *2low leg
+		50 = c3rd_events.5 #general intervention *3 civilwar *2neg leg *2 dislgen
+		10 = c3rd_events.32 #kingmaker emprison rival
+		15 = c3rd_events.33 #general glose
+		20 = c3rd_events.34 #general rivalry
+		25 = c3rd_events.35 #general ask his friend governor
+		20 = c3rd_events.36 #general new king maker
+		20 = c3rd_events.37 #king maker clash
+		7 = c3rd_events.7 #generals asking for war
+		20 = c3rd_events.8 #generals asking for law
+		20 = c3rd_events.45 #republican leader push reforms
+		50 = c3rd_events.39 #kingmaker no office
+		20 = c3rd_other_events.8 #powerful characters asking to stop the tax controls
+	}
+	
+}
+
+c3rd_other_events_monthly_pulse = { #check if events can happen
+	trigger = {
+		num_of_cities >= 1
+		NOR = {
+			tag = REB
+			tag = BAR
+		}
+	}
+	random_events = {
+		500 = 0
+		20 = c3rd_other_events.4 #too few nobles culture pop
+		4 = c3rd_other_events.12 #games
+		3 = c3rd_other_events.30 #slave culture revolt
+	}
+
+}
+
+c3rd_culture_noble_assimilation = {
+	effect = {
+		every_country_culture = {
+			limit = {
+				NOT = {this.culture = root.culture}
+				has_pop_type_right = nobles
+			}
+			save_scope_as = that_noble_culture
+			root = {
+				every_owned_province = {
+					limit = {
+						dominant_province_culture = scope:that_noble_culture.culture
+						any_pops_in_province = {
+							pop_culture = scope:that_noble_culture.culture
+						}
+					}
+					random_pops_in_province = {
+						limit = {
+							pop_culture = root.culture 
+						}
+						set_pop_culture = scope:that_noble_culture.culture
+					}
+
+				}
+			}
+		}
+	}
+
+}
+
+
+c3rd_mines_exhaustion_pulse = {
+	trigger = {
+		has_land = yes
+		current_date >= 750.1.1
+	}
+	effect = {
+		every_owned_province = {
+			limit = {
+				trade_goods = precious_metals
+			}
+			random_list = {
+				35 = {
+					modifier = {
+						add = 20
+						root = {is_ai = yes}
+					}
+					modifier = {
+						add = 20
+						root = {has_law = monetary_reform_law}
+					}
+					modifier = {
+						add = 10
+						root.num_of_cities <= 100
+					}
+				}
+				5 = {
+					modifier = {
+						add = 10
+						any_pops_in_province = {
+							count >= 15
+							pop_type = slaves
+						}
+					}
+					modifier = {
+						add = 10
+						any_pops_in_province = {
+							count >= 30
+							pop_type = slaves
+						}
+					}
+					modifier = {
+						add = 10
+						any_pops_in_province = {
+							count >= 45
+							pop_type = slaves
+						}
+					}
+					modifier = {
+						add = 10
+						owner = {
+							is_subject = yes
+						}
+					}
+					modifier = {
+						add = 15
+						any_pops_in_province = {
+							count >= 60
+							pop_type = slaves
+						}
+					}
+					modifier = {
+						add = 15
+						has_building = slave_mine_building
+					}
+					modifier = {
+						add = 5
+						root = {has_law = basic_monetary_law}
+					}
+					if = {
+						limit = { NOT = {has_variable = mine_exhaustion} }
+						set_variable = {
+							name = mine_exhaustion
+							value = 1
+						}
+					}
+					else_if = {
+						limit = {has_variable = mine_exhaustion }
+						change_variable = {
+							name = mine_exhaustion
+							add = 1
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+c3rd_mines_exhaustion_trigger = {
+	trigger = {
+		has_land = yes
+		any_owned_province = {
+			trade_goods = precious_metals
+			has_variable = mine_exhaustion
+			var:mine_exhaustion >= 50
+		}
+	}
+	effect = {
+		trigger_event = {
+			id = c3rd_other_events.6
+		}
+	}
+}
+
+c3rd_calculate_deflation = {
+	trigger = {
+		has_land = yes
+		is_ai = no
+		current_date >= 750.1.1
+		NOT = {
+			has_country_modifier = solidus_introduced
+		}
+	}
+	effect = {
+		if = {
+			limit = {
+				NOT = {
+					has_variable = country_economy
+				}
+			}
+			set_variable = {
+				name = country_economy
+				value = c3rd_economic_value
+			}
+		}
+		else = {
+			remove_variable = country_economy
+			set_variable = {
+				name = country_economy
+				value = c3rd_economic_value
+			}
+		}
+		if = {
+			limit = {
+				NOT = {
+					has_variable = deflation_value
+				}
+				num_of_cities >= 500
+			}
+			set_variable = {
+				name = deflation_value
+				value = 0
+			}
+		}
+		if = {
+			limit = {
+				NOT = {
+					has_variable = silver_unvalue
+				}
+				has_law = monetary_reform_law
+				num_of_cities >= 500
+			}
+			set_variable = {
+				name = silver_unvalue
+				value = 0
+			}
+		}
+		if = {
+			limit = {
+				var:country_economy > 1
+				var:deflation_value > 0
+			}
+			change_variable = {
+				name = deflation_value
+				add = -1
+			}
+		}
+		if = {
+			limit = {
+				var:country_economy > 2
+				var:deflation_value > 0
+			}
+			change_variable = {
+				name = deflation_value
+				add = -2
+			}
+		}
+		if = {
+			limit = {
+				var:country_economy > 4
+				var:deflation_value > 0
+			}
+			change_variable = {
+				name = deflation_value
+				add = -3
+			}
+		}
+		if = {
+			limit = {
+				var:country_economy < 1
+				num_of_cities >= 500
+			}
+			if = {
+				limit = { NOT = {has_law = monetary_reform_law}} #if you have the monetary reform, you decrease the value of silver
+				change_variable = {
+					name = deflation_value
+					add = 1
+				}
+			}
+			else = {
+				change_variable = {
+					name = silver_unvalue
+					add = 1
+				}
+			}
+		}
+		if = {
+			limit = {
+				var:country_economy < 0.8
+				num_of_cities >= 500
+			}
+			if = {
+				limit = { NOT = {has_law = monetary_reform_law}} #if you have the monetary reform, you decrease the value of silver
+				change_variable = {
+					name = deflation_value
+					add = 1
+				}
+			}
+			else = {
+				change_variable = {
+					name = silver_unvalue
+					add = 1
+				}
+			}
+		}
+		if = {
+			limit = {
+				var:country_economy < 0.6
+				num_of_cities >= 500
+			}
+			if = {
+				limit = { NOT = {has_law = monetary_reform_law}} #if you have the monetary reform, you decrease the value of silver
+				change_variable = {
+					name = deflation_value
+					add = 1
+				}
+			}
+			else = {
+				change_variable = {
+					name = silver_unvalue
+					add = 1
+				}
+			}
+		}
+		if = {
+			limit = {
+				var:country_economy < 0.4
+				num_of_cities >= 500
+			}
+			if = {
+				limit = { NOT = {has_law = monetary_reform_law}} #if you have the monetary reform, you decrease the value of silver
+				change_variable = {
+					name = deflation_value
+					add = 1
+				}
+			}
+			else = {
+				change_variable = {
+					name = silver_unvalue
+					add = 1
+				}
+			}
+		}
+		if = {
+			limit = { 
+				has_law = monetary_reform_law
+				num_of_cities >= 500
+			}
+			change_variable = {
+				name = silver_unvalue
+				add = 1
+			}
+		}
+	}
+}
+c3rd_aurelien = {
+	trigger = {
+		has_land = yes
+		is_ai = no
+		NOT = {
+			has_country_modifier = solidus_introduced
+		}
+	}
+	effect = {
+		if = {
+			limit = { 
+				has_law = second_reform_law
+				has_variable = silver_unvalue
+			}
+			change_variable = {
+				name = silver_unvalue
+				add = -1
+			}
+		}
+	}
+
+}
+
+c3rd_economic_warning = {
+	trigger = {
+		has_land = yes
+		is_ai = no
+		current_date >= 750.1.1
+		has_variable = deflation_value
+	}
+	effect = {
+		if = {
+			limit = {
+				var:deflation_value >= 5
+				NOT = { has_variable = deflation_is_happening} 
+			}
+			trigger_event = {
+				id = c3rd_other_events.5
+			}
+		}
+		if = {
+			limit = {
+				has_variable = deflation_value
+				var:deflation_value <= 0
+				has_variable = deflation_is_happening
+			}
+			trigger_event = {
+				id = c3rd_other_events.7
+			}
+		}
+	}
+
+
+
+
+}
+
+c3rd_apply_deflation = { #applying deflation modifiers events
+	trigger = {
+		has_land = yes
+		is_ai = no
+		current_date >= 750.1.1
+		has_variable = deflation_value
+	}
+	effect = {
+		if = {
+			limit = { 
+				NOR = {
+					has_country_modifier = small_deflation
+					has_country_modifier = medium_deflation
+					has_country_modifier = high_deflation
+				}
+				var:deflation_value >= 30
+				num_of_cities >= 500
+			}
+			trigger_event = {
+				id = c3rd_other_events.20
+			}
+		}
+		else_if = {
+			limit = {
+				NOR = {
+					has_country_modifier = medium_deflation
+					has_country_modifier = high_deflation
+				}
+				var:deflation_value >= 75
+				num_of_cities >= 500
+			}
+			trigger_event = {
+				id = c3rd_other_events.21
+			}
+		}
+		else_if = {
+			limit = {
+				NOT = {
+					has_country_modifier = high_deflation
+				}
+				var:deflation_value >= 130
+				num_of_cities >= 500
+			}
+			trigger_event = {
+				id = c3rd_other_events.22
+			}
+		}
+		else_if = {
+			limit = {
+				has_country_modifier = high_deflation
+				NOT = {
+					has_country_modifier = medium_deflation
+				}
+				var:deflation_value <= 120
+			}
+			trigger_event = {
+				id = c3rd_other_events.23
+			}
+		}
+		else_if = {
+			limit = {
+				has_country_modifier = medium_deflation
+				NOT = {
+					has_country_modifier = small_deflation
+				}
+				var:deflation_value <= 65
+			}
+			trigger_event = {
+				id = c3rd_other_events.24
+			}
+		}
+		else_if = {
+			limit = {
+				has_country_modifier = small_deflation
+				var:deflation_value <= 20
+			}
+			trigger_event = {
+				id = c3rd_other_events.25
+			}
+		}
+
+	}
+}
+
+c3rd_apply_silver_unvalue = { #applying silver modifiers events
+	trigger = {
+		has_land = yes
+		is_ai = no
+		current_date >= 750.1.1
+		has_variable = silver_unvalue
+	}
+	effect = {
+		if = {
+			limit = { 
+				NOR = {
+					has_country_modifier = small_monetary_crash
+					has_country_modifier = medium_monetary_crash
+					has_country_modifier = high_monetary_crash
+				}
+				var:silver_unvalue >= 60
+				num_of_cities >= 500
+			}
+			trigger_event = {
+				id = c3rd_other_events.26
+			}
+		}
+		else_if = {
+			limit = {
+				NOR = {
+					has_country_modifier = medium_monetary_crash
+					has_country_modifier = high_monetary_crash
+				}
+				var:deflation_value >= 90
+				num_of_cities >= 500
+			}
+			trigger_event = {
+				id = c3rd_other_events.27
+			}
+		}
+		else_if = {
+			limit = {
+				NOT = {
+					has_country_modifier = high_monetary_crash
+				}
+				var:deflation_value >= 120
+				num_of_cities >= 500
+			}
+			trigger_event = {
+				id = c3rd_other_events.28
+			}
+		}
+		else_if = {
+			limit = {
+				has_country_modifier = high_monetary_crash
+				NOT = {
+					has_country_modifier = medium_monetary_crash
+				}
+				var:deflation_value <= 100
+			}
+			trigger_event = {
+				id = c3rd_other_events.291
+			}
+		}
+		else_if = {
+			limit = {
+				has_country_modifier = medium_monetary_crash
+				NOT = {
+					has_country_modifier = small_monetary_crash
+				}
+				var:deflation_value <= 70
+			}
+			trigger_event = {
+				id = c3rd_other_events.292
+			}
+		}
+		else_if = {
+			limit = {
+				has_country_modifier = small_monetary_crash
+				var:deflation_value <= 20
+			}
+			trigger_event = {
+				id = c3rd_other_events.293
+			}
+		}
+
+	}
+}
+
+c3rd_province_revolt_gain = {
+	trigger = {
+		has_land = yes
+		is_ai = no
+		#current_date >= 600.1.1
+		any_country_culture = {
+			has_country_culture_modifier = on_going_revolt
+		}
+	}
+	effect = {
+		every_owned_province = {
+			limit = {
+				NOT = {
+					has_province_modifier = revolt_preparation
+				}
+				save_temporary_scope_as = that_slave_province
+				owner = {
+					any_country_culture = {
+						this.culture = scope:that_slave_province.dominant_province_culture
+						has_country_culture_modifier = on_going_revolt
+					}
+				}
+			}
+			random_list = {
+				15 = {}
+				1000 = {
+					modifier = {
+						add = 1
+						root.stability <= 50
+					}
+					modifier = {
+						add = 1
+						root.stability <= 25
+					}
+					modifier = {
+						add = 1
+						root.legitimacy <= 50
+					}
+					modifier = {
+						add = 1
+						root.legitimacy <= 0
+					}
+					add_province_modifier = {
+						name = revolt_preparation
+						duration = 3650
+					}
+				}
+			}
+		}
+	}
+
+}

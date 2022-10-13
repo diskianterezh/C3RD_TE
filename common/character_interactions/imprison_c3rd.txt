@@ -1,0 +1,150 @@
+﻿imprison = {
+
+	on_other_nation = no
+	on_own_nation = yes
+	needs_senate_approval = yes
+	
+	sound = "event:/SFX/UI/Character/Unique/sfx_ui_character_imprison"
+	
+	potential_trigger = {
+		hidden:scope:target = {
+			employer = scope:actor
+			NOT = { employer = { tag = REB } }
+			NOT = { employer = { tag = BAR } }
+			is_alive = yes
+			is_mercenary = no
+			prisoner = no
+		}
+	}
+	
+	allowed_trigger = {
+		hidden:scope:target = {
+			NOR = {
+				has_character_modifier = disloyal_successor_cmod
+				has_character_modifier = king_maker
+			}
+			prisoner = no
+			is_ruler = no
+			is_co_ruler = no
+			is_general = no
+			is_admiral = no
+			is_pretender = no
+			is_primary_heir = no
+			is_governor = no
+			has_any_office = no
+			has_tech_office = no
+			is_clan_chief = no
+			is_head_of_family = no
+			has_legion_trigger = no
+			NOT = {
+				employer = {
+					is_monarchy = yes
+					exists = consort
+					scope:target = scope:target.employer.consort
+				}
+			}
+		}
+		hidden:scope:actor = {
+			can_pay_price = price_imprison
+			stability > 25
+		}
+		scope:target = {
+			custom_tooltip = {
+				text = "family_favor_imprison"
+				NOT = { 
+					has_variable = cannot_imprison_family_favor
+				}
+			}
+		}
+	}
+
+	
+	effect = {
+		
+		scope:actor = {
+			if = {
+				limit = { scope:target.power_base < 2 }
+				pay_price = price_imprison
+			}
+			else = {
+				add_tyranny = {
+					value = scope:target.power_base
+					divide = 2
+					add = 3
+					min = 5
+				}
+			}
+		}
+		scope:actor = {
+			imprison = { target = scope:target }
+			if = {
+				limit = {
+					invention = global_slaves_output_inv_3
+					scope:target = {
+						OR = {
+							has_trait = corrupt
+							wealth < 0
+							has_character_modifier = secret_gambler
+						}
+					}
+				}
+			}
+			else = {
+				current_ruler = {
+					add_popularity = subtract_popularity_small
+				}
+			}
+			trigger_event = {
+				on_action = custom_on_action_imprison
+				days = { 30 360 }
+			}
+		}
+		scope:target = {
+			add_loyalty = imprisoned_l
+			hidden_effect = {
+				set_variable = {
+					name = imprisoned_manually
+				}
+				clear_ambition_effect_ci = yes
+			}
+			if = {
+				limit = {
+					has_variable = olympic_attendee
+				}
+				var:olympic_attendee = {
+					save_scope_as = imprisoned_athlete_country
+				}
+				if = {
+					limit = {
+						NOT = {
+							scope:imprisoned_athlete_country = scope:actor
+						}
+					}
+					remove_variable = olympic_attendee
+					save_scope_as = imprisoned_athlete
+					custom_tooltip = "imprison_olympic_ransom"
+					hidden_effect = {	
+						every_country = {
+							limit = {
+								has_variable = is_competing_in_olympics
+								NOT = {
+									this = scope:actor
+								}
+							}
+							add_opinion = {
+								modifier = olympic_outrage
+								target = scope:actor
+							}
+						}
+						scope:imprisoned_athlete_country = {
+							trigger_event = {
+								id = olympic.7
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	
+}
