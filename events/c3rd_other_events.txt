@@ -2586,11 +2586,15 @@ c3rd_other_events.31 = { # slaves culture revolts
             max = 1
             save_scope_as = new_country_slave
         }
+        scope:revolting_slave_culture = {
+            remove_country_culture_modifier = on_going_revolt
+        }
     }
 
     option = { #vassal
         name = c3rd_other_events.31.a
         custom_tooltip = c3rd_other_events.31.a.tt1
+        add_political_influence = -10
 
         scope:new_country_slave = {
             create_country = {
@@ -2602,23 +2606,36 @@ c3rd_other_events.31 = { # slaves culture revolts
         scope:new_country_vassal = {
             add_military_experience_to_new_country_effect = yes
         }
-        every_owned_province = {
-            limit = {
-                dominant_province_culture = scope:revolting_slave_culture.culture
+        hidden_effect = {
+            every_country_state = {
+                limit = {
+                    any_state_province = {
+                        count >= 5
+                        dominant_province_culture = scope:revolting_slave_culture.culture
+                    }
+                }
+                every_state_province = {
+                    set_owned_by = scope:new_country_vassal
+                }
             }
-            set_owned_by = scope:new_country_vassal
+            every_owned_province = {
+                limit = {
+                    dominant_province_culture = scope:revolting_slave_culture.culture
+                }
+                set_owned_by = scope:new_country_vassal
+            }
         }
         make_subject = { 
             target = scope:new_country_vassal
             type = client_state 
         }
-        
 
         
     }
     option = { #war
         name = c3rd_other_events.31.b
         custom_tooltip = c3rd_other_events.31.b.tt1
+        add_stability = 5
 
         scope:new_country_slave = {
             create_country = {
@@ -2630,24 +2647,59 @@ c3rd_other_events.31 = { # slaves culture revolts
         scope:new_country_vassal = {
             add_military_experience_to_new_country_effect = yes
         }
-        every_owned_province = {
-            limit = {
-                dominant_province_culture = scope:revolting_slave_culture.culture
+
+        hidden_effect = {
+            every_country_state = {
+                limit = {
+                    any_state_province = {
+                        count >= 5
+                        dominant_province_culture = scope:revolting_slave_culture.culture
+                    }
+                }
+                every_state_province = {
+                    set_owned_by = scope:new_country_vassal
+                }
             }
-            set_owned_by = scope:new_country_vassal
-        }
-        every_governorships = {
-            limit = {
-                any_governorship_state = {
+            every_owned_province = {
+                limit = {
+                    dominant_province_culture = scope:revolting_slave_culture.culture
+                }
+                set_owned_by = scope:new_country_vassal
+            }
+            every_governorships = {
+                limit = {
+                    any_governorship_state = {
+                        any_state_province = {
+                            any_neighbor_province = {
+                                owner = scope:new_country_vassal
+                            }
+                        }
+                    }
+                }
+                every_governorship_state = {
+                    limit = {
+                        OR = {
+                            any_state_province = {
+                                state_loyalty <= 20
+                            }
+                            any_state_province = {
+                                count >= 4
+                                has_province_modifier = revolt_preparation
+                            }
+                        }
+                    }
+                    every_state_province = {
+                        set_owned_by = scope:new_country_vassal
+                    }
+                }
+            }
+            every_country_state = {
+                limit = {
                     any_state_province = {
                         any_neighbor_province = {
                             owner = scope:new_country_vassal
                         }
                     }
-                }
-            }
-            every_governorship_state = {
-                limit = {
                     OR = {
                         any_state_province = {
                             state_loyalty <= 20
@@ -2662,36 +2714,16 @@ c3rd_other_events.31 = { # slaves culture revolts
                     set_owned_by = scope:new_country_vassal
                 }
             }
-        }
-        every_country_state = {
-            limit = {
-                any_state_province = {
+            every_owned_province = {
+                limit = {
                     any_neighbor_province = {
                         owner = scope:new_country_vassal
                     }
+                    has_province_modifier = revolt_preparation
                 }
-                OR = {
-                    any_state_province = {
-                        state_loyalty <= 20
-                    }
-                    any_state_province = {
-                        count >= 4
-                        has_province_modifier = revolt_preparation
-                    }
-                }
-            }
-            every_state_province = {
                 set_owned_by = scope:new_country_vassal
             }
-        }
-        every_owned_province = {
-            limit = {
-                any_neighbor_province = {
-                    owner = scope:new_country_vassal
-                }
-                has_province_modifier = revolt_preparation
-            }
-            set_owned_by = scope:new_country_vassal
+
         }
         declare_war_with_wargoal = {
             war_goal = conquer_wargoal

@@ -262,3 +262,11 @@ revolt_preparation = {
 	local_unrest = 2
 }
 
+added_liquidity = {
+	global_commerce_modifier = -0.30
+}
+
+new_balance = {
+	stability_monthly_change = -0.05
+}
+

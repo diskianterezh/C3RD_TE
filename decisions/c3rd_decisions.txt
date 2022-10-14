@@ -160,6 +160,78 @@
 		}
 
 	}
+	inject_liquidity = {
+		potential = {
+			current_date >= 700.1.1
+			OR = {
+				has_country_modifier = small_deflation
+				has_country_modifier = medium_deflation
+				has_country_modifier = high_deflation
+			}
+		}
+		allow = {
+			treasury >= 0
+			political_influence >= 20
+			custom_tooltip = {
+				text = "has_deflation_decision"
+				has_variable = deflation_value
+			}
+			NOT = {
+				has_country_modifier = added_liquidity
+			}
+		}
+		effect = {
+			add_political_influence = -20
+			add_treasury = {
+				value = -3
+				multiply = num_of_cities
+			}
+			change_variable = {
+				name = deflation_value
+				add = -10
+			}
+			add_country_modifier = {
+				name = added_liquidity
+				duration = 1825
+			}
+
+		}
+
+	}
+	new_silver_currency = {
+		potential = {
+			current_date >= 700.1.1
+			OR = {
+				has_country_modifier = small_monetary_crash
+				has_country_modifier = medium_monetary_crash
+				has_country_modifier = high_monetary_crash
+			}
+		}
+		allow = {
+			stability >= 15
+			political_influence >= 20
+			custom_tooltip = {
+				text = "has_silver_decision"
+				has_variable = silver_unvalue
+			}
+			NOT = {
+				has_country_modifier = new_balance
+			}
+		}
+		effect = {
+			add_political_influence = -20
+			add_stability = -10
+			change_variable = {
+				name = silver_unvalue
+				add = -10
+			}
+			add_country_modifier = {
+				name = new_balance
+				duration = 1825
+			}
+		}
+
+	}
 	
 }
 

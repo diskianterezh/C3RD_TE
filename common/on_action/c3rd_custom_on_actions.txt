@@ -524,8 +524,9 @@ c3rd_calculate_deflation = {
 		has_land = yes
 		is_ai = no
 		current_date >= 750.1.1
-		NOT = {
+		NOR = {
 			has_country_modifier = solidus_introduced
+			has_variable = solidus_ongoing
 		}
 	}
 	effect = {
@@ -574,6 +575,7 @@ c3rd_calculate_deflation = {
 		}
 		if = {
 			limit = {
+				has_variable = deflation_value
 				var:country_economy > 1
 				var:deflation_value > 0
 			}
@@ -584,6 +586,7 @@ c3rd_calculate_deflation = {
 		}
 		if = {
 			limit = {
+				has_variable = deflation_value
 				var:country_economy > 2
 				var:deflation_value > 0
 			}
@@ -594,6 +597,7 @@ c3rd_calculate_deflation = {
 		}
 		if = {
 			limit = {
+				has_variable = deflation_value
 				var:country_economy > 4
 				var:deflation_value > 0
 			}
@@ -703,6 +707,7 @@ c3rd_aurelien = {
 			limit = { 
 				has_law = second_reform_law
 				has_variable = silver_unvalue
+				var:silver_unvalue > 0
 			}
 			change_variable = {
 				name = silver_unvalue
@@ -753,6 +758,10 @@ c3rd_apply_deflation = { #applying deflation modifiers events
 		is_ai = no
 		current_date >= 750.1.1
 		has_variable = deflation_value
+		NOR = {
+			has_country_modifier = solidus_introduced
+			has_variable = solidus_ongoing
+		}
 	}
 	effect = {
 		if = {
@@ -837,6 +846,10 @@ c3rd_apply_silver_unvalue = { #applying silver modifiers events
 		is_ai = no
 		current_date >= 750.1.1
 		has_variable = silver_unvalue
+		NOR = {
+			has_country_modifier = solidus_introduced
+			has_variable = solidus_ongoing
+		}
 	}
 	effect = {
 		if = {
@@ -919,8 +932,9 @@ c3rd_province_revolt_gain = {
 	trigger = {
 		has_land = yes
 		is_ai = no
-		#current_date >= 600.1.1
+		current_date >= 600.1.1
 		any_country_culture = {
+			is_integrated = no
 			has_country_culture_modifier = on_going_revolt
 		}
 	}
@@ -940,7 +954,7 @@ c3rd_province_revolt_gain = {
 			}
 			random_list = {
 				15 = {}
-				1000 = {
+				1 = {
 					modifier = {
 						add = 1
 						root.stability <= 50

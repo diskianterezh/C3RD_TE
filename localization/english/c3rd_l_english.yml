@@ -77,6 +77,10 @@
  desc_local_autonomy_c3rd:0 "The local elites has been enforced in their rights"
  revolt_preparation:0 "Fomenting the revolt"
  desc_revolt_preparation:0 "This province is won over to the cause of rebels. In the event of a provincial revolt or cultural uprising, it will join the secessionists"
+ added_liquidity:0 "Added Liquidity"
+ desc_added_liquidity:0 "The government made a direct injection of fresh cash into the monetary system"
+ new_balance:0 "New currency"
+ desc_new_balance:0 "A new silver currency with a fixed rate was introduced"
 
 
  #opinion:
@@ -134,6 +138,13 @@
  check_the_great_book_desc:0 "A great book with the status of the country's economy"
  establish_solidus:0 "Establishing the Solidus"
  establish_solidus_desc:0 "The introduction of gold value is necessary to solve the problems of value in place with the misuse of silver money. #G This will solve any economic balance problem forever #!\n #R The use of the gold value may lead to a strengthening of the elites #!"
+ inject_liquidity:0 "Inject Cash"
+ inject_liquidity_desc:0 "To remedy the monetary balance, we can inject fresh money from the government.\n #G Monetary deflation will be reduced #!"
+ new_silver_currency:0 "Introduce a new silver currency"
+ new_silver_currency_desc:0 "In order to reduce monetary collapse, introducing a new currency in the image of our leader would stabilise rates. #G This will reduce the devaluation of silver #!"
+ has_deflation_decision:0 "You have any deflation"
+ has_silver_decision:0 "You have any silver devaluation"
+ 
 
  #Culture
 
@@ -742,9 +753,11 @@ low_stab_event.4.c.tt1:0 "Things remain as they are, but [independent_current_go
 
 
  c3rd_other_events.31.t:0 "[revolting_slave_culture.GetName] revolt"
- c3rd_other_events.31.desc:0 "[revolting_slave_culture.GetName] revolt in [new_country_slave.GetName]"
- c3rd_other_events.31.a:0 ""
- c3rd_other_events.31.a.tt1:0 ""
+ c3rd_other_events.31.desc:0 "After years of rising tension in the major cities they control, the leaders of the [revolting_slave_culture.GetName] revolt have gathered enough support to centralise their demands and give us an ultimatum. Exasperated with the measures they have been subjected to, they demand the total liberation and independence of the provinces they call home under a new independent state. \nHowever, they are ready to negotiate and accept our suzerainty if we accept their conditions. \nThis would be a clever way of avoiding war and settling this situation, but the warmongers in our government will certainly not hear of it and will undoubtedly push for the massacre of these rebels."
+ c3rd_other_events.31.a:0 "Let us accept this proposal"
+ c3rd_other_events.31.a.tt1:0 "The predominantly [revolting_slave_culture.GetName] provinces will secede into a new client state. All revolt modifiers will be removed from the [revolting_slave_culture.GetName] culture"
+ c3rd_other_events.31.b:0 "To arms then"
+ c3rd_other_events.31.b.tt1:0 "The predominantly [revolting_slave_culture.GetName] provinces will secede into a new state. You will declare war on it. Neighbouring rebel provinces will be able to join the secessionists, as well as provinces with low loyalty"
 
 #tribals fix
 
