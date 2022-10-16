@@ -947,7 +947,8 @@ c3rd_province_revolt_gain = {
 				}
 			}
 			random_list = {
-				15 = {}
+				15 = {
+				}
 				1 = {
 					modifier = {
 						add = 1
