@@ -618,12 +618,6 @@ c3rd_calculate_deflation = {
 					add = 1
 				}
 			}
-			else = {
-				change_variable = {
-					name = silver_unvalue
-					add = 1
-				}
-			}
 		}
 		if = {
 			limit = {
