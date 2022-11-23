@@ -53,21 +53,21 @@ revolt_events.1 = {
 							}
 						}				
 					}
-					every_country_state = {
-						limit = {
-							any_state_province = {
-								any_neighbor_province = {
-									owner = scope:revolt_country
-								}
-							}
-							any_state_province = {
-								count >= 4
-								has_province_modifier = revolt_preparation
+				}
+				every_country_state = {
+					limit = {
+						any_state_province = {
+							any_neighbor_province = {
+								owner = scope:revolt_country
 							}
 						}
-						every_state_province = {
-							set_owned_by = scope:revolt_country
+						any_state_province = {
+							count >= 4
+							has_province_modifier = revolt_preparation
 						}
+					}
+					every_state_province = {
+						set_owned_by = scope:revolt_country
 					}
 				}
 	    	}
