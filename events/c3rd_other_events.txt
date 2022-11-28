@@ -667,6 +667,7 @@ c3rd_other_events.8 = { #event where people are not happy about taxes
         modifier = {
             factor = 0.7
             has_country_modifier = military_advantages
+            has_country_modifier = military_anarchy
         }
         modifier = {
             factor = 0.8
@@ -683,6 +684,14 @@ c3rd_other_events.8 = { #event where people are not happy about taxes
         modifier = {
             factor = 1.3
             legitimacy <= 0
+        }
+        modifier = {
+            factor = 1.2
+            stability <= 40
+        }
+        modifier = {
+            factor = 1.2
+            stability <= 20
         }
 
     }
@@ -929,6 +938,7 @@ c3rd_other_events.9 = { #event where people ask for census taxes
         modifier = {
             factor = 0.7
             has_country_modifier = military_advantages
+            has_country_modifier = military_anarchy
         }
         modifier = {
             factor = 0.8
@@ -945,6 +955,14 @@ c3rd_other_events.9 = { #event where people ask for census taxes
         modifier = {
             factor = 1.3
             legitimacy <= 0
+        }
+        modifier = {
+            factor = 1.2
+            stability <= 40
+        }
+        modifier = {
+            factor = 1.2
+            stability <= 20
         }
         modifier = {
             factor = 1.3
@@ -1160,7 +1178,7 @@ c3rd_other_events.9 = { #event where people ask for census taxes
 }
 
 
-c3rd_other_events.10 = { #inform about deflation stopping
+c3rd_other_events.10 = { #great book
     type = country_event
     title = "c3rd_other_events.10.t"
     desc = {
@@ -2733,7 +2751,7 @@ c3rd_other_events.31 = { # slaves culture revolts
         
     }
 }
-c3rd_other_events.32 = { # unintegrated revolts
+c3rd_other_events.32 = { # unintegrated revolts --- A FINIR
     type = country_event
     title = "c3rd_other_events.32.t"
     desc = "c3rd_other_events.32.desc"
@@ -2962,4 +2980,178 @@ c3rd_other_events.32 = { # unintegrated revolts
     after = {
         remove_variable = max_number_massacre
     }
+}
+
+
+c3rd_other_events.40 = { #corruption from gold
+    type = country_event
+    title = "c3rd_other_events.40.t"
+    desc = "c3rd_other_events.40.desc"
+    
+    picture = greek_court
+
+    trigger = {
+        has_land = yes
+        current_date >= 600.1.1
+        treasury >= 10000
+        OR = {
+            treasury >= income_150
+            treasury >= 90000
+        }
+    }
+
+    weight_multiplier = {
+        modifier = {
+            factor = 1.5
+            stability >= 60
+        }
+        modifier = {
+            factor = 1.5
+            stability >= 75
+        }
+        modifier = {
+            factor = 1.5
+            treasury >= income_300
+        }
+    }
+    immediate = {
+        set_variable = {
+            name = leaders
+            value = 0
+        }
+        set_variable = {
+            name = politics
+            value = 0
+        }
+        every_character = {
+            limit = {
+                OR = {
+                    has_any_office = yes
+					has_tech_office = yes
+                    is_governor = yes
+                    is_general = yes
+                    is_ruler = yes
+                    is_co_ruler = yes
+                }
+            }
+            root = {
+                change_variable = {
+                    name = politics
+                    add = 1
+                }
+            }
+            if = {
+                limit = { 
+                    OR = {
+                        has_any_office = yes
+                        is_ruler = yes
+                        is_co_ruler = yes
+                    }
+                }
+                root = {
+                    change_variable = {
+                        name = leaders
+                        add = 1
+                    }
+                }
+
+            }
+        }
+    }
+    option = { #leaders gets rich
+        name = c3rd_other_events.40.a
+        custom_tooltip = c3rd_other_events.40.a.tt1
+        hidden_effect = {
+            every_character = {
+                limit = {
+                    OR = {
+                        has_any_office = yes
+                        is_ruler = yes
+                        is_co_ruler = yes
+                    }
+                }
+                add_gold = root.has_monthly_income
+                add_corruption = 25
+            }
+        }
+        add_treasury = {
+            value = var:leaders
+            multiply = has_monthly_income
+            multiply = -1
+        }
+    }
+    option = { #politics get rich
+        name = c3rd_other_events.40.b
+        custom_tooltip = c3rd_other_events.40.b.tt1
+        add_political_influence = 50
+        hidden_effect = {
+            every_character = {
+                limit = {
+                    OR = {
+                        has_any_office = yes
+                        has_tech_office = yes
+                        is_governor = yes
+                        is_general = yes
+                        is_ruler = yes
+                        is_co_ruler = yes
+                    }
+                }
+                add_gold = root.has_monthly_income
+                add_corruption = 10
+            }
+        }
+        add_treasury = {
+            value = var:politics
+            multiply = has_monthly_income
+            multiply = -1
+        }
+    }
+    option = { #everyone gets rich
+        trigger = {
+            current_date >= 750.1.1
+        }
+        name = c3rd_other_events.40.c
+        custom_tooltip = c3rd_other_events.40.c.tt1
+        hidden_effect = {
+            every_character = {
+                limit = {
+                    OR = {
+                        has_any_office = yes
+                        has_tech_office = yes
+                        is_governor = yes
+                        is_general = yes
+                        is_ruler = yes
+                        is_co_ruler = yes
+                    }
+                }
+                add_gold = root.has_monthly_income
+                add_corruption = 5
+            }
+        }
+        add_treasury = {
+            value = var:politics
+            multiply = has_monthly_income
+            add = num_of_pops_integrated
+            multiply = -1
+        }
+        add_country_modifier = {
+            name = games_games
+            duration = 365
+        }
+		if = {
+			limit = {
+				has_variable = deflation_value
+				var:deflation_value > 5
+			}
+			change_variable = {
+				name = deflation_value
+				add = -5
+			}
+		}
+    }
+    after = {
+        remove_variable = leaders
+        remove_variable = politics
+    }
+
 }

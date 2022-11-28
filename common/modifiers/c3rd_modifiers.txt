@@ -270,3 +270,7 @@ new_balance = {
 	stability_monthly_change = -0.05
 }
 
+games_games = {
+	happiness_for_same_culture_modifier = 0.1
+}
+

@@ -23,6 +23,7 @@ c3rd_events.1 = { #oh noes, too much vassals
                 is_subject_type = client_state
                 is_subject_type = satrapy
             }
+            has_subject_loyalty <= 80
             NOT = {
                 has_country_modifier = autonomy_granted
             }
@@ -3973,6 +3974,14 @@ c3rd_events.44 = { #finally, seize power
         add_country_modifier = {
             name = deep_reforms
             duration = 18250 #50years
+        }
+        hidden_effect = {
+            every_owned_province = {
+                limit = {
+                    has_province_modifier = athenian_mission_03_council_modifier
+                }
+                remove_province_modifier = athenian_mission_03_council_modifier
+            }
         }
     }
 

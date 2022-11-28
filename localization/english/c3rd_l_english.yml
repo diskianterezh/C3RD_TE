@@ -81,6 +81,8 @@
  desc_added_liquidity:0 "The government made a direct injection of fresh cash into the monetary system"
  new_balance:0 "New currency"
  desc_new_balance:0 "A new silver currency with a fixed rate was introduced"
+ games_games:0 "Games and Games !"
+ desc_games_games:0 "Various and costly games have been offered by the nation"
 
 
  #opinion:
@@ -153,7 +155,7 @@
  new_elite_refused:0 "Social ascension denied"
  strengthen_tax_inspection:0 "Strengthen Tax Inspections"
  strengthen_tax_inspection_desc:0 "The citizens with time pile up the privileges and learn new ways to maintain themselves in a privileged situation and do not feel that it is necessary to pay as much as the others. It is time to track down and eliminate these practices."
- tax_inspection_tt:0 "This will help to balance the finances"
+ tax_inspection_tt:0 "#G This will help to balance the monetary balance #!"
  revoke_strengthen_tax_inspection:0 "Stop the tax inspection zeal"
  revoke_strengthen_tax_inspection_desc:0 "Let's trust our elites... they surely wouldn't dare to hide wealth from us, right ?"
  on_going_revolt:0 "Culture Turmoils"
@@ -758,6 +760,16 @@ low_stab_event.4.c.tt1:0 "Things remain as they are, but [independent_current_go
  c3rd_other_events.31.a.tt1:0 "The predominantly [revolting_slave_culture.GetName] provinces will secede into a new client state. All revolt modifiers will be removed from the [revolting_slave_culture.GetName] culture"
  c3rd_other_events.31.b:0 "To arms then"
  c3rd_other_events.31.b.tt1:0 "The predominantly [revolting_slave_culture.GetName] provinces will secede into a new state. You will declare war on it. Neighbouring rebel provinces will be able to join the secessionists, as well as provinces with low loyalty"
+
+
+ c3rd_other_events.40.t:0 "Mountains of gold"
+ c3rd_other_events.40.desc:0 "'It's absolutely endless! I couldn't even tell one pile of gold from the other'. This is the kind of phrase you hear at social events from the mouths of leaders. Leading one of the richest nations on earth is enough to make a man's head spin. \nFortunately the national wealth is in the hands of the most honest!"
+ c3rd_other_events.40.a:0 "Of course not, nothing falls into our pockets"
+ c3rd_other_events.40.a.tt1:0 "The wealth of the nation enriches its leaders"
+ c3rd_other_events.40.b:0 "Large benefits, large services!"
+ c3rd_other_events.40.b.tt1:0 "Money will flow into the pockets of all officials"
+ c3rd_other_events.40.c:0 "Games and games!"
+ c3rd_other_events.40.c.tt1:0 "Everyone will benefit. #G This will reduce any amount of deflation you could have #!"
 
 #tribals fix
 
