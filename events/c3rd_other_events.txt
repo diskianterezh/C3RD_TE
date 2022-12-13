@@ -1216,14 +1216,6 @@ c3rd_other_events.10 = { #great book
             name = what_is_my_eco
             value = c3rd_economic_value
         }
-        set_variable = {
-            name = what_is_my_fac
-            value = c3rd_economic_factor
-        }
-        set_variable = {
-            name = what_is_my_gold
-            value = c3rd_gold_number
-        }
         change_variable = {
             name = what_is_my_eco
             multiply = 100
@@ -1237,8 +1229,6 @@ c3rd_other_events.10 = { #great book
 
     after = {
         remove_variable = what_is_my_eco
-        remove_variable = what_is_my_fac
-        remove_variable = what_is_my_gold
     }
 }
 

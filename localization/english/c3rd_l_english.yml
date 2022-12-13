@@ -153,6 +153,12 @@
  scheme_care_of_relatives_effect_tt:1 "[SCOPE.GetRootScope.GetCharacter.GetName] Will share his wealth with his family."
  scheme_care_of_relatives_effect:1 "Taking care of the Family"
  scheme_care_of_relatives_effect_desc:0 "This character is using his vast wealth to enrich his family"
+
+ #alerts
+
+ ALERT_MONETARY_BALANCE:0 "#T Monetary balance low#!\nOur monetary balance is dangerously low. Our wealth creation and exploitation is lower than the consumption of the citizenry. \nOpen the great book (decision) to learn more about it"
+ ALERT_MONETARY_BALANCE_MEDIUM:0 "#T Monetary balance low#!\nOur monetary balance is low. Our wealth creation and exploitation is slightly lower than the consumption of the citizenry. \nOpen the great book (decision) to learn more about it"
+ ALERT_COLLAPSE:0 "#T Internal Collapse#!\nYour country is collapsing. As long as your stability is #R below 25#!, collapse events will occur."
  
 
  #Culture
