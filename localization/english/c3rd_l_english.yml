@@ -122,6 +122,8 @@
  desc_king_maker:0 "This character has, by the force of his will, imposed the person of his wish on the throne"
  popular_general:0 "Popular general"
  desc_popular_general:0 "This character made himself known as one of the great men of this country"
+ pater_familias:0 "Pater Familias"
+ desc_pater_familias:0 "This character has made his family rich"
 
  #Decisions
  stop_political_unstability_small:0 "Stopping the political instability"
@@ -146,6 +148,11 @@
  new_silver_currency_desc:0 "In order to reduce monetary collapse, introducing a new currency in the image of our leader would stabilise rates. #G This will reduce the devaluation of silver #!"
  has_deflation_decision:0 "You have any deflation"
  has_silver_decision:0 "You have any silver devaluation"
+ 
+ #schemes
+ scheme_care_of_relatives_effect_tt:1 "[SCOPE.GetRootScope.GetCharacter.GetName] Will share his wealth with his family."
+ scheme_care_of_relatives_effect:1 "Taking care of the Family"
+ scheme_care_of_relatives_effect_desc:0 "This character is using his vast wealth to enrich his family"
  
 
  #Culture
@@ -763,7 +770,7 @@ low_stab_event.4.c.tt1:0 "Things remain as they are, but [independent_current_go
 
 
  c3rd_other_events.40.t:0 "Mountains of gold"
- c3rd_other_events.40.desc:0 "'It's absolutely endless! I couldn't even tell one pile of gold from the other'. This is the kind of phrase you hear at social events from the mouths of leaders. Leading one of the richest nations on earth is enough to make a man's head spin. \nFortunately the national wealth is in the hands of the most honest!"
+ c3rd_other_events.40.desc:0 "Our country is full of wealth. And the greatest of these riches are in the best place; in the government's reserves. Our good management of the country's income is obvious and raises questions, what are our leaders doing with so much wealth?\n\n'It's absolutely endless! I couldn't even tell one pile of gold from the other'. This is the kind of phrase you hear at social events from the mouths of leaders. Leading one of the richest nations on earth is enough indeed to make a man's head spin. \nFortunately the national wealth is in the hands of the most honest!"
  c3rd_other_events.40.a:0 "Of course not, nothing falls into our pockets"
  c3rd_other_events.40.a.tt1:0 "The wealth of the nation enriches its leaders"
  c3rd_other_events.40.b:0 "Large benefits, large services!"

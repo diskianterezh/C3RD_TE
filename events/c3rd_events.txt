@@ -4171,6 +4171,10 @@ c3rd_events.45 = { #powerful republic leader want to reform
                             }
                         }
                         modifier = {
+                            add = 50
+                            has_country_modifier = political_unstability
+                        }
+                        modifier = {
                             add = 10
                             current_ruler = {
                                 has_trait = righteous
@@ -4231,10 +4235,18 @@ c3rd_events.46 = { #unstability made by ruler
 
     left_portrait = current_ruler
     immediate = {
-        add_stability = -5
-        add_country_modifier = {
-            name = political_unstability
-            duration = -1
+        if = {
+            limit = {
+                has_country_modifier = political_unstability 
+            }
+            add_stability = -15
+        }
+        else = {
+            add_stability = -5
+            add_country_modifier = {
+                name = political_unstability
+                duration = -1
+            }
         }
     }
 

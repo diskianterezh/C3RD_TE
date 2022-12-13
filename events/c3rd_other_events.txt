@@ -2998,6 +2998,9 @@ c3rd_other_events.40 = { #corruption from gold
             treasury >= income_150
             treasury >= 90000
         }
+        NOT = {
+            has_variable = got_chest_open
+        }
     }
 
     weight_multiplier = {
@@ -3071,7 +3074,7 @@ c3rd_other_events.40 = { #corruption from gold
                     }
                 }
                 add_gold = root.has_monthly_income
-                add_corruption = 25
+                add_corruption = 50
             }
         }
         add_treasury = {
@@ -3097,7 +3100,7 @@ c3rd_other_events.40 = { #corruption from gold
                     }
                 }
                 add_gold = root.has_monthly_income
-                add_corruption = 10
+                add_corruption = 20
             }
         }
         add_treasury = {
@@ -3125,7 +3128,7 @@ c3rd_other_events.40 = { #corruption from gold
                     }
                 }
                 add_gold = root.has_monthly_income
-                add_corruption = 5
+                add_corruption = 10
             }
         }
         add_treasury = {
@@ -3152,6 +3155,10 @@ c3rd_other_events.40 = { #corruption from gold
     after = {
         remove_variable = leaders
         remove_variable = politics
+        set_variable = {
+            name = got_chest_open
+            days = 1850
+        }
     }
 
 }

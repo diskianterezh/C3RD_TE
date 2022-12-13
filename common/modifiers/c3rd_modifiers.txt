@@ -96,6 +96,7 @@ dictatorial_extension_c3rd = {
 
 civil_war_stab = {
 	stability_monthly_change = -0.25
+	happiness_for_same_culture_modifier = -0.1
 }
 
 unworthy_leader_1 = {
