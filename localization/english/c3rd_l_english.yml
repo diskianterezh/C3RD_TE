@@ -151,14 +151,15 @@
  
  #schemes
  scheme_care_of_relatives_effect_tt:1 "[SCOPE.GetRootScope.GetCharacter.GetName] Will share his wealth with his family."
- scheme_care_of_relatives_effect:1 "Taking care of the Family"
- scheme_care_of_relatives_effect_desc:0 "This character is using his vast wealth to enrich his family"
+ scheme_care_of_relatives:1 "Taking care of the Family"
+ scheme_care_of_relatives_desc:0 "This character is using his vast wealth to enrich his family"
 
  #alerts
 
  ALERT_MONETARY_BALANCE:0 "#T Monetary balance low#!\nOur monetary balance is dangerously low. Our wealth creation and exploitation is lower than the consumption of the citizenry. \nOpen the great book (decision) to learn more about it"
  ALERT_MONETARY_BALANCE_MEDIUM:0 "#T Monetary balance low#!\nOur monetary balance is low. Our wealth creation and exploitation is slightly lower than the consumption of the citizenry. \nOpen the great book (decision) to learn more about it"
  ALERT_COLLAPSE:0 "#T Internal Collapse#!\nYour country is collapsing. As long as your stability is #R below 25#!, collapse events will occur."
+ ALERT_MILITARY_ANARCHY:0 "#T Military Anarchy#!\nThe country is in a phase of military anarchy. As long as this continues, the generals will demand more important concessions and decisions."
  
 
  #Culture
@@ -303,9 +304,12 @@ low_stab_event.4.c.tt1:0 "Things remain as they are, but [independent_current_go
  c3rd_events.5.b.tt1:0 "The ambitions are contained for the moment, but we will lose the favor of [volontary_general.GetName]."
 
  c3rd_events.6.t:0 "A forceful intervention"
- c3rd_events.6.desc:0 "If [volontary_general.GetName]'s public intervention has undoubtedly produced its effects, we have probably overestimated his capacity as a diplomat. As his men demonstrated their strength in the capital, there was much resistance among the elites, who were outraged that the military force was overstepping their influence. Stung to the core, our general redoubled his military zeal, locked down the opposition by vigorous shackling, and maintained an iron grip on the institutions.\nAlthough our authority is undoubtedly reinforced, [volontary_general.GetName]'s new influence was clearly not the objective of this operation"
+ c3rd_events.6.desc.1:0 "If [volontary_general.GetName]'s public intervention has undoubtedly produced its effects, we have probably overestimated his capacity as a diplomat. As his men demonstrated their strength in the capital, there was much resistance among the elites, who were outraged that the military force was overstepping their influence. Stung to the core, our general redoubled his military zeal, locked down the opposition by vigorous shackling, and maintained an iron grip on the institutions.\nAlthough our authority is undoubtedly reinforced, [volontary_general.GetName]'s new influence was clearly not the objective of this operation"
+ c3rd_events.6.desc.2:0 "When [volontary_general.GetName] spoke publicly in our favour, no one could have predicted that such honourable words would be so badly received. A tornado of protest swept through the senate, with the olders vociferating in indignation at what they saw as an attempted coup. \n\nThe session could have turned into a nightmare, but in an incredible political feat, our leader managed to dissociate the government from [volontary_general.GetName]'s 'isolated attempt'. With him taking full responsibility for his actions, we ultimately won back the sympathy and support of all."
  c3rd_events.6.a:0 "So much power in the hands of the army."
  c3rd_events.6.a.tt1:0 "A period of unrest begins..."
+ c3rd_events.6.b:0 "Phew! Let's hope [volontary_general.GetName] will forgive us"
+ c3rd_events.6.b.tt1:0 "The attempt was a failure, but we still managed to reap the profits. Let's hope we haven't offended the army too much."
 
  c3rd_events.7.t:0 "The glory of the empire"
  c3rd_events.7.desc:0 "For a few months a current of discontent has been shaking the officers. A faction of officers, including [general_leader.GetName], openly complains about the weakness of the government."

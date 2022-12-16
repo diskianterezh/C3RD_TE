@@ -1,0 +1,7 @@
+﻿c3rd_military_anarchy_alert = {
+	scope = country
+
+	is_shown = {
+		has_country_modifier = military_anarchy
+	}
+}

@@ -984,7 +984,30 @@ widget = {
 			{
 				texture = "gfx/interface/icons/shared_icons/cost.dds"
 			}
-		}	
+		}
+		###########################
+		#C3RD - Military Anarchy
+		###########################
+		alert = {
+			datacontext = "[GetScriptedGui('c3rd_military_anarchy_alert')]"
+			visible = "[And(ScriptedGui.IsShown(GuiScope.SetRoot(AlertManager.GetPlayer.MakeScope).End), AlertManager.ShowAlert('c3rd_military_anarchy_alert'))]"
+			tooltip = "ALERT_MILITARY_ANARCHY"
+			blockoverride "Color"
+			{
+				frame = 5
+			}
+			using = yellow_alert
+			blockoverride "On_click"
+			{
+				onrightclick = "[AlertManager.ToggleShowAlert('c3rd_military_anarchy_alert')]"
+			}
+				
+				
+			blockoverride "Icon"
+			{
+				texture = "gfx/interface/icons/shared_icons/invoke_devotio.dds"
+			}
+		}		
 		###########################################################################
 		# GREEN ALERTS
 		###########################################################################			

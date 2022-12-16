@@ -434,7 +434,6 @@ c3rd_events.5 = {#general intervention : provoke military crisis where there is 
         is_tribal = no
         current_date >= 900.1.1
         num_of_cities >= 900
-        is_monarchy = yes
         any_character = {
             is_general = yes
             is_ruler = no
@@ -461,7 +460,14 @@ c3rd_events.5 = {#general intervention : provoke military crisis where there is 
         }
         OR = {
             stability < 30
-            legitimacy < 25
+            AND = {
+                is_monarchy = yes
+                legitimacy < 25
+            }
+            AND = {
+                is_republic = yes
+                has_senate_approval <= 25
+            }
             towards_civil_war = yes
             has_civil_war = yes
         }
@@ -480,6 +486,7 @@ c3rd_events.5 = {#general intervention : provoke military crisis where there is 
 		}
         modifier = {
             factor = 2
+            is_monarchy = yes
             legitimacy < 0
         }
         modifier = {
@@ -496,6 +503,10 @@ c3rd_events.5 = {#general intervention : provoke military crisis where there is 
                 is_general = yes
                 is_disloyal = yes
             }
+        }
+        modifier = {
+            factor = 0.5
+            is_republic = yes
         }
         modifier = {
             factor = 2
@@ -599,7 +610,48 @@ c3rd_events.5 = {#general intervention : provoke military crisis where there is 
         else = {
             add_stability = 6
         }
-        add_legitimacy = 6
+        if = {
+            limit = {
+                is_monarchy = yes
+            }
+            add_legitimacy = 6
+        }
+        else_if = {
+            limit = { 
+                is_republic =  yes
+            }
+            if = {
+                limit = { has_party_type = optimates_party }
+                add_party_approval = {
+                    party_type = boni_party
+                    value = 20
+                }
+                add_party_approval = {
+                    party_type = populares_party
+                    value = 20
+                }
+                add_party_approval = {
+                    party_type = optimates_party
+                    value = 20
+                }
+                
+            }
+            else = {
+                add_party_approval = {
+                    party_type = traditionalist_party
+                    value = 20
+                }
+                add_party_approval = {
+                    party_type = democratic_party
+                    value = 20
+                }
+                
+                add_party_approval = {
+                    party_type = oligarchic_party
+                    value = 20
+                }
+            }
+        }
         every_character = {
             limit = {
                 is_disloyal = yes
@@ -684,7 +736,22 @@ c3rd_events.5 = {#general intervention : provoke military crisis where there is 
 c3rd_events.6 = { #volontary general must be convincing
     type = country_event
     title = "c3rd_events.6.t"
-    desc = "c3rd_events.6.desc"
+    desc = {
+        triggered_desc = {
+            trigger = {
+                is_monarchy = yes
+            }
+            desc = "c3rd_events.6.desc.1"
+            
+        }
+        triggered_desc = {
+            trigger = {
+                is_republic = yes
+            }
+            desc = "c3rd_events.6.desc.2"
+            
+        }
+    }
  
     picture = romans_marching
  
@@ -697,28 +764,65 @@ c3rd_events.6 = { #volontary general must be convincing
     left_portrait = scope:volontary_general
 
     immediate = {
-        add_country_modifier = {
-            name = military_anarchy
-            duration = 9125 #25y
+        if = {
+            limit = {
+                is_monarchy = yes
+            }
+            add_country_modifier = {
+                name = military_anarchy
+                duration = 9125 #25y
+            }
+            set_variable = {
+                name = recent_military_anarchy
+                days = 18000 #50 years
+            }
+            scope:volontary_general = {
+                add_character_modifier = {
+                    name = king_maker
+                    duration = 7300
+                }
+            }
+            add_tyranny = 10
         }
-        set_variable = {
-            name = recent_military_anarchy
-            days = 18000 #50 years
-        }
-        scope:volontary_general = {
-            add_character_modifier = {
-                name = king_maker
-                duration = 7300
+        else_if = {
+            limit = { 
+                is_republic = yes 
+            }
+            add_tyranny = 10
+            scope:volontary_general = {
+                add_loyalty = humiliated_general
+            }
+            if = {
+                limit = { has_variable = unworthy_leader}
+                change_variable = {
+                    name = unworthy_leader
+                    add = 2
+                }
+            }
+            else = {
+                set_variable = {
+                    name = unworthy_leader
+                    value = 2
+                }
             }
         }
-        add_tyranny = 10
         
     }
     
-    option = {#ok
+    option = {#ok for monarchies
         name = c3rd_events.6.a
         custom_tooltip = c3rd_events.6.a.tt1
+        trigger = {
+            is_monarchy = yes
+        }
         
+    }
+    option = {#ok for republics
+        name = c3rd_events.6.b
+        custom_tooltip = c3rd_events.6.b.tt1
+        trigger = {
+            is_republic = yes
+        } 
     }
 
 }
@@ -1073,7 +1177,7 @@ c3rd_events.75 = { #not at war
         }
     }
     
-    option = {#ok
+    option = {#oh noes
         name = c3rd_events.75.a
         custom_tooltip = c3rd_events.75.a.tt1
         hidden_effect = {
@@ -1298,6 +1402,7 @@ c3rd_events.9 = { #Assassination of the ruler by the generals
             limit = {
                 is_general = yes
                 loyalty <= 50
+                is_primary_heir = no
             }
             weight = {
                 modifier = {
