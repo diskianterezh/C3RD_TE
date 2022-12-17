@@ -334,6 +334,13 @@ low_stab_event.4.c.tt1:0 "Things remain as they are, but [independent_current_go
  c3rd_events.8.b:0 "We can see your objective... it's absolutely unacceptable"
  c3rd_events.8.b.tt1:0 "This refusal will offend the generals. #R This may increase the risk of military uprising #!"
 
+ c3rd_events.81.t:0 "An influential soldier"
+ c3rd_events.81.desc:0 "Our army is valiant, and at its head, [general_leader.GetName], has earned a reputation as an indispensable general. This influential man holds our military power in his hands and seems willing to take advantage of it.\nNow he is calling for a show of generosity from the government to honour the protection he gives to our institutions. Although he seems well disposed at the moment, it is clear that this is nothing less than a pressure for more honours and prestige... which would be ill-advised to refuse"
+ c3rd_events.81.a:0 "He earned those honours"
+ c3rd_events.81.a.tt1:0 "The general will be overwhelmed with honours"
+ c3rd_events.81.b:0 "A good general must stay in his place"
+ c3rd_events.81.b.tt1:0 "This refusal will offend the general. #R This may increase the risk of military uprising #!"
+
  c3rd_events.9.t:0 "Military intervention"
  c3rd_events.9.desc:0 "For several weeks, the decisions of our leader [assa_ruler.GetName] have more than hurt his popularity. The generals openly accused him of softness, and his policies were unbearable for them. But although this tense climate was well known to our leader, few could have foreseen what would happen next."
  c3rd_events.9.desc.1:0 "\n\nThe shock was total when a trembling messenger brought the terrible news to the senate ; our leader, on his way to the parliament, was violently murdered by several individuals and his body was left bloody on the pavement of the city. Those responsible have not been caught, but everyone suspects that [general_leader.GetName], leader of the most virulent military faction, is no stranger to this event..."
