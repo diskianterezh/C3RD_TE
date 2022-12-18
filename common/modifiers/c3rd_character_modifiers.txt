@@ -8,3 +8,8 @@ king_maker = {
 popular_general = {
 	monthly_character_popularity = 0.15
 }
+
+pater_familias = {
+	monthly_character_popularity = 0.1
+	monthly_corruption = 0.05
+}

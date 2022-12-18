@@ -16,6 +16,8 @@ yearly_country_pulse = {
 		c3rd_economic_warning
 		delay = { days = { 1 364 } }
 		c3rd_apply_deflation
+		delay = { days = { 1 180 } }
+		c3rd_really_rich_country
 
 	}
 }

@@ -163,7 +163,7 @@ c3rd_economic_1_value = {
 
 c3rd_economic_2_value = {
 	value = c3rd_base_economic_value
-	multiply = 2.5
+	multiply = 2.6
 	ROOT = {
 		divide = country_population
 	}
@@ -172,14 +172,14 @@ c3rd_economic_2_value = {
 
 c3rd_economic_3_value = {
 	value = c3rd_base_economic_value
-	multiply = 2.3
+	multiply = 2.4
 	ROOT = {
 		divide = country_population
 	}
 }
 c3rd_economic_4_value = {
 	value = c3rd_base_economic_value
-	multiply = 2.1
+	multiply = 2.2
 	ROOT = {
 		divide = country_population
 	}
@@ -193,35 +193,35 @@ c3rd_economic_5_value = {
 }
 c3rd_economic_6_value = {
 	value = c3rd_base_economic_value
-	multiply = 1.9
+	multiply = 1.8
 	ROOT = {
 		divide = country_population
 	}
 }
 c3rd_economic_7_value = {
 	value = c3rd_base_economic_value
-	multiply = 1.8
+	multiply = 1.6
 	ROOT = {
 		divide = country_population
 	}
 }
 c3rd_economic_8_value = {
 	value = c3rd_base_economic_value
-	multiply = 1.7
+	multiply = 1.5
 	ROOT = {
 		divide = country_population
 	}
 }
 c3rd_economic_9_value = {
 	value = c3rd_base_economic_value
-	multiply = 1.6
+	multiply = 1.4
 	ROOT = {
 		divide = country_population
 	}
 }
 c3rd_economic_10_value = {
 	value = c3rd_base_economic_value
-	multiply = 1.5
+	multiply = 1.3
 	ROOT = {
 		divide = country_population
 	}
@@ -368,4 +368,15 @@ c3rd_economic_value = {
 	else = {
 		value = c3rd_economic_5_value
 	}
+}
+
+
+
+income_150 = {
+	value = has_monthly_income
+	multiply = 150
+}
+income_300 = {
+	value = has_monthly_income
+	multiply = 300
 }

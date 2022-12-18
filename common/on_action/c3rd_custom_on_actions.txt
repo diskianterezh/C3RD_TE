@@ -360,9 +360,9 @@ c3rd_events_monthly_pulse = { #check if people in country can fuck shit up
 		20 = c3rd_events.37 #king maker clash
 		7 = c3rd_events.7 #generals asking for war
 		20 = c3rd_events.8 #generals asking for law
+		20 = c3rd_events.81 #only general take some powa
 		20 = c3rd_events.45 #republican leader push reforms
 		50 = c3rd_events.39 #kingmaker no office
-		20 = c3rd_other_events.8 #powerful characters asking to stop the tax controls
 	}
 	
 }
@@ -378,8 +378,11 @@ c3rd_other_events_monthly_pulse = { #check if events can happen
 	random_events = {
 		500 = 0
 		20 = c3rd_other_events.4 #too few nobles culture pop
+		20 = c3rd_other_events.8 #powerful characters asking to stop the tax controls
+		4 = c3rd_other_events.9 #powerful characters asking for census
 		4 = c3rd_other_events.12 #games
 		3 = c3rd_other_events.30 #slave culture revolt
+		20 = c3rd_other_events.31 #slave culture uprising
 	}
 
 }
@@ -524,8 +527,9 @@ c3rd_calculate_deflation = {
 		has_land = yes
 		is_ai = no
 		current_date >= 750.1.1
-		NOT = {
+		NOR = {
 			has_country_modifier = solidus_introduced
+			has_variable = solidus_ongoing
 		}
 	}
 	effect = {
@@ -574,6 +578,7 @@ c3rd_calculate_deflation = {
 		}
 		if = {
 			limit = {
+				has_variable = deflation_value
 				var:country_economy > 1
 				var:deflation_value > 0
 			}
@@ -584,6 +589,7 @@ c3rd_calculate_deflation = {
 		}
 		if = {
 			limit = {
+				has_variable = deflation_value
 				var:country_economy > 2
 				var:deflation_value > 0
 			}
@@ -594,6 +600,7 @@ c3rd_calculate_deflation = {
 		}
 		if = {
 			limit = {
+				has_variable = deflation_value
 				var:country_economy > 4
 				var:deflation_value > 0
 			}
@@ -611,12 +618,6 @@ c3rd_calculate_deflation = {
 				limit = { NOT = {has_law = monetary_reform_law}} #if you have the monetary reform, you decrease the value of silver
 				change_variable = {
 					name = deflation_value
-					add = 1
-				}
-			}
-			else = {
-				change_variable = {
-					name = silver_unvalue
 					add = 1
 				}
 			}
@@ -703,6 +704,7 @@ c3rd_aurelien = {
 			limit = { 
 				has_law = second_reform_law
 				has_variable = silver_unvalue
+				var:silver_unvalue > 0
 			}
 			change_variable = {
 				name = silver_unvalue
@@ -753,6 +755,10 @@ c3rd_apply_deflation = { #applying deflation modifiers events
 		is_ai = no
 		current_date >= 750.1.1
 		has_variable = deflation_value
+		NOR = {
+			has_country_modifier = solidus_introduced
+			has_variable = solidus_ongoing
+		}
 	}
 	effect = {
 		if = {
@@ -837,6 +843,10 @@ c3rd_apply_silver_unvalue = { #applying silver modifiers events
 		is_ai = no
 		current_date >= 750.1.1
 		has_variable = silver_unvalue
+		NOR = {
+			has_country_modifier = solidus_introduced
+			has_variable = solidus_ongoing
+		}
 	}
 	effect = {
 		if = {
@@ -919,8 +929,9 @@ c3rd_province_revolt_gain = {
 	trigger = {
 		has_land = yes
 		is_ai = no
-		#current_date >= 600.1.1
+		current_date >= 600.1.1
 		any_country_culture = {
+			is_integrated = no
 			has_country_culture_modifier = on_going_revolt
 		}
 	}
@@ -939,8 +950,9 @@ c3rd_province_revolt_gain = {
 				}
 			}
 			random_list = {
-				15 = {}
-				1000 = {
+				15 = {
+				}
+				1 = {
 					modifier = {
 						add = 1
 						root.stability <= 50
@@ -964,6 +976,18 @@ c3rd_province_revolt_gain = {
 				}
 			}
 		}
+	}
+
+}
+
+c3rd_really_rich_country = {
+	trigger = {
+		has_land = yes
+		current_date >= 600.1.1
+	}
+	random_events = {
+		500 = 0
+		50 = c3rd_other_events.40
 	}
 
 }

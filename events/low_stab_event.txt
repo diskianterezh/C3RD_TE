@@ -412,20 +412,20 @@ low_stab_event.3 = { #governors declaring total independance
                 
                 save_scope_as = byebye_governor
             }
-            random_governorship_state = {
-                random_state_province = {
-                    limit = {
-                        owner = root
-                    }
-                    create_country = {
-                        save_scope_as = byebye
-                        change_government = despotic_monarchy
-                        set_as_ruler = scope:byebye_governor
-                        change_law = work_for_the_best
+            hidden_effect = {
+                random_governorship_state = {
+                    random_state_province = {
+                        limit = {
+                            owner = root
+                        }
+                        create_country = {
+                            save_scope_as = byebye
+                            change_government = despotic_monarchy
+                            set_as_ruler = scope:byebye_governor
+                            change_law = work_for_the_best
+                        }
                     }
                 }
-            }
-            hidden_effect = {
                 every_governorship_state = {
                     
                     every_state_province = {

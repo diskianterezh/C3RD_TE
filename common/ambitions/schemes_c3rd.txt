@@ -678,3 +678,76 @@ scheme_disloyalty_other = {
 	}
 }
 
+
+scheme_care_of_relatives = {
+	can_be_picked = {
+		scheme_preconditions = yes
+		NOT = {
+			has_variable = ongoing_scheme_target
+		}
+		loyalty <= 80
+		wealth >= 3000
+		is_head_of_family = yes
+		corruption >= 5
+		NOR = {
+			has_variable = bought_relatives_care
+			has_character_modifier = pater_familias
+		}
+	}
+	
+	finished_when = {
+		custom_tooltip = {
+			text = "scheme_ambition_fulfillment_above_85_loyalty"
+			loyalty > 85
+		}
+	}
+	
+	duration = 365
+	
+	skip_initial_abort = yes
+	
+	abort = {
+		OR = {
+			loyalty > 85
+			is_ruler = yes
+			is_alive = no
+			prisoner = yes
+			has_character_modifier = indisposed_charmod
+			wealth < 2500
+		}
+	}
+	
+	chance = {
+		base = 8
+		modifier = {
+			add = 5
+			wealth >= 5000
+		}
+		modifier = {
+			add = 5
+			wealth >= 10000
+		}
+		modifier = {
+			add = 5
+			has_trait = ambitious
+		}
+		modifier = {
+			add = 5
+			has_trait = crafty
+		}
+		modifier = {
+			add = 5
+			corruption >= 25
+		}
+	}
+	
+	#on_monthly = xyz
+	on_start = scheme_care_of_relatives_start
+	on_finish = scheme_care_of_relatives_finish
+	on_abort = scheme_abort
+
+	modifier = {
+		monthly_character_wealth = -50
+	}
+}
+

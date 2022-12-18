@@ -202,6 +202,13 @@ tribal_flavour_events.4 = {
 		}
 	}
 
+	weight_multiplier = {
+		modifier = {
+			factor = 2
+			is_ai = yes
+		}
+	}
+
 	immediate = {
 		set_variable = {
 			name = tribal_xplosion

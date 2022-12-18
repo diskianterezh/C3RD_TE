@@ -77,6 +77,12 @@
  desc_local_autonomy_c3rd:0 "The local elites has been enforced in their rights"
  revolt_preparation:0 "Fomenting the revolt"
  desc_revolt_preparation:0 "This province is won over to the cause of rebels. In the event of a provincial revolt or cultural uprising, it will join the secessionists"
+ added_liquidity:0 "Added Liquidity"
+ desc_added_liquidity:0 "The government made a direct injection of fresh cash into the monetary system"
+ new_balance:0 "New currency"
+ desc_new_balance:0 "A new silver currency with a fixed rate was introduced"
+ games_games:0 "Games and Games !"
+ desc_games_games:0 "Various and costly games have been offered by the nation"
 
 
  #opinion:
@@ -84,16 +90,16 @@
 
  #laws
  monetary_law:0 "Monetary laws"
- monetary_law_desc:0 "A monetary system, seeking to ensure regular and equal exchanges as well as economic relations between inhabitants, is generally based on a relationship of equivalence of different currencies according to the weight of metals they contain. For centuries, crises and changes did not spare the economy and many emperors tried to reform it... with more or less success..."
+ monetary_law_desc:0 "A monetary system, seeking to ensure regular and equal exchanges as well as economic relations between inhabitants, is generally based on a relationship of equivalence of different currencies according to the weight of metals they contain. For centuries, crises and changes did not spare the economy and many emperors tried to reform it... with more or less success...\n\n #G This set of laws is not of any use until the monetary crisis mechanics are available. This should be around 700 AUC and will unlock new inventions in the civic tree. Until then, you can freely ignore it #!"
  basic_monetary_law:0 "Augustinian System"
- basic_monetary_law_desc:0 "Augustus had instituted in the years 27-23 BC a monetary system based on a scale of values which linked between them and to a currency of account species of gold, silver, orichalcum and copper. Fueled by the expansion of the empire, the fruit of conquests, and the sources of fresh money from mining productions, this system is the reference of the empire as a healthy system.\n\n The fruits of conquest is symbolized by the non integrated pops in your realm. Mining ressources are the total number of precious metals (imported comprised) in your country. \n #R If the ressources are too low for your population, a deflation can occur #!"
+ basic_monetary_law_desc:0 "Augustus had instituted in the years 27-23 BC a monetary system based on a scale of values which linked between them and to a currency of account species of gold, silver, orichalcum and copper. Fueled by the expansion of the empire, the fruit of conquests, and the sources of fresh money from mining productions, this system is the reference of the empire as a healthy system.\n\n The fruits of conquest is symbolized by the non integrated pops in your realm. Mining ressources are the total number of precious metals (imported comprised) in your country. \n #R If the ressources are too low for your population, a deflation can occur #!\n\n #G This set of laws is not of any use until the monetary crisis mechanics are available. This should be around 700 AUC and will unlock new inventions in the civic tree. Until then, you can freely ignore it #!"
  subject_exploitation_law:0 "Vassal exploitation"
- subject_exploitation_law_desc:0 "In case of lack of fresh resources from conquests and mining revenues, it is always possible to squeeze our vassals of all their wealth. They may hold it against us, but this is the price of our protection. \n\n #G Vassal population will count in your ressources in the monetary balance #!"
+ subject_exploitation_law_desc:0 "In case of lack of fresh resources from conquests and mining revenues, it is always possible to squeeze our vassals of all their wealth. They may hold it against us, but this is the price of our protection. \n\n #G Vassal population will count in your ressources in the monetary balance #!\n\n #G This set of laws is not of any use until the monetary crisis mechanics are available. This should be around 700 AUC and will unlock new inventions in the civic tree. Until then, you can freely ignore it #!"
  monetary_reform_law:0 "Silver reform"
- monetary_reform_law_desc:0 "By progressively decreasing the share of silver in denominations without changing the scale of values, it is possible to counterbalance the scarcity of ore very effectively. The possibility of a generalized inflation following the flooding of the economy by a cheap currency is of course only 'unlikely'... \n\n #G  This will very effectively counterbalance the deflation #! \n #R This will progressively reduce the percentage of silver ore in the currency #!"
+ monetary_reform_law_desc:0 "By progressively decreasing the share of silver in denominations without changing the scale of values, it is possible to counterbalance the scarcity of ore very effectively. The possibility of a generalized inflation following the flooding of the economy by a cheap currency is of course only 'unlikely'... \n\n #G  This will very effectively counterbalance the deflation #! \n #R This will progressively reduce the percentage of silver ore in the currency #!\n\n #G This set of laws is not of any use until the monetary crisis mechanics are available. This should be around 700 AUC and will unlock new inventions in the civic tree. Until then, you can freely ignore it #!"
  second_reform_law:0 "Aurelian's reforms"
- second_reform_law_desc:0 "'The decomposition of the monetary sphere was slowed down then stopped when Aurelian took drastic measures of reduction of the volume of the monetary emissions and undertook to stabilize the numeraire of gold and billon, which ended in 309 by the creation of the solidus'\n#G This can fix the eventual crash of the money value\nThis has a positive impact on the monetary balance #!"
- 
+ second_reform_law_desc:0 "'The decomposition of the monetary sphere was slowed down then stopped when Aurelian took drastic measures of reduction of the volume of the monetary emissions and undertook to stabilize the numeraire of gold and billon, which ended in 309 by the creation of the solidus'\n#G This can fix the eventual crash of the money value\nThis has a positive impact on the monetary balance\nThis will enable the Solidus decision #!\n\n #G This set of laws is not of any use until the monetary crisis mechanics are available. This should be around 700 AUC and will unlock new inventions in the civic tree. Until then, you can freely ignore it #!"
+
  
 
  #loyalty:
@@ -116,6 +122,8 @@
  desc_king_maker:0 "This character has, by the force of his will, imposed the person of his wish on the throne"
  popular_general:0 "Popular general"
  desc_popular_general:0 "This character made himself known as one of the great men of this country"
+ pater_familias:0 "Pater Familias"
+ desc_pater_familias:0 "This character has made his family rich"
 
  #Decisions
  stop_political_unstability_small:0 "Stopping the political instability"
@@ -134,6 +142,25 @@
  check_the_great_book_desc:0 "A great book with the status of the country's economy"
  establish_solidus:0 "Establishing the Solidus"
  establish_solidus_desc:0 "The introduction of gold value is necessary to solve the problems of value in place with the misuse of silver money. #G This will solve any economic balance problem forever #!\n #R The use of the gold value may lead to a strengthening of the elites #!"
+ inject_liquidity:0 "Inject Cash"
+ inject_liquidity_desc:0 "To remedy the monetary balance, we can inject fresh money from the government.\n #G Monetary deflation will be reduced #!"
+ new_silver_currency:0 "Introduce a new silver currency"
+ new_silver_currency_desc:0 "In order to reduce monetary collapse, introducing a new currency in the image of our leader would stabilise rates. #G This will reduce the devaluation of silver #!"
+ has_deflation_decision:0 "You have any deflation"
+ has_silver_decision:0 "You have any silver devaluation"
+ 
+ #schemes
+ scheme_care_of_relatives_effect_tt:1 "[SCOPE.GetRootScope.GetCharacter.GetName] Will share his wealth with his family."
+ scheme_care_of_relatives:1 "Taking care of the Family"
+ scheme_care_of_relatives_desc:0 "This character is using his vast wealth to enrich his family"
+
+ #alerts
+
+ ALERT_MONETARY_BALANCE:0 "#T Monetary balance low#!\nOur monetary balance is dangerously low. Our wealth creation and exploitation is lower than the consumption of the citizenry. \nOpen the great book (decision) to learn more about it"
+ ALERT_MONETARY_BALANCE_MEDIUM:0 "#T Monetary balance low#!\nOur monetary balance is low. Our wealth creation and exploitation is slightly lower than the consumption of the citizenry. \nOpen the great book (decision) to learn more about it"
+ ALERT_COLLAPSE:0 "#T Internal Collapse#!\nYour country is collapsing. As long as your stability is #R below 25#!, collapse events will occur."
+ ALERT_MILITARY_ANARCHY:0 "#T Military Anarchy#!\nThe country is in a phase of military anarchy. As long as this continues, the generals will demand more important concessions and decisions."
+ 
 
  #Culture
 
@@ -142,7 +169,7 @@
  new_elite_refused:0 "Social ascension denied"
  strengthen_tax_inspection:0 "Strengthen Tax Inspections"
  strengthen_tax_inspection_desc:0 "The citizens with time pile up the privileges and learn new ways to maintain themselves in a privileged situation and do not feel that it is necessary to pay as much as the others. It is time to track down and eliminate these practices."
- tax_inspection_tt:0 "This will help to balance the finances"
+ tax_inspection_tt:0 "#G This will help to balance the monetary balance #!"
  revoke_strengthen_tax_inspection:0 "Stop the tax inspection zeal"
  revoke_strengthen_tax_inspection_desc:0 "Let's trust our elites... they surely wouldn't dare to hide wealth from us, right?"
  on_going_revolt:0 "Slaves Turmoils"
@@ -277,9 +304,12 @@ low_stab_event.4.c.tt1:0 "Things remain as they are, but [independent_current_go
  c3rd_events.5.b.tt1:0 "The ambitions are contained for the moment, but we will lose the favor of [volontary_general.GetName]."
 
  c3rd_events.6.t:0 "A forceful intervention"
- c3rd_events.6.desc:0 "If [volontary_general.GetName]'s public intervention has undoubtedly produced its effects, we have probably overestimated his capacity as a diplomat. As his men demonstrated their strength in the capital, there was much resistance among the elites, who were outraged that the military force was overstepping their influence. Stung to the core, our general redoubled his military zeal, locked down the opposition by vigorous shackling, and maintained an iron grip on the institutions.\nAlthough our authority is undoubtedly reinforced, [volontary_general.GetName]'s new influence was clearly not the objective of this operation"
+ c3rd_events.6.desc.1:0 "If [volontary_general.GetName]'s public intervention has undoubtedly produced its effects, we have probably overestimated his capacity as a diplomat. As his men demonstrated their strength in the capital, there was much resistance among the elites, who were outraged that the military force was overstepping their influence. Stung to the core, our general redoubled his military zeal, locked down the opposition by vigorous shackling, and maintained an iron grip on the institutions.\nAlthough our authority is undoubtedly reinforced, [volontary_general.GetName]'s new influence was clearly not the objective of this operation"
+ c3rd_events.6.desc.2:0 "When [volontary_general.GetName] spoke publicly in our favour, no one could have predicted that such honourable words would be so badly received. A tornado of protest swept through the senate, with the olders vociferating in indignation at what they saw as an attempted coup. \n\nThe session could have turned into a nightmare, but in an incredible political feat, our leader managed to dissociate the government from [volontary_general.GetName]'s 'isolated attempt'. With him taking full responsibility for his actions, we ultimately won back the sympathy and support of all."
  c3rd_events.6.a:0 "So much power in the hands of the army."
  c3rd_events.6.a.tt1:0 "A period of unrest begins..."
+ c3rd_events.6.b:0 "Phew! Let's hope [volontary_general.GetName] will forgive us"
+ c3rd_events.6.b.tt1:0 "The attempt was a failure, but we still managed to reap the profits. Let's hope we haven't offended the army too much."
 
  c3rd_events.7.t:0 "The glory of the empire"
  c3rd_events.7.desc:0 "For a few months a current of discontent has been shaking the officers. A faction of officers, including [general_leader.GetName], openly complains about the weakness of the government."
@@ -303,6 +333,13 @@ low_stab_event.4.c.tt1:0 "Things remain as they are, but [independent_current_go
  c3rd_events.8.a.tt1:0 "Recruitment levels will be reduced"
  c3rd_events.8.b:0 "We can see your objective... it's absolutely unacceptable"
  c3rd_events.8.b.tt1:0 "This refusal will offend the generals. #R This may increase the risk of military uprising #!"
+
+ c3rd_events.81.t:0 "An influential soldier"
+ c3rd_events.81.desc:0 "Our army is valiant, and at its head, [general_leader.GetName], has earned a reputation as an indispensable general. This influential man holds our military power in his hands and seems willing to take advantage of it.\nNow he is calling for a show of generosity from the government to honour the protection he gives to our institutions. Although he seems well disposed at the moment, it is clear that this is nothing less than a pressure for more honours and prestige... which would be ill-advised to refuse"
+ c3rd_events.81.a:0 "He earned those honours"
+ c3rd_events.81.a.tt1:0 "The general will be overwhelmed with honours"
+ c3rd_events.81.b:0 "A good general must stay in his place"
+ c3rd_events.81.b.tt1:0 "This refusal will offend the general. #R This may increase the risk of military uprising #!"
 
  c3rd_events.9.t:0 "Military intervention"
  c3rd_events.9.desc:0 "For several weeks, the decisions of our leader [assa_ruler.GetName] have more than hurt his popularity. The generals openly accused him of softness, and his policies were unbearable for them. But although this tense climate was well known to our leader, few could have foreseen what would happen next."
@@ -742,9 +779,21 @@ low_stab_event.4.c.tt1:0 "Things remain as they are, but [independent_current_go
 
 
  c3rd_other_events.31.t:0 "[revolting_slave_culture.GetName] revolt"
- c3rd_other_events.31.desc:0 "[revolting_slave_culture.GetName] revolt in [new_country_slave.GetName]"
- c3rd_other_events.31.a:0 ""
- c3rd_other_events.31.a.tt1:0 ""
+ c3rd_other_events.31.desc:0 "After years of rising tension in the major cities they control, the leaders of the [revolting_slave_culture.GetName] revolt have gathered enough support to centralise their demands and give us an ultimatum. Exasperated with the measures they have been subjected to, they demand the total liberation and independence of the provinces they call home under a new independent state. \nHowever, they are ready to negotiate and accept our suzerainty if we accept their conditions. \nThis would be a clever way of avoiding war and settling this situation, but the warmongers in our government will certainly not hear of it and will undoubtedly push for the massacre of these rebels."
+ c3rd_other_events.31.a:0 "Let us accept this proposal"
+ c3rd_other_events.31.a.tt1:0 "The predominantly [revolting_slave_culture.GetName] provinces will secede into a new client state. All revolt modifiers will be removed from the [revolting_slave_culture.GetName] culture"
+ c3rd_other_events.31.b:0 "To arms then"
+ c3rd_other_events.31.b.tt1:0 "The predominantly [revolting_slave_culture.GetName] provinces will secede into a new state. You will declare war on it. Neighbouring rebel provinces will be able to join the secessionists, as well as provinces with low loyalty"
+
+
+ c3rd_other_events.40.t:0 "Mountains of gold"
+ c3rd_other_events.40.desc:0 "Our country is full of wealth. And the greatest of these riches are in the best place; in the government's reserves. Our good management of the country's income is obvious and raises questions, what are our leaders doing with so much wealth?\n\n'It's absolutely endless! I couldn't even tell one pile of gold from the other'. This is the kind of phrase you hear at social events from the mouths of leaders. Leading one of the richest nations on earth is enough indeed to make a man's head spin. \nFortunately the national wealth is in the hands of the most honest!"
+ c3rd_other_events.40.a:0 "Of course not, nothing falls into our pockets"
+ c3rd_other_events.40.a.tt1:0 "The wealth of the nation enriches its leaders"
+ c3rd_other_events.40.b:0 "Large benefits, large services!"
+ c3rd_other_events.40.b.tt1:0 "Money will flow into the pockets of all officials"
+ c3rd_other_events.40.c:0 "Games and games!"
+ c3rd_other_events.40.c.tt1:0 "Everyone will benefit. #G This will reduce any amount of deflation you could have #!"
 
 #tribals fix
 

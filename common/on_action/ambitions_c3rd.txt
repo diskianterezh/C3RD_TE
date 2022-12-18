@@ -333,3 +333,80 @@ scheme_disloyalty_other_start = {
 		}
 	}
 }
+
+scheme_care_of_relatives_start = {
+	effect = {
+		save_scope_as = ongoing_scheme_target
+		set_variable = {
+			name = ongoing_scheme_target
+			value = scope:ongoing_scheme_target
+			days = 400
+		}
+	}
+}
+
+scheme_care_of_relatives_finish = {
+	effect = {
+		custom_tooltip = "scheme_care_of_relatives_effect_tt"
+		hidden_effect = {
+			family = {
+				every_family_member = {
+					limit = {
+						is_adult = yes
+						is_head_of_family = no
+					}
+					if = {
+						limit = { 
+							root.wealth >= 10000
+						}
+						if = {
+							limit = { 
+								has_any_office = yes
+							}
+							add_gold = 300
+							add_corruption = 5
+							root = {
+								add_gold = -300
+							}
+						}
+						else = {
+							add_gold = 100
+							add_corruption = 5
+							root = {
+								add_gold = -100
+							}
+						}
+					}
+					else = {
+						if = {
+							limit = { 
+								has_any_office = yes
+							}
+							add_gold = 150
+							add_corruption = 5
+							root = {
+								add_gold = -150
+							}
+						}
+						else = {
+							add_gold = 50
+							add_corruption = 5
+							root = {
+								add_gold = -50
+							}
+						}
+					}
+				}
+			}
+			set_variable = {
+				name = bought_relatives_care
+				days = 730
+			}
+			add_character_modifier = {
+				name = pater_familias
+				duration = 730
+			}
+			remove_scheme_variables_effect = yes
+		}
+	}
+}

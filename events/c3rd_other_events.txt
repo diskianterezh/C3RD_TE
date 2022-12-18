@@ -667,6 +667,7 @@ c3rd_other_events.8 = { #event where people are not happy about taxes
         modifier = {
             factor = 0.7
             has_country_modifier = military_advantages
+            has_country_modifier = military_anarchy
         }
         modifier = {
             factor = 0.8
@@ -683,6 +684,14 @@ c3rd_other_events.8 = { #event where people are not happy about taxes
         modifier = {
             factor = 1.3
             legitimacy <= 0
+        }
+        modifier = {
+            factor = 1.2
+            stability <= 40
+        }
+        modifier = {
+            factor = 1.2
+            stability <= 20
         }
 
     }
@@ -929,6 +938,7 @@ c3rd_other_events.9 = { #event where people ask for census taxes
         modifier = {
             factor = 0.7
             has_country_modifier = military_advantages
+            has_country_modifier = military_anarchy
         }
         modifier = {
             factor = 0.8
@@ -945,6 +955,14 @@ c3rd_other_events.9 = { #event where people ask for census taxes
         modifier = {
             factor = 1.3
             legitimacy <= 0
+        }
+        modifier = {
+            factor = 1.2
+            stability <= 40
+        }
+        modifier = {
+            factor = 1.2
+            stability <= 20
         }
         modifier = {
             factor = 1.3
@@ -1160,7 +1178,7 @@ c3rd_other_events.9 = { #event where people ask for census taxes
 }
 
 
-c3rd_other_events.10 = { #inform about deflation stopping
+c3rd_other_events.10 = { #great book
     type = country_event
     title = "c3rd_other_events.10.t"
     desc = {
@@ -1198,14 +1216,6 @@ c3rd_other_events.10 = { #inform about deflation stopping
             name = what_is_my_eco
             value = c3rd_economic_value
         }
-        set_variable = {
-            name = what_is_my_fac
-            value = c3rd_economic_factor
-        }
-        set_variable = {
-            name = what_is_my_gold
-            value = c3rd_gold_number
-        }
         change_variable = {
             name = what_is_my_eco
             multiply = 100
@@ -1219,8 +1229,6 @@ c3rd_other_events.10 = { #inform about deflation stopping
 
     after = {
         remove_variable = what_is_my_eco
-        remove_variable = what_is_my_fac
-        remove_variable = what_is_my_gold
     }
 }
 
@@ -2586,11 +2594,15 @@ c3rd_other_events.31 = { # slaves culture revolts
             max = 1
             save_scope_as = new_country_slave
         }
+        scope:revolting_slave_culture = {
+            remove_country_culture_modifier = on_going_revolt
+        }
     }
 
     option = { #vassal
         name = c3rd_other_events.31.a
         custom_tooltip = c3rd_other_events.31.a.tt1
+        add_political_influence = -10
 
         scope:new_country_slave = {
             create_country = {
@@ -2602,23 +2614,36 @@ c3rd_other_events.31 = { # slaves culture revolts
         scope:new_country_vassal = {
             add_military_experience_to_new_country_effect = yes
         }
-        every_owned_province = {
-            limit = {
-                dominant_province_culture = scope:revolting_slave_culture.culture
+        hidden_effect = {
+            every_country_state = {
+                limit = {
+                    any_state_province = {
+                        count >= 5
+                        dominant_province_culture = scope:revolting_slave_culture.culture
+                    }
+                }
+                every_state_province = {
+                    set_owned_by = scope:new_country_vassal
+                }
             }
-            set_owned_by = scope:new_country_vassal
+            every_owned_province = {
+                limit = {
+                    dominant_province_culture = scope:revolting_slave_culture.culture
+                }
+                set_owned_by = scope:new_country_vassal
+            }
         }
         make_subject = { 
             target = scope:new_country_vassal
             type = client_state 
         }
-        
 
         
     }
     option = { #war
         name = c3rd_other_events.31.b
         custom_tooltip = c3rd_other_events.31.b.tt1
+        add_stability = 5
 
         scope:new_country_slave = {
             create_country = {
@@ -2630,24 +2655,59 @@ c3rd_other_events.31 = { # slaves culture revolts
         scope:new_country_vassal = {
             add_military_experience_to_new_country_effect = yes
         }
-        every_owned_province = {
-            limit = {
-                dominant_province_culture = scope:revolting_slave_culture.culture
+
+        hidden_effect = {
+            every_country_state = {
+                limit = {
+                    any_state_province = {
+                        count >= 5
+                        dominant_province_culture = scope:revolting_slave_culture.culture
+                    }
+                }
+                every_state_province = {
+                    set_owned_by = scope:new_country_vassal
+                }
             }
-            set_owned_by = scope:new_country_vassal
-        }
-        every_governorships = {
-            limit = {
-                any_governorship_state = {
+            every_owned_province = {
+                limit = {
+                    dominant_province_culture = scope:revolting_slave_culture.culture
+                }
+                set_owned_by = scope:new_country_vassal
+            }
+            every_governorships = {
+                limit = {
+                    any_governorship_state = {
+                        any_state_province = {
+                            any_neighbor_province = {
+                                owner = scope:new_country_vassal
+                            }
+                        }
+                    }
+                }
+                every_governorship_state = {
+                    limit = {
+                        OR = {
+                            any_state_province = {
+                                state_loyalty <= 20
+                            }
+                            any_state_province = {
+                                count >= 4
+                                has_province_modifier = revolt_preparation
+                            }
+                        }
+                    }
+                    every_state_province = {
+                        set_owned_by = scope:new_country_vassal
+                    }
+                }
+            }
+            every_country_state = {
+                limit = {
                     any_state_province = {
                         any_neighbor_province = {
                             owner = scope:new_country_vassal
                         }
                     }
-                }
-            }
-            every_governorship_state = {
-                limit = {
                     OR = {
                         any_state_province = {
                             state_loyalty <= 20
@@ -2662,36 +2722,16 @@ c3rd_other_events.31 = { # slaves culture revolts
                     set_owned_by = scope:new_country_vassal
                 }
             }
-        }
-        every_country_state = {
-            limit = {
-                any_state_province = {
+            every_owned_province = {
+                limit = {
                     any_neighbor_province = {
                         owner = scope:new_country_vassal
                     }
+                    has_province_modifier = revolt_preparation
                 }
-                OR = {
-                    any_state_province = {
-                        state_loyalty <= 20
-                    }
-                    any_state_province = {
-                        count >= 4
-                        has_province_modifier = revolt_preparation
-                    }
-                }
-            }
-            every_state_province = {
                 set_owned_by = scope:new_country_vassal
             }
-        }
-        every_owned_province = {
-            limit = {
-                any_neighbor_province = {
-                    owner = scope:new_country_vassal
-                }
-                has_province_modifier = revolt_preparation
-            }
-            set_owned_by = scope:new_country_vassal
+
         }
         declare_war_with_wargoal = {
             war_goal = conquer_wargoal
@@ -2700,4 +2740,415 @@ c3rd_other_events.31 = { # slaves culture revolts
         }
         
     }
+}
+c3rd_other_events.32 = { # unintegrated revolts --- A FINIR
+    type = country_event
+    title = "c3rd_other_events.32.t"
+    desc = "c3rd_other_events.32.desc"
+    
+    picture = revolt
+
+    trigger = {
+        has_land = yes
+        is_tribal = no
+        current_date >= 700.1.1
+        any_country_culture = {
+            has_country_culture_modifier = integration_status_removed
+            NOR = {
+                has_country_culture_modifier = on_going_revolt
+                has_country_culture_modifier = emancipation_c3rd
+                has_country_culture_modifier = slaves_massacre_c3rd
+                has_pop_type_right = slaves
+            }
+            save_temporary_scope_as = culture_unintegrated_check
+            root = {
+                any_owned_province = {
+                    count >= 5
+                    dominant_province_culture = scope:culture_unintegrated_check.culture
+                }
+            }
+        }
+    }
+
+    weight_multiplier = {
+        modifier = {
+            factor = 1.5
+            any_country_culture = {
+                NOR = {
+                    has_country_culture_modifier = on_going_revolt
+                    has_country_culture_modifier = emancipation_c3rd
+                    has_country_culture_modifier = slaves_massacre_c3rd
+                    has_pop_type_right = slaves
+                }
+                country_culture_pop_count >= 500
+                has_country_culture_modifier = integration_status_removed
+            }
+        }
+        modifier = {
+            factor = 1.5
+            any_country_culture = {
+                NOR = {
+                    has_country_culture_modifier = on_going_revolt
+                    has_country_culture_modifier = emancipation_c3rd
+                    has_country_culture_modifier = slaves_massacre_c3rd
+                    has_pop_type_right = slaves
+                }
+                country_culture_pop_count >= 200
+                has_country_culture_modifier = integration_status_removed
+            }
+        }
+    }
+
+    immediate = {
+        random_country_culture = {
+            limit = {
+                has_country_culture_modifier = integration_status_removed
+                NOR = {
+                    has_country_culture_modifier = on_going_revolt
+                    has_country_culture_modifier = emancipation_c3rd
+                    has_country_culture_modifier = slaves_massacre_c3rd
+                }
+                save_temporary_scope_as = culture_unintegrated_check
+                root = {
+                    any_owned_province = {
+                        count >= 5
+                        dominant_province_culture = scope:culture_unintegrated_check.culture
+                    }
+                } 
+            }
+            weight = {
+                modifier = {
+                    factor = 2
+                    save_temporary_scope_as = culture_unintegrated_check2
+                    root = {
+                        any_owned_province = {
+                            count >= 10
+                            dominant_province_culture = scope:culture_unintegrated_check2.culture
+                        }
+                    }
+                }
+                modifier = {
+                    factor = 2
+                    save_temporary_scope_as = culture_unintegrated_check2
+                    root = {
+                        any_owned_province = {
+                            count >= 15
+                            dominant_province_culture = scope:culture_unintegrated_check2.culture
+                        }
+                    }
+                }
+                modifier = {
+                    factor = 2
+                    country_culture_pop_count >= 200
+                }
+                modifier = {
+                    factor = 2
+                    country_culture_pop_count >= 500
+                }
+            }
+            save_scope_as = culture_unintegrated_revolt
+        }
+        set_variable = {
+            name = max_number_massacre
+            value = 5
+        }
+        if = {
+            limit = { scope:culture_unintegrated_revolt = {
+                country_culture_pop_count >= 200
+            }}
+            change_variable = {
+                name = max_number_massacre
+                add = 5
+            }
+        }
+        if = {
+            limit = { scope:culture_unintegrated_revolt = {
+                country_culture_pop_count >= 500
+            }}
+            change_variable = {
+                name = max_number_massacre
+                add = 5
+            }
+        }
+    }
+
+    option = { #no
+        name = c3rd_other_events.32.a
+        custom_tooltip = c3rd_other_events.32.a.tt1
+        scope:culture_unintegrated_revolt = {
+            add_country_culture_modifier = {
+                name = on_going_revolt
+                duration = 3650
+            }
+        }
+    }
+
+    option = { #diplo
+        name = c3rd_other_events.32.b
+        custom_tooltip = c3rd_other_events.32.b.tt1
+        trigger = {
+            current_ruler = {
+                NOT = {
+                    has_trait = stubborn
+                }
+                OR = {
+                    charisma >= 10
+                    has_trait = prominent
+                    has_trait = silver_tongued
+                    has_trait = orator
+                }
+            }
+        }
+        highlight = yes
+        hidden_effect = {
+            ordered_owned_province = {
+                limit = {
+                    dominant_province_culture = scope:culture_unintegrated_revolt.culture
+                }
+                order_by = total_population
+                max = var:max_number_massacre
+                add_province_modifier = {
+                    name = local_autonomy_c3rd
+                    duration = 3650
+                }
+            }
+        }
+        add_political_influence = -5
+        scope:culture_unintegrated_revolt = {
+            add_country_culture_modifier = {
+                name = emancipation_c3rd
+                duration = 1850
+            }
+        }
+    }
+
+    option = { #massacre
+        name = c3rd_other_events.32.c
+        custom_tooltip = c3rd_other_events.32.c.tt1
+        trigger = {
+            current_ruler = {
+                NOR = {
+                    has_trait = good_natured
+                    has_trait = merciful
+                    has_trait = benefactor
+                }
+                OR = {
+                    martial >= 10
+                    has_trait = cruel
+                    has_trait = energetic
+                    has_trait = harsh
+                }
+            }
+        }
+        highlight = yes
+        hidden_effect = {
+            ordered_owned_province = {
+                limit = {
+                    dominant_province_culture = scope:culture_unintegrated_revolt.culture
+                }
+                order_by = total_population
+                max = var:max_number_massacre
+                every_pops_in_province = {
+                    limit = {
+                        pop_culture = scope:culture_unintegrated_revolt.culture
+                    }
+                    random_list = {
+                        3 = {}
+                        1 = { kill_pop = yes}
+                    }
+                }
+            }
+        }
+        scope:culture_unintegrated_revolt = {
+            add_country_culture_modifier = {
+                name = slaves_massacre_c3rd
+                duration = 1850
+            }
+        }
+    }
+
+    after = {
+        remove_variable = max_number_massacre
+    }
+}
+
+
+c3rd_other_events.40 = { #corruption from gold
+    type = country_event
+    title = "c3rd_other_events.40.t"
+    desc = "c3rd_other_events.40.desc"
+    
+    picture = greek_court
+
+    trigger = {
+        has_land = yes
+        current_date >= 600.1.1
+        treasury >= 10000
+        OR = {
+            treasury >= income_150
+            treasury >= 90000
+        }
+        NOT = {
+            has_variable = got_chest_open
+        }
+    }
+
+    weight_multiplier = {
+        modifier = {
+            factor = 1.5
+            stability >= 60
+        }
+        modifier = {
+            factor = 1.5
+            stability >= 75
+        }
+        modifier = {
+            factor = 1.5
+            treasury >= income_300
+        }
+    }
+    immediate = {
+        set_variable = {
+            name = leaders
+            value = 0
+        }
+        set_variable = {
+            name = politics
+            value = 0
+        }
+        every_character = {
+            limit = {
+                OR = {
+                    has_any_office = yes
+					has_tech_office = yes
+                    is_governor = yes
+                    is_general = yes
+                    is_ruler = yes
+                    is_co_ruler = yes
+                }
+            }
+            root = {
+                change_variable = {
+                    name = politics
+                    add = 1
+                }
+            }
+            if = {
+                limit = { 
+                    OR = {
+                        has_any_office = yes
+                        is_ruler = yes
+                        is_co_ruler = yes
+                    }
+                }
+                root = {
+                    change_variable = {
+                        name = leaders
+                        add = 1
+                    }
+                }
+
+            }
+        }
+    }
+    option = { #leaders gets rich
+        name = c3rd_other_events.40.a
+        custom_tooltip = c3rd_other_events.40.a.tt1
+        hidden_effect = {
+            every_character = {
+                limit = {
+                    OR = {
+                        has_any_office = yes
+                        is_ruler = yes
+                        is_co_ruler = yes
+                    }
+                }
+                add_gold = root.has_monthly_income
+                add_corruption = 50
+            }
+        }
+        add_treasury = {
+            value = var:leaders
+            multiply = has_monthly_income
+            multiply = -1
+        }
+    }
+    option = { #politics get rich
+        name = c3rd_other_events.40.b
+        custom_tooltip = c3rd_other_events.40.b.tt1
+        add_political_influence = 50
+        hidden_effect = {
+            every_character = {
+                limit = {
+                    OR = {
+                        has_any_office = yes
+                        has_tech_office = yes
+                        is_governor = yes
+                        is_general = yes
+                        is_ruler = yes
+                        is_co_ruler = yes
+                    }
+                }
+                add_gold = root.has_monthly_income
+                add_corruption = 20
+            }
+        }
+        add_treasury = {
+            value = var:politics
+            multiply = has_monthly_income
+            multiply = -1
+        }
+    }
+    option = { #everyone gets rich
+        trigger = {
+            current_date >= 750.1.1
+        }
+        name = c3rd_other_events.40.c
+        custom_tooltip = c3rd_other_events.40.c.tt1
+        hidden_effect = {
+            every_character = {
+                limit = {
+                    OR = {
+                        has_any_office = yes
+                        has_tech_office = yes
+                        is_governor = yes
+                        is_general = yes
+                        is_ruler = yes
+                        is_co_ruler = yes
+                    }
+                }
+                add_gold = root.has_monthly_income
+                add_corruption = 10
+            }
+        }
+        add_treasury = {
+            value = var:politics
+            multiply = has_monthly_income
+            add = num_of_pops_integrated
+            multiply = -1
+        }
+        add_country_modifier = {
+            name = games_games
+            duration = 365
+        }
+		if = {
+			limit = {
+				has_variable = deflation_value
+				var:deflation_value > 5
+			}
+			change_variable = {
+				name = deflation_value
+				add = -5
+			}
+		}
+    }
+    after = {
+        remove_variable = leaders
+        remove_variable = politics
+        set_variable = {
+            name = got_chest_open
+            days = 1850
+        }
+    }
+
 }
