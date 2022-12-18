@@ -171,7 +171,7 @@ mines_control_assessed = {
 	global_slaves_happyness = 0.05
 }
 
-stric_control_assessed = {
+strict_control_assessed = {
 	stability_monthly_change = -0.02
 	monthly_governor_wage = 0.05
 }
