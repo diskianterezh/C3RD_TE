@@ -1193,7 +1193,7 @@
 		requires = {setting_up_controls}
 		on_activate = {
 			add_country_modifier = {
-				name = stric_control_assessed
+				name = strict_control_assessed
 				duration = 730
 			}
 		}
