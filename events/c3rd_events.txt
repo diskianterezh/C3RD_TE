@@ -2516,7 +2516,7 @@ c3rd_events.31 = {#emprison success
                     is_friend = scope:rival_emperor
                 }
             }
-            add_loyalty = imposed_autority
+            add_loyalty = imposed_authority
             remove_from_list = other_empire_govs
         }
         every_governorships = {

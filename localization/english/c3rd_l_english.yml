@@ -102,7 +102,7 @@
  dire_requests_denied:0 "Coup denied"
  loyalty_inspired_mother:0 "Loyalty inspired"
  deposed_king:0 "Deposed King"
- imposed_autority:0 "Imposed Authority"
+ imposed_authority:0 "Imposed Authority"
  loyalty_forced:0 "Forced loyalty"
  medium_requests_denied:0 "Disappointed"
  humiliated_general:0 "Humiliated"
@@ -345,7 +345,7 @@ low_stab_event.4.c.tt1:0 "Things remain as they are, but [independent_current_go
  c3rd_events.13.desc.3:0 " this succession was not self-evident, however, as a significant part of the elite apparently lobbied for the possibility of a reunification"
  c3rd_events.13.desc.4:0 " the succession was however highly agitated, the vast majority of the elites wanted the end of the secession and we missed the reunification by a little ...."
  c3rd_events.13.a:0 "Their little adventure continues ..."
- c3rd_events.13.a.tt1:0 "The empire stays splitted"
+ c3rd_events.13.a.tt1:0 "The empire stays split"
 
  c3rd_events.14.t:0 "Schism confirmed"
  c3rd_events.14.desc:0 "After the death of their ruler, [ex_rival_empire.GetName]'s new leader, [ex_rival_empire.GetRuler.GetName], succeeded in uniting the great families under his rule and turned the page of any reunification once and for all. If he still claims our title, he is now the leader of a country that is definitely different from ours.\nIt would seem that the reunification of the empire can only be done by more ... classical means."
@@ -366,7 +366,7 @@ low_stab_event.4.c.tt1:0 "Things remain as they are, but [independent_current_go
  c3rd_events.16.b:0 "Very funny..."
  c3rd_events.16.b.tt1:0 "You won't do anything"
 
- c3rd_events.17.t:0 "Unstability in [rival_empire.GetName]"
+ c3rd_events.17.t:0 "Instability in [rival_empire.GetName]"
  c3rd_events.17.desc:0 "An emissary has arrived, [rival_empire.GetName] seems to be going through a difficult time, the people are losing confidence in their government and the management seems catamitous. \nRemembering conveniently our suzerainty over the lands they occupy, some of their elites have leaned towards our intervention in their affairs to redress the balance. This proposal, while amusing as hell, given their secessionist status, could be an interesting opportunity to reinforce our authority.."
  c3rd_events.17.a:0 "Our lands are well governed, and theirs are ours."
  c3rd_events.17.a.tt1:0 "You will intervene to restabilize their country.\n #G This will improve the chances of future reunification #!"
@@ -383,12 +383,12 @@ low_stab_event.4.c.tt1:0 "Things remain as they are, but [independent_current_go
  c3rd_events.19.t:0 "End of the Schism"
  c3rd_events.19.desc:0 "After the disappearance of the old empire, no one can question our right to rule. Let our history begin!"
  c3rd_events.19.a:0 "It's about time"
- c3rd_events.19.a.tt1:0 "The empire is definitively independant."
+ c3rd_events.19.a.tt1:0 "The empire is definitively independent."
 
  c3rd_events.20.t:0 "End of the Schism"
  c3rd_events.20.desc:0 "After the death of our ruler, our new leader succeeded in uniting the great families under his rule and turned the page of any reunification once and for all. We are now free to pursuit our goal without the threat of any turmoils on succession"
  c3rd_events.20.a:0 "It's about time"
- c3rd_events.20.a.tt1:0 "The empire is definitively independant."
+ c3rd_events.20.a.tt1:0 "The empire is definitively independent."
 
  c3rd_events.30.t:0 "[rival_emperor.GetName]'s coup"
  c3rd_events.30.desc:0 "Terrible news ; [rival_emperor.GetName], with the support of many governors and loyal troops, has lost all discernment. After a long speech in which he spoke at length about the supposed 'ineptitude' of our leader, he is now claiming the throne and claiming that his party is ready to support him without any hesitation."
@@ -443,7 +443,7 @@ low_stab_event.4.c.tt1:0 "Things remain as they are, but [independent_current_go
 
 
  c3rd_events.37.t:0 "Military anarchy"
- c3rd_events.37.desc:0 "The rivalry between rival_one and Philipe reaches new heights ; these two powerful characters never stop opposing each other, and it seems that there is only room for one of them at the top.  On of their power and haloed by their military power, they follow only their ambition and do not care about the ire of our leader. The latter can only watch these two rivals sharpen their weapons and gradually destroy his authority. \nHowever, it is possible to send one of these two champions lictors justifying his actions, which would allow to keep up appearances, but would oppose us to the other..."
+ c3rd_events.37.desc:0 "The rivalry between rival_one and Philipe reaches new heights; these two powerful characters never stop opposing each other, and it seems that there is only room for one of them at the top.  On of their power and haloed by their military power, they follow only their ambition and do not care about the ire of our leader. The latter can only watch these two rivals sharpen their weapons and gradually destroy his authority. \nHowever, it is possible to send one of these two champions lictors justifying his actions, which would allow to keep up appearances, but would oppose us to the other..."
  c3rd_events.37.a:0 "Let them fight"
  c3rd_events.37.a.tt1:0 "You let the two generals fight, at the risk of looking like a puppet government"
  c3rd_events.37.b:0 "Let's support [rival_one.GetName]"
@@ -464,7 +464,7 @@ low_stab_event.4.c.tt1:0 "Things remain as they are, but [independent_current_go
 
  c3rd_events.40.t:0 "An extraordinary session"
  c3rd_events.40.desc:0 "After the assassination of our leader, an extraordinary session followed. However, the calm and concise debates that were the pride of our democracy were replaced this time by violent attacks between speakers, as well as open demands for the public proscription of everyone. It is unlikely that calm will ever return, while the coup d'état is still on everyone's mind."
- c3rd_events.40.desc.1:0 "\nThe agitation reached its peak when [general_leader.GetName], leader of the putchists, entered the parliament, strongly accompanied, declaiming a long speech on the pitiful state of our institutions and the patent weakness of our empire. He claims with force that the imperium is entrusted urgently to restore the greatness of the country."
+ c3rd_events.40.desc.1:0 "\nThe agitation reached its peak when [general_leader.GetName], leader of the putschists, entered the parliament, strongly accompanied, declaiming a long speech on the pitiful state of our institutions and the patent weakness of our empire. He claims with force that the imperium is entrusted urgently to restore the greatness of the country."
  c3rd_events.40.desc.2:0 "\nThe presence of [general_leader.GetName], newly elected at the head of the state, reinforced the ambient chaos. This one, a confident smile on his lips, started a long speech about the past greatness of our country, and the very weak state of our institutions. He now urgently calls for the Imperium to restore order"
  c3rd_events.40.desc.3:0 "\nIn the midst of the chaos, our newly elected leader tried in vain to make himself heard, calling for powerful changes at the head of the institutions and even the Imperium to restore order"
  c3rd_events.40.a:0 "Let's seize the offenders and restore order!"
@@ -711,7 +711,7 @@ low_stab_event.4.c.tt1:0 "Things remain as they are, but [independent_current_go
 
  c3rd_other_events.28.t:0 "Collapse of the Augustinian system"
  c3rd_other_events.28.desc:0 "The monetary system no longer has any sound basis, the currency is made of worthless poor metals. Barter replaces money in the economy, violence and insecurity increase. The grumble rises."
- c3rd_other_events.28.a:0 "This is a desastre"
+ c3rd_other_events.28.a:0 "This is a disaster"
  c3rd_other_events.28.a.tt1:0 "The effects of a currency crisis are at their maximum. This is mainly the effects of the 'Silver reform' law. Cancelling that law will stop the progressive crisis, however, this will not prevent you from getting a deflation crisis again....\n #G the 'Aurelian's reform' monetary law will reverse the effects #!"
 
  c3rd_other_events.291.t:0 "Crisis stabilization"
