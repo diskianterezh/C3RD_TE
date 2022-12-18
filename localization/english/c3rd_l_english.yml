@@ -9,7 +9,7 @@
  
  autonomy_granted:0 "Autonomy granted"
  crisis_of_the_third_century:0 "Third century"
- desc_crisis_of_the_third_century:0 "Things were too easy until now !"
+ desc_crisis_of_the_third_century:0 "Things were too easy until now!"
  military_anarchy:0 "Military Anarchy"
  desc_military_anarchy:0 "Power in this country tends to be decided by powerful and popular generals"
  stability_boosted_mother:0 "Stability_boost"
@@ -50,7 +50,7 @@
  mines_control_assessed:0 "Seizure of private mines"
  desc_mines_control_assessed:0 "Private monopolies on the sources of monetary metals have been forcibly broken by the state"
  strict_control_assessed:0 "Monetary strict control"
- strict_control_assessed_desc:0 "It's always not very popular to add more contols"
+ strict_control_assessed_desc:0 "It's always not very popular to add more controls"
  small_deflation:0 "Slight Deflation"
  desc_small_deflation:0 "The lack of wealth to feed the economy has led to a strengthening of silver currencies, thus significantly increasing the purchasing power of a large part of the population"
  medium_deflation:0 "Significant Deflation"
@@ -111,7 +111,7 @@
  loyalty_civil_war_victory_c3rd:0 "Civil War Victory"
  softened:0 "Softened"
 
- #characert modifiers
+ #character modifiers
  king_maker:0 "Kingmaker"
  desc_king_maker:0 "This character has, by the force of his will, imposed the person of his wish on the throne"
  popular_general:0 "Popular general"
@@ -144,7 +144,7 @@
  strengthen_tax_inspection_desc:0 "The citizens with time pile up the privileges and learn new ways to maintain themselves in a privileged situation and do not feel that it is necessary to pay as much as the others. It is time to track down and eliminate these practices."
  tax_inspection_tt:0 "This will help to balance the finances"
  revoke_strengthen_tax_inspection:0 "Stop the tax inspection zeal"
- revoke_strengthen_tax_inspection_desc:0 "Let's trust our elites... they surely wouldn't dare to hide wealth from us, right ?"
+ revoke_strengthen_tax_inspection_desc:0 "Let's trust our elites... they surely wouldn't dare to hide wealth from us, right?"
  on_going_revolt:0 "Slaves Turmoils"
  on_going_revolt_desc:0 "This culture foments a revolt against its oppressors"
  emancipation_c3rd:0 "Slave emancipation laws"
@@ -187,7 +187,7 @@
  sanctioning_elites:0 "Sanction the elites"
  sanctioning_elites_desc:0 "The privileged in society must be controlled and punished when they exploit the system. This is disturbing but necessary in order to limit the abuses"
  social_elevator:0 "Social Ascendance"
- social_elevator_desc:0 "Anyone can be part of the ruling elite ! ... anyone can try ..."
+ social_elevator_desc:0 "Anyone can be part of the ruling elite! ... anyone can try ..."
  public_games:0 "Public Games"
  public_games_desc:0 "The implementation of large public games financed by the government is an excellent way to keep the population obedient and satisfied\n The population will expect some games to be held over time.\n #G Making great games will apply other positive modifiers #! \n #R Refusing to hold these games will be frowned upon #!"
  public_games_enabled:0 "You will organize your first games"
@@ -223,7 +223,7 @@ low_stab_event.3.b.tt1:0 "Restoring order by the sword"
 
 low_stab_event.4.t:0 "Governor Intervene"
 low_stab_event.4.desc:0 "[independent_current_governor.GetName], governor of [independent_governorship.GetName] has sent us a proposal. In the turmoil of the current events, he proposes a charter of autonomy for the governorate he holds. Such a reorganization will surely simplify the administrative work by delegating most of the decisions to him, but it could also be a manipulation in order to strengthen his hold on juicy lands!"
-low_stab_event.4.a:0 "A life-saving proposal !"
+low_stab_event.4.a:0 "A life-saving proposal!"
 low_stab_event.4.a.tt1:0 "The governorate will become a client state"
 low_stab_event.4.b:0 "Nice try but no!"
 low_stab_event.4.b.tt1:0 "Things remain as they are, but [independent_current_governor.GetName] will resent you"
@@ -238,7 +238,7 @@ low_stab_event.4.c.tt1:0 "Things remain as they are, but [independent_current_go
  c3rd_events.1.a:0 "Good, I guess?"
  c3rd_events.1.a.tt1:0 "The vassal will become more autonomous and will distance itself from the central administration"
 
- c3rd_events.2.t:0 "The end of an era ?"
+ c3rd_events.2.t:0 "The end of an era?"
  c3rd_events.2.desc:0 "Time passes and so do civilizations. This era seems to have reached its pinnacle... and its limits. The secular traditions as well as the most accomplished systems are running out of breath and time seems to stand still, as if waiting for an imminent disaster. The wind of change is blowing across this land, bringing the sounds of the approaching storm.\nMay the pillars of your empire stand firm in the coming centuries..."
  c3rd_events.2.a:0 "Let us not listen to these preachers of bad omen"
  c3rd_events.2.a.tt1:0 "The events of the 3rd century can now take place"
@@ -255,7 +255,7 @@ low_stab_event.4.c.tt1:0 "Things remain as they are, but [independent_current_go
  c3rd_events.3.b.tt1:0 "[general_target.GetName] will be delivered prisoner to [king_maker_general.GetName]\n #R Giving such legitimacy to a general could be a dangerous precedent #!"
  c3rd_events.3.c:0 "A bit late, [king_maker_general.GetName]"
  c3rd_events.3.c.tt1:0 "It would be tempting if the person concerned had not already escaped abroad..."
- c3rd_events.3.d:0 "A general will not dictate the law !"
+ c3rd_events.3.d:0 "A general will not dictate the law!"
  c3rd_events.3.d.tt1:0 "A clear refusal that will undoubtedly not please the general and his supporters."
 
  c3rd_events.4.t:0 "A general takes command"
@@ -308,7 +308,7 @@ low_stab_event.4.c.tt1:0 "Things remain as they are, but [independent_current_go
  c3rd_events.9.desc:0 "For several weeks, the decisions of our leader [assa_ruler.GetName] have more than hurt his popularity. The generals openly accused him of softness, and his policies were unbearable for them. But although this tense climate was well known to our leader, few could have foreseen what would happen next."
  c3rd_events.9.desc.1:0 "\n\nThe shock was total when a trembling messenger brought the terrible news to the senate ; our leader, on his way to the parliament, was violently murdered by several individuals and his body was left bloody on the pavement of the city. Those responsible have not been caught, but everyone suspects that [general_leader.GetName], leader of the most virulent military faction, is no stranger to this event..."
  c3rd_events.9.desc.2:0 "\n\nWhile our king was resting in his tent during a review of the troops with the legions, several soldiers broke into his tent and savagely killed him with multiple sword blows, despite his pleas. Those responsible for the crime were promptly crucified afterwards, but everyone will have guessed that it was indeed the hand of [general_leader.GetName] that was behind this assassination.\nIn fact, this one was one of the first to present himself to his successor, in order to swear fidelity to him, and to assure him of his protection, as long as he 'would not reproduce the errors of his predecessor'..."
- c3rd_events.9.a:0 "What in ... ?"
+ c3rd_events.9.a:0 "What in ...?"
  c3rd_events.9.a.tt1:0 "This event will shakes up the country"
 
 
@@ -328,14 +328,14 @@ low_stab_event.4.c.tt1:0 "Things remain as they are, but [independent_current_go
  c3rd_events.11.desc:0 "After the death of our ruler, the dirigeant counsil decided that we should stop this nonsense and comply to the real empire's exigences."
  c3rd_events.11.a:0 "The end of a story."
  c3rd_events.11.a.tt1:0 "You'll be annexed by [moma_wait_for_me.GetName], end of the adventure"
- c3rd_events.11.b:0 "Wait wait wait NO !"
+ c3rd_events.11.b:0 "Wait wait wait NO!"
  c3rd_events.11.b.tt1:0 "As an human player, you'll have a chance to continue your story for a cost..."
 
  c3rd_events.12.t:0 "Reunification"
  c3rd_events.12.desc:0 "After the death of their ruler, the state of [reunification.GetName] and the stability of their institutions made their claims on the empire quite difficult to hold. [reunification.GetRuler.GetName], their new leader, reasonable and cunning, has sent us a very tempting proposal ; in exchange for protection for himself and his people, he will be willing to facilitate a smooth reunification of the empire.\nAfter a mock organized battle, [reunification.GetRuler.GetName] was 'conveniently' captured, and taken to the capital where he was sentenced to a symbolic punishment before being reinstated in his rights and duties.\nThe empire is reunited.."
  c3rd_events.12.a:0 "Welcome back, children of the empire."
  c3rd_events.12.a.tt1:0 "The empire is reunited and the former character welcomed"
- c3rd_events.12.b:0 "Spare him, death for the others !"
+ c3rd_events.12.b:0 "Spare him, death for the others!"
  c3rd_events.12.b.tt1:0 "The empire is reunited and the former characters all executed"
 
  c3rd_events.13.t:0 "Reunification failed"
@@ -349,7 +349,7 @@ low_stab_event.4.c.tt1:0 "Things remain as they are, but [independent_current_go
 
  c3rd_events.14.t:0 "Schism confirmed"
  c3rd_events.14.desc:0 "After the death of their ruler, [ex_rival_empire.GetName]'s new leader, [ex_rival_empire.GetRuler.GetName], succeeded in uniting the great families under his rule and turned the page of any reunification once and for all. If he still claims our title, he is now the leader of a country that is definitely different from ours.\nIt would seem that the reunification of the empire can only be done by more ... classical means."
- c3rd_events.14.a:0 "This is what you get by being passive !"
+ c3rd_events.14.a:0 "This is what you get by being passive!"
  c3rd_events.14.a.tt1:0 "The empire is definitively separated, and any possibility of reunification at the death of the king is now impossible."
 
  c3rd_events.15.t:0 "Turmoils in [rival_empire.GetName]"
@@ -381,7 +381,7 @@ low_stab_event.4.c.tt1:0 "Things remain as they are, but [independent_current_go
  c3rd_events.18.b.tt1:0 "You won't do anything"
 
  c3rd_events.19.t:0 "End of the Schism"
- c3rd_events.19.desc:0 "After the disappearance of the old empire, no one can question our right to rule. Let our history begin !"
+ c3rd_events.19.desc:0 "After the disappearance of the old empire, no one can question our right to rule. Let our history begin!"
  c3rd_events.19.a:0 "It's about time"
  c3rd_events.19.a.tt1:0 "The empire is definitively independant."
 
@@ -407,7 +407,7 @@ low_stab_event.4.c.tt1:0 "Things remain as they are, but [independent_current_go
  c3rd_events.32.desc:0 "[king_maker_exige.GetName] suddenly burst into the throne room, furious and trembling with rage; 'the actions of this scoundrel [king_maker_rival.GetName] must stop, I demand his immediate arrest' he proclaimed without further explanation, his gaze heavy with meaning. The eyes turn to the king; what will he decide?."
  c3rd_events.32.a:0 "Better not to upset [king_maker_exige.GetName]."
  c3rd_events.32.a.tt1:0 "[king_maker_exige.GetName]'s influence will allow the arrest of his rival without a hitch"
- c3rd_events.32.b:0 "You are not the king here !"
+ c3rd_events.32.b:0 "You are not the king here!"
  c3rd_events.32.b.tt1:0 "You will not submit to the demands of the entitled man."
 
  c3rd_events.33.t:0 "Boasting among the troops"
@@ -467,15 +467,15 @@ low_stab_event.4.c.tt1:0 "Things remain as they are, but [independent_current_go
  c3rd_events.40.desc.1:0 "\nThe agitation reached its peak when [general_leader.GetName], leader of the putchists, entered the parliament, strongly accompanied, declaiming a long speech on the pitiful state of our institutions and the patent weakness of our empire. He claims with force that the imperium is entrusted urgently to restore the greatness of the country."
  c3rd_events.40.desc.2:0 "\nThe presence of [general_leader.GetName], newly elected at the head of the state, reinforced the ambient chaos. This one, a confident smile on his lips, started a long speech about the past greatness of our country, and the very weak state of our institutions. He now urgently calls for the Imperium to restore order"
  c3rd_events.40.desc.3:0 "\nIn the midst of the chaos, our newly elected leader tried in vain to make himself heard, calling for powerful changes at the head of the institutions and even the Imperium to restore order"
- c3rd_events.40.a:0 "Let's seize the offenders and restore order !"
+ c3rd_events.40.a:0 "Let's seize the offenders and restore order!"
  c3rd_events.40.a.tt1:0 " #G This choice is possible thanks to your high stability and your high senate approval #!\n You will lock up the culprits and end the crisis by force of will"
  c3rd_events.40.b:0 "[general_leader.GetName] is right and will guide us!"
  c3rd_events.40.b.tt1:0 "[general_leader.GetName] will take control of the institutions to resolve the institutional crisis.\n #R This will put you irrevocably on the path of reform towards a monarchy #!\n #G At the end of the reform, you will solve the political instability and will gain a powerful modifier to face the problems of this era #!"
- c3rd_events.40.c:0 "[general_leader.GetName] is right and should guide us !"
+ c3rd_events.40.c:0 "[general_leader.GetName] is right and should guide us!"
  c3rd_events.40.c.tt1:0 "[general_leader.GetName] will take control of the institutions to resolve the institutional crisis.\n #R This will put you irrevocably on the path of reform towards a monarchy #!\n #G At the end of the reform, you will solve the political instability and will gain a powerful modifier to face the problems of this era #!"
  c3rd_events.40.d:0 "We will reform indeed"
  c3rd_events.40.d.tt1:0 "You will make violent institutional changes to resolve the crisis.\n #R This will put you irrevocably on the path of reform towards a monarchy #!\n #G At the end of the reform, you will solve the political instability and will gain a powerful modifier to face the problems of this era #!"
- c3rd_events.40.e:0 "And change our ways ? Never !"
+ c3rd_events.40.e:0 "And change our ways? Never!"
  c3rd_events.40.e.tt1:0 " #R You lose the opportunity to solve the crisis #!\n #G You will keep your republican system and will have a decision to solve the institutional crisis #!"
 
 
@@ -504,12 +504,12 @@ low_stab_event.4.c.tt1:0 "Things remain as they are, but [independent_current_go
  c3rd_events.43.a.tt1:0 "#G This choice is possible thanks to the high religious unity #!\n Stability will be enforced"
  c3rd_events.43.b:0 "All our problems come from the same people..."
  c3rd_events.43.b.tt1:0 "A scapegoat is an excellent way"
- c3rd_events.43.c:0 "We have always had great respect for the clergy !"
+ c3rd_events.43.c:0 "We have always had great respect for the clergy!"
  c3rd_events.43.c.tt1:0 "Just give them what they want!"
 
 
  c3rd_events.44.t:0 "A new era"
- c3rd_events.44.desc:0 "All obstacles have been overcome, and the rise of our new empire cannot be stopped. In front of an assembly of various nobles and new advisors already busy plotting, our leader is blessed at length by the high clergy, then turns back to the great central place where a huge crowd has come, grateful to the one who saved the institutions. \nThe future will not be easy, however, the foundations are not yet solidified and many are those who seek your downfall again. May you enter this new era with courage and wisdom !"
+ c3rd_events.44.desc:0 "All obstacles have been overcome, and the rise of our new empire cannot be stopped. In front of an assembly of various nobles and new advisors already busy plotting, our leader is blessed at length by the high clergy, then turns back to the great central place where a huge crowd has come, grateful to the one who saved the institutions. \nThe future will not be easy, however, the foundations are not yet solidified and many are those who seek your downfall again. May you enter this new era with courage and wisdom!"
  c3rd_events.44.a:0 "Let us sing this day forever!"
  c3rd_events.44.a.tt1:0 "Your reform is completed"
 
@@ -523,7 +523,7 @@ low_stab_event.4.c.tt1:0 "Things remain as they are, but [independent_current_go
 
  c3rd_events.46.t:0 "Political Instability"
  c3rd_events.46.desc:0 "[adored_ruler.GetName] reacted very strongly to our attempt to oppose his reforms. Our intervention in the Senate to denounce his measures resulted in a near-riot as his supporters and various opposition groups threw ancient measures and other proscriptions back in their face. Calm has not yet returned and there are fears of more violence. It may be some time before our constitution recovers."
- c3rd_events.46.a:0 "Curses !"
+ c3rd_events.46.a:0 "Curses!"
  c3rd_events.46.a.tt1:0 "The reform has been stopped, but a difficult period is beginning"
 
  c3rd_events.47.t:0 "Stopped reforms"
@@ -553,7 +553,7 @@ low_stab_event.4.c.tt1:0 "Things remain as they are, but [independent_current_go
 
  c3rd_other_events.3.t:0 "A king without divinity"
  c3rd_other_events.3.desc:0 "Recent defeats have fueled a dangerous feeling among the population ; How could our leader, who should be a god among men, could justify his divine right to govern with such a poor knowledge of the sacred matter? Voices are raised in protest and the troops are losing confidence..."
- c3rd_other_events.3.desc.1:0 "The Egyptian population begins to question the divine origin of our monarch.... How to imagine a leader worthy of this name, if not bringing victory to his troops and smiting his enemies ?"
+ c3rd_other_events.3.desc.1:0 "The Egyptian population begins to question the divine origin of our monarch.... How to imagine a leader worthy of this name, if not bringing victory to his troops and smiting his enemies?"
  c3rd_other_events.3.a:0 "Let's admit our deficiencies, and seek advice"
  c3rd_other_events.3.a.tt1:0 " #G This choice is possible because your leader has less @religious_icon! than one of your religious advisors #!\n Your leader will learn from his advisors to gain the respect of the population"
  c3rd_other_events.3.b:0 "The emperor is above such whining"
@@ -590,16 +590,16 @@ low_stab_event.4.c.tt1:0 "Things remain as they are, but [independent_current_go
 
  c3rd_other_events.8.t:0 "Complaint of the powerful"
  c3rd_other_events.8.desc:0 "[character_taxed_1.GetName], [character_taxed_2.GetName] and [character_taxed_3.GetName], three powerful people, have recently made their dissatisfaction with our taxation policy known. In an audience with our leader, they expressed their sorrow at being burdened with constant reproaches and controls by the tax authorities, and demanded an immediate end to these 'unjust' measures, which, according to them, only seek to reprimand honest citizens while the barbarians of the lower strata thrive in crime.\nThey assure that in case of refusal, they will use their influence to make known the mismanagement of the treasury."
- c3rd_other_events.8.a:0 "These brave servants of our country are right !"
+ c3rd_other_events.8.a:0 "These brave servants of our country are right!"
  c3rd_other_events.8.a.tt1:0 "The tax inspection policy will be revoked\n#R It will not be possible to restore it before 10 years #!"
- c3rd_other_events.8.b:0 "What do you think about a fair compensation ?"
+ c3rd_other_events.8.b:0 "What do you think about a fair compensation?"
  c3rd_other_events.8.b.tt1:0 "This will satisfy the requesters"
  c3rd_other_events.8.c:0 "No one escapes taxes!"
  c3rd_other_events.8.c.tt1:0 "You refuse to comply with the demands of the requesters"
 
  c3rd_other_events.9.t:0 "Requests from the powerful"
  c3rd_other_events.9.desc:0 "[character_taxed_1.GetName], [character_taxed_2.GetName] and [character_taxed_3.GetName] are three powerful figures of the state, and therefore represent quite clearly the claims of our elites. At a hearing, they expressed their concerns about the laws put in place on taxing duties. How can it be fair, according to these people, that the most important men and landowners should be subject to the same tax obligations as the rest of the population? Don't they naturally contribute much more to the wealth of the state than the populace?\nThey show themselves ready to reward a certain mercy of the state towards them by a powerful support to the government of the country"
- c3rd_other_events.9.a:0 "It's only natural !"
+ c3rd_other_events.9.a:0 "It's only natural!"
  c3rd_other_events.9.a.tt1:0 "Citizens and nobles will be exempt from the census\n#R It will not be possible to revoke it before 10 years #!"
  c3rd_other_events.9.b:0 "Come on, the state can be more generous than mere taxes"
  c3rd_other_events.9.b.tt1:0 "You will buy the support of these men"
@@ -632,7 +632,7 @@ low_stab_event.4.c.tt1:0 "Things remain as they are, but [independent_current_go
  c3rd_other_events.12.desc.2:0 "The time has come. The people have been waiting for too long; the people are calling for their Great Games! The merchants are already preparing and the capital is in effervescence... The advisors are crowding around the leader, what is planned?"
  c3rd_other_events.12.a:0 "The Greatest Games ever!"
  c3rd_other_events.12.a.tt1:0 "A substantial investment will make this edition one to remember!"
- c3rd_other_events.12.b:0 "We can afford any expense !"
+ c3rd_other_events.12.b:0 "We can afford any expense!"
  c3rd_other_events.12.b.tt1:0 "Flood the capital with new money to ensure great games"
  c3rd_other_events.12.c:0 "These will be good games"
  c3rd_other_events.12.c.tt1:0 "The necessary investment will be made"
