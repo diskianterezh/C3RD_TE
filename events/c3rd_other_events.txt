@@ -513,6 +513,12 @@ c3rd_other_events.6 = { #gold mine exhaustion
                 }
                 remove_variable = mine_exhaustion
             }
+            if = {
+                limit = {
+                    has_province_modifier = deep_mining 
+                }
+                remove_province_modifier = deep_mining
+            }
             random_list = {
                 10 = {
                     modifier = {
@@ -942,19 +948,33 @@ c3rd_other_events.9 = { #event where people ask for census taxes
         }
         modifier = {
             factor = 0.8
+            is_monarchy = yes
             legitimacy >= 75
         }
         modifier = {
             factor = 0.8
+            is_monarchy = yes
             legitimacy >= 50
         }
         modifier = {
             factor = 1.2
+            is_monarchy = yes
             legitimacy <= 25
         }
         modifier = {
+            factor = 1.2
+            is_republic = yes
+            has_senate_approval <= 0.4
+        }
+        modifier = {
             factor = 1.3
+            is_monarchy = yes
             legitimacy <= 0
+        }
+        modifier = {
+            factor = 1.3
+            is_republic = yes
+            has_senate_approval <= 0.2
         }
         modifier = {
             factor = 1.2
@@ -1471,7 +1491,9 @@ c3rd_other_events.12 = { #games
         else = {
             add_treasury = {
                 value = has_monthly_income
-                multiply = -25
+                multiply = 25
+                min = country_population
+                multiply = -1
             }
         }
 
@@ -1521,7 +1543,9 @@ c3rd_other_events.12 = { #games
         else = {
             add_treasury = {
                 value = has_monthly_income
-                multiply = -10
+                multiply = 10
+                min = num_of_cities
+                multiply = -1
             }
         }
     }
