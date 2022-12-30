@@ -295,6 +295,24 @@ c3rd_economic_factor = {
 		}
 		add = -1
 	}
+	if = {
+		limit = {
+			num_of_territory >= 1000
+		}
+		add = 1
+	}
+	if = {
+		limit = {
+			num_of_territory >= 2500
+		}
+		add = 1
+	}
+	if = {
+		limit = {
+			num_of_territory >= 5000
+		}
+		add = 1
+	}
 
 }
 

@@ -587,10 +587,10 @@ c3rd_other_events.6 = { #gold mine exhaustion
                 name = deep_mining
                 duration = -1
             }
-        }
-        change_variable = {
-            name = mine_exhaustion
-            add = -20
+            change_variable = {
+                name = mine_exhaustion
+                add = -20
+            }
         }
     }
 }
@@ -1121,7 +1121,7 @@ c3rd_other_events.9 = { #event where people ask for census taxes
 		add_treasury = {
 			value = 0
 			subtract = root.has_monthly_income
-			multiply = 12
+			multiply = 15
 		}
         scope:character_taxed_1 = {
             add_gold = {
