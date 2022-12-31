@@ -11,13 +11,7 @@ c3rd_events.1 = { #oh noes, too much vassals
     trigger = {
         
         has_land = yes
-        any_subject = { #number check
-			count > root.max_diplomatic_relations
-            OR = {
-                is_subject_type = client_state
-                is_subject_type = satrapy
-            }
-		}
+        num_active_relations > max_diplomatic_relations
         any_subject = { #check if releasable
             OR = {
                 is_subject_type = client_state
