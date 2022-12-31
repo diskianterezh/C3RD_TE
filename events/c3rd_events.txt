@@ -460,7 +460,7 @@ c3rd_events.5 = {#general intervention : provoke military crisis where there is 
             }
             AND = {
                 is_republic = yes
-                has_senate_approval <= 25
+                has_senate_approval <= 0.25
             }
             towards_civil_war = yes
             has_civil_war = yes
@@ -4406,8 +4406,8 @@ c3rd_events.45 = { #powerful republic leader want to reform
     }
         
     option = {#no way
-        name = c3rd_events.45.a
-        custom_tooltip = c3rd_events.45.a.tt1
+        name = c3rd_events.45.b
+        custom_tooltip = c3rd_events.45.b.tt1
         if = {
             limit = { 
                 has_country_modifier = political_unstability

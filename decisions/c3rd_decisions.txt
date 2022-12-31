@@ -64,7 +64,7 @@
 			current_ruler = {
 				popularity >= 80
 			}
-			has_senate_approval >= 80
+			has_senate_approval >= 0.80
 		}
 		effect = {
 			add_political_influence = -80
