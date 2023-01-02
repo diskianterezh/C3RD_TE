@@ -60,11 +60,12 @@ stability_boosted_mother = {
 
 political_unstability = {
 	monthly_tyranny = 0.05
-	monthly_corruption = 0.05
+	monthly_corruption = 0.1
 	stability_monthly_change = -0.05
-	happiness_for_same_culture_modifier = -0.1
+	happiness_for_same_culture_modifier = -0.15
+	global_nobles_output = -0.2
 	subject_loyalty = -10
-	monthly_political_influence_modifier = -0.25
+	monthly_political_influence_modifier = -0.5
 	diplomatic_relations = -1
 }
 
@@ -275,5 +276,36 @@ new_balance = {
 
 games_games = {
 	happiness_for_same_culture_modifier = 0.1
+}
+
+provinces_republican_reforms = {
+	governor_loyalty = -10
+	monthly_political_influence_modifier = -0.10
+	global_citizen_happyness = 0.1
+	global_nobles_happyness = -0.1
+}
+
+too_grand_republic = {
+	global_tax_modifier = -0.1
+	global_citizen_output = -0.1
+	global_nobles_output = -0.1
+}
+
+too_huge_republic = {
+	global_tax_modifier = -0.15
+	global_citizen_output = -0.15
+	global_nobles_output = -0.15
+	global_slaves_output = -0.1
+	monthly_corruption = 0.05
+}
+
+too_giant_republic = {
+	global_tax_modifier = -0.2
+	global_citizen_output = -0.2
+	global_nobles_output = -0.2
+	global_slaves_output = -0.15
+	global_freemen_output = -0.1
+	monthly_corruption = 0.1
+	global_monthly_state_loyalty = -0.1
 }
 

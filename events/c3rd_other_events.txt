@@ -668,6 +668,10 @@ c3rd_other_events.8 = { #event where people are not happy about taxes
         }
         modifier = {
             factor = 1.5
+            has_country_modifier = provinces_republican_reforms
+        }
+        modifier = {
+            factor = 1.5
             has_country_modifier = military_anarchy
         }
         modifier = {
@@ -936,6 +940,10 @@ c3rd_other_events.9 = { #event where people ask for census taxes
         modifier = {
             factor = 2
             towards_civil_war = yes
+        }
+        modifier = {
+            factor = 1.5
+            has_country_modifier = provinces_republican_reforms
         }
         modifier = {
             factor = 1.5

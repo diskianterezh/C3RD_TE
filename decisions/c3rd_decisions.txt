@@ -233,5 +233,123 @@
 
 	}
 	
+		
+	overexpansion_the_reform = {
+		potential = {
+			num_of_cities >= 1
+			has_country_modifier = crisis_of_the_third_century
+			OR = {
+				has_country_modifier = too_grand_republic
+				has_country_modifier = too_huge_republic
+				has_country_modifier = too_giant_republic
+			}
+			NOT = {
+				has_variable = overexpansion_reform_decision
+			}
+			is_republic = yes
+		}
+		allow = {
+			political_influence >= 50
+			current_ruler = {
+				popularity >= 50
+			}
+			has_senate_approval >= 0.50
+		}
+		effect = {
+			add_political_influence = -50
+			set_variable = {
+				name = overexpansion_reform_decision
+				days = 30
+			}
+			hidden_effect = {
+				random_list = {
+					10 = {
+						modifier = {
+							add = 10
+							current_ruler = {
+								has_trait = submissive
+							}
+						}
+						modifier = {
+							add = 10
+							current_ruler = {
+								has_trait = corrupt
+							}
+						}
+						modifier = {
+							add = current_ruler.corruption
+						}
+						modifier = {
+							add = 10
+							current_ruler = {
+								has_trait = unnoticeable
+							}
+						}
+						modifier = {
+							add = 10
+							current_date >= 1000.1.1
+						}
+						modifier = {
+							add = 10
+							current_date >= 1100.1.1
+						}
+						modifier = {
+							add = 20
+							current_date >= 1200.1.1
+						}
+						trigger_event = { #failure, political instability
+							id = c3rd_events.50
+							days = 15
+						}
+						
+					}
+					1 = {
+						modifier = {
+							add = current_ruler.popularity
+						}
+						modifier = {
+							add = current_ruler.charisma
+						}
+						modifier = {
+							add = 10
+							current_ruler = {
+								has_trait = assertive
+							}
+						}
+						modifier = {
+							add = 10
+							current_ruler = {
+								has_trait = righteous
+							}
+						}
+						modifier = {
+							add = 20
+							current_ruler = {
+								has_trait = prominent
+							}
+						}
+						modifier = {
+							add = 20
+							current_ruler = {
+								has_trait = orator
+							}
+						}
+						trigger_event = { #reform the republic, get a modifier to keep things ok for 20 years
+							id = c3rd_events.49
+							days = 15
+						}
+					}
+				}
+			}
+		}
+		
+		ai_will_do = {
+			modifier = {
+				factor = 10
+				current_date >= 1100.1.1
+			}
+		}
+	}
+	
 }
 
