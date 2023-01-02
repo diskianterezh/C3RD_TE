@@ -158,6 +158,8 @@
  has_silver_decision:0 "You have any silver devaluation"
  overexpansion_the_reform:0 "Solving Republican overexpansion"
  overexpansion_the_reform_desc:0 "Successful reform will further slow down these administrative problems at the cost of some friction. \n#R If this fails, political instability will occur #! \nPopularity of your leader increase the chances while corruption decrease them. \n#G Any Republican overexpansion modifier will be removed #!"
+ overexpansion_the_reform_instability:0 "Solving Republican overexpansion"
+ overexpansion_the_reform_instability_desc:0 "In times of instability, many can force reforms through their will to enforce a solution....\n#G Any Republican overexpansion modifier will be removed #! "
  
  #schemes
  scheme_care_of_relatives_effect_tt:1 "[SCOPE.GetRootScope.GetCharacter.GetName] Will share his wealth with his family."
@@ -170,6 +172,7 @@
  ALERT_MONETARY_BALANCE_MEDIUM:0 "#T Monetary balance low#!\nOur monetary balance is low. Our wealth creation and exploitation is slightly lower than the consumption of the citizenry. \nOpen the great book (decision) to learn more about it"
  ALERT_COLLAPSE:0 "#T Internal Collapse#!\nYour country is collapsing. As long as your stability is #R below 25#!, collapse events will occur."
  ALERT_MILITARY_ANARCHY:0 "#T Military Anarchy#!\nThe country is in a phase of military anarchy. As long as this continues, the generals will demand more important concessions and decisions."
+ ALERT_POLITICAL_INSTABILITY:0 "#T Political Instability#!\nThe country is in a phase of political instability, applying several penalties. You can solve this by using the decisions to either reform the country or stopping the political instability."
  
 
  #Culture
@@ -598,6 +601,15 @@ low_stab_event.4.c.tt1:0 "Things remain as they are, but [independent_current_go
  c3rd_events.50.a:0 "A troubling period is opening up for our republic"
  c3rd_events.50.a.tt1:0 "Overexpansion has been solved, but at the cost of chronic instability of republican institutions"
 
+
+ c3rd_events.51.t:0 "Stabilization of the institutions"
+ c3rd_events.51.desc:0 "The smaller size of our empire has allowed us to regain a healthy administrative base."
+ c3rd_events.51.a:0 "Good news"
+ c3rd_events.51.a.tt1:0 "Any overexpansion has been removed"
+
+
+ c3rd_events.52.t:0 "Stabilization of the institutions"
+ c3rd_events.52.desc:0 "Political instability at least has the advantage of simplifying procedures...  A flexible reform of the provincial and republican administration will undoubtedly solve our institutional worries."
 
  #1.2 Events
 

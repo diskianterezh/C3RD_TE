@@ -502,6 +502,7 @@ widget = {
 			using = red_alert
 			blockoverride "On_click"
 			{
+				onclick = "[OpenGameView('religion')]"
 				onrightclick = "[AlertManager.ToggleShowAlert('c3rd_collapse_alert')]"
 			}
 				
@@ -509,6 +510,31 @@ widget = {
 			blockoverride "Icon"
 			{
 				texture = "gfx/interface/icons/shared_icons/stability.dds"
+			}
+		}	
+		
+		###########################
+		#C3RD - Political Instability
+		###########################
+		alert = {
+			datacontext = "[GetScriptedGui('c3rd_polinstability_alert')]"
+			visible = "[And(ScriptedGui.IsShown(GuiScope.SetRoot(AlertManager.GetPlayer.MakeScope).End), AlertManager.ShowAlert('c3rd_polinstability_alert'))]"
+			tooltip = "ALERT_POLITICAL_INSTABILITY"
+			blockoverride "Color"
+			{
+				frame = 7
+			}
+			using = red_alert
+			blockoverride "On_click"
+			{
+				onclick = "[OpenGameView('overview')]"
+				onrightclick = "[AlertManager.ToggleShowAlert('c3rd_polinstability_alert')]"
+			}
+				
+				
+			blockoverride "Icon"
+			{
+				texture = "gfx/interface/icons/shared_icons/disloyal_power_base.dds"
 			}
 		}
 		

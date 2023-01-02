@@ -363,7 +363,7 @@ c3rd_events_monthly_pulse = { #check if people in country can fuck shit up
 		20 = c3rd_events.81 #only general take some powa
 		20 = c3rd_events.45 #republican leader push reforms
 		50 = c3rd_events.39 #kingmaker no office
-		4 = c3rd_events.48 #Republic above 1000 territories
+		5 = c3rd_events.48 #Republic above 1000 territories
 	}
 	
 }
@@ -380,8 +380,8 @@ c3rd_other_events_monthly_pulse = { #check if events can happen
 		500 = 0
 		20 = c3rd_other_events.4 #too few nobles culture pop
 		20 = c3rd_other_events.8 #powerful characters asking to stop the tax controls
-		4 = c3rd_other_events.9 #powerful characters asking for census
-		4 = c3rd_other_events.12 #games
+		5 = c3rd_other_events.9 #powerful characters asking for census
+		5 = c3rd_other_events.12 #games
 		3 = c3rd_other_events.30 #slave culture revolt
 		20 = c3rd_other_events.31 #slave culture uprising
 	}

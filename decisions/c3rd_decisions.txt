@@ -70,9 +70,14 @@
 			add_political_influence = -80
 			add_stability = -10
 			add_tyranny = 10
+        
+			set_variable = {
+				name = on_going_rep_thingy
+				days = 600
+			}
 			trigger_event = {
 				id = c3rd_events.41
-				days = { 90 190 }
+				days = 1
 			}
 		}
 		
@@ -243,8 +248,9 @@
 				has_country_modifier = too_huge_republic
 				has_country_modifier = too_giant_republic
 			}
-			NOT = {
+			NOR = {
 				has_variable = overexpansion_reform_decision
+				has_country_modifier = political_unstability
 			}
 			is_republic = yes
 		}
@@ -347,6 +353,49 @@
 			modifier = {
 				factor = 10
 				current_date >= 1100.1.1
+			}
+		}
+	}
+
+	overexpansion_the_reform_instability = {
+		potential = {
+			num_of_cities >= 1
+			has_country_modifier = crisis_of_the_third_century
+			has_country_modifier = political_unstability
+			OR = {
+				has_country_modifier = too_grand_republic
+				has_country_modifier = too_huge_republic
+				has_country_modifier = too_giant_republic
+			}
+			NOT = {
+				has_variable = overexpansion_reform_decision
+			}
+			is_republic = yes
+		}
+		allow = {
+			political_influence >= 25
+			current_ruler = {
+				popularity >= 40
+			}
+			stability >= 25
+		}
+		effect = {
+			add_political_influence = -25
+			add_stability = -10
+			add_tyranny = 15
+			set_variable = {
+				name = overexpansion_reform_decision
+				days = 30
+			}
+			trigger_event = { #get the overextension removed as you are in political instability
+				id = c3rd_events.52
+				days = 15
+			}
+		}
+		
+		ai_will_do = {
+			modifier = {
+				factor = 10
 			}
 		}
 	}

@@ -1,0 +1,70 @@
+namespace = country_diplomacy_c3rd
+
+
+#Tributary wants more - c3rd version to prevent immediate independance
+country_diplomacy.39 = {
+	type = country_event
+	title = "country_diplomacy.39.t"
+	desc = "country_diplomacy.39.desc"
+	picture = war_chest
+	left_portrait = scope:tributary_more.current_ruler
+	
+	trigger = {
+		is_overlord = yes
+		any_subject = {
+			is_subject_type = tributary
+			has_land = yes
+			is_ai = yes
+			NOT = { has_truce_with = overlord }
+			war = no
+			has_subject_loyalty >= 60
+			NOT = { has_variable = subject_wants_more_cooldown }
+		}
+	}
+	
+	immediate = {
+		random_subject = {
+			limit = {
+				is_subject_type = tributary
+				has_land = yes
+				is_ai = yes
+				NOT = { has_truce_with = overlord }
+				war = no
+				has_subject_loyalty >= 60
+				NOT = { has_variable = subject_wants_more_cooldown }
+			}
+			save_scope_as = tributary_more
+			set_variable = subject_wants_more_cooldown
+			set_variable = {
+				name = recent_client
+				days = 365
+			}
+		}
+	}
+	
+	option = { 
+		name = "country_diplomacy.39.a"
+		ai_chance = {
+			factor = 100
+		}
+		release_subject = scope:tributary_more
+		make_subject = { 
+			target = scope:tributary_more
+			type = client_state 
+		}
+		add_opinion = {
+			modifier = reliable_overlord
+			target = scope:tributary_more
+		}
+	}
+	option = { 
+		name = "country_diplomacy.39.b"
+		ai_chance = {
+			factor = 0
+		}
+		add_opinion = {
+			modifier = unreliable_overlord
+			target = scope:tributary_more
+		}
+	}
+}

@@ -5,6 +5,7 @@
 		c3rd_events.19
 		low_stab_event.5
 		low_stab_event.6
+		c3rd_events.51
 	}
 	on_actions = {
 		c3rd_custom_on_actions_rival_empire_civil_war

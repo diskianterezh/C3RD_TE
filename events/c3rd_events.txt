@@ -20,6 +20,7 @@ c3rd_events.1 = { #oh noes, too much vassals
             has_subject_loyalty <= 80
             NOR = {
                 has_country_modifier = autonomy_granted
+                has_variable = recent_client
                 has_truce_with = root
             }
         }
@@ -34,8 +35,10 @@ c3rd_events.1 = { #oh noes, too much vassals
                     is_subject_type = client_state
                     is_subject_type = satrapy
                 }
-                NOT = {
+                NOR = {
                     has_country_modifier = autonomy_granted
+                    has_variable = recent_client
+                    has_truce_with = root
                 }
             }
             order_by = { #take least loyal one
@@ -45,6 +48,10 @@ c3rd_events.1 = { #oh noes, too much vassals
             }
             max = 1
             save_scope_as = chosen_subject
+            if = {
+                limit = { has_variable = subject_wants_more_cooldown}
+                remove_variable = subject_wants_more_cooldown
+            }
         }
         hidden_effect = {
             release_subject = scope:chosen_subject
@@ -502,6 +509,10 @@ c3rd_events.5 = {#general intervention : provoke military crisis where there is 
         modifier = {
             factor = 0.5
             is_republic = yes
+        }
+        modifier = {
+            factor = 2
+            has_country_modifier = political_unstability
         }
         modifier = {
             factor = 2
@@ -3889,6 +3900,7 @@ c3rd_events.40 = { #Senate aftermath of the assassination, political unstability
             }
         }
         add_tyranny = 10
+        add_stability = -10
         
         if = {
             limit = { has_party_type = optimates_party }
@@ -4660,7 +4672,7 @@ c3rd_events.48 = { #huge republican empire , too huge for a functionnal republic
             }
         }
         modifier = {
-            factor = 1.2
+            factor = 1.3
             current_ruler = {
                 finesse <= 1
             }
@@ -4743,7 +4755,7 @@ c3rd_events.48 = { #huge republican empire , too huge for a functionnal republic
 
         add_treasury = {
             value = num_of_cities
-            multiply = -8
+            multiply = -11
         }
         set_variable = {
             name = pretty_recent_rep_huge
@@ -4903,11 +4915,11 @@ c3rd_events.49 = { #republic reformed
         }
         add_country_modifier = {
             name = provinces_republican_reforms
-            duration = 7300
+            duration = 7300 #20years
         }
         set_variable = {
             name = pretty_recent_rep_huge
-            days = 10000
+            days = 10000 #30 years so 10 years after the first modifier
         }
         if = {
             limit = { 
@@ -4988,6 +5000,106 @@ c3rd_events.50 = { #reforms failed
     option = {
         name = c3rd_events.50.a
         custom_tooltip = c3rd_events.50.a.tt1
+
+    }
+}
+
+
+
+c3rd_events.51 = { #no more overextension if too small or not republic
+    type = country_event
+    title = "c3rd_events.51.t"
+    desc = "c3rd_events.51.desc"
+ 
+    picture = road_construction
+ 
+    trigger = {
+        has_land = yes
+        OR = {
+            has_country_modifier = too_grand_republic
+            has_country_modifier = too_huge_republic
+            has_country_modifier = too_giant_republic
+        }
+        OR = {
+            num_of_cities <= 900
+            is_republic = no
+        }
+    }
+
+    left_portrait = current_ruler
+
+    immediate = {
+        if = {
+            limit = { 
+                has_country_modifier = too_giant_republic
+            }
+            remove_country_modifier = too_giant_republic
+        }
+        if = {
+            limit = { 
+                has_country_modifier = too_huge_republic
+            }
+            remove_country_modifier = too_huge_republic
+        }
+        if = {
+            limit = { 
+                has_country_modifier = too_grand_republic
+            }
+            remove_country_modifier = too_grand_republic
+        }
+    }
+
+    
+    option = {
+        name = c3rd_events.51.a
+        custom_tooltip = c3rd_events.51.a.tt1
+
+    }
+}
+
+c3rd_events.52 = { #no more overextension if political instability against a cost
+    type = country_event
+    title = "c3rd_events.52.t"
+    desc = "c3rd_events.52.desc"
+ 
+    picture = road_construction
+ 
+    trigger = {
+        has_land = yes
+        OR = {
+            has_country_modifier = too_grand_republic
+            has_country_modifier = too_huge_republic
+            has_country_modifier = too_giant_republic
+        }
+    }
+
+    left_portrait = current_ruler
+
+    immediate = {
+        if = {
+            limit = { 
+                has_country_modifier = too_giant_republic
+            }
+            remove_country_modifier = too_giant_republic
+        }
+        if = {
+            limit = { 
+                has_country_modifier = too_huge_republic
+            }
+            remove_country_modifier = too_huge_republic
+        }
+        if = {
+            limit = { 
+                has_country_modifier = too_grand_republic
+            }
+            remove_country_modifier = too_grand_republic
+        }
+    }
+
+    
+    option = {
+        name = c3rd_events.51.a
+        custom_tooltip = c3rd_events.51.a.tt1
 
     }
 }

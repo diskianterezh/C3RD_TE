@@ -291,6 +291,12 @@ c3rd_economic_factor = {
 	}
 	if = {
 		limit = {
+			has_country_modifier = political_unstability
+		}
+		add = 1
+	}
+	if = {
+		limit = {
 			has_law = second_reform_law
 		}
 		add = -1
