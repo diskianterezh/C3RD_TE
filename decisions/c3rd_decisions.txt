@@ -186,7 +186,7 @@
 			}
 		}
 		effect = {
-			add_political_influence = -20
+			add_political_influence = -25
 			add_treasury = {
 				value = -3
 				multiply = num_of_cities
@@ -390,6 +390,31 @@
 			trigger_event = { #get the overextension removed as you are in political instability
 				id = c3rd_events.52
 				days = 15
+			}
+		}
+		
+		ai_will_do = {
+			modifier = {
+				factor = 10
+			}
+		}
+	}
+
+	
+	repair_great_work = {
+		potential = {
+			num_of_cities >= 1
+			any_owned_province = {
+				has_great_work = yes
+				has_province_modifier = wonder_destroyed_modifier
+			}
+		}
+		allow = {
+			political_influence >= 100
+		}
+		effect = {
+			trigger_event = { #get the overextension removed as you are in political instability
+				id = c3rd_other_events.51
 			}
 		}
 		

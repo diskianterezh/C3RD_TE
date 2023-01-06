@@ -91,6 +91,10 @@
  desc_too_huge_republic:0 "We should reform the republic to better correspond to the new size of our territory"
  too_giant_republic:0 "Republican over-expansion"
  desc_too_giant_republic:0 "It is urgent to reform the republic to better correspond to the new size of our territory"
+ wonder_defended_weapons:0 "Great Work harshly defended"
+ desc_wonder_defended_weapons:0 "This province was violently repressed to defend the great work"
+ wonder_destroyed_modifier:0 "Great work pillaged"
+ desc_wonder_destroyed_modifier:0 "The great work was destroyed by an angry crowd. This modifier will be removed if the Great work no longer exist, or if you restore it through the decision. \nYou may receive bad events if too much Great Works have this modifier"
 
 
  #opinion:
@@ -160,6 +164,8 @@
  overexpansion_the_reform_desc:0 "Successful reform will further slow down these administrative problems at the cost of some friction. \n#R If this fails, political instability will occur #! \nPopularity of your leader increase the chances while corruption decrease them. \n#G Any Republican overexpansion modifier will be removed #!"
  overexpansion_the_reform_instability:0 "Solving Republican overexpansion"
  overexpansion_the_reform_instability_desc:0 "In times of instability, many can force reforms through their will to enforce a solution....\n#G Any Republican overexpansion modifier will be removed #! "
+ repair_great_work:0 "Repair the great works"
+ repair_great_work_desc:0 "Start the reparations of a great work"
  
  #schemes
  scheme_care_of_relatives_effect_tt:1 "[SCOPE.GetRootScope.GetCharacter.GetName] Will share his wealth with his family."
@@ -691,8 +697,14 @@ low_stab_event.4.c.tt1:0 "Things remain as they are, but [independent_current_go
  c3rd_other_events.10.desc.1:0 "\n The state's economy is financed at #G [SCOPE.GetRootScope.GetCountry.MakeScope.GetVariable('what_is_my_eco').GetValue]% #!"
  c3rd_other_events.10.desc.2:0 "\n The state's economy is financed at #R [SCOPE.GetRootScope.GetCountry.MakeScope.GetVariable('what_is_my_eco').GetValue]% #!"
  c3rd_other_events.10.desc.3:0 "\n\n #G As you have established the gold standard, this value of the economy is no longer of any consequence, but you can still watch the numbers move over time... #!"
+ c3rd_other_events.10.desc.4:0 "\n Following modifiers can affect this number :\n"
+ c3rd_other_events.10.desc.5:0 "\n #R Citizen exception from census taxe #!"
+ c3rd_other_events.10.desc.6:0 "\n #R Military Benefits #!"
+ c3rd_other_events.10.desc.7:0 "\n #R Political instability #!"
+ c3rd_other_events.10.desc.8:0 "\n #G Taxe inspection policy #!"
+ c3rd_other_events.10.desc.9:0 "\n #G The Aurelian's reform #!"
  c3rd_other_events.10.a:0 "Interesting"
- c3rd_other_events.10.a.tt1:0 "This number represents the inner wealth of your country  how rich are people, how money flows between workers and owners. It has little to do with the amount of money in your coffers, nor your income... but the consequences of mismanagement can indirectly influence it.\n\nEvery pop of non-integrated culture contributes positively to this figure, symbolizing the exploitation of conquered populations in the service of the country.\n#G Each pop of culture with 'slave' cultural rights will contribute twice as much #! \nEvery precious mineral will contribute positively to this figure.\nEach integrated pop, symbolizing the privileges of the elites will contribute negatively to this figure\n\nThe ratio between positive and negative values will differ according to laws, certain decisions, and over time. It will be more and more difficult to satisfy this ratio with time, symbolizing the progressive corruption of a society that is proud of its success."
+ c3rd_other_events.10.a.tt1:0 "This number represents the inner wealth of your country  how rich are people, how money flows between workers and owners. It has little to do with the amount of money in your coffers, nor your income... but the consequences of mismanagement can indirectly influence it.\n\nEvery pop of non-integrated culture contributes positively to this figure, symbolizing the exploitation of conquered populations in the service of the country.\n#G Each pop of culture with 'slave' cultural rights will contribute twice as much #! \nEvery precious mineral will contribute positively to this figure.\nEach integrated pop, symbolizing the privileges of the elites will contribute negatively to this figure\n\nThe ratio between positive and negative values will differ according to laws, certain cultural decisions as the tax inspection policy, and over time. It will be more and more difficult to satisfy this ratio with time, symbolizing the progressive corruption of a society that is proud of its success."
 
 
  c3rd_other_events.11.t:0 "A flawless succession"
@@ -836,6 +848,37 @@ low_stab_event.4.c.tt1:0 "Things remain as they are, but [independent_current_go
  c3rd_other_events.40.b.tt1:0 "Money will flow into the pockets of all officials"
  c3rd_other_events.40.c:0 "Games and games!"
  c3rd_other_events.40.c.tt1:0 "Everyone will benefit. #G This will reduce any amount of deflation you could have #!"
+
+ c3rd_other_events.50.t:0 "A great work in the midst of starvation"
+ c3rd_other_events.50.desc:0 "For several weeks now, famine has been taking an increasingly heavy toll on the town of [wonder_province_starve.GetName]. Overwhelmed by this plague, the population is looking for those responsible and seems to have directed its anger towards a target symbolising the oppulence they no longer have. \nAn angry mob seems to have made their way to the local wonder, intent on looting it in order to provide for their needs... or just to satisfy their rage. \nThe local guard seems to be holding them back but we must act to avoid the worst."
+ c3rd_other_events.50.a:0 "Let us intervene personally to re-supply this province"
+ c3rd_other_events.50.a.tt1:0 "You will organise the emergency resupply of this province, to resolve the situation and save the Great Work. This will prevent any further revolt for a while"
+ c3rd_other_events.50.b:0 "Send the army"
+ c3rd_other_events.50.b.tt1:0 "You will send a strong contingent to defend the Great Work. The people will be greatly affected."
+ c3rd_other_events.50.c:0 "Ignore this"
+ c3rd_other_events.50.c.tt1:0 "The Great Work will be considered looted.\n#G This modifier will be removed if the Great Work is restored or manually destroyed.#!"
+
+ c3rd_other_events.51.t:0 "Great works"
+ c3rd_other_events.51.desc:0 "It is time to start the necessary work to restore our damaged great works. Where should we focus our attention?"
+ c3rd_other_events.51.a:0 "[wonder_province_destroyed_1.GetName]"
+ c3rd_other_events.51.a.tt1:0 "The Great Work will be considered restored"
+ c3rd_other_events.51.b:0 "[wonder_province_destroyed_2.GetName]"
+ c3rd_other_events.51.b.tt1:0 "The Great Work will be considered restored"
+ c3rd_other_events.51.c:0 "[wonder_province_destroyed_3.GetName]"
+ c3rd_other_events.51.c.tt1:0 "The Great Work will be considered restored"
+ c3rd_other_events.51.d:0 "[wonder_province_destroyed_4.GetName]"
+ c3rd_other_events.51.d.tt1:0 "The Great Work will be considered restored"
+ c3rd_other_events.51.e:0 "Forget it"
+ c3rd_other_events.51.e.tt1:0 "Nothing will be fixed"
+
+ c3rd_other_events.52.t:0 "A crumbling legacy"
+ c3rd_other_events.52.desc:0 "True greatness is measured by the trace left in history. But what can we say about our empire when the great works of our civilisation are in a deplorable state, destroyed by the years and the crises... Is this not an inexorable sign of the decline that is dragging us all down?"
+ c3rd_other_events.52.a:0 "It is only a matter of temporary mistakes."
+ c3rd_other_events.52.a.tt1:0 "Your leader will take responsability.\nThis happens because you have a significant number of great works looted or ransacked. Destroying or repairing (by decision) these monuments will remove the status."
+ c3rd_other_events.52.b:0 "These things happen"
+ c3rd_other_events.52.b.tt1:0 "This happens because you have a significant number of great works looted or ransacked. Destroying or repairing (by decision) these monuments will remove the status."
+ c3rd_other_events.52.c:0 "Start the repairs right now !"
+ c3rd_other_events.52.c.tt1:0 "This happens because you have a significant number of great works looted or ransacked. Destroying or repairing (by decision) these monuments will remove the status.\n#G You will consider the possibility of repairs.#!"
 
 #tribals fix
 

@@ -384,6 +384,8 @@ c3rd_other_events_monthly_pulse = { #check if events can happen
 		5 = c3rd_other_events.12 #games
 		3 = c3rd_other_events.30 #slave culture revolt
 		20 = c3rd_other_events.31 #slave culture uprising
+		30 = c3rd_other_events.50 #wonder threatened
+		5 = c3rd_other_events.52 #stabhit from wonders pillaged
 	}
 
 }
@@ -989,6 +991,30 @@ c3rd_really_rich_country = {
 	random_events = {
 		500 = 0
 		50 = c3rd_other_events.40
+	}
+
+}
+
+c3rd_no_more_wonder = {
+	trigger = {
+		has_land = yes
+		any_province = {
+			has_province_modifier = wonder_destroyed_modifier
+			NOT = {
+				has_great_work = yes
+			}
+		}
+	}
+	effect = {
+		every_province = {
+			limit = {
+				has_province_modifier = wonder_destroyed_modifier
+				NOT = {
+					has_great_work = yes
+				}
+			}
+			remove_province_modifier = wonder_destroyed_modifier
+		}
 	}
 
 }

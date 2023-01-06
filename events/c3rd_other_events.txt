@@ -1232,6 +1232,50 @@ c3rd_other_events.10 = { #great book
             }
             desc = "c3rd_other_events.10.desc.2"  
         }
+         
+        triggered_desc = {
+            trigger = {
+                OR = {
+                    has_country_modifier = citizen_exemption_from_census_tax
+                    has_country_modifier = military_advantages
+                    has_country_modifier = political_unstability
+                    has_country_modifier = tax_inspection
+                    has_country_modifier = second_reform_law
+                }
+            }
+            desc = "c3rd_other_events.10.desc.4" 
+        }
+        
+        triggered_desc = {
+            trigger = {
+                has_country_modifier = citizen_exemption_from_census_tax
+            }
+            desc = "c3rd_other_events.10.desc.5"  
+        }
+        triggered_desc = {
+            trigger = {
+                has_country_modifier = military_advantages
+            }
+            desc = "c3rd_other_events.10.desc.6"  
+        }
+        triggered_desc = {
+            trigger = {
+                has_country_modifier = political_unstability
+            }
+            desc = "c3rd_other_events.10.desc.7"  
+        }
+        triggered_desc = {
+            trigger = {
+                has_country_modifier = tax_inspection
+            }
+            desc = "c3rd_other_events.10.desc.8"  
+        }
+        triggered_desc = {
+            trigger = {
+                has_country_modifier = second_reform_law
+            }
+            desc = "c3rd_other_events.10.desc.9"  
+        }
         triggered_desc = {
             trigger = {
                 has_country_modifier = solidus_introduced
@@ -1463,6 +1507,10 @@ c3rd_other_events.12 = { #games
             stability >= 80
         }
         modifier = {
+            factor = 2
+            stability >= 90
+        }
+        modifier = {
             factor = 1.5
             legitimacy <= 50
         }
@@ -1683,7 +1731,7 @@ c3rd_other_events.14 = { #Solidus 2 : gain control on the system
                 finesse >= 10
             }
         }
-        add_political_influence = -10
+        add_political_influence = -20
     }
 
 
@@ -1767,7 +1815,7 @@ c3rd_other_events.15 = { #Solidus 3 : stability of gold
                 }
             }
         }
-        add_political_influence = -10
+        add_political_influence = -20
     }
 
 
@@ -2465,7 +2513,7 @@ c3rd_other_events.30 = { # slave revolts
                 }
             }
         }
-        add_political_influence = -5
+        add_political_influence = -10
         scope:culture_slave_revolt = {
             add_country_culture_modifier = {
                 name = emancipation_c3rd
@@ -2642,7 +2690,7 @@ c3rd_other_events.31 = { # slaves culture revolts
     option = { #vassal
         name = c3rd_other_events.31.a
         custom_tooltip = c3rd_other_events.31.a.tt1
-        add_political_influence = -10
+        add_political_influence = -15
 
         scope:new_country_slave = {
             create_country = {
@@ -3192,3 +3240,475 @@ c3rd_other_events.40 = { #corruption from gold
     }
 
 }
+
+
+c3rd_other_events.50 = { #Great work gets pillaged by starving people
+    type = country_event
+    title = "c3rd_other_events.50.t"
+    desc = "c3rd_other_events.50.desc"
+    goto_location = scope:wonder_province_starve
+ 
+    picture = great_work_riot
+
+    trigger = {
+        has_land = yes
+        current_date >= 800.1.1
+        any_owned_province = {
+            has_great_work = yes
+            NOR = {
+                has_variable = wonder_food_given
+                has_province_modifier = wonder_destroyed_modifier
+            }
+            unrest_in_province_svalue >= 3
+            state = {
+                has_state_food = 0
+            }
+        }
+        NOT = {
+            has_variable = wonder_food_problem
+        }
+    }
+
+    weight_multiplier = {
+        modifier = {
+            factor = 1.5
+            stability <= 50
+        }
+        modifier = {
+            factor = 1.5
+            any_owned_province = {
+                count >= 3
+                has_great_work = yes
+                NOR = {
+                    has_variable = wonder_food_given
+                    has_province_modifier = wonder_destroyed_modifier
+                }
+                unrest_in_province_svalue >= 3
+                state = {
+                    has_state_food = 0
+                }
+            }
+        }
+        modifier = {
+            factor = 1.5
+            any_owned_province = {
+                count >= 5
+                has_great_work = yes
+                NOR = {
+                    has_variable = wonder_food_given
+                    has_province_modifier = wonder_destroyed_modifier
+                }
+                unrest_in_province_svalue >= 3
+                state = {
+                    has_state_food = 0
+                }
+            }
+        }
+        modifier = {
+            factor = 1.5
+            any_owned_province = {
+                count >= 8
+                has_great_work = yes
+                NOR = {
+                    has_variable = wonder_food_given
+                    has_province_modifier = wonder_destroyed_modifier
+                }
+                unrest_in_province_svalue >= 3
+                state = {
+                    has_state_food = 0
+                }
+            }
+        }
+    }
+
+    immediate = {
+        random_owned_province = {
+            limit = {
+                has_great_work = yes
+                NOR = {
+                    has_variable = wonder_food_given
+                    has_province_modifier = wonder_destroyed_modifier
+                }
+                state = {
+                    has_state_food = 0
+                }
+                unrest_in_province_svalue >= 3
+            }
+            weight = {
+                modifier = {
+                    add = total_population
+                }
+            }
+            save_scope_as = wonder_province_starve
+        }
+        set_variable = {
+            name = wonder_food_problem
+            days = 365
+        }
+        set_variable = {
+            name = manpower_number
+            value = scope:wonder_province_starve.total_population
+        }
+        change_variable = {
+            name = manpower_number
+            multiply = 3
+        }
+    }
+
+    option = { #give them food
+        name = c3rd_other_events.50.a
+        custom_tooltip = c3rd_other_events.50.a.tt1
+        trigger = {
+            any_owned_province = {
+                state = { has_state_food > 300}
+            }
+        }
+        random_country_state = {
+            limit = {
+                has_state_food > 300
+            }
+            add_state_food = -200
+            save_temporary_scope_as = that_province_food
+        }
+        add_political_influence = -50
+        if = {
+            limit = { is_monarchy = yes }
+            add_legitimacy = -20
+        }
+        add_treasury = {
+            value = has_monthly_income
+            multiply = 10
+            min = {
+                value = scope:wonder_province_starve.total_population
+                multiply = 20
+            }
+            multiply = -1
+        }
+        scope:wonder_province_starve = {
+            set_variable = {
+                name = wonder_food_given
+                days = 1850
+            }
+            state = {
+                add_state_food = 200
+            }
+        }
+    }
+
+    option = { #give them sword
+        name = c3rd_other_events.50.b
+        custom_tooltip = c3rd_other_events.50.b.tt1
+        add_political_influence = -20
+        if = {
+            limit = { manpower < var:manpower_number }
+            add_stability = -10
+        }
+        add_manpower = {
+            value = scope:wonder_province_starve.total_population
+            multiply = -3
+        }
+        scope:wonder_province_starve = {
+            set_variable = {
+                name = wonder_food_given
+                days = 1850
+            }
+            hidden_effect = {
+                if = {
+                    limit = { has_province_modifier = wonder_defended_weapons }
+                    remove_province_modifier = wonder_defended_weapons
+                }
+            }
+            add_province_modifier = {
+                name = wonder_defended_weapons
+                duration = 3650
+            }
+        }
+    }
+
+    option = { #do not move
+        name = c3rd_other_events.50.c
+        custom_tooltip = c3rd_other_events.50.c.tt1
+        scope:wonder_province_starve = {
+            add_province_modifier = {
+                name = wonder_destroyed_modifier
+                duration = -1
+            }
+        }
+    }
+
+    after = {
+        remove_variable = manpower_number
+    }
+}
+
+
+c3rd_other_events.51 = { #Great work restaured
+    type = country_event
+    title = "c3rd_other_events.51.t"
+    desc = "c3rd_other_events.51.desc"
+ 
+    picture = great_work_architect
+
+    trigger = {
+        has_land = yes
+        any_owned_province = {
+            has_great_work = yes
+            has_province_modifier = wonder_destroyed_modifier
+        }
+    }
+
+    immediate = {
+        random_owned_province = {
+            limit = {
+                has_great_work = yes
+                has_province_modifier = wonder_destroyed_modifier
+            }
+            weight = {
+                modifier = {
+                    add = total_population
+                }
+            }
+            save_scope_as = wonder_province_destroyed_1
+        }
+        random_owned_province = {
+            limit = {
+                has_great_work = yes
+                has_province_modifier = wonder_destroyed_modifier
+                NOT = {
+                    this = scope:wonder_province_destroyed_1
+                }
+            }
+            weight = {
+                modifier = {
+                    add = total_population
+                }
+            }
+            save_scope_as = wonder_province_destroyed_2
+        }
+        random_owned_province = {
+            limit = {
+                has_great_work = yes
+                has_province_modifier = wonder_destroyed_modifier
+                NOR = {
+                    this = scope:wonder_province_destroyed_1
+                    this = scope:wonder_province_destroyed_2
+                }
+            }
+            weight = {
+                modifier = {
+                    add = total_population
+                }
+            }
+            save_scope_as = wonder_province_destroyed_3
+        }
+        random_owned_province = {
+            limit = {
+                has_great_work = yes
+                has_province_modifier = wonder_destroyed_modifier
+                NOR = {
+                    this = scope:wonder_province_destroyed_1
+                    this = scope:wonder_province_destroyed_2
+                    this = scope:wonder_province_destroyed_3
+                }
+            }
+            weight = {
+                modifier = {
+                    add = total_population
+                }
+            }
+            save_scope_as = wonder_province_destroyed_4
+        }
+    }
+
+    option = { #give them food
+        name = c3rd_other_events.51.a
+        custom_tooltip = c3rd_other_events.51.a.tt1
+        trigger = {
+            scope:wonder_province_destroyed_1 = {
+                has_province_modifier = wonder_destroyed_modifier
+            }
+        }
+        add_treasury = -20000
+        add_political_influence = -180
+        if = {
+            limit = { is_monarchy = yes }
+            add_legitimacy = 5
+        }
+        scope:wonder_province_destroyed_1 = {
+            remove_province_modifier = wonder_destroyed_modifier
+            set_variable = {
+                name = wonder_food_problem
+                days = 10000
+            }
+        }
+    }
+
+    option = { #give them food
+        name = c3rd_other_events.51.b
+        custom_tooltip = c3rd_other_events.51.b.tt1
+        trigger = {
+            scope:wonder_province_destroyed_2 = {
+                has_province_modifier = wonder_destroyed_modifier
+            }
+        }
+        add_treasury = -20000
+        add_political_influence = -180
+        if = {
+            limit = { is_monarchy = yes }
+            add_legitimacy = 5
+        }
+        scope:wonder_province_destroyed_2 = {
+            remove_province_modifier = wonder_destroyed_modifier
+            set_variable = {
+                name = wonder_food_problem
+                days = 10000
+            }
+        }
+    }
+
+    option = { #give them food
+        name = c3rd_other_events.51.c
+        custom_tooltip = c3rd_other_events.51.c.tt1
+        trigger = {
+            scope:wonder_province_destroyed_3 = {
+                has_province_modifier = wonder_destroyed_modifier
+            }
+        }
+        add_treasury = -20000
+        add_political_influence = -180
+        if = {
+            limit = { is_monarchy = yes }
+            add_legitimacy = 5
+        }
+        scope:wonder_province_destroyed_3 = {
+            remove_province_modifier = wonder_destroyed_modifier
+            set_variable = {
+                name = wonder_food_problem
+                days = 10000
+            }
+        }
+    }
+
+    option = { #give them food
+        name = c3rd_other_events.51.d
+        custom_tooltip = c3rd_other_events.51.d.tt1
+        trigger = {
+            scope:wonder_province_destroyed_4 = {
+                has_province_modifier = wonder_destroyed_modifier
+            }
+        }
+        add_treasury = -20000
+        add_political_influence = -180
+        if = {
+            limit = { is_monarchy = yes }
+            add_legitimacy = 5
+        }
+        scope:wonder_province_destroyed_4 = {
+            remove_province_modifier = wonder_destroyed_modifier
+            set_variable = {
+                name = wonder_food_problem
+                days = 10000
+            }
+        }
+    }
+
+    option = { #do not move
+        name = c3rd_other_events.51.e
+        custom_tooltip = c3rd_other_events.51.e.tt1
+    }
+}
+
+
+c3rd_other_events.52 = { #stabhit because pillaged wonders
+    type = country_event
+    title = "c3rd_other_events.52.t"
+    desc = "c3rd_other_events.52.desc"
+ 
+    picture = great_work_animals
+
+    trigger = {
+        has_land = yes
+        current_date >= 800.1.1
+        any_owned_province = {
+            count >= 3
+            has_great_work = yes
+            has_province_modifier = wonder_destroyed_modifier
+        }
+        NOT = {
+            has_variable = great_work_destroyed_stabhit
+        }
+    }
+
+    weight_multiplier = {
+        modifier = {
+            factor = 1.5
+            stability >= 70
+        }
+        modifier = {
+            factor = 1.5
+            stability >= 80
+        }
+        modifier = {
+            factor = 1.5
+            stability >= 90
+        }
+        modifier = {
+            factor = 1.5
+            any_owned_province = {
+                count >= 5
+                has_great_work = yes
+                has_province_modifier = wonder_destroyed_modifier
+            }
+        }
+        modifier = {
+            factor = 1.5
+            any_owned_province = {
+                count >= 7
+                has_great_work = yes
+                has_province_modifier = wonder_destroyed_modifier
+            }
+        }
+        modifier = {
+            factor = 1.5
+            any_owned_province = {
+                count >= 10
+                has_great_work = yes
+                has_province_modifier = wonder_destroyed_modifier
+            }
+        }
+    }
+
+    immediate = {
+        set_variable = {
+            name = great_work_destroyed_stabhit
+            days = 3650
+        }
+    }
+
+    option = { #legitimacy cost
+        name = c3rd_other_events.52.a
+        custom_tooltip = c3rd_other_events.52.a.tt1
+        trigger = {
+            is_monarchy = yes
+        }
+        add_legitimacy = -20
+    }
+
+    option = { #stability
+        name = c3rd_other_events.52.b
+        custom_tooltip = c3rd_other_events.52.b.tt1
+        add_stability = -7
+    }
+
+    option = { #stability and start repairing
+        name = c3rd_other_events.52.c
+        custom_tooltip = c3rd_other_events.52.c.tt1
+        add_stability = -7
+        trigger_event = {
+            id = c3rd_other_events.51
+        }
+    }
+}
+
+
+

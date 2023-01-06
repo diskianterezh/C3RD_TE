@@ -416,7 +416,7 @@ c3rd_events.4 = { #succession crisis kill the target
         scope:king_maker_general = {
             add_popularity = -50
         }
-        add_political_influence = -10
+        add_political_influence = -15
     }
 
 }
@@ -1987,7 +1987,7 @@ c3rd_events.10 = { #oh no rival splitting
             num_of_provinces > local_var:rival_size
         }
         highlight = yes
-        add_political_influence = -20
+        add_political_influence = -40
         make_subject = { 
             target = scope:rival_empire
             type = tributary
@@ -3045,7 +3045,7 @@ c3rd_events.33 = {#general seek popularity
     option = {
         name = c3rd_events.33.b
         custom_tooltip = c3rd_events.33.b.tt1
-        add_political_influence = -5
+        add_political_influence = -10
         scope:popular_general = {
             add_loyalty = humiliated_general
             add_popularity = -10
@@ -3154,7 +3154,7 @@ c3rd_events.34 = {#two generals clashing
     option = {
         name = c3rd_events.34.b
         custom_tooltip = c3rd_events.34.b.tt1
-        add_political_influence = -5
+        add_political_influence = -10
         scope:general_one = {
             add_popularity = 15
             if = {
@@ -3178,7 +3178,7 @@ c3rd_events.34 = {#two generals clashing
     option = {
         name = c3rd_events.34.c
         custom_tooltip = c3rd_events.34.c.tt1
-        add_political_influence = -5
+        add_political_influence = -10
         scope:general_two = {
             add_popularity = 15
             if = {
@@ -3222,6 +3222,8 @@ c3rd_events.35 = {#general ask a governorship
             any_friend = {
                 employer = root
                 is_governor = no
+                is_general = no
+                is_mercenary = no
                 has_any_office = no
                 has_tech_office = no
             }
@@ -3266,6 +3268,8 @@ c3rd_events.35 = {#general ask a governorship
                 any_friend = {
                     employer = root
                     is_governor = no
+                    is_general = no
+                    is_mercenary = no
                     has_any_office = no
                     has_tech_office = no
                 }
@@ -3275,6 +3279,8 @@ c3rd_events.35 = {#general ask a governorship
                 limit = {
                     employer = root
                     is_governor = no
+                    is_general = no
+                    is_mercenary = no
                     has_any_office = no
                     has_tech_office = no
                 }
@@ -3332,10 +3338,12 @@ c3rd_events.35 = {#general ask a governorship
         name = c3rd_events.35.a
         custom_tooltip = c3rd_events.35.a.tt1
         scope:asked_governorship = {
+            governor = {
+                remove_as_governor = yes
+            }
             random_governorship_state = {
                 random_state_province = {
                     set_as_governor = scope:asking_friend
-                    
                 }
             }
         }
@@ -3501,7 +3509,7 @@ c3rd_events.36 = {#general is pretty powerful, gain king maker
             add_loyalty = humiliated_general
             add_popularity = -50
         }
-        add_political_influence = -15
+        add_political_influence = -30
     }
 }
 

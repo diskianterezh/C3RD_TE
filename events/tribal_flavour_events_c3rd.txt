@@ -266,7 +266,7 @@ tribal_flavour_events.4 = {
 			is_ai = no
 			centralization <= 0
 		}
-		add_political_influence = -25
+		add_political_influence = -40
 		add_stability = -5
 		add_country_modifier = {
 			name = collapse_avoided_decdec
