@@ -455,6 +455,10 @@ low_stab_event.3 = { #governors declaring total independance
 		name = low_stab_event.3.a
 		custom_tooltip = low_stab_event.3.a.tt1
         add_stability = 2
+        add_truce = {
+          target = scope:byebye
+          duration = 3650
+        }
     }
     option = {
         trigger = {

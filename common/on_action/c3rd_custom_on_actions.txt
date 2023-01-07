@@ -350,7 +350,7 @@ c3rd_events_monthly_pulse = { #check if people in country can fuck shit up
 	}
 	random_events = {
 		500 = 0
-		40 = c3rd_events.30 #military coup *5 civilwar *2low leg
+		40 = c3rd_events.30 #military coup *3 civilwar *2low leg
 		50 = c3rd_events.5 #general intervention *3 civilwar *2neg leg *2 dislgen
 		10 = c3rd_events.32 #kingmaker emprison rival
 		15 = c3rd_events.33 #general glose
@@ -364,6 +364,7 @@ c3rd_events_monthly_pulse = { #check if people in country can fuck shit up
 		20 = c3rd_events.45 #republican leader push reforms
 		50 = c3rd_events.39 #kingmaker no office
 		5 = c3rd_events.48 #Republic above 1000 territories
+		40 = c3rd_events.21 #governor defect to rival
 	}
 	
 }

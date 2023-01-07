@@ -71,7 +71,7 @@ c3rd_base_economic_value = {
 			every_subject = {
 				add = {
 					value = country_population
-					multiply = 1
+					multiply = 0.5
 				}
 			}
 		}

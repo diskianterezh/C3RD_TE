@@ -17,7 +17,8 @@
 			}
 		}
 		modifier = {
-			subject_opinions = -50
+			subject_opinions = -80
+			subject_loyalty = -10
 			tribute_income_modifier = -0.5
 		}
 	}

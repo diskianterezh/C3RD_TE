@@ -41,6 +41,11 @@ humiliated_general = {
 	yearly_decay = 1
 }
 
+humiliated_powerful_general = {
+	value = -30
+	yearly_decay = 1
+}
+
 honored_general = {
 	value = 10
 	yearly_decay = 2

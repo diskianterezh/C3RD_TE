@@ -796,7 +796,7 @@ c3rd_events.6 = { #volontary general must be convincing
             }
             add_tyranny = 10
             scope:volontary_general = {
-                add_loyalty = humiliated_general
+                add_loyalty = humiliated_powerful_general
             }
             if = {
                 limit = { has_variable = unworthy_leader}
@@ -2126,6 +2126,9 @@ c3rd_events.12 = { #reunification from mother
                     remove_character_modifier = foreign_citizen
                 }
             }
+            every_owned_province = {
+                set_owned_by = root
+            }
         }
     }
     option = {#
@@ -2444,6 +2447,175 @@ c3rd_events.20 = {#mother is dead
     }
 }
 
+
+c3rd_events.21 = {#governorship defects to rival empire
+    type = country_event
+    title = "c3rd_events.21.t"
+    desc = "c3rd_events.21.desc"
+
+    picture = successors
+    trigger = {
+        any_neighbour_country = {
+            has_variable = mother_empire
+            var:mother_empire = root
+        }
+        has_land = yes
+        is_tribal = no
+        current_date >= 900.1.1
+        NOT = {
+            has_variable = recent_gov_defect
+        }
+        any_owned_province = {
+            exists = governor
+            governor = {
+                OR = {
+                    loyalty <= 15
+                    AND = {
+                        root = {has_civil_war = yes}
+                        loyalty <= 30
+                    }
+                }
+                NOT = {
+                    has_variable = defection_prevented
+                }
+            }
+            any_neighbor_province = {
+                owner = {
+                    has_variable = mother_empire
+                    var:mother_empire = root
+                }
+            }
+        }
+        
+    }
+
+    weight_multiplier = {
+		modifier = {
+			factor = 2
+			towards_civil_war = yes
+		}
+        modifier = {
+            factor = 2
+            has_civil_war = yes
+        }
+		modifier = {
+			factor = 1.5
+			stability <= 40
+		}
+		modifier = {
+			factor = 1.5
+			stability <= 20
+		}
+		modifier = {
+			factor = 2
+			has_country_modifier = internal_collapse
+		}
+		modifier = {
+			factor = 2
+			has_country_modifier = solidus_introduced
+		}
+        
+    }
+
+    immediate = {
+        random_neighbour_country = {
+            limit = {
+                has_variable = mother_empire
+                var:mother_empire = root
+            }
+            save_scope_as = rival_empire_defect_to
+        }
+
+        random_owned_province = {
+            limit = {
+                exists = governor
+                governor = {
+                    OR = {
+                        loyalty <= 15
+                        AND = {
+                            root = {has_civil_war = yes}
+                            loyalty <= 30
+                        }
+                    }
+                    NOR = {
+                        has_variable = defection_prevented
+                        is_friend = ruler
+                    }
+                }
+                any_neighbor_province = {
+                    owner = {
+                        has_variable = mother_empire
+                        var:mother_empire = root
+                    }
+                }
+            }
+            governorship = {
+                save_scope_as = governorship_defect
+            }
+            governor = {
+                save_scope_as = governor_defect
+            }
+        }
+        set_variable = {
+            name = recent_gov_defect
+            days = 365
+        }
+    }
+
+    option = {
+        name = c3rd_events.21.a
+        custom_tooltip = c3rd_events.21.a.tt1
+        add_treasury = {
+            value = has_monthly_income
+            multiply = -10
+        }
+        scope:governor_defect = {
+            add_loyalty = requests_fulfilled
+            add_gold = {
+                value = root.has_monthly_income
+                multiply = 10
+            }
+            set_variable = {
+                name = defection_prevented
+                days = 3650
+            }
+        }
+    }
+
+    option = {
+        name = c3rd_events.21.b
+        custom_tooltip = c3rd_events.21.b.tt1
+        add_legitimacy = -30
+        scope:governor_defect = {
+            add_loyalty = requests_fulfilled
+            set_variable = {
+                name = defection_prevented
+                days = 3650
+            }
+        }
+    }
+
+    option = {
+        name = c3rd_events.21.c
+        custom_tooltip = c3rd_events.21.c.tt1
+        add_stability = 5
+        hidden_effect = {
+            every_owned_province = {
+                limit = {
+                    governorship = scope:governorship_defect
+                }
+                set_owned_by = scope:rival_empire_defect_to
+            }
+            scope:governor_defect = {
+                remove_all_positions = yes
+                move_country = scope:rival_empire_defect_to
+                set_home_country = scope:rival_empire_defect_to
+                remove_character_modifier = foreign_citizen
+            }
+        }
+    }
+}
+
 #Here come the monthly events where generals do whatever they want
 
 c3rd_events.30 = {#general ultimatum : throne or rival empire
@@ -2517,16 +2689,16 @@ c3rd_events.30 = {#general ultimatum : throne or rival empire
 
     weight_multiplier = {
 		modifier = {
-			factor = 7
+			factor = 3
 			towards_civil_war = yes
 		}
 		modifier = {
-			factor = 5
+			factor = 2
 			has_civil_war = yes
 		}
         modifier = {
             factor = 2
-            legitimacy < 25
+            legitimacy < 0
         }
         modifier = {
             factor = 2
@@ -2918,6 +3090,10 @@ c3rd_events.32 = {#rival vs kingmaker
         }
         scope:king_maker_exige = {
             add_loyalty = medium_requests_denied
+            if = {
+                limit = { is_friend = root.current_ruler }
+                remove_friend = root.current_ruler
+            }
         }
     }
 }
@@ -3154,7 +3330,7 @@ c3rd_events.34 = {#two generals clashing
     option = {
         name = c3rd_events.34.b
         custom_tooltip = c3rd_events.34.b.tt1
-        add_political_influence = -10
+        add_political_influence = -5
         scope:general_one = {
             add_popularity = 15
             if = {
@@ -3173,12 +3349,16 @@ c3rd_events.34 = {#two generals clashing
         scope:general_two = {
             add_popularity = -15
             add_loyalty = humiliated_general
+            if = {
+                limit = { is_friend = root.current_ruler }
+                remove_friend = root.current_ruler
+            }
         }
     }
     option = {
         name = c3rd_events.34.c
         custom_tooltip = c3rd_events.34.c.tt1
-        add_political_influence = -10
+        add_political_influence = -5
         scope:general_two = {
             add_popularity = 15
             if = {
@@ -3197,6 +3377,10 @@ c3rd_events.34 = {#two generals clashing
         scope:general_one = {
             add_popularity = -15
             add_loyalty = humiliated_general
+            if = {
+                limit = { is_friend = root.current_ruler }
+                remove_friend = root.current_ruler
+            }
         }
     }
 }
@@ -3226,6 +3410,17 @@ c3rd_events.35 = {#general ask a governorship
                 is_mercenary = no
                 has_any_office = no
                 has_tech_office = no
+                is_ruler = no
+                prisoner = no
+                trigger_if = {
+                    limit = {
+                        root = {
+                            gender_equality = no
+                        }
+                    }
+                    is_female = no
+                }
+                
             }
         }
     }
@@ -3251,8 +3446,20 @@ c3rd_events.35 = {#general ask a governorship
                 any_friend = {
                     employer = root
                     is_governor = no
+                    is_general = no
+                    is_mercenary = no
                     has_any_office = no
                     has_tech_office = no
+                    is_ruler = no
+                    prisoner = no
+                    trigger_if = {
+                        limit = {
+                            root = {
+                                gender_equality = no
+                            }
+                        }
+                        is_female = no
+                    }
                 }
             }
         }
@@ -3272,6 +3479,16 @@ c3rd_events.35 = {#general ask a governorship
                     is_mercenary = no
                     has_any_office = no
                     has_tech_office = no
+                    is_ruler = no
+                    prisoner = no
+                    trigger_if = {
+                        limit = {
+                            root = {
+                                gender_equality = no
+                            }
+                        }
+                        is_female = no
+                    }
                 }
             }
             save_scope_as = asking_general
@@ -3283,6 +3500,16 @@ c3rd_events.35 = {#general ask a governorship
                     is_mercenary = no
                     has_any_office = no
                     has_tech_office = no
+                    is_ruler = no
+                    prisoner = no
+                    trigger_if = {
+                        limit = {
+                            root = {
+                                gender_equality = no
+                            }
+                        }
+                        is_female = no
+                    }
                 }
                 save_scope_as = asking_friend
             }
@@ -3294,6 +3521,7 @@ c3rd_events.35 = {#general ask a governorship
                         NOR = {
                             is_friend = scope:asking_general
                             this = scope:asking_friend
+                            is_ruler = yes
                         }
                     }
                     NOT = {exists = governor}
@@ -3338,9 +3566,6 @@ c3rd_events.35 = {#general ask a governorship
         name = c3rd_events.35.a
         custom_tooltip = c3rd_events.35.a.tt1
         scope:asked_governorship = {
-            governor = {
-                remove_as_governor = yes
-            }
             random_governorship_state = {
                 random_state_province = {
                     set_as_governor = scope:asking_friend
@@ -3370,6 +3595,10 @@ c3rd_events.35 = {#general ask a governorship
         }
         scope:asking_general = {
             add_loyalty = medium_requests_denied
+            if = {
+                limit = { is_friend = root.current_ruler }
+                remove_friend = root.current_ruler
+            }
         }
     }
 }
@@ -3505,8 +3734,9 @@ c3rd_events.36 = {#general is pretty powerful, gain king maker
     option = {
         name = c3rd_events.36.b
         custom_tooltip = c3rd_events.36.b.tt1
+        add_stability = -7
         scope:new_king_maker = {
-            add_loyalty = humiliated_general
+            add_loyalty = humiliated_powerful_general
             add_popularity = -50
         }
         add_political_influence = -30
@@ -3761,7 +3991,7 @@ c3rd_events.39 = {#king maker have no office
             save_scope_as = king_maker_unhappy
             add_loyal_veterans = num_of_provinces
             add_gold = -1000
-            add_loyalty = humiliated_general
+            add_loyalty = humiliated_powerful_general
             add_popularity = 30
         }
         while = {

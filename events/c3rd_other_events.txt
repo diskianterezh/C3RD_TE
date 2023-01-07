@@ -646,6 +646,7 @@ c3rd_other_events.8 = { #event where people are not happy about taxes
         has_country_modifier = tax_inspection
         NOR = {
             has_country_modifier = citizen_exemption_from_census_tax
+            has_country_modifier = solidus_introduced
             has_variable = remove_tax_inspection_asked
         }
         any_character = {
@@ -926,6 +927,7 @@ c3rd_other_events.9 = { #event where people ask for census taxes
             has_country_modifier = tax_inspection
             has_variable = remove_tax_inspection_asked
             has_variable = census_exemption_asked
+            has_country_modifier = solidus_introduced
         }
         any_character = {
             count >= 3

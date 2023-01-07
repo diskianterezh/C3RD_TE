@@ -446,6 +446,15 @@ low_stab_event.4.c.tt1:0 "Things remain as they are, but [independent_current_go
  c3rd_events.20.a:0 "It's about time"
  c3rd_events.20.a.tt1:0 "The empire is definitively independent."
 
+ c3rd_events.21.t:0 "Governor Defect"
+ c3rd_events.21.desc:0 "As the empire is divided between two rival monarchs, some seem to see this as an opportunity to advance their interests and seek greener pastures. \n[governor_defect.GetName], governors of [governor_defect.GetName], in the grey area where sovereignties are still undecided, seems to have been won over by [rival_empire_defect_to.GetName]'s claims, and appears determined to recognise him as the legitimate ruler of the empire. This would be a dramatic setback for our influence in the region, but could be avoided ... if we act quickly!"
+ c3rd_events.21.a:0 "Gold will restore his sanity"
+ c3rd_events.21.a.tt1:0 "The Governor's defection will be prevented"
+ c3rd_events.21.b:0 "Great honours for our friend !"
+ c3rd_events.21.b.tt1:0 "The Governor's defection will be prevented"
+ c3rd_events.21.c:0 "One less traitor"
+ c3rd_events.21.c.tt1:0 "The governor will defect with the lands he governs."
+
  c3rd_events.30.t:0 "[rival_emperor.GetName]'s coup"
  c3rd_events.30.desc:0 "Terrible news ; [rival_emperor.GetName], with the support of many governors and loyal troops, has lost all discernment. After a long speech in which he spoke at length about the supposed 'ineptitude' of our leader, he is now claiming the throne and claiming that his party is ready to support him without any hesitation."
  c3rd_events.30.a:0 "It is better to give in."

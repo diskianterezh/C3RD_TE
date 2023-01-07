@@ -6,7 +6,7 @@ king_maker = {
 }
 
 popular_general = {
-	monthly_character_popularity = 0.15
+	monthly_character_popularity = 0.20
 }
 
 pater_familias = {
