@@ -2635,6 +2635,10 @@ on_battle_lost = {
 						}
 						modifier = {
 							add = 25
+							has_law = royal_bureaucracy
+						}
+						modifier = {
+							add = 25
 							any_current_war = {
 								war_score = {
 									target = root
@@ -2694,6 +2698,10 @@ on_battle_lost = {
 							add = 25
 							has_law = elevate_monarch_monarchy
 							current_ruler.zeal < 8
+						}
+						modifier = {
+							add = 25
+							has_law = royal_bureaucracy
 						}
 						modifier = {
 							add = 25

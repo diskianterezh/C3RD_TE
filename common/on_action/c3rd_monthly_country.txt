@@ -12,6 +12,7 @@
 		c3rd_custom_on_actions_rival_empire_in_war
 		c3rd_custom_on_actions_rival_unstable
 		c3rd_no_more_wonder
+		c3rd_barbarian_sack
 		c3rd_custom_on_actions_rival_legitimate
 		delay = { days = { 1 15 } }
 		c3rd_custom_on_actions_instability

@@ -387,6 +387,7 @@ c3rd_other_events_monthly_pulse = { #check if events can happen
 		20 = c3rd_other_events.31 #slave culture uprising
 		30 = c3rd_other_events.50 #wonder threatened
 		5 = c3rd_other_events.52 #stabhit from wonders pillaged
+		4 = c3rd_other_events.60 #stabhit from barbarians
 	}
 
 }
@@ -1015,6 +1016,50 @@ c3rd_no_more_wonder = {
 				}
 			}
 			remove_province_modifier = wonder_destroyed_modifier
+		}
+	}
+
+}
+
+c3rd_barbarian_sack = {
+	trigger = {
+		has_land = yes
+		any_owned_province = {
+			controller = { tag = BAR }
+			is_state_capital = yes
+			state = {
+				NOT = {
+					has_state_modifier = barbarians_border
+				}
+				any_state_province = {
+					count <= 4
+					NOT = {
+						controller = { tag = BAR }
+					}
+				}
+			}
+		}
+	}
+	effect = {
+		every_province = {
+			limit = {
+				controller = { tag = BAR }
+				is_state_capital = yes
+				state = {
+					any_state_province = {
+						count <= 4
+						NOT = {
+							controller = { tag = BAR }
+						}
+					}
+				}
+			}
+			state = {
+				add_state_modifier = {
+					name = barbarians_border
+					duration = 1850
+				}
+			}
 		}
 	}
 

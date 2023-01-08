@@ -454,7 +454,14 @@ low_stab_event.3 = { #governors declaring total independance
     option = {
 		name = low_stab_event.3.a
 		custom_tooltip = low_stab_event.3.a.tt1
-        add_stability = 2
+        if = {
+            limit = { num_of_cities <= 1000 }
+            add_stability = 2
+        }
+        else_if = {
+            limit = { num_of_cities <= 2000 }
+            add_stability = 1
+        }
         add_truce = {
           target = scope:byebye
           duration = 3650
@@ -608,7 +615,21 @@ low_stab_event.4 = { #governor proposes to be independent
             }
             
         }
-        add_stability = 5
+        if = {
+            limit = { num_of_cities <= 1000 }
+            add_stability = 5
+        }
+        else_if = {
+            limit = { num_of_cities <= 2000 }
+            add_stability = 3
+        }
+        else_if = {
+            limit = { num_of_cities <= 3000 }
+            add_stability = 2
+        }
+        else = {
+            add_stability = 1
+        }
     }
     option = {
         name = low_stab_event.4.b

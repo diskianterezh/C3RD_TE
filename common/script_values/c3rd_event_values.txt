@@ -226,6 +226,13 @@ c3rd_economic_10_value = {
 		divide = country_population
 	}
 }
+c3rd_economic_11_value = {
+	value = c3rd_base_economic_value
+	multiply = 1.2
+	ROOT = {
+		divide = country_population
+	}
+}
 
 c3rd_economic_factor = {
 	value = 2
@@ -385,7 +392,13 @@ c3rd_economic_value = {
 	}
 	else_if = {
 		limit = {
-			c3rd_economic_factor >= 10
+			c3rd_economic_factor = 10
+		}
+		value = c3rd_economic_10_value
+	}
+	else_if = {
+		limit = {
+			c3rd_economic_factor >= 11
 		}
 		value = c3rd_economic_10_value
 	}

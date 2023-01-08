@@ -1610,7 +1610,10 @@ c3rd_other_events.12 = { #games
             add_treasury = {
                 value = has_monthly_income
                 multiply = 10
-                min = num_of_cities
+                min = {
+                    value = num_of_cities
+                    multiply = 5
+                }
                 multiply = -1
             }
         }
@@ -3522,7 +3525,7 @@ c3rd_other_events.51 = { #Great work restaured
         }
     }
 
-    option = { #give them food
+    option = { #repair choice 1
         name = c3rd_other_events.51.a
         custom_tooltip = c3rd_other_events.51.a.tt1
         trigger = {
@@ -3545,7 +3548,7 @@ c3rd_other_events.51 = { #Great work restaured
         }
     }
 
-    option = { #give them food
+    option = { #repair choice 2
         name = c3rd_other_events.51.b
         custom_tooltip = c3rd_other_events.51.b.tt1
         trigger = {
@@ -3568,7 +3571,7 @@ c3rd_other_events.51 = { #Great work restaured
         }
     }
 
-    option = { #give them food
+    option = { #repair choice 3
         name = c3rd_other_events.51.c
         custom_tooltip = c3rd_other_events.51.c.tt1
         trigger = {
@@ -3591,7 +3594,7 @@ c3rd_other_events.51 = { #Great work restaured
         }
     }
 
-    option = { #give them food
+    option = { #repair choice 4
         name = c3rd_other_events.51.d
         custom_tooltip = c3rd_other_events.51.d.tt1
         trigger = {
@@ -3708,6 +3711,133 @@ c3rd_other_events.52 = { #stabhit because pillaged wonders
         add_stability = -7
         trigger_event = {
             id = c3rd_other_events.51
+        }
+    }
+}
+
+
+
+
+c3rd_other_events.60 = { #filthy barbarians ransacking our lands
+    type = country_event
+    title = "c3rd_other_events.60.t"
+    desc = "c3rd_other_events.60.desc"
+ 
+    picture = babylon_plundered
+
+    trigger = {
+        has_land = yes
+        any_country_state = {
+            count >= 5
+            has_state_modifier = barbarians_border
+        }
+        not = {
+            has_variable = barbarian_border_stabhit
+        }
+    }
+    weight_multiplier = {
+        modifier = {
+            factor = 1.5
+            stability >= 70
+        }
+        modifier = {
+            factor = 1.5
+            stability >= 80
+        }
+        modifier = {
+            factor = 1.5
+            stability >= 90
+        }
+        modifier = {
+            factor = 1.5
+            any_country_state = {
+                count >= 10
+                has_state_modifier = barbarians_border
+            }
+        }
+        modifier = {
+            factor = 1.5
+            any_country_state = {
+                count >= 15
+                has_state_modifier = barbarians_border
+            }
+        }
+        modifier = {
+            factor = 1.5
+            any_country_state = {
+                count >= 20
+                has_state_modifier = barbarians_border
+            }
+        }
+        modifier = {
+            factor = 1.5
+            num_of_cities >= 500
+        }
+        modifier = {
+            factor = 1.5
+            num_of_cities >= 1000
+        }
+        modifier = {
+            factor = 1.5
+            num_of_cities >= 2000
+        }
+        modifier = {
+            factor = 1.5
+            num_of_cities >= 3000
+        }
+        modifier = {
+            factor = 1.5
+            num_of_cities >= 4000
+        }
+    }
+
+    immediate = {
+        set_variable = {
+            name = barbarian_border_stabhit
+            days = 3650
+        }
+        if = {
+            limit = { num_of_cities <= 500 }
+            add_stability = -2
+        }
+        else_if = {
+            limit = { num_of_cities <= 1000 }
+            add_stability = -5
+        }
+        else_if = {
+            limit = { num_of_cities <= 2000 }
+            add_stability = -10
+        }
+        else_if = {
+            limit = { num_of_cities <= 3000 }
+            add_stability = -15
+        }
+        else = {
+            add_stability = -20
+        }
+    }
+
+    option = { #legitimacy cost
+        name = c3rd_other_events.60.a
+        custom_tooltip = c3rd_other_events.60.a.tt1
+        trigger = {
+            is_monarchy = yes
+        }
+        add_legitimacy = -30
+    }
+
+    option = { #governors
+        name = c3rd_other_events.60.b
+        custom_tooltip = c3rd_other_events.60.b.tt1
+        every_governorships = {
+            limit = {
+                any_governorship_state = {
+                    has_state_modifier = barbarians_border
+                }
+            }
+            governor = {
+                add_loyalty = disappointed
+            }
         }
     }
 }

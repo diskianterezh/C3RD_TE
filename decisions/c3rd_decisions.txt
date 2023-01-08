@@ -186,14 +186,14 @@
 			}
 		}
 		effect = {
-			add_political_influence = -25
+			add_political_influence = -50
 			add_treasury = {
-				value = -3
+				value = -10
 				multiply = num_of_cities
 			}
 			change_variable = {
 				name = deflation_value
-				add = -10
+				add = -7
 			}
 			add_country_modifier = {
 				name = added_liquidity
@@ -224,7 +224,7 @@
 			}
 		}
 		effect = {
-			add_political_influence = -20
+			add_political_influence = -25
 			add_stability = -10
 			change_variable = {
 				name = silver_unvalue

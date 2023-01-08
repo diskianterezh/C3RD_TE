@@ -95,6 +95,8 @@
  desc_wonder_defended_weapons:0 "This province was violently repressed to defend the great work"
  wonder_destroyed_modifier:0 "Great work pillaged"
  desc_wonder_destroyed_modifier:0 "The great work was destroyed by an angry crowd. This modifier will be removed if the Great work no longer exist, or if you restore it through the decision. \nYou may receive bad events if too much Great Works have this modifier"
+ barbarians_border:0 "Barbarians on the border"
+ desc_barbarians_border:0 "Barbarians have reached this state, causing great turmoil and decreasing faith in the government"
 
 
  #opinion:
@@ -128,6 +130,7 @@
  disappointed:0 "Disappointed"
  loyalty_civil_war_victory_c3rd:0 "Civil War Victory"
  softened:0 "Softened"
+ humiliated_powerful_general:0 "Humiliated"
 
  #character modifiers
  king_maker:0 "Kingmaker"
@@ -378,7 +381,7 @@ low_stab_event.4.c.tt1:0 "Things remain as they are, but [independent_current_go
  c3rd_events.10.b:0 "If they think they are better protected by this parvenu..."
  c3rd_events.10.b.tt1:0 "The rival empire secedes and things remain as they are for the time being. \nWith both our empires claiming the main title, later events may allow for a peaceful reunification. \nIf the two empires remain separated for too long, the schism will be complete."
  c3rd_events.10.c:0 "Our administrators and trustworthy men are always on site...."
- c3rd_events.10.c.tt1:0 "This option is available because your empire is way larger. \nWe can set up a state of tribute, which will remain as long as we can.\nWith both our empires claiming the main title, later events may allow for a peaceful reunification. \nIf the two empires remain separated for too long, the schism will be complete."
+ c3rd_events.10.c.tt1:0 "This option is available because your empire is way larger. \nWe can set up some administrative path which will make future reunification easier.\nWith both our empires claiming the main title, later events may allow for a peaceful reunification. \nIf the two empires remain separated for too long, the schism will be complete."
 
  c3rd_events.11.t:0 "Reunification"
  c3rd_events.11.desc:0 "After the death of our ruler, the dirigeant counsil decided that we should stop this nonsense and comply to the real empire's exigences."
@@ -667,7 +670,7 @@ low_stab_event.4.c.tt1:0 "Things remain as they are, but [independent_current_go
  c3rd_other_events.5.t:0 "Lack of wealth"
  c3rd_other_events.5.desc:0 "Our empire may seem radiant, overflowing with wealth and swimming in success. But the real economy is not limited to the walls of the state's vault, but to trade, social balance and the wealth of the population. This balance is complicated to achieve, and very often the privileged populations get rich on the backs of the conquered ones, while the State produces the money necessary for its projects. \nRecently, the accounts are in the red... whether it is the lack of new wealth or the reluctance of our elite to pay taxes... the atmosphere is one of scarcity of money, which risks provoking a generalized deflation if we let this trend continue."
  c3rd_other_events.5.a:0 "But ... what about our games?"
- c3rd_other_events.5.a.tt1:0 "Your economic balance tends towards deflation. You need to increase the sources of wealth to save the Augustinian system, or change the monetary law.\nSource of wealth inclue :\n#G Number of unintegrated pops \nPops of a enslaved culture \nNumber of Precious metal goods in your country (both from production and importation)#!\n\nSome new decisions have been unlocked"
+ c3rd_other_events.5.a.tt1:0 "Your economic balance tends towards deflation. You need to increase the sources of wealth to save the Augustinian system, or change the monetary law.\nSource of wealth inclue :\n#G Number of unintegrated pops \nPops of a enslaved culture \nNumber of Precious metal goods in your country (both from production and importation)#!"
 
  c3rd_other_events.6.t:0 "Mine depletion"
  c3rd_other_events.6.desc:0 "After years of abundance and wealth produced, the mine of [exhausted_mine.GetName] seems to have exhausted its vein. The carts dripping with gold that supplied our coffers have now dried up, and our slaves are now redirected to other local sources of goods."
@@ -888,6 +891,14 @@ low_stab_event.4.c.tt1:0 "Things remain as they are, but [independent_current_go
  c3rd_other_events.52.b.tt1:0 "This happens because you have a significant number of great works looted or ransacked. Destroying or repairing (by decision) these monuments will remove the status."
  c3rd_other_events.52.c:0 "Start the repairs right now !"
  c3rd_other_events.52.c.tt1:0 "This happens because you have a significant number of great works looted or ransacked. Destroying or repairing (by decision) these monuments will remove the status.\n#G You will consider the possibility of repairs.#!"
+
+
+ c3rd_other_events.60.t:0 "Crumbling Borders"
+ c3rd_other_events.60.desc:0 "Is our civilisation in peril? As many of our subjects find their once-safe homes looted and ravaged by tribes of bloodthirsty barbarians, trust in the government is falling, and trouble is brewing in the far reaches of the empire. We must regain control of the borders if we are to safeguard our gains."
+ c3rd_other_events.60.a:0 "It is only a matter of temporary mistakes."
+ c3rd_other_events.60.a.tt1:0 "Your leader will take responsability.\nThis happens because you have a significant number of states invaded by barbarians."
+ c3rd_other_events.60.b:0 "These things happen"
+ c3rd_other_events.60.b.tt1:0 "This happens because you have a significant number of states invaded by barbarians."
 
 #tribals fix
 

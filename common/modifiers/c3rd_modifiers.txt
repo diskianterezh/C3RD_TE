@@ -224,7 +224,7 @@ solidus_introduced = {
 	global_nobles_happyness = 0.1
 	global_nobles_output = -0.15
 	global_freemen_happyness = -0.1
-	character_loyalty = -5
+	character_loyalty = -10 #this will changed once feudality events are added
 }
 
 big_monetary_control = {
@@ -283,6 +283,14 @@ wonder_destroyed_modifier = {
 	local_unrest = 2
 	local_migration_attraction = -5
 	local_migration_speed = 2
+}
+
+barbarians_border = {
+	local_monthly_civilization = -0.05
+	local_unrest = 2
+	local_migration_attraction = -5
+	local_migration_speed = 2
+	local_pop_assimilation_speed = -1
 }
 
 added_liquidity = {

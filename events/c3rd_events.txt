@@ -60,6 +60,12 @@ c3rd_events.1 = { #oh noes, too much vassals
                 type = tributary 
             }
         }
+        scope:chosen_subject = {
+            set_variable = {
+                name = subject_wants_more_cooldown
+                days = 3650
+            }
+        }
            
     }
 
@@ -1980,7 +1986,7 @@ c3rd_events.10 = { #oh no rival splitting
     }
 
     
-    option = { #tributaries them
+    option = { #more unification step them
         name = c3rd_events.10.c
         custom_tooltip = c3rd_events.10.c.tt1
         trigger = {
@@ -1988,13 +1994,11 @@ c3rd_events.10 = { #oh no rival splitting
         }
         highlight = yes
         add_political_influence = -40
-        make_subject = { 
-            target = scope:rival_empire
-            type = tributary
-        }
-        add_truce = {
-        	target = scope:rival_empire
-        	duration = 3650 #10 years
+        scope:rival_empire = {
+            change_variable = {
+                name = unification_value
+                add = 20
+            }
         }
 
     }
@@ -3734,7 +3738,7 @@ c3rd_events.36 = {#general is pretty powerful, gain king maker
     option = {
         name = c3rd_events.36.b
         custom_tooltip = c3rd_events.36.b.tt1
-        add_stability = -7
+        add_stability = -2
         scope:new_king_maker = {
             add_loyalty = humiliated_powerful_general
             add_popularity = -50

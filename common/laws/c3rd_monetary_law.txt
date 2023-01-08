@@ -20,6 +20,7 @@
 			subject_opinions = -80
 			subject_loyalty = -10
 			tribute_income_modifier = -0.5
+			improve_relation_impact = -0.5
 		}
 	}
 	
