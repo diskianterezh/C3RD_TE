@@ -2603,7 +2603,7 @@ on_battle_lost = {
 						government = imperium
 						country_culture_group = hellenic
 					}
-					rank = great_power
+					num_of_cities >= 500
 					current_ruler = {
 						martial < 9
 					}
@@ -2614,7 +2614,7 @@ on_battle_lost = {
 					}
 				}
 				random_list = {
-					50 = {
+					25 = {
 						modifier = {
 							add = current_ruler.popularity
 						}
@@ -2630,7 +2630,9 @@ on_battle_lost = {
 							add = 25
 							any_owned_province = {
 								count >= root.num_of_provinces
-								has_siege = yes
+								NOT = {
+									controller = root
+								}
 							}
 						}
 						modifier = {
@@ -2639,6 +2641,7 @@ on_battle_lost = {
 						}
 						modifier = {
 							add = 25
+							war = yes
 							any_current_war = {
 								war_score = {
 									target = root
@@ -2664,7 +2667,7 @@ on_battle_lost = {
 						country_culture_group = north_african
 						has_law = elevate_monarch_monarchy
 					}
-					rank = great_power
+					num_of_cities >= 500
 					current_ruler = {
 						zeal < 9
 					}

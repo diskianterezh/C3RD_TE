@@ -131,6 +131,7 @@
  loyalty_civil_war_victory_c3rd:0 "Civil War Victory"
  softened:0 "Softened"
  humiliated_powerful_general:0 "Humiliated"
+ governor_abandonned:0 "Governor abandoned to the barbarians"
 
  #character modifiers
  king_maker:0 "Kingmaker"

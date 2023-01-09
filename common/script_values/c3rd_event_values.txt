@@ -163,7 +163,7 @@ c3rd_economic_1_value = {
 
 c3rd_economic_2_value = {
 	value = c3rd_base_economic_value
-	multiply = 2.6
+	multiply = 2.7
 	ROOT = {
 		divide = country_population
 	}
@@ -179,56 +179,56 @@ c3rd_economic_3_value = {
 }
 c3rd_economic_4_value = {
 	value = c3rd_base_economic_value
-	multiply = 2.2
+	multiply = 2.1
 	ROOT = {
 		divide = country_population
 	}
 }
 c3rd_economic_5_value = {
 	value = c3rd_base_economic_value
-	multiply = 2
+	multiply = 1.9
 	ROOT = {
 		divide = country_population
 	}
 }
 c3rd_economic_6_value = {
 	value = c3rd_base_economic_value
-	multiply = 1.8
+	multiply = 1.7
 	ROOT = {
 		divide = country_population
 	}
 }
 c3rd_economic_7_value = {
 	value = c3rd_base_economic_value
-	multiply = 1.6
+	multiply = 1.5
 	ROOT = {
 		divide = country_population
 	}
 }
 c3rd_economic_8_value = {
 	value = c3rd_base_economic_value
-	multiply = 1.5
+	multiply = 1.4
 	ROOT = {
 		divide = country_population
 	}
 }
 c3rd_economic_9_value = {
 	value = c3rd_base_economic_value
-	multiply = 1.4
+	multiply = 1.3
 	ROOT = {
 		divide = country_population
 	}
 }
 c3rd_economic_10_value = {
 	value = c3rd_base_economic_value
-	multiply = 1.3
+	multiply = 1.2
 	ROOT = {
 		divide = country_population
 	}
 }
 c3rd_economic_11_value = {
 	value = c3rd_base_economic_value
-	multiply = 1.2
+	multiply = 1.1
 	ROOT = {
 		divide = country_population
 	}

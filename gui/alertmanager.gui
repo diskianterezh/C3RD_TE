@@ -478,6 +478,7 @@ widget = {
 			using = red_alert
 			blockoverride "On_click"
 			{
+				onclick = "[OpenGameView('culture')]"
 				onrightclick = "[AlertManager.ToggleShowAlert('c3rd_monetary_balance')]"
 			}
 				
@@ -1002,6 +1003,7 @@ widget = {
 			using = yellow_alert
 			blockoverride "On_click"
 			{
+				onclick = "[OpenGameView('overview')]"
 				onrightclick = "[AlertManager.ToggleShowAlert('c3rd_monetary_balance_medium')]"
 			}
 				
@@ -1025,6 +1027,7 @@ widget = {
 			using = yellow_alert
 			blockoverride "On_click"
 			{
+				onclick = "[OpenGameView('overview')]"
 				onrightclick = "[AlertManager.ToggleShowAlert('c3rd_military_anarchy_alert')]"
 			}
 				

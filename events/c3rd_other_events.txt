@@ -803,6 +803,9 @@ c3rd_other_events.8 = { #event where people are not happy about taxes
                 modifier = {
                     add = power_base
                 }
+                # modifier = { #*2
+                #     add = power_base
+                # }
                 modifier = {
                     add = corruption
                 }
@@ -2695,7 +2698,7 @@ c3rd_other_events.31 = { # slaves culture revolts
     option = { #vassal
         name = c3rd_other_events.31.a
         custom_tooltip = c3rd_other_events.31.a.tt1
-        add_political_influence = -15
+        add_political_influence = -30
 
         scope:new_country_slave = {
             create_country = {
@@ -3794,7 +3797,7 @@ c3rd_other_events.60 = { #filthy barbarians ransacking our lands
     immediate = {
         set_variable = {
             name = barbarian_border_stabhit
-            days = 3650
+            days = 1850
         }
         if = {
             limit = { num_of_cities <= 500 }
@@ -3836,7 +3839,7 @@ c3rd_other_events.60 = { #filthy barbarians ransacking our lands
                 }
             }
             governor = {
-                add_loyalty = disappointed
+                add_loyalty = governor_abandonned
             }
         }
     }
