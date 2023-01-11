@@ -233,6 +233,34 @@ c3rd_economic_11_value = {
 		divide = country_population
 	}
 }
+c3rd_economic_12_value = {
+	value = c3rd_base_economic_value
+	multiply = 1.05
+	ROOT = {
+		divide = country_population
+	}
+}
+c3rd_economic_13_value = {
+	value = c3rd_base_economic_value
+	multiply = 1
+	ROOT = {
+		divide = country_population
+	}
+}
+c3rd_economic_14_value = {
+	value = c3rd_base_economic_value
+	multiply = 0.95
+	ROOT = {
+		divide = country_population
+	}
+}
+c3rd_economic_15_value = {
+	value = c3rd_base_economic_value
+	multiply = 0.9
+	ROOT = {
+		divide = country_population
+	}
+}
 
 c3rd_economic_factor = {
 	value = 2
@@ -305,6 +333,12 @@ c3rd_economic_factor = {
 	if = {
 		limit = {
 			has_law = second_reform_law
+		}
+		add = -1
+	}
+	if = {
+		limit = {
+			num_of_cities <= 200
 		}
 		add = -1
 	}
@@ -398,9 +432,33 @@ c3rd_economic_value = {
 	}
 	else_if = {
 		limit = {
-			c3rd_economic_factor >= 11
+			c3rd_economic_factor = 11
 		}
-		value = c3rd_economic_10_value
+		value = c3rd_economic_11_value
+	}
+	else_if = {
+		limit = {
+			c3rd_economic_factor = 12
+		}
+		value = c3rd_economic_12_value
+	}
+	else_if = {
+		limit = {
+			c3rd_economic_factor = 13
+		}
+		value = c3rd_economic_13_value
+	}
+	else_if = {
+		limit = {
+			c3rd_economic_factor = 14
+		}
+		value = c3rd_economic_14_value
+	}
+	else_if = {
+		limit = {
+			c3rd_economic_factor >= 14
+		}
+		value = c3rd_economic_15_value
 	}
 	else = {
 		value = c3rd_economic_5_value

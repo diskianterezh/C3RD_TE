@@ -668,7 +668,7 @@
         modifier = { 
 			monthly_wage_modifier = -0.1 
 			loyalty_gain_chance_modifier = -0.025
-			civil_war_threshold = 0.05
+			civil_war_threshold = 0.025
 		}
         keystone = yes
         requires = { state_trade_inv_2 }

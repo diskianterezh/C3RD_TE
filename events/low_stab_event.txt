@@ -368,7 +368,7 @@ low_stab_event.3 = { #governors declaring total independance
     type = country_event
     title = "low_stab_event.3.t"
     desc = "low_stab_event.3.desc"
- 
+    goto_location = scope:byebye.capital_scope
     picture = council_country
  
     trigger = {
@@ -500,6 +500,7 @@ low_stab_event.4 = { #governor proposes to be independent
     type = country_event
     title = "low_stab_event.4.t"
     desc = "low_stab_event.4.desc"
+    goto_location = scope:client.capital_scope
  
     picture = council_country
  
@@ -621,14 +622,14 @@ low_stab_event.4 = { #governor proposes to be independent
         }
         else_if = {
             limit = { num_of_cities <= 2000 }
-            add_stability = 3
+            add_stability = 4
         }
         else_if = {
             limit = { num_of_cities <= 3000 }
-            add_stability = 2
+            add_stability = 3
         }
         else = {
-            add_stability = 1
+            add_stability = 2
         }
     }
     option = {
@@ -638,6 +639,21 @@ low_stab_event.4 = { #governor proposes to be independent
             scope:independent_current_governor = {
                 loyalty >= 20
             }
+        }
+        if = {
+            limit = { num_of_cities <= 1000 }
+            add_political_influence = -5
+        }
+        else_if = {
+            limit = { num_of_cities <= 2000 }
+            add_political_influence = -10
+        }
+        else_if = {
+            limit = { num_of_cities <= 3000 }
+            add_political_influence = -15
+        }
+        else = {
+            add_political_influence = -20
         }
         scope:independent_current_governor = {
             add_loyalty = independence_denied
@@ -650,6 +666,21 @@ low_stab_event.4 = { #governor proposes to be independent
             scope:independent_current_governor = {
                 loyalty < 20
             }
+        }
+        if = {
+            limit = { num_of_cities <= 1000 }
+            add_political_influence = -5
+        }
+        else_if = {
+            limit = { num_of_cities <= 2000 }
+            add_political_influence = -10
+        }
+        else_if = {
+            limit = { num_of_cities <= 3000 }
+            add_political_influence = -15
+        }
+        else = {
+            add_political_influence = -20
         }
         scope:independent_current_governor = {
             add_loyalty = independence_denied

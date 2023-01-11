@@ -267,7 +267,7 @@ local_autonomy_c3rd = {
 }
 
 revolt_preparation = {
-	local_unrest = 2
+	local_unrest = 5
 }
 
 wonder_defended_weapons = {
@@ -335,5 +335,23 @@ too_giant_republic = {
 	global_freemen_output = -0.1
 	monthly_corruption = 0.1
 	global_monthly_state_loyalty = -0.1
+}
+
+huns_buffs_c3rd = {
+	discipline = 0.4
+	heavy_cavalry_morale = 0.20
+	heavy_cavalry_defensive = 0.20
+	heavy_cavalry_discipline = 0.10
+	heavy_cavalry_offensive = 0.20
+	land_unit_attrition = -0.2
+	siege_ability = 0.4
+	siege_engineers = 2
+	horse_archers_morale = 0.20
+	horse_archers_defensive = 0.20
+	horse_archers_discipline = 0.1
+	horse_archers_offensive = 0.20
+	light_infantry_defensive = 0.20
+	light_infantry_discipline = 0.1
+	light_infantry_offensive = 0.20
 }
 

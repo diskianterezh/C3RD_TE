@@ -803,9 +803,9 @@ c3rd_other_events.8 = { #event where people are not happy about taxes
                 modifier = {
                     add = power_base
                 }
-                # modifier = { #*2
-                #     add = power_base
-                # }
+                modifier = { #*2
+                    add = power_base
+                }
                 modifier = {
                     add = corruption
                 }
@@ -848,7 +848,8 @@ c3rd_other_events.8 = { #event where people are not happy about taxes
         name = c3rd_other_events.8.b
         custom_tooltip = c3rd_other_events.8.b.tt1
         current_ruler = {
-            add_corruption = 10
+            add_corruption = 15
+            add_popularity = -10
         }
 		add_treasury = {
 			value = 0
@@ -1237,6 +1238,12 @@ c3rd_other_events.10 = { #great book
             }
             desc = "c3rd_other_events.10.desc.2"  
         }
+        triggered_desc = {
+            trigger = {
+                has_law = monetary_reform_law
+            }
+            desc = "c3rd_other_events.10.desc.20"  
+        }
          
         triggered_desc = {
             trigger = {
@@ -1245,7 +1252,11 @@ c3rd_other_events.10 = { #great book
                     has_country_modifier = military_advantages
                     has_country_modifier = political_unstability
                     has_country_modifier = tax_inspection
-                    has_country_modifier = second_reform_law
+                    has_law = second_reform_law
+                    has_law = subject_exploitation_law
+                    any_country_culture = {
+                        has_pop_type_right = slaves
+                    }
                 }
             }
             desc = "c3rd_other_events.10.desc.4" 
@@ -1277,9 +1288,23 @@ c3rd_other_events.10 = { #great book
         }
         triggered_desc = {
             trigger = {
-                has_country_modifier = second_reform_law
+                has_law = second_reform_law
             }
             desc = "c3rd_other_events.10.desc.9"  
+        }
+        triggered_desc = {
+            trigger = {
+                any_country_culture = {
+                    has_pop_type_right = slaves
+                }
+            }
+            desc = "c3rd_other_events.10.desc.10"  
+        }
+        triggered_desc = {
+            trigger = {
+                has_law = subject_exploitation_law
+            }
+            desc = "c3rd_other_events.10.desc.11"  
         }
         triggered_desc = {
             trigger = {
@@ -2595,7 +2620,7 @@ c3rd_other_events.31 = { # slaves culture revolts
     type = country_event
     title = "c3rd_other_events.31.t"
     desc = "c3rd_other_events.31.desc"
-    
+    goto_location = scope:new_country_slave
     picture = revolt
 
     trigger = {
@@ -2634,6 +2659,34 @@ c3rd_other_events.31 = { # slaves culture revolts
         modifier = {
             factor = 1.5
             stability <= 30
+        }
+        modifier = {
+            factor = 1.5
+            any_state_province = {
+                count >= 10
+                has_province_modifier = revolt_preparation
+            }
+        }
+        modifier = {
+            factor = 1.5
+            any_state_province = {
+                count >= 15
+                has_province_modifier = revolt_preparation
+            }
+        }
+        modifier = {
+            factor = 1.5
+            any_state_province = {
+                count >= 20
+                has_province_modifier = revolt_preparation
+            }
+        }
+        modifier = {
+            factor = 1.5
+            any_state_province = {
+                count >= 30
+                has_province_modifier = revolt_preparation
+            }
         }
         modifier = {
             factor = 1.5
@@ -2713,9 +2766,25 @@ c3rd_other_events.31 = { # slaves culture revolts
         hidden_effect = {
             every_country_state = {
                 limit = {
+                    NOT = {
+                        this = root.capital_scope.state
+                    }
                     any_state_province = {
-                        count >= 5
-                        dominant_province_culture = scope:revolting_slave_culture.culture
+                        count >= 4
+                        dominant_province_culture = scope:check_culture2.culture
+                    }
+                    OR = {
+                        any_state_province = {
+                            state_loyalty <= 30
+                        }
+                        any_state_province = {
+                            count >= 4
+                            has_province_modifier = revolt_preparation
+                        }
+                        any_state_province = {
+                            count >= 5
+                            dominant_province_culture = scope:revolting_slave_culture.culture
+                        }
                     }
                 }
                 every_state_province = {
@@ -3818,6 +3887,9 @@ c3rd_other_events.60 = { #filthy barbarians ransacking our lands
         else = {
             add_stability = -20
         }
+        current_ruler = {
+            add_popularity = -10
+        }
     }
 
     option = { #legitimacy cost
@@ -3843,7 +3915,53 @@ c3rd_other_events.60 = { #filthy barbarians ransacking our lands
             }
         }
     }
+
+    after = {
+        hidden_effect = {
+            random_list = {
+                10 = {
+                    modifier = {
+                        add = 10
+                        has_variable = unworthy_leader
+                        var:unworthy_leader <= 2
+                    }
+                    modifier = {
+                        add = 2
+                        legitimacy >= 85
+                    }
+                }
+                1 = {
+                    modifier = {
+                        add = var:unworthy_leader
+                        has_variable = unworthy_leader
+                    }
+                    modifier = {
+                        add = 1
+                        legitimacy < 50
+                    }
+                    modifier = {
+                        add = 1
+                        legitimacy < 25
+                    }
+                    modifier = {
+                        add = 2
+                        legitimacy < 0
+                    }
+                    modifier = {
+                        add = 2
+                        stability < 25
+                    }
+                    trigger_event = {
+                        id = c3rd_events.9
+                        days = 15
+                    }
+                }
+            }
+        }
+        
+    }
 }
+
 
 
 
