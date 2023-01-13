@@ -297,6 +297,14 @@
 		modifier = { max_research_efficiency = 0.25 }
 	}
 
+	compass_inv = {
+		requires = { book_binding_invention }
+		modifier = { diplomatic_range_modifier = 0.25 }
+		allow = {
+			primary_culture = tocharian
+		}
+	}
+
 	acta_diurna_invention = {
 		allow = { primary_culture = roman }
 		
@@ -962,8 +970,8 @@
 		}
 	}	
 
-	# # Level 10
-	# tribute_income_modifier_inv_3 = {
+	# Level 10
+	# tribute_income_modifier_inv_3 = { #MODIFIED BY C3RD SEE END
 	# 	modifier = { 
 	# 		tribute_income_modifier = -0.75 
 	# 		subject_loyalty = 50
@@ -1388,13 +1396,13 @@
 		}
 		allow = {
 			is_ai = no
-		} 
+		}
 		keystone = yes
         potential = { NOT = { invention = subject_exploitation_c3rd } }
 		requires = { relation_inv_5 }
 	}
 
-	#new one
+	#new one C3RD
 	
 	subject_exploitation_c3rd = {
 		modifier = { 
@@ -1412,5 +1420,4 @@
 			custom_tooltip = "subject_exploitation_c3rd_enabled"
 		}
 	}
-
 }

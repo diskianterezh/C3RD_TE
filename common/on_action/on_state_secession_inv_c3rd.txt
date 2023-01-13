@@ -79,7 +79,7 @@ on_state_secession = {	#Fired for States that revolt only, for now. Civil wars r
 				trigger_event = revolt_events.2
 			}
 		}
-		#Vanilla effect, Why was this removed???? Removing it made revolts a lot weaker! Do not remove!
+		#Vanilla effect
 		if = {
 			limit = {
 				has_variable = num_state_mods
