@@ -2906,236 +2906,236 @@ c3rd_other_events.31 = { # slaves culture revolts
         
     }
 }
-c3rd_other_events.32 = { # unintegrated revolts --- A FINIR
-    type = country_event
-    title = "c3rd_other_events.32.t"
-    desc = "c3rd_other_events.32.desc"
+# c3rd_other_events.32 = { # unintegrated revolts --- A FINIR
+#     type = country_event
+#     title = "c3rd_other_events.32.t"
+#     desc = "c3rd_other_events.32.desc"
     
-    picture = revolt
+#     picture = revolt
 
-    trigger = {
-        has_land = yes
-        is_tribal = no
-        current_date >= 700.1.1
-        any_country_culture = {
-            has_country_culture_modifier = integration_status_removed
-            NOR = {
-                has_country_culture_modifier = on_going_revolt
-                has_country_culture_modifier = emancipation_c3rd
-                has_country_culture_modifier = slaves_massacre_c3rd
-                has_pop_type_right = slaves
-            }
-            save_temporary_scope_as = culture_unintegrated_check
-            root = {
-                any_owned_province = {
-                    count >= 5
-                    dominant_province_culture = scope:culture_unintegrated_check.culture
-                }
-            }
-        }
-    }
+#     trigger = {
+#         has_land = yes
+#         is_tribal = no
+#         current_date >= 700.1.1
+#         any_country_culture = {
+#             has_country_culture_modifier = integration_status_removed
+#             NOR = {
+#                 has_country_culture_modifier = on_going_revolt
+#                 has_country_culture_modifier = emancipation_c3rd
+#                 has_country_culture_modifier = slaves_massacre_c3rd
+#                 has_pop_type_right = slaves
+#             }
+#             save_temporary_scope_as = culture_unintegrated_check
+#             root = {
+#                 any_owned_province = {
+#                     count >= 5
+#                     dominant_province_culture = scope:culture_unintegrated_check.culture
+#                 }
+#             }
+#         }
+#     }
 
-    weight_multiplier = {
-        modifier = {
-            factor = 1.5
-            any_country_culture = {
-                NOR = {
-                    has_country_culture_modifier = on_going_revolt
-                    has_country_culture_modifier = emancipation_c3rd
-                    has_country_culture_modifier = slaves_massacre_c3rd
-                    has_pop_type_right = slaves
-                }
-                country_culture_pop_count >= 500
-                has_country_culture_modifier = integration_status_removed
-            }
-        }
-        modifier = {
-            factor = 1.5
-            any_country_culture = {
-                NOR = {
-                    has_country_culture_modifier = on_going_revolt
-                    has_country_culture_modifier = emancipation_c3rd
-                    has_country_culture_modifier = slaves_massacre_c3rd
-                    has_pop_type_right = slaves
-                }
-                country_culture_pop_count >= 200
-                has_country_culture_modifier = integration_status_removed
-            }
-        }
-    }
+#     weight_multiplier = {
+#         modifier = {
+#             factor = 1.5
+#             any_country_culture = {
+#                 NOR = {
+#                     has_country_culture_modifier = on_going_revolt
+#                     has_country_culture_modifier = emancipation_c3rd
+#                     has_country_culture_modifier = slaves_massacre_c3rd
+#                     has_pop_type_right = slaves
+#                 }
+#                 country_culture_pop_count >= 500
+#                 has_country_culture_modifier = integration_status_removed
+#             }
+#         }
+#         modifier = {
+#             factor = 1.5
+#             any_country_culture = {
+#                 NOR = {
+#                     has_country_culture_modifier = on_going_revolt
+#                     has_country_culture_modifier = emancipation_c3rd
+#                     has_country_culture_modifier = slaves_massacre_c3rd
+#                     has_pop_type_right = slaves
+#                 }
+#                 country_culture_pop_count >= 200
+#                 has_country_culture_modifier = integration_status_removed
+#             }
+#         }
+#     }
 
-    immediate = {
-        random_country_culture = {
-            limit = {
-                has_country_culture_modifier = integration_status_removed
-                NOR = {
-                    has_country_culture_modifier = on_going_revolt
-                    has_country_culture_modifier = emancipation_c3rd
-                    has_country_culture_modifier = slaves_massacre_c3rd
-                }
-                save_temporary_scope_as = culture_unintegrated_check
-                root = {
-                    any_owned_province = {
-                        count >= 5
-                        dominant_province_culture = scope:culture_unintegrated_check.culture
-                    }
-                } 
-            }
-            weight = {
-                modifier = {
-                    factor = 2
-                    save_temporary_scope_as = culture_unintegrated_check2
-                    root = {
-                        any_owned_province = {
-                            count >= 10
-                            dominant_province_culture = scope:culture_unintegrated_check2.culture
-                        }
-                    }
-                }
-                modifier = {
-                    factor = 2
-                    save_temporary_scope_as = culture_unintegrated_check2
-                    root = {
-                        any_owned_province = {
-                            count >= 15
-                            dominant_province_culture = scope:culture_unintegrated_check2.culture
-                        }
-                    }
-                }
-                modifier = {
-                    factor = 2
-                    country_culture_pop_count >= 200
-                }
-                modifier = {
-                    factor = 2
-                    country_culture_pop_count >= 500
-                }
-            }
-            save_scope_as = culture_unintegrated_revolt
-        }
-        set_variable = {
-            name = max_number_massacre
-            value = 5
-        }
-        if = {
-            limit = { scope:culture_unintegrated_revolt = {
-                country_culture_pop_count >= 200
-            }}
-            change_variable = {
-                name = max_number_massacre
-                add = 5
-            }
-        }
-        if = {
-            limit = { scope:culture_unintegrated_revolt = {
-                country_culture_pop_count >= 500
-            }}
-            change_variable = {
-                name = max_number_massacre
-                add = 5
-            }
-        }
-    }
+#     immediate = {
+#         random_country_culture = {
+#             limit = {
+#                 has_country_culture_modifier = integration_status_removed
+#                 NOR = {
+#                     has_country_culture_modifier = on_going_revolt
+#                     has_country_culture_modifier = emancipation_c3rd
+#                     has_country_culture_modifier = slaves_massacre_c3rd
+#                 }
+#                 save_temporary_scope_as = culture_unintegrated_check
+#                 root = {
+#                     any_owned_province = {
+#                         count >= 5
+#                         dominant_province_culture = scope:culture_unintegrated_check.culture
+#                     }
+#                 } 
+#             }
+#             weight = {
+#                 modifier = {
+#                     factor = 2
+#                     save_temporary_scope_as = culture_unintegrated_check2
+#                     root = {
+#                         any_owned_province = {
+#                             count >= 10
+#                             dominant_province_culture = scope:culture_unintegrated_check2.culture
+#                         }
+#                     }
+#                 }
+#                 modifier = {
+#                     factor = 2
+#                     save_temporary_scope_as = culture_unintegrated_check2
+#                     root = {
+#                         any_owned_province = {
+#                             count >= 15
+#                             dominant_province_culture = scope:culture_unintegrated_check2.culture
+#                         }
+#                     }
+#                 }
+#                 modifier = {
+#                     factor = 2
+#                     country_culture_pop_count >= 200
+#                 }
+#                 modifier = {
+#                     factor = 2
+#                     country_culture_pop_count >= 500
+#                 }
+#             }
+#             save_scope_as = culture_unintegrated_revolt
+#         }
+#         set_variable = {
+#             name = max_number_massacre
+#             value = 5
+#         }
+#         if = {
+#             limit = { scope:culture_unintegrated_revolt = {
+#                 country_culture_pop_count >= 200
+#             }}
+#             change_variable = {
+#                 name = max_number_massacre
+#                 add = 5
+#             }
+#         }
+#         if = {
+#             limit = { scope:culture_unintegrated_revolt = {
+#                 country_culture_pop_count >= 500
+#             }}
+#             change_variable = {
+#                 name = max_number_massacre
+#                 add = 5
+#             }
+#         }
+#     }
 
-    option = { #no
-        name = c3rd_other_events.32.a
-        custom_tooltip = c3rd_other_events.32.a.tt1
-        scope:culture_unintegrated_revolt = {
-            add_country_culture_modifier = {
-                name = on_going_revolt
-                duration = 3650
-            }
-        }
-    }
+#     option = { #no
+#         name = c3rd_other_events.32.a
+#         custom_tooltip = c3rd_other_events.32.a.tt1
+#         scope:culture_unintegrated_revolt = {
+#             add_country_culture_modifier = {
+#                 name = on_going_revolt
+#                 duration = 3650
+#             }
+#         }
+#     }
 
-    option = { #diplo
-        name = c3rd_other_events.32.b
-        custom_tooltip = c3rd_other_events.32.b.tt1
-        trigger = {
-            current_ruler = {
-                NOT = {
-                    has_trait = stubborn
-                }
-                OR = {
-                    charisma >= 10
-                    has_trait = prominent
-                    has_trait = silver_tongued
-                    has_trait = orator
-                }
-            }
-        }
-        highlight = yes
-        hidden_effect = {
-            ordered_owned_province = {
-                limit = {
-                    dominant_province_culture = scope:culture_unintegrated_revolt.culture
-                }
-                order_by = total_population
-                max = var:max_number_massacre
-                add_province_modifier = {
-                    name = local_autonomy_c3rd
-                    duration = 3650
-                }
-            }
-        }
-        add_political_influence = -5
-        scope:culture_unintegrated_revolt = {
-            add_country_culture_modifier = {
-                name = emancipation_c3rd
-                duration = 1850
-            }
-        }
-    }
+#     option = { #diplo
+#         name = c3rd_other_events.32.b
+#         custom_tooltip = c3rd_other_events.32.b.tt1
+#         trigger = {
+#             current_ruler = {
+#                 NOT = {
+#                     has_trait = stubborn
+#                 }
+#                 OR = {
+#                     charisma >= 10
+#                     has_trait = prominent
+#                     has_trait = silver_tongued
+#                     has_trait = orator
+#                 }
+#             }
+#         }
+#         highlight = yes
+#         hidden_effect = {
+#             ordered_owned_province = {
+#                 limit = {
+#                     dominant_province_culture = scope:culture_unintegrated_revolt.culture
+#                 }
+#                 order_by = total_population
+#                 max = var:max_number_massacre
+#                 add_province_modifier = {
+#                     name = local_autonomy_c3rd
+#                     duration = 3650
+#                 }
+#             }
+#         }
+#         add_political_influence = -5
+#         scope:culture_unintegrated_revolt = {
+#             add_country_culture_modifier = {
+#                 name = emancipation_c3rd
+#                 duration = 1850
+#             }
+#         }
+#     }
 
-    option = { #massacre
-        name = c3rd_other_events.32.c
-        custom_tooltip = c3rd_other_events.32.c.tt1
-        trigger = {
-            current_ruler = {
-                NOR = {
-                    has_trait = good_natured
-                    has_trait = merciful
-                    has_trait = benefactor
-                }
-                OR = {
-                    martial >= 10
-                    has_trait = cruel
-                    has_trait = energetic
-                    has_trait = harsh
-                }
-            }
-        }
-        highlight = yes
-        hidden_effect = {
-            ordered_owned_province = {
-                limit = {
-                    dominant_province_culture = scope:culture_unintegrated_revolt.culture
-                }
-                order_by = total_population
-                max = var:max_number_massacre
-                every_pops_in_province = {
-                    limit = {
-                        pop_culture = scope:culture_unintegrated_revolt.culture
-                    }
-                    random_list = {
-                        3 = {}
-                        1 = { kill_pop = yes}
-                    }
-                }
-            }
-        }
-        scope:culture_unintegrated_revolt = {
-            add_country_culture_modifier = {
-                name = slaves_massacre_c3rd
-                duration = 1850
-            }
-        }
-    }
+#     option = { #massacre
+#         name = c3rd_other_events.32.c
+#         custom_tooltip = c3rd_other_events.32.c.tt1
+#         trigger = {
+#             current_ruler = {
+#                 NOR = {
+#                     has_trait = good_natured
+#                     has_trait = merciful
+#                     has_trait = benefactor
+#                 }
+#                 OR = {
+#                     martial >= 10
+#                     has_trait = cruel
+#                     has_trait = energetic
+#                     has_trait = harsh
+#                 }
+#             }
+#         }
+#         highlight = yes
+#         hidden_effect = {
+#             ordered_owned_province = {
+#                 limit = {
+#                     dominant_province_culture = scope:culture_unintegrated_revolt.culture
+#                 }
+#                 order_by = total_population
+#                 max = var:max_number_massacre
+#                 every_pops_in_province = {
+#                     limit = {
+#                         pop_culture = scope:culture_unintegrated_revolt.culture
+#                     }
+#                     random_list = {
+#                         3 = {}
+#                         1 = { kill_pop = yes}
+#                     }
+#                 }
+#             }
+#         }
+#         scope:culture_unintegrated_revolt = {
+#             add_country_culture_modifier = {
+#                 name = slaves_massacre_c3rd
+#                 duration = 1850
+#             }
+#         }
+#     }
 
-    after = {
-        remove_variable = max_number_massacre
-    }
-}
+#     after = {
+#         remove_variable = max_number_massacre
+#     }
+# }
 
 
 c3rd_other_events.40 = { #corruption from gold
