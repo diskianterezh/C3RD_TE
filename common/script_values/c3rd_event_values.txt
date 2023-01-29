@@ -356,7 +356,13 @@ c3rd_economic_factor = {
 	}
 	if = {
 		limit = {
-			num_of_cities >= 2500
+			num_of_cities >= 2000
+		}
+		add = 1
+	}
+	if = {
+		limit = {
+			num_of_cities >= 3000
 		}
 		add = 1
 	}
