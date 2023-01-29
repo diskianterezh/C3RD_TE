@@ -355,6 +355,16 @@ huns_buffs_c3rd = {
 	light_infantry_offensive = 0.20
 }
 
+aristocratic_reforms = {
+	global_nobles_output = -0.2
+	global_nobles_happyness = 0.1
+	global_slaves_happyness = -0.2
+	global_freemen_happyness = -0.2
+	monthly_corruption = 0.05
+	global_monthly_state_loyalty = -0.05
+	global_slaves_desired_pop_ratio = 0.05
+}
+
 # barbarian_spawn_buff_x = {
 # 	discipline = 0.05 - 0.1
 # 	emblematic_unit_1_offensive = 0.1

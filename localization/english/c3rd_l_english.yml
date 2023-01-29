@@ -97,6 +97,8 @@
  desc_wonder_destroyed_modifier:0 "The great work was destroyed by an angry crowd. This modifier will be removed if the Great work no longer exist, or if you restore it through the decision. \nYou may receive bad events if too much Great Works have this modifier"
  barbarians_border:0 "Barbarians on the border"
  desc_barbarians_border:0 "Barbarians have reached this state, causing great turmoil and decreasing faith in the government"
+ aristocratic_reforms:0 "Aristocratic reforms"
+ desc_aristocratic_reforms:0 "Inspired by the wealthy, these reforms aim to put the idle working classes back to work. By force."
 
 
  #opinion:
@@ -132,6 +134,7 @@
  softened:0 "Softened"
  humiliated_powerful_general:0 "Humiliated"
  governor_abandonned:0 "Governor abandoned to the barbarians"
+ assets_seized:0 "Assets seized"
 
  #character modifiers
  king_maker:0 "Kingmaker"
@@ -718,6 +721,7 @@ low_stab_event.4.c.tt1:0 "Things remain as they are, but [independent_current_go
  c3rd_other_events.10.desc.9:0 "\n #G The Aurelian's reform #!"
  c3rd_other_events.10.desc.10:0 "\n #G Some cultures are enslaved #!"
  c3rd_other_events.10.desc.11:0 "\n #G Vassals are exploited #!"
+ c3rd_other_events.10.desc.12:0 "\n #G Aristocratic reforms #!"
  c3rd_other_events.10.desc.20:0 "\n\nYou are currently creating money by diminishing the quantity of silver in the currency, #G this is completely reversing any possible deflation #!, but could eventually lead to a monetary crash"
  c3rd_other_events.10.a:0 "Interesting"
  c3rd_other_events.10.a.tt1:0 "This number represents the inner wealth of your country  how rich are people, how money flows between workers and owners. It has little to do with the amount of money in your coffers, nor your income... but the consequences of mismanagement can indirectly influence it.\n\nEvery pop of non-integrated culture contributes positively to this figure, symbolizing the exploitation of conquered populations in the service of the country.\n#G Each pop of culture with 'slave' cultural rights will contribute twice as much #! \nEvery precious mineral will contribute positively to this figure.\nEach integrated pop, symbolizing the privileges of the elites will contribute negatively to this figure\n\nThe ratio between positive and negative values will differ according to laws, certain cultural decisions as the tax inspection policy, and over time. It will be more and more difficult to satisfy this ratio with time, symbolizing the progressive corruption of a society that is proud of its success."
@@ -907,6 +911,15 @@ low_stab_event.4.c.tt1:0 "Things remain as they are, but [independent_current_go
  c3rd_other_events.60.a.tt1:0 "Your leader will take responsability.\nThis happens because you have a significant number of states invaded by barbarians."
  c3rd_other_events.60.b:0 "These things happen"
  c3rd_other_events.60.b.tt1:0 "This happens because you have a significant number of states invaded by barbarians."
+
+ c3rd_other_events.70.t:0 "Aristocratic intervention"
+ c3rd_other_events.70.desc:0 "With the catastrophic state of the economy crippling growth and employment, the wealthy have decided to take strong measures to 'put' what they call the 'lazy' back to work. By blocking access to the infrastructures they control to those who are explicitly not active workers, and even by organising patrols actively seeking out inactive free men to enslave them, they want to force economic recovery the hard way. \nThese measures are multiplying in the country and a decision must now be taken to regain control. Should these initiatives be supported nationwide to rebalance the economic balance, or should they be discouraged altogether? \nIt might also be wise to punish these actions by seizing the assets of these rich people and distributing them in the economy."
+ c3rd_other_events.70.a:0 "Let's support these initiatives, everyone at work!"
+ c3rd_other_events.70.a.tt1:0 "#G This modifier will have a positive effect on the economic balance #!"
+ c3rd_other_events.70.b:0 "If they fear for their wealth, perhaps they have too much?"
+ c3rd_other_events.70.b.tt1:0 "You will seize part of the fortune of these influential people. #G This will reduce deflation by an amount #! "
+ c3rd_other_events.70.c:0 "Let's put a stop to this"
+ c3rd_other_events.70.c.tt1:0 "You will stop these initiatives and leave the situation as it is"
 
 #tribals fix
 

@@ -388,6 +388,7 @@ c3rd_other_events_monthly_pulse = { #check if events can happen
 		30 = c3rd_other_events.50 #wonder threatened
 		5 = c3rd_other_events.52 #stabhit from wonders pillaged
 		4 = c3rd_other_events.60 #stabhit from barbarians
+		5 = c3rd_other_events.70 #aristocratic reforms
 	}
 
 }
@@ -585,7 +586,7 @@ c3rd_calculate_deflation = {
 			}
 			change_variable = {
 				name = deflation_value
-				add = -2
+				add = -1
 			}
 		}
 		if = {
@@ -832,7 +833,12 @@ c3rd_apply_deflation = { #applying deflation modifiers events
 					has_country_modifier = medium_deflation
 					has_country_modifier = high_deflation
 				}
-				var:deflation_value <= 20
+				OR = {
+					NOT = {
+						has_variable = deflation_value
+					}
+					var:deflation_value <= 20
+				}
 			}
 			trigger_event = {
 				id = c3rd_other_events.25
@@ -927,7 +933,12 @@ c3rd_apply_silver_unvalue = { #applying silver modifiers events
 					has_country_modifier = high_monetary_crash
 					has_country_modifier = small_monetary_crash
 				}
-				var:silver_unvalue <= 20
+				OR = {
+					NOT = {
+						has_variable = silver_unvalue
+					}
+					var:silver_unvalue <= 20
+				}
 			}
 			trigger_event = {
 				id = c3rd_other_events.293

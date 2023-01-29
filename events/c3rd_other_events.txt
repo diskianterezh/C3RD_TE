@@ -1308,6 +1308,12 @@ c3rd_other_events.10 = { #great book
         }
         triggered_desc = {
             trigger = {
+                has_country_modifier = aristocratic_reforms
+            }
+            desc = "c3rd_other_events.10.desc.12"  
+        }
+        triggered_desc = {
+            trigger = {
                 has_country_modifier = solidus_introduced
             }
             desc = "c3rd_other_events.10.desc.3"  
@@ -3980,6 +3986,189 @@ c3rd_other_events.60 = { #filthy barbarians ransacking our lands
             }
         }
         
+    }
+}
+
+#events when in the mud
+
+
+
+c3rd_other_events.70 = { #aristocracy acts against deflation
+    type = country_event
+    title = "c3rd_other_events.70.t"
+    desc = "c3rd_other_events.70.desc"
+ 
+    picture = senator_conversing
+
+    trigger = {
+        has_land = yes
+        has_variable = deflation_value
+        has_country_modifier = high_deflation
+        NOR = {
+            has_variable = aristocrats_deflation
+            has_country_modifier = aristocratic_reforms
+        }
+    }
+
+    weight_multiplier = {
+        modifier = {
+            factor = 1.5
+            stability < 40
+        }
+        modifier = {
+            factor = 1.2
+            stability < 30
+        }
+        modifier = {
+            factor = 1.2
+            stability < 20
+        }
+        modifier = {
+            factor = 1.5
+            has_variable = deflation_value
+            var:deflation_value >= 150
+        }
+        modifier = {
+            factor = 1.5
+            has_variable = deflation_value
+            var:deflation_value >= 175
+        }
+        modifier = {
+            factor = 1.5
+            has_variable = deflation_value
+            var:deflation_value >= 200
+        }
+    }
+
+    immediate = {
+        set_variable = {
+            name = aristocrats_deflation
+            days = 3650
+        }
+        if = {
+            limit = { is_monarchy = yes }
+            add_legitimacy = -10
+        }
+    }
+
+    option = { #let them do
+        name = c3rd_other_events.70.a
+        custom_tooltip = c3rd_other_events.70.a.tt1
+        add_country_modifier = {
+            name = aristocratic_reforms
+            duration = 3650
+        }
+        if = {
+            limit = { is_republic = yes }
+            if = {
+                limit = { 
+                    is_republic = yes
+                    has_party_type = populares_party 
+                }
+                add_party_approval = {
+                    party_type = populares_party
+                    value = -30
+                }
+                add_party_approval = {
+                    party_type = optimates_party
+                    value = 10
+                }
+            }
+            else_if = {
+                limit = { 
+                    is_republic = yes
+                    has_party_type = democratic_party 
+                }
+                add_party_approval = {
+                    party_type = democratic_party
+                    value = -30
+                }
+                add_party_approval = {
+                    party_type = oligarchic_party
+                    value = 10
+                }
+            }
+        }
+    }
+
+    option = { #seize their assets
+        name = c3rd_other_events.70.b
+        custom_tooltip = c3rd_other_events.70.b.tt1
+        add_tyranny = 10
+        every_character = {
+            limit = {
+                wealth >= 1000
+                is_ruler = no
+            }
+            add_gold = -1000
+            add_loyalty = assets_seized
+        }
+        if = {
+            limit = { 
+                is_republic = yes
+                has_party_type = populares_party 
+            }
+            add_party_approval = {
+                party_type = populares_party
+                value = 10
+            }
+            add_party_approval = {
+                party_type = optimates_party
+                value = -30
+            }
+        }
+        else_if = {
+            limit = { 
+                is_republic = yes
+                has_party_type = democratic_party 
+            }
+            add_party_approval = {
+                party_type = democratic_party
+                value = 10
+            }
+            add_party_approval = {
+                party_type = oligarchic_party
+                value = -30
+            }
+        }
+        change_variable = {
+            name = deflation_value
+            add = -10
+        }
+    }
+
+    option = { #stop them, nothing will be done
+        name = c3rd_other_events.70.c
+        custom_tooltip = c3rd_other_events.70.c.tt1
+        add_stability = -5
+        add_political_influence = -15
+        every_character = {
+            limit = {
+                wealth >= 100
+                is_ruler = no
+            }
+            add_loyalty = disappointed
+        }
+        if = {
+            limit = { 
+                is_republic = yes
+                has_party_type = boni_party 
+            }
+            add_party_approval = {
+                party_type = boni_party
+                value = -10
+            }
+        }
+        else_if = {
+            limit = { 
+                is_republic = yes
+                has_party_type = traditionalist_party 
+            }
+            add_party_approval = {
+                party_type = traditionalist_party
+                value = -10
+            }
+        }
     }
 }
 
