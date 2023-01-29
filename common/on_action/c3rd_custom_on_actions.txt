@@ -570,6 +570,26 @@ c3rd_calculate_deflation = {
 		}
 		if = {
 			limit = {
+				has_variable = silver_unvalue
+				has_law = second_reform_law
+			}
+			change_variable = {
+				name = silver_unvalue
+				add = -1
+			}
+		}
+		if = {
+			limit = {
+				has_variable = deflation_value
+				has_law = monetary_reform_law
+			}
+			change_variable = {
+				name = deflation_value
+				add = -2
+			}
+		}
+		if = {
+			limit = {
 				NOT = {
 					has_variable = silver_unvalue
 				}
