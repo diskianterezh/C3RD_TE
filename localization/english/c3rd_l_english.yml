@@ -836,6 +836,10 @@ low_stab_event.4.c.tt1:0 "Things remain as they are, but [independent_current_go
  c3rd_other_events.293.a:0 "Awesome"
  c3rd_other_events.293.a.tt1:0 "The monetary crisis effects have been removed"
 
+
+ c3rd_other_events.2942.t:0 "Super awesome hidden check event"
+ c3rd_other_events.2942.desc:0 "Deflation = [SCOPE.GetRootScope.GetCountry.MakeScope.GetVariable('deflation_value').GetValue]\nSilver = [SCOPE.GetRootScope.GetCountry.MakeScope.GetVariable('silver_unvalue').GetValue]"
+
  c3rd_other_events.30.t:0 "[culture_slave_revolt.GetName] revolt"
  c3rd_other_events.30.desc:0 "The revolt is rumbling in our provinces. The proud [culture_slave_revolt.GetName] people, the influential elite in a certain part of our empire, cannot stand the situation of servitude in which we have reduced them. The local aristocrats even seem to support a major action against our suzerainty. This could easily degenerate into an armed revolt, without our intervention. \nOur advisors advise us to return them to a social status of emancipation in order to calm the situation, but others insist on a no-concessions line"
  c3rd_other_events.30.a:0 "We will give nothing away"

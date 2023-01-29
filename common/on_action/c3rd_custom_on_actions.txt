@@ -807,19 +807,23 @@ c3rd_apply_deflation = { #applying deflation modifiers events
 		}
 		else_if = {
 			limit = {
-				has_country_modifier = high_deflation
-				NOT = {
+				OR = {
+					has_country_modifier = small_deflation
 					has_country_modifier = medium_deflation
+					has_country_modifier = high_deflation
 				}
-				var:deflation_value <= 120
+				var:deflation_value <= 20
 			}
 			trigger_event = {
-				id = c3rd_other_events.23
+				id = c3rd_other_events.25
 			}
 		}
 		else_if = {
 			limit = {
-				has_country_modifier = medium_deflation
+				OR = {
+					has_country_modifier = medium_deflation
+					has_country_modifier = high_deflation
+				}
 				NOT = {
 					has_country_modifier = small_deflation
 				}
@@ -831,11 +835,14 @@ c3rd_apply_deflation = { #applying deflation modifiers events
 		}
 		else_if = {
 			limit = {
-				has_country_modifier = small_deflation
-				var:deflation_value <= 20
+				has_country_modifier = high_deflation
+				NOT = {
+					has_country_modifier = medium_deflation
+				}
+				var:deflation_value <= 120
 			}
 			trigger_event = {
-				id = c3rd_other_events.25
+				id = c3rd_other_events.23
 			}
 		}
 
@@ -874,7 +881,7 @@ c3rd_apply_silver_unvalue = { #applying silver modifiers events
 					has_country_modifier = medium_monetary_crash
 					has_country_modifier = high_monetary_crash
 				}
-				var:deflation_value >= 90
+				var:silver_unvalue >= 90
 				num_of_cities >= 500
 			}
 			trigger_event = {
@@ -886,7 +893,7 @@ c3rd_apply_silver_unvalue = { #applying silver modifiers events
 				NOT = {
 					has_country_modifier = high_monetary_crash
 				}
-				var:deflation_value >= 120
+				var:silver_unvalue >= 120
 				num_of_cities >= 500
 			}
 			trigger_event = {
@@ -895,23 +902,27 @@ c3rd_apply_silver_unvalue = { #applying silver modifiers events
 		}
 		else_if = {
 			limit = {
-				has_country_modifier = high_monetary_crash
-				NOT = {
+				OR = {
 					has_country_modifier = medium_monetary_crash
+					has_country_modifier = high_monetary_crash
+					has_country_modifier = small_monetary_crash
 				}
-				var:deflation_value <= 100
+				var:silver_unvalue <= 20
 			}
 			trigger_event = {
-				id = c3rd_other_events.291
+				id = c3rd_other_events.293
 			}
 		}
 		else_if = {
 			limit = {
-				has_country_modifier = medium_monetary_crash
+				OR = {
+					has_country_modifier = medium_monetary_crash
+					has_country_modifier = high_monetary_crash
+				}
 				NOT = {
 					has_country_modifier = small_monetary_crash
 				}
-				var:deflation_value <= 70
+				var:silver_unvalue <= 70
 			}
 			trigger_event = {
 				id = c3rd_other_events.292
@@ -919,11 +930,14 @@ c3rd_apply_silver_unvalue = { #applying silver modifiers events
 		}
 		else_if = {
 			limit = {
-				has_country_modifier = small_monetary_crash
-				var:deflation_value <= 20
+				has_country_modifier = high_monetary_crash
+				NOT = {
+					has_country_modifier = medium_monetary_crash
+				}
+				var:silver_unvalue <= 100
 			}
 			trigger_event = {
-				id = c3rd_other_events.293
+				id = c3rd_other_events.291
 			}
 		}
 

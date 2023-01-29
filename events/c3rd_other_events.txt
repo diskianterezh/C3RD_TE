@@ -2361,6 +2361,27 @@ c3rd_other_events.293 = { #silver remove
     }
 }
 
+
+
+c3rd_other_events.2942 = { #check the values
+    type = country_event
+    title = "c3rd_other_events.2942.t"
+    desc = "c3rd_other_events.2942.desc"
+ 
+    picture = scribe_tools
+
+    trigger = {
+    }
+
+    immediate = {
+    }
+
+    option = {
+        name = c3rd_other_events.293.a
+        custom_tooltip = c3rd_other_events.293.a.tt1
+    }
+}
+
 c3rd_other_events.30 = { # slave revolts
     type = country_event
     title = "c3rd_other_events.30.t"

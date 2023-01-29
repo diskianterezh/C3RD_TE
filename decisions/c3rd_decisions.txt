@@ -199,6 +199,48 @@
 				name = added_liquidity
 				duration = 1825
 			}
+			hidden_effect = {
+				if = {
+					limit = {
+						OR = {
+							has_country_modifier = small_deflation
+							has_country_modifier = medium_deflation
+							has_country_modifier = high_deflation
+						}
+						var:deflation_value <= 20
+					}
+					trigger_event = {
+						id = c3rd_other_events.25
+					}
+				}
+				else_if = {
+					limit = {
+						OR = {
+							has_country_modifier = medium_deflation
+							has_country_modifier = high_deflation
+						}
+						NOT = {
+							has_country_modifier = small_deflation
+						}
+						var:deflation_value <= 65
+					}
+					trigger_event = {
+						id = c3rd_other_events.24
+					}
+				}
+				else_if = {
+					limit = {
+						has_country_modifier = high_deflation
+						NOT = {
+							has_country_modifier = medium_deflation
+						}
+						var:deflation_value <= 120
+					}
+					trigger_event = {
+						id = c3rd_other_events.23
+					}
+				}
+			}
 
 		}
 
@@ -233,6 +275,48 @@
 			add_country_modifier = {
 				name = new_balance
 				duration = 1825
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						OR = {
+							has_country_modifier = medium_monetary_crash
+							has_country_modifier = high_monetary_crash
+							has_country_modifier = small_monetary_crash
+						}
+						var:silver_unvalue <= 20
+					}
+					trigger_event = {
+						id = c3rd_other_events.293
+					}
+				}
+				else_if = {
+					limit = {
+						OR = {
+							has_country_modifier = medium_monetary_crash
+							has_country_modifier = high_monetary_crash
+						}
+						NOT = {
+							has_country_modifier = small_monetary_crash
+						}
+						var:silver_unvalue <= 70
+					}
+					trigger_event = {
+						id = c3rd_other_events.292
+					}
+				}
+				else_if = {
+					limit = {
+						has_country_modifier = high_monetary_crash
+						NOT = {
+							has_country_modifier = medium_monetary_crash
+						}
+						var:silver_unvalue <= 100
+					}
+					trigger_event = {
+						id = c3rd_other_events.291
+					}
+				}
 			}
 		}
 
