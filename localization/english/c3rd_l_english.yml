@@ -6,7 +6,7 @@
  nobility_turmoils:0 "Nobility turmoils"
  desc_nobility_turmoils:0 "The nobility in our country is very upset"
  priest_unrestricted:0 "Priest unrestricted"
- 
+
  autonomy_granted:0 "Autonomy granted"
  crisis_of_the_third_century:0 "Third century"
  desc_crisis_of_the_third_century:0 "Things were too easy until now!"
@@ -23,7 +23,7 @@
  reform_to_monarchy_modifier:0 "Winds of Change"
  desc_reform_to_monarchy_modifier:0 "such a modification of the texts will not go smoothly"
  dictatorial_extension_c3rd:0 "Senate mandate"
- desc_dictatorial_extension_c3rd:0 "In order to push some vital reforms, the leader gained a speciale mandate"
+ desc_dictatorial_extension_c3rd:0 "In order to push some vital reforms, the leader gained a special mandate"
  civil_war_stab:0 "Civil war turmoils"
  desc_civil_war_stab:0 "In these troubled times, civil wars are scourges that we must fight if we wish to remain together"
  unworthy_leader_1:0 "Unworthy leader"
@@ -108,15 +108,15 @@
  monetary_law:0 "Monetary laws"
  monetary_law_desc:0 "A monetary system, seeking to ensure regular and equal exchanges as well as economic relations between inhabitants, is generally based on a relationship of equivalence of different currencies according to the weight of metals they contain. For centuries, crises and changes did not spare the economy and many emperors tried to reform it... with more or less success...\n\n #G This set of laws is not of any use until the monetary crisis mechanics are available. This should be around 700 AUC and will unlock new inventions in the civic tree. Until then, you can freely ignore it #!"
  basic_monetary_law:0 "Augustinian System"
- basic_monetary_law_desc:0 "Augustus had instituted in the years 27-23 BC a monetary system based on a scale of values which linked between them and to a currency of account species of gold, silver, orichalcum and copper. Fueled by the expansion of the empire, the fruit of conquests, and the sources of fresh money from mining productions, this system is the reference of the empire as a healthy system.\n\n The fruits of conquest is symbolized by the non integrated pops in your realm. Mining ressources are the total number of precious metals (imported comprised) in your country. \n #R If the ressources are too low for your population, a deflation can occur #!\n\n #G This set of laws is not of any use until the monetary crisis mechanics are available. This should be around 700 AUC and will unlock new inventions in the civic tree. Until then, you can freely ignore it #!"
+ basic_monetary_law_desc:0 "Augustus had instituted in the years 27-23 BC a monetary system based on a scale of values which linked between them and to a currency of account species of gold, silver, orichalcum and copper. Fueled by the expansion of the empire, the fruit of conquests, and the sources of fresh money from mining productions, this system is the reference of the empire as a healthy system.\n\n The fruits of conquest is symbolized by the non integrated pops in your realm. Mining resources are the total number of precious metals (imported comprised) in your country. \n #R If the resources are too low for your population, a deflation can occur #!\n\n #G This set of laws is not of any use until the monetary crisis mechanics are available. This should be around 700 AUC and will unlock new inventions in the civic tree. Until then, you can freely ignore it #!"
  subject_exploitation_law:0 "Vassal exploitation"
- subject_exploitation_law_desc:0 "In case of lack of fresh resources from conquests and mining revenues, it is always possible to squeeze our vassals of all their wealth. They may hold it against us, but this is the price of our protection. \n\n #G Vassal population will count in your ressources in the monetary balance #!\n\n #G This set of laws is not of any use until the monetary crisis mechanics are available. This should be around 700 AUC and will unlock new inventions in the civic tree. Until then, you can freely ignore it #!"
+ subject_exploitation_law_desc:0 "In case of lack of fresh resources from conquests and mining revenues, it is always possible to squeeze our vassals of all their wealth. They may hold it against us, but this is the price of our protection. \n\n #G Vassal population will count in your resources in the monetary balance #!\n\n #G This set of laws is not of any use until the monetary crisis mechanics are available. This should be around 700 AUC and will unlock new inventions in the civic tree. Until then, you can freely ignore it #!"
  monetary_reform_law:0 "Silver reform"
  monetary_reform_law_desc:0 "By progressively decreasing the share of silver in denominations without changing the scale of values, it is possible to counterbalance the scarcity of ore very effectively. The possibility of a generalized inflation following the flooding of the economy by a cheap currency is of course only 'unlikely'... \n\n #G  This will very effectively counterbalance the deflation #! \n #R This will progressively reduce the percentage of silver ore in the currency #!\n\n #G This set of laws is not of any use until the monetary crisis mechanics are available. This should be around 700 AUC and will unlock new inventions in the civic tree. Until then, you can freely ignore it #!"
  second_reform_law:0 "Aurelian's reforms"
  second_reform_law_desc:0 "'The decomposition of the monetary sphere was slowed down then stopped when Aurelian took drastic measures of reduction of the volume of the monetary emissions and undertook to stabilize the numeraire of gold and billon, which ended in 309 by the creation of the solidus'\n#G This can fix the eventual crash of the money value\nThis has a positive impact on the monetary balance\nThis will enable the Solidus decision which can end the monetary crisis once and for all #!\n\n #G This set of laws is not of any use until the monetary crisis mechanics are available. This should be around 700 AUC and will unlock new inventions in the civic tree. Until then, you can freely ignore it #!"
 
- 
+
 
  #loyalty:
  independence_denied:0 "Autonomy denied"
@@ -173,7 +173,7 @@
  overexpansion_the_reform_instability_desc:0 "In times of instability, many can force reforms through their will to enforce a solution....\n#G Any Republican overexpansion modifier will be removed #! "
  repair_great_work:0 "Repair the great works"
  repair_great_work_desc:0 "Start the reparations of a great work"
- 
+
  #schemes
  scheme_care_of_relatives_effect_tt:1 "[SCOPE.GetRootScope.GetCharacter.GetName] Will share his wealth with his family."
  scheme_care_of_relatives:1 "Taking care of the Family"
@@ -186,7 +186,7 @@
  ALERT_COLLAPSE:0 "#T Internal Collapse#!\nYour country is collapsing. As long as your stability is #R below 25#!, collapse events will occur."
  ALERT_MILITARY_ANARCHY:0 "#T Military Anarchy#!\nThe country is in a phase of military anarchy. As long as this continues, the generals will demand more important concessions and decisions."
  ALERT_POLITICAL_INSTABILITY:0 "#T Political Instability#!\nThe country is in a phase of political instability, applying several penalties. You can solve this by using the decisions to either reform the country or stopping the political instability."
- 
+
 
  #Culture
 
@@ -204,7 +204,7 @@
  emancipation_c3rd_desc:0 "The emancipation of slaves as a reward for loyal service was put in place to respond to the dull anger of this minority"
  slaves_massacre_c3rd:0 "Revolt Massacred"
  slaves_massacre_c3rd_desc:0 "An uprising has been massacred, the slaves are subdued"
- 
+
 
 
  #Inventions
@@ -246,7 +246,7 @@
  public_games_enabled:0 "You will organize your first games"
 
  #Events
- 
+
  low_stab_event.1.t:0 "Catastrophic instability"
  low_stab_event.1.desc:0 "Our country is in a situation of serious instability. Whatever the reasons that have brought us to such a point, we must make quick decisions to avoid the total collapse of everything we have built.."
  low_stab_event.1.a:0 "And what can we do about it?"
@@ -331,7 +331,7 @@ low_stab_event.4.c.tt1:0 "Things remain as they are, but [independent_current_go
 
  c3rd_events.6.t:0 "A forceful intervention"
  c3rd_events.6.desc.1:0 "If [volontary_general.GetName]'s public intervention has undoubtedly produced its effects, we have probably overestimated his capacity as a diplomat. As his men demonstrated their strength in the capital, there was much resistance among the elites, who were outraged that the military force was overstepping their influence. Stung to the core, our general redoubled his military zeal, locked down the opposition by vigorous shackling, and maintained an iron grip on the institutions.\nAlthough our authority is undoubtedly reinforced, [volontary_general.GetName]'s new influence was clearly not the objective of this operation"
- c3rd_events.6.desc.2:0 "When [volontary_general.GetName] spoke publicly in our favour, no one could have predicted that such honourable words would be so badly received. A tornado of protest swept through the senate, with the olders vociferating in indignation at what they saw as an attempted coup. \n\nThe session could have turned into a nightmare, but in an incredible political feat, our leader managed to dissociate the government from [volontary_general.GetName]'s 'isolated attempt'. With him taking full responsibility for his actions, we ultimately won back the sympathy and support of all."
+ c3rd_events.6.desc.2:0 "When [volontary_general.GetName] spoke publicly in our favour, no one could have predicted that such honourable words would be so badly received. A tornado of protest swept through the senate, with the elders vociferating in indignation at what they saw as an attempted coup. \n\nThe session could have turned into a nightmare, but in an incredible political feat, our leader managed to dissociate the government from [volontary_general.GetName]'s 'isolated attempt'. With him taking full responsibility for his actions, we ultimately won back the sympathy and support of all."
  c3rd_events.6.a:0 "So much power in the hands of the army."
  c3rd_events.6.a.tt1:0 "A period of unrest begins..."
  c3rd_events.6.b:0 "Phew! Let's hope [volontary_general.GetName] will forgive us"
@@ -388,7 +388,7 @@ low_stab_event.4.c.tt1:0 "Things remain as they are, but [independent_current_go
  c3rd_events.10.c.tt1:0 "This option is available because your empire is way larger. \nWe can set up some administrative path which will make future reunification easier.\nWith both our empires claiming the main title, later events may allow for a peaceful reunification. \nIf the two empires remain separated for too long, the schism will be complete."
 
  c3rd_events.11.t:0 "Reunification"
- c3rd_events.11.desc:0 "After the death of our ruler, the dirigeant counsil decided that we should stop this nonsense and comply to the real empire's exigences."
+ c3rd_events.11.desc:0 "After the death of our ruler, the diligent council decided that we should stop this nonsense and comply to the real empire's exigencies."
  c3rd_events.11.a:0 "The end of a story."
  c3rd_events.11.a.tt1:0 "You'll be annexed by [moma_wait_for_me.GetName], end of the adventure"
  c3rd_events.11.b:0 "Wait wait wait NO!"
@@ -430,7 +430,7 @@ low_stab_event.4.c.tt1:0 "Things remain as they are, but [independent_current_go
  c3rd_events.16.b.tt1:0 "You won't do anything"
 
  c3rd_events.17.t:0 "Instability in [rival_empire.GetName]"
- c3rd_events.17.desc:0 "An emissary has arrived, [rival_empire.GetName] seems to be going through a difficult time, the people are losing confidence in their government and the management seems catamitous. \nRemembering conveniently our suzerainty over the lands they occupy, some of their elites have leaned towards our intervention in their affairs to redress the balance. This proposal, while amusing as hell, given their secessionist status, could be an interesting opportunity to reinforce our authority.."
+ c3rd_events.17.desc:0 "An emissary has arrived, [rival_empire.GetName] seems to be going through a difficult time, the people are losing confidence in their government and the management seems calamitous. \nRemembering conveniently our suzerainty over the lands they occupy, some of their elites have leaned towards our intervention in their affairs to redress the balance. This proposal, while amusing as hell, given their secessionist status, could be an interesting opportunity to reinforce our authority.."
  c3rd_events.17.a:0 "Our lands are well governed, and theirs are ours."
  c3rd_events.17.a.tt1:0 "You will intervene to restabilize their country.\n #G This will improve the chances of future reunification #!"
  c3rd_events.17.b:0 "Let them cry and watch how we do it"
@@ -674,7 +674,7 @@ low_stab_event.4.c.tt1:0 "Things remain as they are, but [independent_current_go
  c3rd_other_events.5.t:0 "Lack of wealth"
  c3rd_other_events.5.desc:0 "Our empire may seem radiant, overflowing with wealth and swimming in success. But the real economy is not limited to the walls of the state's vault, but to trade, social balance and the wealth of the population. This balance is complicated to achieve, and very often the privileged populations get rich on the backs of the conquered ones, while the State produces the money necessary for its projects. \nRecently, the accounts are in the red... whether it is the lack of new wealth or the reluctance of our elite to pay taxes... the atmosphere is one of scarcity of money, which risks provoking a generalized deflation if we let this trend continue."
  c3rd_other_events.5.a:0 "But ... what about our games?"
- c3rd_other_events.5.a.tt1:0 "Your economic balance tends towards deflation. You need to increase the sources of wealth to save the Augustinian system, or change the monetary law.\nSource of wealth inclue :\n#G Number of unintegrated pops \nPops of a enslaved culture \nNumber of Precious metal goods in your country (both from production and importation)#!"
+ c3rd_other_events.5.a.tt1:0 "Your economic balance tends towards deflation. You need to increase the sources of wealth to save the Augustinian system, or change the monetary law.\nSource of wealth includes :\n#G Number of unintegrated pops \nPops of a enslaved culture \nNumber of Precious metal goods in your country (both from production and importation)#!"
 
  c3rd_other_events.6.t:0 "Mine depletion"
  c3rd_other_events.6.desc:0 "After years of abundance and wealth produced, the mine of [exhausted_mine.GetName] seems to have exhausted its vein. The carts dripping with gold that supplied our coffers have now dried up, and our slaves are now redirected to other local sources of goods."
@@ -874,7 +874,7 @@ low_stab_event.4.c.tt1:0 "Things remain as they are, but [independent_current_go
  c3rd_other_events.40.c.tt1:0 "Everyone will benefit. #G This will reduce any amount of deflation you could have #!"
 
  c3rd_other_events.50.t:0 "A great work in the midst of starvation"
- c3rd_other_events.50.desc:0 "For several weeks now, famine has been taking an increasingly heavy toll on the town of [wonder_province_starve.GetName]. Overwhelmed by this plague, the population is looking for those responsible and seems to have directed its anger towards a target symbolising the oppulence they no longer have. \nAn angry mob seems to have made their way to the local wonder, intent on looting it in order to provide for their needs... or just to satisfy their rage. \nThe local guard seems to be holding them back but we must act to avoid the worst."
+ c3rd_other_events.50.desc:0 "For several weeks now, famine has been taking an increasingly heavy toll on the town of [wonder_province_starve.GetName]. Overwhelmed by this plague, the population is looking for those responsible and seems to have directed its anger towards a target symbolising the opulence they no longer have. \nAn angry mob seems to have made their way to the local wonder, intent on looting it in order to provide for their needs... or just to satisfy their rage. \nThe local guard seems to be holding them back but we must act to avoid the worst."
  c3rd_other_events.50.a:0 "Let us intervene personally to re-supply this province"
  c3rd_other_events.50.a.tt1:0 "You will organise the emergency resupply of this province, to resolve the situation and save the Great Work. This will prevent any further revolt for a while"
  c3rd_other_events.50.b:0 "Send the army"
@@ -898,7 +898,7 @@ low_stab_event.4.c.tt1:0 "Things remain as they are, but [independent_current_go
  c3rd_other_events.52.t:0 "A crumbling legacy"
  c3rd_other_events.52.desc:0 "True greatness is measured by the trace left in history. But what can we say about our empire when the great works of our civilisation are in a deplorable state, destroyed by the years and the crises... Is this not an inexorable sign of the decline that is dragging us all down?"
  c3rd_other_events.52.a:0 "It is only a matter of temporary mistakes."
- c3rd_other_events.52.a.tt1:0 "Your leader will take responsability.\nThis happens because you have a significant number of great works looted or ransacked. Destroying or repairing (by decision) these monuments will remove the status."
+ c3rd_other_events.52.a.tt1:0 "Your leader will take responsibility.\nThis happens because you have a significant number of great works looted or ransacked. Destroying or repairing (by decision) these monuments will remove the status."
  c3rd_other_events.52.b:0 "These things happen"
  c3rd_other_events.52.b.tt1:0 "This happens because you have a significant number of great works looted or ransacked. Destroying or repairing (by decision) these monuments will remove the status."
  c3rd_other_events.52.c:0 "Start the repairs right now !"
@@ -908,7 +908,7 @@ low_stab_event.4.c.tt1:0 "Things remain as they are, but [independent_current_go
  c3rd_other_events.60.t:0 "Crumbling Borders"
  c3rd_other_events.60.desc:0 "Is our civilisation in peril? As many of our subjects find their once-safe homes looted and ravaged by tribes of bloodthirsty barbarians, trust in the government is falling, and trouble is brewing in the far reaches of the empire. We must regain control of the borders if we are to safeguard our gains."
  c3rd_other_events.60.a:0 "It is only a matter of temporary mistakes."
- c3rd_other_events.60.a.tt1:0 "Your leader will take responsability.\nThis happens because you have a significant number of states invaded by barbarians."
+ c3rd_other_events.60.a.tt1:0 "Your leader will take responsibility.\nThis happens because you have a significant number of states invaded by barbarians."
  c3rd_other_events.60.b:0 "These things happen"
  c3rd_other_events.60.b.tt1:0 "This happens because you have a significant number of states invaded by barbarians."
 

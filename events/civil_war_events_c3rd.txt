@@ -3,7 +3,7 @@
 civil_war.1 = { #Civil war end event notifications for ORIGINAL COUNTRY WINNING
 	type = country_event
 	hidden = yes
-	
+
 	immediate = {
 		save_scope_as = victorious_side
 		if = {
@@ -106,8 +106,8 @@ civil_war.1 = { #Civil war end event notifications for ORIGINAL COUNTRY WINNING
 							}
 						}
 					}
-					NOR = { 
-						has_variable = me_syr_foreign_country_flag 
+					NOR = {
+						has_variable = me_syr_foreign_country_flag
 						tag = SYR
 					}
 				}
@@ -173,7 +173,7 @@ civil_war.1 = { #Civil war end event notifications for ORIGINAL COUNTRY WINNING
 					num_of_cities >= 100
 				}
 				trigger_event = { #Trigger infomercial
-					id = civil_war.2 
+					id = civil_war.2
 					days = { 2 10 }
 				}
 			}
@@ -190,7 +190,7 @@ civil_war.2 = {
 		desc = "civil_war.2.desc"
 		random_valid = {
 			desc = civil_war.2.descSIEGE
-			desc = civil_war.2.descSIEGE2 
+			desc = civil_war.2.descSIEGE2
 			desc = civil_war.2.descBATTLE
 			desc = civil_war.2.descBATTLE2
 		}
@@ -216,23 +216,23 @@ civil_war.2 = {
 			desc = civil_war.2.descOpinionNeutral
 		}
 	}
-	
+
 	left_portrait = scope:victorious_side.current_ruler
-	
+
 	immediate = {
-		
+
 	}
-	
+
 	option = {
 		name = "civil_war.2.a"
 	}
-	
+
 }
 
 civil_war.3 = { #Civil war end event notifications for REBEL COUNTRY WINNING
 	type = country_event
 	hidden = yes
-	
+
 	immediate = {
 		save_scope_as = victorious_side
 		if = {
@@ -258,11 +258,11 @@ civil_war.3 = { #Civil war end event notifications for REBEL COUNTRY WINNING
 			}
 		}
 		scope:target = {
-			save_scope_as = resistance_ruler 
+			save_scope_as = resistance_ruler
 		}
 		if = {
-			limit = { 
-				current_ruler = { has_variable = flavor_egy_5_civil_war_magas_flag } 
+			limit = {
+				current_ruler = { has_variable = flavor_egy_5_civil_war_magas_flag }
 			}
 			every_country = {
 				limit = {
@@ -377,7 +377,7 @@ civil_war.3 = { #Civil war end event notifications for REBEL COUNTRY WINNING
 					}
 				}
 				trigger_event = { #Trigger infomercial
-					id = civil_war.4 
+					id = civil_war.4
 					days = { 2 10 }
 				}
 			}
@@ -437,34 +437,34 @@ civil_war.4 = {
 					}
 				}
 			}
-			desc = civil_war.4.descOpinionNeutral  
+			desc = civil_war.4.descOpinionNeutral
 		}
 	}
-	
+
 	left_portrait = scope:victorious_side.current_ruler
-	
+
 	immediate = {
-		
+
 	}
-	
+
 	option = {
 		name = "civil_war.4.a"
 	}
-	
+
 }
 
 civil_war.5 = {
 	type = country_event
 	title = "civil_war.5.t"
 	desc = "civil_war.5.desc"
-	
+
 	left_portrait = root.current_ruler
 	right_portrait = scope:target
-	
+
 	picture = romans_marching
-	
+
 	trigger = {
-		NOR = { 
+		NOR = {
 			has_variable = flavor_egy_5_civil_war_cyrenaica_flag
 			current_ruler = { has_variable = flavor_egy_5_civil_war_magas_flag }
 			has_variable = ip_rep_66_civil_war_attacker
@@ -473,7 +473,7 @@ civil_war.5 = {
 			has_variable = death_to_tyrants_flag
 		}
 	}
-	
+
 	immediate = {
 		current_ruler = { add_popularity = 30 }
 		add_greater_stability_effect = yes
@@ -548,7 +548,7 @@ civil_war.5 = {
 			}
 		}
 	}
-	
+
 	option = {
 		name = "civil_war.5.a"
 		ai_chance = {
@@ -571,7 +571,7 @@ civil_war.5 = {
 			}
 		}
 	}
-	
+
 	option = {
 		name = "civil_war.5.b"
 		ai_chance = {
@@ -604,7 +604,7 @@ civil_war.5 = {
 			}
 		}
 	}
-	
+
 	option = {
 		name = "civil_war.5.c"
 		ai_chance = {
@@ -633,7 +633,7 @@ civil_war.5 = {
 			}
 		}
 		if = {
-			limit = { 
+			limit = {
 				current_date >= 750.1.1
 				num_of_cities >= 300
 				is_tribal = no
@@ -650,7 +650,7 @@ civil_war.5 = {
 			}
 		}
 	}
-	
+
 }
 
 civil_war.6 = {
@@ -658,12 +658,12 @@ civil_war.6 = {
 	title = "civil_war.6.t"
 	desc = "civil_war.6.desc"
 	picture = successors
-	
+
 	left_portrait = root.current_ruler
 	right_portrait = scope:target
-	
+
 	trigger = {
-		NOR = { 
+		NOR = {
 			has_variable = flavor_egy_5_civil_war_cyrenaica_flag
 			current_ruler = { has_variable = flavor_egy_5_civil_war_magas_flag }
 			has_variable = ip_rep_66_civil_war_attacker
@@ -671,7 +671,7 @@ civil_war.6 = {
 			has_variable = me_syr_demo_civil_war_active
 		}
 	}
-	
+
 	immediate = {
 		add_stability_effect = yes
 		add_country_modifier = {
@@ -720,8 +720,8 @@ civil_war.6 = {
 			}
 		}
 	}
-	
-	
+
+
 	option = {
 		name = "civil_war.5.a"
 		add_manpower = {
@@ -729,7 +729,7 @@ civil_war.6 = {
 			divide = 4
 		}
 	}
-	
+
 	option = {
 		name = "civil_war.5.b"
 		custom_tooltip = "forgiving_bad_tooltip"
@@ -746,9 +746,9 @@ civil_war.6 = {
 				target = root
 			}
 		}
-		
+
 	}
-	
+
 	option = {
 		name = "civil_war.5.c"
 		add_country_modifier = {
@@ -758,7 +758,7 @@ civil_war.6 = {
 		custom_tooltip = civil_war_5_kill_all
 		hidden_effect = {
 			if = {
-				limit = { 
+				limit = {
 					current_date >= 750.1.1
 					num_of_cities >= 300
 					is_tribal = no

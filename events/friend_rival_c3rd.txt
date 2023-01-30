@@ -1,24 +1,24 @@
 ﻿namespace = friend_rival
 
 #Generic friendship Events
-friend_rival.11 = { 
+friend_rival.11 = {
 	type = character_event
 	title = "friend_rival.11.t"
 	desc = "friend_rival.11.desc"
 	picture = senate_debate
-	
+
 	left_portrait = root
 	right_portrait = scope:targeter
-	
+
 	trigger = {
 		exists = scope:targeter
 		scope:targeter = { is_alive = yes }
 	}
-	
+
 	immediate = {
 
 	}
-	
+
 	option = {
 		name = "friend_rival.11.a"
 		if = {
@@ -42,7 +42,7 @@ friend_rival.11 = {
 			}
 		}
 	}
-	
+
 	option = {
 		name = "friend_rival.11.b"
 		if = {
