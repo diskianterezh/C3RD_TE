@@ -70,6 +70,7 @@ revolt_events.1 = {
 						set_owned_by = scope:revolt_country
 					}
 				}
+
 	    	}
 			20 = { #Revolt buffed
     			trigger = {
@@ -219,8 +220,12 @@ revolt_events.1 = {
 						            attacker = yes
 						            leader = no
 								}
+								trigger_event = {
+									id = revolt_events.4
+								}
 		    				}
 		    			}
+						
 		    		}
 		    	}
 				every_country_state = {
@@ -249,6 +254,9 @@ revolt_events.1 = {
 				}
 				ROOT = { integrate_country_culture = PREV }
 			}
+			trigger_event = {
+				id = revolt_events.4
+			}
 		}
 		if = {
 			limit = { is_ai = yes }
@@ -259,7 +267,45 @@ revolt_events.1 = {
 		}
 	}
 }
+revolt_events.2 = {
+    type = country_event
+    hidden = yes
 
+    immediate = {
+		every_country_state = {
+			capital_scope = {
+				add_state_loyalty = 20
+			}
+		}
+    }
+}
+
+revolt_events.3 = { #test
+    type = country_event
+    hidden = yes
+
+    immediate = {
+    	random_country_state = {
+    		capital_scope = {
+    			add_state_loyalty = -99
+    		}
+    	}
+    }
+}
+
+revolt_events.4 = { #integrating country culture workaround
+    type = country_event
+    hidden = yes
+
+    immediate = {
+    	random_country_culture = {
+			limit = { 
+				is_integrated = no
+			}
+			ROOT = { integrate_country_culture = PREV }
+		}
+    }
+}
 revolt_events.10 = {
     type = country_event
     hidden = yes

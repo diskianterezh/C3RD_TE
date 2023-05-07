@@ -86,7 +86,7 @@ gw_effect_second_temple = {
 			country_modifier = {
 				omen_power = 0.12
 				happiness_for_same_religion_modifier = 0.05
-				stability_monthly_change = 0.02
+				stability_monthly_change = 0.03
 			}
 		}
 	}
@@ -561,7 +561,7 @@ gw_effect_pergamon_acropolis = {
 			}
 			state_modifier = {
 				local_defensive = 0.2
-				local_population_capacity = 20
+				local_population_capacity = 10
 			}
 		}
 	}
@@ -780,7 +780,7 @@ gw_effect_temple_zeus = {
 		gw_effect_temple_zeus_tier_1 = {
 			great_work_effect_tier = gw_effect_tier_1
 			country_modifier = {
-				improve_relation_impact = 0.05
+				improve_relation_impact = 0.1
 				global_citizen_output = 0.01
 			}
 			state_modifier = {
@@ -790,7 +790,7 @@ gw_effect_temple_zeus = {
 		gw_effect_temple_zeus_tier_2 = {
 			great_work_effect_tier = gw_effect_tier_2
 			country_modifier = {
-				improve_relation_impact = 0.1
+				improve_relation_impact = 0.2
 				global_citizen_output = 0.02
 			}
 			state_modifier = {
@@ -800,21 +800,21 @@ gw_effect_temple_zeus = {
 		gw_effect_temple_zeus_tier_3 = {
 			great_work_effect_tier = gw_effect_tier_3
 			country_modifier = {
-				improve_relation_impact = 0.15
+				improve_relation_impact = 0.3
 				global_citizen_output = 0.03
 			}
 			state_modifier = {
-				local_citizen_happyness = 0.03
+				local_citizen_happyness = 0.04
 			}
 		}
 		gw_effect_temple_zeus_4 = {
 			great_work_effect_tier = gw_effect_tier_4
 			country_modifier = {
-				improve_relation_impact = 0.2
+				improve_relation_impact = 0.5
 				global_citizen_output = 0.05
 			}
 			state_modifier = {
-				local_citizen_happyness = 0.05
+				local_citizen_happyness = 0.06
 			}
 		}
 	}
@@ -832,7 +832,7 @@ gw_effect_pyramids = {
 			great_work_effect_tier = gw_effect_tier_1
 			country_modifier = {
 				monthly_legitimacy = 0.01
-				monthly_political_influence = 0.025
+				monthly_political_influence_modifier = 0.025
 				subject_loyalty = 2.5
 			}
 		}
@@ -840,7 +840,7 @@ gw_effect_pyramids = {
 			great_work_effect_tier = gw_effect_tier_2
 			country_modifier = {
 				monthly_legitimacy = 0.02
-				monthly_political_influence = 0.05
+				monthly_political_influence_modifier = 0.05
 				subject_loyalty = 5
 			}
 		}
@@ -848,7 +848,7 @@ gw_effect_pyramids = {
 			great_work_effect_tier = gw_effect_tier_3
 			country_modifier = {
 				monthly_legitimacy = 0.03
-				monthly_political_influence = 0.075
+				monthly_political_influence_modifier = 0.075
 				subject_loyalty = 7.5
 			}
 		}
@@ -856,7 +856,7 @@ gw_effect_pyramids = {
 			great_work_effect_tier = gw_effect_tier_4
 			country_modifier = {
 				monthly_legitimacy = 0.05
-				monthly_political_influence = 0.10
+				monthly_political_influence_modifier = 0.10
 				subject_loyalty = 10
 			}
 		}
@@ -1295,6 +1295,51 @@ gw_effect_dodona = {
 	}
 }
 
+
+gw_effect_persepolis = {
+	icon = "gw_effect_diplomats_supreme"
+
+	allow = {
+		always = no
+	}
+
+	great_work_tier_effect_modifiers = {
+		gw_effect_persepolis_tier_1 = {
+			great_work_effect_tier = gw_effect_tier_1
+			country_modifier = {
+				diplomatic_reputation = 1
+				character_loyalty = 1
+				tribute_income_modifier = 0.1
+			}
+		}
+		gw_effect_persepolis_tier_2 = {
+			great_work_effect_tier = gw_effect_tier_2
+			country_modifier = {
+				diplomatic_reputation = 3
+				character_loyalty = 2
+				tribute_income_modifier = 0.2
+			}
+		}
+		gw_effect_persepolis_tier_3 = {
+			great_work_effect_tier = gw_effect_tier_3
+			country_modifier = {
+				diplomatic_reputation = 5
+				character_loyalty = 3
+				tribute_income_modifier = 0.35
+			}
+		}
+		gw_effect_persepolis_tier_4 = {
+			great_work_effect_tier = gw_effect_tier_4
+			country_modifier = {
+				global_pop_conversion_speed_modifier = 0.05
+				diplomatic_reputation = 8
+				character_loyalty = 4
+				tribute_income_modifier = 0.5
+			}
+		}
+	}
+}
+
 gw_effect_stonehenge_event = {
 	icon = "gw_effect_omen_doctrine"
 
@@ -1330,11 +1375,10 @@ gw_effect_stonehenge_event = {
 		gw_effect_stonehenge_event_tier_4 = {
 			great_work_effect_tier = gw_effect_tier_4
 			country_modifier = {
-				monthly_political_influence = 0.1
-				omen_power = 0.1
-				stability_monthly_change = 0.04
+				happiness_for_same_religion_modifier = 0.1
+				global_monthly_food_modifier = 0.1
+				global_population_growth = 0.05
 			}
 		}
 	}
 }
-
