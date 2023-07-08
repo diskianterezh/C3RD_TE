@@ -1896,7 +1896,7 @@ c3rd_events.10 = { #oh no rival splitting
                                             exists = yes
                                         }
                                     }
-                                    add_commander = rival_commander
+                                    add_commander = scope:rival_commander
                                 }
                             }
                         }

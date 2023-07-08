@@ -191,9 +191,38 @@
 				value = -10
 				multiply = num_of_cities
 			}
-			change_variable = {
-				name = deflation_value
-				add = -7
+			if = {
+				limit = { 
+					num_of_cities <= 100
+				}
+				change_variable = {
+					name = deflation_value
+					add = -16
+				}
+			}
+			else_if = {
+				limit = { 
+					num_of_cities <= 250
+				}
+				change_variable = {
+					name = deflation_value
+					add = -13
+				}
+			}
+			else_if = {
+				limit = { 
+					num_of_cities <= 500
+				}
+				change_variable = {
+					name = deflation_value
+					add = -10
+				}
+			}
+			else = {
+				change_variable = {
+					name = deflation_value
+					add = -7
+				}
 			}
 			add_country_modifier = {
 				name = added_liquidity
@@ -268,9 +297,38 @@
 		effect = {
 			add_political_influence = -25
 			add_stability = -10
-			change_variable = {
-				name = silver_unvalue
-				add = -10
+			if = {
+				limit = { 
+					num_of_cities <= 100
+				}
+				change_variable = {
+					name = silver_unvalue
+					add = -25
+				}
+			}
+			else_if = {
+				limit = { 
+					num_of_cities <= 250
+				}
+				change_variable = {
+					name = silver_unvalue
+					add = -20
+				}
+			}
+			else_if = {
+				limit = { 
+					num_of_cities <= 500
+				}
+				change_variable = {
+					name = silver_unvalue
+					add = -15
+				}
+			}
+			else = {
+				change_variable = {
+					name = silver_unvalue
+					add = -10
+				}
 			}
 			add_country_modifier = {
 				name = new_balance

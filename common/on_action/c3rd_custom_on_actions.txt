@@ -389,6 +389,8 @@ c3rd_other_events_monthly_pulse = { #check if events can happen
 		5 = c3rd_other_events.52 #stabhit from wonders pillaged
 		4 = c3rd_other_events.60 #stabhit from barbarians
 		5 = c3rd_other_events.70 #aristocratic reforms
+		7 = c3rd_other_events.71 #revolt of the freemen against inflation
+		5 = c3rd_other_events.72 #act against silver crash
 	}
 
 }
@@ -539,7 +541,7 @@ c3rd_calculate_deflation = {
 		}
 	}
 	effect = {
-		if = {
+		if = { #calculation of this year economy
 			limit = {
 				NOT = {
 					has_variable = country_economy
@@ -550,14 +552,14 @@ c3rd_calculate_deflation = {
 				value = c3rd_economic_value
 			}
 		}
-		else = {
+		else = { #recalculation
 			remove_variable = country_economy
 			set_variable = {
 				name = country_economy
 				value = c3rd_economic_value
 			}
 		}
-		if = {
+		if = { #create the deflation variable if > 500 cities
 			limit = {
 				NOT = {
 					has_variable = deflation_value
@@ -569,17 +571,29 @@ c3rd_calculate_deflation = {
 				value = 0
 			}
 		}
-		if = {
+		if = { #first reduction of the silver unvalue if aurelian
 			limit = {
 				has_variable = silver_unvalue
 				has_law = second_reform_law
+				var:silver_unvalue > 0
 			}
 			change_variable = {
 				name = silver_unvalue
 				add = -1
 			}
 		}
-		if = {
+		if = { #reduction if bartering
+			limit = {
+				has_variable = silver_unvalue
+				has_country_modifier = bartering_authorised
+				var:silver_unvalue > 0
+			}
+			change_variable = {
+				name = silver_unvalue
+				add = -1
+			}
+		}
+		if = { #silver law reduce deflation passively
 			limit = {
 				has_variable = deflation_value
 				has_law = monetary_reform_law
@@ -589,7 +603,7 @@ c3rd_calculate_deflation = {
 				add = -1
 			}
 		}
-		if = {
+		if = { #creation of the silver unvalue variable if >500 cities
 			limit = {
 				NOT = {
 					has_variable = silver_unvalue
@@ -602,7 +616,7 @@ c3rd_calculate_deflation = {
 				value = 0
 			}
 		}
-		if = {
+		if = { #reduce deflation if economy good
 			limit = {
 				has_variable = deflation_value
 				var:country_economy > 1
@@ -613,7 +627,7 @@ c3rd_calculate_deflation = {
 				add = -1
 			}
 		}
-		if = {
+		if = { #economy very good
 			limit = {
 				has_variable = deflation_value
 				var:country_economy > 2
@@ -624,7 +638,7 @@ c3rd_calculate_deflation = {
 				add = -2
 			}
 		}
-		if = {
+		if = { #veryvery good
 			limit = {
 				has_variable = deflation_value
 				var:country_economy > 4
@@ -635,7 +649,8 @@ c3rd_calculate_deflation = {
 				add = -3
 			}
 		}
-		if = {
+		#increase deflation or silver unvalue, depending of the law - only if cities > 500
+		if = { 
 			limit = {
 				var:country_economy < 1
 				num_of_cities >= 500
@@ -711,7 +726,7 @@ c3rd_calculate_deflation = {
 				}
 			}
 		}
-		if = {
+		if = { #passive unvalue of silver if silver law
 			limit = { 
 				has_law = monetary_reform_law
 				num_of_cities >= 500
@@ -913,7 +928,7 @@ c3rd_apply_silver_unvalue = { #applying silver modifiers events
 					has_country_modifier = medium_monetary_crash
 					has_country_modifier = high_monetary_crash
 				}
-				var:silver_unvalue >= 90
+				var:silver_unvalue >= 95
 				num_of_cities >= 500
 			}
 			trigger_event = {
@@ -925,7 +940,7 @@ c3rd_apply_silver_unvalue = { #applying silver modifiers events
 				NOT = {
 					has_country_modifier = high_monetary_crash
 				}
-				var:silver_unvalue >= 120
+				var:silver_unvalue >= 130
 				num_of_cities >= 500
 			}
 			trigger_event = {

@@ -99,6 +99,12 @@
  desc_barbarians_border:0 "Barbarians have reached this state, causing great turmoil and decreasing faith in the government"
  aristocratic_reforms:0 "Aristocratic reforms"
  desc_aristocratic_reforms:0 "Inspired by the wealthy, these reforms aim to put the idle working classes back to work. By force."
+ raise_of_wages:0 "Wages increase"
+ desc_raise_of_wages:0 "Following a popular protest movement, salaries were increased to support the plebeians' purchasing power. "
+ bartering_authorised:0 "Bartering Authorised"
+ desc_bartering_authorised:0 "The population is allowed (and encouraged) to develop bartering as an alternative to silver."
+ customs_controls:0 "Custom Controls"
+ desc_customs_controls:0 "The overlord tightened border controls to regulate the economy"
 
 
  #opinion:
@@ -920,6 +926,29 @@ low_stab_event.4.c.tt1:0 "Things remain as they are, but [independent_current_go
  c3rd_other_events.70.b.tt1:0 "You will seize part of the fortune of these influential people. #G This will reduce deflation by an amount #! "
  c3rd_other_events.70.c:0 "Let's put a stop to this"
  c3rd_other_events.70.c.tt1:0 "You will stop these initiatives and leave the situation as it is"
+
+
+ c3rd_other_events.71.t:0 "The anger of free men"
+ c3rd_other_events.71.desc:0 "Faced with the serious situation of the value of the currency and the collapse of the population's wealth, troops of angry plebeians have gathered in the places where they are present in large numbers. They are clamouring for substantial pay rises in order to regain a decent standard of living. We could intervene with the aristocracy and landlords to encourage them to make a gesture... But wouldn't that make us look weak?"
+ c3rd_other_events.71.a:0 "It won't save the economy, but it will appease them"
+ c3rd_other_events.71.a.tt1:0 "You will pressure to increase the income of plebeians"
+ c3rd_other_events.71.b:0 "Confiscate their possessions"
+ c3rd_other_events.71.b.tt1:0 "By confiscating part of the wealth in circulation, we should be able to control the fall in monetary value?\n #G This will reduce the collapse of the currency by a small amount #! "
+ c3rd_other_events.71.c:0 "Ignore them"
+ c3rd_other_events.71.c.tt1:0 "Nothing will happen"
+
+
+ c3rd_other_events.72.t:0 "Reactions to the currency crash"
+ c3rd_other_events.72.desc:0 "At a time when everything seems to be going from bad to worse, people are finding their own ways of recovering the value of their labour. The quaestors report a drastic increase in bartering among the population, or even transfers of value between our neighbours and allies in order to exploit currency conversion margins.\nSome of our financiers are advising us to let this trend towards bartering go in order to regulate the devaluation of values. Others argue that this is a dangerous precedent that could seriously accelerate the decay of our homeland."
+ c3rd_other_events.72.a:0 "Let the bartering continue"
+ c3rd_other_events.72.a.tt1:0 "You will encourage bartering initiatives\n #G This will help to restore the value of the currency through time #! "
+ c3rd_other_events.72.b:0 "Regulate border flows !"
+ c3rd_other_events.72.b.tt1:0 "You'll cut off your clients' access to your market, to keep the influx of cheap silver on the other side.\n #R Your clients will become tributaries #!\n #G The larger the subject, the stronger the silver will recover #!\n"
+ c3rd_other_events.72.b.tt2:0 "#G The value of silver will recover slightly #!\n"
+ c3rd_other_events.72.b.tt3:0 "#G The value of silver will recover strongly #!\n"
+ c3rd_other_events.72.b.tt4:0 "#G The value of silver will recover enormously #!\n"
+ c3rd_other_events.72.c:0 "We won't"
+ c3rd_other_events.72.c.tt1:0 "Nothing will be done"
 
 #tribals fix
 

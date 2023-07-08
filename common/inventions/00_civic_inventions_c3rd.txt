@@ -1014,7 +1014,6 @@
 			global_slaves_output = 0.05
 		}
 		requires = {currency_unification}
-		add_political_influence = -10
 		on_activate = {
 			add_country_modifier = {
 				name = mines_control_assessed

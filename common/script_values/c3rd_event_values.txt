@@ -487,3 +487,17 @@ income_300 = {
 	value = has_monthly_income
 	multiply = 300
 }
+
+state_freemen = {
+	value = 0
+	every_state_province = {
+		add = num_of_freemen
+	}
+}
+third_of_state_pop = {
+	value = 0
+	every_state_province = {
+		add = total_population
+	}
+	divide = 3
+}
