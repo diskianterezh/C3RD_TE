@@ -537,7 +537,6 @@ c3rd_calculate_deflation = {
 		current_date >= 750.1.1
 		NOR = {
 			has_country_modifier = solidus_introduced
-			has_variable = solidus_ongoing
 		}
 	}
 	effect = {
@@ -586,6 +585,17 @@ c3rd_calculate_deflation = {
 			limit = {
 				has_variable = silver_unvalue
 				has_country_modifier = bartering_authorised
+				var:silver_unvalue > 0
+			}
+			change_variable = {
+				name = silver_unvalue
+				add = -1
+			}
+		}
+		if = { #reduction if silv consolidation (solidus)
+			limit = {
+				has_variable = silver_unvalue
+				has_country_modifier = silver_consolidation_sol
 				var:silver_unvalue > 0
 			}
 			change_variable = {
@@ -804,7 +814,6 @@ c3rd_apply_deflation = { #applying deflation modifiers events
 		has_variable = deflation_value
 		NOR = {
 			has_country_modifier = solidus_introduced
-			has_variable = solidus_ongoing
 		}
 	}
 	effect = {
@@ -904,7 +913,6 @@ c3rd_apply_silver_unvalue = { #applying silver modifiers events
 		has_variable = silver_unvalue
 		NOR = {
 			has_country_modifier = solidus_introduced
-			has_variable = solidus_ongoing
 		}
 	}
 	effect = {
@@ -1091,6 +1099,7 @@ c3rd_barbarian_sack = {
 	trigger = {
 		has_land = yes
 		any_owned_province = {
+			is_previous_controller = root
 			controller = { tag = BAR }
 			is_state_capital = yes
 			state = {
@@ -1109,6 +1118,7 @@ c3rd_barbarian_sack = {
 	effect = {
 		every_province = {
 			limit = {
+				is_previous_controller = root
 				controller = { tag = BAR }
 				is_state_capital = yes
 				state = {
@@ -1117,6 +1127,9 @@ c3rd_barbarian_sack = {
 						NOT = {
 							controller = { tag = BAR }
 						}
+					}
+					NOT = {
+						has_state_modifier = barbarians_border
 					}
 				}
 			}

@@ -326,6 +326,12 @@ c3rd_economic_factor = {
 	}
 	if = {
 		limit = {
+			has_country_modifier = monetary_consolidation_sol
+		}
+		add = -2
+	}
+	if = {
+		limit = {
 			has_country_modifier = aristocratic_reforms
 		}
 		add = -2
@@ -500,4 +506,14 @@ third_of_state_pop = {
 		add = total_population
 	}
 	divide = 3
+}
+
+num_vassal_provinces = {
+	value = 0
+	every_subject = {
+		add = {
+			value = num_of_cities
+			multiply = 3
+		}
+	}
 }

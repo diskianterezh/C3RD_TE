@@ -267,7 +267,7 @@ high_monetary_crash = {
 }
 
 local_autonomy_c3rd = {
-	local_pop_assimilation_speed_modifier = -0.25
+	local_pop_assimilation_speed_modifier = -0.5
 }
 
 revolt_preparation = {
@@ -383,6 +383,39 @@ bartering_authorised = {
 	global_tribesmen_desired_pop_ratio = 0.05
 	country_civilization_value = -10
 	global_monthly_civilization = -0.05
+}
+
+monetary_consolidation_sol = {
+	global_tax_modifier = 0.1
+	happiness_for_same_culture_modifier = 0.05
+}
+
+little_trade_buff = {
+	global_commerce_modifier = 0.1
+}
+
+little_freemen_output = {
+	global_freemen_output = 0.1
+}
+
+little_noble_happy = {
+	global_nobles_happyness = 0.05
+}
+
+little_freemen_happy = {
+	global_freemen_happyness = 0.05
+}
+
+city_against_deflation = {
+	local_freemen_output = 0.1
+	local_nobles_happyness = 0.05
+	local_commerce_value_modifier = 0.1
+	local_tax_modifier = -0.1
+}
+
+silver_consolidation_sol = {
+	global_commerce_modifier = 0.1
+	happiness_for_same_culture_modifier = 0.05
 }
 
 # barbarian_spawn_buff_x = {

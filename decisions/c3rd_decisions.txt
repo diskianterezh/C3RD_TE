@@ -136,35 +136,6 @@
 		}
 
 	}
-	establish_solidus = {
-		potential = {
-			current_date >= 750.1.1
-			has_law = second_reform_law
-			NOR = {
-				has_country_modifier = solidus_introduced
-				has_variable = solidus_ongoing
-			}
-		}
-		allow = {
-			has_law = second_reform_law
-			NOR = {
-				has_country_modifier = small_deflation
-				has_country_modifier = medium_deflation
-				has_country_modifier = high_deflation
-				has_country_modifier = small_monetary_crash
-				has_country_modifier = medium_monetary_crash
-				has_country_modifier = high_monetary_crash
-			}
-			political_influence >= 50
-		}
-		effect = {
-			trigger_event = {
-				id = c3rd_other_events.13
-			}
-
-		}
-
-	}
 	inject_liquidity = {
 		potential = {
 			current_date >= 700.1.1

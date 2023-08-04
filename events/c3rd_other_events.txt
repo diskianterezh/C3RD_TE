@@ -1670,44 +1670,6 @@ c3rd_other_events.12 = { #games
 }
 
 
-c3rd_other_events.13 = { #Solidus 1 : survey the situation
-    type = country_event
-    title = "c3rd_other_events.13.t"
-    desc = "c3rd_other_events.13.desc"
-
-
-    picture = scribe_tools
-
-    trigger = {
-        has_land = yes
-        is_tribal = no
-        current_date >= 700.1.1
-    }
-
-    immediate = {
-        set_variable = {
-            name = solidus_ongoing
-        }
-    }
-
-    option = {
-        name = c3rd_other_events.13.a
-        custom_tooltip = c3rd_other_events.13.a.tt1
-        add_political_influence = -50
-        trigger_event = {
-            id = c3rd_other_events.14
-            days = 50
-        }
-    }
-
-
-    option = {
-        name = c3rd_other_events.13.b
-        custom_tooltip = c3rd_other_events.13.b.tt1
-        remove_variable = solidus_ongoing
-    }
-}
-
 
 
 c3rd_other_events.14 = { #Solidus 2 : gain control on the system
@@ -1771,14 +1733,6 @@ c3rd_other_events.14 = { #Solidus 2 : gain control on the system
             }
         }
         add_political_influence = -20
-    }
-
-
-    after = {
-        trigger_event = {
-            id = c3rd_other_events.15
-            days = 50
-        }
     }
 }
 
@@ -1857,13 +1811,6 @@ c3rd_other_events.15 = { #Solidus 3 : stability of gold
         add_political_influence = -20
     }
 
-
-    after = {
-        trigger_event = {
-            id = c3rd_other_events.16
-            days = 50
-        }
-    }
 }
 
 
@@ -1896,6 +1843,12 @@ c3rd_other_events.16 = { #Solidus final
             }
             remove_variable = silver_unvalue
         }
+        if = {
+            limit = {
+                has_country_modifier = monetary_consolidation_sol
+            }
+            remove_country_modifier = monetary_consolidation_sol
+        }
 
     }
 
@@ -1906,7 +1859,98 @@ c3rd_other_events.16 = { #Solidus final
             name = solidus_introduced
             duration = -1
         }
-        remove_variable = solidus_ongoing
+    }
+}
+
+
+c3rd_other_events.17 = { #Mission 1b bonus
+    type = country_event
+    title = "c3rd_other_events.17.t"
+    desc = "c3rd_other_events.17.desc"
+
+
+    picture = trade_port
+
+    trigger = {
+        has_land = yes
+        is_tribal = no
+        current_date >= 700.1.1
+    }
+
+    immediate = {
+    }
+
+    option = {#bonus commerce
+        name = c3rd_other_events.17.a
+        custom_tooltip = c3rd_other_events.17.a.tt1
+        add_country_modifier = {
+            name = little_trade_buff
+            duration = 1650
+        }
+    }
+    
+    option = {#bonus freemen output
+        name = c3rd_other_events.17.b
+        custom_tooltip = c3rd_other_events.17.b.tt1
+        add_country_modifier = {
+            name = little_freemen_output
+            duration = 1650
+        }
+        
+    }
+    option = {#bonus nobles happy
+        name = c3rd_other_events.17.c
+        custom_tooltip = c3rd_other_events.17.c.tt1
+        add_country_modifier = {
+            name = little_noble_happy
+            duration = 1650
+        }
+        add_stability = 2
+        current_ruler = {
+            add_corruption = 3
+        }
+    }
+}
+
+c3rd_other_events.18 = { #Mission 1b bonus
+    type = country_event
+    title = "c3rd_other_events.18.t"
+    desc = "c3rd_other_events.18.desc"
+
+
+    picture = trade_port
+
+    trigger = {
+        has_land = yes
+        is_tribal = no
+        current_date >= 700.1.1
+    }
+
+    immediate = {
+    }
+
+    option = {#bonus stability
+        name = c3rd_other_events.18.a
+        custom_tooltip = c3rd_other_events.18.a.tt1
+        add_stability = 5
+    }
+    
+    option = {#bonus corruption/popularité
+        name = c3rd_other_events.18.b
+        custom_tooltip = c3rd_other_events.18.b.tt1
+        current_ruler = {
+            add_corruption = -10
+            add_popularity = 20
+        }
+    }
+    option = {#bonus freemen happy
+        name = c3rd_other_events.18.c
+        custom_tooltip = c3rd_other_events.18.c.tt1
+        add_country_modifier = {
+            name = little_freemen_happy
+            duration = 1650
+        }
+        add_stability = -2
     }
 }
 
