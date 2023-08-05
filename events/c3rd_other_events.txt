@@ -1314,6 +1314,12 @@ c3rd_other_events.10 = { #great book
         }
         triggered_desc = {
             trigger = {
+                has_country_modifier = monetary_consolidation_sol
+            }
+            desc = "c3rd_other_events.10.desc.13"
+        }
+        triggered_desc = {
+            trigger = {
                 has_country_modifier = solidus_introduced
             }
             desc = "c3rd_other_events.10.desc.3"
@@ -4751,7 +4757,7 @@ c3rd_other_events.74 = { #the decuriones are fleeing
         name = c3rd_other_events.74.a
         custom_tooltip = c3rd_other_events.74.a.tt1
         add_stability = -2
-        add_tyranny = 10
+        add_tyranny = 5
         
         set_variable = {
             name = forced_decuria
@@ -4811,6 +4817,15 @@ c3rd_other_events.75 = { #new currency, but the leader is really bad at that
     }
 
     immediate = {
+        random_character = {
+            limit = {
+                OR = {
+                    has_office = office_magistrate
+                    has_office = office_steward
+                }
+            }
+            save_scope_as = office_treasure_man
+        }
     }
 
     option = { #destroy the surplux of cardboard money
@@ -4845,6 +4860,10 @@ c3rd_other_events.75 = { #new currency, but the leader is really bad at that
             set_variable = {
 				name = treasureman_fixed_money
 			}
+        }
+        add_treasury = {
+            value = has_monthly_income
+            multiply = -8
         }
         
     }

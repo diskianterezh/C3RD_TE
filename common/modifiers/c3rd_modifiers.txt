@@ -424,7 +424,7 @@ decuria_established = {
 }
 
 tyranny_of_taxation = {
-	monthly_corruption = 0.1
+	monthly_corruption = 0.02
 	monthly_governor_wage = 0.1
 }
 
