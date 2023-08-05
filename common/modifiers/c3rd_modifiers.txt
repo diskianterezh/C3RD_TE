@@ -418,6 +418,20 @@ silver_consolidation_sol = {
 	happiness_for_same_culture_modifier = 0.05
 }
 
+decuria_established = {
+	global_citizen_happyness = -0.1
+	global_tax_modifier = 0.05
+}
+
+tyranny_of_taxation = {
+	monthly_corruption = 0.1
+	monthly_governor_wage = 0.1
+}
+
+escape_silver_taxation = {
+	global_tax_modifier = -0.4
+}
+
 # barbarian_spawn_buff_x = {
 # 	discipline = 0.05 - 0.1
 # 	emblematic_unit_1_offensive = 0.1

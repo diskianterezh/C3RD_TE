@@ -389,8 +389,10 @@ c3rd_other_events_monthly_pulse = { #check if events can happen
 		5 = c3rd_other_events.52 #stabhit from wonders pillaged
 		4 = c3rd_other_events.60 #stabhit from barbarians
 		5 = c3rd_other_events.70 #aristocratic reforms
-		7 = c3rd_other_events.71 #revolt of the freemen against inflation
+		4 = c3rd_other_events.71 #revolt of the freemen against inflation
 		5 = c3rd_other_events.72 #act against silver crash
+		7 = c3rd_other_events.73 #rpeople trying to escape taxes
+		2 = c3rd_other_events.74 #Decuriones fleeing
 	}
 
 }

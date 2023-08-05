@@ -98,6 +98,7 @@
 
 		on_completion = {
 			custom_tooltip = "sol_first_deflation_mission"
+			add_2_free_province_investments = yes
 			change_variable = {
 				name = deflation_value
 				add = -15

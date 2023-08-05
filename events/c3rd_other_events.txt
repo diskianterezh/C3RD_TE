@@ -4251,6 +4251,13 @@ c3rd_other_events.71 = { #people revolt against the crash of currency - negative
             has_variable = silver_unvalue
             var:silver_unvalue >= 200
         }
+        modifier = {
+            factor = 2
+            OR = {
+                has_country_modifier = tyranny_of_taxation
+                has_variable = forced_decuria
+            }
+        }
     }
 
     immediate = {
@@ -4455,7 +4462,7 @@ c3rd_other_events.72 = { #Some possibility to balance the monetary value - this 
     immediate = {
         set_variable = {
             name = actions_against_silver
-            days = 3650
+            days = 7300
         }
     }
 
@@ -4464,7 +4471,7 @@ c3rd_other_events.72 = { #Some possibility to balance the monetary value - this 
         custom_tooltip = c3rd_other_events.72.a.tt1
         add_country_modifier = {
             name = bartering_authorised
-            duration = 3650
+            duration = 7300
         }
         current_ruler = {
             add_popularity = 10
@@ -4616,5 +4623,261 @@ c3rd_other_events.72 = { #Some possibility to balance the monetary value - this 
                 value = -10
             }
         }
+    }
+}
+
+c3rd_other_events.73 = { #crash of the currency event : people trying to escape the taxes
+    type = country_event
+    title = "c3rd_other_events.73.t"
+    desc = "c3rd_other_events.73.desc"
+
+    picture = bakery
+
+    trigger = {
+        has_land = yes
+        has_variable = silver_unvalue
+        has_country_modifier = high_monetary_crash
+        num_of_cities >= 400 #to leave a small buffer between 500 and 400 where you don't have the 500 events, but still can get this one
+        NOR = {
+            has_variable = silver_escape_taxes
+            has_variable = forced_decuria
+            has_country_modifier = decuria_established
+            has_country_modifier = tyranny_of_taxation
+            has_country_modifier = escape_silver_taxation
+        }
+    }
+
+    weight_multiplier = {
+        modifier = {
+            factor = 1.5
+            has_variable = silver_unvalue
+            var:silver_unvalue >= 150
+        }
+        modifier = {
+            factor = 1.5
+            has_variable = silver_unvalue
+            var:silver_unvalue >= 175
+        }
+        modifier = {
+            factor = 1.5
+            has_variable = silver_unvalue
+            var:silver_unvalue >= 200
+        }
+    }
+
+    immediate = {
+        set_variable = {
+            name = silver_escape_taxes
+            days = 3650
+        }
+    }
+
+    option = { #reinforce controls and punishments
+        name = c3rd_other_events.73.a
+        custom_tooltip = c3rd_other_events.73.a.tt1
+        add_stability = -2
+        add_tyranny = 10
+        add_country_modifier = {
+            name = tyranny_of_taxation
+            duration = 7300
+        }
+        
+    }
+
+
+    option = { #establish decuriones
+        name = c3rd_other_events.73.b
+        custom_tooltip = c3rd_other_events.73.b.tt1
+        current_ruler = {
+            add_popularity = -10
+        }
+        add_country_modifier = {
+            name = decuria_established
+            duration = 7300
+        }
+    }
+
+    option = { #let them
+        name = c3rd_other_events.73.c
+        custom_tooltip = c3rd_other_events.73.c.tt1
+        add_country_modifier = {
+            name = escape_silver_taxation
+            duration = 3650
+        }
+    }
+}
+
+
+c3rd_other_events.74 = { #the decuriones are fleeing
+    type = country_event
+    title = "c3rd_other_events.74.t"
+    desc = "c3rd_other_events.74.desc"
+
+    picture = proscription
+
+    trigger = {
+        has_land = yes
+        has_variable = silver_unvalue
+        has_country_modifier = high_monetary_crash
+        num_of_cities >= 400 #to leave a small buffer between 500 and 400 where you don't have the 500 events, but still can get this one
+        has_country_modifier = decuria_established
+        NOT = {
+            has_variable = forced_decuria
+        }
+    }
+
+    weight_multiplier = {
+        modifier = {
+            factor = 1.5
+            has_variable = silver_unvalue
+            var:silver_unvalue >= 150
+        }
+        modifier = {
+            factor = 1.5
+            has_variable = silver_unvalue
+            var:silver_unvalue >= 175
+        }
+        modifier = {
+            factor = 1.5
+            has_variable = silver_unvalue
+            var:silver_unvalue >= 200
+        }
+    }
+
+    immediate = {
+    }
+
+    option = { #reinforce controls and punishments
+        name = c3rd_other_events.74.a
+        custom_tooltip = c3rd_other_events.74.a.tt1
+        add_stability = -2
+        add_tyranny = 10
+        
+        set_variable = {
+            name = forced_decuria
+            days = 3650
+        }
+        
+    }
+
+
+    option = { #let them go
+        name = c3rd_other_events.74.b
+        custom_tooltip = c3rd_other_events.74.b.tt1
+        if = {
+            limit = {is_monarchy = yes }
+            add_legitimacy = -20
+        }
+        else_if = {
+            limit = {
+                is_republic = yes
+                has_party_type = populares_party
+            }
+            add_party_approval = {
+                party_type = optimates_party
+                value = -35
+            }
+        }
+        else_if = {
+            limit = {
+                is_republic = yes
+                has_party_type = democratic_party
+            }
+            add_party_approval = {
+                party_type = oligarchic_party
+                value = -35
+            }
+        }
+        remove_country_modifier = decuria_established
+    }
+}
+
+
+c3rd_other_events.75 = { #new currency, but the leader is really bad at that
+    type = country_event
+    title = "c3rd_other_events.75.t"
+    desc = "c3rd_other_events.75.desc"
+
+    picture = hellenic_marketplace
+
+    trigger = {
+        has_land = yes
+        num_of_cities >= 400 #to leave a small buffer between 500 and 400 where you don't have the 500 events, but still can get this one
+        current_ruler = {
+            finesse <= 2
+            NOT = {has_variable = treasureman_fixed_money}
+        }
+        has_variable = silver_unvalue
+    }
+
+    immediate = {
+    }
+
+    option = { #destroy the surplux of cardboard money
+        name = c3rd_other_events.75.a
+        custom_tooltip = c3rd_other_events.75.a.tt1
+        if = {
+            limit = {is_monarchy = yes }
+            add_legitimacy = -10
+        }
+        else_if = {
+            limit = {
+                is_republic = yes
+                has_party_type = populares_party
+            }
+            add_party_approval = {
+                party_type = boni_party
+                value = -20
+            }
+        }
+        else_if = {
+            limit = {
+                is_republic = yes
+                has_party_type = democratic_party
+            }
+            add_party_approval = {
+                party_type = traditionalist_party
+                value = -20
+            }
+        }
+        add_stability = -5
+        current_ruler = {
+            set_variable = {
+				name = treasureman_fixed_money
+			}
+        }
+        
+    }
+
+
+    option = { #office treasureman is competent enough
+        name = c3rd_other_events.75.b
+        custom_tooltip = c3rd_other_events.75.b.tt1
+        trigger = {
+            exists = scope:office_treasure_man
+            scope:office_treasure_man = {
+                finesse >= 10
+            }
+        }
+        highlight = yes
+        add_political_influence = -10
+        current_ruler = {
+            set_variable = {
+				name = treasureman_fixed_money
+			}
+        }
+    }
+
+    option = { #do nothing
+        name = c3rd_other_events.75.c
+        custom_tooltip = c3rd_other_events.75.c.tt1
+        current_ruler = {
+            add_popularity = -20
+            add_corruption = 10
+        }
+		change_variable = {
+			name = silver_unvalue
+			add = 25
+		}
     }
 }

@@ -346,6 +346,10 @@
 						id = c3rd_other_events.291
 					}
 				}
+				trigger_event = {
+					id = c3rd_other_events.75
+					days = 90
+				}
 			}
 		}
 

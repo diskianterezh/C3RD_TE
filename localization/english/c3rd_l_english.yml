@@ -114,6 +114,12 @@
  city_against_deflation:0 "Back to business"
  silver_consolidation_sol:0 "Silver Consolidation"
  desc_silver_consolidation_sol:0 "The use of strict controls helps to limit the fall in the value of silver money"
+ decuria_established:0 "Tax collectors decuriones"
+ desc_decuria_established:0 "the task of collecting taxes was entrusted to the decuriones, municipal councillors"
+ tyranny_of_taxation:0 "Tyranny of taxation"
+ desc_tyranny_of_taxation:0 "Tax controls have been ruthlessly stepped up and the number of administrative staff doubled"
+ escape_silver_taxation:0 "Tax evasion"
+ desc_escape_silver_taxation:0 "Galloping  inflation has led to a global trend towards tax evasion"
 
 
  #opinion:
@@ -1003,6 +1009,31 @@ low_stab_event.4.c.tt1:0 "Things remain as they are, but [independent_current_go
  c3rd_other_events.72.b.tt4:0 "#G The value of silver will recover enormously #!\n"
  c3rd_other_events.72.c:0 "We won't"
  c3rd_other_events.72.c.tt1:0 "Nothing will be done"
+
+ c3rd_other_events.73.t:0 "The population flees tax"
+ c3rd_other_events.73.desc:0 "The currency crisis is having a heavy impact on the people. With their purchasing power crumbling and a succession of different currencies, it seems that only gold retains its universal value. However, gold is the obligatory currency of exchange for annual taxes, so it's very difficult to get hold of it.... unless you stop paying taxes. A large-scale tax evasion movement has therefore begun to develop in the country. We need to counter it quickly before this mania spreads out of control!"
+ c3rd_other_events.73.a:0 "Double the inspections, triple them!"
+ c3rd_other_events.73.a.tt1:0 "More controls, more inspectors, more discipline. Maybe at the price of a sprawling administration that is difficult to control"
+ c3rd_other_events.73.b:0 "Delegate these tasks to the Decuriones"
+ c3rd_other_events.73.b.tt1:0 "These local magistrates have influence and popularity. They know the inhabitants and are undoubtedly well placed for this task."
+ c3rd_other_events.73.c:0 "Ignore this problem"
+ c3rd_other_events.73.c.tt1:0 "You'll do nothing to combat tax evasion"
+
+ c3rd_other_events.74.t:0 "Departure of the Decuriones"
+ c3rd_other_events.74.desc:0 "The Decuriones did not take kindly to being appointed local tax collectors. Not only has their prestige and popularity suffered, but the rules put in place to govern them oblige them to repay any difference in their own funds. A large number of Decuriones have fled their assigned cities to withdraw to the provinces, abandoning their obligations..."
+ c3rd_other_events.74.a:0 "Bring them back. By force."
+ c3rd_other_events.74.a.tt1:0 "The fugitives will be brought back in chains to their prestigious duty."
+ c3rd_other_events.74.b:0 "It wasn't the right solution, let's forget it"
+ c3rd_other_events.74.b.tt1:0 "Their tax collection duties will be withdrawn"
+
+ c3rd_other_events.75.t:0 "A botched currency introduction"
+ c3rd_other_events.75.desc:0 "The last time a new value was introduced, it was completely botched, no doubt due to our leader's lack of economic rigour. Instead of gradually introducing the new currency by withdrawing the old one, it was abruptly introduced all at once without any consideration for monetary equilibrium. The psychological effect on the population is devastating: knowing that the old currencies will soon be worthless, everyone is trying to get rid of them as quickly as possible! The result is a drastic increase in the circulation of money and a tenfold rise in prices."
+ c3rd_other_events.75.a:0 "Let's buy up as much of the old currency as we can and recast it! "
+ c3rd_other_events.75.a.tt1:0 "You will solve the problem and your leader will never make the same mistake again."
+ c3rd_other_events.75.b:0 "[office_treasure_man.GetName] will sort out the problem"
+ c3rd_other_events.75.b.tt1:0 "#G This choice is available because of [office_treasure_man.GetName]'s finesse #!. Your leader will never make the same mistake again."
+ c3rd_other_events.75.c:0 "I dont see any problem here"
+ c3rd_other_events.75.c.tt1:0 "#R this will reduce the value of silver money #!"
 
 #tribals fix
 
