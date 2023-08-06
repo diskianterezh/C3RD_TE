@@ -1399,17 +1399,15 @@ c3rd_events.81 = { #Only general with power ; he wants recognition
             has_country_modifier = political_unstability
         }
         num_of_cities >= 900
-        NOT = {
-            any_character = {
-                count > 1
-                is_general = yes
-                is_mercenary = no
-            }
+        any_character = {
+            count = 1
+            is_general = yes
+            is_mercenary = no
         }
         any_character = {
             is_general = yes
             is_mercenary = no
-            loyalty < 50 #very loyal general will follow you to hell
+            loyalty < 60 #very loyal general will follow you to hell
             power_base >= 20
             NOT = {
                 is_friend = root.current_ruler
@@ -1451,7 +1449,7 @@ c3rd_events.81 = { #Only general with power ; he wants recognition
             limit = {
                 is_general = yes
                 is_mercenary = no
-                loyalty < 50
+                loyalty < 60
                 power_base >= 20
                 NOT = {
                     is_friend = root.current_ruler
@@ -5355,6 +5353,36 @@ c3rd_events.52 = { #no more overextension if political instability against a cos
         name = c3rd_events.51.a
         custom_tooltip = c3rd_events.51.a.tt1
 
+    }
+}
+
+c3rd_events.100 = { #debug event
+    type = country_event
+    title = "c3rd_events.100.t"
+    desc = "c3rd_events.100.desc"
+
+    picture = road_construction
+
+
+    left_portrait = current_ruler
+
+    immediate = {
+        every_character = {
+            limit = {
+                is_general = yes
+                is_mercenary = no
+            }
+            add_gold = 1
+        }
+    }
+
+
+    option = {
+        name = c3rd_events.100.a
+        
+        trigger_event = {
+            id = c3rd_events.81
+        }
     }
 }
 

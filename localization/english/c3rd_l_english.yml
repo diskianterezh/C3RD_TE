@@ -278,6 +278,7 @@
  sol_solidus_reform_1_a_tt2:0 "There is a significant deflation in your country \n"
  sol_first_deflation_mission:0 "The deflation will be reduced by an amount"
  sol_deflation_bonus:0 "#G This will have a positive impact on the economy #!"
+ sol_solidus_reform_1_b_tt1:0 "Your economic balance should be at least 100%"
  solidus_reform_1_a:0 "Gold reserves"
  solidus_reform_1_b:0 "Stabilize the Crisis"
  solidus_reform_1_c:0 "Control of the Crisis"
@@ -682,6 +683,11 @@ low_stab_event.4.c.tt1:0 "Things remain as they are, but [independent_current_go
 
  c3rd_events.52.t:0 "Stabilization of the institutions"
  c3rd_events.52.desc:0 "Political instability at least has the advantage of simplifying procedures...  A flexible reform of the provincial and republican administration will undoubtedly solve our institutional worries."
+
+
+ c3rd_events.100.t:0 "Debug"
+ c3rd_events.100.desc:0 "This is a debug event for coding purposes only . beep boop"
+ c3rd_events.100.a:0 "COMPUTER NOISES"
 
  #1.2 Events
 

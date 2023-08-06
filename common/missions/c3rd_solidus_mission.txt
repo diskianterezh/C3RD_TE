@@ -112,7 +112,13 @@
 		requires = { solidus_reform_1 } 
 
 		allow = {
-			political_influence >= 25
+			OR = {
+				custom_tooltip = {
+					text = sol_solidus_reform_1_b_tt1
+					c3rd_economic_value >= 1
+				}
+				has_law = monetary_reform_law
+			}
 			NOT = {
 				has_country_modifier = high_deflation
 			}
