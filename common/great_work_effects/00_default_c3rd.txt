@@ -1046,7 +1046,7 @@ gw_effect_slaves_pop_doctrine = {
 			great_work_effect_tier = gw_effect_tier_4
 
 			country_modifier = {
-				global_slaves_output = 0.20
+				global_slaves_output = 0.15
 				#global_slaves_happyness = 0.16
 			}
 		}
@@ -1779,6 +1779,7 @@ gw_effect_mercenary_doctrine = {
 			country_modifier = {
 				mercenary_land_maintenance_cost = -0.2
 				mercenary_naval_maintenance_cost = -0.2
+				max_mercenary_stacks = 1
 			}
 		}
 	}
@@ -2171,7 +2172,7 @@ gw_effect_resilient_at_sea = {
 
 			country_modifier = {
 				blockade_efficiency = 0.05
-				ship_repair_at_sea = 0.05
+				ship_repair_at_sea = 0.02
 				naval_unit_attrition = -0.05
 			}
 		}
@@ -2180,7 +2181,7 @@ gw_effect_resilient_at_sea = {
 
 			country_modifier = {
 				blockade_efficiency = 0.1
-				ship_repair_at_sea = 0.1
+				ship_repair_at_sea = 0.03
 				naval_unit_attrition = -0.1
 			}
 		} 
@@ -2189,7 +2190,7 @@ gw_effect_resilient_at_sea = {
 
 			country_modifier = {
 				blockade_efficiency = 0.15
-				ship_repair_at_sea = 0.15
+				ship_repair_at_sea = 0.04
 				naval_unit_attrition = -0.15
 			}
 		} 
@@ -2198,7 +2199,7 @@ gw_effect_resilient_at_sea = {
 
 			country_modifier = {
 				blockade_efficiency = 0.2
-				ship_repair_at_sea = 0.2
+				ship_repair_at_sea = 0.05
 				naval_unit_attrition = -0.2
 			}
 		}

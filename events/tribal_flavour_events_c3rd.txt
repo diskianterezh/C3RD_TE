@@ -90,11 +90,11 @@ tribal_flavour_events.2 = {
 	trigger = {
 		is_ai = yes
 		is_tribal = yes
-		num_of_cities >= 120
+		num_of_cities >= 110
 		war = no
 		has_civil_war = no
 		NOT = {
-			country_culture_group = scythia
+			has_variable = is_facing_tribal_crisis
 		}
 		OR = {
 			stability <= 20
@@ -107,57 +107,266 @@ tribal_flavour_events.2 = {
 	}
 
 	immediate = {
-		save_scope_as = origin_crisis
-		every_country_state = {
-			limit = {
+		#FROM INVICTUS
+		#kind of a last hurrah
+		set_variable = is_facing_tribal_crisis
+		if = {
+			limit = { 
+				OR = {
+					country_culture_group = scythia
+					country_culture_group = scythian_east
+					country_culture_group = bactrian
+				}
 				NOT = {
-					this = root.capital_scope.state
+					has_variable = has_been_through_tribal_collapse
 				}
 			}
-			save_scope_as = sbgnq1
-			capital_scope = {
-				create_country = {
-					change_government = tribal_kingdom
-					save_scope_as = sbgnq2
-					if = {
-						limit = {
-							exists = scope:sbgnq1
-						}
-						scope:sbgnq1 = {
-							every_state_province = {
-								set_owned_by = scope:sbgnq2
-							}
-						}
-					}
-					if = {
-						limit = {
-							any_neighbour_country = {
-								this = root
-							}
-						}
-						root = {
-							make_subject = {
-								target = scope:sbgnq2
-								type = feudatory
-							}
-						}
-					}
-				}
-			}
-		}
-		every_country = {
-			limit = {
-				is_ai = no
+			add_country_modifier = {
+				name = steppe_insanity_unleashed
+				duration = 7300
 			}
 			trigger_event = {
-				id = tribal_flavour_events.3
+				id = tribal_flavour_events.4
+				days = { 7300 8000 }
+			}
+			change_government = steppe_horde
+			switch_government_type_event_clearup_effect = yes
+			random_family = {
+				weight = {
+					modifier = {
+						factor = 1000
+						any_family_member = {
+							count = all
+							from_ruler_family = no
+						}
+					}
+				}
+				save_scope_as = monarchy_family
+			}
+			if = {
+				limit = {
+					exists = scope:monarchy_family
+					scope:monarchy_family = {
+						any_family_member = {
+							is_adult = yes
+							trigger_if = {
+								limit = {
+									root = {
+										gender_equality = no
+									}
+								}
+								is_male = yes
+							}
+							has_any_office = no
+						}
+					}
+				}
+				custom_tooltip = grant_offices_monarchy_reform_tt
+				hidden_effect = {
+					if = {
+						limit = {
+							scope:monarchy_family = {
+								any_family_member = {
+									is_adult = yes
+									trigger_if = {
+										limit = {
+											root = {
+												gender_equality = no
+											}
+										}
+										is_male = yes
+									}
+									has_any_office = no
+									is_general = no
+									is_admiral = no
+									is_governor = no
+									has_tech_office = no
+								}
+							}
+							office_is_empty = office_foreign_minister
+						}
+						scope:monarchy_family = {
+							random_family_member = {
+								limit = {
+									is_adult = yes
+									trigger_if = {
+										limit = {
+											root = {
+												gender_equality = no
+											}
+										}
+										is_male = yes
+									}
+									has_any_office = no
+									is_general = no
+									is_admiral = no
+									is_governor = no
+									has_tech_office = no
+								}
+								weight = {
+									modifier = {
+										factor = {
+											value = 1
+											add = charisma
+										}
+									}
+								}
+								give_office = office_foreign_minister
+							}
+						}
+					}
+					if = {
+						limit = {
+							scope:monarchy_family = {
+								any_family_member = {
+									is_adult = yes
+									trigger_if = {
+										limit = {
+											root = {
+												gender_equality = no
+											}
+										}
+										is_male = yes
+									}
+									has_any_office = no
+									is_general = no
+									is_admiral = no
+									is_governor = no
+									has_tech_office = no
+								}
+							}
+							office_is_empty = office_marshal
+						}
+						scope:monarchy_family = {
+							random_family_member = {
+								limit = {
+									is_adult = yes
+									trigger_if = {
+										limit = {
+											root = {
+												gender_equality = no
+											}
+										}
+										is_male = yes
+									}
+									has_any_office = no
+									is_general = no
+									is_admiral = no
+									is_governor = no
+									has_tech_office = no
+								}
+								weight = {
+									modifier = {
+										factor = {
+											value = 1
+											add = martial
+										}
+									}
+								}
+								give_office = office_marshal
+							}
+						}
+					}
+					if = {
+						limit = {
+							scope:monarchy_family = {
+								any_family_member = {
+									is_adult = yes
+									trigger_if = {
+										limit = {
+											root = {
+												gender_equality = no
+											}
+										}
+										is_male = yes
+									}
+									has_any_office = no
+									is_general = no
+									is_admiral = no
+									is_governor = no
+									has_tech_office = no
+								}
+							}
+							office_is_empty = office_high_priest_monarchy
+						}
+						scope:monarchy_family = {
+							random_family_member = {
+								limit = {
+									is_adult = yes
+									trigger_if = {
+										limit = {
+											root = {
+												gender_equality = no
+											}
+										}
+										is_male = yes
+									}
+									has_any_office = no
+									is_general = no
+									is_admiral = no
+									is_governor = no
+									has_tech_office = no
+								}
+								weight = {
+									modifier = {
+										factor = {
+											value = 1
+											add = zeal
+										}
+									}
+								}
+								give_office = office_high_priest_monarchy
+							}
+						}
+					}
+				}
 			}
 		}
+		else_if = {
+			limit = { 
+				government = tribal_chiefdom
+				NOT = {
+					has_variable = has_been_through_tribal_collapse
+				}
+			}
+			add_country_modifier = {
+				name = migratory_insanity_unleashed
+				duration = 7300
+			}
+			trigger_event = {
+				id = tribal_flavour_events.4
+				days = { 7300 8000 }
+			}
+		}
+		else_if = {
+			limit = {
+				NOT = {
+					has_variable = has_been_through_tribal_collapse
+				}
+			}
+			add_country_modifier = {
+				name = tribal_insanity_unleashed
+				duration = 7300
+			}
+			trigger_event = {
+				id = tribal_flavour_events.4
+				days = { 7300 8000 }
+			}
+		}
+		else = {
+			trigger_event = {
+				id = tribal_flavour_events.4
+				days = 1
+			}			
+		}
+
+
+		#END INVICTUS
 	}
 
 }
 
-tribal_flavour_events.3 = {
+tribal_flavour_events.3 = {#News that tribal empire has collapsed
 	type = country_event
 	title = "tribal_flavour_events.3.t"
 	desc =  "tribal_flavour_events.3.desc"
@@ -175,11 +384,86 @@ tribal_flavour_events.3 = {
 		custom_tooltip = "target_fallen_tfe3"
 	}
 }
-
-tribal_flavour_events.4 = {
+tribal_flavour_events.4 = { #Tribal collapse
 	type = country_event
-	title = "tribal_flavour_events.4.t"
-	desc =  "tribal_flavour_events.4.desc"
+	hidden = yes
+
+	trigger = {
+		is_ai = yes
+		is_tribal = yes
+	}
+	
+	
+	immediate = {
+		save_scope_as = origin_crisis
+		every_country_state = {
+			limit = {
+				NOT = {
+					this = root.capital_scope.state
+					this.region = root.capital_scope.state.region
+				}
+			}
+			capital_scope = {
+				create_country = {
+					change_government = tribal_kingdom
+					add_military_experience_to_new_country_effect = yes
+					trigger_event = {
+						id = revolt_events.4
+					}
+					save_scope_as = sbgnq2
+					capital_scope.region = {
+						every_region_province = {
+							limit = {
+								owner = root
+							}
+							set_owned_by = scope:sbgnq2
+						}
+					}
+					root = {
+						#kill them properly the second time, no subjects
+						if = {
+							limit = { has_variable = has_been_through_tribal_collapse }
+							add_country_modifier = {
+								name = has_collapsed_tribe_crisis_again
+								duration = 1900
+							}
+							scope:sbgnq2 = {
+								add_country_modifier = {
+									name = rise_and_rise_again
+									duration = 1900
+								}
+							}
+						}
+						else = {
+							make_subject = {
+								target = scope:sbgnq2
+								type = tributary
+							}
+							add_country_modifier = {
+								name = has_collapsed_tribe_crisis
+								duration = 1900
+							}
+						}
+					}
+				}
+			}
+		}
+		every_country = {
+			limit = {
+				is_ai = no
+			}
+			trigger_event = {
+				id = tribal_flavour_events.3
+			}
+		}
+		set_variable = has_been_through_tribal_collapse
+	}	
+}
+
+tribal_flavour_events.41 = {#C3RD PLAYER COLLAPSE
+	type = country_event
+	title = "tribal_flavour_events.41.t"
+	desc =  "tribal_flavour_events.41.desc"
 	picture = celtic_diplomacy
 	goto_location = scope:origin_crisis.capital_scope
 
@@ -217,8 +501,8 @@ tribal_flavour_events.4 = {
 	}
 
 	option = {
-		name = "tribal_flavour_events.4.a"
-        custom_tooltip = tribal_flavour_events.4.a.tt1
+		name = "tribal_flavour_events.41.a"
+        custom_tooltip = tribal_flavour_events.41.a.tt1
 		random_list = {
 			50 = {
 				modifier = {
@@ -227,7 +511,7 @@ tribal_flavour_events.4 = {
 				add_stability = 10
 			}
 			100 = {
-				custom_tooltip = tribal_flavour_events.4.a.tt2
+				custom_tooltip = tribal_flavour_events.41.a.tt2
 				modifier = {
 					add = 100
 					is_ai = yes
@@ -241,14 +525,14 @@ tribal_flavour_events.4 = {
 					centralization < -75
 				}
 				trigger_event = {
-					id = tribal_flavour_events.5
+					id = tribal_flavour_events.51
 				}
 			}
 		}
 	}
 	option = {
-		name = "tribal_flavour_events.4.b"
-        custom_tooltip = tribal_flavour_events.4.b.tt1
+		name = "tribal_flavour_events.41.b"
+        custom_tooltip = tribal_flavour_events.41.b.tt1
 		trigger = {
 			is_ai = no
 			centralization >= 0
@@ -260,8 +544,8 @@ tribal_flavour_events.4 = {
 		}
 	}
 	option = {
-		name = "tribal_flavour_events.4.c"
-        custom_tooltip = tribal_flavour_events.4.c.tt1
+		name = "tribal_flavour_events.41.c"
+        custom_tooltip = tribal_flavour_events.41.c.tt1
 		trigger = {
 			is_ai = no
 			centralization <= 0
@@ -275,10 +559,10 @@ tribal_flavour_events.4 = {
 	}
 }
 
-tribal_flavour_events.5 = {
+tribal_flavour_events.51 = {#C3RD PLAYER COLLAPSE
 	type = country_event
-	title = "tribal_flavour_events.5.t"
-	desc =  "tribal_flavour_events.5.desc"
+	title = "tribal_flavour_events.51.t"
+	desc =  "tribal_flavour_events.51.desc"
 	picture = celtic_diplomacy
 
 	trigger = {
@@ -340,8 +624,8 @@ tribal_flavour_events.5 = {
 	}
 
 	option = {
-		name = "tribal_flavour_events.5.a"
-        custom_tooltip = tribal_flavour_events.5.a.tt1
+		name = "tribal_flavour_events.51.a"
+        custom_tooltip = tribal_flavour_events.51.a.tt1
 
 	}
 }

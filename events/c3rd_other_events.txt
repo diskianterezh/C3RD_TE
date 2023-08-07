@@ -1855,6 +1855,42 @@ c3rd_other_events.16 = { #Solidus final
             }
             remove_country_modifier = monetary_consolidation_sol
         }
+        if = {
+            limit = {
+                has_country_modifier = small_deflation
+            }
+            remove_country_modifier = small_deflation
+        }
+        if = {
+            limit = {
+                has_country_modifier = medium_deflation
+            }
+            remove_country_modifier = medium_deflation
+        }
+        if = {
+            limit = {
+                has_country_modifier = high_deflation
+            }
+            remove_country_modifier = high_deflation
+        }
+        if = {
+            limit = {
+                has_country_modifier = small_monetary_crash
+            }
+            remove_country_modifier = small_monetary_crash
+        }
+        if = {
+            limit = {
+                has_country_modifier = medium_monetary_crash
+            }
+            remove_country_modifier = medium_monetary_crash
+        }
+        if = {
+            limit = {
+                has_country_modifier = high_monetary_crash
+            }
+            remove_country_modifier = high_monetary_crash
+        }
 
     }
 

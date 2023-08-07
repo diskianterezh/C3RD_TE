@@ -1044,18 +1044,18 @@ low_stab_event.4.c.tt1:0 "Things remain as they are, but [independent_current_go
 
 #tribals fix
 
- tribal_flavour_events.4.t:0 "Imminent collapse"
- tribal_flavour_events.4.desc:0 "The country is on the verge of an explosion. Poor diplomacy, bad understanding of the main clans or disunity of the country in each village... No one can say what has contributed most to this situation, but here we are. In the midst of the representatives, about to act the irretrievable loss of the predominance of our clan, our leader can try a last attempt to save the country."
- tribal_flavour_events.4.a:0 "Let us appeal to their honor, and the privilege of serving our clan."
- tribal_flavour_events.4.a.tt1:0 "You will try a last desperate speech, the #G popularity #! of your leader will influence the outcome"
- tribal_flavour_events.4.a.tt2:0 "The country will collapse"
- tribal_flavour_events.4.b:0 "Wait ... what if we offered more autonomy?"
- tribal_flavour_events.4.b.tt1:0 "You will dodge the collapse at the cost of heavy reforms"
- tribal_flavour_events.4.c:0 "Come on, you'll get what you want!"
- tribal_flavour_events.4.c.tt1:0 "You will dodge the collapse at the cost of heavy concessions"
+ tribal_flavour_events.41.t:0 "Imminent collapse"
+ tribal_flavour_events.41.desc:0 "The country is on the verge of an explosion. Poor diplomacy, bad understanding of the main clans or disunity of the country in each village... No one can say what has contributed most to this situation, but here we are. In the midst of the representatives, about to act the irretrievable loss of the predominance of our clan, our leader can try a last attempt to save the country."
+ tribal_flavour_events.41.a:0 "Let us appeal to their honor, and the privilege of serving our clan."
+ tribal_flavour_events.41.a.tt1:0 "You will try a last desperate speech, the #G popularity #! of your leader will influence the outcome"
+ tribal_flavour_events.41.a.tt2:0 "The country will collapse"
+ tribal_flavour_events.41.b:0 "Wait ... what if we offered more autonomy?"
+ tribal_flavour_events.41.b.tt1:0 "You will dodge the collapse at the cost of heavy reforms"
+ tribal_flavour_events.41.c:0 "Come on, you'll get what you want!"
+ tribal_flavour_events.41.c.tt1:0 "You will dodge the collapse at the cost of heavy concessions"
 
 
- tribal_flavour_events.5.t:0 "Tribal Collapse"
- tribal_flavour_events.5.desc:0 "It seemed that the audience might have been convinced... but as your leader launched into a passionate diatribe, it became more and more obvious that the hope of saving the unity of the country was fading away during the evening. One by one, the representatives went back to their respective clans, now masters of their destinies again."
- tribal_flavour_events.5.a:0 "This is a disaster..."
- tribal_flavour_events.5.a.tt1:0 "The country was divided into many sub-clans"
+ tribal_flavour_events.51.t:0 "Tribal Collapse"
+ tribal_flavour_events.51.desc:0 "It seemed that the audience might have been convinced... but as your leader launched into a passionate diatribe, it became more and more obvious that the hope of saving the unity of the country was fading away during the evening. One by one, the representatives went back to their respective clans, now masters of their destinies again."
+ tribal_flavour_events.51.a:0 "This is a disaster..."
+ tribal_flavour_events.51.a.tt1:0 "The country was divided into many sub-clans"

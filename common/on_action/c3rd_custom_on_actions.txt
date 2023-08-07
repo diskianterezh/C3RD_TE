@@ -58,7 +58,7 @@ c3rd_custom_on_actions_third_century = {
 	
 	random_events = {
 		500 = 0
-		100 = tribal_flavour_events.4
+		100 = tribal_flavour_events.41
 	}
 }
 
