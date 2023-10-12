@@ -43,7 +43,7 @@ crisis_of_the_third_century = {
 	monthly_legitimacy = -0.1
 	agressive_expansion_impact = 0.25
 	global_monthly_state_loyalty = -0.01
-	integrate_speed = -0.5
+	integrate_speed = -0.4
 	diplomatic_relations = -1
 	monthly_political_influence_modifier = -0.10
 }
