@@ -1938,7 +1938,7 @@ gw_effect_strong_generals = {
 			great_work_effect_tier = gw_effect_tier_4
 
 			country_modifier = {
-				land_morale_modifier = 0.04
+				land_morale_modifier = 0.05
 				general_loyalty = 5
 			}
 		}
