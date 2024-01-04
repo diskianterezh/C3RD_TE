@@ -28,6 +28,10 @@ autonomy_granted = {
 	loyalty_to_overlord = 20
 }
 
+customs_controls = {
+	loyalty_to_overlord = -10
+}
+
 crisis_of_the_third_century = {
 	global_nobles_output = -0.1
 	global_citizen_output = -0.1
@@ -39,7 +43,7 @@ crisis_of_the_third_century = {
 	monthly_legitimacy = -0.1
 	agressive_expansion_impact = 0.25
 	global_monthly_state_loyalty = -0.01
-	integrate_speed = -0.5
+	integrate_speed = -0.4
 	diplomatic_relations = -1
 	monthly_political_influence_modifier = -0.10
 }
@@ -263,7 +267,7 @@ high_monetary_crash = {
 }
 
 local_autonomy_c3rd = {
-	local_pop_assimilation_speed_modifier = -0.25
+	local_pop_assimilation_speed_modifier = -0.5
 }
 
 revolt_preparation = {
@@ -363,6 +367,69 @@ aristocratic_reforms = {
 	monthly_corruption = 0.05
 	global_monthly_state_loyalty = -0.05
 	global_slaves_desired_pop_ratio = 0.05
+}
+
+raise_of_wages = {
+	global_nobles_happyness = -0.1
+	global_freemen_happyness = 0.1
+	global_tax_modifier = -0.15 #these are not economically correct, because raising wage should technically up taxes and economy by consequences, however, this is here to  symbolize the economy cost of the elite (hence also the governement) of raising wages
+	global_commerce_modifier = -0.15
+	stability_monthly_change = 0.02
+}
+
+bartering_authorised = {
+	global_tax_modifier = -0.15
+	global_slaves_desired_pop_ratio = 0.05
+	global_tribesmen_desired_pop_ratio = 0.05
+	country_civilization_value = -10
+	global_monthly_civilization = -0.05
+}
+
+monetary_consolidation_sol = {
+	global_tax_modifier = 0.1
+	happiness_for_same_culture_modifier = 0.05
+}
+
+little_trade_buff = {
+	global_commerce_modifier = 0.1
+}
+
+little_freemen_output = {
+	global_freemen_output = 0.1
+}
+
+little_noble_happy = {
+	global_nobles_happyness = 0.05
+}
+
+little_freemen_happy = {
+	global_freemen_happyness = 0.05
+}
+
+city_against_deflation = {
+	local_freemen_output = 0.1
+	local_nobles_happyness = 0.05
+	local_commerce_value_modifier = 0.1
+	local_tax_modifier = -0.1
+}
+
+silver_consolidation_sol = {
+	global_commerce_modifier = 0.1
+	happiness_for_same_culture_modifier = 0.05
+}
+
+decuria_established = {
+	global_citizen_happyness = -0.1
+	global_tax_modifier = 0.05
+}
+
+tyranny_of_taxation = {
+	monthly_corruption = 0.02
+	monthly_governor_wage = 0.1
+}
+
+escape_silver_taxation = {
+	global_tax_modifier = -0.4
 }
 
 # barbarian_spawn_buff_x = {

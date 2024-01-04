@@ -6,5 +6,6 @@
 		current_date >= 750.1.1
 		c3rd_economic_value < 1
 		c3rd_economic_value > 0.75
+		NOT = {has_country_modifier = solidus_introduced}
 	}
 }

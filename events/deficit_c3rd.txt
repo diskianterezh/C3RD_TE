@@ -5,10 +5,10 @@ deficit.1 = {
 	title = "deficit.1.t"
 	desc = "deficit.1.d"
 	picture = war_chest
-	
+
 	left_portrait = root.current_ruler
 	right_portrait = scope:deficit_1_target
-	
+
 	trigger = {
 		any_character = {
 			is_ruler = no
@@ -16,7 +16,7 @@ deficit.1 = {
 			has_legion_trigger = yes
 		}
 	}
-	
+
 	immediate = {
 		if = {
 			limit = {
@@ -69,15 +69,15 @@ deficit.2 = {
 	title = "deficit.2.t"
 	desc = "deficit.2.d"
 	picture = city_construction
-	
+
 	left_portrait = root.current_ruler
-	
+
 	trigger = {
-		
+
 	}
-	
+
 	immediate = {
-		
+
 	}
 
 	option = {
@@ -120,7 +120,7 @@ deficit.3 = {
 	title = "deficit.3.t"
 	desc = "deficit.3.d"
 	picture = proscription
-	
+
 	left_portrait = root.current_ruler
 
 	trigger = {
@@ -154,10 +154,10 @@ deficit.4 = {
 	title = "deficit.4.t"
 	desc = "deficit.4.d"
 	picture = proscription
-	
+
 	left_portrait = root.current_ruler
 	right_portrait = scope:deficit_4_target
-	
+
 	trigger = {
 		any_character = {
 			OR = {
@@ -166,7 +166,7 @@ deficit.4 = {
 			}
 		}
 	}
-	
+
 	immediate = {
 		if = {
 			limit = {
@@ -226,16 +226,16 @@ deficit.5 = {
 	title = "deficit.5.t"
 	desc = "deficit.5.d"
 	picture = war_chest
-	
+
 	left_portrait = root.current_ruler
 	right_portrait = scope:deficit_5_target
-	
+
 	trigger = {
 		any_character = {
 			has_tech_office = yes
 		}
 	}
-	
+
 	immediate = {
 		random_character = {
 			limit = {
@@ -280,13 +280,13 @@ deficit.6 = {
 	title = "deficit.6.t"
 	desc = "deficit.6.d"
 	picture = war_chest
-	
+
 	left_portrait = root.current_ruler
 
 	trigger = {
 		NOT = { has_variable = deficit_lucky_var }
 	}
-	
+
 	immediate = {
 		set_variable = {
 			name = deficit_lucky_var
@@ -333,7 +333,7 @@ deficit.7 = {
 			}
 		}
 	}
-	
+
 	immediate = {
 		save_scope_as = merc_target_country
 		random_character = {
@@ -378,12 +378,12 @@ deficit.8 = {
 	title = "deficit.8.t"
 	desc = "deficit.8.desc"
 	picture = celtic_diplomacy
-	
+
 	left_portrait = root.current_ruler
 	right_portrait = scope:defecting_captain
-	
+
 	goto_location = scope:defecting_captain
-	
+
 	immediate = {
 		save_scope_as = merc_target_country_2
 	}
@@ -411,7 +411,7 @@ deficit.8 = {
 			change_mercenary_employer = root
 		}
 	}
-	
+
 	option = {
 		name = "deficit.8.b"
 		scope:defecting_captain = {
@@ -438,7 +438,7 @@ deficit.8 = {
 			}
 		}
 	}
-	
+
 	option = {
 		name = "deficit.8.c"
 		custom_tooltip = "shrewd_tooltip"
@@ -465,7 +465,7 @@ deficit.8 = {
 			change_mercenary_employer = root
 		}
 	}
-	
+
 }
 
 deficit.9 = {
@@ -473,32 +473,32 @@ deficit.9 = {
 	title = "deficit.9.t"
 	desc = "deficit.9.desc"
 	picture = persia_marching
-	
+
 	left_portrait = root.current_ruler
 	right_portrait = scope:defecting_captain
-	
+
 	option = {
 		name = "deficit.9.a"
 	}
-	
+
 }
 
 deficit.10 = {
 	type = country_event
 	title = "deficit.10.t"
 	desc = "deficit.10.desc"
-	
+
 	left_portrait = current_ruler
 	right_portrait = scope:seceding_captain
-	
+
 	picture = revolt
-	
+
 	goto_location = scope:seceding_captain
-	
+
 	trigger = {
 		treasury <= 0
 		any_character = {
-			is_mercenary = yes  
+			is_mercenary = yes
 			is_general = yes
 			NOT = {
 				location = {
@@ -515,11 +515,11 @@ deficit.10 = {
 			}
 		}
 	}
-	
+
 	immediate = {
 		random_character = {
 			limit = {
-				is_mercenary = yes 
+				is_mercenary = yes
 				is_general = yes
 				NOT = {
 					location = {
@@ -562,7 +562,7 @@ deficit.10 = {
 			}
 			scope:seceding_captain = {
 				change_mercenary_employer = c:MER
-				remove_character_modifier = foreign_citizen 
+				remove_character_modifier = foreign_citizen
 			}
 			reset_scoring = scope:mercenary_secession_country
 			scope:mercenary_secession_country = {
@@ -570,7 +570,7 @@ deficit.10 = {
 			}
 		}
 	}
-	
+
 	option = {
 		name = "deficit.10.a"
 		declare_war_with_wargoal = {
@@ -589,27 +589,27 @@ deficit.10 = {
 			duration = 3650
 		}
 	}
-	
+
 }
 
 deficit.11 = {
 	type = country_event
 	title = "deficit.11.t"
 	desc = "deficit.11.desc"
-	
+
 	left_portrait = current_ruler
 	right_portrait = scope:angry_captain
-	
+
 	goto_location = scope:angry_captain
-	
+
 	picture = persia_marching
-	
+
 	trigger = {
 		#NOT = {
 		#	has_variable = deficit_11_toggle
 		#}
 		any_character = {
-			is_mercenary = yes  
+			is_mercenary = yes
 			is_general = yes
 			NOT = {
 				location = {
@@ -621,7 +621,7 @@ deficit.11 = {
 			}
 		}
 	}
-	
+
 	immediate = {
 		#set_variable = {
 		#	name = deficit_11_toggle
@@ -629,7 +629,7 @@ deficit.11 = {
 		#}
 		random_character = {
 			limit = {
-				is_mercenary = yes  
+				is_mercenary = yes
 				is_general = yes
 				NOT = {
 					location = {
@@ -663,7 +663,7 @@ deficit.11 = {
 			}
 		}
 	}
-	
+
 	option = {
 		name = "deficit.11.a"
 		custom_tooltip = "deficit.11.a.tooltip"
@@ -671,6 +671,5 @@ deficit.11 = {
 			add_popularity = subtract_popularity_small
 		}
 	}
-	
+
 }
-	

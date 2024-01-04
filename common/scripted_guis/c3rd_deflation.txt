@@ -8,5 +8,6 @@
 			has_country_modifier = small_deflation
 			has_country_modifier = medium_deflation
 		}
+		NOT = {has_country_modifier = solidus_introduced}
 	}
 }

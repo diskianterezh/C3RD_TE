@@ -136,35 +136,6 @@
 		}
 
 	}
-	establish_solidus = {
-		potential = {
-			current_date >= 750.1.1
-			has_law = second_reform_law
-			NOR = {
-				has_country_modifier = solidus_introduced
-				has_variable = solidus_ongoing
-			}
-		}
-		allow = {
-			has_law = second_reform_law
-			NOR = {
-				has_country_modifier = small_deflation
-				has_country_modifier = medium_deflation
-				has_country_modifier = high_deflation
-				has_country_modifier = small_monetary_crash
-				has_country_modifier = medium_monetary_crash
-				has_country_modifier = high_monetary_crash
-			}
-			political_influence >= 50
-		}
-		effect = {
-			trigger_event = {
-				id = c3rd_other_events.13
-			}
-
-		}
-
-	}
 	inject_liquidity = {
 		potential = {
 			current_date >= 700.1.1
@@ -191,9 +162,38 @@
 				value = -10
 				multiply = num_of_cities
 			}
-			change_variable = {
-				name = deflation_value
-				add = -7
+			if = {
+				limit = { 
+					num_of_cities <= 100
+				}
+				change_variable = {
+					name = deflation_value
+					add = -16
+				}
+			}
+			else_if = {
+				limit = { 
+					num_of_cities <= 250
+				}
+				change_variable = {
+					name = deflation_value
+					add = -13
+				}
+			}
+			else_if = {
+				limit = { 
+					num_of_cities <= 500
+				}
+				change_variable = {
+					name = deflation_value
+					add = -10
+				}
+			}
+			else = {
+				change_variable = {
+					name = deflation_value
+					add = -7
+				}
 			}
 			add_country_modifier = {
 				name = added_liquidity
@@ -268,9 +268,38 @@
 		effect = {
 			add_political_influence = -25
 			add_stability = -10
-			change_variable = {
-				name = silver_unvalue
-				add = -10
+			if = {
+				limit = { 
+					num_of_cities <= 100
+				}
+				change_variable = {
+					name = silver_unvalue
+					add = -25
+				}
+			}
+			else_if = {
+				limit = { 
+					num_of_cities <= 250
+				}
+				change_variable = {
+					name = silver_unvalue
+					add = -20
+				}
+			}
+			else_if = {
+				limit = { 
+					num_of_cities <= 500
+				}
+				change_variable = {
+					name = silver_unvalue
+					add = -15
+				}
+			}
+			else = {
+				change_variable = {
+					name = silver_unvalue
+					add = -10
+				}
 			}
 			add_country_modifier = {
 				name = new_balance
@@ -316,6 +345,10 @@
 					trigger_event = {
 						id = c3rd_other_events.291
 					}
+				}
+				trigger_event = {
+					id = c3rd_other_events.75
+					days = 90
 				}
 			}
 		}

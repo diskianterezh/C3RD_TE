@@ -3,3 +3,8 @@ empire_rivals = {
 	value = -100
 	yearly_decay = 1
 }
+
+border_money = {
+	value = -25
+	yearly_decay = 1
+}

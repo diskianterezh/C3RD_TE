@@ -14,10 +14,10 @@ c3rd_other_events.1 = { #Empire leader has too low martial in a war
                 }
             }
             desc = "c3rd_other_events.1.desc.1"
-            
+
         }
     }
- 
+
     picture = successors
 
     trigger = {
@@ -43,7 +43,7 @@ c3rd_other_events.1 = { #Empire leader has too low martial in a war
     immediate = {
         if = {
             limit = {
-                current_date >= 1050.1.1 
+                current_date >= 1050.1.1
             }
             add_country_modifier = {
                 name = unworthy_leader_3
@@ -52,7 +52,7 @@ c3rd_other_events.1 = { #Empire leader has too low martial in a war
         }
         else_if = {
             limit = {
-                current_date >= 900.1.1 
+                current_date >= 900.1.1
             }
             add_country_modifier = {
                 name = unworthy_leader_2
@@ -72,7 +72,7 @@ c3rd_other_events.1 = { #Empire leader has too low martial in a war
             add_legitimacy = -10
         }
         add_stability = -5
-           
+
     }
 
     option = { #please help me improve
@@ -128,7 +128,7 @@ c3rd_other_events.2 = { #removing it
     type = country_event
     title = "c3rd_other_events.2.t"
     desc = "c3rd_other_events.2.desc"
- 
+
     picture = greek_court
 
     trigger = {
@@ -170,7 +170,7 @@ c3rd_other_events.2 = { #removing it
                 remove_country_culture_modifier = unworthy_ruler_tradition
             }
         }
-           
+
     }
 
     option = {
@@ -192,10 +192,10 @@ c3rd_other_events.3 = { #Divine imperium leader has too low zeal in a war
                 }
             }
             desc = "c3rd_other_events.3.desc.1"
-            
+
         }
     }
- 
+
     picture = successors
 
     trigger = {
@@ -222,7 +222,7 @@ c3rd_other_events.3 = { #Divine imperium leader has too low zeal in a war
     immediate = {
         if = {
             limit = {
-                current_date >= 1050.1.1 
+                current_date >= 1050.1.1
             }
             add_country_modifier = {
                 name = unworthy_leader_3
@@ -231,7 +231,7 @@ c3rd_other_events.3 = { #Divine imperium leader has too low zeal in a war
         }
         else_if = {
             limit = {
-                current_date >= 900.1.1 
+                current_date >= 900.1.1
             }
             add_country_modifier = {
                 name = unworthy_leader_2
@@ -251,7 +251,7 @@ c3rd_other_events.3 = { #Divine imperium leader has too low zeal in a war
             add_legitimacy = -10
         }
         add_stability = -5
-           
+
     }
 
     option = { #please help me improve
@@ -307,7 +307,7 @@ c3rd_other_events.4 = { #social crisis : too few integrated pops
     type = country_event
     title = "c3rd_other_events.4.t"
     desc = "c3rd_other_events.4.desc"
- 
+
     picture = persia_marching
 
     trigger = {
@@ -390,7 +390,7 @@ c3rd_other_events.4 = { #social crisis : too few integrated pops
 					}
 				}}
 			}
-            
+
         }
     }
     option = {
@@ -438,7 +438,7 @@ c3rd_other_events.5 = { #inform about deflation
     type = country_event
     title = "c3rd_other_events.5.t"
     desc = "c3rd_other_events.5.desc"
- 
+
     picture = aqueducts
 
     trigger = {
@@ -476,10 +476,10 @@ c3rd_other_events.6 = { #gold mine exhaustion
                 }
             }
             desc = "c3rd_other_events.6.desc.1"
-            
+
         }
     }
- 
+
     picture = war_chest
 
     trigger = {
@@ -509,13 +509,13 @@ c3rd_other_events.6 = { #gold mine exhaustion
         scope:exhausted_mine = {
             if = {
                 limit = {
-                    has_variable = mine_exhaustion 
+                    has_variable = mine_exhaustion
                 }
                 remove_variable = mine_exhaustion
             }
             if = {
                 limit = {
-                    has_province_modifier = deep_mining 
+                    has_province_modifier = deep_mining
                 }
                 remove_province_modifier = deep_mining
             }
@@ -606,7 +606,7 @@ c3rd_other_events.7 = { #inform about deflation stopping
     type = country_event
     title = "c3rd_other_events.7.t"
     desc = "c3rd_other_events.7.desc"
- 
+
     picture = road_construction
 
     trigger = {
@@ -633,7 +633,7 @@ c3rd_other_events.8 = { #event where people are not happy about taxes
     type = country_event
     title = "c3rd_other_events.8.t"
     desc = "c3rd_other_events.8.desc"
- 
+
     picture = senator_conversing
     left_portrait = scope:character_taxed_1
     right_portrait = scope:character_taxed_2
@@ -659,7 +659,7 @@ c3rd_other_events.8 = { #event where people are not happy about taxes
                     is_governor = yes
                 }
             }
-            
+
         }
     }
     weight_multiplier = {
@@ -916,7 +916,7 @@ c3rd_other_events.9 = { #event where people ask for census taxes
     type = country_event
     title = "c3rd_other_events.9.t"
     desc = "c3rd_other_events.9.desc"
- 
+
     picture = senator_conversing
     left_portrait = scope:character_taxed_1
     right_portrait = scope:character_taxed_2
@@ -943,7 +943,7 @@ c3rd_other_events.9 = { #event where people ask for census taxes
                     is_governor = yes
                 }
             }
-            
+
         }
     }
     weight_multiplier = {
@@ -1230,21 +1230,21 @@ c3rd_other_events.10 = { #great book
                 var:what_is_my_eco >= 100
             }
             desc = "c3rd_other_events.10.desc.1"
-            
+
         }
         triggered_desc = {
             trigger = {
-                var:what_is_my_eco < 100 
+                var:what_is_my_eco < 100
             }
-            desc = "c3rd_other_events.10.desc.2"  
+            desc = "c3rd_other_events.10.desc.2"
         }
         triggered_desc = {
             trigger = {
                 has_law = monetary_reform_law
             }
-            desc = "c3rd_other_events.10.desc.20"  
+            desc = "c3rd_other_events.10.desc.20"
         }
-         
+
         triggered_desc = {
             trigger = {
                 OR = {
@@ -1259,38 +1259,38 @@ c3rd_other_events.10 = { #great book
                     }
                 }
             }
-            desc = "c3rd_other_events.10.desc.4" 
+            desc = "c3rd_other_events.10.desc.4"
         }
-        
+
         triggered_desc = {
             trigger = {
                 has_country_modifier = citizen_exemption_from_census_tax
             }
-            desc = "c3rd_other_events.10.desc.5"  
+            desc = "c3rd_other_events.10.desc.5"
         }
         triggered_desc = {
             trigger = {
                 has_country_modifier = military_advantages
             }
-            desc = "c3rd_other_events.10.desc.6"  
+            desc = "c3rd_other_events.10.desc.6"
         }
         triggered_desc = {
             trigger = {
                 has_country_modifier = political_unstability
             }
-            desc = "c3rd_other_events.10.desc.7"  
+            desc = "c3rd_other_events.10.desc.7"
         }
         triggered_desc = {
             trigger = {
                 has_country_modifier = tax_inspection
             }
-            desc = "c3rd_other_events.10.desc.8"  
+            desc = "c3rd_other_events.10.desc.8"
         }
         triggered_desc = {
             trigger = {
                 has_law = second_reform_law
             }
-            desc = "c3rd_other_events.10.desc.9"  
+            desc = "c3rd_other_events.10.desc.9"
         }
         triggered_desc = {
             trigger = {
@@ -1298,29 +1298,35 @@ c3rd_other_events.10 = { #great book
                     has_pop_type_right = slaves
                 }
             }
-            desc = "c3rd_other_events.10.desc.10"  
+            desc = "c3rd_other_events.10.desc.10"
         }
         triggered_desc = {
             trigger = {
                 has_law = subject_exploitation_law
             }
-            desc = "c3rd_other_events.10.desc.11"  
+            desc = "c3rd_other_events.10.desc.11"
         }
         triggered_desc = {
             trigger = {
                 has_country_modifier = aristocratic_reforms
             }
-            desc = "c3rd_other_events.10.desc.12"  
+            desc = "c3rd_other_events.10.desc.12"
+        }
+        triggered_desc = {
+            trigger = {
+                has_country_modifier = monetary_consolidation_sol
+            }
+            desc = "c3rd_other_events.10.desc.13"
         }
         triggered_desc = {
             trigger = {
                 has_country_modifier = solidus_introduced
             }
-            desc = "c3rd_other_events.10.desc.3"  
+            desc = "c3rd_other_events.10.desc.3"
         }
     }
-    
- 
+
+
     picture = great_library
 
     trigger = {
@@ -1352,8 +1358,8 @@ c3rd_other_events.11 = { #new ruler, in case of military anarchy, let's pay high
     type = country_event
     title = "c3rd_other_events.11.t"
     desc = "c3rd_other_events.11.desc"
-    
- 
+
+
     picture = greek_court
     left_portrait = current_ruler
     right_portrait = scope:general_leader_money
@@ -1505,18 +1511,18 @@ c3rd_other_events.12 = { #games
                 has_variable = yeah_games
             }
             desc = "c3rd_other_events.12.desc.1"
-            
+
         }
         triggered_desc = {
             trigger = {
                 NOT = {has_variable = yeah_games}
             }
             desc = "c3rd_other_events.12.desc.2"
-            
+
         }
     }
-    
- 
+
+
     picture = gladiators
 
     trigger = {
@@ -1567,7 +1573,7 @@ c3rd_other_events.12 = { #games
         }
     }
 
-    
+
 
     option = {#great games
         name = c3rd_other_events.12.a
@@ -1670,52 +1676,14 @@ c3rd_other_events.12 = { #games
 }
 
 
-c3rd_other_events.13 = { #Solidus 1 : survey the situation
-    type = country_event
-    title = "c3rd_other_events.13.t"
-    desc = "c3rd_other_events.13.desc"
-    
- 
-    picture = scribe_tools
-
-    trigger = {
-        has_land = yes
-        is_tribal = no
-        current_date >= 700.1.1
-    }
-
-    immediate = {
-        set_variable = {
-            name = solidus_ongoing
-        }
-    }
-
-    option = {
-        name = c3rd_other_events.13.a
-        custom_tooltip = c3rd_other_events.13.a.tt1
-        add_political_influence = -50
-        trigger_event = {
-            id = c3rd_other_events.14
-            days = 50
-        }
-    }
-
-    
-    option = {
-        name = c3rd_other_events.13.b
-        custom_tooltip = c3rd_other_events.13.b.tt1
-        remove_variable = solidus_ongoing
-    }
-}
-
 
 
 c3rd_other_events.14 = { #Solidus 2 : gain control on the system
     type = country_event
     title = "c3rd_other_events.14.t"
     desc = "c3rd_other_events.14.desc"
-    
- 
+
+
     picture = indian_city
 
     trigger = {
@@ -1772,14 +1740,6 @@ c3rd_other_events.14 = { #Solidus 2 : gain control on the system
         }
         add_political_influence = -20
     }
-
-
-    after = {
-        trigger_event = {
-            id = c3rd_other_events.15
-            days = 50
-        } 
-    }
 }
 
 
@@ -1788,8 +1748,8 @@ c3rd_other_events.15 = { #Solidus 3 : stability of gold
     type = country_event
     title = "c3rd_other_events.15.t"
     desc = "c3rd_other_events.15.desc"
-    
- 
+
+
     picture = persepolis
 
     trigger = {
@@ -1819,7 +1779,7 @@ c3rd_other_events.15 = { #Solidus 3 : stability of gold
             duration = 1825
         }
     }
-    option = { #office man take the 
+    option = { #office man take the
         name = c3rd_other_events.15.b
         custom_tooltip = c3rd_other_events.15.b.tt1
         trigger = {
@@ -1857,13 +1817,6 @@ c3rd_other_events.15 = { #Solidus 3 : stability of gold
         add_political_influence = -20
     }
 
-
-    after = {
-        trigger_event = {
-            id = c3rd_other_events.16
-            days = 50
-        } 
-    }
 }
 
 
@@ -1872,8 +1825,8 @@ c3rd_other_events.16 = { #Solidus final
     type = country_event
     title = "c3rd_other_events.16.t"
     desc = "c3rd_other_events.16.desc"
-    
- 
+
+
     picture = trade_port
 
     trigger = {
@@ -1896,6 +1849,48 @@ c3rd_other_events.16 = { #Solidus final
             }
             remove_variable = silver_unvalue
         }
+        if = {
+            limit = {
+                has_country_modifier = monetary_consolidation_sol
+            }
+            remove_country_modifier = monetary_consolidation_sol
+        }
+        if = {
+            limit = {
+                has_country_modifier = small_deflation
+            }
+            remove_country_modifier = small_deflation
+        }
+        if = {
+            limit = {
+                has_country_modifier = medium_deflation
+            }
+            remove_country_modifier = medium_deflation
+        }
+        if = {
+            limit = {
+                has_country_modifier = high_deflation
+            }
+            remove_country_modifier = high_deflation
+        }
+        if = {
+            limit = {
+                has_country_modifier = small_monetary_crash
+            }
+            remove_country_modifier = small_monetary_crash
+        }
+        if = {
+            limit = {
+                has_country_modifier = medium_monetary_crash
+            }
+            remove_country_modifier = medium_monetary_crash
+        }
+        if = {
+            limit = {
+                has_country_modifier = high_monetary_crash
+            }
+            remove_country_modifier = high_monetary_crash
+        }
 
     }
 
@@ -1906,7 +1901,98 @@ c3rd_other_events.16 = { #Solidus final
             name = solidus_introduced
             duration = -1
         }
-        remove_variable = solidus_ongoing
+    }
+}
+
+
+c3rd_other_events.17 = { #Mission 1b bonus
+    type = country_event
+    title = "c3rd_other_events.17.t"
+    desc = "c3rd_other_events.17.desc"
+
+
+    picture = trade_port
+
+    trigger = {
+        has_land = yes
+        is_tribal = no
+        current_date >= 700.1.1
+    }
+
+    immediate = {
+    }
+
+    option = {#bonus commerce
+        name = c3rd_other_events.17.a
+        custom_tooltip = c3rd_other_events.17.a.tt1
+        add_country_modifier = {
+            name = little_trade_buff
+            duration = 1650
+        }
+    }
+    
+    option = {#bonus freemen output
+        name = c3rd_other_events.17.b
+        custom_tooltip = c3rd_other_events.17.b.tt1
+        add_country_modifier = {
+            name = little_freemen_output
+            duration = 1650
+        }
+        
+    }
+    option = {#bonus nobles happy
+        name = c3rd_other_events.17.c
+        custom_tooltip = c3rd_other_events.17.c.tt1
+        add_country_modifier = {
+            name = little_noble_happy
+            duration = 1650
+        }
+        add_stability = 2
+        current_ruler = {
+            add_corruption = 3
+        }
+    }
+}
+
+c3rd_other_events.18 = { #Mission 1b bonus
+    type = country_event
+    title = "c3rd_other_events.18.t"
+    desc = "c3rd_other_events.18.desc"
+
+
+    picture = trade_port
+
+    trigger = {
+        has_land = yes
+        is_tribal = no
+        current_date >= 700.1.1
+    }
+
+    immediate = {
+    }
+
+    option = {#bonus stability
+        name = c3rd_other_events.18.a
+        custom_tooltip = c3rd_other_events.18.a.tt1
+        add_stability = 5
+    }
+    
+    option = {#bonus corruption/popularité
+        name = c3rd_other_events.18.b
+        custom_tooltip = c3rd_other_events.18.b.tt1
+        current_ruler = {
+            add_corruption = -10
+            add_popularity = 20
+        }
+    }
+    option = {#bonus freemen happy
+        name = c3rd_other_events.18.c
+        custom_tooltip = c3rd_other_events.18.c.tt1
+        add_country_modifier = {
+            name = little_freemen_happy
+            duration = 1650
+        }
+        add_stability = -2
     }
 }
 
@@ -1914,7 +2000,7 @@ c3rd_other_events.20 = { #small deflation
     type = country_event
     title = "c3rd_other_events.20.t"
     desc = "c3rd_other_events.20.desc"
- 
+
     picture = scribe_tools
 
     trigger = {
@@ -1925,12 +2011,12 @@ c3rd_other_events.20 = { #small deflation
 
     immediate = {
         if = {
-            limit = { 
+            limit = {
                 NOR = {
                     has_country_modifier = small_deflation
                     has_country_modifier = medium_deflation
                     has_country_modifier = high_deflation
-                } 
+                }
             }
             add_country_modifier = {
                 name = small_deflation
@@ -1950,7 +2036,7 @@ c3rd_other_events.21 = { #medium deflation
     type = country_event
     title = "c3rd_other_events.21.t"
     desc = "c3rd_other_events.21.desc"
-    
+
     picture = scribe_tools
 
     trigger = {
@@ -1961,11 +2047,11 @@ c3rd_other_events.21 = { #medium deflation
 
     immediate = {
         if = {
-            limit = { 
+            limit = {
                 NOR = {
                     has_country_modifier = medium_deflation
                     has_country_modifier = high_deflation
-                } 
+                }
             }
             add_country_modifier = {
                 name = medium_deflation
@@ -1989,7 +2075,7 @@ c3rd_other_events.22 = { #high deflation
     type = country_event
     title = "c3rd_other_events.22.t"
     desc = "c3rd_other_events.22.desc"
- 
+
     picture = scribe_tools
 
     trigger = {
@@ -2000,10 +2086,10 @@ c3rd_other_events.22 = { #high deflation
 
     immediate = {
         if = {
-            limit = { 
+            limit = {
                 NOT = {
                     has_country_modifier = high_deflation
-                } 
+                }
             }
             add_country_modifier = {
                 name = high_deflation
@@ -2030,7 +2116,7 @@ c3rd_other_events.23 = { #high deflation remove
     type = country_event
     title = "c3rd_other_events.23.t"
     desc = "c3rd_other_events.23.desc"
- 
+
     picture = scribe_tools
 
     trigger = {
@@ -2041,11 +2127,11 @@ c3rd_other_events.23 = { #high deflation remove
 
     immediate = {
         if = {
-            limit = { 
+            limit = {
                 NOR = {
                     has_country_modifier = medium_deflation
                     has_country_modifier = small_deflation
-                } 
+                }
             }
             add_country_modifier = {
                 name = medium_deflation
@@ -2068,7 +2154,7 @@ c3rd_other_events.24 = { #medium deflation remove
     type = country_event
     title = "c3rd_other_events.24.t"
     desc = "c3rd_other_events.24.desc"
- 
+
     picture = scribe_tools
 
     trigger = {
@@ -2079,10 +2165,10 @@ c3rd_other_events.24 = { #medium deflation remove
 
     immediate = {
         if = {
-            limit = { 
+            limit = {
                 NOT = {
                     has_country_modifier = small_deflation
-                } 
+                }
             }
             add_country_modifier = {
                 name = small_deflation
@@ -2109,7 +2195,7 @@ c3rd_other_events.25 = { # deflation remove
     type = country_event
     title = "c3rd_other_events.25.t"
     desc = "c3rd_other_events.25.desc"
-    
+
     picture = scribe_tools
 
     trigger = {
@@ -2144,7 +2230,7 @@ c3rd_other_events.26 = { # low silver unvalue
     type = country_event
     title = "c3rd_other_events.26.t"
     desc = "c3rd_other_events.26.desc"
-    
+
     picture = scribe_tools
 
     trigger = {
@@ -2155,12 +2241,12 @@ c3rd_other_events.26 = { # low silver unvalue
 
     immediate = {
         if = {
-            limit = { 
+            limit = {
                 NOR = {
                     has_country_modifier = small_monetary_crash
                     has_country_modifier = medium_monetary_crash
                     has_country_modifier = high_monetary_crash
-                } 
+                }
             }
             add_country_modifier = {
                 name = small_monetary_crash
@@ -2179,7 +2265,7 @@ c3rd_other_events.27 = { # medium silver unvalue
     type = country_event
     title = "c3rd_other_events.27.t"
     desc = "c3rd_other_events.27.desc"
-    
+
     picture = scribe_tools
 
     trigger = {
@@ -2190,11 +2276,11 @@ c3rd_other_events.27 = { # medium silver unvalue
 
     immediate = {
         if = {
-            limit = { 
+            limit = {
                 NOR = {
                     has_country_modifier = medium_monetary_crash
                     has_country_modifier = high_monetary_crash
-                } 
+                }
             }
             add_country_modifier = {
                 name = medium_monetary_crash
@@ -2217,7 +2303,7 @@ c3rd_other_events.28 = { # high silver unvalue
     type = country_event
     title = "c3rd_other_events.28.t"
     desc = "c3rd_other_events.28.desc"
-    
+
     picture = scribe_tools
 
     trigger = {
@@ -2228,10 +2314,10 @@ c3rd_other_events.28 = { # high silver unvalue
 
     immediate = {
         if = {
-            limit = { 
+            limit = {
                 NOT = {
                     has_country_modifier = high_monetary_crash
-                } 
+                }
             }
             add_country_modifier = {
                 name = high_monetary_crash
@@ -2258,7 +2344,7 @@ c3rd_other_events.291 = { #high silver remove
     type = country_event
     title = "c3rd_other_events.291.t"
     desc = "c3rd_other_events.291.desc"
- 
+
     picture = scribe_tools
 
     trigger = {
@@ -2269,11 +2355,11 @@ c3rd_other_events.291 = { #high silver remove
 
     immediate = {
         if = {
-            limit = { 
+            limit = {
                 NOR = {
                     has_country_modifier = medium_monetary_crash
                     has_country_modifier = small_monetary_crash
-                } 
+                }
             }
             add_country_modifier = {
                 name = medium_monetary_crash
@@ -2296,7 +2382,7 @@ c3rd_other_events.292 = { #medium silver remove
     type = country_event
     title = "c3rd_other_events.292.t"
     desc = "c3rd_other_events.292.desc"
- 
+
     picture = scribe_tools
 
     trigger = {
@@ -2307,10 +2393,10 @@ c3rd_other_events.292 = { #medium silver remove
 
     immediate = {
         if = {
-            limit = { 
+            limit = {
                 NOT = {
                     has_country_modifier = small_monetary_crash
-                } 
+                }
             }
             add_country_modifier = {
                 name = small_monetary_crash
@@ -2337,7 +2423,7 @@ c3rd_other_events.293 = { #silver remove
     type = country_event
     title = "c3rd_other_events.293.t"
     desc = "c3rd_other_events.293.desc"
- 
+
     picture = scribe_tools
 
     trigger = {
@@ -2373,7 +2459,7 @@ c3rd_other_events.2942 = { #check the values
     type = country_event
     title = "c3rd_other_events.2942.t"
     desc = "c3rd_other_events.2942.desc"
- 
+
     picture = scribe_tools
 
     trigger = {
@@ -2392,7 +2478,7 @@ c3rd_other_events.30 = { # slave revolts
     type = country_event
     title = "c3rd_other_events.30.t"
     desc = "c3rd_other_events.30.desc"
-    
+
     picture = revolt
 
     trigger = {
@@ -2470,7 +2556,7 @@ c3rd_other_events.30 = { # slave revolts
                         count >= 5
                         dominant_province_culture = scope:culture_slave_check.culture
                     }
-                } 
+                }
             }
             weight = {
                 modifier = {
@@ -2679,7 +2765,7 @@ c3rd_other_events.31 = { # slaves culture revolts
                 }
             }
         }
-        
+
     }
 
     weight_multiplier = {
@@ -2825,12 +2911,12 @@ c3rd_other_events.31 = { # slaves culture revolts
                 set_owned_by = scope:new_country_vassal
             }
         }
-        make_subject = { 
+        make_subject = {
             target = scope:new_country_vassal
-            type = client_state 
+            type = client_state
         }
 
-        
+
     }
     option = { #war
         name = c3rd_other_events.31.b
@@ -2930,14 +3016,14 @@ c3rd_other_events.31 = { # slaves culture revolts
 			province = scope:new_country_vassal.capital_scope
             target = scope:new_country_vassal
         }
-        
+
     }
 }
 # c3rd_other_events.32 = { # unintegrated revolts --- A FINIR
 #     type = country_event
 #     title = "c3rd_other_events.32.t"
 #     desc = "c3rd_other_events.32.desc"
-    
+
 #     picture = revolt
 
 #     trigger = {
@@ -3006,7 +3092,7 @@ c3rd_other_events.31 = { # slaves culture revolts
 #                         count >= 5
 #                         dominant_province_culture = scope:culture_unintegrated_check.culture
 #                     }
-#                 } 
+#                 }
 #             }
 #             weight = {
 #                 modifier = {
@@ -3169,7 +3255,7 @@ c3rd_other_events.40 = { #corruption from gold
     type = country_event
     title = "c3rd_other_events.40.t"
     desc = "c3rd_other_events.40.desc"
-    
+
     picture = greek_court
 
     trigger = {
@@ -3226,7 +3312,7 @@ c3rd_other_events.40 = { #corruption from gold
                 }
             }
             if = {
-                limit = { 
+                limit = {
                     OR = {
                         has_any_office = yes
                         is_ruler = yes
@@ -3351,7 +3437,7 @@ c3rd_other_events.50 = { #Great work gets pillaged by starving people
     title = "c3rd_other_events.50.t"
     desc = "c3rd_other_events.50.desc"
     goto_location = scope:wonder_province_starve
- 
+
     picture = great_work_riot
 
     trigger = {
@@ -3550,7 +3636,7 @@ c3rd_other_events.51 = { #Great work restaured
     type = country_event
     title = "c3rd_other_events.51.t"
     desc = "c3rd_other_events.51.desc"
- 
+
     picture = great_work_architect
 
     trigger = {
@@ -3727,7 +3813,7 @@ c3rd_other_events.52 = { #stabhit because pillaged wonders
     type = country_event
     title = "c3rd_other_events.52.t"
     desc = "c3rd_other_events.52.desc"
- 
+
     picture = great_work_animals
 
     trigger = {
@@ -3821,7 +3907,7 @@ c3rd_other_events.60 = { #filthy barbarians ransacking our lands
     type = country_event
     title = "c3rd_other_events.60.t"
     desc = "c3rd_other_events.60.desc"
- 
+
     picture = babylon_plundered
 
     trigger = {
@@ -3985,7 +4071,7 @@ c3rd_other_events.60 = { #filthy barbarians ransacking our lands
                 }
             }
         }
-        
+
     }
 }
 
@@ -3997,7 +4083,7 @@ c3rd_other_events.70 = { #aristocracy acts against deflation
     type = country_event
     title = "c3rd_other_events.70.t"
     desc = "c3rd_other_events.70.desc"
- 
+
     picture = senator_conversing
 
     trigger = {
@@ -4061,9 +4147,9 @@ c3rd_other_events.70 = { #aristocracy acts against deflation
         if = {
             limit = { is_republic = yes }
             if = {
-                limit = { 
+                limit = {
                     is_republic = yes
-                    has_party_type = populares_party 
+                    has_party_type = populares_party
                 }
                 add_party_approval = {
                     party_type = populares_party
@@ -4075,9 +4161,9 @@ c3rd_other_events.70 = { #aristocracy acts against deflation
                 }
             }
             else_if = {
-                limit = { 
+                limit = {
                     is_republic = yes
-                    has_party_type = democratic_party 
+                    has_party_type = democratic_party
                 }
                 add_party_approval = {
                     party_type = democratic_party
@@ -4104,9 +4190,9 @@ c3rd_other_events.70 = { #aristocracy acts against deflation
             add_loyalty = assets_seized
         }
         if = {
-            limit = { 
+            limit = {
                 is_republic = yes
-                has_party_type = populares_party 
+                has_party_type = populares_party
             }
             add_party_approval = {
                 party_type = populares_party
@@ -4118,9 +4204,9 @@ c3rd_other_events.70 = { #aristocracy acts against deflation
             }
         }
         else_if = {
-            limit = { 
+            limit = {
                 is_republic = yes
-                has_party_type = democratic_party 
+                has_party_type = democratic_party
             }
             add_party_approval = {
                 party_type = democratic_party
@@ -4150,9 +4236,9 @@ c3rd_other_events.70 = { #aristocracy acts against deflation
             add_loyalty = disappointed
         }
         if = {
-            limit = { 
+            limit = {
                 is_republic = yes
-                has_party_type = boni_party 
+                has_party_type = boni_party
             }
             add_party_approval = {
                 party_type = boni_party
@@ -4160,9 +4246,9 @@ c3rd_other_events.70 = { #aristocracy acts against deflation
             }
         }
         else_if = {
-            limit = { 
+            limit = {
                 is_republic = yes
-                has_party_type = traditionalist_party 
+                has_party_type = traditionalist_party
             }
             add_party_approval = {
                 party_type = traditionalist_party
@@ -4173,5 +4259,680 @@ c3rd_other_events.70 = { #aristocracy acts against deflation
 }
 
 
+c3rd_other_events.71 = { #people revolt against the crash of currency - negative event when currency collapse
+    type = country_event
+    title = "c3rd_other_events.71.t"
+    desc = "c3rd_other_events.71.desc"
+
+    picture = revolt
+
+    trigger = {
+        has_land = yes
+        has_variable = silver_unvalue
+        has_country_modifier = high_monetary_crash
+        num_of_cities >= 400 #to leave a small buffer between 500 and 400 where you don't have the 500 events, but still can get this one
+        NOR = {
+            has_variable = revolt_against_crash
+            has_country_modifier = raise_of_wages
+        }
+    }
+
+    weight_multiplier = {
+        modifier = {
+            factor = 1.5
+            has_variable = silver_unvalue
+            var:silver_unvalue >= 150
+        }
+        modifier = {
+            factor = 1.5
+            has_variable = silver_unvalue
+            var:silver_unvalue >= 175
+        }
+        modifier = {
+            factor = 1.5
+            has_variable = silver_unvalue
+            var:silver_unvalue >= 200
+        }
+        modifier = {
+            factor = 2
+            OR = {
+                has_country_modifier = tyranny_of_taxation
+                has_variable = forced_decuria
+            }
+        }
+    }
+
+    immediate = {
+        set_variable = {
+            name = revolt_against_crash
+            days = 3650
+        }
+        add_stability = -10 #what do you mean, i want to trigger the collapse ? ;)
+    }
+
+    option = { #we need to raise the wages
+        name = c3rd_other_events.71.a
+        custom_tooltip = c3rd_other_events.71.a.tt1
+        add_country_modifier = {
+            name = raise_of_wages
+            duration = 3650
+        }
+        add_political_influence = -15
+        if = {
+            limit = { is_republic = yes }
+            if = {
+                limit = {
+                    is_republic = yes
+                    has_party_type = populares_party
+                }
+                add_party_approval = {
+                    party_type = populares_party
+                    value = 10
+                }
+                add_party_approval = {
+                    party_type = optimates_party
+                    value = -30
+                }
+            }
+            else_if = {
+                limit = {
+                    is_republic = yes
+                    has_party_type = democratic_party
+                }
+                add_party_approval = {
+                    party_type = democratic_party
+                    value = 10
+                }
+                add_party_approval = {
+                    party_type = oligarchic_party
+                    value = -30
+                }
+            }
+        }
+        else_if = {
+            limit = {
+                is_monarchy = yes
+            }
+            add_legitimacy = -10
+            current_ruler = {
+                add_popularity = 20
+            }
+        }
+        every_country_state = {
+            limit = {
+                state_freemen >= third_of_state_pop
+            }
+            random_state_province = {
+                add_state_loyalty = 5
+            }
+        }
+    }
+
+    option = { #repression and enslave
+        name = c3rd_other_events.71.b
+        custom_tooltip = c3rd_other_events.71.b.tt1
+        add_tyranny = 10
+        if = {
+            limit = {
+                is_republic = yes
+                has_party_type = populares_party
+            }
+            add_party_approval = {
+                party_type = populares_party
+                value = -30
+            }
+            add_party_approval = {
+                party_type = optimates_party
+                value = 10
+            }
+        }
+        else_if = {
+            limit = {
+                is_republic = yes
+                has_party_type = democratic_party
+            }
+            add_party_approval = {
+                party_type = democratic_party
+                value = -30
+            }
+            add_party_approval = {
+                party_type = oligarchic_party
+                value = 10
+            }
+        }
+        else_if = {
+            limit = {
+                is_monarchy = yes
+            }
+            add_legitimacy = 5
+            current_ruler = {
+                add_popularity = -10
+            }
+        }
+        every_country_state = {
+            limit = {
+                state_freemen >= third_of_state_pop
+            }
+            random_state_province = {
+                add_state_loyalty = -10
+            }
+        }
+        change_variable = {
+            name = silver_unvalue
+            add = -10
+        }
+    }
+
+    option = { #ignore them
+        name = c3rd_other_events.71.c
+        custom_tooltip = c3rd_other_events.71.c.tt1
+        add_stability = -5
+        current_ruler = {
+            add_popularity = -10
+        }
+        if = {
+            limit = {
+                is_republic = yes
+                has_party_type = boni_party
+            }
+            add_party_approval = {
+                party_type = boni_party
+                value = -10
+            }
+        }
+        else_if = {
+            limit = {
+                is_republic = yes
+                has_party_type = traditionalist_party
+            }
+            add_party_approval = {
+                party_type = traditionalist_party
+                value = -10
+            }
+        }
+    }
+}
 
 
+c3rd_other_events.72 = { #Some possibility to balance the monetary value - this is a positive event where you can bring back the scale for a price
+    type = country_event
+    title = "c3rd_other_events.72.t"
+    desc = "c3rd_other_events.72.desc"
+
+    picture = bakery
+
+    trigger = {
+        has_land = yes
+        has_variable = silver_unvalue
+        has_country_modifier = high_monetary_crash
+        NOR = {
+            has_variable = actions_against_silver
+            has_country_modifier = bartering_authorised
+        }
+    }
+
+    weight_multiplier = {
+        modifier = {
+            factor = 1.5
+            stability < 40
+        }
+        modifier = {
+            factor = 1.2
+            stability < 30
+        }
+        modifier = {
+            factor = 1.2
+            stability < 20
+        }
+        modifier = {
+            factor = 1.5
+            has_variable = silver_unvalue
+            var:silver_unvalue >= 150
+        }
+        modifier = {
+            factor = 1.5
+            has_variable = silver_unvalue
+            var:silver_unvalue >= 175
+        }
+        modifier = {
+            factor = 1.5
+            has_variable = silver_unvalue
+            var:silver_unvalue >= 200
+        }
+    }
+
+    immediate = {
+        set_variable = {
+            name = actions_against_silver
+            days = 7300
+        }
+    }
+
+    option = { #let them barter
+        name = c3rd_other_events.72.a
+        custom_tooltip = c3rd_other_events.72.a.tt1
+        add_country_modifier = {
+            name = bartering_authorised
+            duration = 7300
+        }
+        current_ruler = {
+            add_popularity = 10
+        }
+        change_variable = {
+            name = silver_unvalue
+            add = -5
+        }
+    }
+
+    option = { #if you have subjects, instaure money controls on border, clients become tributaries
+        name = c3rd_other_events.72.b
+        custom_tooltip = c3rd_other_events.72.b.tt1
+        trigger = {
+            any_subject = {
+                OR = {
+                    is_subject_type = client_state
+                    is_subject_type = satrapy
+                }
+            }
+        }
+        highlight = yes
+        if = {
+            limit = {
+                is_monarchy = yes
+            }
+            add_legitimacy = 5
+        }
+        every_subject = {
+            limit = {
+                OR = {
+                    is_subject_type = client_state
+                    is_subject_type = satrapy
+                }
+            }
+            save_temporary_scope_as = chosen_subject
+            root = {
+                hidden_effect = {
+                    release_subject = scope:chosen_subject
+                    make_subject = {
+                        target = scope:chosen_subject
+                        type = tributary
+                    }
+                }
+            }
+            if = {
+                limit = { has_variable = subject_wants_more_cooldown}
+                remove_variable = subject_wants_more_cooldown
+            }
+            set_variable = {
+                name = subject_wants_more_cooldown
+                days = 3650
+            }
+            add_country_modifier = {
+                name = customs_controls
+                duration = 3650
+            }
+            add_truce = {
+              target = root
+              duration = 1850
+            }
+            if = {
+                limit = { num_of_cities <= 10 }
+                custom_tooltip = c3rd_other_events.72.b.tt2
+                root = {
+                    change_variable = {
+                        name = silver_unvalue
+                        add = -2
+                    }
+                }
+            }
+            else_if = {
+                limit = { num_of_cities <= 25 }
+                custom_tooltip = c3rd_other_events.72.b.tt2
+                root = {
+                    change_variable = {
+                        name = silver_unvalue
+                        add = -4
+                    }
+                }
+            }
+            else_if = {
+                limit = { num_of_cities <= 65 }
+                custom_tooltip = c3rd_other_events.72.b.tt3
+                root = {
+                    change_variable = {
+                        name = silver_unvalue
+                        add = -8
+                    }
+                }
+            }
+            else_if = {
+                limit = { num_of_cities <= 150 }
+                custom_tooltip = c3rd_other_events.72.b.tt3
+                root = {
+                    change_variable = {
+                        name = silver_unvalue
+                        add = -15
+                    }
+                }
+            }
+            else_if = {
+                limit = { num_of_cities <= 400 }
+                custom_tooltip = c3rd_other_events.72.b.tt4
+                root = {
+                    change_variable = {
+                        name = silver_unvalue
+                        add = -25
+                    }
+                }
+            }
+            else = {
+                custom_tooltip = c3rd_other_events.72.b.tt4
+                root = {
+                    change_variable = {
+                        name = silver_unvalue
+                        add = -40
+                    }
+                }
+            }
+            
+        }
+    }
+
+    option = { #ignore them
+        name = c3rd_other_events.72.c
+        custom_tooltip = c3rd_other_events.72.c.tt1
+        add_stability = -5
+        current_ruler = {
+            add_popularity = -10
+        }
+        if = {
+            limit = {
+                is_republic = yes
+                has_party_type = boni_party
+            }
+            add_party_approval = {
+                party_type = boni_party
+                value = -10
+            }
+        }
+        else_if = {
+            limit = {
+                is_republic = yes
+                has_party_type = traditionalist_party
+            }
+            add_party_approval = {
+                party_type = traditionalist_party
+                value = -10
+            }
+        }
+    }
+}
+
+c3rd_other_events.73 = { #crash of the currency event : people trying to escape the taxes
+    type = country_event
+    title = "c3rd_other_events.73.t"
+    desc = "c3rd_other_events.73.desc"
+
+    picture = bakery
+
+    trigger = {
+        has_land = yes
+        has_variable = silver_unvalue
+        has_country_modifier = high_monetary_crash
+        num_of_cities >= 400 #to leave a small buffer between 500 and 400 where you don't have the 500 events, but still can get this one
+        NOR = {
+            has_variable = silver_escape_taxes
+            has_variable = forced_decuria
+            has_country_modifier = decuria_established
+            has_country_modifier = tyranny_of_taxation
+            has_country_modifier = escape_silver_taxation
+        }
+    }
+
+    weight_multiplier = {
+        modifier = {
+            factor = 1.5
+            has_variable = silver_unvalue
+            var:silver_unvalue >= 150
+        }
+        modifier = {
+            factor = 1.5
+            has_variable = silver_unvalue
+            var:silver_unvalue >= 175
+        }
+        modifier = {
+            factor = 1.5
+            has_variable = silver_unvalue
+            var:silver_unvalue >= 200
+        }
+    }
+
+    immediate = {
+        set_variable = {
+            name = silver_escape_taxes
+            days = 3650
+        }
+    }
+
+    option = { #reinforce controls and punishments
+        name = c3rd_other_events.73.a
+        custom_tooltip = c3rd_other_events.73.a.tt1
+        add_stability = -2
+        add_tyranny = 10
+        add_country_modifier = {
+            name = tyranny_of_taxation
+            duration = 7300
+        }
+        
+    }
+
+
+    option = { #establish decuriones
+        name = c3rd_other_events.73.b
+        custom_tooltip = c3rd_other_events.73.b.tt1
+        current_ruler = {
+            add_popularity = -10
+        }
+        add_country_modifier = {
+            name = decuria_established
+            duration = 7300
+        }
+    }
+
+    option = { #let them
+        name = c3rd_other_events.73.c
+        custom_tooltip = c3rd_other_events.73.c.tt1
+        add_country_modifier = {
+            name = escape_silver_taxation
+            duration = 3650
+        }
+    }
+}
+
+
+c3rd_other_events.74 = { #the decuriones are fleeing
+    type = country_event
+    title = "c3rd_other_events.74.t"
+    desc = "c3rd_other_events.74.desc"
+
+    picture = proscription
+
+    trigger = {
+        has_land = yes
+        has_variable = silver_unvalue
+        has_country_modifier = high_monetary_crash
+        num_of_cities >= 400 #to leave a small buffer between 500 and 400 where you don't have the 500 events, but still can get this one
+        has_country_modifier = decuria_established
+        NOT = {
+            has_variable = forced_decuria
+        }
+    }
+
+    weight_multiplier = {
+        modifier = {
+            factor = 1.5
+            has_variable = silver_unvalue
+            var:silver_unvalue >= 150
+        }
+        modifier = {
+            factor = 1.5
+            has_variable = silver_unvalue
+            var:silver_unvalue >= 175
+        }
+        modifier = {
+            factor = 1.5
+            has_variable = silver_unvalue
+            var:silver_unvalue >= 200
+        }
+    }
+
+    immediate = {
+    }
+
+    option = { #reinforce controls and punishments
+        name = c3rd_other_events.74.a
+        custom_tooltip = c3rd_other_events.74.a.tt1
+        add_stability = -2
+        add_tyranny = 5
+        
+        set_variable = {
+            name = forced_decuria
+            days = 3650
+        }
+        
+    }
+
+
+    option = { #let them go
+        name = c3rd_other_events.74.b
+        custom_tooltip = c3rd_other_events.74.b.tt1
+        if = {
+            limit = {is_monarchy = yes }
+            add_legitimacy = -20
+        }
+        else_if = {
+            limit = {
+                is_republic = yes
+                has_party_type = populares_party
+            }
+            add_party_approval = {
+                party_type = optimates_party
+                value = -35
+            }
+        }
+        else_if = {
+            limit = {
+                is_republic = yes
+                has_party_type = democratic_party
+            }
+            add_party_approval = {
+                party_type = oligarchic_party
+                value = -35
+            }
+        }
+        remove_country_modifier = decuria_established
+    }
+}
+
+
+c3rd_other_events.75 = { #new currency, but the leader is really bad at that
+    type = country_event
+    title = "c3rd_other_events.75.t"
+    desc = "c3rd_other_events.75.desc"
+
+    picture = hellenic_marketplace
+
+    trigger = {
+        has_land = yes
+        num_of_cities >= 400 #to leave a small buffer between 500 and 400 where you don't have the 500 events, but still can get this one
+        current_ruler = {
+            finesse <= 2
+            NOT = {has_variable = treasureman_fixed_money}
+        }
+        has_variable = silver_unvalue
+    }
+
+    immediate = {
+        random_character = {
+            limit = {
+                OR = {
+                    has_office = office_magistrate
+                    has_office = office_steward
+                }
+            }
+            save_scope_as = office_treasure_man
+        }
+    }
+
+    option = { #destroy the surplux of cardboard money
+        name = c3rd_other_events.75.a
+        custom_tooltip = c3rd_other_events.75.a.tt1
+        if = {
+            limit = {is_monarchy = yes }
+            add_legitimacy = -10
+        }
+        else_if = {
+            limit = {
+                is_republic = yes
+                has_party_type = populares_party
+            }
+            add_party_approval = {
+                party_type = boni_party
+                value = -20
+            }
+        }
+        else_if = {
+            limit = {
+                is_republic = yes
+                has_party_type = democratic_party
+            }
+            add_party_approval = {
+                party_type = traditionalist_party
+                value = -20
+            }
+        }
+        add_stability = -5
+        current_ruler = {
+            set_variable = {
+				name = treasureman_fixed_money
+			}
+        }
+        add_treasury = {
+            value = has_monthly_income
+            multiply = -8
+        }
+        
+    }
+
+
+    option = { #office treasureman is competent enough
+        name = c3rd_other_events.75.b
+        custom_tooltip = c3rd_other_events.75.b.tt1
+        trigger = {
+            exists = scope:office_treasure_man
+            scope:office_treasure_man = {
+                finesse >= 10
+            }
+        }
+        highlight = yes
+        add_political_influence = -10
+        current_ruler = {
+            set_variable = {
+				name = treasureman_fixed_money
+			}
+        }
+    }
+
+    option = { #do nothing
+        name = c3rd_other_events.75.c
+        custom_tooltip = c3rd_other_events.75.c.tt1
+        current_ruler = {
+            add_popularity = -20
+            add_corruption = 10
+        }
+		change_variable = {
+			name = silver_unvalue
+			add = 25
+		}
+    }
+}

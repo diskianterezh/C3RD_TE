@@ -45,13 +45,13 @@ revolt_events.1 = {
 					capital_scope.culture = {
 						save_scope_as = new_culture_revolt
 					}
-					capital_scope = {		
+					capital_scope = {
 						area = {
 							every_area_province = {
 								limit = { owner = root }
 								set_owned_by = scope:revolt_country
 							}
-						}				
+						}
 					}
 				}
 				every_country_state = {
@@ -98,7 +98,7 @@ revolt_events.1 = {
 					capital_scope.culture = {
 						save_scope_as = new_culture_revolt
 					}
-		    		capital_scope = {		
+		    		capital_scope = {
 						area = {
 							every_area_province = {
 								limit = { owner = root }
@@ -127,7 +127,7 @@ revolt_events.1 = {
     				random_list = {
     					1 = {
 			    			create_unit = {
-			    				location = prev.capital_scope
+			    				location = scope:revolt_country.capital_scope
 			    				add_subunit = heavy_infantry
 			    				add_subunit = heavy_infantry
 			    				add_subunit = heavy_infantry
@@ -142,7 +142,7 @@ revolt_events.1 = {
 		    			}
 		    			2 = {
 			    			create_unit = {
-			    				location = prev.capital_scope
+			    				location = scope:revolt_country.capital_scope
 			    				add_subunit = heavy_infantry
 			    				add_subunit = light_infantry
 			    				add_subunit = light_infantry
@@ -179,7 +179,7 @@ revolt_events.1 = {
 							}
 						}
 		    		}
-		    		capital_scope = {						
+		    		capital_scope = {
 						if = {
 							limit = {
 								dominant_province_culture = scope:revolt_country.culture #capital_scope.culture doesnt work in capital_scope, use dominant instead
@@ -195,7 +195,7 @@ revolt_events.1 = {
 							create_country = {
 								save_scope_as = revolt_snowball_country
 							}
-						}	
+						}
 		    			if = {
 		    				limit = {
 		    					exists = scope:revolt_snowball_country
@@ -210,7 +210,7 @@ revolt_events.1 = {
 									}
 								}
 								random_country_culture = {
-									limit = { 
+									limit = {
 										is_integrated = no
 									}
 									ROOT = { integrate_country_culture = PREV }
@@ -249,7 +249,7 @@ revolt_events.1 = {
 		scope:revolt_country = {
 			#Let them integrate a random culture
 			random_country_culture = {
-				limit = { 
+				limit = {
 					is_integrated = no
 				}
 				ROOT = { integrate_country_culture = PREV }
@@ -274,7 +274,7 @@ revolt_events.2 = {
     immediate = {
 		every_country_state = {
 			capital_scope = {
-				add_state_loyalty = 20
+				add_state_loyalty = 10
 			}
 		}
     }
@@ -310,7 +310,7 @@ revolt_events.10 = {
     type = country_event
     hidden = yes
 
-    immediate = { 
+    immediate = {
     	#root = player country
     	scope:revolting_state_province = {
     		owner = {
@@ -346,7 +346,7 @@ revolt_events.10 = {
 					}
 				}
 			}
-			capital_scope = {						
+			capital_scope = {
 				if = {
 					limit = {
 						dominant_province_culture_group = scope:revolt_country.culture.culture_group #capital_scope.culture doesnt work in capital_scope, use dominant instead
@@ -362,7 +362,7 @@ revolt_events.10 = {
 					create_country = {
 						save_scope_as = revolt_snowball_country
 					}
-				}	
+				}
 				if = {
 					limit = {
 						exists = scope:revolt_snowball_country
@@ -409,16 +409,4 @@ revolt_events.10 = {
 			}
 		}
 	}
-}
-revolt_events.2 = { #same as the invictus one
-    type = country_event
-    hidden = yes
-
-    immediate = {
-		every_country_state = {
-			capital_scope = {
-				add_state_loyalty = 25
-			}
-		}
-    }
 }
