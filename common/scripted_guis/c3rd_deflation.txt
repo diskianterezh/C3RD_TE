@@ -1,11 +1,13 @@
-﻿c3rd_monetary_balance_medium = {
+﻿c3rd_deflation = {
 	scope = country
 
 	is_shown = {
 		is_ai = no
 		current_date >= 750.1.1
-		c3rd_economic_value < 1
-		c3rd_economic_value > 0.75
+		OR = {
+			has_country_modifier = small_deflation
+			has_country_modifier = medium_deflation
+		}
 		NOT = {has_country_modifier = solidus_introduced}
 	}
 }

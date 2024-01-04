@@ -58,7 +58,7 @@ c3rd_custom_on_actions_third_century = {
 	
 	random_events = {
 		500 = 0
-		100 = tribal_flavour_events.4
+		100 = tribal_flavour_events.41
 	}
 }
 
@@ -350,7 +350,7 @@ c3rd_events_monthly_pulse = { #check if people in country can fuck shit up
 	}
 	random_events = {
 		500 = 0
-		40 = c3rd_events.30 #military coup *5 civilwar *2low leg
+		40 = c3rd_events.30 #military coup *3 civilwar *2low leg
 		50 = c3rd_events.5 #general intervention *3 civilwar *2neg leg *2 dislgen
 		10 = c3rd_events.32 #kingmaker emprison rival
 		15 = c3rd_events.33 #general glose
@@ -363,6 +363,8 @@ c3rd_events_monthly_pulse = { #check if people in country can fuck shit up
 		20 = c3rd_events.81 #only general take some powa
 		20 = c3rd_events.45 #republican leader push reforms
 		50 = c3rd_events.39 #kingmaker no office
+		5 = c3rd_events.48 #Republic above 1000 territories
+		40 = c3rd_events.21 #governor defect to rival
 	}
 	
 }
@@ -379,10 +381,18 @@ c3rd_other_events_monthly_pulse = { #check if events can happen
 		500 = 0
 		20 = c3rd_other_events.4 #too few nobles culture pop
 		20 = c3rd_other_events.8 #powerful characters asking to stop the tax controls
-		4 = c3rd_other_events.9 #powerful characters asking for census
-		4 = c3rd_other_events.12 #games
+		5 = c3rd_other_events.9 #powerful characters asking for census
+		5 = c3rd_other_events.12 #games
 		3 = c3rd_other_events.30 #slave culture revolt
 		20 = c3rd_other_events.31 #slave culture uprising
+		30 = c3rd_other_events.50 #wonder threatened
+		5 = c3rd_other_events.52 #stabhit from wonders pillaged
+		4 = c3rd_other_events.60 #stabhit from barbarians
+		5 = c3rd_other_events.70 #aristocratic reforms
+		4 = c3rd_other_events.71 #revolt of the freemen against inflation
+		5 = c3rd_other_events.72 #act against silver crash
+		7 = c3rd_other_events.73 #rpeople trying to escape taxes
+		2 = c3rd_other_events.74 #Decuriones fleeing
 	}
 
 }
@@ -529,11 +539,10 @@ c3rd_calculate_deflation = {
 		current_date >= 750.1.1
 		NOR = {
 			has_country_modifier = solidus_introduced
-			has_variable = solidus_ongoing
 		}
 	}
 	effect = {
-		if = {
+		if = { #calculation of this year economy
 			limit = {
 				NOT = {
 					has_variable = country_economy
@@ -544,14 +553,14 @@ c3rd_calculate_deflation = {
 				value = c3rd_economic_value
 			}
 		}
-		else = {
+		else = { #recalculation
 			remove_variable = country_economy
 			set_variable = {
 				name = country_economy
 				value = c3rd_economic_value
 			}
 		}
-		if = {
+		if = { #create the deflation variable if > 500 cities
 			limit = {
 				NOT = {
 					has_variable = deflation_value
@@ -563,7 +572,50 @@ c3rd_calculate_deflation = {
 				value = 0
 			}
 		}
-		if = {
+		if = { #first reduction of the silver unvalue if aurelian
+			limit = {
+				has_variable = silver_unvalue
+				has_law = second_reform_law
+				var:silver_unvalue > 0
+			}
+			change_variable = {
+				name = silver_unvalue
+				add = -1
+			}
+		}
+		if = { #reduction if bartering
+			limit = {
+				has_variable = silver_unvalue
+				has_country_modifier = bartering_authorised
+				var:silver_unvalue > 0
+			}
+			change_variable = {
+				name = silver_unvalue
+				add = -1
+			}
+		}
+		if = { #reduction if silv consolidation (solidus)
+			limit = {
+				has_variable = silver_unvalue
+				has_country_modifier = silver_consolidation_sol
+				var:silver_unvalue > 0
+			}
+			change_variable = {
+				name = silver_unvalue
+				add = -1
+			}
+		}
+		if = { #silver law reduce deflation passively
+			limit = {
+				has_variable = deflation_value
+				has_law = monetary_reform_law
+			}
+			change_variable = {
+				name = deflation_value
+				add = -1
+			}
+		}
+		if = { #creation of the silver unvalue variable if >500 cities
 			limit = {
 				NOT = {
 					has_variable = silver_unvalue
@@ -576,7 +628,7 @@ c3rd_calculate_deflation = {
 				value = 0
 			}
 		}
-		if = {
+		if = { #reduce deflation if economy good
 			limit = {
 				has_variable = deflation_value
 				var:country_economy > 1
@@ -587,7 +639,7 @@ c3rd_calculate_deflation = {
 				add = -1
 			}
 		}
-		if = {
+		if = { #economy very good
 			limit = {
 				has_variable = deflation_value
 				var:country_economy > 2
@@ -598,7 +650,7 @@ c3rd_calculate_deflation = {
 				add = -2
 			}
 		}
-		if = {
+		if = { #veryvery good
 			limit = {
 				has_variable = deflation_value
 				var:country_economy > 4
@@ -609,7 +661,8 @@ c3rd_calculate_deflation = {
 				add = -3
 			}
 		}
-		if = {
+		#increase deflation or silver unvalue, depending of the law - only if cities > 500
+		if = { 
 			limit = {
 				var:country_economy < 1
 				num_of_cities >= 500
@@ -618,6 +671,12 @@ c3rd_calculate_deflation = {
 				limit = { NOT = {has_law = monetary_reform_law}} #if you have the monetary reform, you decrease the value of silver
 				change_variable = {
 					name = deflation_value
+					add = 1
+				}
+			}
+			else = {
+				change_variable = {
+					name = silver_unvalue
 					add = 1
 				}
 			}
@@ -679,7 +738,7 @@ c3rd_calculate_deflation = {
 				}
 			}
 		}
-		if = {
+		if = { #passive unvalue of silver if silver law
 			limit = { 
 				has_law = monetary_reform_law
 				num_of_cities >= 500
@@ -757,7 +816,6 @@ c3rd_apply_deflation = { #applying deflation modifiers events
 		has_variable = deflation_value
 		NOR = {
 			has_country_modifier = solidus_introduced
-			has_variable = solidus_ongoing
 		}
 	}
 	effect = {
@@ -802,19 +860,28 @@ c3rd_apply_deflation = { #applying deflation modifiers events
 		}
 		else_if = {
 			limit = {
-				has_country_modifier = high_deflation
-				NOT = {
+				OR = {
+					has_country_modifier = small_deflation
 					has_country_modifier = medium_deflation
+					has_country_modifier = high_deflation
 				}
-				var:deflation_value <= 120
+				OR = {
+					NOT = {
+						has_variable = deflation_value
+					}
+					var:deflation_value <= 20
+				}
 			}
 			trigger_event = {
-				id = c3rd_other_events.23
+				id = c3rd_other_events.25
 			}
 		}
 		else_if = {
 			limit = {
-				has_country_modifier = medium_deflation
+				OR = {
+					has_country_modifier = medium_deflation
+					has_country_modifier = high_deflation
+				}
 				NOT = {
 					has_country_modifier = small_deflation
 				}
@@ -826,11 +893,14 @@ c3rd_apply_deflation = { #applying deflation modifiers events
 		}
 		else_if = {
 			limit = {
-				has_country_modifier = small_deflation
-				var:deflation_value <= 20
+				has_country_modifier = high_deflation
+				NOT = {
+					has_country_modifier = medium_deflation
+				}
+				var:deflation_value <= 120
 			}
 			trigger_event = {
-				id = c3rd_other_events.25
+				id = c3rd_other_events.23
 			}
 		}
 
@@ -845,7 +915,6 @@ c3rd_apply_silver_unvalue = { #applying silver modifiers events
 		has_variable = silver_unvalue
 		NOR = {
 			has_country_modifier = solidus_introduced
-			has_variable = solidus_ongoing
 		}
 	}
 	effect = {
@@ -869,7 +938,7 @@ c3rd_apply_silver_unvalue = { #applying silver modifiers events
 					has_country_modifier = medium_monetary_crash
 					has_country_modifier = high_monetary_crash
 				}
-				var:deflation_value >= 90
+				var:silver_unvalue >= 95
 				num_of_cities >= 500
 			}
 			trigger_event = {
@@ -881,7 +950,7 @@ c3rd_apply_silver_unvalue = { #applying silver modifiers events
 				NOT = {
 					has_country_modifier = high_monetary_crash
 				}
-				var:deflation_value >= 120
+				var:silver_unvalue >= 130
 				num_of_cities >= 500
 			}
 			trigger_event = {
@@ -890,23 +959,32 @@ c3rd_apply_silver_unvalue = { #applying silver modifiers events
 		}
 		else_if = {
 			limit = {
-				has_country_modifier = high_monetary_crash
-				NOT = {
+				OR = {
 					has_country_modifier = medium_monetary_crash
+					has_country_modifier = high_monetary_crash
+					has_country_modifier = small_monetary_crash
 				}
-				var:deflation_value <= 100
+				OR = {
+					NOT = {
+						has_variable = silver_unvalue
+					}
+					var:silver_unvalue <= 20
+				}
 			}
 			trigger_event = {
-				id = c3rd_other_events.291
+				id = c3rd_other_events.293
 			}
 		}
 		else_if = {
 			limit = {
-				has_country_modifier = medium_monetary_crash
+				OR = {
+					has_country_modifier = medium_monetary_crash
+					has_country_modifier = high_monetary_crash
+				}
 				NOT = {
 					has_country_modifier = small_monetary_crash
 				}
-				var:deflation_value <= 70
+				var:silver_unvalue <= 70
 			}
 			trigger_event = {
 				id = c3rd_other_events.292
@@ -914,11 +992,14 @@ c3rd_apply_silver_unvalue = { #applying silver modifiers events
 		}
 		else_if = {
 			limit = {
-				has_country_modifier = small_monetary_crash
-				var:deflation_value <= 20
+				has_country_modifier = high_monetary_crash
+				NOT = {
+					has_country_modifier = medium_monetary_crash
+				}
+				var:silver_unvalue <= 100
 			}
 			trigger_event = {
-				id = c3rd_other_events.293
+				id = c3rd_other_events.291
 			}
 		}
 
@@ -988,6 +1069,79 @@ c3rd_really_rich_country = {
 	random_events = {
 		500 = 0
 		50 = c3rd_other_events.40
+	}
+
+}
+
+c3rd_no_more_wonder = {
+	trigger = {
+		has_land = yes
+		any_province = {
+			has_province_modifier = wonder_destroyed_modifier
+			NOT = {
+				has_great_work = yes
+			}
+		}
+	}
+	effect = {
+		every_province = {
+			limit = {
+				has_province_modifier = wonder_destroyed_modifier
+				NOT = {
+					has_great_work = yes
+				}
+			}
+			remove_province_modifier = wonder_destroyed_modifier
+		}
+	}
+
+}
+
+c3rd_barbarian_sack = {
+	trigger = {
+		has_land = yes
+		any_owned_province = {
+			is_previous_controller = root
+			controller = { tag = BAR }
+			is_state_capital = yes
+			state = {
+				NOT = {
+					has_state_modifier = barbarians_border
+				}
+				any_state_province = {
+					count <= 4
+					NOT = {
+						controller = { tag = BAR }
+					}
+				}
+			}
+		}
+	}
+	effect = {
+		every_province = {
+			limit = {
+				is_previous_controller = root
+				controller = { tag = BAR }
+				is_state_capital = yes
+				state = {
+					any_state_province = {
+						count <= 4
+						NOT = {
+							controller = { tag = BAR }
+						}
+					}
+					NOT = {
+						has_state_modifier = barbarians_border
+					}
+				}
+			}
+			state = {
+				add_state_modifier = {
+					name = barbarians_border
+					duration = 1850
+				}
+			}
+		}
 	}
 
 }

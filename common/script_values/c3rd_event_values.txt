@@ -71,7 +71,7 @@ c3rd_base_economic_value = {
 			every_subject = {
 				add = {
 					value = country_population
-					multiply = 1
+					multiply = 0.5
 				}
 			}
 		}
@@ -163,7 +163,7 @@ c3rd_economic_1_value = {
 
 c3rd_economic_2_value = {
 	value = c3rd_base_economic_value
-	multiply = 2.6
+	multiply = 2.7
 	ROOT = {
 		divide = country_population
 	}
@@ -179,49 +179,84 @@ c3rd_economic_3_value = {
 }
 c3rd_economic_4_value = {
 	value = c3rd_base_economic_value
-	multiply = 2.2
+	multiply = 2.1
 	ROOT = {
 		divide = country_population
 	}
 }
 c3rd_economic_5_value = {
 	value = c3rd_base_economic_value
-	multiply = 2
+	multiply = 1.9
 	ROOT = {
 		divide = country_population
 	}
 }
 c3rd_economic_6_value = {
 	value = c3rd_base_economic_value
-	multiply = 1.8
+	multiply = 1.7
 	ROOT = {
 		divide = country_population
 	}
 }
 c3rd_economic_7_value = {
 	value = c3rd_base_economic_value
-	multiply = 1.6
+	multiply = 1.55
 	ROOT = {
 		divide = country_population
 	}
 }
 c3rd_economic_8_value = {
 	value = c3rd_base_economic_value
-	multiply = 1.5
+	multiply = 1.4
 	ROOT = {
 		divide = country_population
 	}
 }
 c3rd_economic_9_value = {
 	value = c3rd_base_economic_value
-	multiply = 1.4
+	multiply = 1.25
 	ROOT = {
 		divide = country_population
 	}
 }
 c3rd_economic_10_value = {
 	value = c3rd_base_economic_value
-	multiply = 1.3
+	multiply = 1.15
+	ROOT = {
+		divide = country_population
+	}
+}
+c3rd_economic_11_value = {
+	value = c3rd_base_economic_value
+	multiply = 1.05
+	ROOT = {
+		divide = country_population
+	}
+}
+c3rd_economic_12_value = {
+	value = c3rd_base_economic_value
+	multiply = 0.95
+	ROOT = {
+		divide = country_population
+	}
+}
+c3rd_economic_13_value = {
+	value = c3rd_base_economic_value
+	multiply = 0.9
+	ROOT = {
+		divide = country_population
+	}
+}
+c3rd_economic_14_value = {
+	value = c3rd_base_economic_value
+	multiply = 0.85
+	ROOT = {
+		divide = country_population
+	}
+}
+c3rd_economic_15_value = {
+	value = c3rd_base_economic_value
+	multiply = 0.8
 	ROOT = {
 		divide = country_population
 	}
@@ -291,9 +326,57 @@ c3rd_economic_factor = {
 	}
 	if = {
 		limit = {
+			has_country_modifier = monetary_consolidation_sol
+		}
+		add = -2
+	}
+	if = {
+		limit = {
+			has_country_modifier = aristocratic_reforms
+		}
+		add = -2
+	}
+	if = {
+		limit = {
+			has_country_modifier = political_unstability
+		}
+		add = 1
+	}
+	if = {
+		limit = {
 			has_law = second_reform_law
 		}
 		add = -1
+	}
+	if = {
+		limit = {
+			num_of_cities <= 200
+		}
+		add = -1
+	}
+	if = {
+		limit = {
+			num_of_cities >= 1000
+		}
+		add = 1
+	}
+	if = {
+		limit = {
+			num_of_cities >= 2000
+		}
+		add = 1
+	}
+	if = {
+		limit = {
+			num_of_cities >= 3000
+		}
+		add = 1
+	}
+	if = {
+		limit = {
+			num_of_cities >= 5000
+		}
+		add = 1
 	}
 
 }
@@ -361,9 +444,39 @@ c3rd_economic_value = {
 	}
 	else_if = {
 		limit = {
-			c3rd_economic_factor >= 10
+			c3rd_economic_factor = 10
 		}
 		value = c3rd_economic_10_value
+	}
+	else_if = {
+		limit = {
+			c3rd_economic_factor = 11
+		}
+		value = c3rd_economic_11_value
+	}
+	else_if = {
+		limit = {
+			c3rd_economic_factor = 12
+		}
+		value = c3rd_economic_12_value
+	}
+	else_if = {
+		limit = {
+			c3rd_economic_factor = 13
+		}
+		value = c3rd_economic_13_value
+	}
+	else_if = {
+		limit = {
+			c3rd_economic_factor = 14
+		}
+		value = c3rd_economic_14_value
+	}
+	else_if = {
+		limit = {
+			c3rd_economic_factor >= 14
+		}
+		value = c3rd_economic_15_value
 	}
 	else = {
 		value = c3rd_economic_5_value
@@ -379,4 +492,28 @@ income_150 = {
 income_300 = {
 	value = has_monthly_income
 	multiply = 300
+}
+
+state_freemen = {
+	value = 0
+	every_state_province = {
+		add = num_of_freemen
+	}
+}
+third_of_state_pop = {
+	value = 0
+	every_state_province = {
+		add = total_population
+	}
+	divide = 3
+}
+
+num_vassal_provinces = {
+	value = 0
+	every_subject = {
+		add = {
+			value = num_of_cities
+			multiply = 3
+		}
+	}
 }

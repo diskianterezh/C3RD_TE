@@ -64,15 +64,20 @@
 			current_ruler = {
 				popularity >= 80
 			}
-			has_senate_approval >= 80
+			has_senate_approval >= 0.80
 		}
 		effect = {
 			add_political_influence = -80
 			add_stability = -10
 			add_tyranny = 10
+        
+			set_variable = {
+				name = on_going_rep_thingy
+				days = 600
+			}
 			trigger_event = {
 				id = c3rd_events.41
-				days = { 90 190 }
+				days = 1
 			}
 		}
 		
@@ -131,35 +136,6 @@
 		}
 
 	}
-	establish_solidus = {
-		potential = {
-			current_date >= 750.1.1
-			has_law = second_reform_law
-			NOR = {
-				has_country_modifier = solidus_introduced
-				has_variable = solidus_ongoing
-			}
-		}
-		allow = {
-			has_law = second_reform_law
-			NOR = {
-				has_country_modifier = small_deflation
-				has_country_modifier = medium_deflation
-				has_country_modifier = high_deflation
-				has_country_modifier = small_monetary_crash
-				has_country_modifier = medium_monetary_crash
-				has_country_modifier = high_monetary_crash
-			}
-			political_influence >= 50
-		}
-		effect = {
-			trigger_event = {
-				id = c3rd_other_events.13
-			}
-
-		}
-
-	}
 	inject_liquidity = {
 		potential = {
 			current_date >= 700.1.1
@@ -181,18 +157,89 @@
 			}
 		}
 		effect = {
-			add_political_influence = -20
+			add_political_influence = -50
 			add_treasury = {
-				value = -3
+				value = -10
 				multiply = num_of_cities
 			}
-			change_variable = {
-				name = deflation_value
-				add = -10
+			if = {
+				limit = { 
+					num_of_cities <= 100
+				}
+				change_variable = {
+					name = deflation_value
+					add = -16
+				}
+			}
+			else_if = {
+				limit = { 
+					num_of_cities <= 250
+				}
+				change_variable = {
+					name = deflation_value
+					add = -13
+				}
+			}
+			else_if = {
+				limit = { 
+					num_of_cities <= 500
+				}
+				change_variable = {
+					name = deflation_value
+					add = -10
+				}
+			}
+			else = {
+				change_variable = {
+					name = deflation_value
+					add = -7
+				}
 			}
 			add_country_modifier = {
 				name = added_liquidity
 				duration = 1825
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						OR = {
+							has_country_modifier = small_deflation
+							has_country_modifier = medium_deflation
+							has_country_modifier = high_deflation
+						}
+						var:deflation_value <= 20
+					}
+					trigger_event = {
+						id = c3rd_other_events.25
+					}
+				}
+				else_if = {
+					limit = {
+						OR = {
+							has_country_modifier = medium_deflation
+							has_country_modifier = high_deflation
+						}
+						NOT = {
+							has_country_modifier = small_deflation
+						}
+						var:deflation_value <= 65
+					}
+					trigger_event = {
+						id = c3rd_other_events.24
+					}
+				}
+				else_if = {
+					limit = {
+						has_country_modifier = high_deflation
+						NOT = {
+							has_country_modifier = medium_deflation
+						}
+						var:deflation_value <= 120
+					}
+					trigger_event = {
+						id = c3rd_other_events.23
+					}
+				}
 			}
 
 		}
@@ -219,18 +266,280 @@
 			}
 		}
 		effect = {
-			add_political_influence = -20
+			add_political_influence = -25
 			add_stability = -10
-			change_variable = {
-				name = silver_unvalue
-				add = -10
+			if = {
+				limit = { 
+					num_of_cities <= 100
+				}
+				change_variable = {
+					name = silver_unvalue
+					add = -25
+				}
+			}
+			else_if = {
+				limit = { 
+					num_of_cities <= 250
+				}
+				change_variable = {
+					name = silver_unvalue
+					add = -20
+				}
+			}
+			else_if = {
+				limit = { 
+					num_of_cities <= 500
+				}
+				change_variable = {
+					name = silver_unvalue
+					add = -15
+				}
+			}
+			else = {
+				change_variable = {
+					name = silver_unvalue
+					add = -10
+				}
 			}
 			add_country_modifier = {
 				name = new_balance
 				duration = 1825
 			}
+			hidden_effect = {
+				if = {
+					limit = {
+						OR = {
+							has_country_modifier = medium_monetary_crash
+							has_country_modifier = high_monetary_crash
+							has_country_modifier = small_monetary_crash
+						}
+						var:silver_unvalue <= 20
+					}
+					trigger_event = {
+						id = c3rd_other_events.293
+					}
+				}
+				else_if = {
+					limit = {
+						OR = {
+							has_country_modifier = medium_monetary_crash
+							has_country_modifier = high_monetary_crash
+						}
+						NOT = {
+							has_country_modifier = small_monetary_crash
+						}
+						var:silver_unvalue <= 70
+					}
+					trigger_event = {
+						id = c3rd_other_events.292
+					}
+				}
+				else_if = {
+					limit = {
+						has_country_modifier = high_monetary_crash
+						NOT = {
+							has_country_modifier = medium_monetary_crash
+						}
+						var:silver_unvalue <= 100
+					}
+					trigger_event = {
+						id = c3rd_other_events.291
+					}
+				}
+				trigger_event = {
+					id = c3rd_other_events.75
+					days = 90
+				}
+			}
 		}
 
+	}
+	
+		
+	overexpansion_the_reform = {
+		potential = {
+			num_of_cities >= 1
+			has_country_modifier = crisis_of_the_third_century
+			OR = {
+				has_country_modifier = too_grand_republic
+				has_country_modifier = too_huge_republic
+				has_country_modifier = too_giant_republic
+			}
+			NOR = {
+				has_variable = overexpansion_reform_decision
+				has_country_modifier = political_unstability
+			}
+			is_republic = yes
+		}
+		allow = {
+			political_influence >= 50
+			current_ruler = {
+				popularity >= 50
+			}
+			has_senate_approval >= 0.50
+		}
+		effect = {
+			add_political_influence = -50
+			set_variable = {
+				name = overexpansion_reform_decision
+				days = 30
+			}
+			hidden_effect = {
+				random_list = {
+					10 = {
+						modifier = {
+							add = 10
+							current_ruler = {
+								has_trait = submissive
+							}
+						}
+						modifier = {
+							add = 10
+							current_ruler = {
+								has_trait = corrupt
+							}
+						}
+						modifier = {
+							add = current_ruler.corruption
+						}
+						modifier = {
+							add = 10
+							current_ruler = {
+								has_trait = unnoticeable
+							}
+						}
+						modifier = {
+							add = 10
+							current_date >= 1000.1.1
+						}
+						modifier = {
+							add = 10
+							current_date >= 1100.1.1
+						}
+						modifier = {
+							add = 20
+							current_date >= 1200.1.1
+						}
+						trigger_event = { #failure, political instability
+							id = c3rd_events.50
+							days = 15
+						}
+						
+					}
+					1 = {
+						modifier = {
+							add = current_ruler.popularity
+						}
+						modifier = {
+							add = current_ruler.charisma
+						}
+						modifier = {
+							add = 10
+							current_ruler = {
+								has_trait = assertive
+							}
+						}
+						modifier = {
+							add = 10
+							current_ruler = {
+								has_trait = righteous
+							}
+						}
+						modifier = {
+							add = 20
+							current_ruler = {
+								has_trait = prominent
+							}
+						}
+						modifier = {
+							add = 20
+							current_ruler = {
+								has_trait = orator
+							}
+						}
+						trigger_event = { #reform the republic, get a modifier to keep things ok for 20 years
+							id = c3rd_events.49
+							days = 15
+						}
+					}
+				}
+			}
+		}
+		
+		ai_will_do = {
+			modifier = {
+				factor = 10
+				current_date >= 1100.1.1
+			}
+		}
+	}
+
+	overexpansion_the_reform_instability = {
+		potential = {
+			num_of_cities >= 1
+			has_country_modifier = crisis_of_the_third_century
+			has_country_modifier = political_unstability
+			OR = {
+				has_country_modifier = too_grand_republic
+				has_country_modifier = too_huge_republic
+				has_country_modifier = too_giant_republic
+			}
+			NOT = {
+				has_variable = overexpansion_reform_decision
+			}
+			is_republic = yes
+		}
+		allow = {
+			political_influence >= 25
+			current_ruler = {
+				popularity >= 40
+			}
+			stability >= 25
+		}
+		effect = {
+			add_political_influence = -25
+			add_stability = -10
+			add_tyranny = 15
+			set_variable = {
+				name = overexpansion_reform_decision
+				days = 30
+			}
+			trigger_event = { #get the overextension removed as you are in political instability
+				id = c3rd_events.52
+				days = 15
+			}
+		}
+		
+		ai_will_do = {
+			modifier = {
+				factor = 10
+			}
+		}
+	}
+
+	
+	repair_great_work = {
+		potential = {
+			num_of_cities >= 1
+			any_owned_province = {
+				has_great_work = yes
+				has_province_modifier = wonder_destroyed_modifier
+			}
+		}
+		allow = {
+			political_influence >= 100
+		}
+		effect = {
+			trigger_event = { #get the overextension removed as you are in political instability
+				id = c3rd_other_events.51
+			}
+		}
+		
+		ai_will_do = {
+			modifier = {
+				factor = 10
+			}
+		}
 	}
 	
 }

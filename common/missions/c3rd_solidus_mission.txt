@@ -1,0 +1,461 @@
+﻿solidus_reform = { 
+
+	header = "mission_image_macedon"
+	icon = "macedon_2"
+
+	repeatable = no 
+
+	potential = {
+		is_tribal = no
+		invention = monetary_reform
+		NOR = {
+			has_country_modifier = solidus_introduced
+			has_variable = solidus_reform_cooldown
+		}
+		has_civil_war = no
+	} 
+
+	abort = {
+		ai_mission_back_out_trigger = yes
+	}
+
+	chance = {
+		factor = 100
+	} 
+
+	on_potential = {} 
+
+	on_start = {
+	}  
+
+	on_abort = {
+		custom_tooltip = "on_abort_tribal_reform_tt"
+		set_variable = {
+			name = solidus_reform_cooldown
+			days = 7300
+		}
+	}  
+
+	on_completion = {
+		complete_mission_effect = yes
+	}
+
+	solidus_reform_1 = { #deflation prevention side
+		icon = "task_economical"
+
+		allow = {
+			has_country_modifier = tax_inspection
+			NOT = {
+				has_country_modifier = citizen_exemption_from_census_tax
+			}
+			OR ={
+				has_country_modifier = small_deflation
+				has_country_modifier = medium_deflation
+				has_country_modifier = high_deflation
+			}
+		} 
+		bypass = {
+			OR = {
+				NOR = {
+					has_country_modifier = medium_deflation
+					has_country_modifier = high_deflation
+				}
+				c3rd_economic_value >= 0.9
+			}
+		}
+		
+
+		on_completion = {
+			custom_tooltip = "sol_first_deflation_mission"
+			change_variable = {
+				name = deflation_value
+				add = -15
+			}
+		}
+	}
+	solidus_reform_1_a = { #defl little branch
+		icon = "task_expansion"
+		requires = { solidus_reform_1 } 
+
+		allow = {
+			custom_tooltip = {
+				text = "sol_solidus_reform_1_a_tt1"
+				c3rd_gold_number >= 10
+			}
+			custom_tooltip = {
+				text = "sol_solidus_reform_1_a_tt2"
+				has_variable = deflation_value
+				var:deflation_value >= 15
+			}
+
+			OR ={
+				has_country_modifier = small_deflation
+				has_country_modifier = medium_deflation
+				has_country_modifier = high_deflation
+			}
+		}
+		
+
+		on_completion = {
+			custom_tooltip = "sol_first_deflation_mission"
+			add_2_free_province_investments = yes
+			change_variable = {
+				name = deflation_value
+				add = -15
+			}
+		}
+	}
+	
+	solidus_reform_1_b = { 
+		icon = "task_diplomatic"
+
+		requires = { solidus_reform_1 } 
+
+		allow = {
+			OR = {
+				custom_tooltip = {
+					text = sol_solidus_reform_1_b_tt1
+					c3rd_economic_value >= 1
+				}
+				has_law = monetary_reform_law
+			}
+			NOT = {
+				has_country_modifier = high_deflation
+			}
+			OR ={
+				has_country_modifier = small_deflation
+				has_country_modifier = medium_deflation
+			}
+		}
+
+		bypass = {
+			NOR = {
+				has_country_modifier = small_deflation
+				has_country_modifier = medium_deflation
+				has_country_modifier = high_deflation
+			}
+		}
+
+		on_completion = {
+			add_political_influence = -25
+			custom_tooltip = "sol_first_deflation_mission"
+			change_variable = {
+				name = deflation_value
+				add = -15
+			}
+			trigger_event = {
+				id = c3rd_other_events.17
+			}
+		} 
+	}
+
+	solidus_reform_1_c = { 
+		icon = "task_economical"
+
+		requires = { solidus_reform_1_b } 
+
+		allow = {
+			political_influence >= 25
+			NOR = {
+				has_country_modifier = high_deflation
+				has_country_modifier = medium_deflation
+			}
+			has_country_modifier = small_deflation
+		} 
+		bypass = {
+			NOR = {
+				has_country_modifier = small_deflation
+				has_country_modifier = medium_deflation
+				has_country_modifier = high_deflation
+			}
+		}
+
+		on_completion = {
+			add_political_influence = -25
+			custom_tooltip = "sol_first_deflation_mission"
+			change_variable = {
+				name = deflation_value
+				add = -15
+			}
+			ordered_owned_province = {
+				limit = {
+					has_city_status = yes
+				}
+				order_by = total_population
+				max = 10
+				add_province_modifier = {
+					name = city_against_deflation
+					duration = 1650
+				}
+			}
+		} 
+	}
+	solidus_reform_1_d = { 
+		icon = "task_economical"
+
+		requires = { solidus_reform_1_c } 
+
+		allow = {
+			political_influence >= 50
+			NOR = {
+				has_country_modifier = high_deflation
+				has_country_modifier = medium_deflation
+				has_country_modifier = small_deflation
+			}
+		}
+
+		on_completion = {
+			add_political_influence = -50
+			custom_tooltip = "sol_deflation_bonus"
+			
+			add_country_modifier = {
+				name = monetary_consolidation_sol
+				duration = 14600
+			}
+		} 
+	}
+
+	solidus_reform_2 = { #main tree
+		icon = "task_expansion"
+
+		allow = {
+			has_law = second_reform_law
+			political_influence >= 50
+			NOR ={
+				has_country_modifier = small_deflation
+				has_country_modifier = medium_deflation
+				has_country_modifier = high_deflation
+				has_country_modifier = small_monetary_crash
+				has_country_modifier = medium_monetary_crash
+				has_country_modifier = high_monetary_crash
+			}
+		}
+
+		duration = 730
+		
+
+		on_completion = {
+			custom_tooltip = "sol_first_deflation_mission"
+			add_political_influence = -50
+			trigger_event = {
+				id = c3rd_other_events.14
+			}
+		}
+	}
+	solidus_reform_2_a = {
+		icon = "task_political"
+		requires = { solidus_reform_2 } 
+
+		allow = {
+			has_law = second_reform_law
+			NOR ={
+				has_country_modifier = small_deflation
+				has_country_modifier = medium_deflation
+				has_country_modifier = high_deflation
+				has_country_modifier = small_monetary_crash
+				has_country_modifier = medium_monetary_crash
+				has_country_modifier = high_monetary_crash
+			}
+		}
+
+		duration = 730
+		
+
+		on_completion = {
+			custom_tooltip = "sol_first_deflation_mission"
+			trigger_event = {
+				id = c3rd_other_events.15
+			}
+		}
+	}
+	solidus_reform_2_b = {
+		icon = "task_economical"
+		requires = { solidus_reform_2_a } 
+
+		allow = {
+			has_law = second_reform_law
+			NOR ={
+				has_country_modifier = small_deflation
+				has_country_modifier = medium_deflation
+				has_country_modifier = high_deflation
+				has_country_modifier = small_monetary_crash
+				has_country_modifier = medium_monetary_crash
+				has_country_modifier = high_monetary_crash
+			}
+		}
+
+		duration = 730
+		
+
+		on_completion = {
+			custom_tooltip = "sol_first_deflation_mission"
+			trigger_event = {
+				id = c3rd_other_events.16
+			}
+		}
+	}
+	
+	solidus_reform_3 = { #silver decrease prevention side
+	icon = "task_economical"
+
+		allow = {
+			OR ={
+				has_country_modifier = small_monetary_crash
+				has_country_modifier = medium_monetary_crash
+				has_country_modifier = high_monetary_crash
+			}
+		} 
+		bypass = {
+			OR = {
+				NOR = {
+					has_country_modifier = medium_monetary_crash
+					has_country_modifier = high_monetary_crash
+				}
+			}
+		}
+	
+
+		on_completion = {
+			has_law = second_reform_law
+			custom_tooltip = "sol_first_silver_mission"
+			change_variable = {
+				name = silver_unvalue
+				add = -15
+			}
+		}
+	}
+	solidus_reform_3_a = { #silv little branch
+		icon = "task_conquest"
+		requires = { solidus_reform_3 } 
+
+		allow = {
+			custom_tooltip = {
+				text = "sol_solidus_reform_3_a_tt1"
+				num_vassal_provinces >= num_of_cities
+			}
+
+			OR ={
+				has_country_modifier = small_monetary_crash
+				has_country_modifier = medium_monetary_crash
+				has_country_modifier = high_monetary_crash
+			}
+		}
+	
+
+		on_completion = {
+			custom_tooltip = "sol_first_silver_mission"
+			change_variable = {
+				name = silver_unvalue
+				add = -15
+			}
+			every_subject = {
+                add_opinion = {
+                    modifier = border_money
+                    target = root
+                }
+			}
+		}
+	}
+
+	solidus_reform_3_b = { 
+		icon = "task_diplomatic"
+
+		requires = { solidus_reform_3 } 
+
+		allow = {
+			political_influence >= 25
+			NOT = {
+				has_country_modifier = high_monetary_crash
+			}
+			OR ={
+				has_country_modifier = small_monetary_crash
+				has_country_modifier = medium_monetary_crash
+			}
+		}
+
+		bypass = {
+			NOR = {
+				has_country_modifier = small_monetary_crash
+				has_country_modifier = medium_monetary_crash
+				has_country_modifier = high_monetary_crash
+			}
+		}
+
+		on_completion = {
+			add_political_influence = -25
+			custom_tooltip = "sol_first_silver_mission"
+			change_variable = {
+				name = silver_unvalue
+				add = -15
+			}
+			trigger_event = {
+				id = c3rd_other_events.18
+			}
+		} 
+	}
+
+	solidus_reform_3_c = { 
+		icon = "task_political"
+
+		requires = { solidus_reform_3_b } 
+
+		allow = {
+			political_influence >= 25
+			current_ruler = {
+				corruption <= 10
+			}
+			NOR = {
+				has_country_modifier = high_monetary_crash
+				has_country_modifier = medium_monetary_crash
+			}
+			has_country_modifier = small_monetary_crash
+		} 
+		bypass = {
+			NOR = {
+				has_country_modifier = small_monetary_crash
+				has_country_modifier = medium_monetary_crash
+				has_country_modifier = high_monetary_crash
+			}
+		}
+
+		on_completion = {
+			add_political_influence = -25
+		
+			custom_tooltip = "sol_first_silver_mission"
+			change_variable = {
+				name = silver_unvalue
+				add = -15
+			}
+			every_character = {
+				limit = {
+					has_any_office = yes
+				}
+				add_corruption = -10
+			}
+		} 
+	}
+	solidus_reform_3_d = { 
+		icon = "task_economical"
+
+		requires = { solidus_reform_3_c } 
+
+		allow = {
+			political_influence >= 50
+			NOR = {
+				has_country_modifier = high_monetary_crash
+				has_country_modifier = medium_monetary_crash
+				has_country_modifier = small_monetary_crash
+			}
+		}
+
+		on_completion = {
+			add_political_influence = -50
+			custom_tooltip = "sol_silver_bonus"
+		
+			add_country_modifier = {
+				name = silver_consolidation_sol
+				duration = 10950
+			}
+		} 
+	}
+}

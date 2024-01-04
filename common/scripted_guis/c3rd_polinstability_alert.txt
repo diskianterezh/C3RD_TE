@@ -1,0 +1,7 @@
+﻿c3rd_polinstability_alert = {
+	scope = country
+
+	is_shown = {
+		has_country_modifier = political_unstability
+	}
+}

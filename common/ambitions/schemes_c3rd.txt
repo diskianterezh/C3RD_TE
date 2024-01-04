@@ -1,5 +1,7 @@
 ﻿#Default duration = 730 days
 
+#C3RD
+
 scheme_provoke_rival = {
 	can_be_picked = {
 		scheme_preconditions = yes

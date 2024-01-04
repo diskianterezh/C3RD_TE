@@ -28,6 +28,10 @@ autonomy_granted = {
 	loyalty_to_overlord = 20
 }
 
+customs_controls = {
+	loyalty_to_overlord = -10
+}
+
 crisis_of_the_third_century = {
 	global_nobles_output = -0.1
 	global_citizen_output = -0.1
@@ -35,11 +39,13 @@ crisis_of_the_third_century = {
 	subject_loyalty = -20
 	tribute_income_modifier = -0.35
 	happiness_for_same_culture_modifier = -0.1
+	happiness_for_wrong_culture_group_modifier = -0.15
 	monthly_legitimacy = -0.1
 	agressive_expansion_impact = 0.25
 	global_monthly_state_loyalty = -0.01
-	integrate_speed = -0.5
+	integrate_speed = -0.4
 	diplomatic_relations = -1
+	monthly_political_influence_modifier = -0.10
 }
 
 military_anarchy = {
@@ -50,6 +56,7 @@ military_anarchy = {
 	land_morale_modifier = 0.05
 	governor_loyalty = -5
 	diplomatic_relations = -1
+	monthly_political_influence_modifier = -0.20
 }
 
 stability_boosted_mother = {
@@ -57,13 +64,16 @@ stability_boosted_mother = {
 }
 
 political_unstability = {
-	monthly_tyranny = 0.05
-	monthly_corruption = 0.05
+	monthly_tyranny = 0.20
+	monthly_corruption = 0.1
 	stability_monthly_change = -0.05
-	happiness_for_same_culture_modifier = -0.1
+	happiness_for_same_culture_modifier = -0.15
+	global_nobles_output = -0.2
 	subject_loyalty = -10
-	monthly_political_influence_modifier = -0.25
+	monthly_political_influence_modifier = -0.5
 	diplomatic_relations = -1
+	civil_war_threshold = -0.05
+	character_loyalty = -5
 }
 
 deep_reforms = {
@@ -172,7 +182,7 @@ mines_control_assessed = {
 	global_slaves_happyness = 0.05
 }
 
-stric_control_assessed = {
+strict_control_assessed = {
 	stability_monthly_change = -0.02
 	monthly_governor_wage = 0.05
 }
@@ -219,6 +229,7 @@ solidus_introduced = {
 	global_nobles_happyness = 0.1
 	global_nobles_output = -0.15
 	global_freemen_happyness = -0.1
+	character_loyalty = -10 #this will changed once feudality events are added
 }
 
 big_monetary_control = {
@@ -256,11 +267,35 @@ high_monetary_crash = {
 }
 
 local_autonomy_c3rd = {
-	local_pop_assimilation_speed_modifier = -0.25
+	local_pop_assimilation_speed_modifier = -0.5
 }
 
 revolt_preparation = {
+	local_unrest = 5
+}
+
+wonder_defended_weapons = {
+	local_unrest = 5
+	local_population_growth = -0.1
+	local_output_modifier = -0.3
+	local_migration_attraction = -5
+	local_migration_speed = 2
+}
+
+wonder_destroyed_modifier = {
+	local_output_modifier = -0.5
+	local_country_civilization_value = -25
 	local_unrest = 2
+	local_migration_attraction = -5
+	local_migration_speed = 2
+}
+
+barbarians_border = {
+	local_monthly_civilization = -0.05
+	local_unrest = 2
+	local_migration_attraction = -5
+	local_migration_speed = 2
+	local_pop_assimilation_speed = -1
 }
 
 added_liquidity = {
@@ -274,4 +309,137 @@ new_balance = {
 games_games = {
 	happiness_for_same_culture_modifier = 0.1
 }
+
+provinces_republican_reforms = {
+	governor_loyalty = -10
+	monthly_political_influence_modifier = -0.10
+	global_citizen_happyness = 0.1
+	global_nobles_happyness = -0.1
+}
+
+too_grand_republic = {
+	global_tax_modifier = -0.1
+	global_citizen_output = -0.1
+	global_nobles_output = -0.1
+}
+
+too_huge_republic = {
+	global_tax_modifier = -0.15
+	global_citizen_output = -0.15
+	global_nobles_output = -0.15
+	global_slaves_output = -0.1
+	monthly_corruption = 0.05
+}
+
+too_giant_republic = {
+	global_tax_modifier = -0.2
+	global_citizen_output = -0.2
+	global_nobles_output = -0.2
+	global_slaves_output = -0.15
+	global_freemen_output = -0.1
+	monthly_corruption = 0.1
+	global_monthly_state_loyalty = -0.1
+}
+
+huns_buffs_c3rd = {
+	discipline = 0.4
+	heavy_cavalry_morale = 0.20
+	heavy_cavalry_defensive = 0.20
+	heavy_cavalry_discipline = 0.10
+	heavy_cavalry_offensive = 0.20
+	land_unit_attrition = -0.2
+	siege_ability = 0.4
+	siege_engineers = 2
+	horse_archers_morale = 0.20
+	horse_archers_defensive = 0.20
+	horse_archers_discipline = 0.1
+	horse_archers_offensive = 0.20
+	light_infantry_defensive = 0.20
+	light_infantry_discipline = 0.1
+	light_infantry_offensive = 0.20
+}
+
+aristocratic_reforms = {
+	global_nobles_output = -0.2
+	global_nobles_happyness = 0.1
+	global_slaves_happyness = -0.2
+	global_freemen_happyness = -0.2
+	monthly_corruption = 0.05
+	global_monthly_state_loyalty = -0.05
+	global_slaves_desired_pop_ratio = 0.05
+}
+
+raise_of_wages = {
+	global_nobles_happyness = -0.1
+	global_freemen_happyness = 0.1
+	global_tax_modifier = -0.15 #these are not economically correct, because raising wage should technically up taxes and economy by consequences, however, this is here to  symbolize the economy cost of the elite (hence also the governement) of raising wages
+	global_commerce_modifier = -0.15
+	stability_monthly_change = 0.02
+}
+
+bartering_authorised = {
+	global_tax_modifier = -0.15
+	global_slaves_desired_pop_ratio = 0.05
+	global_tribesmen_desired_pop_ratio = 0.05
+	country_civilization_value = -10
+	global_monthly_civilization = -0.05
+}
+
+monetary_consolidation_sol = {
+	global_tax_modifier = 0.1
+	happiness_for_same_culture_modifier = 0.05
+}
+
+little_trade_buff = {
+	global_commerce_modifier = 0.1
+}
+
+little_freemen_output = {
+	global_freemen_output = 0.1
+}
+
+little_noble_happy = {
+	global_nobles_happyness = 0.05
+}
+
+little_freemen_happy = {
+	global_freemen_happyness = 0.05
+}
+
+city_against_deflation = {
+	local_freemen_output = 0.1
+	local_nobles_happyness = 0.05
+	local_commerce_value_modifier = 0.1
+	local_tax_modifier = -0.1
+}
+
+silver_consolidation_sol = {
+	global_commerce_modifier = 0.1
+	happiness_for_same_culture_modifier = 0.05
+}
+
+decuria_established = {
+	global_citizen_happyness = -0.1
+	global_tax_modifier = 0.05
+}
+
+tyranny_of_taxation = {
+	monthly_corruption = 0.02
+	monthly_governor_wage = 0.1
+}
+
+escape_silver_taxation = {
+	global_tax_modifier = -0.4
+}
+
+# barbarian_spawn_buff_x = {
+# 	discipline = 0.05 - 0.1
+# 	emblematic_unit_1_offensive = 0.1
+# 	emblematic_unit_1_defensive = 0.1
+# 	emblematic_unit_2_offensive = 0.1
+# 	emblematic_unit_2_defensive = 0.1
+# 	#not at all events
+# 	siege_ability = 0.1
+# 	siege_engineers = 1
+# }
 

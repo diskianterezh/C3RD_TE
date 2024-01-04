@@ -5,18 +5,18 @@ succession_crisis.1 = {
 	type = country_event
 	title = "succession_crisis.1.t"
 	desc = "succession_crisis.1.desc"
-	
+
 	picture = successors
-	
+
 	right_portrait = scope:successor_general_1
 	right_portrait = scope:successor_general_2
 	right_portrait = scope:successor_general_3
 	left_portrait = current_ruler
 	left_portrait = scope:former_ruler
-	
+
 	goto_location = scope:neighbor_succession_target.capital_scope
-	
-	trigger = { 
+
+	trigger = {
 		any_owned_province = {
 			controller = root
 		}
@@ -143,9 +143,9 @@ succession_crisis.1 = {
 		add_stability = -20
 		custom_tooltip = special_successor_interactions_available
 	}
-	
+
 	option = {
-		name = "succession_crisis.1.a"		
+		name = "succession_crisis.1.a"
 		hidden_effect = {
 			if = {
 				limit = {
@@ -274,7 +274,7 @@ succession_crisis.1 = {
 						limit = {
 							has_land = yes
 							NOR = {
-								this = root 
+								this = root
 								alliance_with = root
 							}
 						}
@@ -356,10 +356,10 @@ succession_crisis.1 = {
 				id = c3rd_events.3
 				days = { 15 30 }
 			}
-		
-		}	
-		
+
+		}
+
 
 	}
-	
+
 }

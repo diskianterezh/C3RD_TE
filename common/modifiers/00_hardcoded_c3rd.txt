@@ -13,5 +13,5 @@ looted = {
 	local_monthly_civilization = -0.03
 	local_migration_attraction = -2
 	local_pop_assimilation_speed_modifier = -1
-	global_pop_promotion_speed_modifier = -0.5
+	local_pop_promotion_speed = -0.5
 }

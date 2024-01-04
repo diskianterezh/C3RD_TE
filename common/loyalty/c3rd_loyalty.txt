@@ -21,7 +21,7 @@ loyalty_inspired_mother = {
 	yearly_decay = 2
 }
 
-imposed_autority = {
+imposed_authority = {
 	value = 20
 	yearly_decay = 1
 }
@@ -33,11 +33,16 @@ loyalty_forced = {
 
 medium_requests_denied = {
 	value = -15
-	yearly_decay = 2
+	yearly_decay = 1
 }
 
 humiliated_general = {
 	value = -15
+	yearly_decay = 1
+}
+
+humiliated_powerful_general = {
+	value = -30
 	yearly_decay = 1
 }
 
@@ -59,6 +64,16 @@ loyalty_civil_war_victory_c3rd = {
 softened = {
 	value = 10
 	yearly_decay = 1
+}
+
+governor_abandonned = {
+	value = -20
+	yearly_decay = 1
+}
+
+assets_seized = {
+	value = -20
+	yearly_decay = 2
 }
 
 
