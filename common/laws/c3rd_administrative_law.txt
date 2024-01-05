@@ -1,0 +1,37 @@
+﻿administrative_law = {
+	potential = {
+		is_tribal = no
+	}
+	
+	basic_administrative_law = {
+		allow = {
+		}
+		
+	}
+	
+	constantine_reform_law = {
+		allow = {
+			invention = administrative_military_reform_c3rd
+			OR = {
+				NOT = {has_law = decentralized_administration_law}
+			}
+		}
+		modifier = {
+			general_loyalty = -5
+			governor_loyalty = 5
+		}
+	}
+	
+	decentralized_administration_law = { #this is a law enacted by event, when the nobles have too much control
+		allow = {
+			always = no
+		}
+		modifier = {
+			character_loyalty = 5
+			monthly_corruption = 0.05
+			global_nobles_output = 0.1
+			global_tax_modifier = -0.2
+		}
+	}
+	
+}

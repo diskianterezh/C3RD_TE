@@ -1,4 +1,21 @@
 namespace = c3rd_events
+#Notes for Military Anarchy :
+# Military anarchy is called by c3rd_events.9 - ruler assassinated by generals. Rulers above 85 popularity are immune - THIS IS WHY POPULARITY MUST BE TANKED BY NEGATIVE EVENTS TO AVOID PLAYERS BEING INVULNERABLE TO THE ANARCHY
+# Chances to be called when :
+# -You dont accept the call to war of generals : c3rd_events.7
+# -Accepted it but did not declare : c3rd_events.75
+# -c3rd_events.81, which is the special case of having only one powerful general (edge case, very rare)
+# -Barbarians ransacking the lands : c3rd_other_events.60
+# The chances are scaled by a hidden variable : unworthy_leader
+# It increases when :
+# - General intervention on succession crisis denied : c3rd_events.3 
+# - In republic, when the general fail to be convincing c3rd_events.6
+# - Ruler refuses to go to war c3rd_events.7 (it decreases when you go to war - bit too simple, nerf ?), gain a lot more when you fail to go to war c3rd_events.75
+# - You refuse the military advantages : c3rd_events.8
+# - c3rd_events.81 denied
+# - Denied the vanilla general call commander_loyalty.5 - a faire plus, c'est plus immersif avec la version de base
+
+
 #Crisis will create vassals, and some country (AI) could get crushed under the weight of vassals, reducing their PI by 200% because of diplomatic relations.
 #This is for making clients/satrapy back to tributaries (where they can get independent and stop helping the master)
 c3rd_events.1 = { #oh noes, too much vassals

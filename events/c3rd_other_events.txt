@@ -4031,6 +4031,15 @@ c3rd_other_events.60 = { #filthy barbarians ransacking our lands
 
     after = {
         hidden_effect = {
+            if = {
+                limit = { 
+                    NOR = { #if already milanarch
+                        has_country_modifier = military_anarchy
+                        has_variable = recent_military_anarchy
+                        has_variable = on_going_rep_thingy
+                        has_country_modifier = political_unstability
+                    }}
+            }
             random_list = {
                 10 = {
                     modifier = {
