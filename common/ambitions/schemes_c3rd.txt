@@ -753,3 +753,167 @@ scheme_care_of_relatives = {
 	}
 }
 
+
+scheme_buy_holding = {
+	can_be_picked = {
+		scheme_preconditions = yes
+		NOT = {
+			has_variable = ongoing_scheme_target
+		}
+		NOT = {
+			has_variable = bought_holding_recently
+		}	
+		wealth >= character_holding_price_svalue
+		OR = {
+			AND = {
+				is_head_of_family = yes
+				employer = {
+					any_owned_province = {
+						controller = root.employer
+						AND = {
+							NOT = {
+								this = root.employer.capital_scope
+							}
+							OR = {
+								NOT = {
+									exists = holding_owner
+								}
+								AND = {
+									exists = holding_owner
+									holding_owner = {
+										is_alive = no
+									}
+								}
+							}
+						}
+					}
+				}
+
+			}
+			AND = {
+				employer = {
+					NOT = {has_law = basic_administrative_law}
+				}
+				is_governor = yes
+				is_ruler = no
+				employer = {
+					any_owned_province = {
+						controller = root.employer
+						exists = governor
+						governor = root
+						AND = {
+							NOT = {
+								this = root.employer.capital_scope
+							}
+							OR = {
+								NOT = {
+									exists = holding_owner
+								}
+								AND = {
+									exists = holding_owner
+									holding_owner = {
+										is_alive = no
+									}
+								}
+							}
+						}
+					}
+				}
+
+			}
+		}
+		OR = {
+			title_importance_svalue > 1.25
+			power_base >= 1
+		}
+	}
+	
+	finished_when = {
+		custom_tooltip = {
+			text = "scheme_ambition_fulfillment_always_yes"
+		}
+	}
+	
+	duration = 60
+	
+	skip_initial_abort = yes
+	
+	abort = {
+		OR = {
+			prisoner = yes
+			NOT = {
+				exists = scope:ongoing_scheme_target
+			}
+			NOT = {
+				exists = scope:buy_holding_target
+			}
+			scope:buy_holding_target = {
+				OR = {
+					NOT = {
+						owner = root.employer
+					}
+					exists = holding_owner
+				}
+			}
+			scope:ongoing_scheme_target = {
+				OR = {
+					NOT = {
+						employer = root.employer
+					}
+					is_alive = no
+				}
+			}
+			has_character_modifier = indisposed_charmod
+			AND = {
+				employer = {has_law = basic_administrative_law}
+				is_governor = no
+				is_head_of_family = no
+			}
+		}
+	}
+	
+	chance = {
+		base = 10
+		likely_thief = yes
+		modifier = {
+			factor = 5
+			is_head_of_family = yes
+		}
+		modifier = {
+			factor = 3
+			is_governor = yes
+			employer = {has_law = constantine_reform_law}
+		}
+		modifier = {
+			factor = 6
+			is_governor = yes
+			employer = {has_law = decentralized_administration_law}
+		}
+		modifier = {
+			factor = 2
+			employer = {has_country_modifier = solidus_introduced}
+		}
+		modifier = {
+			factor = 0.2
+			employer = {
+				num_of_provinces < 10
+			}
+		}
+		modifier = {
+			factor = 10
+			employer = {
+				num_of_provinces > 100
+			}
+		}
+	}
+	
+	#on_monthly = xyz
+	on_start = scheme_buy_holding_start
+	on_finish = scheme_buy_holding_finish
+	on_abort = scheme_abort
+
+	modifier = {
+		monthly_character_popularity = -0.25
+	}
+}
+

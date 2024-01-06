@@ -2666,6 +2666,7 @@ oratory_2 = {
 		}
 		allow = {
 			is_ai = no
+			current_date >= 750.1.1 #just to prevent people for enabling those mechanics too soon
 		}
 		keystone = yes
 		requires = { monthly_character_loyalty_inv_5 }

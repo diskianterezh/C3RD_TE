@@ -1145,3 +1145,17 @@ c3rd_barbarian_sack = {
 	}
 
 }
+
+c3rd_holding_control = {
+	trigger = {
+		has_land = yes
+		any_governorships = {
+			exists = governor
+			governor = {
+				is_ruler = no
+			}
+			region_control_value >= 20
+		}
+	}
+	
+}

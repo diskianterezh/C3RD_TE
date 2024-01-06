@@ -137,12 +137,14 @@
  monetary_reform_law_desc:0 "By progressively decreasing the share of silver in denominations without changing the scale of values, it is possible to counterbalance the scarcity of ore very effectively. The possibility of a generalized inflation following the flooding of the economy by a cheap currency is of course only 'unlikely'... \n\n #G  This will very effectively counterbalance the deflation #! \n #R This will progressively reduce the percentage of silver ore in the currency #!\n\n #G This set of laws is not of any use until the monetary crisis mechanics are available. This should be around 700 AUC and will unlock new inventions in the civic tree. Until then, you can freely ignore it #!"
  second_reform_law:0 "Aurelian's reforms"
  second_reform_law_desc:0 "'The decomposition of the monetary sphere was slowed down then stopped when Aurelian took drastic measures of reduction of the volume of the monetary emissions and undertook to stabilize the numeraire of gold and billon, which ended in 309 by the creation of the solidus'\n#G This can fix the eventual crash of the money value\nThis has a positive impact on the monetary balance\nThis will enable the Solidus decision which can end the monetary crisis once and for all #!\n\n #G This set of laws is not of any use until the monetary crisis mechanics are available. This should be around 700 AUC and will unlock new inventions in the civic tree. Until then, you can freely ignore it #!"
+ administrative_law:0 "Administrative Laws"
  basic_administrative_law:0 "Military Governorates"
  basic_administrative_law_desc:0 "The magistrate sent to a province was the only one to hold the imperium, the full authority of the people. He had virtually absolute power, in the civil, judicial and military spheres. During civil wars, therefore, the provinces were ideal breeding grounds for the ambitious, who were sure of obtaining reliable troops and money without any controls."
  constantine_reform_law:0 "Reform of Constantine"
- constantine_reform_law_desc:0 "A new management structure was put in place. Military and civilian careers were definitively separated: the prefects of the praetorium and the vicars were confined to purely administrative functions and the governors were relieved of all military concerns, in favour of war professionals."
+ constantine_reform_law_desc:0 "A new management structure was put in place. Military and civilian careers were definitively separated: the prefects of the praetorium and the vicars were confined to purely administrative functions and the governors were relieved of all military concerns, in favour of war professionals. \n\n#G Generals will no longer ask for external wars\nGenerals are now less likely to trigger a Military Anarchy #! \n\n #R Governors are able to extend their personal influence in the regions they govern #! "
  decentralized_administration_law:0 "Total Autonomy"
- decentralized_administration_law_desc:0 "Governors were given greater autonomy, similar to the original governorates, but with weaker control and acquired rights for the major families."
+ decentralized_administration_law_desc:0 "Governors were given greater autonomy, with large powers and acquired rights for the major families. This means that they tend to lose interest in imperial politics and concentrate on their own lands.\n\n #R Governors are able to extend their personal influence in the regions they govern and are muchmore likely to take independant actions #!"
+ reduced_the_autonomy_desc:0 "Provincial autonomy has been reduced"
 
 
  #loyalty:
@@ -273,7 +275,7 @@
  public_games_enabled:0 "You will organize your first games"
  administrative_military_reform_c3rd:0 "Civil Administration Autonomy"
  administrative_military_reform_c3rd_desc:0 "The civil administration has been manipulated too much by military officers who paint themselves as local tyrants. A healthy separation must be made between the military administration of the provinces and the cities."
- administrative_military_reform_c3rd_enabled:0 "This will enable the 'Reform of Constantine' Administration law"
+ administrative_military_reform_c3rd_enabled:0 "#G This will enable the 'Reform of Constantine' Administration law #!"
 
 
  #Missions
@@ -1050,6 +1052,8 @@ low_stab_event.4.c.tt1:0 "Things remain as they are, but [independent_current_go
  c3rd_other_events.75.b.tt1:0 "#G This choice is available because of [office_treasure_man.GetName]'s statesmanship #!. Your leader will never make the same mistake again."
  c3rd_other_events.75.c:0 "I dont see any problem here"
  c3rd_other_events.75.c.tt1:0 "#R this will reduce the value of silver money \n This happened because of your leader's poor Statesmanship and he will surely make this mistake again#!"
+
+ c3rd_other_events.80.desc:0 "[autonomy_governorship.GetVariable('control_value_value').GetValue]% for [autonomy_governorship.GetName]"
 
 #tribals fix
 

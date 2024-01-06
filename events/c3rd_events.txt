@@ -823,15 +823,43 @@ c3rd_events.6 = { #volontary general must be convincing
             }
             if = {
                 limit = { has_variable = unworthy_leader}
-                change_variable = {
-                    name = unworthy_leader
-                    add = 2
+                if = {
+                    limit = { 
+                        OR = {
+                            has_law = constantine_reform_law
+                            has_law = decentralized_administration_law
+                        }
+                    }
+                    change_variable = {
+                        name = unworthy_leader
+                        add = 1
+                    }
+                }
+                else = {
+                    change_variable = {
+                        name = unworthy_leader
+                        add = 2
+                    } 
                 }
             }
             else = {
-                set_variable = {
-                    name = unworthy_leader
-                    value = 2
+                if = {
+                    limit = { 
+                        OR = {
+                            has_law = constantine_reform_law
+                            has_law = decentralized_administration_law
+                        }
+                    }
+                    set_variable = {
+                        name = unworthy_leader
+                        add = 1
+                    }
+                }
+                else = {
+                    set_variable = {
+                        name = unworthy_leader
+                        value = 2
+                    }
                 }
             }
         }
@@ -896,6 +924,8 @@ c3rd_events.7 = { #Generals ask for a war
             has_variable = recent_general_asking
             has_variable = on_going_rep_thingy
             has_country_modifier = political_unstability
+            has_law = constantine_reform_law
+            has_law = decentralized_administration_law
         }
         num_of_cities >= 900
         any_character = {
@@ -1302,6 +1332,14 @@ c3rd_events.8 = { #Generals ask for a law
 		modifier = {
 			factor = 0.5
 			towards_civil_war = yes
+		}
+		modifier = {
+			factor = 0.5
+			has_law = constantine_reform_law
+		}
+		modifier = {
+			factor = 0.5
+			has_law = decentralized_administration_law
 		}
 		modifier = {
 			factor = 2

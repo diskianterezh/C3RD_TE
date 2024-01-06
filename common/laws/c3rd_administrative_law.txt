@@ -5,6 +5,7 @@
 	
 	basic_administrative_law = {
 		allow = {
+			NOT = {has_law = decentralized_administration_law}
 		}
 		
 	}
@@ -14,6 +15,10 @@
 			invention = administrative_military_reform_c3rd
 			OR = {
 				NOT = {has_law = decentralized_administration_law}
+				custom_tooltip = {
+					text = reduced_the_autonomy_desc
+					has_variable = reduced_the_autonomy
+				}
 			}
 		}
 		modifier = {

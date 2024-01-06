@@ -4038,7 +4038,8 @@ c3rd_other_events.60 = { #filthy barbarians ransacking our lands
                         has_variable = recent_military_anarchy
                         has_variable = on_going_rep_thingy
                         has_country_modifier = political_unstability
-                    }}
+                    }
+                }
             }
             random_list = {
                 10 = {
@@ -4050,6 +4051,14 @@ c3rd_other_events.60 = { #filthy barbarians ransacking our lands
                     modifier = {
                         add = 2
                         legitimacy >= 85
+                    }
+                    modifier = {
+                        add = 10
+                        has_law = constantine_reform_law
+                    }
+                    modifier = { #decentralized administration means the governor will take measures
+                        add = 12
+                        has_law = decentralized_administration_law
                     }
                 }
                 1 = {
@@ -4943,5 +4952,90 @@ c3rd_other_events.75 = { #new currency, but the leader is really bad at that
 			name = silver_unvalue
 			add = 25
 		}
+    }
+}
+
+
+### ADMINISTRATIVE EVENTS ####
+
+### Basically nobles (great families) taking more power in the realm
+### Nothing will almost ever happen as long as you don't reform the administrative law, or enact the Solidus
+### Constantine reform is cool because it reduce military anarchy, however it will progressively give power to the governors
+### Everything will although stay minor UNTIL you enact Solidus - and then things will snowball
+### Solidus is really great because it delete all the monetary crisis mechanics so you don't have to deal with that anymore, but with a secondary effect.
+### Those Administrative things are the secondary effect
+
+
+
+
+#Notification of autonomy
+c3rd_other_events.80 = {
+	type = minor_country_event
+	title= "c3rd_other_events.80.t"
+	desc = "c3rd_other_events.80.desc"
+	interface_lock = no
+	
+	left_portrait = current_ruler
+	
+	trigger = {
+		current_date > 750.1.1
+	}
+	
+	immediate = {
+        random_governorships = {
+            limit = {
+                exists = governor
+                governor = {
+                    is_ruler = no
+                }
+                region_control_value >= 5
+            }
+            save_scope_as = autonomy_governorship
+            set_variable = {
+                name = control_value_value
+                value = region_control_value
+            }
+        }
+
+	}
+
+	option = {
+		name = "c3rd_other_events.80.a"
+	}
+}
+
+
+c3rd_other_events.81 = { #
+    type = country_event
+    title = "c3rd_other_events.81.t"
+    desc = "c3rd_other_events.81.desc"
+
+    picture = hellenic_marketplace
+
+    trigger = {
+        has_land = yes
+    }
+
+    immediate = {
+    }
+
+    option = { #
+        name = c3rd_other_events.81.a
+        custom_tooltip = c3rd_other_events.81.a.tt1
+        
+        
+    }
+
+
+    option = { #
+        name = c3rd_other_events.81.b
+        custom_tooltip = c3rd_other_events.81.b.tt1
+        
+    }
+
+    option = { #
+        name = c3rd_other_events.81.c
+        custom_tooltip = c3rd_other_events.81.c.tt1
+        
     }
 }

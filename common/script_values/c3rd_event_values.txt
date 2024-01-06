@@ -517,3 +517,34 @@ num_vassal_provinces = {
 		}
 	}
 }
+
+region_owned_provinces = {
+	value = 0
+	every_governorship_state = {
+		every_state_province = {
+			add = 1
+		}
+	}
+
+}
+
+region_control_value = {
+	value = 0
+	every_governorship_state = {
+		every_state_province = {
+			if = {
+				limit = {
+					exists = holding_owner
+					OR = {
+						holding_owner = governor
+						holding_owner = governor.family.head_of_family
+					}
+				}
+				add = 1
+			}
+		}
+	}
+	multiply = 100
+	divide = region_owned_provinces
+	
+}

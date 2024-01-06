@@ -410,3 +410,146 @@ scheme_care_of_relatives_finish = {
 		}
 	}
 }
+
+
+scheme_buy_holding_start = {
+	effect = {
+		employer = {
+			random_owned_province = {
+				limit = {
+					controller = root.employer
+					OR = {
+						root = {
+							is_head_of_family = yes
+						}
+						AND = {
+							governor = root
+							NOT = {
+								has_law = basic_administrative_law
+							}
+						}
+					}
+					AND = {
+						NOT = {
+							this = root.employer.capital_scope
+						}
+						OR = {
+							NOT = {
+								exists = holding_owner
+							}
+							AND = {
+								exists = holding_owner
+								holding_owner = {
+									is_alive = no
+								}
+							}
+						}
+					}
+				}
+				weight = {
+					modifier = {
+						factor = 10000
+						any_neighbor_province = {
+							trigger_if = {
+								limit = {
+									exists = holding_owner
+								}
+								holding_owner = root
+							}
+							trigger_else = {
+								always = no
+							}
+						}
+					}
+				}
+				save_scope_as = buy_holding_target
+			}
+		}
+		save_scope_as = ongoing_scheme_target
+		if = {
+			limit = {
+				exists = scope:ongoing_scheme_target
+			}
+			set_variable = {
+				name = ongoing_scheme_target
+				value = scope:ongoing_scheme_target
+				days = 770
+			}
+		}
+	}
+}
+
+
+scheme_buy_holding_finish = {
+	effect = {
+		custom_tooltip = "buy_holding_effect_tt"
+		if = {
+			limit = { 
+				employer = {
+					has_law = decentralized_administration_law
+					has_country_modifier = solidus_introduced
+				}
+			}
+			set_variable = {
+				name = bought_holding_recently
+				days = 180
+			}
+		}
+		else_if = {
+			limit = {
+				employer = {
+					has_law = constantine_reform_law
+					has_country_modifier = solidus_introduced
+				}
+			}
+			set_variable = {
+				name = bought_holding_recently
+				days = 300
+			}
+		}
+		else_if = {
+			limit = {
+				employer = {
+					has_law = decentralized_administration_law
+				}
+			}
+			set_variable = {
+				name = bought_holding_recently
+				days = 365
+			}
+		}
+		else_if = {
+			limit = {
+				employer = {
+					has_law = constantine_reform_law
+				}
+			}
+			set_variable = {
+				name = bought_holding_recently
+				days = 600
+			}
+		}
+		else_if = {
+			limit = {
+				employer = {
+					has_country_modifier = solidus_introduced
+				}
+			}
+			set_variable = {
+				name = bought_holding_recently
+				days = 365
+			}
+		}
+		else = {
+			set_variable = {
+				name = bought_holding_recently
+				days = 730
+			}
+		}
+		hidden_effect = {
+			add_holding = scope:buy_holding_target
+			add_gold = -10
+			remove_scheme_variables_effect = yes
+		}
+	}
+}
