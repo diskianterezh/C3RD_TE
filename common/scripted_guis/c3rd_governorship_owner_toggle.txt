@@ -1,0 +1,11 @@
+﻿c3rd_governorship_owner_toggle = {
+	scope = governorship
+
+	ai_is_valid = {
+		always = no
+	}
+
+	is_shown = {
+		has_variable = governorship_owner
+	}
+}

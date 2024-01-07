@@ -546,5 +546,6 @@ region_control_value = {
 	}
 	multiply = 100
 	divide = region_owned_provinces
+	round = yes
 	
 }

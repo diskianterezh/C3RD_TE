@@ -1,0 +1,84 @@
+﻿c3rd_governorship_owner_CanChange = {
+	scope = governorship
+
+
+	is_valid = {
+		trigger_if = {
+			limit = {
+				has_variable = governorship_owner
+				var:governorship_owner = governor
+			}
+			custom_tooltip = {
+				text = "The Governor owns the Region and cannot be dismissed"
+				NOT = {
+					has_variable = governorship_owner
+					var:governorship_owner = governor
+				}
+			}
+		}
+		trigger_if = {
+			limit = {
+				has_variable = governorship_owner
+				governor.family = var:governorship_owner.family
+				var:governorship_owner = {
+					is_head_of_family = yes
+				}
+			}
+			custom_tooltip = {
+				text = "The head of the family of the governor possesses the Region and does not accept the dismissal"
+				NOT = {
+					has_variable = governorship_owner
+					governor.family = var:governorship_owner.family
+					var:governorship_owner = {
+						is_head_of_family = yes
+					}
+				}
+			}
+		}
+		trigger_if = {
+			limit = {
+				governor = {is_ruler = yes}
+			}
+			custom_tooltip = {
+				text = "You cannot change the Governor of your capital region"
+				governor = {is_ruler = no}
+			}
+		}
+		trigger_if = {
+			limit = {
+				governor = {is_disloyal = yes}
+			}
+			custom_tooltip = {
+				text = "The Governor is disloyal"
+				governor = {is_disloyal = no}
+			}
+		}
+		
+		# NOR = {
+		# 	AND = {
+		# 		has_variable = governorship_owner
+		# 		var:governorship_owner = governor
+		# 	}
+		# 	AND = {
+		# 		has_variable = governorship_owner
+		# 		governor.family = var:governorship_owner.family
+		# 		var:governorship_owner = {
+		# 			is_head_of_family = yes
+		# 		}
+		# 		governor.employer = {
+		# 			OR = {
+		# 				has_law = decentralized_administration_law 
+		# 				has_country_modifier = solidus_introduced
+		# 			}
+		# 		}
+		# 	}
+
+		# }
+	}
+
+	effect = {
+		custom_tooltip = "Clic here to change governor"
+
+
+	}
+}

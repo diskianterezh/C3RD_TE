@@ -1053,7 +1053,12 @@ low_stab_event.4.c.tt1:0 "Things remain as they are, but [independent_current_go
  c3rd_other_events.75.c:0 "I dont see any problem here"
  c3rd_other_events.75.c.tt1:0 "#R this will reduce the value of silver money \n This happened because of your leader's poor Statesmanship and he will surely make this mistake again#!"
 
- c3rd_other_events.80.desc:0 "[autonomy_governorship.GetVariable('control_value_value').GetValue]% for [autonomy_governorship.GetName]"
+ c3rd_governorship_owner_tt:0 "This Governorship is firmly controlled by [OverviewGovernorshipItem.GetGovernorship.MakeScope.GetVariable('governorship_owner').GetCharacter.GetName] of the family [OverviewGovernorshipItem.GetGovernorship.MakeScope.GetVariable('governorship_owner').GetCharacter.GetFamily.GetName]\n#R [OverviewGovernorshipItem.GetGovernorship.MakeScope.GetVariable('governorship_owner_ratio').GetValue] %#! of the region is controlled"
+
+ c3rd_other_events.80.t:0 ""
+ c3rd_other_events.80.desc:0 "[autonomy_governorship.MakeScope.GetVariable('governorship_owner').GetCharacter.GetName] for [autonomy_governorship.GetName]"
+ c3rd_other_events.80.a:0 ""
+ 
 
 #tribals fix
 

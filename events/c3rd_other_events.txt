@@ -1341,6 +1341,7 @@ c3rd_other_events.10 = { #great book
         change_variable = {
             name = what_is_my_eco
             multiply = 100
+            round = yes
         }
     }
 
@@ -4988,11 +4989,19 @@ c3rd_other_events.80 = {
                 governor = {
                     is_ruler = no
                 }
-                region_control_value >= 5
+                NOR = {
+                    has_variable = governorship_owner
+                    has_variable = governorship_owner_ratio
+                }
+                region_control_value >= 1
             }
             save_scope_as = autonomy_governorship
             set_variable = {
-                name = control_value_value
+                name = governorship_owner
+                value = governor
+            }
+            set_variable = {
+                name = governorship_owner_ratio
                 value = region_control_value
             }
         }

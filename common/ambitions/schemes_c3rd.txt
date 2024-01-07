@@ -876,17 +876,25 @@ scheme_buy_holding = {
 		base = 10
 		likely_thief = yes
 		modifier = {
+			add = 5
+			corruption >= 25
+		}
+		modifier = {
+			add = 5
+			corruption >= 50
+		}
+		modifier = {
 			factor = 5
 			is_head_of_family = yes
 		}
 		modifier = {
-			factor = 3
+			factor = 5
 			is_governor = yes
+			is_head_of_family = no
 			employer = {has_law = constantine_reform_law}
 		}
 		modifier = {
-			factor = 6
-			is_governor = yes
+			factor = 3
 			employer = {has_law = decentralized_administration_law}
 		}
 		modifier = {
