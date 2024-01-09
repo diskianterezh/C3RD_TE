@@ -5,11 +5,12 @@
 	is_valid = {
 		trigger_if = {
 			limit = {
+				exists = governor
 				has_variable = governorship_owner
 				var:governorship_owner = governor
 			}
 			custom_tooltip = {
-				text = "The Governor owns the Region and cannot be dismissed"
+				text = c3rd_CanChange_tt1
 				NOT = {
 					has_variable = governorship_owner
 					var:governorship_owner = governor
@@ -18,38 +19,42 @@
 		}
 		trigger_if = {
 			limit = {
+				exists = governor
+				save_temporary_scope_as = governorship_tmp_scope
 				has_variable = governorship_owner
-				governor.family = var:governorship_owner.family
 				var:governorship_owner = {
 					is_head_of_family = yes
+					family = scope:governorship_tmp_scope.governor.family
 				}
 			}
 			custom_tooltip = {
-				text = "The head of the family of the governor possesses the Region and does not accept the dismissal"
+				text = c3rd_CanChange_tt2
 				NOT = {
 					has_variable = governorship_owner
-					governor.family = var:governorship_owner.family
 					var:governorship_owner = {
 						is_head_of_family = yes
+						family = scope:governorship_tmp_scope.governor.family
 					}
 				}
 			}
 		}
 		trigger_if = {
 			limit = {
+				exists = governor
 				governor = {is_ruler = yes}
 			}
 			custom_tooltip = {
-				text = "You cannot change the Governor of your capital region"
+				text = c3rd_CanChange_tt3
 				governor = {is_ruler = no}
 			}
 		}
 		trigger_if = {
 			limit = {
+				exists = governor
 				governor = {is_disloyal = yes}
 			}
 			custom_tooltip = {
-				text = "The Governor is disloyal"
+				text = c3rd_CanChange_tt4
 				governor = {is_disloyal = no}
 			}
 		}
@@ -77,7 +82,7 @@
 	}
 
 	effect = {
-		custom_tooltip = "Clic here to change governor"
+		custom_tooltip = c3rd_CanChange_tt
 
 
 	}

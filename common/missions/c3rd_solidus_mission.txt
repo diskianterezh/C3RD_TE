@@ -299,6 +299,7 @@
 	icon = "task_economical"
 
 		allow = {
+			has_law = second_reform_law
 			OR ={
 				has_country_modifier = small_monetary_crash
 				has_country_modifier = medium_monetary_crash
@@ -316,7 +317,6 @@
 	
 
 		on_completion = {
-			has_law = second_reform_law
 			custom_tooltip = "sol_first_silver_mission"
 			change_variable = {
 				name = silver_unvalue

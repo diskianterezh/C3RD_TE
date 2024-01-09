@@ -2469,5 +2469,76 @@ on_character_death = {
 				}
 			}
 		}
+		#33 C3RD : If the dead man had some ownership on Regions 
+		if = {
+			limit = {
+				employer = {
+					any_governorships = {
+						has_variable = governorship_owner
+						var:governorship_owner = root
+					}
+				}
+			}
+			if = {
+				limit = {
+					is_head_of_family = yes
+					exists = next_in_family
+				}
+				next_in_family = {
+					save_scope_as = ownership_target
+				}
+			}
+			else_if = {
+				limit = {
+					is_head_of_family = no
+					exists = family.head_of_family
+					family.head_of_family = {
+						employer = root.employer
+					}
+				}
+				family.head_of_family = {
+					save_scope_as = ownership_target
+				}
+			}
+		}
+		if = { # Give ownership to relevant character based on above
+			limit = { 
+				exists = scope:ownership_target 
+				NOT = {
+					scope:ownership_target = root
+				}
+			}
+			employer = {
+				every_governorships = {
+					limit = { 
+						has_variable = governorship_owner
+						var:governorship_owner = root 
+					}
+					remove_variable = governorship_owner
+					set_variable = {
+						name = governorship_owner
+						value = scope:ownership_target
+					}
+				}
+			}
+			scope:ownership_target = {
+                if = {
+                    limit = {
+                        has_variable = country_ownership
+                    }
+                    remove_variable = country_ownership
+                }
+				save_scope_as = influent_character
+                set_variable = {
+                    name = country_ownership
+                    value = country_region_control
+                }
+				trigger_event = {
+					id = c3rd_other_events.81
+					days = 1 #Necessary
+				}
+			}
+		}
+		
 	}
 }

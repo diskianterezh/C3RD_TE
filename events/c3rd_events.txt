@@ -852,7 +852,7 @@ c3rd_events.6 = { #volontary general must be convincing
                     }
                     set_variable = {
                         name = unworthy_leader
-                        add = 1
+                        value = 1
                     }
                 }
                 else = {

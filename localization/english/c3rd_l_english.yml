@@ -1054,10 +1054,18 @@ low_stab_event.4.c.tt1:0 "Things remain as they are, but [independent_current_go
  c3rd_other_events.75.c.tt1:0 "#R this will reduce the value of silver money \n This happened because of your leader's poor Statesmanship and he will surely make this mistake again#!"
 
  c3rd_governorship_owner_tt:0 "This Governorship is firmly controlled by [OverviewGovernorshipItem.GetGovernorship.MakeScope.GetVariable('governorship_owner').GetCharacter.GetName] of the family [OverviewGovernorshipItem.GetGovernorship.MakeScope.GetVariable('governorship_owner').GetCharacter.GetFamily.GetName]\n#R [OverviewGovernorshipItem.GetGovernorship.MakeScope.GetVariable('governorship_owner_ratio').GetValue] %#! of the region is controlled"
+ c3rd_CanChange_tt1:0 "The Governor owns the Region and cannot be dismissed"
+ c3rd_CanChange_tt2:0 "The head of the family owns the region and does not agree to the dismissal of one of its members"
+ c3rd_CanChange_tt3:0 "You cannot change the Governor of your capital region"
+ c3rd_CanChange_tt4:0 "The Governor is disloyal"
+ c3rd_CanChange_tt:0 "Clic here to change Governor"
 
- c3rd_other_events.80.t:0 ""
- c3rd_other_events.80.desc:0 "[autonomy_governorship.MakeScope.GetVariable('governorship_owner').GetCharacter.GetName] for [autonomy_governorship.GetName]"
- c3rd_other_events.80.a:0 ""
+ c3rd_other_events.80.t:0 "Growing influence"
+ c3rd_other_events.80.desc:0 "[autonomy_governorship.MakeScope.GetVariable('governorship_owner').GetCharacter.GetName] and his family have invested a lot of their resources in the Region of [autonomy_governorship.GetName]. Enough for the local authorities to answer to them directly."
+ c3rd_other_events.80.a:0 "Now that's unpleasant"
+ c3rd_other_events.80.a.tt1:0 "The region is now considered a stronghold of the [autonomy_governorship.MakeScope.GetVariable('governorship_owner').GetCharacter.GetFamily.GetName]"
+
+ c3rd_other_events.802.desc:0 "[owner_target_for_number.GetName] Possesses [owner_target_for_number.MakeScope.GetVariable('country_ownership').GetValue]%"
  
 
 #tribals fix

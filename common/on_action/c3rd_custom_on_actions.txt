@@ -1146,16 +1146,243 @@ c3rd_barbarian_sack = {
 
 }
 
-c3rd_holding_control = {
+c3rd_holding_control = { #governor gain control of region
 	trigger = {
 		has_land = yes
+		NOT = {
+			has_law = basic_administrative_law
+		}
 		any_governorships = {
 			exists = governor
 			governor = {
 				is_ruler = no
 			}
-			region_control_value >= 20
+			NOT = {
+				has_variable = governorship_owner
+			}
+			OR = {
+				AND = {
+					region_control_value >= 30
+					root={has_law = decentralized_administration_law}
+				}
+				AND = {
+					region_control_value >= 40
+					root={has_country_modifier = solidus_introduced}
+				}
+				region_control_value >= 50
+			}
 		}
 	}
-	
+	effect = {
+
+        random_governorships = {
+            limit = {
+                exists = governor
+                governor = {
+                    is_ruler = no
+                }
+                NOR = {
+					AND = {
+						has_variable = governorship_owner
+						governor={family = var:governorship_owner.family}
+						var:governorship_owner = {
+							is_head_of_family = yes
+						}
+					}
+					AND = {
+						has_variable = governorship_owner
+						var:governorship_owner = governor
+					}
+                }
+				OR = {
+					AND = {
+						region_control_value >= 30
+						root={has_law = decentralized_administration_law}
+					}
+					AND = {
+						region_control_value >= 40
+						root={has_country_modifier = solidus_introduced}
+					}
+					region_control_value >= 50
+				}
+            }
+			weight = {
+                modifier = {
+                    factor = 2
+                    region_control_value >= 75
+                }
+                modifier = { #less chances close to the capital
+                    factor = 0.4
+                    any_governorship_state = {
+                        any_state_province = {
+                            region = {
+                                any_neighbor_region = {
+                                    any_region_province = {
+                                        owner = root
+                                        is_capital = yes
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                modifier = { #more chances near foreign countries
+                    factor = 2
+                    any_governorship_state = {
+                        any_state_province = {
+                            any_neighbor_province = {
+								NOT = {
+									owner = root
+								}
+							}
+                        }
+                    }
+                }
+			}
+            save_scope_as = autonomy_governorship
+        }
+		random_list = {
+			9 = {
+			}
+			1 = {
+				modifier = {
+					add = 1
+					stability <= 50
+				}
+				modifier = {
+					add = 1
+					has_law = decentralized_administration_law
+				}
+				modifier = {
+					add = 1
+					has_country_modifier = solidus_introduced
+				}
+				modifier = {
+					add = 1
+					scope:autonomy_governorship = {
+						region_control_value >= 70
+					}
+				}
+				modifier = {
+					add = 1
+					scope:autonomy_governorship = {
+						region_control_value >= 80
+					}
+				}
+				modifier = {
+					add = 2
+					scope:autonomy_governorship = {
+						region_control_value >= 90
+					}
+				}
+				trigger_event = {
+					id = c3rd_other_events.80
+					days = { 30 360 }
+				}
+				
+			}
+		}
+	}
+}
+
+c3rd_holding_clear = {
+	trigger = {
+		any_governorships = {
+			has_variable = governorship_owner
+			var:governorship_owner = {
+				OR = {
+					is_alive = no
+					NOT = {employer = root}
+				}
+			}
+		}
+	}
+	effect = {
+		every_governorships = {
+			limit = {
+				has_variable = governorship_owner
+				var:governorship_owner = {
+					OR = {
+						is_alive = no
+						NOT = {employer = root}
+					}
+				}
+			}
+			if = {
+				limit = {
+					var:governorship_owner = {	
+						is_head_of_family = no
+						exists = family.head_of_family
+						family.head_of_family = {
+							employer = root.employer
+						}
+					}
+				}
+				var:governorship_owner = {
+					family.head_of_family = {
+						save_scope_as = ownership_target
+					}
+				}
+				remove_variable = governorship_owner
+				set_variable = {
+					name = governorship_owner
+					value = scope:ownership_target
+				}
+			}
+			else = {
+				remove_variable = governorship_owner
+			}
+		}
+	}
+}
+
+c3rd_country_control_check = {
+	trigger = {
+		any_governorships = {
+			has_variable = governorship_owner
+			var:governorship_owner = {
+				is_alive = yes
+				employer = root
+			}
+		}
+	}
+	effect = {
+		every_character = {
+			limit = {
+				employer = {
+					any_governorships = {
+						has_variable = governorship_owner
+						var:governorship_owner = prev
+					}
+				}
+			}
+			if = {
+				limit = {
+					has_variable = country_ownership
+				}
+				remove_variable = country_ownership
+			}
+			save_scope_as = influent_character
+			set_variable = {
+				name = country_ownership
+				value = country_region_control
+			}
+			if = {
+				limit = { 
+					country_region_control >= 25
+				}
+				add_character_modifier = {
+					name = major_influence_aristocrat
+					duration = -1
+				}
+			}
+			if = {
+				limit = { 
+					has_character_modifier = major_influence_aristocrat
+					country_region_control < 20
+				}
+				remove_character_modifier = major_influence_aristocrat
+			}
+		}
+	}
 }

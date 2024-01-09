@@ -1341,7 +1341,6 @@ c3rd_other_events.10 = { #great book
         change_variable = {
             name = what_is_my_eco
             multiply = 100
-            round = yes
         }
     }
 
@@ -4969,8 +4968,8 @@ c3rd_other_events.75 = { #new currency, but the leader is really bad at that
 
 
 
-#Notification of autonomy
-c3rd_other_events.80 = {
+
+c3rd_other_events.80 = { #Notification of governorship taken by family
 	type = minor_country_event
 	title= "c3rd_other_events.80.t"
 	desc = "c3rd_other_events.80.desc"
@@ -4980,22 +4979,40 @@ c3rd_other_events.80 = {
 	
 	trigger = {
 		current_date > 750.1.1
+        scope:autonomy_governorship = {
+            exists = governor
+            governor = {
+                is_ruler = no
+            }
+            NOR = {
+				AND = {
+					has_variable = governorship_owner
+					governor={family = var:governorship_owner.family}
+					var:governorship_owner = {
+						is_head_of_family = yes
+					}
+				}
+				AND = {
+					has_variable = governorship_owner
+					var:governorship_owner = governor
+				}
+            }
+			OR = {
+				AND = {
+					region_control_value >= 30
+					root={has_law = decentralized_administration_law}
+				}
+				AND = {
+					region_control_value >= 40
+					root={has_country_modifier = solidus_introduced}
+				}
+				region_control_value >= 50
+			}  
+        }
 	}
 	
 	immediate = {
-        random_governorships = {
-            limit = {
-                exists = governor
-                governor = {
-                    is_ruler = no
-                }
-                NOR = {
-                    has_variable = governorship_owner
-                    has_variable = governorship_owner_ratio
-                }
-                region_control_value >= 1
-            }
-            save_scope_as = autonomy_governorship
+        scope:autonomy_governorship = {
             set_variable = {
                 name = governorship_owner
                 value = governor
@@ -5004,47 +5021,227 @@ c3rd_other_events.80 = {
                 name = governorship_owner_ratio
                 value = region_control_value
             }
+            hidden_effect = {
+                governor = {
+                    if = {
+                        limit = {
+                            has_variable = country_ownership
+                        }
+                        remove_variable = country_ownership
+                    }
+                    save_scope_as = influent_character
+                    set_variable = {
+                        name = country_ownership
+                        value = country_region_control
+                    }
+                    if = {
+                        limit = { 
+                            country_region_control >= 25
+                        }
+                        add_character_modifier = {
+                            name = major_influence_aristocrat
+                            duration = -1
+                        }
+                    }
+                    if = {
+                        limit = { 
+                            has_character_modifier = major_influence_aristocrat
+                            country_region_control < 20
+                        }
+                        remove_character_modifier = major_influence_aristocrat
+                    }
+                }
+            }
         }
 
 	}
 
 	option = {
 		name = "c3rd_other_events.80.a"
+        custom_tooltip = c3rd_other_events.80.a.tt1
 	}
 }
+c3rd_other_events.801 = { #Notification of governorship taken by family ######  FOR DEBUG PURPOSES
+type = minor_country_event
+title= "c3rd_other_events.80.t"
+desc = "c3rd_other_events.80.desc"
+interface_lock = no
 
+left_portrait = current_ruler
 
-c3rd_other_events.81 = { #
-    type = country_event
-    title = "c3rd_other_events.81.t"
-    desc = "c3rd_other_events.81.desc"
+trigger = {
+    current_date > 750.1.1
+}
 
-    picture = hellenic_marketplace
+immediate = {
+    random_governorships = {
+        limit = {
+            exists = governor
+            governor = {
+                is_ruler = no
+            }
+            save_temporary_scope_as = governorship_tmp_scope
+            NOR = {
+                AND = {
+                    has_variable = governorship_owner
+                    var:governorship_owner = {
+                        is_head_of_family = yes
+                        family = scope:governorship_tmp_scope.governor.family
+                    }
+                }
+                AND = {
+                    has_variable = governorship_owner
+                    var:governorship_owner = governor
+                }
+            }
+            OR = {
+                AND = {
+                    region_control_value >= 30
+                    root={has_law = decentralized_administration_law}
+                }
+                AND = {
+                    region_control_value >= 40
+                    root={has_country_modifier = solidus_introduced}
+                }
+                region_control_value >= 10
+            }
+
+        }
+        save_scope_as = autonomy_governorship
+        set_variable = {
+            name = governorship_owner
+            value = governor
+        }
+        set_variable = {
+            name = governorship_owner_ratio
+            value = region_control_value
+        }
+        governor = {
+            if = {
+                limit = {
+                    has_variable = country_ownership
+                }
+                remove_variable = country_ownership
+            }
+            save_scope_as = influent_character
+            set_variable = {
+                name = country_ownership
+                value = country_region_control
+            }
+        }
+    }
+
+}
+
+option = {
+    name = "c3rd_other_events.80.a"
+    custom_tooltip = c3rd_other_events.80.a.tt1
+}
+}
+c3rd_other_events.802 = { #Notification of country control ######  FOR DEBUG PURPOSES
+    type = minor_country_event
+    title= "c3rd_other_events.80.t"
+    desc = "c3rd_other_events.802.desc"
+    interface_lock = no
+
+    left_portrait = current_ruler
 
     trigger = {
-        has_land = yes
+        current_date > 750.1.1
     }
 
     immediate = {
+        random_character = {
+            limit = {
+                has_variable = country_ownership
+            }
+            save_scope_as = owner_target_for_number
+        }
+
     }
 
-    option = { #
-        name = c3rd_other_events.81.a
-        custom_tooltip = c3rd_other_events.81.a.tt1
-        
-        
+    option = {
+        name = "c3rd_other_events.80.a"
+        custom_tooltip = c3rd_other_events.75.c.tt1
     }
+}
 
 
-    option = { #
-        name = c3rd_other_events.81.b
-        custom_tooltip = c3rd_other_events.81.b.tt1
-        
-    }
+c3rd_other_events.81 = { #succession ownership
+    type = character_event
+	hidden = yes
 
-    option = { #
-        name = c3rd_other_events.81.c
-        custom_tooltip = c3rd_other_events.81.c.tt1
-        
-    }
+	trigger = {
+		is_minor_character = no
+		exists = family
+		exists = family.head_of_family
+		NOT = {
+			root = family.head_of_family
+		}
+	}
+	
+	immediate = {
+		if = {
+			limit = {
+				employer = {
+                    any_governorships = {
+                        has_variable = governorship_owner
+                        var:governorship_owner = root
+                    }
+                }
+			}
+			family.head_of_family = {
+				save_scope_as = ownership_target
+			}
+			employer = {
+				every_governorships = {
+					limit = { 
+						has_variable = governorship_owner
+						var:governorship_owner = root 
+					}
+                    remove_variable = governorship_owner
+					set_variable = {
+						name = governorship_owner
+						value = scope:ownership_target
+					}
+				}
+			}
+            scope:ownership_target = {
+                if = {
+                    limit = {
+                        has_variable = country_ownership
+                    }
+                    remove_variable = country_ownership
+                }
+				save_scope_as = influent_character
+                set_variable = {
+                    name = country_ownership
+                    value = country_region_control
+                }
+                if = {
+                    limit = { 
+                        country_region_control >= 25
+                    }
+                    add_character_modifier = {
+                        name = major_influence_aristocrat
+                        duration = -1
+                    }
+                }
+                # if = {
+                #     limit = { 
+                #         has_character_modifier = major_influence_aristocrat
+                #         country_region_control < 20
+                #     }
+                #     remove_character_modifier = major_influence_aristocrat
+                # }
+                
+            }
+            if = {
+                limit = {
+                    has_variable = country_ownership
+                }
+                remove_variable = country_ownership
+            }
+		}
+	}
 }

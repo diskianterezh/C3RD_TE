@@ -425,7 +425,7 @@ scheme_buy_holding_start = {
 						AND = {
 							governor = root
 							NOT = {
-								has_law = basic_administrative_law
+								owner = {has_law = basic_administrative_law}
 							}
 						}
 					}

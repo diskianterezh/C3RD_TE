@@ -549,3 +549,27 @@ region_control_value = {
 	round = yes
 	
 }
+
+country_total_regions = { #scope COUNTRY
+	value = 0
+	every_governorships = {
+		add= 1
+	}
+}
+country_region_control = { #scope CHAR
+	value = 0
+	employer = { 
+		every_governorships = {
+			limit = {
+				has_variable = governorship_owner
+				var:governorship_owner = scope:influent_character
+			}
+			add = 1
+		}
+		multiply = 100
+
+	
+		divide = country_total_regions
+	}
+	round = yes
+}
