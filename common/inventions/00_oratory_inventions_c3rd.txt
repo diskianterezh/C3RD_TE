@@ -919,6 +919,7 @@
 		allow = {
 			OR = { 
 				tag = PER
+				exists = current_ruler
 				current_ruler = {
 					has_trait = achaemenid
 				}

@@ -1,0 +1,24 @@
+﻿c3rd_influent_characters_owners = {
+	scope = country
+
+	is_shown = {
+		any_character = {
+			has_character_modifier = major_influence_aristocrat
+			has_variable = country_ownership
+		}
+	}
+
+	
+	effect = {
+		custom_tooltip = c3rd_influent_characters_owners_tt1
+		every_character = {
+			limit = {
+				has_character_modifier = major_influence_aristocrat
+				has_variable = country_ownership
+			}
+			save_scope_as = influent_character_parse
+			custom_tooltip = c3rd_influent_characters_owners_tt2
+		}
+	}
+
+}

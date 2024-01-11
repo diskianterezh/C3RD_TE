@@ -1157,8 +1157,19 @@ c3rd_holding_control = { #governor gain control of region
 			governor = {
 				is_ruler = no
 			}
-			NOT = {
-				has_variable = governorship_owner
+			save_temporary_scope_as = governorship_tmp_scope
+			NOR = {
+				AND = {
+					has_variable = governorship_owner
+					var:governorship_owner = {
+						is_head_of_family = yes
+						family = scope:governorship_tmp_scope.governor.family
+					}
+				}
+				AND = {
+					has_variable = governorship_owner
+					var:governorship_owner = governor
+				}
 			}
 			OR = {
 				AND = {
@@ -1181,12 +1192,13 @@ c3rd_holding_control = { #governor gain control of region
                 governor = {
                     is_ruler = no
                 }
+				save_temporary_scope_as = governorship_tmp_scope
                 NOR = {
 					AND = {
 						has_variable = governorship_owner
-						governor={family = var:governorship_owner.family}
 						var:governorship_owner = {
 							is_head_of_family = yes
+							family = scope:governorship_tmp_scope.governor.family
 						}
 					}
 					AND = {
@@ -1328,6 +1340,7 @@ c3rd_holding_clear = {
 					name = governorship_owner
 					value = scope:ownership_target
 				}
+				calculate_the_gov_ownership = yes
 			}
 			else = {
 				remove_variable = governorship_owner
@@ -1349,10 +1362,11 @@ c3rd_country_control_check = {
 	effect = {
 		every_character = {
 			limit = {
+				save_temporary_scope_as = charcheck_tmp
 				employer = {
 					any_governorships = {
 						has_variable = governorship_owner
-						var:governorship_owner = prev
+						var:governorship_owner = scope:charcheck_tmp
 					}
 				}
 			}
@@ -1369,7 +1383,7 @@ c3rd_country_control_check = {
 			}
 			if = {
 				limit = { 
-					country_region_control >= 25
+					country_region_control >= 5
 				}
 				add_character_modifier = {
 					name = major_influence_aristocrat
@@ -1379,10 +1393,34 @@ c3rd_country_control_check = {
 			if = {
 				limit = { 
 					has_character_modifier = major_influence_aristocrat
-					country_region_control < 20
+					country_region_control < 0 #20
 				}
 				remove_character_modifier = major_influence_aristocrat
 			}
+		}
+	}
+}
+
+c3rd_country_calculate_the_gov_ownership = {
+	trigger = {
+		any_governorships = {
+			has_variable = governorship_owner
+			var:governorship_owner = {
+				is_alive = yes
+				employer = root
+			}
+		}
+	}
+	effect = {
+		every_governorships = {
+			limit = {
+				has_variable = governorship_owner
+				var:governorship_owner = {
+					is_alive = yes
+					employer = root
+				}
+			}
+			calculate_the_gov_ownership = yes
 		}
 	}
 }

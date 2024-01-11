@@ -550,10 +550,45 @@ region_control_value = {
 	
 }
 
+region_control_value_owner = {
+	value = 0
+	if = {
+		limit = {
+			has_variable = governorship_owner
+		}
+		every_governorship_state = {
+			every_state_province = {
+				if = {
+					limit = {
+						exists = holding_owner
+						OR = {
+							holding_owner = var:governorship_owner
+							holding_owner = var:governorship_owner.family.head_of_family
+						}
+					}
+					add = 1
+				}
+			}
+		}
+	}
+	multiply = 100
+	divide = region_owned_provinces
+	round = yes
+	
+}
+
 country_total_regions = { #scope COUNTRY
 	value = 0
 	every_governorships = {
-		add= 1
+		if = {
+			limit = { #if the region is a small one, it count as half
+				region_owned_provinces < 20
+			}
+			add = 0.5
+		}
+		else = {
+			add= 1
+		}
 	}
 }
 country_region_control = { #scope CHAR
@@ -564,7 +599,15 @@ country_region_control = { #scope CHAR
 				has_variable = governorship_owner
 				var:governorship_owner = scope:influent_character
 			}
-			add = 1
+			if = {
+				limit = { #if the region is a small one, it count as half
+					region_owned_provinces < 20
+				}
+				add = 0.5
+			}
+			else = {
+				add= 1
+			}
 		}
 		multiply = 100
 

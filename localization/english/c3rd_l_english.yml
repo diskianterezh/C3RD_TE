@@ -164,6 +164,8 @@
  humiliated_powerful_general:0 "Humiliated"
  governor_abandonned:0 "Governor abandoned to the barbarians"
  assets_seized:0 "Assets seized"
+ property_seized:0 "Confiscated property"
+ property_seized_small:0 "Confiscated family property"
 
  #character modifiers
  king_maker:0 "Kingmaker"
@@ -172,6 +174,8 @@
  desc_popular_general:0 "This character made himself known as one of the great men of this country"
  pater_familias:0 "Pater Familias"
  desc_pater_familias:0 "This character has made his family rich"
+ major_influence_aristocrat:0 "Major Landowner"
+ desc_major_influence_aristocrat:0 "This character has established his authority over a large part of the country's governorates, making him one of the most influential figures in the country."
 
  #Decisions
  stop_political_unstability_small:0 "Stopping the political instability"
@@ -215,6 +219,8 @@
  ALERT_COLLAPSE:0 "#T Internal Collapse#!\nYour country is collapsing. As long as your stability is #R below 25#!, collapse events will occur."
  ALERT_MILITARY_ANARCHY:0 "#T Military Anarchy#!\nThe country is in a phase of military anarchy. As long as this continues, the generals will demand more important concessions and decisions."
  ALERT_POLITICAL_INSTABILITY:0 "#T Political Instability#!\nThe country is in a phase of political instability, applying several penalties. You can solve this by using the decisions to either reform the country or stopping the political instability."
+ c3rd_influent_characters_owners_tt1:0 "Some people in your country are considered to be major landowners because of the number of governorates they control."
+ c3rd_influent_characters_owners_tt2:0 "[influent_character_parse.GetName] owns #R [influent_character_parse.MakeScope.GetVariable('country_ownership').GetValue]% #!"
 
 
  #Culture
@@ -306,6 +312,14 @@
  solidus_reform_3_c:0 "Control of the Silver"
  solidus_reform_3_d:0 "Stable Value"
  sol_solidus_reform_3_a_tt1:0 "Your vassals' territory is at least a third of yours"
+
+ #character interactions
+
+ taking_over_lands:0 "Confiscate land"
+ taking_over_lands_act:0 "Acting to reduce the territorial influence of $CHAR$"
+ taking_over_lands_act:0 "You acted against $CHAR$ influence"
+ taking_over_lands_effect:0 "You plan to confiscate several properties"
+ 
 
  #Events
 
@@ -1059,6 +1073,7 @@ low_stab_event.4.c.tt1:0 "Things remain as they are, but [independent_current_go
  c3rd_CanChange_tt3:0 "You cannot change the Governor of your capital region"
  c3rd_CanChange_tt4:0 "The Governor is disloyal"
  c3rd_CanChange_tt:0 "Clic here to change Governor"
+
 
  c3rd_other_events.80.t:0 "Growing influence"
  c3rd_other_events.80.desc:0 "[autonomy_governorship.MakeScope.GetVariable('governorship_owner').GetCharacter.GetName] and his family have invested a lot of their resources in the Region of [autonomy_governorship.GetName]. Enough for the local authorities to answer to them directly."

@@ -1036,7 +1036,32 @@ widget = {
 			{
 				texture = "gfx/interface/icons/shared_icons/invoke_devotio.dds"
 			}
-		}		
+		}	
+		#######################################
+		#C3RD - Influent Characters Ownership
+		#######################################
+
+		alert = {
+			datacontext = "[GetScriptedGui('c3rd_influent_characters_owners')]"
+			visible = "[And(ScriptedGui.IsShown(GuiScope.SetRoot(AlertManager.GetPlayer.MakeScope).End), AlertManager.ShowAlert('c3rd_influent_characters_owners'))]"
+			tooltip = "[ScriptedGui.BuildTooltip( GuiScope.SetRoot( AlertManager.GetPlayer.MakeScope ).End )]" 
+			blockoverride "Color"
+			{
+				frame = 5
+			}
+			using = yellow_alert
+			blockoverride "On_click"
+			{
+				onclick = "[OpenGameView('overview')]"
+				onrightclick = "[AlertManager.ToggleShowAlert('c3rd_influent_characters_owners')]"
+			}
+				
+				
+			blockoverride "Icon"
+			{
+				texture = "gfx/interface/icons/shared_icons/holdings.dds"
+			}
+		}	
 		###########################################################################
 		# GREEN ALERTS
 		###########################################################################			

@@ -1,0 +1,20 @@
+﻿
+calculate_the_gov_ownership = {#SCOPE Governorship
+	#custom_tooltip = decision_state_loyalty_tt
+	#Biggest 5 are displayed 
+	if = {
+		limit = {
+			has_variable = governorship_owner
+		}
+		if = {
+			limit = {
+				NOT = {has_variable = governorship_owner_ratio}
+			}
+			remove_variable = governorship_owner_ratio
+		}
+		set_variable = {
+			name = governorship_owner_ratio
+			value = region_control_value_owner
+		}
+	}
+}

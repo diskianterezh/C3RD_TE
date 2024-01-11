@@ -16,6 +16,6 @@ pater_familias = {
 
 major_influence_aristocrat = {
 	monthly_character_popularity = 0.25
-	monthly_corruption = 0.02
+	monthly_corruption = 0.05
 	monthly_character_prominence = 0.1
 }

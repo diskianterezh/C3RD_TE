@@ -4987,10 +4987,10 @@ c3rd_other_events.80 = { #Notification of governorship taken by family
             NOR = {
 				AND = {
 					has_variable = governorship_owner
-					governor={family = var:governorship_owner.family}
-					var:governorship_owner = {
-						is_head_of_family = yes
-					}
+                    var:governorship_owner = {
+                        is_head_of_family = yes
+                        family = scope:autonomy_governorship.governor.family
+                    }
 				}
 				AND = {
 					has_variable = governorship_owner
@@ -5013,13 +5013,25 @@ c3rd_other_events.80 = { #Notification of governorship taken by family
 	
 	immediate = {
         scope:autonomy_governorship = {
+            if = {
+                limit = {
+                    has_variable = governorship_owner
+                }
+                remove_variable = governorship_owner
+            }
             set_variable = {
                 name = governorship_owner
                 value = governor
             }
-            set_variable = {
+            if = {
+                limit = {
+                    has_variable = governorship_owner_ratio
+                }
+                remove_variable = governorship_owner_ratio
+            }
+            set_variable = { #equivalent à appeler calculate_the_gov_ownership = yes
                 name = governorship_owner_ratio
-                value = region_control_value
+                value = region_control_value #prend le gov alors que calculate_the_gov_ownership prend le owner, ce qui est la même chose ici
             }
             hidden_effect = {
                 governor = {
@@ -5204,6 +5216,8 @@ c3rd_other_events.81 = { #succession ownership
 						name = governorship_owner
 						value = scope:ownership_target
 					}
+                    calculate_the_gov_ownership = yes
+
 				}
 			}
             scope:ownership_target = {
@@ -5245,3 +5259,256 @@ c3rd_other_events.81 = { #succession ownership
 		}
 	}
 }
+
+
+c3rd_other_events.82 = { #take lands from landowner
+    type = country_event
+    title = "c3rd_other_events.82.t"
+    desc = "c3rd_other_events.82.desc"
+
+    picture = hellenic_marketplace
+
+    trigger = {
+        has_land = yes
+        exists = scope:target
+        
+    }
+
+    immediate = {
+        random_governorships = {
+            limit = {
+                has_variable = governorship_owner
+                var:governorship_owner = scope:target
+                save_temporary_scope_as = govtmp_parse
+                OR = {
+                    scope:target = {
+                        any_holdings = {
+                            count >= 5
+                            governorship = scope:govtmp_parse
+                        }
+                    }
+                    scope:target.family.head_of_family = {
+                        any_holdings = {
+                            count >= 5
+                            governorship = scope:govtmp_parse
+                        }
+                    }
+                }
+            }
+            weight = {
+                modifier = {
+                    if = {
+                        limit = {
+                            has_variable = governorship_owner_ratio
+                        }
+                    }
+                    add = var:governorship_owner_ratio
+                }
+            }
+            save_scope_as = governorship_1
+        }
+        random_governorships = {
+            limit = {
+                has_variable = governorship_owner
+                NOT = {
+                    this = scope:governorship_1
+                }
+                var:governorship_owner = scope:target
+                save_temporary_scope_as = govtmp_parse
+                OR = {
+                    scope:target = {
+                        any_holdings = {
+                            count >= 5
+                            governorship = scope:govtmp_parse
+                        }
+                    }
+                    scope:target.family.head_of_family = {
+                        any_holdings = {
+                            count >= 5
+                            governorship = scope:govtmp_parse
+                        }
+                    }
+                }
+            }
+            weight = {
+                modifier = {
+                    if = {
+                        limit = {
+                            has_variable = governorship_owner_ratio
+                        }
+                    }
+                    add = var:governorship_owner_ratio
+                }
+            }
+            save_scope_as = governorship_2
+        }
+        random_governorships = {
+            limit = {
+                has_variable = governorship_owner
+                NOR = {
+                    this = scope:governorship_1
+                    this = scope:governorship_2
+                }
+                var:governorship_owner = scope:target
+                save_temporary_scope_as = govtmp_parse
+                OR = {
+                    scope:target = {
+                        any_holdings = {
+                            count >= 5
+                            governorship = scope:govtmp_parse
+                        }
+                    }
+                    scope:target.family.head_of_family = {
+                        any_holdings = {
+                            count >= 5
+                            governorship = scope:govtmp_parse
+                        }
+                    }
+                }
+            }
+            weight = {
+                modifier = {
+                    if = {
+                        limit = {
+                            has_variable = governorship_owner_ratio
+                        }
+                    }
+                    add = var:governorship_owner_ratio
+                }
+            }
+            save_scope_as = governorship_3
+        }
+        random_governorships = {
+            limit = {
+                has_variable = governorship_owner
+                NOR = {
+                    this = scope:governorship_1
+                    this = scope:governorship_2
+                    this = scope:governorship_3
+                }
+                var:governorship_owner = scope:target
+                save_temporary_scope_as = govtmp_parse
+                OR = {
+                    scope:target = {
+                        any_holdings = {
+                            count >= 5
+                            governorship = scope:govtmp_parse
+                        }
+                    }
+                    scope:target.family.head_of_family = {
+                        any_holdings = {
+                            count >= 5
+                            governorship = scope:govtmp_parse
+                        }
+                    }
+                }
+            }
+            weight = {
+                modifier = {
+                    if = {
+                        limit = {
+                            has_variable = governorship_owner_ratio
+                        }
+                    }
+                    add = var:governorship_owner_ratio
+                }
+            }
+            save_scope_as = governorship_4
+        }
+    }
+
+    option = { #
+        name = c3rd_other_events.82.a
+        custom_tooltip = c3rd_other_events.82.a.tt1
+        while = {
+            count = 5
+            random_owned_province = {
+                limit = {
+                    governorship = scope:governorship_1
+                    exists = holding_owner
+                    OR = {
+                        holding_owner = scope:target
+                        holding_owner = scope:target.family.head_of_family
+                    }
+                }
+                holding_owner = {
+                    remove_holding = prev
+                }
+            }
+        }
+        hidden_effect = {
+            scope:governorship_1 = {
+                calculate_the_gov_ownership = yes
+            }
+        }
+        if = {
+            limit = {
+                scope:target = {
+                    is_head_of_family = yes
+                }
+            }
+            scope:target = {add_loyalty = property_seized}
+            add_political_influence = -10
+        }
+        else = {
+            scope:target = {add_loyalty = property_seized}
+            scope:target.family.head_of_family = {add_loyalty = property_seized_small}
+            add_political_influence = -5
+            
+        }
+        if = {
+            limit = {
+                has_country_modifier = solidus_introduced
+            }
+            add_tyranny = 5
+        }
+        if = {
+            limit = {
+                has_law = decentralized_administration_law
+            }
+            current_ruler = {
+                add_popularity = -5
+            }
+            if = {
+                limit = {
+                    is_republic = yes
+                    has_party_type = populares_party
+                }
+                add_party_approval = {
+                    party_type = populares_party
+                    value = 3
+                }
+                add_party_approval = {
+                    party_type = optimates_party
+                    value = -7
+                }
+            }
+            else_if = {
+                limit = {
+                    is_republic = yes
+                    has_party_type = democratic_party
+                }
+                add_party_approval = {
+                    party_type = democratic_party
+                    value = 3
+                }
+                add_party_approval = {
+                    party_type = oligarchic_party
+                    value = -7
+                }
+            }
+            else_if = {
+                limit = {
+                    is_monarchy = yes
+                }
+                add_legitimacy = -5
+            }
+        }
+        
+        
+    }
+
+
+}
+
+

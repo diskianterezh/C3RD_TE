@@ -76,4 +76,15 @@ assets_seized = {
 	yearly_decay = 2
 }
 
+property_seized = {
+	value = -10
+	yearly_decay = 1
+}
+
+
+property_seized_small = {
+	value = -5
+	yearly_decay = 1
+}
+
 
