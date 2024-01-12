@@ -6054,3 +6054,82 @@ c3rd_other_events.83 = { #Retake governorship failed :  you'll have to negociate
 
 }
 
+
+c3rd_other_events.84 = { #event when you have  the tax inspection culture law : great nobles invest in land
+    type = country_event
+    title = "c3rd_other_events.84.t"
+    desc = "c3rd_other_events.84.desc"
+    left_portrait = current_ruler
+    right_portrait = scope:noble_1
+    right_portrait = scope:noble_2
+    picture = senator_conversing
+
+    trigger = {
+        has_land = yes
+        has_country_modifier = tax_inspection
+        any_character = {
+            count > 2
+            loyalty <= 50
+            is_head_of_family = yes
+            is_ruler = no
+        }
+        NOT = {
+            has_variable = had_land_tax_evasion
+        }
+    }
+
+    immediate = {
+        set_variable = {
+            name = had_land_tax_evasion
+            days = 10000
+        }
+        hidden_effect = {
+            every_governorships = {
+                limit = {
+                    governor = {
+                        is_ruler = no
+                        loyalty < 50
+                    }
+                    any_governorship_state = {
+                        any_state_province = {
+                            NOT = {
+                                exists = holding_owner
+                            }
+                        }
+                    }
+                }
+                save_scope_as = governorship_parse
+                owner = {
+                    random_owned_province = {
+                        limit = {
+                            NOT = {
+                                exists = holding_owner
+                            }
+                        }
+                        save_scope_as = holding_target
+                        governor = {
+                            add_holding = scope:holding_target
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    option = { #let it go
+        name = c3rd_other_events.84.a
+        custom_tooltip = c3rd_other_events.84.a.tt1
+    }
+
+    option = { #stop this evasion
+        name = c3rd_other_events.84.b
+        custom_tooltip = c3rd_other_events.84.b.tt1
+    }
+    option = { #offer to reverse the law
+        name = c3rd_other_events.84.c
+        custom_tooltip = c3rd_other_events.84.c.tt1
+    }
+
+
+}
+
