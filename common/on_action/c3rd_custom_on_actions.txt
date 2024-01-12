@@ -1149,8 +1149,11 @@ c3rd_barbarian_sack = {
 c3rd_holding_control = { #governor gain control of region
 	trigger = {
 		has_land = yes
-		NOT = {
-			has_law = basic_administrative_law
+		OR = {
+			NOT = {
+				has_law = basic_administrative_law
+			}
+			has_country_modifier = solidus_introduced
 		}
 		any_governorships = {
 			exists = governor
@@ -1220,8 +1223,16 @@ c3rd_holding_control = { #governor gain control of region
             }
 			weight = {
                 modifier = {
-                    factor = 2
+                    factor = 3
                     region_control_value >= 75
+                }
+                modifier = {
+                    factor = 2
+                    region_control_value >= 60
+                }
+                modifier = {
+                    factor = 5
+                    region_control_value >= 90
                 }
                 modifier = { #less chances close to the capital
                     factor = 0.4
@@ -1255,6 +1266,10 @@ c3rd_holding_control = { #governor gain control of region
         }
 		random_list = {
 			9 = {
+				modifier = {
+					add = 2
+					num_of_cities <= 200
+				}
 			}
 			1 = {
 				modifier = {
@@ -1286,6 +1301,18 @@ c3rd_holding_control = { #governor gain control of region
 					scope:autonomy_governorship = {
 						region_control_value >= 90
 					}
+				}
+				modifier = {
+					add = 1
+					num_of_cities >= 500
+				}
+				modifier = {
+					add = 1
+					num_of_cities >= 1000
+				}
+				modifier = {
+					add = 1
+					num_of_cities >= 2000
 				}
 				trigger_event = {
 					id = c3rd_other_events.80
@@ -1383,7 +1410,10 @@ c3rd_country_control_check = {
 			}
 			if = {
 				limit = { 
-					country_region_control >= 5
+					country_region_control >= 25
+					NOT = {
+						has_character_modifier = major_influence_aristocrat
+					}
 				}
 				add_character_modifier = {
 					name = major_influence_aristocrat
@@ -1393,7 +1423,7 @@ c3rd_country_control_check = {
 			if = {
 				limit = { 
 					has_character_modifier = major_influence_aristocrat
-					country_region_control < 0 #20
+					country_region_control < 20
 				}
 				remove_character_modifier = major_influence_aristocrat
 			}
@@ -1421,6 +1451,276 @@ c3rd_country_calculate_the_gov_ownership = {
 				}
 			}
 			calculate_the_gov_ownership = yes
+		}
+	}
+}
+
+
+c3rd_holding_gain_owner = { #owner gain control in his region
+	trigger = {
+		has_land = yes
+		OR = {
+			NOT = {
+				has_law = basic_administrative_law
+			}
+			has_country_modifier = solidus_introduced
+		}
+		any_governorships = { #check available governorship (thus owner)
+			exists = governor
+			governor = {
+				is_ruler = no
+			}
+			save_temporary_scope_as = governorship_tmp_scope
+			has_variable = governorship_owner
+			OR = {
+				AND = {
+					var:governorship_owner = {
+						is_head_of_family = yes
+						family = scope:governorship_tmp_scope.governor.family
+					}
+				}
+				var:governorship_owner = governor
+			}
+			any_governorship_state = {
+				any_state_province = {
+					NOT = {
+						exists = holding_owner
+					}
+				}
+			}
+		}
+	}
+	effect = {
+
+        random_governorships = {
+            limit = {
+				exists = governor
+				governor = {
+					is_ruler = no
+				}
+				save_temporary_scope_as = governorship_tmp_scope
+				has_variable = governorship_owner
+				OR = {
+					AND = {
+						var:governorship_owner = {
+							is_head_of_family = yes
+							family = scope:governorship_tmp_scope.governor.family
+						}
+					}
+					var:governorship_owner = governor
+				}
+				any_governorship_state = {
+					any_state_province = {
+						NOT = {
+							exists = holding_owner
+						}
+					}
+				}
+				var:governorship_owner = {
+					wealth >= 100
+				}
+            }
+			weight = { #the richer the best
+				modifier = {
+					factor = 2
+					has_variable = governorship_owner
+					var:governorship_owner = {
+						wealth >= 500
+					}
+				}
+				modifier = {
+					factor = 2
+					has_variable = governorship_owner
+					var:governorship_owner = {
+						wealth >= 2000
+					}
+				}
+				modifier = {
+					factor = 2
+					has_variable = governorship_owner
+					var:governorship_owner = {
+						wealth >= 5000
+					}
+				}
+				modifier = {
+					factor = 2
+					has_variable = governorship_owner
+					var:governorship_owner = {
+						wealth >= 10000
+					}
+				}
+			}
+            save_scope_as = new_holding_governorship
+        }
+		random_list = { #base 16%; 10% if small up to 66% for wealthy gov with solidus in 1000+ country ,max 88%
+			5 = {
+				modifier = {
+					add = 4
+					num_of_cities <= 200
+				}
+			}
+			1 = {
+				modifier = {
+					add = 1
+					stability >= 75
+				}
+				modifier = {
+					add = 1
+					scope:new_holding_governorship = {
+						has_variable = governorship_owner
+						var:governorship_owner = {
+							wealth >= 500
+						}
+					}
+				}
+				modifier = {
+					add = 1
+					scope:new_holding_governorship = {
+						has_variable = governorship_owner
+						var:governorship_owner = {
+							wealth >= 2000
+						}
+					}
+				}
+				modifier = {
+					add = 1
+					scope:new_holding_governorship = {
+						has_variable = governorship_owner
+						var:governorship_owner = {
+							wealth >= 5000
+						}
+					}
+				}
+				modifier = {
+					add = 1
+					scope:new_holding_governorship = {
+						has_variable = governorship_owner
+						var:governorship_owner = {
+							wealth >= 10000
+						}
+					}
+				}
+				modifier = {
+					add = 2
+					num_of_cities >= 1000
+				}
+				modifier = {
+					add = 2
+					num_of_cities >= 2000
+				}
+				modifier = {
+					factor = 2
+					has_country_modifier = solidus_introduced
+				}
+				modifier = {
+					factor = 2
+					has_law = decentralized_administration_law
+				}
+				random_owned_province = {
+					limit = {
+						governorship = scope:new_holding_governorship
+						NOT = {
+							exists = holding_owner
+						}
+					}
+					weight = {
+						modifier = {
+							factor = 10
+							any_neighbor_province = {
+								holding_owner = scope:new_holding_governorship.var:governorship_owner
+							}
+						}
+					}
+					save_scope_as = new_holding_target
+				}
+				scope:new_holding_governorship.var:governorship_owner = {
+					add_gold = -100
+					add_holding = scope:new_holding_target
+				}
+				if = { #chance for another
+					limit = {
+						scope:new_holding_governorship = {
+							has_variable = governorship_owner
+							var:governorship_owner = {
+								wealth >= 500
+							}
+						}
+					}
+					random_list = {
+						9 = {
+	
+						}
+						1 = {
+							modifier = {
+								add = 1
+								num_of_cities >= 1000
+							}
+							modifier = {
+								add = 1
+								num_of_cities >= 2000
+							}
+							modifier = {
+								add = 1
+								scope:new_holding_governorship = {
+									has_variable = governorship_owner
+									var:governorship_owner = {
+										wealth >= 2000
+									}
+								}
+							}
+							modifier = {
+								add = 1
+								scope:new_holding_governorship = {
+									has_variable = governorship_owner
+									var:governorship_owner = {
+										wealth >= 5000
+									}
+								}
+							}
+							modifier = {
+								add = 1
+								scope:new_holding_governorship = {
+									has_variable = governorship_owner
+									var:governorship_owner = {
+										wealth >= 10000
+									}
+								}
+							}
+							modifier = {
+								factor = 2
+								has_country_modifier = solidus_introduced
+							}
+							modifier = {
+								factor = 2
+								has_law = decentralized_administration_law
+							}
+							random_owned_province = {
+								limit = {
+									governorship = scope:new_holding_governorship
+									NOT = {
+										exists = holding_owner
+									}
+								}
+								weight = {
+									modifier = {
+										factor = 10
+										any_neighbor_province = {
+											holding_owner = scope:new_holding_governorship.var:governorship_owner
+										}
+									}
+								}
+								save_scope_as = new_holding_target
+							}
+							scope:new_holding_governorship.var:governorship_owner = {
+								add_gold = -200
+								add_holding = scope:new_holding_target
+							}
+	
+						}
+					}
+				}
+				
+			}
 		}
 	}
 }

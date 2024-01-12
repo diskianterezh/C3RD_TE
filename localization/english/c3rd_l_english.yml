@@ -166,6 +166,8 @@
  assets_seized:0 "Assets seized"
  property_seized:0 "Confiscated property"
  property_seized_small:0 "Confiscated family property"
+ traded_holding:0 "Holdings traded"
+ lost_gov_ownership:0 "Regional property seized"
 
  #character modifiers
  king_maker:0 "Kingmaker"
@@ -317,9 +319,11 @@
 
  taking_over_lands:0 "Confiscate land"
  taking_over_lands_act:0 "Acting to reduce the territorial influence of $CHAR$"
- taking_over_lands_act:0 "You acted against $CHAR$ influence"
+ taking_over_lands_act_past:0 "You acted against $CHAR$ influence"
  taking_over_lands_effect:0 "You plan to confiscate several properties"
- 
+ taking_over_lands_tt1:0 "Not enough holdings in a controlled governorship to confiscate several of them"
+ grant_holding_trigger_tt:0 "Was recently expropriated en masse"
+ taking_over_lands_trigger_tt:0 "Recently received holdings"
 
  #Events
 
@@ -1073,6 +1077,10 @@ low_stab_event.4.c.tt1:0 "Things remain as they are, but [independent_current_go
  c3rd_CanChange_tt3:0 "You cannot change the Governor of your capital region"
  c3rd_CanChange_tt4:0 "The Governor is disloyal"
  c3rd_CanChange_tt:0 "Clic here to change Governor"
+ c3rd_governorship_owner_regain_control_tt1:0 "You need an ownership of less than #R 25% #! to regain control of the governorship\nControl under #G 10% #! give a larger chance to regain control without trouble"
+ c3rd_governorship_owner_regain_control_tt2:0 "An ownership below #G 10% #! give a larger chance to regain control without trouble"
+ c3rd_governorship_owner_regain_control_tt3:0 "#T Attempt to regain control of the governorship #!"
+ c3rd_governorship_owner_regain_control_tt4:0 "You already tried to regain control on this Governorship recently"
 
 
  c3rd_other_events.80.t:0 "Growing influence"
@@ -1081,6 +1089,35 @@ low_stab_event.4.c.tt1:0 "Things remain as they are, but [independent_current_go
  c3rd_other_events.80.a.tt1:0 "The region is now considered a stronghold of the [autonomy_governorship.MakeScope.GetVariable('governorship_owner').GetCharacter.GetFamily.GetName]"
 
  c3rd_other_events.802.desc:0 "[owner_target_for_number.GetName] Possesses [owner_target_for_number.MakeScope.GetVariable('country_ownership').GetValue]%"
+
+ c3rd_other_events.82.t:0 "Confiscation of land"
+ c3rd_other_events.82.desc:0 "[target.GetName]'s takeover of state-owned land must be controlled. A political offensive and the replacement of local administrators should make it possible to curb the problem. At the obvious cost of some tension with his family.\n"
+ c3rd_other_events.82.a:0 "Take action on [governorship_1.GetName]"
+ c3rd_other_events.82.a.tt1:0 "5 holdings of [target.GetName] or his family will be withdrawn in [governorship_1.GetName]"
+ c3rd_other_events.82.b:0 "[governorship_2.GetName] is the objective"
+ c3rd_other_events.82.b.tt1:0 "5 holdings of [target.GetName] or his family will be withdrawn in [governorship_2.GetName]"
+ c3rd_other_events.82.c:0 "His influence in [governorship_3.GetName] is too strong"
+ c3rd_other_events.82.c.tt1:0 "5 holdings of [target.GetName] or his family will be withdrawn in [governorship_3.GetName]"
+ c3rd_other_events.82.d:0 "[governorship_4.GetName] will return to state ownership"
+ c3rd_other_events.82.d.tt1:0 "5 holdings of [target.GetName] or his family will be withdrawn in [governorship_4.GetName]"
+ c3rd_other_events.82.e:0 "Let's not be hasty"
+ c3rd_other_events.82.e.tt1:0 "You won't do anything"
+
+ c3rd_other_events.83.t:0 "Landlord resists extortion"
+ c3rd_other_events.83.desc:0 "As our bureaucrats finalised the takeover of the regional administrations in  [regaining_governorship.GetName], [regaining_governorship.MakeScope.GetVariable('governorship_owner').GetCharacter.GetName]'s reaction was swift. Checkpoints were blocked, important documents were concealed, government officials were roughed up in the field, and scandals broke out in high political circles. It would seem that the region's return to the hands of the state is not a foregone conclusion. \n\nNegotiations are essential, unless we want to step up the pressure?"
+ c3rd_other_events.83.a:0 "Let's give him a generous send-off"
+ c3rd_other_events.83.a.tt1:0 "Gold is always a solution"
+ c3rd_other_events.83.b:0 "No doubt other lands will comfort him"
+ c3rd_other_events.83.b.tt1:0 "We will grant new lands to [regaining_governorship.MakeScope.GetVariable('governorship_owner').GetCharacter.GetName]"
+ c3rd_other_events.83.c:0 "Call in the troops and solve the problem"
+ c3rd_other_events.83.c.tt1:0 "You'll opt for violence"
+ c3rd_other_events.83.d:0 "Put him in a minority in front of his peers"
+ c3rd_other_events.83.d.tt1:0 "This option is available because your leader has sufficient #G finesse #! and judicious traits."
+ c3rd_other_events.83.e:0 "Drown him in praise"
+ c3rd_other_events.83.e.tt1:0 "This option is available because your leader has sufficient #G charisma #! and traits of a negociator."
+ c3rd_other_events.83.f:0 "Let him know that we know where he lives"
+ c3rd_other_events.83.f.tt1:0 "This option is available because your leader has sufficient #G martial #! and crafty traits."
+ c3rd_other_events.83.a.tt2:0 "You will regain control of [regaining_governorship.GetName]."
  
 
 #tribals fix

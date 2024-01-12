@@ -24,6 +24,8 @@ yearly_country_pulse = {
 		c3rd_apply_silver_unvalue
 		delay = { days = { 1 180 } }
 		c3rd_really_rich_country
+		delay = { days = { 1 364 } }
+		c3rd_holding_gain_owner
 
 	}
 }

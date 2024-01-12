@@ -562,8 +562,8 @@ region_control_value_owner = {
 					limit = {
 						exists = holding_owner
 						OR = {
-							holding_owner = var:governorship_owner
-							holding_owner = var:governorship_owner.family.head_of_family
+							holding_owner = governorship.var:governorship_owner
+							holding_owner = governorship.var:governorship_owner.family.head_of_family
 						}
 					}
 					add = 1

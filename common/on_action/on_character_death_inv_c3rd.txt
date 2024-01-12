@@ -2540,6 +2540,101 @@ on_character_death = {
 				}
 			}
 		}
+		if = {
+			limit = {
+				is_minor_character = yes
+				num_holdings_owned > 0
+			}
+			if = {
+				limit = {
+					employer = {
+						OR = {
+							is_republic = no
+							has_country_modifier = solidus_introduced
+						}
+					}
+				}
+				if = {
+					limit = {
+						num_of_children > 0
+						any_child = {
+							is_alive = yes
+							age >= 14
+							employer = root.employer
+							is_ruler = no
+						}
+					}
+					random_child = {
+						limit = {
+							is_alive = yes
+							age >= 14
+							employer = root.employer
+							is_ruler = no
+						}
+						save_scope_as = heir_child
+					}
+					while = {
+						limit = { num_holdings_owned > 0 }
+						random_holdings = { save_scope_as = holding_transfer }
+						remove_holding = scope:holding_transfer
+						scope:heir_child = { add_holding = scope:holding_transfer }
+					}
+					employer = {
+						every_governorships = {
+							limit = { 
+								has_variable = governorship_owner
+								var:governorship_owner = root 
+							}
+							remove_variable = governorship_owner
+							set_variable = {
+								name = governorship_owner
+								value = scope:heir_child
+							}
+							calculate_the_gov_ownership = yes
+						}
+					}
+				}
+				else_if = {
+					limit = {
+						any_sibling = {
+							is_alive = yes
+							age >= 14
+							employer = root.employer
+							is_ruler = no
+						}
+					}
+					random_sibling = {
+						limit = {
+							is_alive = yes
+							age >= 14
+							employer = root.employer
+							is_ruler = no
+						}
+						save_scope_as = heir_child
+					}
+					while = {
+						limit = { num_holdings_owned > 0 }
+						random_holdings = { save_scope_as = holding_transfer }
+						remove_holding = scope:holding_transfer
+						scope:heir_child = { add_holding = scope:holding_transfer }
+					}
+					employer = {
+						every_governorships = {
+							limit = { 
+								has_variable = governorship_owner
+								var:governorship_owner = root 
+							}
+							remove_variable = governorship_owner
+							set_variable = {
+								name = governorship_owner
+								value = scope:heir_child
+							}
+							calculate_the_gov_ownership = yes
+						}
+					}
+				}
+			}
+		}
 		if = { #C3RD clear variables
 			limit = {
 				has_variable = country_ownership

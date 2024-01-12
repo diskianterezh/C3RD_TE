@@ -1,0 +1,142 @@
+﻿c3rd_governorship_owner_regain_control = {
+	scope = governorship
+
+	ai_is_valid = {
+		always = no
+	}
+    is_valid = {
+		trigger_if = {
+			limit = {
+				has_variable = governorship_owner
+				has_variable = governorship_owner_ratio
+				var:governorship_owner_ratio >= 25
+			}
+			custom_tooltip = {
+				text = c3rd_governorship_owner_regain_control_tt1
+				has_variable = governorship_owner
+				has_variable = governorship_owner_ratio
+				var:governorship_owner_ratio < 25
+			}
+		}
+		trigger_if = {
+			limit = {
+				has_variable = tried_to_regain_gov
+			}
+			custom_tooltip = {
+				text = c3rd_governorship_owner_regain_control_tt4
+				NOT = {has_variable = tried_to_regain_gov}
+			}
+		}
+    }
+
+	is_shown = {
+		has_variable = governorship_owner
+		has_variable = governorship_owner_ratio
+	}
+
+	effect = {
+		custom_tooltip = c3rd_governorship_owner_regain_control_tt3
+		if = {
+			limit = {
+				has_variable = governorship_owner
+				has_variable = governorship_owner_ratio
+				var:governorship_owner_ratio < 25
+				var:governorship_owner_ratio > 10
+			}
+			custom_tooltip  = c3rd_governorship_owner_regain_control_tt2
+		}
+		save_scope_as = regaining_governorship
+			
+		hidden_effect = {
+			random_list = {
+				40 = {
+					modifier = {
+						var:governorship_owner_ratio < 10
+						add = 40
+					}
+					modifier = {
+						var:governorship_owner = {
+							has_trait = content
+						}
+						add = 10
+					}
+					modifier = {
+						var:governorship_owner = {
+							has_trait = guileless
+						}
+						add = 10
+					}
+					if = {
+						limit = {
+							has_variable = governorship_owner
+						}
+						remove_variable = governorship_owner
+					}
+					if = {
+						limit = {
+							has_variable = governorship_owner_ratio
+						}
+						remove_variable = governorship_owner_ratio
+					}
+				}
+				10 = {
+					modifier = {
+						var:governorship_owner = {
+							is_disloyal = yes
+						}
+						add = 10
+					}
+					modifier = {
+						var:governorship_owner = {
+							has_trait = ambitious
+						}
+						add = 10
+					}
+					modifier = {
+						var:governorship_owner = {
+							has_trait = crafty
+						}
+						add = 10
+					}
+					modifier = {
+						var:governorship_owner = {
+							has_trait = gluttonous
+						}
+						add = 10
+					}
+					modifier = {
+						owner = {
+							has_country_modifier = solidus_introduced
+						}
+						add = 20
+					}
+					modifier = {
+						owner = {
+							has_law = decentralized_administration_law
+						}
+						add = 10
+					}
+					modifier = {
+						var:governorship_owner = {
+							NOT = {employer = scope:regaining_governorship.owner}
+						}
+						factor = 0.1
+					}
+					modifier = {
+						var:governorship_owner_ratio >= 21
+						factor = 2
+					}
+					set_variable = {
+						name = tried_to_regain_gov
+						days = 165
+					}
+					owner = {
+						trigger_event = {
+							id = c3rd_other_events.83
+						}
+					}
+				}
+			}
+		}
+	}
+}

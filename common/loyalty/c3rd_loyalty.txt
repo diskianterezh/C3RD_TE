@@ -87,4 +87,14 @@ property_seized_small = {
 	yearly_decay = 1
 }
 
+traded_holding = {
+	value = 10
+	yearly_decay = 2
+}
+
+lost_gov_ownership = {
+	value = -10
+	yearly_decay = 2
+}
+
 

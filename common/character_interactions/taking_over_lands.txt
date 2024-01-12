@@ -51,6 +51,44 @@
 				}
 				political_influence >= 10
 			}
+			
+		}
+		custom_tooltip = {
+			text = taking_over_lands_tt1
+			scope:actor = {
+				any_governorships = {
+					has_variable = governorship_owner
+					var:governorship_owner = scope:target
+					save_temporary_scope_as = govtmp_parse
+					OR = {
+						scope:target = {
+							any_holdings = {
+								count >= 5
+								governorship = scope:govtmp_parse
+							}
+						}
+						scope:target.family.head_of_family = {
+							any_holdings = {
+								count >= 5
+								governorship = scope:govtmp_parse
+							}
+						}
+					}
+				}
+			}
+		}
+		trigger_if = {
+			limit = {
+				scope:target = {
+					has_variable = got_holdings_recently
+				}
+			}
+			custom_tooltip = {
+				text = taking_over_lands_trigger_tt
+				scope:target = {
+					NOT = {has_variable = got_holdings_recently}
+				}
+			}
 		}
 	}
 

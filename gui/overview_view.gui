@@ -1059,6 +1059,10 @@ base_window = {
 														size = { 40 60 }
 														datacontext = "[OverviewGovernorshipItem.GetGovernorship.GetGovernorOrRuler]"
 													}
+													cpt_button = {
+														size = { 40 60 }
+														datacontext = "[OverviewGovernorshipItem.GetGovernorship.GetGovernorOrRuler]"
+													}
 													tag = {
 														position = { 50 0 }
 														parentanchor = vcenter
@@ -1085,11 +1089,24 @@ base_window = {
 														visible = "[ScriptedGui.IsShown( GuiScope.SetRoot( OverviewGovernorshipItem.GetGovernorship.MakeScope ).End )]"
 														tooltip = "c3rd_governorship_owner_tt"
 														parentanchor = vcenter|right
-														position = { -310 -10 }
-														size = { 120 0 }
+														position = { -290 -10 }
+														size = { 110 0 }
 														blockoverride "Icon" { using = icon_disloyal_powerbase }
 														blockoverride "Text" { text = "[OverviewGovernorshipItem.GetGovernorship.MakeScope.GetVariable('governorship_owner_ratio').GetValue]%" }
-														
+													}
+													icon_button_square = {
+														datacontext = "[GetScriptedGui('c3rd_governorship_owner_regain_control')]"
+														visible = "[ScriptedGui.IsShown( GuiScope.SetRoot( OverviewGovernorshipItem.GetGovernorship.MakeScope ).End )]"
+														enabled = "[ScriptedGui.IsValid( GuiScope.SetRoot( OverviewGovernorshipItem.GetGovernorship.MakeScope ).End )]"
+														blockoverride "On_click"
+														{
+															onclick = "[ScriptedGui.Execute( GuiScope.SetRoot( OverviewGovernorshipItem.GetGovernorship.MakeScope ).End )]"
+														}
+														tooltip = "[ScriptedGui.BuildTooltip( GuiScope.SetRoot( OverviewGovernorshipItem.GetGovernorship.MakeScope ).End )]"
+														parentanchor = vcenter|right
+														position = { -400 0 }
+														blockoverride "ClickSound" { clicksound = "event:/SFX/UI/Actions/sfx_ui_action_goverment_interactions" }
+														blockoverride "Icon" { texture = "gfx/interface/icons/shared_icons/ironman.dds" }
 													}
 													
 												}
@@ -1128,14 +1145,63 @@ base_window = {
 														visible = "[ScriptedGui.IsShown( GuiScope.SetRoot( OverviewGovernorshipItem.GetGovernorship.MakeScope ).End )]"
 														tooltip = "c3rd_governorship_owner_tt"
 														parentanchor = vcenter|right
-														position = { -310 -10 }
-														size = { 120 0 }
+														position = { -290 -10 }
+														size = { 110 0 }
 														blockoverride "Icon" { using = icon_disloyal_powerbase }
 														blockoverride "Text" { text = "[OverviewGovernorshipItem.GetGovernorship.MakeScope.GetVariable('governorship_owner_ratio').GetValue]%" }
 														
 													}
+													icon_button_square = {
+														datacontext = "[GetScriptedGui('c3rd_governorship_owner_regain_control')]"
+														visible = "[ScriptedGui.IsShown( GuiScope.SetRoot( OverviewGovernorshipItem.GetGovernorship.MakeScope ).End )]"
+														enabled = "[ScriptedGui.IsValid( GuiScope.SetRoot( OverviewGovernorshipItem.GetGovernorship.MakeScope ).End )]"
+														blockoverride "On_click"
+														{
+															onclick = "[ScriptedGui.Execute( GuiScope.SetRoot( OverviewGovernorshipItem.GetGovernorship.MakeScope ).End )]"
+														}
+														tooltip = "[ScriptedGui.BuildTooltip( GuiScope.SetRoot( OverviewGovernorshipItem.GetGovernorship.MakeScope ).End )]"
+														parentanchor = vcenter|right
+														position = { -400 0 }
+														blockoverride "ClickSound" { clicksound = "event:/SFX/UI/Actions/sfx_ui_action_goverment_interactions" }
+														blockoverride "Icon" { texture = "gfx/interface/icons/shared_icons/ironman.dds" }
+													}
 												}
 											}
+											# flowcontainer = {
+											# 	direction = vertical
+											# 	ignoreinvisible = yes
+											# 	spacing = 6
+											# 	parentanchor = left
+											# 	visible = "[GetVariableSystem.HasValue( OverviewGovernorshipItem.GetGovernorship.GetName, 'yes' )]"
+											# 	icon_button_square = {
+											# 		datacontext = "[GetScriptedGui('c3rd_governorship_owner_regain_control')]"
+											# 		visible = "[ScriptedGui.IsShown( GuiScope.SetRoot( OverviewGovernorshipItem.GetGovernorship.MakeScope ).End )]"
+											# 		enabled = "[ScriptedGui.IsValid( GuiScope.SetRoot( OverviewGovernorshipItem.GetGovernorship.MakeScope ).End )]"
+											# 		blockoverride "On_click"
+											# 		{
+											# 			onclick = "[ScriptedGui.Execute( GuiScope.SetRoot( OverviewGovernorshipItem.GetGovernorship.MakeScope ).End )]"
+											# 		}
+											# 		tooltip = "[ScriptedGui.BuildTooltip( GuiScope.SetRoot( OverviewGovernorshipItem.GetGovernorship.MakeScope ).End )]"
+											# 		parentanchor = vcenter|right
+											# 		position = { -380 0 }
+											# 		size = { 110 0 }
+											# 		blockoverride "ClickSound" { clicksound = "event:/SFX/UI/Actions/sfx_ui_action_goverment_interactions" }
+											# 		blockoverride "Icon" { texture = "gfx/interface/icons/shared_icons/ironman.dds" }
+											# 	}
+											# 	icon_button_square = {
+											# 		datacontext = "[GetScriptedGui('hold_games_button')]"
+											# 		visible = "[ScriptedGui.IsShown( GuiScope.SetRoot( Player.MakeScope ).End )]"
+											# 		blockoverride "On_click"
+											# 		{
+											# 			enabled = "[ScriptedGui.IsValid( GuiScope.SetRoot( Player.MakeScope ).End )]"
+											# 			onclick = "[ScriptedGui.Execute( GuiScope.SetRoot( Player.MakeScope ).End )]"
+											# 		}
+											# 		tooltip = "HOLD_GAMES_BUTTON_TOOLTIP"
+													
+											# 		blockoverride "ClickSound" { clicksound = "event:/SFX/UI/Actions/sfx_ui_action_goverment_interactions" }
+											# 		blockoverride "Icon" { texture = "gfx/interface/icons/shared_icons/hold_games.dds" }
+											# 	}
+											# }
 											fixedgridbox = {
 												name = "states_grid"
 												size = { 684 394 }
