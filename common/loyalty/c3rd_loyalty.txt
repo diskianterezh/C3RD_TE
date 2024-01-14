@@ -97,4 +97,14 @@ lost_gov_ownership = {
 	yearly_decay = 2
 }
 
+is_tax_evading = {
+	value = 10
+	yearly_decay = 1
+}
+
+cant_tax_evading = {
+	value = -7
+	yearly_decay = 1
+}
+
 

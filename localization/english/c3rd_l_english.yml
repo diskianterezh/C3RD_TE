@@ -168,6 +168,8 @@
  property_seized_small:0 "Confiscated family property"
  traded_holding:0 "Holdings traded"
  lost_gov_ownership:0 "Regional property seized"
+ is_tax_evading:0 "Approved investments"
+ cant_tax_evading:0 "Investments stopped"
 
  #character modifiers
  king_maker:0 "Kingmaker"
@@ -1119,6 +1121,15 @@ low_stab_event.4.c.tt1:0 "Things remain as they are, but [independent_current_go
  c3rd_other_events.83.f.tt1:0 "This option is available because your leader has sufficient #G martial #! and crafty traits."
  c3rd_other_events.83.a.tt2:0 "You will regain control of [regaining_governorship.GetName]."
  
+
+ c3rd_other_events.84.t:0 "Strategic investments"
+ c3rd_other_events.84.desc:0 "Our quaestors report strange movements of funds in the empire's provinces, accompanied by a strange drying up of tax revenues, particularly from large families. It would seem that the introduction of stricter controls on nobles' taxes has encouraged leading figures to safeguard their gold in landed estates, preferably within easy reach... This trend does not appear to be particularly harmful, but if left unchecked, it could lead to a loss of control over the nobility's personal possessions. We could also get to the root of the problem by calming down our inspectors..."
+ c3rd_other_events.84.a:0 "Leave them alone"
+ c3rd_other_events.84.a.tt1:0 "You will not intervene\n #R This decision may increase the acquisition of holdings by governors #!"
+ c3rd_other_events.84.b:0 "Get them to fall in line"
+ c3rd_other_events.84.b.tt1:0 "You'll narrow the problem"
+ c3rd_other_events.84.c:0 "Let's calm down the inspections"
+ c3rd_other_events.84.c.tt1:0 "You'll cancel the tax inspection reinforcement\n #R You won't be able to repromote it for a while #!"
 
 #tribals fix
 

@@ -6078,17 +6078,47 @@ c3rd_other_events.84 = { #event when you have  the tax inspection culture law : 
         }
     }
 
+    weight_multiplier = {
+        modifier = {
+            factor = 1.5
+            stability >= 70
+        }
+        modifier = {
+            factor = 2
+            stability >= 90
+        }
+        modifier = {
+            factor = 1.5
+            current_ruler = {
+                corruption >= 25
+            }
+        }
+        modifier = {
+            factor = 1.5
+            current_ruler = {
+                corruption >= 50
+            }
+        }
+        modifier = {
+            factor = 2
+            treasury >= 60000
+        }
+    }
+
     immediate = {
         set_variable = {
             name = had_land_tax_evasion
-            days = 10000
+            days = 10000 #27 years
         }
         hidden_effect = {
             every_governorships = {
                 limit = {
                     governor = {
                         is_ruler = no
-                        loyalty < 50
+                        OR = {
+                            corruption >= 30
+                            loyalty < 50
+                        }
                     }
                     any_governorship_state = {
                         any_state_province = {
@@ -6111,6 +6141,7 @@ c3rd_other_events.84 = { #event when you have  the tax inspection culture law : 
                             add_holding = scope:holding_target
                         }
                     }
+                    add_corruption = 5
                 }
             }
         }
@@ -6119,15 +6150,41 @@ c3rd_other_events.84 = { #event when you have  the tax inspection culture law : 
     option = { #let it go
         name = c3rd_other_events.84.a
         custom_tooltip = c3rd_other_events.84.a.tt1
+        every_character = {
+            limit = {
+                is_head_of_family = yes
+                is_ruler = no
+            }
+            add_loyalty = is_tax_evading
+        }
+        set_variable = {
+            name = land_tax_evasion_authorized
+            days = 9000 #24.6 yo
+        }
     }
 
     option = { #stop this evasion
         name = c3rd_other_events.84.b
         custom_tooltip = c3rd_other_events.84.b.tt1
+        add_tyranny = 10
+        every_character = {
+            limit = {
+                is_head_of_family = yes
+                is_ruler = no
+            }
+            add_loyalty = cant_tax_evading
+        }
     }
+
     option = { #offer to reverse the law
         name = c3rd_other_events.84.c
         custom_tooltip = c3rd_other_events.84.c.tt1
+        add_political_influence = 10
+        remove_country_modifier = tax_inspection
+        set_variable = {
+            name = tax_inspection_stopped
+            days = 3650
+        }
     }
 
 
