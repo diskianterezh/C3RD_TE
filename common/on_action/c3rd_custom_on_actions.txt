@@ -1769,7 +1769,7 @@ c3rd_holding_tax_evasion = { #when tax evasion is on
 				}
             }
             save_scope_as = new_holding_governorship
-			random_list = { #base 16%; 10% if small up to 66% for wealthy gov with solidus in 1000+ country ,max 88%
+			random_list = { #base 16% up 82%
 				5 = {
 				}
 				1 = {
@@ -1802,13 +1802,13 @@ c3rd_holding_tax_evasion = { #when tax evasion is on
 						}
 					}
 					modifier = {
-						add = 2
+						factor = 2
 						governor = {
 							corruption > 50
 						}
 					}
 					modifier = {
-						add = 2
+						factor = 2
 						governor = {
 							corruption > 75
 						}

@@ -6060,9 +6060,7 @@ c3rd_other_events.84 = { #event when you have  the tax inspection culture law : 
     title = "c3rd_other_events.84.t"
     desc = "c3rd_other_events.84.desc"
     left_portrait = current_ruler
-    right_portrait = scope:noble_1
-    right_portrait = scope:noble_2
-    picture = senator_conversing
+    picture = indian_city
 
     trigger = {
         has_land = yes
@@ -6189,4 +6187,244 @@ c3rd_other_events.84 = { #event when you have  the tax inspection culture law : 
 
 
 }
+
+
+c3rd_other_events.85 = { #event when you have  the tax inspection culture law : great nobles invest in land
+    type = country_event
+    title = "c3rd_other_events.85.t"
+    desc = "c3rd_other_events.85.desc"
+    left_portrait = current_ruler
+    right_portrait = scope:target
+    picture = senator_conversing
+
+    trigger = {
+        has_land = yes
+        scope:target = {
+            is_alive = yes
+            is_ruler = no
+        }
+    }
+
+    immediate = {
+        set_variable = { #calculation of the landowner's power : 0-2 = weak ; 3-5 = powerful ; 6+ = omnipotent 
+            name = landowner_demands
+            value = 0
+        }
+        scope:target = {
+            set_variable = {
+                name = got_negociated_recently
+                days = 1800
+            }
+        }
+        if = {
+            limit = {
+                scope:target = {
+                    var:country_ownership >= 25
+                }
+            }
+            change_variable = {
+                name = landowner_demands
+                add = 1
+            }
+        }
+        if = {
+            limit = {
+                scope:target = {
+                    var:country_ownership >= 40
+                }
+            }
+            change_variable = {
+                name = landowner_demands
+                add = 1
+            }
+        }
+        if = {
+            limit = {
+                scope:target = {
+                    var:country_ownership >= 50
+                }
+            }
+            change_variable = {
+                name = landowner_demands
+                add = 1
+            }
+        }
+        if = {
+            limit = {
+                scope:target = {
+                    var:country_ownership >= 65
+                }
+            }
+            change_variable = {
+                name = landowner_demands
+                add = 1
+            }
+        }
+        if = {
+            limit = {
+                scope:target = {
+                    var:country_ownership >= 80
+                }
+            }
+            change_variable = {
+                name = landowner_demands
+                add = 2
+            }
+        }
+        if = {
+            limit = {
+                scope:target = {
+                    power_base >= 30
+                }
+            }
+            change_variable = {
+                name = landowner_demands
+                add = 1
+            }
+        }
+        if = {
+            limit = {
+                scope:target = {
+                    power_base >= 50
+                }
+            }
+            change_variable = {
+                name = landowner_demands
+                add = 1
+            }
+        }
+        if = {
+            limit = {
+                scope:target = {
+                    power_base >= 70
+                }
+            }
+            change_variable = {
+                name = landowner_demands
+                add = 2
+            }
+        }
+        if = {
+            limit = {
+                scope:target = {
+                    corruption >= 50
+                }
+            }
+            change_variable = {
+                name = landowner_demands
+                add = 1
+            }
+        }
+        if = {
+            limit = {
+                scope:target = {
+                    OR = {
+                        has_trait = crafty
+                        has_trait = prominent
+                        has_trait = assertive
+                    }
+                }
+            }
+            change_variable = {
+                name = landowner_demands
+                add = 1
+            }
+        }
+    }
+
+    #what do we want ?
+    option = { #decrease his power/ownership
+        name = c3rd_other_events.85.a
+        custom_tooltip = c3rd_other_events.85.a.tt1
+        trigger = {
+            any_governorships = {
+                count >= 2
+                has_variable = governorship_owner
+                var:governorship_owner = scope:target
+            }
+        }
+        if = {
+            limit = {
+                scope:target = {
+                    is_disloyal = yes
+                }
+            }
+            change_variable = {
+                name = landowner_demands
+                add = 1
+            }
+        }
+        set_variable = {
+            name = what_are_we_asking
+            value = 1
+        }
+    }
+
+    option = { #increase his undying loyalty
+        name = c3rd_other_events.85.b
+        custom_tooltip = c3rd_other_events.85.b.tt1
+        trigger = {
+            towards_civil_war = no
+        }
+        set_variable = {
+            name = what_are_we_asking
+            value = 2
+        }
+    }
+
+    option = { #ask for bonuses
+        name = c3rd_other_events.85.c
+        custom_tooltip = c3rd_other_events.85.c.tt1
+        set_variable = {
+            name = what_are_we_asking
+            value = 3
+        }
+    }
+
+    
+    option = { #save the country from civil war !
+        name = c3rd_other_events.85.d
+        custom_tooltip = c3rd_other_events.85.d.tt1
+        highlight = yes
+        trigger = {
+            towards_civil_war = yes
+        }
+        if = {
+            limit = {
+                scope:target = {
+                    is_disloyal = yes
+                }
+            }
+            change_variable = {
+                name = landowner_demands
+                add = 1
+            }
+        }
+        set_variable = {
+            name = what_are_we_asking
+            value = 4
+        }
+    }
+    
+    option = { #cancel
+        name = c3rd_other_events.85.e
+        custom_tooltip = c3rd_other_events.85.e.tt1
+        remove_variable = landowner_demands
+    }
+
+    after = { #5 days later, the answer
+        if = {
+            limit = {
+                has_variable = landowner_demands
+            }
+            custom_tooltip = c3rd_other_events.85.desc2
+            trigger_event = {
+                id = c3rd_other_events.86
+                days = 5
+            }
+        }
+    }
+
+}
+
 

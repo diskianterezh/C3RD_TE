@@ -326,6 +326,11 @@
  taking_over_lands_tt1:0 "Not enough holdings in a controlled governorship to confiscate several of them"
  grant_holding_trigger_tt:0 "Was recently expropriated en masse"
  taking_over_lands_trigger_tt:0 "Recently received holdings"
+ negociate_with_landowner:0 "Negociate with Landowner"
+ negociate_with_landowner_act:0 "Negociating with $CHAR$"
+ negociate_with_landowner_act_past:0 "You negociated with $CHAR$ "
+ negociate_with_landowner_effect:0 "You will propose an agreement to reduce the influence of this character"
+ negociate_with_landowner_tt:0 "Recently negotiated"
 
  #Events
 
@@ -1125,11 +1130,26 @@ low_stab_event.4.c.tt1:0 "Things remain as they are, but [independent_current_go
  c3rd_other_events.84.t:0 "Strategic investments"
  c3rd_other_events.84.desc:0 "Our quaestors report strange movements of funds in the empire's provinces, accompanied by a strange drying up of tax revenues, particularly from large families. It would seem that the introduction of stricter controls on nobles' taxes has encouraged leading figures to safeguard their gold in landed estates, preferably within easy reach... This trend does not appear to be particularly harmful, but if left unchecked, it could lead to a loss of control over the nobility's personal possessions. We could also get to the root of the problem by calming down our inspectors..."
  c3rd_other_events.84.a:0 "Leave them alone"
- c3rd_other_events.84.a.tt1:0 "You will not intervene\n #R This decision may increase the acquisition of holdings by governors #!"
+ c3rd_other_events.84.a.tt1:0 "You will not intervene\n #R This decision may increase the acquisition of holdings by governors for several years#!"
  c3rd_other_events.84.b:0 "Get them to fall in line"
  c3rd_other_events.84.b.tt1:0 "You'll narrow the problem"
  c3rd_other_events.84.c:0 "Let's calm down the inspections"
  c3rd_other_events.84.c.tt1:0 "You'll cancel the tax inspection reinforcement\n #R You won't be able to repromote it for a while #!"
+
+
+ c3rd_other_events.85.t:0 "Negotiating with a powerful character"
+ c3rd_other_events.85.desc:0 "[target.GetName] is an influential figure in our country. Whether we like it or not, we have to accept this state of affairs. Although our efforts to undermine his influence are certainly not exhausted, it is sometimes wiser to reach agreements on good terms.\nWe will be organising a meeting to find common ground. We have several areas on which we can extract concessions, it remains to be seen which one we will concentrate on."
+ c3rd_other_events.85.desc2:0 "[target.GetName]'s response will be coming soon"
+ c3rd_other_events.85.a:0 "Let's recover some of his domain"
+ c3rd_other_events.85.a.tt1:0 "You will attempt to regain control of regions under [target.GetName]'s control."
+ c3rd_other_events.85.b:0 "Ensuring his undying loyalty"
+ c3rd_other_events.85.b.tt1:0 "You want to greatly increase their loyalty"
+ c3rd_other_events.85.c:0 "Let's ask him to help us exploit his land"
+ c3rd_other_events.85.c.tt1:0 "You can obtain bonuses on all the lands controlled by [target.GetName]"
+ c3rd_other_events.85.d:0 "Help us save the country's unity"
+ c3rd_other_events.85.d.tt1:0 "You will ask [target.GetName] to help you prevent the coming civil war"
+ c3rd_other_events.85.e:0 "I've changed my mind, we don't need any concessions"
+ c3rd_other_events.85.e.tt1:0 "You won't do anything"
 
 #tribals fix
 

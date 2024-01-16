@@ -9,24 +9,11 @@
 	potential_trigger = {
 		hidden:scope:target = {
 			employer = scope:actor
+			has_character_modifier = major_influence_aristocrat
 			employer = {
 				any_governorships = {
 					has_variable = governorship_owner
 					var:governorship_owner = scope:target
-					save_temporary_scope_as = govchecek_tmp
-					any_governorship_state = {
-						any_state_province = {
-							exists = holding_owner
-							OR = {
-								holding_owner = scope:target
-								holding_owner = {
-									is_head_of_family = yes
-									family = scope:target.family
-								}
-
-							}
-						}
-					}
 				}
 			}
 			is_ruler = no
@@ -49,44 +36,18 @@
 					limit = { has_country_modifier = internal_collapse }
 					NOT = { has_country_modifier = internal_collapse }
 				}
-				political_influence >= 10
-			}
-			
-		}
-		custom_tooltip = {
-			text = taking_over_lands_tt1
-			scope:actor = {
-				any_governorships = {
-					has_variable = governorship_owner
-					var:governorship_owner = scope:target
-					save_temporary_scope_as = govtmp_parse
-					OR = {
-						scope:target = {
-							any_holdings = {
-								count >= 5
-								governorship = scope:govtmp_parse
-							}
-						}
-						scope:target.family.head_of_family = {
-							any_holdings = {
-								count >= 5
-								governorship = scope:govtmp_parse
-							}
-						}
-					}
-				}
 			}
 		}
 		trigger_if = {
 			limit = {
 				scope:target = {
-					has_variable = got_holdings_recently
+					has_variable = got_negociated_recently
 				}
 			}
 			custom_tooltip = {
-				text = taking_over_lands_trigger_tt
+				text = negociate_with_landowner_tt
 				scope:target = {
-					NOT = {has_variable = got_holdings_recently}
+					NOT = {has_variable = got_negociated_recently}
 				}
 			}
 		}
@@ -97,7 +58,7 @@
 		
 		scope:actor = {
 			trigger_event = {
-				id = c3rd_other_events.82
+				id = c3rd_other_events.85
 			}
 		}
 	}
