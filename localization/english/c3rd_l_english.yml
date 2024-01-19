@@ -136,7 +136,7 @@
  monetary_reform_law:0 "Silver reform"
  monetary_reform_law_desc:0 "By progressively decreasing the share of silver in denominations without changing the scale of values, it is possible to counterbalance the scarcity of ore very effectively. The possibility of a generalized inflation following the flooding of the economy by a cheap currency is of course only 'unlikely'... \n\n #G  This will very effectively counterbalance the deflation #! \n #R This will progressively reduce the percentage of silver ore in the currency #!\n\n #G This set of laws is not of any use until the monetary crisis mechanics are available. This should be around 700 AUC and will unlock new inventions in the civic tree. Until then, you can freely ignore it #!"
  second_reform_law:0 "Aurelian's reforms"
- second_reform_law_desc:0 "'The decomposition of the monetary sphere was slowed down then stopped when Aurelian took drastic measures of reduction of the volume of the monetary emissions and undertook to stabilize the numeraire of gold and billon, which ended in 309 by the creation of the solidus'\n#G This can fix the eventual crash of the money value\nThis has a positive impact on the monetary balance\nThis will enable the Solidus decision which can end the monetary crisis once and for all #!\n\n #G This set of laws is not of any use until the monetary crisis mechanics are available. This should be around 700 AUC and will unlock new inventions in the civic tree. Until then, you can freely ignore it #!"
+ second_reform_law_desc:0 "'The decomposition of the monetary sphere was slowed down then stopped when Aurelian took drastic measures of reduction of the volume of the monetary emissions and undertook to stabilize the numeraire of gold and billon, which ended in 309 by the creation of the solidus'\n#G This can fix the eventual crash of the money value\nThis has a positive impact on the monetary balance\nThis will enable the Solidus mission tree which can end the monetary crisis once and for all #!\n\n #G This set of laws is not of any use until the monetary crisis mechanics are available. This should be around 700 AUC and will unlock new inventions in the civic tree. Until then, you can freely ignore it #!"
  administrative_law:0 "Administrative Laws"
  basic_administrative_law:0 "Military Governorates"
  basic_administrative_law_desc:0 "The magistrate sent to a province was the only one to hold the imperium, the full authority of the people. He had virtually absolute power, in the civil, judicial and military spheres. During civil wars, therefore, the provinces were ideal breeding grounds for the ambitious, who were sure of obtaining reliable troops and money without any controls."
@@ -331,7 +331,7 @@
  negociate_with_landowner_act_past:0 "You negociated with $CHAR$ "
  negociate_with_landowner_effect:0 "You will propose an agreement to reduce the influence of this character"
  negociate_with_landowner_tt:0 "Recently negotiated"
-
+ negociate_with_landowner_tt2:0 "The last negociation exhausted our bureaucrats"
  #Events
 
  low_stab_event.1.t:0 "Catastrophic instability"

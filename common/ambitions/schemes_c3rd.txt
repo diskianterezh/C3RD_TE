@@ -792,7 +792,10 @@ scheme_buy_holding = {
 			}
 			AND = {
 				employer = {
-					NOT = {has_law = basic_administrative_law}
+					OR = {
+						NOT = {has_law = basic_administrative_law}
+						has_country_modifier = solidus_introduced
+					}
 				}
 				is_governor = yes
 				is_ruler = no
@@ -819,7 +822,6 @@ scheme_buy_holding = {
 						}
 					}
 				}
-
 			}
 		}
 		OR = {
@@ -888,10 +890,10 @@ scheme_buy_holding = {
 			is_head_of_family = yes
 		}
 		modifier = {
-			factor = 5
+			factor = 4
 			is_governor = yes
 			is_head_of_family = no
-			employer = {has_law = constantine_reform_law}
+			employer = {NOT = {has_law = basic_administrative_law}}
 		}
 		modifier = {
 			factor = 3

@@ -8,12 +8,24 @@
 				exists = governor
 				has_variable = governorship_owner
 				var:governorship_owner = governor
+				governor.employer = {
+					OR = {
+						has_law = decentralized_administration_law 
+						has_country_modifier = solidus_introduced
+					}
+				}
 			}
 			custom_tooltip = {
 				text = c3rd_CanChange_tt1
 				NOT = {
 					has_variable = governorship_owner
 					var:governorship_owner = governor
+					governor.employer = {
+						OR = {
+							has_law = decentralized_administration_law 
+							has_country_modifier = solidus_introduced
+						}
+					}
 				}
 			}
 		}
@@ -26,6 +38,12 @@
 					is_head_of_family = yes
 					family = scope:governorship_tmp_scope.governor.family
 				}
+				governor.employer = {
+					OR = {
+						has_law = decentralized_administration_law 
+						has_country_modifier = solidus_introduced
+					}
+				}
 			}
 			custom_tooltip = {
 				text = c3rd_CanChange_tt2
@@ -34,6 +52,12 @@
 					var:governorship_owner = {
 						is_head_of_family = yes
 						family = scope:governorship_tmp_scope.governor.family
+					}
+					governor.employer = {
+						OR = {
+							has_law = decentralized_administration_law 
+							has_country_modifier = solidus_introduced
+						}
 					}
 				}
 			}

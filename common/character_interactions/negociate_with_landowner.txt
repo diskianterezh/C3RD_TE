@@ -51,12 +51,25 @@
 				}
 			}
 		}
+		trigger_if = {
+			limit = {
+				has_variable = negociating_no_duplicate
+			}
+			custom_tooltip = {
+				text = negociate_with_landowner_tt2
+				NOT = {has_variable = negociating_no_duplicate}
+			}
+		}
 	}
 
 	effect = {
 		custom_tooltip = negociate_with_landowner_effect
 		
 		scope:actor = {
+			set_variable = { #to prevent negociating with several landowners at the same time
+				name = negociating_no_duplicate
+				days = 30
+			}
 			trigger_event = {
 				id = c3rd_other_events.85
 			}

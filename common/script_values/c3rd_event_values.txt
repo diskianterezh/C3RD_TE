@@ -616,3 +616,33 @@ country_region_control = { #scope CHAR
 	}
 	round = yes
 }
+
+country_gov_ratio_number = {
+	value = 1
+	if = {
+		limit = { 
+			num_of_cities >= 1000
+		}
+		add = 1
+	}
+	if = {
+		limit = { 
+			num_of_cities >= 2000
+		}
+		add = 1
+	}
+	if = {
+		limit = { 
+			num_of_cities >= 5000
+		}
+		add = 1
+	}
+	if = {
+		limit = { 
+			has_variable = landowner_demands
+			var:landowner_demands >= 5
+		}
+		add = 1
+	}
+	
+}

@@ -474,20 +474,6 @@ commander_loyalty.5 = {
 			add_loyalty = loyalty_general_law_refused
 		}
 		remove_stability_effect = yes
-	}
-
-	option = {
-		name = "commander_loyalty.5.c"
-		scope:demanding_general = {
-			add_gold = {
-				value = root.has_monthly_income
-				multiply = 12
-			}
-		}
-		add_treasury = {
-			value = root.has_monthly_income
-			multiply = -12
-		}
 		if = {
 			limit = {
 				has_land = yes
@@ -514,6 +500,20 @@ commander_loyalty.5 = {
 					value = 1
 				}
 			}
+		}
+	}
+
+	option = {
+		name = "commander_loyalty.5.c"
+		scope:demanding_general = {
+			add_gold = {
+				value = root.has_monthly_income
+				multiply = 12
+			}
+		}
+		add_treasury = {
+			value = root.has_monthly_income
+			multiply = -12
 		}
 	}
 }
