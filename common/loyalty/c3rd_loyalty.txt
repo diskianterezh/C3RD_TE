@@ -107,4 +107,9 @@ cant_tax_evading = {
 	yearly_decay = 1
 }
 
+reintegrated_domain = {
+	value = -40
+	yearly_decay = 1
+}
+
 

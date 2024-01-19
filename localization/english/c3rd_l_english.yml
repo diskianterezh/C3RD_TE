@@ -136,7 +136,7 @@
  monetary_reform_law:0 "Silver reform"
  monetary_reform_law_desc:0 "By progressively decreasing the share of silver in denominations without changing the scale of values, it is possible to counterbalance the scarcity of ore very effectively. The possibility of a generalized inflation following the flooding of the economy by a cheap currency is of course only 'unlikely'... \n\n #G  This will very effectively counterbalance the deflation #! \n #R This will progressively reduce the percentage of silver ore in the currency #!\n\n #G This set of laws is not of any use until the monetary crisis mechanics are available. This should be around 700 AUC and will unlock new inventions in the civic tree. Until then, you can freely ignore it #!"
  second_reform_law:0 "Aurelian's reforms"
- second_reform_law_desc:0 "'The decomposition of the monetary sphere was slowed down then stopped when Aurelian took drastic measures of reduction of the volume of the monetary emissions and undertook to stabilize the numeraire of gold and billon, which ended in 309 by the creation of the solidus'\n#G This can fix the eventual crash of the money value\nThis has a positive impact on the monetary balance\nThis will enable the Solidus mission tree which can end the monetary crisis once and for all #!\n\n #G This set of laws is not of any use until the monetary crisis mechanics are available. This should be around 700 AUC and will unlock new inventions in the civic tree. Until then, you can freely ignore it #!"
+ second_reform_law_desc:0 "'The decomposition of the monetary sphere was slowed down then stopped when Aurelian took drastic measures of reduction of the volume of the monetary emissions and undertook to stabilize the numeraire of gold and billon, which ended in 309 by the creation of the solidus'\n#G This can fix the eventual crash of the money value\nThis has a positive impact on the monetary balance\nThis is necessary for advancing further in the Solidus mission tree which can end the monetary crisis once and for all #!\n\n #G This set of laws is not of any use until the monetary crisis mechanics are available. This should be around 700 AUC and will unlock new inventions in the civic tree. Until then, you can freely ignore it #!"
  administrative_law:0 "Administrative Laws"
  basic_administrative_law:0 "Military Governorates"
  basic_administrative_law_desc:0 "The magistrate sent to a province was the only one to hold the imperium, the full authority of the people. He had virtually absolute power, in the civil, judicial and military spheres. During civil wars, therefore, the provinces were ideal breeding grounds for the ambitious, who were sure of obtaining reliable troops and money without any controls."
@@ -170,6 +170,7 @@
  lost_gov_ownership:0 "Regional property seized"
  is_tax_evading:0 "Approved investments"
  cant_tax_evading:0 "Investments stopped"
+ reintegrated_domain:0 "Domains have been nationalized"
 
  #character modifiers
  king_maker:0 "Kingmaker"
@@ -223,8 +224,9 @@
  ALERT_COLLAPSE:0 "#T Internal Collapse#!\nYour country is collapsing. As long as your stability is #R below 25#!, collapse events will occur."
  ALERT_MILITARY_ANARCHY:0 "#T Military Anarchy#!\nThe country is in a phase of military anarchy. As long as this continues, the generals will demand more important concessions and decisions."
  ALERT_POLITICAL_INSTABILITY:0 "#T Political Instability#!\nThe country is in a phase of political instability, applying several penalties. You can solve this by using the decisions to either reform the country or stopping the political instability."
- c3rd_influent_characters_owners_tt1:0 "Some people in your country are considered to be major landowners because of the number of governorates they control."
+ c3rd_influent_characters_owners_tt1:0 "Some people in your country are considered to be major landowners because of the number of regions they control."
  c3rd_influent_characters_owners_tt2:0 "[influent_character_parse.GetName] owns #R [influent_character_parse.MakeScope.GetVariable('country_ownership').GetValue]% #!"
+ c3rd_influent_characters_owners_tt3:0 "\n\nCharacters will lose this status if they control less than #G 20%#!"
 
 
  #Culture
@@ -271,7 +273,7 @@
  gold_scale_desc:0 "Using gold as the new base value will stabilize the monetary situation"
  monetary_reform:0 "The Aurelian intervention"
  monetary_reform_desc:0 "'The Solidus of Constantine I knew an exceptional stability which it preserved in Byzantium until the XIe century and became the base of the monetary system of the Low Empire then of the Byzantine empire.'"
- monetary_reform_enabled:0 "This will enable the 'Aurelian's reform' monetary law"
+ monetary_reform_enabled:0 "This will enable the 'Aurelian's reform' monetary law\n#G This will enable the Solidus Reform mission tree, which can put an end to the monetary crisis  #!"
  force_national_currency:0 "Force National Currency"
  force_national_currency_desc:0 "The conquered territories must be forced to use the national currency instead of their barbaric barter, only then can civilization be transmitted to them"
  national_foreign_investments:0 "International investment"
@@ -281,7 +283,7 @@
  social_elevator:0 "Social Ascendance"
  social_elevator_desc:0 "Anyone can be part of the ruling elite! ... anyone can try ..."
  public_games:0 "Public Games"
- public_games_desc:0 "The implementation of large public games financed by the government is an excellent way to keep the population obedient and satisfied\n The population will expect some games to be held over time.\n #G Making great games will apply other positive modifiers #! \n #R Refusing to hold these games will be frowned upon #!"
+ public_games_desc:0 "The implementation of large public games financed by the government is an excellent way to keep the population obedient and satisfied\n The population will expect some games to be held over time.\n #G Making great games will apply other positive modifiers #! \n #R Refusing to hold these games will be frowned upon\n These games will cost money every time they are held #!"
  public_games_enabled:0 "You will organize your first games"
  administrative_military_reform_c3rd:0 "Civil Administration Autonomy"
  administrative_military_reform_c3rd_desc:0 "The civil administration has been manipulated too much by military officers who paint themselves as local tyrants. A healthy separation must be made between the military administration of the provinces and the cities."
@@ -332,6 +334,26 @@
  negociate_with_landowner_effect:0 "You will propose an agreement to reduce the influence of this character"
  negociate_with_landowner_tt:0 "Recently negotiated"
  negociate_with_landowner_tt2:0 "The last negociation exhausted our bureaucrats"
+ reintegrate_region:0 "Reintegrate a region"
+ reintegrate_region_act:0 "Asking the owner of the domain to reintegrate a region to the main country"
+ reintegrate_region_act_past:0 "You asked the owner of the domain for a reintegration"
+ reintegrate_region_effect:0 "You will fully reintegrate a region of the domain to the main country"
+ reintegrate_region_tt1:0 "The owner, [target.GetEmployer.MakeScope.GetVariable('owner_from_another_empire').GetCharacter.GetName] must have a loyalty of 75 and above"
+ reintegrate_region_tt2:0 "The owner, [target.GetEmployer.MakeScope.GetVariable('owner_from_another_empire').GetCharacter.GetName] is in another country. The fate of the domain will soon be decided."
+
+
+ #subjects
+
+
+ autonomous_domain:0 "Autonomous Region"
+ AM_autonomous_domain:0 "Autonomous Region"
+ 
+ CANCEL_autonomous_domainTITLE:0 "Give Independance"
+ CANCEL_autonomous_domain_TOOLTIP_HEADER:0 "Give Independance to the governorship"
+ CANCEL_autonomous_domain_DESC:0 "This will cut any ties between your two countries"
+ CANCEL_autonomous_domain_FLAVOR:0 "This could be a way of reducing the influence of its owner in your country, but it would probably be wiser to use the "reintegrate regions" interaction on its ruler."
+ CANCEL_autonomous_domain_NEWDESC:0 "Are you sure you want to give this region total independence? You will lose the mechanics of reintegrating the regions as well as its suzerainty."
+
  #Events
 
  low_stab_event.1.t:0 "Catastrophic instability"
@@ -1150,6 +1172,38 @@ low_stab_event.4.c.tt1:0 "Things remain as they are, but [independent_current_go
  c3rd_other_events.85.d.tt1:0 "You will ask [target.GetName] to help you prevent the coming civil war"
  c3rd_other_events.85.e:0 "I've changed my mind, we don't need any concessions"
  c3rd_other_events.85.e.tt1:0 "You won't do anything"
+
+ c3rd_other_events.86.tt13:0 "[SCOPE.ScriptValue('country_gov_ratio_number')|0Y] governorships will create an autonomous domain of [asked_landowner.GetName]'s family"
+
+
+ c3rd_other_events.87.t:0 "Back to administration"
+ c3rd_other_events.87.desc:0 "[owner_reintegrated.GetName]'s total control of state-owned land must be stopped. The rapid dispatch of a contigent of bureaucrats escorted by a loyal legion to one of the autonomous regions will enable us to regain effective control. [owner_reintegrated.GetName] shouldn't be able to oppose it this time, we've made sure of that...\n"
+ c3rd_other_events.87.a:0 "Take action on [governorship_1.GetName]"
+ c3rd_other_events.87.a.tt1:0 "[governorship_1.GetName] will return to the country"
+ c3rd_other_events.87.b:0 "[governorship_2.GetName] is the objective"
+ c3rd_other_events.87.b.tt1:0 "[governorship_2.GetName] will return to the country"
+ c3rd_other_events.87.c:0 "His influence in [governorship_3.GetName] is too strong"
+ c3rd_other_events.87.c.tt1:0 "[governorship_3.GetName] will return to the country"
+ c3rd_other_events.87.d:0 "[governorship_4.GetName] will return to state ownership"
+ c3rd_other_events.87.d.tt1:0 "[governorship_4.GetName] will return to the country"
+ c3rd_other_events.87.e:0 "Let's not be hasty"
+ c3rd_other_events.87.e.tt1:0 "You won't do anything"
+
+
+ c3rd_other_events.88.t:0 "The future of [subject_without_owner.GetName]"
+ c3rd_other_events.88.desc:0 "[subject_without_owner.GetName], our autonomous province, is in an unprecedented situation: this land, until now part of a private domain, finds itself without an owner. This is a unique opportunity to regain control over these lands, even if it will undoubtedly be a little abrupt."
+ c3rd_other_events.88.a:0 "Let's reintegrate all this"
+ c3rd_other_events.88.a.tt1:0 "You will absorb the domain"
+ c3rd_other_events.88.b:0 "Let them keep their de facto independence"
+ c3rd_other_events.88.b.tt1:0 "The domain will be changed to client state"
+
+
+ c3rd_other_events.89.t:0 "The future of [subject_with_foreign_owner.GetName]"
+ c3rd_other_events.89.desc:0 "[subject_with_foreign_owner.GetName], our autonomous province, is in an dangerous situation: this land, until now part of a private domain of one of our nobles, finds itself owned by a foreign character. This situation is very dangerous because [subject_with_foreign_owner.MakeScope.GetVariable('owner_from_another_empire').GetCharacter.GetName], now in [subject_with_foreign_owner.GetName], is claiming his rights and seeking to recover his land. Much to the delight of his new hosts, of course. We can act quickly and regain control of as much land as possible, before our rivals do. But an interesting option would be to offer the local magnates confirmation of their office... in return for undying loyalty, of course."
+ c3rd_other_events.89.a:0 "Quick, take back control!"
+ c3rd_other_events.89.a.tt1:0 "You will absorb most of the domain, #R but a part will get annexed by [subject_with_foreign_owner.GetName]#!"
+ c3rd_other_events.89.b:0 "People of [subject_with_foreign_owner.GetName], rise up!"
+ c3rd_other_events.89.b.tt1:0 "The domain will be changed to our client state, without any losses"
 
 #tribals fix
 

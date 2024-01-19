@@ -590,6 +590,35 @@ country_total_regions = { #scope COUNTRY
 			add= 1
 		}
 	}
+	every_subject = {
+		limit = {
+			is_subject_type = autonomous_domain
+			has_variable = owner_from_another_empire
+		}
+		if = {
+			limit = {
+				num_of_cities < 100
+			}
+			add = 0.5
+		}
+		else_if = {
+			limit = {
+				num_of_cities >= 100
+				num_of_cities < 250
+			}
+			add = 1
+		}
+		else_if = {
+			limit = {
+				num_of_cities >= 250
+				num_of_cities < 500
+			}
+			add = 1.5
+		}
+		else = {
+			add = 2
+		}
+	}
 }
 country_region_control = { #scope CHAR
 	value = 0
@@ -609,9 +638,37 @@ country_region_control = { #scope CHAR
 				add= 1
 			}
 		}
+		every_subject = {
+			limit = {
+				is_subject_type = autonomous_domain
+				has_variable = owner_from_another_empire
+				var:owner_from_another_empire = scope:influent_character
+			}
+			if = {
+				limit = {
+					num_of_cities < 100
+				}
+				add = 0.5
+			}
+			else_if = {
+				limit = {
+					num_of_cities >= 100
+					num_of_cities < 250
+				}
+				add = 1
+			}
+			else_if = {
+				limit = {
+					num_of_cities >= 250
+					num_of_cities < 500
+				}
+				add = 1.5
+			}
+			else = {
+				add = 2
+			}
+		}
 		multiply = 100
-
-	
 		divide = country_total_regions
 	}
 	round = yes
@@ -645,4 +702,11 @@ country_gov_ratio_number = {
 		add = 1
 	}
 	
+}
+
+subject_partition_ratio = {#subject scope
+	value = 0
+	add = num_of_provinces
+	divide = 3
+	round = yes
 }

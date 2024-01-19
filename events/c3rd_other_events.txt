@@ -5267,6 +5267,85 @@ c3rd_other_events.81 = { #succession ownership
 }
 
 
+c3rd_other_events.811 = { #succession ownership
+    type = character_event
+	hidden = yes
+
+	trigger = {
+		is_minor_character = no
+		exists = family
+		exists = family.head_of_family
+		NOT = {
+			root = family.head_of_family
+		}
+	}
+	
+	immediate = {
+		if = {
+			limit = {
+				any_country = {
+					has_variable = owner_from_another_empire
+					var:owner_from_another_empire = root
+				}
+			}
+			family.head_of_family = {
+				save_scope_as = ownership_target
+			}
+			random_country = {
+				limit = {
+					has_variable = owner_from_another_empire
+					var:owner_from_another_empire = root
+				}
+				remove_variable = owner_from_another_empire
+				set_variable = {
+					name = owner_from_another_empire
+					value = scope:ownership_target
+				}
+			}
+            scope:ownership_target = {
+                if = {
+                    limit = {
+                        has_variable = country_ownership
+                    }
+                    remove_variable = country_ownership
+                }
+				save_scope_as = influent_character
+                set_variable = {
+                    name = country_ownership
+                    value = country_region_control
+                }
+                if = {
+                    limit = { 
+                        country_region_control >= 25
+                        NOT = {
+                            has_character_modifier = major_influence_aristocrat
+                        }
+                    }
+                    add_character_modifier = {
+                        name = major_influence_aristocrat
+                        duration = -1
+                    }
+                }
+                if = {
+                    limit = { 
+                        has_character_modifier = major_influence_aristocrat
+                        country_region_control < 20
+                    }
+                    remove_character_modifier = major_influence_aristocrat
+                }
+                
+            }
+            if = {
+                limit = {
+                    has_variable = country_ownership
+                }
+                remove_variable = country_ownership
+            }
+		}
+	}
+}
+
+
 c3rd_other_events.82 = { #take lands from landowner
     type = country_event
     title = "c3rd_other_events.82.t"
@@ -6426,151 +6505,153 @@ c3rd_other_events.85 = { #event when you have  the tax inspection culture law : 
                 has_variable = landowner_demands
             }
             custom_tooltip = c3rd_other_events.85.desc2
-            random_list = {
-                1 = { #refuse
-                    modifier = {
-                        add = 10
-                        scope:target = {
-                            loyalty < 33
+            hidden_effect = {
+                random_list = {
+                    1 = { #refuse
+                        modifier = {
+                            add = 10
+                            scope:target = {
+                                loyalty < 33
+                            }
+                            var:what_are_we_asking = 1
                         }
-                        var:what_are_we_asking = 1
-                    }
-                    modifier = {
-                        add = 14
-                        scope:target = {
-                            loyalty < 33
+                        modifier = {
+                            add = 14
+                            scope:target = {
+                                loyalty < 33
+                            }
+                            var:what_are_we_asking = 3
                         }
-                        var:what_are_we_asking = 3
-                    }
-                    modifier = {
-                        add = 1
-                        scope:target = {
-                            has_trait = abrasive
+                        modifier = {
+                            add = 1
+                            scope:target = {
+                                has_trait = abrasive
+                            }
                         }
-                    }
-                    modifier = {
-                        add = 2
-                        scope:target = {
-                            has_trait = suspicious
+                        modifier = {
+                            add = 2
+                            scope:target = {
+                                has_trait = suspicious
+                            }
                         }
-                    }
-                    modifier = {
-                        add = -1
-                        scope:target = {
-                            has_trait = benefactor
+                        modifier = {
+                            add = -1
+                            scope:target = {
+                                has_trait = benefactor
+                            }
                         }
-                    }
-                    set_variable = {
-                        name = answer_landowner
-                        value = 1
-                    }
-                }
-                4 = { #demand political power (chances to coup)
-                    modifier = {
-                        add = 2
-                        scope:target = {
-                            has_trait = ambitious
+                        set_variable = {
+                            name = answer_landowner
+                            value = 1
                         }
                     }
-                    modifier = {
-                        add = -1
-                        scope:target = {
-                            has_trait = cautious
+                    4 = { #demand political power (chances to coup)
+                        modifier = {
+                            add = 2
+                            scope:target = {
+                                has_trait = ambitious
+                            }
+                        }
+                        modifier = {
+                            add = -1
+                            scope:target = {
+                                has_trait = cautious
+                            }
+                        }
+                        modifier = {
+                            add = 1
+                            scope:target = {
+                                has_trait = crafty
+                            }
+                        }
+                        modifier = {
+                            factor = 2
+                            scope:target = {
+                                var:country_ownership >= 60
+                            }
+                        }
+                        modifier = {
+                            factor = 2
+                            scope:target = {
+                                loyalty < 33
+                            }
+                            var:what_are_we_asking = 4
+                        }
+                        set_variable = {
+                            name = answer_landowner
+                            value = 2
+                        }
+                        
+                    }
+                    50 = { #demand independant domain
+                        modifier = {
+                            add = 2
+                            scope:target = {
+                                has_trait = corrupt
+                            }
+                        }
+                        modifier = {
+                            add = 2
+                            scope:target = {
+                                has_trait = founder
+                            }
+                        }
+                        modifier = {
+                            add = 1
+                            scope:target = {
+                                has_trait = selfish
+                            }
+                        }
+                        modifier = {
+                            factor = 1.5
+                            num_of_cities >= 1000
+                        }
+                        modifier = {
+                            factor = 1.5
+                            num_of_cities >= 2000
+                        }
+                        modifier = {
+                            factor = 2
+                            num_of_cities >= 5000
+                        }
+                        modifier = {
+                            factor = 0.2
+                            any_governorships = {
+                                count < country_gov_ratio_number
+                                has_variable = governorship_owner
+                                var:governorship_owner = scope:target
+                            }
+                        }
+                        set_variable = {
+                            name = answer_landowner
+                            value = 3
                         }
                     }
-                    modifier = {
-                        add = 1
-                        scope:target = {
-                            has_trait = crafty
+                    5 = { #demand special laws - right
+                        modifier = {
+                            add = 2
+                            scope:target = {
+                                has_trait = assertive
+                            }
                         }
-                    }
-                    modifier = {
-                        factor = 2
-                        scope:target = {
-                            var:country_ownership >= 60
+                        modifier = {
+                            add = 1
+                            scope:target = {
+                                has_trait = crafty
+                            }
                         }
-                    }
-                    modifier = {
-                        factor = 2
-                        scope:target = {
-                            loyalty < 33
+                        modifier = {
+                            add = 1
+                            scope:target = {
+                                has_trait = proud
+                            }
                         }
-                        var:what_are_we_asking = 4
-                    }
-                    set_variable = {
-                        name = answer_landowner
-                        value = 2
-                    }
-                    
-                }
-                5 = { #demand independant domain
-                    modifier = {
-                        add = 2
-                        scope:target = {
-                            has_trait = corrupt
+                        set_variable = {
+                            name = answer_landowner
+                            value = 4
                         }
+                        
                     }
-                    modifier = {
-                        add = 2
-                        scope:target = {
-                            has_trait = founder
-                        }
-                    }
-                    modifier = {
-                        add = 1
-                        scope:target = {
-                            has_trait = selfish
-                        }
-                    }
-                    modifier = {
-                        factor = 1.5
-                        num_of_cities >= 1000
-                    }
-                    modifier = {
-                        factor = 1.5
-                        num_of_cities >= 2000
-                    }
-                    modifier = {
-                        factor = 2
-                        num_of_cities >= 5000
-                    }
-                    modifier = {
-                        factor = 0.2
-                        any_governorships = {
-                            count < country_gov_ratio_number
-                            has_variable = governorship_owner
-                            var:governorship_owner = scope:target
-                        }
-                    }
-                    set_variable = {
-                        name = answer_landowner
-                        value = 3
-                    }
-                }
-                5 = { #demand special laws - right
-                    modifier = {
-                        add = 2
-                        scope:target = {
-                            has_trait = assertive
-                        }
-                    }
-                    modifier = {
-                        add = 1
-                        scope:target = {
-                            has_trait = crafty
-                        }
-                    }
-                    modifier = {
-                        add = 1
-                        scope:target = {
-                            has_trait = proud
-                        }
-                    }
-                    set_variable = {
-                        name = answer_landowner
-                        value = 4
-                    }
-                    
                 }
             }
             trigger_event = {
@@ -6698,63 +6779,65 @@ c3rd_other_events.86 = { #
     }
 
     immediate = {
-        if = {
-            limit = { #choose the governorship
-                has_variable = answer_landowner
-                var:answer_landowner = 3
-            }
-            while = {
-                count = country_gov_ratio_number
-                random_governorships = {
-                    limit = {
-                        has_variable = governorship_owner
-                        var:governorship_owner = scope:asked_landowner
-                        NOR = {
-                            is_in_list = family_domain_govs
+        hidden_effect = {
+            if = {
+                limit = { #choose the governorship
+                    has_variable = answer_landowner
+                    var:answer_landowner = 3
+                }
+                while = {
+                    count = country_gov_ratio_number
+                    random_governorships = {
+                        limit = {
+                            has_variable = governorship_owner
+                            var:governorship_owner = scope:asked_landowner
+                            NOR = {
+                                is_in_list = family_domain_govs
+                            }
+                            governor = {
+                                is_ruler = no
+                            }
                         }
-                        governor = {
-                            is_ruler = no
+                        weight = {
+                            modifier = {
+                                factor = 10
+                                any_governorship_state = {
+                                    any_state_province = {
+                                        any_neighbor_province = {
+                                            governorship = {
+                                                is_in_list = family_domain_govs
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            modifier = {
+                                factor = 3
+                                any_governorship_state = {
+                                    any_state_province = {
+                                        any_neighbor_province = {
+                                            NOT = {
+                                                owner = root
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            modifier = {
+                                factor = 0.1
+                                any_governorship_state = {
+                                    any_state_province = {
+                                        any_neighbor_province = {
+                                            governor = {
+                                                is_ruler = yes
+                                            }
+                                        }
+                                    }
+                                }
+                            }
                         }
+                        add_to_list = family_domain_govs
                     }
-                    weight = {
-                        modifier = {
-                            factor = 10
-                            any_governorship_state = {
-                                any_state_province = {
-                                    any_neighbor_province = {
-                                        governorship = {
-                                            is_in_list = family_domain_govs
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                        modifier = {
-                            factor = 3
-                            any_governorship_state = {
-                                any_state_province = {
-                                    any_neighbor_province = {
-                                        NOT = {
-                                            owner = root
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                        modifier = {
-                            factor = 0.1
-                            any_governorship_state = {
-                                any_state_province = {
-                                    any_neighbor_province = {
-                                        governor = {
-                                            is_ruler = yes
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    add_to_list = family_domain_govs
                 }
             }
         }
@@ -6762,8 +6845,8 @@ c3rd_other_events.86 = { #
 
     
     option = { #accept his offer
-        name = c3rd_other_events.85.a
-        custom_tooltip = c3rd_other_events.85.a.tt1
+        name = c3rd_other_events.86.a
+        custom_tooltip = c3rd_other_events.86.a.tt1
         if = {
             limit = {
                 has_variable = landowner_demands
@@ -6773,112 +6856,16 @@ c3rd_other_events.86 = { #
                     is_alive = yes
                 }
             }
-            every_governorships = {
-                limit = {
-                    is_in_list = family_domain_govs
-                }
-                remove_from_list = family_domain_govs
-                if = {
-                    limit = {
-                        any_country = {
-                            has_variable = owner_from_another_empire
-                            var:owner_from_another_empire = scope:asked_landowner
-                            is_subject_of = root
-                        }
-                    }
-                    random_country = {
-                        limit = {
-                            has_variable = owner_from_another_empire
-                            var:owner_from_another_empire = scope:asked_landowner 
-                        }
-                        save_scope_as = the_domain_country
-                    }
-                    every_governorship_state = {
-                        every_state_province = {
-                            limit = { owner = root }
-                            set_owned_by = scope:the_domain_country
-                        }
-                    }
-                }
-                else = {
-                    if = {
-                        limit = {
-                            governor = {
-                                family = scope:asked_landowner.family
-                            }
-                        }
-                        governor = {
-                            save_scope_as = ruler_domain
-                        }
-                    }
-                    else_if = {
-                        limit = {
-                            root = {any_character = {
-                                family = scope:asked_landowner.family
-                                is_ruler = no
-                                is_alive = yes
-                                has_office = no
-                            }}
-                        }
-                        root = {
-                            random_character = {
-                                limit = {
-                                    family = scope:asked_landowner.family
-                                    is_ruler = no
-                                    is_alive = yes
-                                    has_office = no
-                                }
-                                save_scope_as = ruler_domain
-                            }
-                        }
-                    }
-                    random_governorship_state = {
-                        random_state_province = {
-                            create_country = {
-                                save_scope_as = new_country_domain
-                                change_government = despotic_monarchy
-                                add_treasury = 50.0
-                                set_as_ruler = scope:ruler_domain
-                                set_variable = {
-                                    name = owner_from_another_empire
-                                    value = scope:asked_landowner
-                                }
-                            }
-                        }
-                    }
-                    scope:ruler_domain = {
-                        remove_all_positions = yes
-                        move_country = scope:new_country_domain
-                        set_home_country = scope:new_country_domain
-                        every_child = {
-                            limit = {
-                                prisoner = no
-                            }
-                            remove_all_positions = yes
-                            move_country = scope:new_country_domain
-                            set_home_country = scope:new_country_domain
-                        }
-                    }
-                    every_governorship_state = {
-                        every_state_province = {
-                            limit = { owner = root }
-                            set_owned_by = scope:new_country_domain
-                        }
-                    }
-                }
-                root = {
-                    make_subject = {
-                        target = scope:new_country_domain
-                        type = client_state
-                    }
-                }
+            custom_tooltip = c3rd_other_events.86.tt13
+            hidden_effect = {
+                create_domain = yes
             }
         }
     }
 
     option = { #offer gold
-        name = c3rd_other_events.85.b
-        custom_tooltip = c3rd_other_events.85.b.tt1
+        name = c3rd_other_events.86.b
+        custom_tooltip = c3rd_other_events.86.b.tt1
         trigger = {
             current_ruler = { 
                 finesse >= scope:asked_landowner.finesse 
@@ -6910,18 +6897,630 @@ c3rd_other_events.86 = { #
     }
 
     option = { #negociate half - need to be persuasive and the guy to not be mad
-        name = c3rd_other_events.85.c
-        custom_tooltip = c3rd_other_events.85.c.tt1
+        name = c3rd_other_events.86.c
+        custom_tooltip = c3rd_other_events.86.c.tt1
     }
     
     option = { #say no
-        name = c3rd_other_events.85.d
-        custom_tooltip = c3rd_other_events.85.d.tt1
+        name = c3rd_other_events.86.d
+        custom_tooltip = c3rd_other_events.86.d.tt1
     }
     
     option = { #case when he is dead/bug
-        name = c3rd_other_events.85.e
-        custom_tooltip = c3rd_other_events.85.e.tt1
+        name = c3rd_other_events.86.e
+        custom_tooltip = c3rd_other_events.86.e.tt1
     }
 
+
+    after = { 
+        if = {
+            limit = {
+                has_variable = landowner_demands
+            }
+            remove_variable = landowner_demands
+        }
+        if = {
+            limit = {
+                has_variable = answer_landowner
+            }
+            remove_variable = answer_landowner
+        }
+        if = {
+            limit = {
+                has_variable = answer_landowner
+            }
+            remove_variable = answer_landowner
+        }
+    }
+
+}
+
+c3rd_other_events.87 = { #take region from domain
+    type = country_event
+    title = "c3rd_other_events.87.t"
+    desc = "c3rd_other_events.87.desc"
+
+    picture = hellenic_marketplace
+
+    trigger = {
+        has_land = yes
+        exists = scope:target
+        scope:target.employer = {has_variable = owner_from_another_empire}
+    }
+
+    immediate = {
+        scope:target.employer = {
+            var:owner_from_another_empire = {
+                save_scope_as = owner_reintegrated
+            }
+            random_governorships = {
+                weight = {
+                    modifier = {
+                        any_governorship_state = {
+                            any_state_province = {
+                                any_neighbor_province = {
+                                    owner = root
+                                }
+                            }
+                        }
+                        factor = 10
+                    }
+                }
+                save_scope_as = governorship_1
+            }
+            random_governorships = {
+                limit = {
+                    NOT = {
+                        this = scope:governorship_1
+                    }
+                }
+                modifier = {
+                    any_governorship_state = {
+                        any_state_province = {
+                            any_neighbor_province = {
+                                owner = root
+                            }
+                        }
+                    }
+                    factor = 10
+                }
+                save_scope_as = governorship_2
+            }
+            random_governorships = {
+                limit = {
+                    NOR = {
+                        this = scope:governorship_1
+                        this = scope:governorship_2
+                    }
+                }
+                modifier = {
+                    any_governorship_state = {
+                        any_state_province = {
+                            any_neighbor_province = {
+                                owner = root
+                            }
+                        }
+                    }
+                    factor = 10
+                }
+                save_scope_as = governorship_3
+            }
+            random_governorships = {
+                limit = {
+                    NOR = {
+                        this = scope:governorship_1
+                        this = scope:governorship_2
+                        this = scope:governorship_3
+                    }
+                }
+                modifier = {
+                    any_governorship_state = {
+                        any_state_province = {
+                            any_neighbor_province = {
+                                owner = root
+                            }
+                        }
+                    }
+                    factor = 10
+                }
+                save_scope_as = governorship_4
+            }
+        }
+    }
+
+    option = { #
+        name = c3rd_other_events.87.a
+        custom_tooltip = c3rd_other_events.87.a.tt1
+        trigger = {
+            exists = scope:governorship_1
+        }
+        hidden_effect = {
+            scope:governorship_1 = {
+                every_governorship_state = {
+                    every_state_province = {
+                        limit = {
+                            owner = scope:target.employer
+                        }
+                        set_owned_by = root
+                    }
+                }
+            }
+        }
+        add_political_influence = -5
+        if = {
+            limit = {
+                has_country_modifier = solidus_introduced
+            }
+            add_tyranny = 5
+        }
+        if = {
+            limit = {
+                has_law = decentralized_administration_law
+            }
+            current_ruler = {
+                add_popularity = -5
+            }
+            if = {
+                limit = {
+                    is_republic = yes
+                    has_party_type = populares_party
+                }
+                add_party_approval = {
+                    party_type = populares_party
+                    value = 3
+                }
+                add_party_approval = {
+                    party_type = optimates_party
+                    value = -7
+                }
+            }
+            else_if = {
+                limit = {
+                    is_republic = yes
+                    has_party_type = democratic_party
+                }
+                add_party_approval = {
+                    party_type = democratic_party
+                    value = 3
+                }
+                add_party_approval = {
+                    party_type = oligarchic_party
+                    value = -7
+                }
+            }
+            else_if = {
+                limit = {
+                    is_monarchy = yes
+                }
+                add_legitimacy = -5
+            }
+        }
+        scope:owner_reintegrated = {
+            add_loyalty = reintegrated_domain
+            if = {
+                limit = {
+                    has_variable = country_ownership
+                }
+                remove_variable = country_ownership
+            }
+            save_scope_as = influent_character
+            set_variable = {
+                name = country_ownership
+                value = country_region_control
+            } 
+        }
+    }
+    option = { #
+        name = c3rd_other_events.87.b
+        custom_tooltip = c3rd_other_events.87.b.tt1
+        trigger = {
+            exists = scope:governorship_2
+        }
+        hidden_effect = {
+            scope:governorship_2 = {
+                every_governorship_state = {
+                    every_state_province = {
+                        limit = {
+                            owner = scope:target.employer
+                        }
+                        set_owned_by = root
+                    }
+                }
+            }
+        }
+        add_political_influence = -5
+        if = {
+            limit = {
+                has_country_modifier = solidus_introduced
+            }
+            add_tyranny = 5
+        }
+        if = {
+            limit = {
+                has_law = decentralized_administration_law
+            }
+            current_ruler = {
+                add_popularity = -5
+            }
+            if = {
+                limit = {
+                    is_republic = yes
+                    has_party_type = populares_party
+                }
+                add_party_approval = {
+                    party_type = populares_party
+                    value = 3
+                }
+                add_party_approval = {
+                    party_type = optimates_party
+                    value = -7
+                }
+            }
+            else_if = {
+                limit = {
+                    is_republic = yes
+                    has_party_type = democratic_party
+                }
+                add_party_approval = {
+                    party_type = democratic_party
+                    value = 3
+                }
+                add_party_approval = {
+                    party_type = oligarchic_party
+                    value = -7
+                }
+            }
+            else_if = {
+                limit = {
+                    is_monarchy = yes
+                }
+                add_legitimacy = -5
+            }
+        }
+        scope:owner_reintegrated = {
+            add_loyalty = reintegrated_domain
+            if = {
+                limit = {
+                    has_variable = country_ownership
+                }
+                remove_variable = country_ownership
+            }
+            save_scope_as = influent_character
+            set_variable = {
+                name = country_ownership
+                value = country_region_control
+            } 
+        }
+    }
+    option = { #
+        name = c3rd_other_events.87.c
+        custom_tooltip = c3rd_other_events.87.c.tt1
+        trigger = {
+            exists = scope:governorship_3
+        }
+        hidden_effect = {
+            scope:governorship_3 = {
+                every_governorship_state = {
+                    every_state_province = {
+                        limit = {
+                            owner = scope:target.employer
+                        }
+                        set_owned_by = root
+                    }
+                }
+            }
+        }
+        add_political_influence = -5
+        if = {
+            limit = {
+                has_country_modifier = solidus_introduced
+            }
+            add_tyranny = 5
+        }
+        if = {
+            limit = {
+                has_law = decentralized_administration_law
+            }
+            current_ruler = {
+                add_popularity = -5
+            }
+            if = {
+                limit = {
+                    is_republic = yes
+                    has_party_type = populares_party
+                }
+                add_party_approval = {
+                    party_type = populares_party
+                    value = 3
+                }
+                add_party_approval = {
+                    party_type = optimates_party
+                    value = -7
+                }
+            }
+            else_if = {
+                limit = {
+                    is_republic = yes
+                    has_party_type = democratic_party
+                }
+                add_party_approval = {
+                    party_type = democratic_party
+                    value = 3
+                }
+                add_party_approval = {
+                    party_type = oligarchic_party
+                    value = -7
+                }
+            }
+            else_if = {
+                limit = {
+                    is_monarchy = yes
+                }
+                add_legitimacy = -5
+            }
+        }
+        scope:owner_reintegrated = {
+            add_loyalty = reintegrated_domain
+            if = {
+                limit = {
+                    has_variable = country_ownership
+                }
+                remove_variable = country_ownership
+            }
+            save_scope_as = influent_character
+            set_variable = {
+                name = country_ownership
+                value = country_region_control
+            } 
+        }
+        
+    }
+    option = { #
+        name = c3rd_other_events.87.d
+        custom_tooltip = c3rd_other_events.87.d.tt1
+        trigger = {
+            exists = scope:governorship_4
+        }
+        hidden_effect = {
+            scope:governorship_4 = {
+                every_governorship_state = {
+                    every_state_province = {
+                        limit = {
+                            owner = scope:target.employer
+                        }
+                        set_owned_by = root
+                    }
+                }
+            }
+            
+        }
+        add_political_influence = -8
+        if = {
+            limit = {
+                has_country_modifier = solidus_introduced
+            }
+            add_tyranny = 8
+        }
+        else = {
+            add_tyranny = 4
+        }
+        if = {
+            limit = {
+                has_law = decentralized_administration_law
+            }
+            current_ruler = {
+                add_popularity = -5
+            }
+            if = {
+                limit = {
+                    is_republic = yes
+                    has_party_type = populares_party
+                }
+                add_party_approval = {
+                    party_type = populares_party
+                    value = 3
+                }
+                add_party_approval = {
+                    party_type = optimates_party
+                    value = -7
+                }
+            }
+            else_if = {
+                limit = {
+                    is_republic = yes
+                    has_party_type = democratic_party
+                }
+                add_party_approval = {
+                    party_type = democratic_party
+                    value = 3
+                }
+                add_party_approval = {
+                    party_type = oligarchic_party
+                    value = -7
+                }
+            }
+            else_if = {
+                limit = {
+                    is_monarchy = yes
+                }
+                add_legitimacy = -5
+            }
+        }
+        scope:owner_reintegrated = {
+            add_loyalty = reintegrated_domain
+            if = {
+                limit = {
+                    has_variable = country_ownership
+                }
+                remove_variable = country_ownership
+            }
+            save_scope_as = influent_character
+            set_variable = {
+                name = country_ownership
+                value = country_region_control
+            } 
+        }
+    }
+    option = { #
+        name = c3rd_other_events.87.e
+        custom_tooltip = c3rd_other_events.87.e.tt1
+    }
+}
+
+c3rd_other_events.88 = { #when one autonomous domain does not have any owner
+    type = country_event
+    title = "c3rd_other_events.88.t"
+    desc = "c3rd_other_events.88.desc"
+
+    picture = hellenic_marketplace
+
+    option = {
+        name = c3rd_other_events.88.a
+        custom_tooltip = c3rd_other_events.88.a.tt1
+        if = {
+            limit = {
+                scope:subject_without_owner = {
+                    num_of_cities < 250
+                }
+            }
+            add_stability = -5
+        }
+        else = {
+            add_stability = -10
+        }
+        hidden_effect = {
+            scope:subject_without_owner = {
+                every_owned_province = {
+                    set_owned_by = root
+                }
+            }
+        }
+    }
+
+    option = {
+        name = c3rd_other_events.88.b
+        custom_tooltip = c3rd_other_events.88.b.tt1
+        hidden_effect = {
+            release_subject = scope:subject_without_owner
+            make_subject = {
+                target = scope:subject_without_owner
+                type = client_state
+            }
+        }
+        if = {
+            limit = {
+                scope:subject_without_owner = {
+                    num_of_cities < 250
+                }
+            }
+            add_stability = 5
+        }
+        else = {
+            add_stability = 10
+        }
+    }
+}
+
+
+c3rd_other_events.89 = { #when one autonomous domain have owner in foreign country and no heir have been found
+    type = country_event
+    title = "c3rd_other_events.89.t"
+    desc = "c3rd_other_events.89.desc"
+
+    picture = romans_marching
+    trigger = {
+        exists = scope:subject_with_foreign_owner
+        scope:subject_with_foreign_owner = {
+            has_land = yes
+            has_variable = owner_from_another_empire
+            var:owner_from_another_empire = {
+                is_alive = yes
+                NOT = {employer = root}
+            }
+        }
+    }
+
+    immediate = {
+        scope:subject_with_foreign_owner = {
+            var:owner_from_another_empire = {
+                employer = {
+                    save_scope_as = foreign_pretendant
+                }
+            }
+            if = {
+                limit = {
+                    num_of_cities < 250
+                }
+                set_variable = {
+                    name = partition
+                    value = num_of_provinces
+                }
+                change_variable = {
+                    name = partition
+                    divide = 3
+                }
+            }
+        }
+        
+    }
+
+    option = {#annex the domain - lose some
+        name = c3rd_other_events.89.a
+        custom_tooltip = c3rd_other_events.89.a.tt1
+        hidden_effect = {
+            scope:subject_with_foreign_owner = {
+                while = {
+                    count = subject_partition_ratio
+                    random_country_state = {
+                        weight = {
+                            modifier = {
+                                factor = 20
+                                any_state_province = {
+                                    any_neighbor_province = {
+                                        owner = scope:foreign_pretendant
+                                    }
+                                }
+                            }
+                            modifier = {
+                                factor = 0.2
+                                any_state_province = {
+                                    any_neighbor_province = {
+                                        owner = root
+                                    }
+                                }
+                            }
+                            modifier = {
+                                factor = 4
+                                NOT = {
+                                    any_state_province = {
+                                        any_neighbor_province = {
+                                            owner = root
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        every_state_province = {
+                            set_owned_by = foreign_pretendant
+                        }
+                    }
+                }
+                every_owned_province = {
+                    set_owned_by = root
+                }
+            }
+        }
+    }
+
+    option = {#client
+        name = c3rd_other_events.89.b
+        custom_tooltip = c3rd_other_events.89.b.tt1
+        hidden_effect = {
+            release_subject = scope:subject_with_foreign_owner
+            make_subject = {
+                target = scope:subject_with_foreign_owner
+                type = client_state
+            }
+        }
+    }
 }

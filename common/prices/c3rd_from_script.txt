@@ -1,0 +1,5 @@
+﻿
+subject_pays_governorship = {
+	scaled_manpower = 0.40 
+	scaled_gold = 0.40
+}

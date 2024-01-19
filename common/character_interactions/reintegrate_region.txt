@@ -1,0 +1,69 @@
+﻿reintegrate_region = {
+
+	on_other_nation = yes
+	on_own_nation = no
+	needs_senate_approval = yes
+	
+	sound = "event:/SFX/UI/Character/Generic/sfx_ui_character_economy"
+	
+	potential_trigger = {
+		hidden:scope:target = {
+			is_ruler = yes
+			employer = {
+				has_variable = owner_from_another_empire
+				var:owner_from_another_empire = {
+					is_ruler = no
+					is_alive = yes
+					employer = scope:actor
+					employer = {
+						OR = {
+							is_monarchy = yes
+							is_republic = yes
+						}
+					}
+					NOT = { employer = { tag = REB } }
+					NOT = { employer = { tag = BAR } }
+				}
+			}
+			is_alive = yes
+			NOT = { employer = { tag = REB } }
+			NOT = { employer = { tag = BAR } }
+		}
+	}
+	allowed_trigger = {
+		custom_tooltip = {
+			text = reintegrate_region_tt1
+			scope:target = {
+				employer = {
+					var:owner_from_another_empire = {
+						loyalty >= 75
+					}
+				}
+			}
+		}
+		custom_tooltip = {
+			text = reintegrate_region_tt2
+			scope:target = {
+				employer = {
+					var:owner_from_another_empire = {
+						NOT = {employer = scope:actor}
+					}
+				}
+			}
+		}
+	}
+
+	effect = {
+		custom_tooltip = reintegrate_region_effect
+		
+		scope:actor = {
+			trigger_event = {
+				id = c3rd_other_events.87
+			}
+		}
+	}
+	
+	ai_will_do = {
+	}
+	
+}	

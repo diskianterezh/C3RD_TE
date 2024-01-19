@@ -1,5 +1,5 @@
-﻿
-calculate_the_gov_ownership = {#SCOPE Governorship
+﻿calculate_the_gov_ownership = {
+	#SCOPE Governorship
 	#custom_tooltip = decision_state_loyalty_tt
 	#Biggest 5 are displayed 
 	if = {
@@ -15,6 +15,124 @@ calculate_the_gov_ownership = {#SCOPE Governorship
 		set_variable = {
 			name = governorship_owner_ratio
 			value = region_control_value_owner
+		}
+	}
+}
+
+create_domain = {
+	#scope country
+	every_governorships = {
+		limit = {
+			is_in_list = family_domain_govs
+		}
+		remove_from_list = family_domain_govs
+		if = {
+			limit = {
+				has_variable = governorship_owner
+			}
+			remove_variable = governorship_owner
+		}
+		if = {
+			limit = {
+				has_variable = governorship_owner_ratio
+			}
+			remove_variable = governorship_owner_ratio
+		}
+		if = {
+			limit = {
+				any_country = {
+					has_variable = owner_from_another_empire
+					var:owner_from_another_empire = scope:asked_landowner
+					is_subject_of = root
+				}
+			}
+			random_country = {
+				limit = {
+					has_variable = owner_from_another_empire
+					var:owner_from_another_empire = scope:asked_landowner
+				}
+				save_scope_as = the_domain_country
+			}
+			every_governorship_state = {
+				every_state_province = {
+					limit = {
+						owner = root
+					}
+					set_owned_by = scope:the_domain_country
+				}
+			}
+		}
+		else = {
+        	create_character = { # General 
+        		culture = scope:asked_landowner.culture
+        		religion = scope:asked_landowner.religion
+			}
+			random_governorship_state = {
+				random_state_province = {
+					create_country = {
+						save_scope_as = new_country_domain
+						change_government = despotic_monarchy
+						add_treasury = 50
+						set_as_ruler = scope:ruler_domain
+						set_variable = {
+							name = owner_from_another_empire
+							value = scope:asked_landowner
+						}
+					}
+				}
+			}
+			scope:ruler_domain = {
+				remove_all_positions = yes
+				move_country = scope:new_country_domain
+				set_home_country = scope:new_country_domain
+				every_child = {
+					limit = {
+						prisoner = no
+					}
+					remove_all_positions = yes
+					move_country = scope:new_country_domain
+					set_home_country = scope:new_country_domain
+				}
+			}
+			if = {
+				limit = {
+					has_variable = governorship_owner
+				}
+				remove_variable = governorship_owner
+			}
+			if = {
+				limit = {
+					has_variable = governorship_owner_ratio
+				}
+				remove_variable = governorship_owner_ratio
+			}
+			every_governorship_state = {
+				every_state_province = {
+					limit = {
+						owner = root
+					}
+					set_owned_by = scope:new_country_domain
+				}
+			}
+		}
+		root = {
+			make_subject = {
+				target = scope:new_country_domain
+				type = autonomous_domain
+			}
+		}
+		scope:asked_landowner = {
+			if = {
+				limit = {
+					has_variable = country_ownership
+				}
+				remove_variable = country_ownership
+			}
+			save_scope_as = influent_character
+			set_variable = {
+				name = country_ownership
+				value = country_region_control
+			}
 		}
 	}
 }

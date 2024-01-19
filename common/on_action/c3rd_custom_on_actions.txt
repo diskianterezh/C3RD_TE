@@ -1411,7 +1411,7 @@ c3rd_country_control_check = {
 			}
 			if = {
 				limit = { 
-					country_region_control >= 25
+					country_region_control >= 5
 					NOT = {
 						has_character_modifier = major_influence_aristocrat
 					}
@@ -1424,7 +1424,7 @@ c3rd_country_control_check = {
 			if = {
 				limit = { 
 					has_character_modifier = major_influence_aristocrat
-					country_region_control < 20
+					country_region_control < 0
 				}
 				remove_character_modifier = major_influence_aristocrat
 			}
@@ -1845,5 +1845,84 @@ c3rd_holding_tax_evasion = { #when tax evasion is on
 				}
 			}
         }
+	}
+}
+
+c3rd_variables_clear = {
+	effect = {
+		every_country = {
+			limit = {
+				has_variable = owner_from_another_empire
+				OR = {
+					var:owner_from_another_empire = {
+						is_alive = no
+					}
+					has_land = no
+				}
+				
+			}
+			remove_variable = owner_from_another_empire
+		}
+		random_subject = {
+			limit = {
+				is_subject_type = autonomous_domain
+				NOT = {has_variable = owner_from_another_empire}
+				has_land = yes
+			}
+			save_scope_as = subject_without_owner
+			root = {
+				trigger_event = {
+					id = c3rd_other_events.88
+					days = { 10 100}
+				}
+			}
+		}
+		every_subject = {
+			limit = {
+				is_subject_type = autonomous_domain
+				has_variable = owner_from_another_empire
+				has_land = yes
+				var:owner_from_another_empire = {
+					NOT = {employer = root}
+					exists = family
+					family = {
+						any_family_member = {
+							employer = root
+							is_head_of_family = yes
+						}
+					}
+				}
+			}
+			var:owner_from_another_empire = {
+				family = {
+					head_of_family = {
+						save_scope_as = owner_target
+					}
+				}
+			}
+			remove_variable = owner_from_another_empire
+			set_variable = {
+				name = owner_from_another_empire
+				value = scope:owner_target
+			}
+		}
+		random_subject = {
+			limit = {
+				is_subject_type = autonomous_domain
+				has_variable = owner_from_another_empire
+				has_land = yes
+				var:owner_from_another_empire = {
+					NOT = {employer = root}
+				}
+			}
+
+			save_scope_as = subject_with_foreign_owner
+			root = {
+				trigger_event = {
+					id = c3rd_other_events.89
+					days = { 10 100}
+				}
+			}
+		}
 	}
 }
