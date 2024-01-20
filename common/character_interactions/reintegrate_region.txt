@@ -11,10 +11,10 @@
 			is_ruler = yes
 			employer = {
 				has_variable = owner_from_another_empire
-				var:owner_from_another_empire = {
+				is_subject_of = scope:actor
+				var:owner_from_another_empire = {#not checking the employer, because its checked and dealt with in yearly checks
 					is_ruler = no
 					is_alive = yes
-					employer = scope:actor
 					employer = {
 						OR = {
 							is_monarchy = yes
@@ -32,21 +32,21 @@
 	}
 	allowed_trigger = {
 		custom_tooltip = {
-			text = reintegrate_region_tt1
+			text = reintegrate_region_tt2
 			scope:target = {
 				employer = {
 					var:owner_from_another_empire = {
-						loyalty >= 75
+						employer = scope:actor
 					}
 				}
 			}
 		}
 		custom_tooltip = {
-			text = reintegrate_region_tt2
+			text = reintegrate_region_tt1
 			scope:target = {
 				employer = {
 					var:owner_from_another_empire = {
-						NOT = {employer = scope:actor}
+						loyalty >= 75
 					}
 				}
 			}

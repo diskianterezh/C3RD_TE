@@ -5082,7 +5082,7 @@ title= "c3rd_other_events.80.t"
 desc = "c3rd_other_events.80.desc"
 interface_lock = no
 
-left_portrait = current_ruler
+left_portrait = scope:autonomy_governorship.var:governorship_owner
 
 trigger = {
     current_date > 750.1.1
@@ -5132,17 +5132,7 @@ immediate = {
             value = region_control_value
         }
         governor = {
-            if = {
-                limit = {
-                    has_variable = country_ownership
-                }
-                remove_variable = country_ownership
-            }
-            save_scope_as = influent_character
-            set_variable = {
-                name = country_ownership
-                value = country_region_control
-            }
+            recalculate_ownership_char = yes
         }
     }
 
@@ -5224,36 +5214,7 @@ c3rd_other_events.81 = { #succession ownership
 				}
 			}
             scope:ownership_target = {
-                if = {
-                    limit = {
-                        has_variable = country_ownership
-                    }
-                    remove_variable = country_ownership
-                }
-				save_scope_as = influent_character
-                set_variable = {
-                    name = country_ownership
-                    value = country_region_control
-                }
-                if = {
-                    limit = { 
-                        country_region_control >= 25
-                        NOT = {
-                            has_character_modifier = major_influence_aristocrat
-                        }
-                    }
-                    add_character_modifier = {
-                        name = major_influence_aristocrat
-                        duration = -1
-                    }
-                }
-                if = {
-                    limit = { 
-                        has_character_modifier = major_influence_aristocrat
-                        country_region_control < 20
-                    }
-                    remove_character_modifier = major_influence_aristocrat
-                }
+                recalculate_ownership_char = yes
                 
             }
             if = {
@@ -5303,36 +5264,7 @@ c3rd_other_events.811 = { #succession ownership
 				}
 			}
             scope:ownership_target = {
-                if = {
-                    limit = {
-                        has_variable = country_ownership
-                    }
-                    remove_variable = country_ownership
-                }
-				save_scope_as = influent_character
-                set_variable = {
-                    name = country_ownership
-                    value = country_region_control
-                }
-                if = {
-                    limit = { 
-                        country_region_control >= 25
-                        NOT = {
-                            has_character_modifier = major_influence_aristocrat
-                        }
-                    }
-                    add_character_modifier = {
-                        name = major_influence_aristocrat
-                        duration = -1
-                    }
-                }
-                if = {
-                    limit = { 
-                        has_character_modifier = major_influence_aristocrat
-                        country_region_control < 20
-                    }
-                    remove_character_modifier = major_influence_aristocrat
-                }
+                recalculate_ownership_char = yes
                 
             }
             if = {
@@ -6785,17 +6717,25 @@ c3rd_other_events.86 = { #
                     has_variable = answer_landowner
                     var:answer_landowner = 3
                 }
+                scope:asked_landowner = {
+                    add_gold = 1
+                }
                 while = {
-                    count = country_gov_ratio_number
+                    count = landowner_asked_ratio_number
                     random_governorships = {
                         limit = {
                             has_variable = governorship_owner
                             var:governorship_owner = scope:asked_landowner
-                            NOR = {
+                            NOT = {
                                 is_in_list = family_domain_govs
                             }
-                            governor = {
-                                is_ruler = no
+                            OR = {
+                                NOT = {
+                                    exists = governor
+                                }
+                                governor = {
+                                    is_ruler = no
+                                }
                             }
                         }
                         weight = {
@@ -6806,6 +6746,19 @@ c3rd_other_events.86 = { #
                                         any_neighbor_province = {
                                             governorship = {
                                                 is_in_list = family_domain_govs
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            modifier = {
+                                factor = 10
+                                any_governorship_state = {
+                                    any_state_province = {
+                                        any_neighbor_province = {
+                                            owner = {
+                                                has_variable = owner_from_another_empire
+                                                var:owner_from_another_empire = scope:asked_landowner
                                             }
                                         }
                                     }
@@ -6857,6 +6810,13 @@ c3rd_other_events.86 = { #
                 }
             }
             custom_tooltip = c3rd_other_events.86.tt13
+            every_governorships = {
+                limit = {
+                    is_in_list = family_domain_govs
+                }
+                save_scope_as = gov_tooltip
+                custom_tooltip = c3rd_other_events.86.a.tt2
+            }
             hidden_effect = {
                 create_domain = yes
             }
@@ -6896,14 +6856,56 @@ c3rd_other_events.86 = { #
         }
     }
 
-    option = { #negociate half - need to be persuasive and the guy to not be mad
+    option = { #negociate better - need to be persuasive and the guy to not be mad
         name = c3rd_other_events.86.c
         custom_tooltip = c3rd_other_events.86.c.tt1
+        highlight = yes
+        trigger = {
+            scope:asked_landowner = {
+                NOR = {
+                    charisma >= 10
+                    loyalty <= 33
+                }
+            }
+            current_ruler = {
+                charisma >= 10
+                OR = {
+                    has_trait = assertive
+                    has_trait = silver_tongued
+                    has_trait = deceitful
+                    has_trait = shrewd
+                }
+            }
+        }
+        if = {
+            limit = {
+                has_variable = landowner_demands
+                has_variable = answer_landowner
+                var:answer_landowner = 3
+                scope:asked_landowner = {
+                    is_alive = yes
+                }
+            }
+            custom_tooltip = c3rd_other_events.86.tt13
+            every_governorships = {
+                limit = {
+                    is_in_list = family_domain_govs
+                }
+                save_scope_as = gov_tooltip
+                custom_tooltip = c3rd_other_events.86.a.tt2
+            }
+            hidden_effect = {
+                create_domain = yes
+            }
+        }
     }
     
     option = { #say no
         name = c3rd_other_events.86.d
         custom_tooltip = c3rd_other_events.86.d.tt1
+        scope:asked_landowner = {
+            add_loyalty = disappointed
+        }
     }
     
     option = { #case when he is dead/bug
@@ -6930,6 +6932,9 @@ c3rd_other_events.86 = { #
                 has_variable = answer_landowner
             }
             remove_variable = answer_landowner
+        }
+        scope:asked_landowner = {
+			recalculate_ownership_char = yes
         }
     }
 
@@ -7026,6 +7031,7 @@ c3rd_other_events.87 = { #take region from domain
                 save_scope_as = governorship_4
             }
         }
+        custom_tooltip = low_stab_event.7.tt1
     }
 
     option = { #
@@ -7097,17 +7103,7 @@ c3rd_other_events.87 = { #take region from domain
         }
         scope:owner_reintegrated = {
             add_loyalty = reintegrated_domain
-            if = {
-                limit = {
-                    has_variable = country_ownership
-                }
-                remove_variable = country_ownership
-            }
-            save_scope_as = influent_character
-            set_variable = {
-                name = country_ownership
-                value = country_region_control
-            } 
+            recalculate_ownership_char = yes
         }
     }
     option = { #
@@ -7179,17 +7175,7 @@ c3rd_other_events.87 = { #take region from domain
         }
         scope:owner_reintegrated = {
             add_loyalty = reintegrated_domain
-            if = {
-                limit = {
-                    has_variable = country_ownership
-                }
-                remove_variable = country_ownership
-            }
-            save_scope_as = influent_character
-            set_variable = {
-                name = country_ownership
-                value = country_region_control
-            } 
+            recalculate_ownership_char = yes
         }
     }
     option = { #
@@ -7261,17 +7247,7 @@ c3rd_other_events.87 = { #take region from domain
         }
         scope:owner_reintegrated = {
             add_loyalty = reintegrated_domain
-            if = {
-                limit = {
-                    has_variable = country_ownership
-                }
-                remove_variable = country_ownership
-            }
-            save_scope_as = influent_character
-            set_variable = {
-                name = country_ownership
-                value = country_region_control
-            } 
+            recalculate_ownership_char = yes
         }
         
     }
@@ -7348,17 +7324,7 @@ c3rd_other_events.87 = { #take region from domain
         }
         scope:owner_reintegrated = {
             add_loyalty = reintegrated_domain
-            if = {
-                limit = {
-                    has_variable = country_ownership
-                }
-                remove_variable = country_ownership
-            }
-            save_scope_as = influent_character
-            set_variable = {
-                name = country_ownership
-                value = country_region_control
-            } 
+            recalculate_ownership_char = yes
         }
     }
     option = { #
@@ -7371,6 +7337,7 @@ c3rd_other_events.88 = { #when one autonomous domain does not have any owner
     type = country_event
     title = "c3rd_other_events.88.t"
     desc = "c3rd_other_events.88.desc"
+    goto_location = scope:subject_without_owner.capital_scope
 
     picture = hellenic_marketplace
 
@@ -7426,6 +7393,7 @@ c3rd_other_events.89 = { #when one autonomous domain have owner in foreign count
     type = country_event
     title = "c3rd_other_events.89.t"
     desc = "c3rd_other_events.89.desc"
+    goto_location = scope:subject_with_foreign_owner.capital_scope
 
     picture = romans_marching
     trigger = {
@@ -7474,7 +7442,7 @@ c3rd_other_events.89 = { #when one autonomous domain have owner in foreign count
                     random_country_state = {
                         weight = {
                             modifier = {
-                                factor = 20
+                                factor = 30
                                 any_state_province = {
                                     any_neighbor_province = {
                                         owner = scope:foreign_pretendant
@@ -7501,7 +7469,7 @@ c3rd_other_events.89 = { #when one autonomous domain have owner in foreign count
                             }
                         }
                         every_state_province = {
-                            set_owned_by = foreign_pretendant
+                            set_owned_by = scope:foreign_pretendant
                         }
                     }
                 }

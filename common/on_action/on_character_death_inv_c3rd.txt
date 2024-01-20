@@ -2523,17 +2523,7 @@ on_character_death = {
 				}
 			}
 			scope:ownership_target = {
-                if = {
-                    limit = {
-                        has_variable = country_ownership
-                    }
-                    remove_variable = country_ownership
-                }
-				save_scope_as = influent_character
-                set_variable = {
-                    name = country_ownership
-                    value = country_region_control
-                }
+                recalculate_ownership_char = yes
 				trigger_event = {
 					id = c3rd_other_events.81
 					days = 1 #Necessary
@@ -2690,17 +2680,7 @@ on_character_death = {
 				}
 			}
 			scope:ownership_target = {
-                if = {
-                    limit = {
-                        has_variable = country_ownership
-                    }
-                    remove_variable = country_ownership
-                }
-				save_scope_as = influent_character
-                set_variable = {
-                    name = country_ownership
-                    value = country_region_control
-                }
+                recalculate_ownership_char = yes
 				trigger_event = {
 					id = c3rd_other_events.811
 					days = 1 #Necessary

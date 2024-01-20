@@ -224,7 +224,7 @@
  ALERT_COLLAPSE:0 "#T Internal Collapse#!\nYour country is collapsing. As long as your stability is #R below 25#!, collapse events will occur."
  ALERT_MILITARY_ANARCHY:0 "#T Military Anarchy#!\nThe country is in a phase of military anarchy. As long as this continues, the generals will demand more important concessions and decisions."
  ALERT_POLITICAL_INSTABILITY:0 "#T Political Instability#!\nThe country is in a phase of political instability, applying several penalties. You can solve this by using the decisions to either reform the country or stopping the political instability."
- c3rd_influent_characters_owners_tt1:0 "Some people in your country are considered to be major landowners because of the number of regions they control."
+ c3rd_influent_characters_owners_tt1:0 "#T Powerful Landowners#!\nSome people in your country are considered to be major landowners because of the number of regions they control."
  c3rd_influent_characters_owners_tt2:0 "[influent_character_parse.GetName] owns #R [influent_character_parse.MakeScope.GetVariable('country_ownership').GetValue]% #!"
  c3rd_influent_characters_owners_tt3:0 "\n\nCharacters will lose this status if they control less than #G 20%#!"
 
@@ -337,16 +337,17 @@
  reintegrate_region:0 "Reintegrate a region"
  reintegrate_region_act:0 "Asking the owner of the domain to reintegrate a region to the main country"
  reintegrate_region_act_past:0 "You asked the owner of the domain for a reintegration"
- reintegrate_region_effect:0 "You will fully reintegrate a region of the domain to the main country"
+ reintegrate_region_effect:0 "You will fully reintegrate a region of [target.GetEmployer.MakeScope.GetVariable('owner_from_another_empire').GetCharacter.GetName]'s' domain to the main country"
  reintegrate_region_tt1:0 "The owner, [target.GetEmployer.MakeScope.GetVariable('owner_from_another_empire').GetCharacter.GetName] must have a loyalty of 75 and above"
- reintegrate_region_tt2:0 "The owner, [target.GetEmployer.MakeScope.GetVariable('owner_from_another_empire').GetCharacter.GetName] is in another country. The fate of the domain will soon be decided."
+ reintegrate_region_tt2:0 "The owner, [target.GetEmployer.MakeScope.GetVariable('owner_from_another_empire').GetCharacter.GetName] is in another country, [target.GetEmployer.MakeScope.GetVariable('owner_from_another_empire').GetCharacter.GetEmployer.GetName] and not [actor.GetName]. The fate of the domain will soon be decided."
 
 
  #subjects
 
 
  autonomous_domain:0 "Autonomous Region"
- AM_autonomous_domain:0 "Autonomous Region"
+ AM_autonomous_domain:0 "Autonomous Domain of $LIST$\n#G 'Reintegrate Region' interaction is available on the ruler #!"
+ LEAD_autonomous_domain:2 "#T $LIST$#!\nAutonomous Domain\n#G 'Reintegrate Region' interaction is available on the ruler #!"
  
  CANCEL_autonomous_domainTITLE:0 "Give Independance"
  CANCEL_autonomous_domain_TOOLTIP_HEADER:0 "Give Independance to the governorship"
@@ -391,6 +392,14 @@ low_stab_event.4.b:0 "Nice try but no!"
 low_stab_event.4.b.tt1:0 "Things remain as they are, but [independent_current_governor.GetName] will resent you"
 low_stab_event.4.c:0 "You traitor!"
 low_stab_event.4.c.tt1:0 "Things remain as they are, but [independent_current_governor.GetName]'s resentment will have deleterious effects on the unity of the country"
+
+low_stab_event.7.t:0 "Landowner withdrawing"
+low_stab_event.7.desc:0 "Faced with the turmoil shaking our nation, [byebye_owner.GetName] felt that securing his lands was the priority. He therefore unilaterally decided to retire to his estate in [byebye_domain.GetName] to manage his lands as a complete autocrat."
+low_stab_event.7.tt1:0 "States in the regions owned by [byebye_owner.GetName] that are bordering [byebye_domain.GetName] will be owned by [byebye_domain.GetName]"
+low_stab_event.7.a:0 "Let him play the kinglet, we have more important things to do"
+low_stab_event.7.a.tt1:0 "[byebye_owner.GetName] will be joining [byebye_domain.GetName] as a new leader. [byebye_domain.GetName] is now a client state"
+low_stab_event.7.b:0 "Traitor! Seize what he may have left"
+low_stab_event.7.b.tt1:0 "All the regions owned by [byebye_owner.GetName] will no longer be under his control, and therefore cannot be inherited by his family."
 
 
 
@@ -1100,7 +1109,7 @@ low_stab_event.4.c.tt1:0 "Things remain as they are, but [independent_current_go
  c3rd_other_events.75.c:0 "I dont see any problem here"
  c3rd_other_events.75.c.tt1:0 "#R this will reduce the value of silver money \n This happened because of your leader's poor Statesmanship and he will surely make this mistake again#!"
 
- c3rd_governorship_owner_tt:0 "This Governorship is firmly controlled by [OverviewGovernorshipItem.GetGovernorship.MakeScope.GetVariable('governorship_owner').GetCharacter.GetName] of the family [OverviewGovernorshipItem.GetGovernorship.MakeScope.GetVariable('governorship_owner').GetCharacter.GetFamily.GetName]\n#R [OverviewGovernorshipItem.GetGovernorship.MakeScope.GetVariable('governorship_owner_ratio').GetValue] %#! of the region is controlled"
+ c3rd_governorship_owner_tt:0 "This Governorship is firmly controlled by [OverviewGovernorshipItem.GetGovernorship.MakeScope.GetVariable('governorship_owner').GetCharacter.GetName] of the family [OverviewGovernorshipItem.GetGovernorship.MakeScope.GetVariable('governorship_owner').GetCharacter.GetFamily.GetName]\n#R [OverviewGovernorshipItem.GetGovernorship.MakeScope.GetVariable('governorship_owner_ratio').GetValue] %#! of the region is controlled\n\nThis takes into account the percentage of holdings owned by the owner, or the head of the family. If too many of your country's regions are controlled by the same person, powerful landowners may emerge."
  c3rd_CanChange_tt1:0 "The Governor owns the Region and cannot be dismissed"
  c3rd_CanChange_tt2:0 "The head of the family owns the region and does not agree to the dismissal of one of its members"
  c3rd_CanChange_tt3:0 "You cannot change the Governor of your capital region"
@@ -1110,12 +1119,13 @@ low_stab_event.4.c.tt1:0 "Things remain as they are, but [independent_current_go
  c3rd_governorship_owner_regain_control_tt2:0 "An ownership below #G 10% #! give a larger chance to regain control without trouble"
  c3rd_governorship_owner_regain_control_tt3:0 "#T Attempt to regain control of the governorship #!"
  c3rd_governorship_owner_regain_control_tt4:0 "You already tried to regain control on this Governorship recently"
+ c3rd_governorship_owner_regain_control_tt5:0 "The owner is no longer in the country. His control over the land will pass to his family, or disappear naturally."
 
 
  c3rd_other_events.80.t:0 "Growing influence"
  c3rd_other_events.80.desc:0 "[autonomy_governorship.MakeScope.GetVariable('governorship_owner').GetCharacter.GetName] and his family have invested a lot of their resources in the Region of [autonomy_governorship.GetName]. Enough for the local authorities to answer to them directly."
  c3rd_other_events.80.a:0 "Now that's unpleasant"
- c3rd_other_events.80.a.tt1:0 "The region is now considered a stronghold of the [autonomy_governorship.MakeScope.GetVariable('governorship_owner').GetCharacter.GetFamily.GetName]"
+ c3rd_other_events.80.a.tt1:0 "The region is now considered a stronghold of the [autonomy_governorship.MakeScope.GetVariable('governorship_owner').GetCharacter.GetFamily.GetName]\n\n #T You can check regional holdings and try to regain control in the 'Nation Overview', Administration tab. #!"
 
  c3rd_other_events.802.desc:0 "[owner_target_for_number.GetName] Possesses [owner_target_for_number.MakeScope.GetVariable('country_ownership').GetValue]%"
 
@@ -1173,7 +1183,27 @@ low_stab_event.4.c.tt1:0 "Things remain as they are, but [independent_current_go
  c3rd_other_events.85.e:0 "I've changed my mind, we don't need any concessions"
  c3rd_other_events.85.e.tt1:0 "You won't do anything"
 
- c3rd_other_events.86.tt13:0 "[SCOPE.ScriptValue('country_gov_ratio_number')|0Y] governorships will create an autonomous domain of [asked_landowner.GetName]'s family"
+
+ c3rd_other_events.86.t:0 "neg"
+ c3rd_other_events.86.desc.1:0 "weak"
+ c3rd_other_events.86.desc.2:0 "strong"
+ c3rd_other_events.86.desc.3:0 "omni"
+ c3rd_other_events.86.desc.4:0 "dead"
+ c3rd_other_events.86.desc.5:0 "error"
+ c3rd_other_events.86.desc.11:0 "refuses"
+ c3rd_other_events.86.desc.12:0 "politic"
+ c3rd_other_events.86.desc.13:0 "domain"
+ c3rd_other_events.86.desc.14:0 "laws"
+ c3rd_other_events.86.a:0 "accept"
+ c3rd_other_events.86.a.tt1:0 ""
+ c3rd_other_events.86.a.tt2:0 "[gov_tooltip.GetName] will be part of it"
+ c3rd_other_events.86.b:0 ""
+ c3rd_other_events.86.b.tt1:0 ""
+ c3rd_other_events.86.c:0 ""
+ c3rd_other_events.86.c.tt1:0 ""
+ c3rd_other_events.86.d:0 ""
+ c3rd_other_events.86.d.tt1:0 ""
+ c3rd_other_events.86.tt13:0 "[SCOPE.ScriptValue('country_gov_ratio_number')|0Y] governorships will join an autonomous domain of [asked_landowner.GetName]"
 
 
  c3rd_other_events.87.t:0 "Back to administration"
@@ -1199,9 +1229,9 @@ low_stab_event.4.c.tt1:0 "Things remain as they are, but [independent_current_go
 
 
  c3rd_other_events.89.t:0 "The future of [subject_with_foreign_owner.GetName]"
- c3rd_other_events.89.desc:0 "[subject_with_foreign_owner.GetName], our autonomous province, is in an dangerous situation: this land, until now part of a private domain of one of our nobles, finds itself owned by a foreign character. This situation is very dangerous because [subject_with_foreign_owner.MakeScope.GetVariable('owner_from_another_empire').GetCharacter.GetName], now in [subject_with_foreign_owner.GetName], is claiming his rights and seeking to recover his land. Much to the delight of his new hosts, of course. We can act quickly and regain control of as much land as possible, before our rivals do. But an interesting option would be to offer the local magnates confirmation of their office... in return for undying loyalty, of course."
+ c3rd_other_events.89.desc:0 "[subject_with_foreign_owner.GetName], our autonomous province, is in an dangerous situation: this land, until now part of a private domain of one of our nobles, finds itself owned by a foreign character. This situation is very dangerous because [subject_with_foreign_owner.MakeScope.GetVariable('owner_from_another_empire').GetCharacter.GetName], now in [subject_with_foreign_owner.MakeScope.GetVariable('owner_from_another_empire').GetCharacter.GetEmployer.GetName], is claiming his rights and seeking to recover his land. Much to the delight of his new hosts, of course. We can act quickly and regain control of as much land as possible, before our rivals do. But an interesting option would be to offer the local magnates confirmation of their office... in return for undying loyalty, of course."
  c3rd_other_events.89.a:0 "Quick, take back control!"
- c3rd_other_events.89.a.tt1:0 "You will absorb most of the domain, #R but a part will get annexed by [subject_with_foreign_owner.GetName]#!"
+ c3rd_other_events.89.a.tt1:0 "You will absorb most of the domain, #R but a part will get annexed by [subject_with_foreign_owner.MakeScope.GetVariable('owner_from_another_empire').GetCharacter.GetEmployer.GetName]#!"
  c3rd_other_events.89.b:0 "People of [subject_with_foreign_owner.GetName], rise up!"
  c3rd_other_events.89.b.tt1:0 "The domain will be changed to our client state, without any losses"
 

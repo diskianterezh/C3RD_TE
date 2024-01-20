@@ -25,6 +25,7 @@ c3rd_custom_on_actions_low_stab_event = {
 	random_events = {
 		60 = 0
         15 = low_stab_event.4
+		20 = low_stab_event.7
         1 = low_stab_event.3
 	}
 }
@@ -1354,7 +1355,7 @@ c3rd_holding_clear = {
 						is_head_of_family = no
 						exists = family.head_of_family
 						family.head_of_family = {
-							employer = root.employer
+							employer = root
 						}
 					}
 				}
@@ -1379,55 +1380,46 @@ c3rd_holding_clear = {
 
 c3rd_country_control_check = {
 	trigger = {
-		any_governorships = {
-			has_variable = governorship_owner
-			var:governorship_owner = {
-				is_alive = yes
-				employer = root
+		OR = {
+			any_governorships = {
+				has_variable = governorship_owner
+				var:governorship_owner = {
+					is_alive = yes
+					employer = root
+				}
 			}
+			any_subject = {
+				is_subject_type = autonomous_domain
+				has_variable = owner_from_another_empire
+			}
+			any_character = {
+				has_variable = country_ownership
+			}
+
 		}
 	}
 	effect = {
 		every_character = {
 			limit = {
 				save_temporary_scope_as = charcheck_tmp
-				employer = {
-					any_governorships = {
-						has_variable = governorship_owner
-						var:governorship_owner = scope:charcheck_tmp
+				OR = {
+					employer = {
+						any_governorships = {
+							has_variable = governorship_owner
+							var:governorship_owner = scope:charcheck_tmp
+						}
 					}
-				}
-			}
-			if = {
-				limit = {
+					employer = {
+						any_subject = {
+							has_variable = owner_from_another_empire
+							is_subject_type = autonomous_domain
+							var:owner_from_another_empire = scope:charcheck_tmp
+						}
+					}
 					has_variable = country_ownership
 				}
-				remove_variable = country_ownership
 			}
-			save_scope_as = influent_character
-			set_variable = {
-				name = country_ownership
-				value = country_region_control
-			}
-			if = {
-				limit = { 
-					country_region_control >= 5
-					NOT = {
-						has_character_modifier = major_influence_aristocrat
-					}
-				}
-				add_character_modifier = {
-					name = major_influence_aristocrat
-					duration = -1
-				}
-			}
-			if = {
-				limit = { 
-					has_character_modifier = major_influence_aristocrat
-					country_region_control < 0
-				}
-				remove_character_modifier = major_influence_aristocrat
-			}
+			recalculate_ownership_char = yes
 		}
 	}
 }
@@ -1905,6 +1897,9 @@ c3rd_variables_clear = {
 				name = owner_from_another_empire
 				value = scope:owner_target
 			}
+			scope:owner_target = {
+				recalculate_ownership_char = yes
+			}
 		}
 		random_subject = {
 			limit = {
@@ -1921,6 +1916,58 @@ c3rd_variables_clear = {
 				trigger_event = {
 					id = c3rd_other_events.89
 					days = { 10 100}
+				}
+			}
+		}
+		if = { #2 domains of same guy
+			limit = {
+				any_character = {
+					save_temporary_scope_as = tmp_char
+					employer = {
+						any_subject = {
+							count >= 2
+							has_variable = owner_from_another_empire
+							is_subject_type = autonomous_domain
+							var:owner_from_another_empire = scope:tmp_char
+						}
+					}
+				}
+			}
+			random_character = {
+				limit = {
+					save_temporary_scope_as = tmp_char
+					employer = {
+						any_subject = {
+							count >= 2
+							has_variable = owner_from_another_empire
+							is_subject_type = autonomous_domain
+							var:owner_from_another_empire = scope:tmp_char
+						}
+					}
+				}
+				save_scope_as = dual_owner
+			}
+			random_subject = {
+				limit = {
+					has_variable = owner_from_another_empire
+					is_subject_type = autonomous_domain
+					var:owner_from_another_empire = scope:dual_owner
+				}
+				save_scope_as = domain_1
+			}
+			random_subject = {
+				limit = {
+					has_variable = owner_from_another_empire
+					is_subject_type = autonomous_domain
+					var:owner_from_another_empire = scope:dual_owner
+					NOT = {this = scope:domain_1}
+				}
+				save_scope_as = domain_2
+			}
+			scope:domain_2 = {
+				remove_variable = owner_from_another_empire
+				every_owned_province = {
+					set_owned_by = scope:domain_1
 				}
 			}
 		}

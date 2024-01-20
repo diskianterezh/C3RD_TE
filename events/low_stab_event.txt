@@ -1,220 +1,222 @@
 namespace = low_stab_event
-
-low_stab_event.1 = { #oh noes, bad stability
-    type = country_event
-    title = "low_stab_event.1.t"
-    desc = "low_stab_event.1.desc"
-
-    picture = council_country
-
-    trigger = {
-
-        has_land = yes
-        OR = {
-            stability < 10
-            AND = {
-                stability <15
-                is_ai = no
-            }
-
-        }
-        is_tribal = no
-        NOT = { has_country_modifier = internal_collapse}
-        rank = great_power
-        current_date >= 900.1.1
-    }
-
-
-    immediate = {
-        add_country_modifier = {
-            name = internal_collapse
-            duration = -1
-        }
-        if = {
-            limit = { #players are usually better than AI
-                is_ai = no
-            }
-            add_stability = -5
-        }
-        ordered_country_culture = { #for democrats
-            limit = {
-                is_integrated = no
-                NOT = { this.culture = root.culture }
-                country_culture_pop_count > 80
-                save_temporary_scope_as = culture_to_integrate
-                root = {
-                    any_owned_province = {
-                        dominant_province_culture = scope:culture_to_integrate.culture
-                    }
-                }
-            }
-            order_by = country_culture_pop_count
-            save_scope_as = agenda_culture
-        }
-        ordered_country_culture = { #for traditionalists
-            limit = {
-                is_integrated = yes
-                NOT = { this.culture = root.culture }
-            }
-            order_by = country_culture_pop_count
-            save_scope_as = unagenda_culture
-        }
-
-
-    }
-
-    option = { #do nothing - get the modifier
-        name = low_stab_event.1.a
-        custom_tooltip = low_stab_event.1.a.tt1
-    }
-
-    option = {
+low_stab_event.1 = {
+	#oh noes, bad stability
+	type = country_event
+	title = "low_stab_event.1.t"
+	desc = "low_stab_event.1.desc"
+	picture = council_country
+	trigger = {
+		has_land = yes
+		OR = {
+			stability < 10
+			AND = {
+				stability < 15
+				is_ai = no
+			}
+		}
+		is_tribal = no
+		NOT = {
+			has_country_modifier = internal_collapse
+		}
+		rank = great_power
+		current_date >= 900.1.1
+	}
+	immediate = {
+		add_country_modifier = {
+			name = internal_collapse
+			duration = -1
+		}
+		if = {
+			limit = {
+				#players are usually better than AI
+				is_ai = no
+			}
+			add_stability = -5
+		}
+		ordered_country_culture = {
+			#for democrats
+			limit = {
+				is_integrated = no
+				NOT = {
+					this.culture = root.culture
+				}
+				country_culture_pop_count > 80
+				save_temporary_scope_as = culture_to_integrate
+				root = {
+					any_owned_province = {
+						dominant_province_culture = scope:culture_to_integrate.culture
+					}
+				}
+			}
+			order_by = country_culture_pop_count
+			save_scope_as = agenda_culture
+		}
+		ordered_country_culture = {
+			#for traditionalists
+			limit = {
+				is_integrated = yes
+				NOT = {
+					this.culture = root.culture
+				}
+			}
+			order_by = country_culture_pop_count
+			save_scope_as = unagenda_culture
+		}
+	}
+	option = {
+		#do nothing - get the modifier
+		name = low_stab_event.1.a
+		custom_tooltip = low_stab_event.1.a.tt1
+	}
+	option = {
 		name = low_stab_event.1.b
 		custom_tooltip = low_stab_event.1.b.tt1
 		trigger = {
-            is_monarchy = yes
-            legitimacy > 50
-            current_ruler = {
-                popularity > 50
-            }
+			is_monarchy = yes
+			legitimacy > 50
+			current_ruler = {
+				popularity > 50
+			}
 		}
 		ai_chance = {
-            modifier = {
-                factor = 10
-            }
-        }
+			modifier = {
+				factor = 10
+			}
+		}
 		highlight = no
 		remove_country_modifier = internal_collapse
 		add_legitimacy = -75
-        current_ruler = {
-             add_popularity = -50
-        }
-        add_tyranny = 10
-        add_stability = 10
+		current_ruler = {
+			add_popularity = -50
+		}
+		add_tyranny = 10
+		add_stability = 10
 	}
-
-    option = {
+	option = {
 		name = low_stab_event.1.c
 		custom_tooltip = low_stab_event.1.c.tt1
 		trigger = {
-            is_republic = yes
-            has_senate_approval > 0.85
+			is_republic = yes
+			has_senate_approval > 0.85
 		}
 		ai_chance = {
-            modifier = {
-                factor = 10
-            }
-        }
+			modifier = {
+				factor = 10
+			}
+		}
 		highlight = yes
 		remove_country_modifier = internal_collapse
-
-        if = {
-            limit = { has_party_type = optimates_party }
-            add_party_approval = {
-                party_type = boni_party
-                value = -50
-            }
-            add_party_approval = {
-                party_type = populares_party
-                value = -50
-            }
-            add_party_approval = {
-                party_type = optimates_party
-                value = -50
-            }
-
-        }
-        else = {
-            add_party_approval = {
-                party_type = traditionalist_party
-                value = -50
-            }
-            add_party_approval = {
-                party_type = democratic_party
-                value = -50
-            }
-
-            add_party_approval = {
-                party_type = oligarchic_party
-                value = -50
-            }
-        }
-        current_ruler = {
-             add_popularity = -50
-        }
-
-        add_stability = 10
+		if = {
+			limit = {
+				has_party_type = optimates_party
+			}
+			add_party_approval = {
+				party_type = boni_party
+				value = -50
+			}
+			add_party_approval = {
+				party_type = populares_party
+				value = -50
+			}
+			add_party_approval = {
+				party_type = optimates_party
+				value = -50
+			}
+		}
+		else = {
+			add_party_approval = {
+				party_type = traditionalist_party
+				value = -50
+			}
+			add_party_approval = {
+				party_type = democratic_party
+				value = -50
+			}
+			add_party_approval = {
+				party_type = oligarchic_party
+				value = -50
+			}
+		}
+		current_ruler = {
+			add_popularity = -50
+		}
+		add_stability = 10
 	}
-
-    option = {
+	option = {
 		name = low_stab_event.1.d
 		custom_tooltip = low_stab_event.1.d.tt1
 		trigger = {
-            is_republic = yes
-            has_senate_approval > 0.50
-            current_ruler = {
-                OR = {
-                    party_type = oligarchic_party
-                    party_type = optimates_party
-                }
-            }
-            NOT = { has_country_modifier = general_corruption }
+			is_republic = yes
+			has_senate_approval > 0.5
+			current_ruler = {
+				OR = {
+					party_type = oligarchic_party
+					party_type = optimates_party
+				}
+			}
+			NOT = {
+				has_country_modifier = general_corruption
+			}
 		}
 		ai_chance = {
-            modifier = {
-                factor = 10
-            }
-        }
+			modifier = {
+				factor = 10
+			}
+		}
 		remove_country_modifier = internal_collapse
 		add_tyranny = 25
-        add_country_modifier = {
-            name = general_corruption
-            duration = 3650
-        }
-        current_ruler = {
-             add_popularity = -50
-        }
-        if = {
-            limit = { has_party_type = optimates_party }
-            add_party_approval = {
-                party_type = boni_party
-                value = -50
-            }
-            add_party_approval = {
-                party_type = populares_party
-                value = -50
-            }
-
-        }
-        else = {
-            add_party_approval = {
-                party_type = traditionalist_party
-                value = -50
-            }
-            add_party_approval = {
-                party_type = democratic_party
-                value = -50
-            }
-        }
-        add_stability = 10
+		add_country_modifier = {
+			name = general_corruption
+			duration = 3650
+		}
+		current_ruler = {
+			add_popularity = -50
+		}
+		if = {
+			limit = {
+				has_party_type = optimates_party
+			}
+			add_party_approval = {
+				party_type = boni_party
+				value = -50
+			}
+			add_party_approval = {
+				party_type = populares_party
+				value = -50
+			}
+		}
+		else = {
+			add_party_approval = {
+				party_type = traditionalist_party
+				value = -50
+			}
+			add_party_approval = {
+				party_type = democratic_party
+				value = -50
+			}
+		}
+		add_stability = 10
 	}
-
-    option = {
+	option = {
 		name = low_stab_event.1.e
 		custom_tooltip = low_stab_event.1.e.tt1
 		trigger = {
-            is_republic = yes
-            has_senate_approval > 0.50
-             current_ruler = {
-                OR = {
-                    party_type = populares_party
-                    party_type = democratic_party
-                }
-             }
-            NOT = { has_country_modifier = nobility_turmoils }
-            any_country_culture = {
+			is_republic = yes
+			has_senate_approval > 0.5
+			current_ruler = {
+				OR = {
+					party_type = populares_party
+					party_type = democratic_party
+				}
+			}
+			NOT = {
+				has_country_modifier = nobility_turmoils
+			}
+			any_country_culture = {
 				is_integrated = no
-				NOT = { this.culture = root.culture }
+				NOT = {
+					this.culture = root.culture
+				}
 				save_temporary_scope_as = culture_to_integrate
 				country_culture_pop_count > 80
 				root = {
@@ -225,252 +227,250 @@ low_stab_event.1 = { #oh noes, bad stability
 			}
 		}
 		ai_chance = {
-            modifier = {
-                factor = 10
-            }
-        }
+			modifier = {
+				factor = 10
+			}
+		}
 		remove_country_modifier = internal_collapse
-        scope:agenda_culture = {
-            set_country_culture_right = citizen
-        }
-        add_country_modifier = {
-            name = nobility_turmoils
-            duration = 3650
-        }
-        current_ruler = {
-             add_popularity = -50
-        }
-        if = {
-            limit = { has_party_type = optimates_party }
-            add_party_approval = {
-                party_type = optimates_party
-                value = -50
-            }
-            add_party_approval = {
-                party_type = boni_party
-                value = -50
-            }
-
-        }
-        else = {
-            add_party_approval = {
-                party_type = oligarchic_party
-                value = -50
-            }
-            add_party_approval = {
-                party_type = traditionalist_party
-                value = -50
-            }
-        }
-
-        add_stability = 10
+		scope:agenda_culture = {
+			set_country_culture_right = citizen
+		}
+		add_country_modifier = {
+			name = nobility_turmoils
+			duration = 3650
+		}
+		current_ruler = {
+			add_popularity = -50
+		}
+		if = {
+			limit = {
+				has_party_type = optimates_party
+			}
+			add_party_approval = {
+				party_type = optimates_party
+				value = -50
+			}
+			add_party_approval = {
+				party_type = boni_party
+				value = -50
+			}
+		}
+		else = {
+			add_party_approval = {
+				party_type = oligarchic_party
+				value = -50
+			}
+			add_party_approval = {
+				party_type = traditionalist_party
+				value = -50
+			}
+		}
+		add_stability = 10
 	}
-
-    option = {
+	option = {
 		name = low_stab_event.1.f
 		custom_tooltip = low_stab_event.1.f.tt1
 		trigger = {
-            is_republic = yes
-            has_senate_approval > 0.50
-            current_ruler = {
-                OR = {
-                party_type = traditionalist_party
-                party_type = boni_party
-                }
-            }
-            NOT = { has_country_modifier = priest_unrestricted }
-            any_country_culture = {
+			is_republic = yes
+			has_senate_approval > 0.5
+			current_ruler = {
+				OR = {
+					party_type = traditionalist_party
+					party_type = boni_party
+				}
+			}
+			NOT = {
+				has_country_modifier = priest_unrestricted
+			}
+			any_country_culture = {
 				is_integrated = yes
-				NOT = { this.culture = root.culture }
+				NOT = {
+					this.culture = root.culture
+				}
 			}
 		}
 		ai_chance = {
-            modifier = {
-                factor = 10
-            }
-        }
+			modifier = {
+				factor = 10
+			}
+		}
 		remove_country_modifier = internal_collapse
-        scope:unagenda_culture = {
-            set_country_culture_right = freemen
-        }
-        add_country_modifier = {
-            name = priest_unrestricted
-            duration = 3650
-        }
-        current_ruler = {
-             add_popularity = -50
-        }
-
-        if = {
-            limit = { has_party_type = optimates_party }
-            add_party_approval = {
-                party_type = optimates_party
-                value = -50
-            }
-            add_party_approval = {
-                party_type = populares_party
-                value = -50
-            }
-
-        }
-        else = {
-            add_party_approval = {
-                party_type = oligarchic_party
-                value = -50
-            }
-            add_party_approval = {
-                party_type = democratic_party
-                value = -50
-            }
-        }
-        add_stability = 10
+		scope:unagenda_culture = {
+			set_country_culture_right = freemen
+		}
+		add_country_modifier = {
+			name = priest_unrestricted
+			duration = 3650
+		}
+		current_ruler = {
+			add_popularity = -50
+		}
+		if = {
+			limit = {
+				has_party_type = optimates_party
+			}
+			add_party_approval = {
+				party_type = optimates_party
+				value = -50
+			}
+			add_party_approval = {
+				party_type = populares_party
+				value = -50
+			}
+		}
+		else = {
+			add_party_approval = {
+				party_type = oligarchic_party
+				value = -50
+			}
+			add_party_approval = {
+				party_type = democratic_party
+				value = -50
+			}
+		}
+		add_stability = 10
 	}
-
 }
 
-low_stab_event.2 = { #yay, better stability
-    type = country_event
-    title = "low_stab_event.2.t"
-    desc = "low_stab_event.2.desc"
-
-    picture = council_country
-
-    trigger = {
-
-        has_land = yes
-        has_country_modifier = internal_collapse
-        OR = {
-            stability > 25
-            NOT = {
-                OR = {
-                    rank = great_power
-                    rank = major_power
-                }
-            }
-        }
-
-    }
-
-
-    immediate = {
-        remove_country_modifier = internal_collapse
-    }
-
-
-    option = {
+low_stab_event.2 = {
+	#yay, better stability
+	type = country_event
+	title = "low_stab_event.2.t"
+	desc = "low_stab_event.2.desc"
+	picture = council_country
+	trigger = {
+		has_land = yes
+		has_country_modifier = internal_collapse
+		OR = {
+			stability > 25
+			NOT = {
+				OR = {
+					rank = great_power
+					rank = major_power
+				}
+			}
+		}
+	}
+	immediate = {
+		remove_country_modifier = internal_collapse
+	}
+	option = {
 		name = low_stab_event.2.a
 		custom_tooltip = low_stab_event.2.a.tt1
-    }
+	}
 }
 
-
-low_stab_event.3 = { #governors declaring total independance
-    type = country_event
-    title = "low_stab_event.3.t"
-    desc = "low_stab_event.3.desc"
-    goto_location = scope:byebye.capital_scope
-    picture = council_country
-
-    trigger = {
-
-        has_land = yes
-        has_country_modifier = internal_collapse
-        OR = {
-            stability < 5
-            has_civil_war = yes
-        }
-        any_governorships = {
-            exists = governor
-            governor = {
-                is_disloyal = yes
-            }
-        }
-
-    }
-    weight_multiplier = {
+low_stab_event.3 = {
+	#governors declaring total independance
+	type = country_event
+	title = "low_stab_event.3.t"
+	desc = "low_stab_event.3.desc"
+	goto_location = scope:byebye.capital_scope
+	picture = council_country
+	trigger = {
+		has_land = yes
+		has_country_modifier = internal_collapse
+		OR = {
+			stability < 5
+			has_civil_war = yes
+		}
+		any_governorships = {
+			exists = governor
+			governor = {
+				is_disloyal = yes
+				NOT = {
+					has_character_modifier = major_influence_aristocrat
+				}
+			}
+		}
+	}
+	weight_multiplier = {
 		modifier = {
-            add = 45
-            OR = {
-                has_civil_war = yes
-                stability < 5
-            }
-
+			add = 45
+			OR = {
+				has_civil_war = yes
+				stability < 5
+			}
+		}
+	}
+	immediate = {
+		random_governorships = {
+			limit = {
+				exists = governor
+				governor = {
+					is_disloyal = yes
+					NOT = {
+						has_character_modifier = major_influence_aristocrat
+					}
+				}
+			}
+			governor = {
+				save_scope_as = byebye_governor
+			}
+			hidden_effect = {
+				random_governorship_state = {
+					random_state_province = {
+						limit = {
+							owner = root
+						}
+						create_country = {
+							save_scope_as = byebye
+							change_government = despotic_monarchy
+							change_law = work_for_the_best
+						}
+					}
+				}
+				every_governorship_state = {
+					every_state_province = {
+						limit = {
+							owner = root
+						}
+						set_owned_by = scope:byebye
+					}
+				}
+			}
+		}
+		scope:byebye_governor = {
+			remove_all_positions = yes
+			move_country = scope:byebye
+			set_home_country = scope:byebye
+			every_child = {
+				limit = {
+					prisoner = no
+				}
+				remove_all_positions = yes
+				move_country = scope:byebye
+				set_home_country = scope:byebye
+			}
+		}
+        scope:byebye = {
+            set_as_ruler = scope:byebye_governor
         }
 	}
-
-
-    immediate = {
-        random_governorships = {
-            limit = {
-                exists = governor
-                governor = {
-                    is_disloyal = yes
-                }
-            }
-
-            governor = {
-
-                save_scope_as = byebye_governor
-            }
-            hidden_effect = {
-                random_governorship_state = {
-                    random_state_province = {
-                        limit = {
-                            owner = root
-                        }
-                        create_country = {
-                            save_scope_as = byebye
-                            change_government = despotic_monarchy
-                            set_as_ruler = scope:byebye_governor
-                            change_law = work_for_the_best
-                        }
-                    }
-                }
-                every_governorship_state = {
-
-                    every_state_province = {
-                        limit = { owner = root }
-                        set_owned_by = scope:byebye
-                    }
-                }
-            }
-        }
-        scope:byebye_governor = {
-            remove_all_positions = yes
-            move_country = scope:byebye
-            set_home_country = scope:byebye
-            every_child = {
-                limit = {
-                    prisoner = no
-                }
-                remove_all_positions = yes
-                move_country = scope:byebye
-                set_home_country = scope:byebye
-            }
-        }
-    }
-
-
-    option = {
+	option = {
 		name = low_stab_event.3.a
 		custom_tooltip = low_stab_event.3.a.tt1
-        if = {
-            limit = { num_of_cities <= 1000 }
-            add_stability = 2
-        }
-        else_if = {
-            limit = { num_of_cities <= 2000 }
-            add_stability = 1
-        }
-        add_truce = {
-          target = scope:byebye
-          duration = 3650
-        }
-    }
-    option = {
-        trigger = {
-            has_civil_war = no
-        }
+		if = {
+			limit = {
+				num_of_cities <= 1000
+			}
+			add_stability = 2
+		}
+		else_if = {
+			limit = {
+				num_of_cities <= 2000
+			}
+			add_stability = 1
+		}
+		add_truce = {
+			target = scope:byebye
+			duration = 3650
+		}
+	}
+	option = {
+		trigger = {
+			has_civil_war = no
+		}
 		ai_chance = {
 			factor = 1
 			modifier = {
@@ -486,66 +486,65 @@ low_stab_event.3 = { #governors declaring total independance
 				war = yes
 			}
 		}
-        name = low_stab_event.3.b
-        custom_tooltip = low_stab_event.3.b.tt1
-        declare_war_with_wargoal = {
-            war_goal = conquer_wargoal
+		name = low_stab_event.3.b
+		custom_tooltip = low_stab_event.3.b.tt1
+		declare_war_with_wargoal = {
+			war_goal = conquer_wargoal
 			province = scope:byebye.capital_scope
 			target = scope:byebye
-        }
-    }
+		}
+	}
 }
 
-low_stab_event.4 = { #governor proposes to be independent
-    type = country_event
-    title = "low_stab_event.4.t"
-    desc = "low_stab_event.4.desc"
-    goto_location = scope:client.capital_scope
-
-    picture = council_country
-
-    trigger = {
-
-        has_land = yes
-        has_country_modifier = internal_collapse
-        NOT = {
-            stability >= 25
-        }
-        any_governorships = {
-            exists = governor
-        }
-
-    }
-
-
-    immediate = {
-        random_governorships = {
+low_stab_event.4 = {
+	#governor proposes to be independent
+	type = country_event
+	title = "low_stab_event.4.t"
+	desc = "low_stab_event.4.desc"
+	goto_location = scope:client.capital_scope
+	picture = council_country
+	trigger = {
+		has_land = yes
+		has_country_modifier = internal_collapse
+		NOT = {
+			stability >= 25
+		}
+		any_governorships = {
+			exists = governor
+		}
+	}
+	immediate = {
+		random_governorships = {
 			limit = {
 				any_governorship_state = {
 					any_state_province = {
-						NOT = {dominant_province_culture = root.culture}
+						NOT = {
+							dominant_province_culture = root.culture
+						}
 						owner = ROOT
 					}
 				}
 				exists = governor
 			}
 			check_range_bounds = no
-            weight = {
-                base = 1
-                modifier = {
-                    add = {
-                        value = 0
-                        every_governorship_state = {
-                            every_state_province = {
-                                limit = {
-                                NOT = {dominant_province_culture = root.culture}
-                                }
-                                add = 1
-                            }
-                        }
-                    }
-                }
-            }
+			weight = {
+				base = 1
+				modifier = {
+					add = {
+						value = 0
+						every_governorship_state = {
+							every_state_province = {
+								limit = {
+									NOT = {
+										dominant_province_culture = root.culture
+									}
+								}
+								add = 1
+							}
+						}
+					}
+				}
+			}
 			save_scope_as = independent_governorship
 			random_governorship_state = {
 				random_state_province = {
@@ -556,10 +555,8 @@ low_stab_event.4 = { #governor proposes to be independent
 				save_scope_as = independent_current_governor
 			}
 		}
-    }
-
-
-    option = {
+	}
+	option = {
 		name = low_stab_event.4.a
 		custom_tooltip = low_stab_event.4.a.tt1
 		ai_chance = {
@@ -573,160 +570,356 @@ low_stab_event.4 = { #governor proposes to be independent
 				stability < 15
 			}
 		}
-        hidden_effect = {
-            scope:independent_governorship_province = {
-                create_country = {
-                    save_scope_as = client
-                    change_government = despotic_monarchy
-                    set_as_ruler = scope:independent_current_governor
-                    change_law = work_for_the_best
+		hidden_effect = {
+			scope:independent_governorship_province = {
+				create_country = {
+					save_scope_as = client
+					change_government = despotic_monarchy
+					change_law = work_for_the_best
+				}
+			}
+			scope:independent_governorship = {
+				every_governorship_state = {
+					every_state_province = {
+						limit = {
+							owner = root
+						}
+						set_owned_by = scope:client
+					}
+				}
+			}
+			scope:independent_current_governor = {
+				remove_all_positions = yes
+				move_country = scope:client
+				set_home_country = scope:client
+				every_child = {
+					limit = {
+						prisoner = no
+					}
+					remove_all_positions = yes
+					move_country = scope:client
+					set_home_country = scope:client
+				}
+			}
+            
+			make_subject = {
+				target = scope:client
+				type = client_state
+			}
+			scope:client = {
+				add_country_modifier = {
+					name = autonomy_granted
+					duration = 3650
+				}
+                set_as_ruler = scope:independent_current_governor
+                set_variable = {
+                    name = recent_client
+                    days = 365
                 }
-            }
-            scope:independent_governorship = {
-                every_governorship_state = {
-
-                    every_state_province = {
-                        limit = { owner = root }
-                        set_owned_by = scope:client
-                    }
-                }
-            }
-            scope:independent_current_governor = {
-                remove_all_positions = yes
-                move_country = scope:client
-                set_home_country = scope:client
-                every_child = {
-                    limit = {
-                        prisoner = no
-                    }
-                    remove_all_positions = yes
-                    move_country = scope:client
-                    set_home_country = scope:client
-                }
-            }
-            make_subject = {
-                target = scope:client
-                type = client_state
-            }
-            scope:client = {
-                add_country_modifier = {
-                    name = autonomy_granted
-                    duration = 3650
-                }
-            }
-
-        }
-        if = {
-            limit = { num_of_cities <= 1000 }
-            add_stability = 5
-        }
-        else_if = {
-            limit = { num_of_cities <= 2000 }
-            add_stability = 4
-        }
-        else_if = {
-            limit = { num_of_cities <= 3000 }
-            add_stability = 3
-        }
-        else = {
-            add_stability = 2
-        }
-    }
-    option = {
-        name = low_stab_event.4.b
-        custom_tooltip = low_stab_event.4.b.tt1
-        trigger = {
-            scope:independent_current_governor = {
-                loyalty >= 20
-            }
-        }
-        if = {
-            limit = { num_of_cities <= 1000 }
-            add_political_influence = -5
-        }
-        else_if = {
-            limit = { num_of_cities <= 2000 }
-            add_political_influence = -10
-        }
-        else_if = {
-            limit = { num_of_cities <= 3000 }
-            add_political_influence = -15
-        }
-        else = {
-            add_political_influence = -20
-        }
-        scope:independent_current_governor = {
-            add_loyalty = independence_denied
-        }
-    }
-    option = {
-        name = low_stab_event.4.c
-        custom_tooltip = low_stab_event.4.c.tt1
-        trigger = {
-            scope:independent_current_governor = {
-                loyalty < 20
-            }
-        }
-        if = {
-            limit = { num_of_cities <= 1000 }
-            add_political_influence = -5
-        }
-        else_if = {
-            limit = { num_of_cities <= 2000 }
-            add_political_influence = -10
-        }
-        else_if = {
-            limit = { num_of_cities <= 3000 }
-            add_political_influence = -15
-        }
-        else = {
-            add_political_influence = -20
-        }
-        scope:independent_current_governor = {
-            add_loyalty = independence_denied
-        }
-        add_stability = -3
-    }
+			}
+		}
+		if = {
+			limit = {
+				num_of_cities <= 1000
+			}
+			add_stability = 5
+		}
+		else_if = {
+			limit = {
+				num_of_cities <= 2000
+			}
+			add_stability = 4
+		}
+		else_if = {
+			limit = {
+				num_of_cities <= 3000
+			}
+			add_stability = 3
+		}
+		else = {
+			add_stability = 2
+		}
+	}
+	option = {
+		name = low_stab_event.4.b
+		custom_tooltip = low_stab_event.4.b.tt1
+		trigger = {
+			scope:independent_current_governor = {
+				loyalty >= 20
+			}
+		}
+		if = {
+			limit = {
+				num_of_cities <= 1000
+			}
+			add_political_influence = -5
+		}
+		else_if = {
+			limit = {
+				num_of_cities <= 2000
+			}
+			add_political_influence = -10
+		}
+		else_if = {
+			limit = {
+				num_of_cities <= 3000
+			}
+			add_political_influence = -15
+		}
+		else = {
+			add_political_influence = -20
+		}
+		scope:independent_current_governor = {
+			add_loyalty = independence_denied
+		}
+	}
+	option = {
+		name = low_stab_event.4.c
+		custom_tooltip = low_stab_event.4.c.tt1
+		trigger = {
+			scope:independent_current_governor = {
+				loyalty < 20
+			}
+		}
+		if = {
+			limit = {
+				num_of_cities <= 1000
+			}
+			add_political_influence = -5
+		}
+		else_if = {
+			limit = {
+				num_of_cities <= 2000
+			}
+			add_political_influence = -10
+		}
+		else_if = {
+			limit = {
+				num_of_cities <= 3000
+			}
+			add_political_influence = -15
+		}
+		else = {
+			add_political_influence = -20
+		}
+		scope:independent_current_governor = {
+			add_loyalty = independence_denied
+		}
+		add_stability = -3
+	}
 }
 
-low_stab_event.5 = { #because civ wars are buggued, lets decrease stab
-    type = country_event
-    hidden = yes
-
-    trigger = {
-        current_date >= 800.1.1
-        has_civil_war = yes
-        NOT = {
-            has_country_modifier = civil_war_stab
-        }
-    }
-
-    immediate = {
-        add_stability = -10
+low_stab_event.5 = {
+	#because civ wars are buggued, lets decrease stab
+	type = country_event
+	hidden = yes
+	trigger = {
+		current_date >= 800.1.1
+		has_civil_war = yes
+		NOT = {
+			has_country_modifier = civil_war_stab
+		}
+	}
+	immediate = {
+		add_stability = -10
 		add_country_modifier = {
-            name = civil_war_stab
-            duration = -1
-        }
-    }
-
-
+			name = civil_war_stab
+			duration = -1
+		}
+	}
 }
 
-low_stab_event.6 = { #remove if civ war ended
-    type = country_event
-    hidden = yes
-
-    trigger = {
-        has_civil_war = no
-        has_country_modifier = civil_war_stab
-
-    }
-
-    immediate = {
+low_stab_event.6 = {
+	#remove if civ war ended
+	type = country_event
+	hidden = yes
+	trigger = {
+		has_civil_war = no
+		has_country_modifier = civil_war_stab
+	}
+	immediate = {
 		remove_country_modifier = civil_war_stab
-    }
-
-
+	}
 }
 
-
+low_stab_event.7 = {
+	#influent aristocrat retreating in his domain
+	type = country_event
+	title = "low_stab_event.7.t"
+	desc = "low_stab_event.7.desc"
+	goto_location = scope:byebye.capital_scope
+	picture = council_country
+	trigger = {
+		has_land = yes
+		has_country_modifier = internal_collapse
+		NOT = {
+			stability >= 25
+		}
+		any_subject = {
+			is_subject_type = autonomous_domain
+			has_variable = owner_from_another_empire
+			var:owner_from_another_empire = {
+				is_ruler = no
+				is_alive = yes
+				employer = root
+				save_temporary_scope_as = tmp_owner
+				owned_governorship_num_of_cities < owned_domain_num_of_cities
+			}
+		}
+	}
+	weight_multiplier = {
+		modifier = {
+			factor = 2
+			OR = {
+				has_civil_war = yes
+				stability < 5
+			}
+		}
+	}
+	immediate = {
+		random_subject = {
+			limit = {
+				is_subject_type = autonomous_domain
+				has_variable = owner_from_another_empire
+				var:owner_from_another_empire = {
+					is_ruler = no
+					is_alive = yes
+					employer = root
+					save_temporary_scope_as = tmp_owner
+					owned_governorship_num_of_cities < owned_domain_num_of_cities
+				}
+			}
+			var:owner_from_another_empire = {
+				save_scope_as = byebye_owner
+			}
+			save_scope_as = byebye_domain
+		}
+		hidden_effect = {
+			release_subject = scope:byebye_domain
+			make_subject = {
+				target = scope:byebye_domain
+				type = client_state
+			}
+			scope:byebye_owner = {
+				remove_all_positions = yes
+				move_country = scope:byebye_domain
+				set_home_country = scope:byebye_domain
+				every_child = {
+					limit = {
+						prisoner = no
+					}
+					remove_all_positions = yes
+					move_country = scope:byebye_domain
+					set_home_country = scope:byebye_domain
+				}
+			}
+			scope:byebye_domain = {
+				set_as_ruler = scope:byebye_owner
+                set_variable = {
+                    name = recent_client
+                    days = 365
+                }
+			}
+			if = {
+				#edges
+				limit = {
+					any_governorships = {
+						OR = {
+							NOT = {
+								exists = governor
+							}
+							governor = {
+								is_ruler = no
+							}
+						}
+						has_variable = governorship_owner
+						var:governorship_owner = scope:byebye_owner
+						any_governorship_state = {
+							any_state_province = {
+								any_neighbor_province = {
+									owner = scope:byebye_domain
+								}
+							}
+						}
+					}
+				}
+				random_governorships = {
+					limit = {
+						OR = {
+							NOT = {
+								exists = governor
+							}
+							governor = {
+								is_ruler = no
+							}
+						}
+						has_variable = governorship_owner
+						var:governorship_owner = scope:byebye_owner
+						any_governorship_state = {
+							any_state_province = {
+								any_neighbor_province = {
+									owner = scope:byebye_domain
+								}
+							}
+						}
+					}
+					every_governorship_state = {
+						limit = {
+							any_state_province = {
+								any_neighbor_province = {
+									owner = scope:byebye_domain
+								}
+							}
+						}
+						add_to_list = state_join_domain
+					}
+				}
+				every_country_state = {
+					limit = {
+						is_in_list = state_join_domain
+					}
+					remove_from_list = state_join_domain
+					every_state_province = {
+						set_owned_by = scope:byebye_domain
+					}
+				}
+			}
+		}
+	}
+	option = {
+		name = low_stab_event.7.a
+		custom_tooltip = low_stab_event.7.a.tt1
+		add_stability = 4
+		add_truce = {
+			target = scope:byebye_domain
+			duration = 3650
+		}
+	}
+	option = {
+		trigger = {
+			has_civil_war = no
+			any_governorships = {
+				has_variable = governorship_owner
+				var:governorship_owner = scope:byebye_owner
+			}
+		}
+		name = low_stab_event.7.b
+		custom_tooltip = low_stab_event.7.b.tt1
+		add_tyranny = 5
+		hidden_effect = {
+			every_governorships = {
+				limit = {
+					has_variable = governorship_owner
+					var:governorship_owner = scope:byebye_owner
+				}
+				remove_variable = governorship_owner
+				if = {
+					limit = {
+						has_variable = governorship_owner_ratio
+					}
+					remove_variable = governorship_owner_ratio
+				}
+			}
+		}
+	}
+}

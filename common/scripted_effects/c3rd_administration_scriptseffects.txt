@@ -19,8 +19,48 @@
 	}
 }
 
+recalculate_ownership_char = {#scopechar
+	if = {
+		limit = {
+			has_variable = country_ownership
+		}
+		remove_variable = country_ownership
+	}
+	save_scope_as = influent_character
+	set_variable = {
+		name = country_ownership
+		value = country_region_control
+	}
+	if = {
+		limit = {#clean
+			var:country_ownership = 0
+		}
+		remove_variable = country_ownership
+	}
+	if = {
+		limit = { 
+			country_region_control >= 1
+			NOT = {
+				has_character_modifier = major_influence_aristocrat
+			}
+		}
+		add_character_modifier = {
+			name = major_influence_aristocrat
+			duration = -1
+		}
+	}
+	if = {
+		limit = { 
+			has_character_modifier = major_influence_aristocrat
+			country_region_control < 0
+		}
+		remove_character_modifier = major_influence_aristocrat
+	}
+}
+
 create_domain = {
 	#scope country
+	#needed init scopes : asked_landowner and governorships in a family_domain_govs list
 	every_governorships = {
 		limit = {
 			is_in_list = family_domain_govs
@@ -40,18 +80,23 @@ create_domain = {
 		}
 		if = {
 			limit = {
-				any_country = {
-					has_variable = owner_from_another_empire
-					var:owner_from_another_empire = scope:asked_landowner
-					is_subject_of = root
+				owner = {
+					any_subject = {
+						has_variable = owner_from_another_empire
+						var:owner_from_another_empire = scope:asked_landowner
+						is_subject_of = root
+					}
 				}
 			}
-			random_country = {
-				limit = {
-					has_variable = owner_from_another_empire
-					var:owner_from_another_empire = scope:asked_landowner
+			owner = {
+				random_subject = {
+					limit = {
+						has_variable = owner_from_another_empire
+						var:owner_from_another_empire = scope:asked_landowner
+						is_subject_of = root
+					}
+					save_scope_as = the_domain_country
 				}
-				save_scope_as = the_domain_country
 			}
 			every_governorship_state = {
 				every_state_province = {
@@ -121,18 +166,8 @@ create_domain = {
 				type = autonomous_domain
 			}
 		}
-		scope:asked_landowner = {
-			if = {
-				limit = {
-					has_variable = country_ownership
-				}
-				remove_variable = country_ownership
-			}
-			save_scope_as = influent_character
-			set_variable = {
-				name = country_ownership
-				value = country_region_control
-			}
-		}
+	}
+	scope:asked_landowner = {
+		recalculate_ownership_char = yes
 	}
 }

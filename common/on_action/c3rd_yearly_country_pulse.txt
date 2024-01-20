@@ -10,10 +10,10 @@ yearly_country_pulse = {
 		c3rd_province_revolt_gain
 		c3rd_holding_control
 		c3rd_holding_clear
-		c3rd_country_control_check
 		c3rd_country_calculate_the_gov_ownership
 		c3rd_holding_tax_evasion
 		c3rd_variables_clear
+		c3rd_country_control_check
 		delay = { days = { 1 364 } }
 		c3rd_custom_on_actions_third_century
 		delay = { days = { 1 364 } }

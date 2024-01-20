@@ -5420,23 +5420,124 @@ c3rd_events.100 = { #debug event
 
 
     left_portrait = current_ruler
+	trigger = {
+		OR = {
+			any_governorships = {
+				has_variable = governorship_owner
+				var:governorship_owner = {
+					is_alive = yes
+					employer = root
+				}
+			}
+			any_subject = {
+				is_subject_type = autonomous_domain
+				has_variable = owner_from_another_empire
+			}
+			any_character = {
+				has_variable = country_ownership
+			}
 
-    immediate = {
-        every_character = {
+		}
+	}
+	immediate = {
+        random_character = {
             limit = {
-                is_general = yes
-                is_mercenary = no
+                save_temporary_scope_as = tmp_char
+                employer = {
+                    any_governorships = {
+                        has_variable = governorship_owner
+                        var:governorship_owner = scope:tmp_char
+                        NOT = {
+                            is_in_list = family_domain_govs
+                        }
+                        governor = {
+                            is_ruler = no
+                        }
+                    }
+                }
             }
-            add_gold = 1
+            save_scope_as = asked_landowner
         }
-    }
+		while = {
+            count = country_gov_ratio_number
+            random_governorships = {
+                limit = {
+                    has_variable = governorship_owner
+                    var:governorship_owner = scope:asked_landowner
+                    NOT = {
+                        is_in_list = family_domain_govs
+                    }
+                    governor = {
+                        is_ruler = no
+                    }
+                }
+                weight = {
+                    modifier = {
+                        factor = 10
+                        any_governorship_state = {
+                            any_state_province = {
+                                any_neighbor_province = {
+                                    governorship = {
+                                        is_in_list = family_domain_govs
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    modifier = {
+                        factor = 10
+                        any_governorship_state = {
+                            any_state_province = {
+                                any_neighbor_province = {
+                                    owner = {
+                                        has_variable = owner_from_another_empire
+                                        var:owner_from_another_empire = scope:asked_landowner
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    modifier = {
+                        factor = 3
+                        any_governorship_state = {
+                            any_state_province = {
+                                any_neighbor_province = {
+                                    NOT = {
+                                        owner = root
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    modifier = {
+                        factor = 0.1
+                        any_governorship_state = {
+                            any_state_province = {
+                                any_neighbor_province = {
+                                    governor = {
+                                        is_ruler = yes
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                add_to_list = family_domain_govs
+            }
+        }
+	}
 
 
     option = {
         name = c3rd_events.100.a
         
-        trigger_event = {
-            id = c3rd_events.81
+        
+        every_governorships = {
+            limit = {
+                is_in_list = family_domain_govs
+            }
+            save_scope_as = gov_tooltip
+            custom_tooltip = c3rd_other_events.86.a.tt2
         }
     }
 }

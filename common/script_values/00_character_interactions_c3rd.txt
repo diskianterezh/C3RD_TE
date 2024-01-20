@@ -139,5 +139,43 @@ get_trial_success_chance = {
 		} #not so easy ;)
 		subtract = 10
 	}
+	if = {
+		limit = {
+			scope:actor = {
+				has_country_modifier = solidus_introduced
+			}
+		} #solidus crush the power of state
+		subtract = 5
+	}
+	if = {
+		limit = {
+			scope:target = {
+				has_character_modifier = major_influence_aristocrat
+			}
+		} #big guy
+		subtract = 10
+	}
+	if = {
+		limit = {
+			scope:actor = {
+				OR = {
+					has_country_modifier = solidus_introduced
+					has_law = constantine_reform_law
+				}
+			}
+			scope:target = {
+				is_head_of_family = yes
+			}
+		} #heads cannot be too easy to banish to prevent ownership inheritance - and proscription
+		subtract = 10
+	}
+	if = {
+		limit = {
+			scope:actor = {
+				has_law = decentralized_administration_law
+			}
+		} #too decentralized
+		subtract = 10
+	}
 	min = 1
 }

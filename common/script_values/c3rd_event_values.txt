@@ -704,9 +704,135 @@ country_gov_ratio_number = {
 	
 }
 
+country_gov_ratio_number_minus = { #to get how many governorships should the landowner keep once the domain is created
+	value = country_gov_ratio_number
+	add = 1
+	if = {
+		limit = { 
+			num_of_cities >= 1000
+		}
+		add = 1
+	}
+	if = {
+		limit = { 
+			num_of_cities >= 2000
+		}
+		add = 1
+	}
+	if = {
+		limit = { 
+			num_of_cities >= 5000
+		}
+		add = 1
+	}
+}
+landowner_asked_ratio_number = { #scope country, need asked_landowner
+	value = 0
+	if = {
+		limit = {
+			any_governorships = { #check if too small
+				count < country_gov_ratio_number
+				has_variable = governorship_owner
+				var:governorship_owner = scope:asked_landowner
+			}
+		}
+		every_governorships = {
+			limit = {
+				has_variable = governorship_owner
+				var:governorship_owner = scope:asked_landowner
+			}
+			add = 1
+		}
+		if = {
+			limit = { 
+				num_of_cities >= 1000
+			}
+			add = -1
+		}
+		if = {
+			limit = { 
+				num_of_cities >= 2000
+			}
+			add = -1
+		}
+		if = {
+			limit = { 
+				num_of_cities >= 5000
+			}
+			add = -1
+		}
+	}
+	else_if = {
+		limit = {
+			any_governorships = { #basically for a small country, he should have 1 more governorships than domain gov; 1000+ 2 more, 2000+ 3 more, ect... this to keep their power in a big country
+				count < country_gov_ratio_number_minus
+				has_variable = governorship_owner
+				var:governorship_owner = scope:asked_landowner
+			}
+		}
+		add = country_gov_ratio_number
+		if = {
+			limit = { 
+				num_of_cities >= 1000
+			}
+			add = -1
+		}
+		if = {
+			limit = { 
+				num_of_cities >= 2000
+			}
+			add = -1
+		}
+		if = {
+			limit = { 
+				num_of_cities >= 5000
+			}
+			add = -1
+		}
+
+	}
+	else = {
+		add = country_gov_ratio_number
+	}
+	min = 1
+
+}
+
 subject_partition_ratio = {#subject scope
 	value = 0
 	add = num_of_provinces
 	divide = 3
-	round = yes
+	ceiling = yes
+}
+
+owned_governorship_num_of_cities = { #scope CHAR need a tmp_owner char scope
+	value = 0
+	employer = {
+		every_owned_province = {
+			limit = {
+				governorship = {
+					has_variable = governorship_owner
+					var:governorship_owner = scope:tmp_owner
+				}
+			}
+			add = 1
+		}
+	}
+
+}
+
+owned_domain_num_of_cities = {#scope CHAR need a tmp_owner char scope
+	value = 0
+	employer = {
+		every_subject = {
+			limit = {
+				has_variable = owner_from_another_empire
+				is_subject_type = autonomous_domain
+				var:owner_from_another_empire = scope:tmp_owner
+			}
+			every_owned_province = {
+				add = 1
+			}
+		}
+	}
 }
