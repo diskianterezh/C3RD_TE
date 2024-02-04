@@ -6477,7 +6477,7 @@ c3rd_other_events.85 = { #event when you have  the tax inspection culture law : 
                             value = 1
                         }
                     }
-                    4 = { #demand political power (chances to coup)
+                    40 = { #demand political power (chances to coup)
                         modifier = {
                             add = 2
                             scope:target = {
@@ -6515,7 +6515,7 @@ c3rd_other_events.85 = { #event when you have  the tax inspection culture law : 
                         }
                         
                     }
-                    50 = { #demand independant domain
+                    5 = { #demand independant domain
                         modifier = {
                             add = 2
                             scope:target = {
@@ -6596,7 +6596,7 @@ c3rd_other_events.85 = { #event when you have  the tax inspection culture law : 
 
 
 
-c3rd_other_events.86 = { #
+c3rd_other_events.86 = { #answer from landowner
     type = country_event
     title = "c3rd_other_events.86.t"
     desc = {
@@ -6713,7 +6713,7 @@ c3rd_other_events.86 = { #
     immediate = {
         hidden_effect = {
             if = {
-                limit = { #choose the governorship
+                limit = { #choose the governorships to be given as domain
                     has_variable = answer_landowner
                     var:answer_landowner = 3
                 }
@@ -6800,6 +6800,12 @@ c3rd_other_events.86 = { #
     option = { #accept his offer
         name = c3rd_other_events.86.a
         custom_tooltip = c3rd_other_events.86.a.tt1
+        trigger = {
+            has_variable = answer_landowner
+            NOT = {
+                var:answer_landowner = 3
+            }
+        }
         if = {
             limit = {
                 has_variable = landowner_demands
@@ -6821,6 +6827,32 @@ c3rd_other_events.86 = { #
                 create_domain = yes
             }
         }
+        else_if = {
+            limit = { 
+                has_variable = landowner_demands
+                has_variable = answer_landowner
+                var:answer_landowner = 2
+                scope:asked_landowner = {
+                    is_alive = yes
+                }
+            }
+            add_political_influence = -25
+            current_ruler = {
+                add_popularity = -20
+            }
+            if = {
+                limit = {
+                    is_monarchy = yes
+                }
+                add_legitimacy = -10
+            }
+            scope:asked_landowner = {
+                add_character_modifier = {
+                    name = political_power_character
+                    duration = 5500 #15years
+                }
+            }
+        }
     }
 
     option = { #offer gold
@@ -6837,12 +6869,17 @@ c3rd_other_events.86 = { #
                     }
                 }
             }
+            has_variable = answer_landowner
+            NOT = {
+                var:answer_landowner = 3
+            }
         }
         add_treasury = {
             value = has_monthly_income
-            multiply = -4
+            multiply = 4
             multiply = var:landowner_demands
             min = has_monthly_income
+            multiply = -1
         }
         scope:asked_landowner = {
             add_gold = {
@@ -6876,6 +6913,10 @@ c3rd_other_events.86 = { #
                     has_trait = shrewd
                 }
             }
+            has_variable = answer_landowner
+            NOT = {
+                var:answer_landowner = 3
+            }
         }
         if = {
             limit = {
@@ -6898,6 +6939,32 @@ c3rd_other_events.86 = { #
                 create_domain = yes
             }
         }
+        else_if = {
+            limit = { 
+                has_variable = landowner_demands
+                has_variable = answer_landowner
+                var:answer_landowner = 2
+                scope:asked_landowner = {
+                    is_alive = yes
+                }
+            }
+            add_political_influence = -25
+            current_ruler = {
+                add_popularity = -20
+            }
+            if = {
+                limit = {
+                    is_monarchy = yes
+                }
+                add_legitimacy = -10
+            }
+            scope:asked_landowner = {
+                add_character_modifier = {
+                    name = political_power_character
+                    duration = 5500 #15years
+                }
+            }
+        }
     }
     
     option = { #say no
@@ -6908,11 +6975,25 @@ c3rd_other_events.86 = { #
         }
     }
     
-    option = { #case when he is dead/bug
+    option = { #case when he is dead/bug/refuses
         name = c3rd_other_events.86.e
         custom_tooltip = c3rd_other_events.86.e.tt1
+        trigger = {
+            OR = {
+                scope:asked_landowner = { #dead
+                    is_alive = no
+                }
+                AND = { #refuses
+                    has_variable = answer_landowner
+                    var:answer_landowner = 3
+                }
+                NOR = { #bug
+                    has_variable = landowner_demands
+                    has_variable = answer_landowner
+                }
+            }
+        }
     }
-
 
     after = { 
         if = {

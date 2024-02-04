@@ -28,6 +28,8 @@ yearly_country_pulse = {
 		c3rd_really_rich_country
 		delay = { days = { 1 364 } }
 		c3rd_holding_gain_owner
+		delay = { days = { 1 364 } }
+		c3rd_political_general_rampup
 
 	}
 }

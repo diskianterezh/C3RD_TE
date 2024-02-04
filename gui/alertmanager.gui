@@ -1019,7 +1019,7 @@ widget = {
 		alert = {
 			datacontext = "[GetScriptedGui('c3rd_military_anarchy_alert')]"
 			visible = "[And(ScriptedGui.IsShown(GuiScope.SetRoot(AlertManager.GetPlayer.MakeScope).End), AlertManager.ShowAlert('c3rd_military_anarchy_alert'))]"
-			tooltip = "ALERT_MILITARY_ANARCHY"
+			tooltip = "[ScriptedGui.BuildTooltip( GuiScope.SetRoot( AlertManager.GetPlayer.MakeScope ).End )]"
 			blockoverride "Color"
 			{
 				frame = 5

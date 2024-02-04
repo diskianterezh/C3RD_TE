@@ -181,6 +181,8 @@
  desc_pater_familias:0 "This character has made his family rich"
  major_influence_aristocrat:0 "Major Landowner"
  desc_major_influence_aristocrat:0 "This character has established his authority over a large part of the country's governorates, making him one of the most influential figures in the country."
+ political_power_character:0 "Major politician"
+ desc_political_power_character:0 "This character has been established as one of the most politically powerful character in the country. His influence can make him dangerous if he is found to be disloyal"
 
  #Decisions
  stop_political_unstability_small:0 "Stopping the political instability"
@@ -223,10 +225,14 @@
  ALERT_MONETARY_BALANCE_MEDIUM:0 "#T Monetary balance low#!\nOur monetary balance is low. Our wealth creation and exploitation is slightly lower than the consumption of the citizenry. \nOpen the great book (decision) to learn more about it"
  ALERT_COLLAPSE:0 "#T Internal Collapse#!\nYour country is collapsing. As long as your stability is #R below 25#!, collapse events will occur."
  ALERT_MILITARY_ANARCHY:0 "#T Military Anarchy#!\nThe country is in a phase of military anarchy. As long as this continues, the generals will demand more important concessions and decisions."
+ ALERT_MILITARY_ANARCHY_TT1:0 "\nSome characters are influent generals :\n"
+ ALERT_MILITARY_ANARCHY_TT2:0 "[king_maker_parse.GetName]"
  ALERT_POLITICAL_INSTABILITY:0 "#T Political Instability#!\nThe country is in a phase of political instability, applying several penalties. You can solve this by using the decisions to either reform the country or stopping the political instability."
  c3rd_influent_characters_owners_tt1:0 "#T Powerful Landowners#!\nSome people in your country are considered to be major landowners because of the number of regions they control."
  c3rd_influent_characters_owners_tt2:0 "[influent_character_parse.GetName] owns #R [influent_character_parse.MakeScope.GetVariable('country_ownership').GetValue]% #!"
- c3rd_influent_characters_owners_tt3:0 "\n\nCharacters will lose this status if they control less than #G 20%#!"
+ c3rd_influent_characters_owners_tt3:0 "\nCharacters will lose this status if they control less than #G 20%#!"
+ c3rd_influent_characters_owners_tt4:0 "\nYour country also have #R Major politicians #! :\n"
+ c3rd_influent_characters_owners_tt5:0 "[politician_character_parse.GetName]"
 
 
  #Culture
@@ -1203,6 +1209,8 @@ low_stab_event.7.b.tt1:0 "All the regions owned by [byebye_owner.GetName] will n
  c3rd_other_events.86.c.tt1:0 ""
  c3rd_other_events.86.d:0 ""
  c3rd_other_events.86.d.tt1:0 ""
+ c3rd_other_events.86.e:0 "There is nothing to do"
+ c3rd_other_events.86.e.tt1:0 "Nothing will be done"
  c3rd_other_events.86.tt13:0 "[SCOPE.ScriptValue('country_gov_ratio_number')|0Y] governorships will join an autonomous domain of [asked_landowner.GetName]"
 
 

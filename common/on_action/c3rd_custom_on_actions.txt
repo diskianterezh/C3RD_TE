@@ -1973,3 +1973,8 @@ c3rd_variables_clear = {
 		}
 	}
 }
+
+
+c3rd_political_general_rampup = {
+	
+}

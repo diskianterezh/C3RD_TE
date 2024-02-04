@@ -1656,6 +1656,7 @@ c3rd_events.9 = { #Assassination of the ruler by the generals
             is_general = yes
             is_mercenary = no
             is_primary_heir = no
+            is_ruler = no
             loyalty < 50 #need at least some unloyal ones
             NOT = {
                 is_friend = root.current_ruler
@@ -1674,10 +1675,16 @@ c3rd_events.9 = { #Assassination of the ruler by the generals
                 is_mercenary = no
                 loyalty <= 50
                 is_primary_heir = no
+                is_ruler = no
             }
             weight = {
                 modifier = {
                     add = power_base
+                }
+                modifier = {
+                    factor = 100
+                    has_character_modifier = political_power_character
+                    loyalty <= 33
                 }
             }
             save_scope_as = general_leader

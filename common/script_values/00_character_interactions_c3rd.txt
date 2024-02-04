@@ -62,6 +62,14 @@ get_trial_success_chance_character = {
 		} #not so easy ;)
 		subtract = 10
 	}
+	if = {
+		limit = {
+			scope:target = {
+				has_character_modifier = political_power_character
+			}
+		} #not so easy ;)
+		subtract = 10
+	}
 	min = 1
 }
 
@@ -135,6 +143,14 @@ get_trial_success_chance = {
 		limit = {
 			scope:target = {
 				has_character_modifier = king_maker
+			}
+		} #not so easy ;)
+		subtract = 10
+	}
+	if = {
+		limit = {
+			scope:target = {
+				has_character_modifier = political_power_character
 			}
 		} #not so easy ;)
 		subtract = 10

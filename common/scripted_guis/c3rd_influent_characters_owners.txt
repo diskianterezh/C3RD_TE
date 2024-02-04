@@ -20,6 +20,21 @@
 			custom_tooltip = c3rd_influent_characters_owners_tt2
 		}
 		custom_tooltip = c3rd_influent_characters_owners_tt3
+		if = {
+			limit = {
+				any_character = {
+					has_character_modifier = political_power_character
+				}
+			}
+			custom_tooltip = c3rd_influent_characters_owners_tt4
+			every_character = {
+				limit = {
+					has_character_modifier = political_power_character
+				}
+				save_scope_as = politician_character_parse
+				custom_tooltip = c3rd_influent_characters_owners_tt5
+			}
+		}
 	}
 
 }
