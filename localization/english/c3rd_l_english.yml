@@ -171,6 +171,7 @@
  is_tax_evading:0 "Approved investments"
  cant_tax_evading:0 "Investments stopped"
  reintegrated_domain:0 "Domains have been nationalized"
+ political_coup:0 "Political coup"
 
  #character modifiers
  king_maker:0 "Kingmaker"
@@ -495,8 +496,11 @@ low_stab_event.7.b.tt1:0 "All the regions owned by [byebye_owner.GetName] will n
  c3rd_events.9.desc:0 "For several weeks, the decisions of our leader [assa_ruler.GetName] have more than hurt his popularity. The generals openly accused him of softness, and his policies were unbearable for them. But although this tense climate was well known to our leader, few could have foreseen what would happen next."
  c3rd_events.9.desc.1:0 "\n\nThe shock was total when a trembling messenger brought the terrible news to the senate ; our leader, on his way to the parliament, was violently murdered by several individuals and his body was left bloody on the pavement of the city. Those responsible have not been caught, but everyone suspects that [general_leader.GetName], leader of the most virulent military faction, is no stranger to this event..."
  c3rd_events.9.desc.2:0 "\n\nWhile our king was resting in his tent during a review of the troops with the legions, several soldiers broke into his tent and savagely killed him with multiple sword blows, despite his pleas. Those responsible for the crime were promptly crucified afterwards, but everyone will have guessed that it was indeed the hand of [general_leader.GetName] that was behind this assassination.\nIn fact, this one was one of the first to present himself to his successor, in order to swear fidelity to him, and to assure him of his protection, as long as he 'would not reproduce the errors of his predecessor'..."
+ c3rd_events.9.desc.3:0 "\n\nWhile our king was resting in his tent during a review of the troops with the legions, several soldiers broke into his tent and savagely killed him with multiple sword blows, despite his pleas. Those responsible for the crime were promptly crucified afterwards, but everyone will have guessed that it was indeed the hand of [general_leader.GetName] that was behind this assassination.\nThis powerful figure, who enjoys undoubted political power and military command, never ceased to point out the ineptitude - in his view - of our leader.\nIn the chaos that ensued, he was the quickest to present himself as the 'legitimate' successor, without anyone objecting... for the time being. The previous heir was quickly removed and the country is holding its breath."
  c3rd_events.9.a:0 "What in ...?"
  c3rd_events.9.a.tt1:0 "This event will shakes up the country"
+ c3rd_events.9.b:0 "Well, long live [general_leader.GetName] i guess ?"
+ c3rd_events.9.b.tt1:0 "[general_leader.GetName] takes over the leadership, with the support of the army"
 
 
 

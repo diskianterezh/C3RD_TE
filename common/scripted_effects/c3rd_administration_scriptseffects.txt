@@ -171,3 +171,71 @@ create_domain = {
 		recalculate_ownership_char = yes
 	}
 }
+
+give_political_power_modifier = {
+	#scope country
+	#need an asked_landowner scope saved, and 
+	if = {
+		limit = {
+			has_variable = answer_landowner
+			var:landowner_demands < 2 
+			scope:asked_landowner = {
+				is_alive = yes
+			}
+		}
+		scope:asked_landowner = {
+			add_character_modifier = {
+				name = political_power_character
+				duration = 1825 #5years
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			has_variable = answer_landowner
+			var:landowner_demands < 4 
+			var:landowner_demands >= 2 
+			scope:asked_landowner = {
+				is_alive = yes
+			}
+		}
+		scope:asked_landowner = {
+			add_character_modifier = {
+				name = political_power_character
+				duration = 3650 #10 years
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			has_variable = answer_landowner
+			var:landowner_demands < 6 
+			var:landowner_demands >= 4 
+			scope:asked_landowner = {
+				is_alive = yes
+			}
+		}
+		scope:asked_landowner = {
+			add_character_modifier = {
+				name = political_power_character
+				duration = 5500 #15 years
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			has_variable = answer_landowner
+			var:landowner_demands >= 6
+			scope:asked_landowner = {
+				is_alive = yes
+			}
+		}
+		scope:asked_landowner = {
+			add_character_modifier = {
+				name = political_power_character
+				duration = 7300 #20 years
+			}
+		}
+	}
+
+}

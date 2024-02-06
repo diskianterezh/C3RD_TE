@@ -1628,8 +1628,20 @@ c3rd_events.9 = { #Assassination of the ruler by the generals
         triggered_desc = {
             trigger = {
                 is_monarchy = yes
+                scope:general_leader = {
+                    NOT = {has_character_modifier = political_power_character}
+                }
             }
             desc = "c3rd_events.9.desc.2"
+        }
+        triggered_desc = {
+            trigger = {
+                is_monarchy = yes
+                scope:general_leader = {
+                    has_character_modifier = political_power_character
+                }
+            }
+            desc = "c3rd_events.9.desc.3"
         }
     }
 
@@ -1669,6 +1681,9 @@ c3rd_events.9 = { #Assassination of the ruler by the generals
     right_portrait = scope:general_leader
 
     immediate = {
+        current_heir = {
+            save_scope_as = current_heir_last
+        }
         random_character = {
             limit = {
                 is_general = yes
@@ -1723,8 +1738,42 @@ c3rd_events.9 = { #Assassination of the ruler by the generals
     }
 
     option = {#ok
+        trigger = {
+            scope:general_leader = {
+                NOT = {has_character_modifier = political_power_character}
+            }
+        }
         name = c3rd_events.9.a
         custom_tooltip = c3rd_events.9.a.tt1
+    }
+    option = {#ok + he takes pwer
+        trigger = {
+            scope:general_leader = {
+                has_character_modifier = political_power_character
+            }
+        }
+        name = c3rd_events.9.b
+        custom_tooltip = c3rd_events.9.b.tt1
+        set_as_ruler = scope:general_leader
+        add_legitimacy = -25
+        add_tyranny = 10
+        add_political_influence = 25
+        scope:general_leader = {
+            add_corruption = 10
+        }
+        every_character = {
+            limit = {
+                NOR = {
+                    this = scope:general_leader
+                    is_friend = scope:general_leader
+                }
+                OR = {
+                    this = scope:current_heir_last
+                    has_character_modifier = political_power_character
+                }
+            }
+            add_loyalty = political_coup
+        }
     }
 
     after = {

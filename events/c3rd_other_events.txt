@@ -4039,13 +4039,13 @@ c3rd_other_events.60 = { #filthy barbarians ransacking our lands
                         has_variable = on_going_rep_thingy
                         has_country_modifier = political_unstability
                     }
+                    has_variable = unworthy_leader
                 }
             }
             random_list = {
                 10 = {
                     modifier = {
                         add = 10
-                        has_variable = unworthy_leader
                         var:unworthy_leader <= 2
                     }
                     modifier = {
@@ -6334,6 +6334,17 @@ c3rd_other_events.85 = { #event when you have  the tax inspection culture law : 
         if = {
             limit = {
                 scope:target = {
+                    has_character_modifier = political_power_character
+                }
+            }
+            change_variable = {
+                name = landowner_demands
+                add = 1
+            }
+        }
+        if = {
+            limit = {
+                scope:target = {
                     OR = {
                         has_trait = crafty
                         has_trait = prominent
@@ -6846,12 +6857,7 @@ c3rd_other_events.86 = { #answer from landowner
                 }
                 add_legitimacy = -10
             }
-            scope:asked_landowner = {
-                add_character_modifier = {
-                    name = political_power_character
-                    duration = 5500 #15years
-                }
-            }
+            give_political_power_modifier = yes
         }
     }
 
@@ -6958,12 +6964,7 @@ c3rd_other_events.86 = { #answer from landowner
                 }
                 add_legitimacy = -10
             }
-            scope:asked_landowner = {
-                add_character_modifier = {
-                    name = political_power_character
-                    duration = 5500 #15years
-                }
-            }
+            give_political_power_modifier = yes
         }
     }
     
