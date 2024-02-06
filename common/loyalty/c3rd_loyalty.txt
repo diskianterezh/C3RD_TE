@@ -112,4 +112,9 @@ reintegrated_domain = {
 	yearly_decay = 1
 }
 
+political_coup = {
+	value = -25
+	yearly_decay = 1
+}
+
 
