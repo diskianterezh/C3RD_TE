@@ -1247,6 +1247,15 @@ low_stab_event.7.b.tt1:0 "All the regions owned by [byebye_owner.GetName] will n
  c3rd_other_events.89.b:0 "People of [subject_with_foreign_owner.GetName], rise up!"
  c3rd_other_events.89.b.tt1:0 "The domain will be changed to our client state, without any losses"
 
+ c3rd_other_events.90.t:0 "Machinations behind closed doors"
+ c3rd_other_events.90.desc:0 "[pol_target.GetName], strengthened by his political favours, is not resting on his laurels. He can be seen using his charms on numerous officials in the capital, and informants even speak of unofficial contacts with powerful army officers. These manoeuvres are clearly not innocent and are designed to increase [pol_target.GetName]'s influence, no doubt for very ambitious ends. It remains to be seen how we will react."
+ c3rd_other_events.90.a:0 "Let it be"
+ c3rd_other_events.90.a.tt1:0 "You will not intervene"
+ c3rd_other_events.90.b:0 "Let's show this pretender who's pulling the strings"
+ c3rd_other_events.90.b.tt1:0 "#G This option is available because you are more popular than [pol_target.GetName] #!"
+ c3rd_other_events.90.c:0 "We need to act as quickly as possible"
+ c3rd_other_events.90.c.tt1:0 "You will intervene to undermine [pol_target.GetName]'s initiatives"
+
 #tribals fix
 
  tribal_flavour_events.41.t:0 "Imminent collapse"
