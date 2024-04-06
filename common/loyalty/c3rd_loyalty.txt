@@ -117,4 +117,14 @@ political_coup = {
 	yearly_decay = 1
 }
 
+coup_loyal = {
+	value = 10
+	yearly_decay = 1
+}
+
+coup_unloyal = {
+	value = -10
+	yearly_decay = 1
+}
+
 

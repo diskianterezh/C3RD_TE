@@ -396,6 +396,7 @@ c3rd_other_events_monthly_pulse = { #check if events can happen
 		2 = c3rd_other_events.74 #Decuriones fleeing
 		2 = c3rd_other_events.84 #nobles escaping tax through land
 		8 = c3rd_other_events.90 #political character doing his things
+		15 = c3rd_other_events.91 #coup from political character
 	}
 }
 

@@ -18,6 +18,18 @@
 			}
 			save_scope_as = influent_character_parse
 			custom_tooltip = c3rd_influent_characters_owners_tt2
+			if = {
+				limit = {
+					employer = {
+						any_subject = {
+							has_variable = owner_from_another_empire
+							is_subject_type = autonomous_domain
+							var:owner_from_another_empire = scope:influent_character_parse
+						}
+					}
+				}
+				custom_tooltip = c3rd_influent_characters_owners_tt2_2
+			}
 		}
 		custom_tooltip = c3rd_influent_characters_owners_tt3
 		if = {

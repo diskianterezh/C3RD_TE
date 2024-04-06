@@ -64,9 +64,7 @@ get_trial_success_chance_character = {
 	}
 	if = {
 		limit = {
-			scope:target = {
-				has_character_modifier = political_power_character
-			}
+			has_character_modifier = political_power_character
 		} #not so easy ;)
 		subtract = 10
 	}

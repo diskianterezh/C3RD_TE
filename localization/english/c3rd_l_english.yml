@@ -172,6 +172,8 @@
  cant_tax_evading:0 "Investments stopped"
  reintegrated_domain:0 "Domains have been nationalized"
  political_coup:0 "Political coup"
+ coup_loyal:0 "Support the government"
+ coup_unloyal:0 "Support the rebels"
 
  #character modifiers
  king_maker:0 "Kingmaker"
@@ -231,6 +233,7 @@
  ALERT_POLITICAL_INSTABILITY:0 "#T Political Instability#!\nThe country is in a phase of political instability, applying several penalties. You can solve this by using the decisions to either reform the country or stopping the political instability."
  c3rd_influent_characters_owners_tt1:0 "#T Powerful Landowners#!\nSome people in your country are considered to be major landowners because of the number of regions they control."
  c3rd_influent_characters_owners_tt2:0 "[influent_character_parse.GetName] owns #R [influent_character_parse.MakeScope.GetVariable('country_ownership').GetValue]% #!"
+ c3rd_influent_characters_owners_tt2_2:0 " this character owns autonomous domains"
  c3rd_influent_characters_owners_tt3:0 "\nCharacters will lose this status if they control less than #G 20%#!"
  c3rd_influent_characters_owners_tt4:0 "\nYour country also have #R Major politicians #! :\n"
  c3rd_influent_characters_owners_tt5:0 "[politician_character_parse.GetName]"
@@ -1255,6 +1258,19 @@ low_stab_event.7.b.tt1:0 "All the regions owned by [byebye_owner.GetName] will n
  c3rd_other_events.90.b.tt1:0 "#G This option is available because you are more popular than [pol_target.GetName] #!"
  c3rd_other_events.90.c:0 "We need to act as quickly as possible"
  c3rd_other_events.90.c.tt1:0 "You will intervene to undermine [pol_target.GetName]'s initiatives"
+
+
+ c3rd_other_events.91.t:0 "Coup !"
+ c3rd_other_events.91.desc:0 "The evening was well advanced and our leader [ROOT.GetCountry.GetRuler.GetName] was relaxing in his flats when the door opened violently: a squad of armed men led by [pol_target_c.GetName], accompanied by [pol_support_1.GetName] and [pol_support_2.GetName] burst into the room. The surprise was complete, but the demands followed one after the other, clear and direct. Who would have thought that [pol_target_c.GetName]'s thirst for power would take him all the way to an armed coup? Giving in to his demands would seem prudent but would mean losing all influence, but it is also possible to respond to arms with arms!"
+ c3rd_other_events.91.a:0 "We have no choice"
+ c3rd_other_events.91.a.tt1:0 "You will give in to [pol_target_c.GetName]'s demands for more power and influence"
+ c3rd_other_events.91.b:0 "[pol_target_c.GetName] must take power"
+ c3rd_other_events.91.b.tt1:0 "This is possible because [pol_target_c.GetName] is #G more popular#! than our leader"
+ c3rd_other_events.91.c:0 "Guards, help! Traitor!"
+ c3rd_other_events.91.c.tt1:0 "Fighting is courageous, but not without risk!"
+ c3rd_other_events.91.c.tt2:0 "You will foil the coup, and imprison [pol_target_c.GetName] if he is not a family head"
+ c3rd_other_events.91.c.tt3:0 "Your leader will die"
+ c3rd_other_events.91.c.tt4:0 "All characters below #Y 50#! loyalty will become more #R rebellious#!, those above more #G loyal#!."
 
 #tribals fix
 

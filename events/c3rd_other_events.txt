@@ -6821,7 +6821,7 @@ c3rd_other_events.86 = { #answer from landowner
         trigger = {
             has_variable = answer_landowner
             NOT = {
-                var:answer_landowner = 3
+                var:answer_landowner = 1
             }
         }
         if = {
@@ -6884,7 +6884,7 @@ c3rd_other_events.86 = { #answer from landowner
             }
             has_variable = answer_landowner
             NOT = {
-                var:answer_landowner = 3
+                var:answer_landowner = 1
             }
         }
         add_treasury = {
@@ -6928,7 +6928,7 @@ c3rd_other_events.86 = { #answer from landowner
             }
             has_variable = answer_landowner
             NOT = {
-                var:answer_landowner = 3
+                var:answer_landowner = 1
             }
         }
         if = {
@@ -6993,7 +6993,7 @@ c3rd_other_events.86 = { #answer from landowner
                 }
                 AND = { #refuses
                     has_variable = answer_landowner
-                    var:answer_landowner = 3
+                    var:answer_landowner = 1
                 }
                 NOR = { #bug
                     has_variable = landowner_demands
@@ -7709,7 +7709,7 @@ c3rd_other_events.90 = { #political powerful character - get influence
         name = c3rd_other_events.90.b
         custom_tooltip = c3rd_other_events.90.b.tt1
         trigger = {
-            scope:target = {
+            scope:pol_target = {
                 current_ruler = {
                     popularity > scope:pol_target.popularity
                 }
@@ -7740,7 +7740,9 @@ c3rd_other_events.91 = { #political powerful character - coup
     title = "c3rd_other_events.91.t"
     desc = "c3rd_other_events.91.desc"
     left_portrait = current_ruler
-    right_portrait = scope:pol_target
+    right_portrait = scope:pol_target_c
+    right_portrait = scope:pol_support_1
+    right_portrait = scope:pol_support_2
 
     picture = assassination
     trigger = {
@@ -7757,7 +7759,7 @@ c3rd_other_events.91 = { #political powerful character - coup
                 has_variable = pol_coup
             }
         }
-        any_character = {
+        any_character = { #the support
             count >= 3
             loyalty <= 30
             is_ruler = no
@@ -7804,14 +7806,67 @@ c3rd_other_events.91 = { #political powerful character - coup
         random_character = {
             limit = {
                 has_character_modifier = political_power_character
-                loyalty <= 30
+                loyalty <= 87
                 is_ruler = no
-                popularity >= 80
+                popularity >= 20
                 NOT = {
                     has_variable = pol_coup
                 }
             }
-            save_scope_as = pol_target
+            save_scope_as = pol_target_c
+            set_variable = {
+                name = pol_coup
+                days = 3650 #10y
+            }
+        }
+        random_character = {
+            limit = {
+                loyalty <= 30
+                is_ruler = no
+                NOT = {
+                    this = scope:pol_target_c
+                }
+                OR = {
+                    has_character_modifier = political_power_character
+                    power_base >= 10
+                    has_character_modifier = king_maker #in case
+                    has_character_modifier = major_influence_aristocrat
+                    AND = {
+                        is_general = yes
+                        is_mercenary = no
+                        is_governor = no
+                        power_base >= 5
+                    }
+                }
+            }
+            save_scope_as = pol_support_1
+            set_variable = {
+                name = pol_coup
+                days = 3650 #10y
+            }
+        }
+        random_character = {
+            limit = {
+                loyalty <= 30
+                is_ruler = no
+                NOR = {
+                    this = scope:pol_target_c
+                    this = scope:pol_support_1
+                }
+                OR = {
+                    has_character_modifier = political_power_character
+                    power_base >= 10
+                    has_character_modifier = king_maker #in case
+                    has_character_modifier = major_influence_aristocrat
+                    AND = {
+                        is_general = yes
+                        is_mercenary = no
+                        is_governor = no
+                        power_base >= 5
+                    }
+                }
+            }
+            save_scope_as = pol_support_2
             set_variable = {
                 name = pol_coup
                 days = 3650 #10y
@@ -7823,8 +7878,19 @@ c3rd_other_events.91 = { #political powerful character - coup
     option = {#accept
         name = c3rd_other_events.91.a
         custom_tooltip = c3rd_other_events.91.a.tt1
-        add_legitimacy = -50
-        scope:pol_target = {
+        if = {
+            limit = {
+                is_monarchy = yes
+            }
+            add_legitimacy = -50
+        }
+        else_if = {
+            limit = {
+                is_republic = yes
+            }
+            add_political_influence = -100
+        }
+        scope:pol_target_c = {
             add_corruption = 25
             add_gold = {
                 value = 0
@@ -7832,11 +7898,11 @@ c3rd_other_events.91 = { #political powerful character - coup
                 multiply = 10
             }
         }
-        every_character = {
+        every_character = { #the support
             limit = {
                 OR = {
                     loyalty <= 40
-                    is_friend = scope:pol_target
+                    is_friend = scope:pol_target_c
                 }
                 OR = {
                     has_character_modifier = political_power_character
@@ -7861,7 +7927,7 @@ c3rd_other_events.91 = { #political powerful character - coup
         custom_tooltip = c3rd_other_events.91.b.tt1
         trigger = {
             current_ruler = {
-                popularity <= scope:pol_target.popularity
+                popularity <= scope:pol_target_c.popularity
             }
         }
         current_ruler = {
@@ -7869,7 +7935,29 @@ c3rd_other_events.91 = { #political powerful character - coup
 				death_reason = death_execution
 			}
         }
-        set_as_ruler = scope:pol_target
+        set_as_ruler = scope:pol_target_c
+        every_character = { #the support
+            limit = {
+                OR = {
+                    loyalty <= 40
+                    is_friend = scope:pol_target_c
+                }
+                OR = {
+                    has_character_modifier = political_power_character
+                    power_base >= 10
+                    has_character_modifier = king_maker #in case
+                    has_character_modifier = major_influence_aristocrat
+                    AND = {
+                        is_general = yes
+                        is_mercenary = no
+                        is_governor = no
+                        power_base >= 5
+                    }
+                }
+            }
+            add_loyalty = requests_fulfilled
+        }
+        add_legitimacy = -10
         
         
     }
@@ -7877,6 +7965,120 @@ c3rd_other_events.91 = { #political powerful character - coup
     option = {#fight
         name = c3rd_other_events.91.c
         custom_tooltip = c3rd_other_events.91.c.tt1
-        
+        random_list = { #ruler might get killed ini action
+            50 = {
+                modifier = {
+                    factor = 2
+                    current_ruler = {
+                        martial >= 10
+                    }
+                }
+                modifier = {
+                    factor = 2
+                    current_ruler = {
+                        OR = {
+                            has_trait = steadfast
+                            has_trait = tough
+                        }
+                    }
+                }
+                modifier = {
+                    factor = 0.5
+                    current_ruler = {
+                        OR = {
+                            has_trait = brain_damaged
+                            has_trait = blind
+                            has_trait = depressed
+                            has_trait = gout
+                            has_trait = limp
+                        }
+                    }
+                }
+                modifier = {
+                    factor = 1.5
+                    current_ruler = {
+                        has_trait = cautious
+                    }
+                }
+                modifier = {
+                    factor = 1.5
+                    current_ruler = {
+                        OR = {
+                            has_trait = crafty
+                            has_trait = deceitful
+                        }
+                    }
+                }
+                modifier = {
+                    factor = 0.5
+                    current_ruler = {
+                        OR = {
+                            has_trait = guileless
+                            has_trait = incapable
+                        }
+                    }
+                }
+                custom_tooltip = c3rd_other_events.91.c.tt2
+                hidden_effect = {
+                    scope:pol_target_c = {
+                        if = {
+                            limit = {
+                                is_head_of_family = yes
+                            }
+                            add_popularity = -50
+                        }
+                        else = {
+                            root = {
+                                imprison = {
+                                    target = scope:pol_target_c
+                                }
+                            }
+                        }
+                    }
+                }
+                add_legitimacy = 5
+            }
+            50 = {
+                custom_tooltip = c3rd_other_events.91.c.tt3
+                hidden_effect = {
+                    current_ruler = {
+                        death = {
+                            death_reason = death_assassinated
+                            killer = scope:pol_target_c
+                        }
+                    }
+                }
+            }
+        }
+        add_tyranny = 10
+        custom_tooltip = c3rd_other_events.91.c.tt4
+        hidden_effect = {
+            every_character = { #the powerful are mixed
+                limit = {
+                    OR = {
+                        is_friend = scope:pol_target_c
+                        has_character_modifier = political_power_character
+                        power_base >= 10
+                        has_character_modifier = king_maker #in case
+                        has_character_modifier = major_influence_aristocrat
+                        AND = {
+                            is_general = yes
+                            is_mercenary = no
+                            is_governor = no
+                            power_base >= 5
+                        }
+                    }
+                }
+                if = {
+                    limit = {
+                        loyalty <= 50
+                    }
+                    add_loyalty = coup_unloyal
+                }
+                else = {
+                    add_loyalty = coup_loyal
+                }
+            }
+        }
     }
 }
