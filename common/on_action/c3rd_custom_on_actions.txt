@@ -1720,10 +1720,15 @@ c3rd_holding_gain_owner = { #owner gain control in his region
 }
 
 
-c3rd_holding_tax_evasion = { #when tax evasion is on
+c3rd_holding_tax_evasion = { #when tax evasion is on but also when you have the law advantage modifier 3+
 	trigger = {
 		has_land = yes
-		has_variable = land_tax_evasion_authorized
+		OR = {
+			has_variable = land_tax_evasion_authorized
+			has_country_modifier = law_advantages_3
+			has_country_modifier = law_advantages_4
+			has_country_modifier = law_advantages_5
+		}
 		any_governorships = { #check available governorship (thus owner)
 			exists = governor
 			governor = {
@@ -1774,6 +1779,16 @@ c3rd_holding_tax_evasion = { #when tax evasion is on
 						add = 1
 						governor = {
 							wealth >= 500
+						}
+					}
+					modifier = {
+						add = 1
+						OR = {
+							has_country_modifier = law_advantages_1
+							has_country_modifier = law_advantages_2
+							has_country_modifier = law_advantages_3
+							has_country_modifier = law_advantages_4
+							has_country_modifier = law_advantages_5
 						}
 					}
 					modifier = {

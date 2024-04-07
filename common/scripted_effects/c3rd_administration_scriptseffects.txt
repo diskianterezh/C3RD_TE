@@ -239,3 +239,473 @@ give_political_power_modifier = {
 	}
 
 }
+
+give_law_change_pol = {
+	#scope country
+	#need an asked_landowner scope saved and landowner_demands
+
+	if = {
+		limit = {#weak : secondary law
+			var:landowner_demands < 3
+		}
+		if = {#first the republic law
+			limit = {
+				is_republic = yes
+			}
+			if = {
+				limit = {
+					has_law = republic_corruption_2
+				}
+				change_law = republic_corruption_3
+			}
+			else_if = {
+				limit = {
+					tag = ROM
+					NOT = {
+						has_law = no_laws_on_corruption
+					}
+				}
+				change_law = no_laws_on_corruption
+			}
+			else_if = {
+				limit = {
+					NOR = {
+						has_law = republican_integration_2
+						tag = ROM
+					}
+				}
+				change_law = republican_integration_2
+			}
+			else_if = {
+				limit = {
+					tag = ROM
+					NOT = {
+						has_law = lex_papia
+					}
+				}
+				change_law = lex_papia
+			}
+			else_if = {
+				limit = {
+					NOR = {
+						has_law = republican_citizen_2
+						tag = ROM
+					}
+				}
+				change_law = republican_citizen_2
+			}
+			else_if = {
+				limit = {
+					has_country_modifier = tax_inspection
+				}
+				remove_country_modifier = tax_inspection
+				set_variable = {
+					name = tax_inspection_stopped
+					days = 3650
+				}
+			}
+			else_if = {
+				limit = {
+					NOT = {
+						has_country_modifier = citizen_exemption_from_census_tax
+					}
+				}
+				custom_tooltip = give_law_change_cultdec_tt1
+				if = {
+					limit = {
+						NOT = {
+							has_country_modifier = solidus_introduced
+						}
+					}
+					custom_tooltip = give_law_change_cultdec_tt2
+				}
+				add_country_modifier = { #copied from official, hence the ""
+					name = "citizen_exemption_from_census_tax" #Applies to all integrated cultures
+					duration = -1
+				}
+			}
+			else = {
+				if = {
+					limit = {
+						NOR = {
+							has_country_modifier = law_advantages_1
+							has_country_modifier = law_advantages_2
+							has_country_modifier = law_advantages_3
+							has_country_modifier = law_advantages_4
+							has_country_modifier = law_advantages_5
+						}
+					}
+					add_country_modifier = {
+						name = law_advantages_1
+						duration = 5500
+					}
+				}
+				else_if = {
+					limit = {
+						has_country_modifier = law_advantages_1
+					}
+					custom_tooltip = give_law_change_evolve_tt1
+					hidden_effect = {
+						remove_country_modifier = law_advantages_1
+					}
+					add_country_modifier = {
+						name = law_advantages_2
+						duration = 5500
+					}
+				}
+				else_if = {
+					limit = {
+						has_country_modifier = law_advantages_2
+					}
+					custom_tooltip = give_law_change_evolve_tt1
+					hidden_effect = {
+						remove_country_modifier = law_advantages_2
+					}
+					add_country_modifier = {
+						name = law_advantages_3
+						duration = 5500
+					}
+				}
+				else_if = {
+					limit = {
+						has_country_modifier = law_advantages_3
+					}
+					custom_tooltip = give_law_change_evolve_tt1
+					hidden_effect = {
+						remove_country_modifier = law_advantages_3
+					}
+					add_country_modifier = {
+						name = law_advantages_4
+						duration = 5500
+					}
+				}
+				else_if = {
+					limit = {
+						has_country_modifier = law_advantages_4
+					}
+					custom_tooltip = give_law_change_evolve_tt1
+					hidden_effect = {
+						remove_country_modifier = law_advantages_4
+					}
+					add_country_modifier = {
+						name = law_advantages_5
+						duration = 5500
+					}
+				}
+				else = {
+					add_stability = -2
+					current_ruler = {
+						add_corruption = 10
+					}
+					scope:asked_landowner = {
+						add_corruption = 25
+					}
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				is_monarchy = yes
+			}
+			if = {
+				limit = {
+					invention = global_tribesmen_output_inv_3
+					NOT = {
+						has_law = heritage_tax_exemption
+					}
+				}
+				change_law = heritage_tax_exemption
+			}
+			else_if = {
+				limit = {
+					NOT = {
+						has_law = no_contract_law
+					}
+				}
+				change_law = no_contract_law
+			}
+			else_if = {
+				limit = {
+					has_country_modifier = tax_inspection
+				}
+				remove_country_modifier = tax_inspection
+				set_variable = {
+					name = tax_inspection_stopped
+					days = 3650
+				}
+			}
+			else_if = {
+				limit = {
+					NOT = {
+						has_country_modifier = citizen_exemption_from_census_tax
+					}
+				}
+				add_country_modifier = { #copied from official, hence the ""
+					name = "citizen_exemption_from_census_tax" #Applies to all integrated cultures
+					duration = -1
+				}
+			}
+			else = {
+				if = {
+					limit = {
+						NOR = {
+							has_country_modifier = law_advantages_1
+							has_country_modifier = law_advantages_2
+							has_country_modifier = law_advantages_3
+							has_country_modifier = law_advantages_4
+							has_country_modifier = law_advantages_5
+						}
+					}
+					add_country_modifier = {
+						name = law_advantages_1
+						duration = 5500
+					}
+				}
+				else_if = {
+					limit = {
+						has_country_modifier = law_advantages_1
+					}
+					custom_tooltip = give_law_change_evolve_tt1
+					hidden_effect = {
+						remove_country_modifier = law_advantages_1
+					}
+					add_country_modifier = {
+						name = law_advantages_2
+						duration = 5500
+					}
+				}
+				else_if = {
+					limit = {
+						has_country_modifier = law_advantages_2
+					}
+					custom_tooltip = give_law_change_evolve_tt1
+					hidden_effect = {
+						remove_country_modifier = law_advantages_2
+					}
+					add_country_modifier = {
+						name = law_advantages_3
+						duration = 5500
+					}
+				}
+				else_if = {
+					limit = {
+						has_country_modifier = law_advantages_3
+					}
+					custom_tooltip = give_law_change_evolve_tt1
+					hidden_effect = {
+						remove_country_modifier = law_advantages_3
+					}
+					add_country_modifier = {
+						name = law_advantages_4
+						duration = 5500
+					}
+				}
+				else_if = {
+					limit = {
+						has_country_modifier = law_advantages_4
+					}
+					custom_tooltip = give_law_change_evolve_tt1
+					hidden_effect = {
+						remove_country_modifier = law_advantages_4
+					}
+					add_country_modifier = {
+						name = law_advantages_5
+						duration = 5500
+					}
+				}
+				else = {
+					add_stability = -2
+					current_ruler = {
+						add_corruption = 10
+					}
+					scope:asked_landowner = {
+						add_corruption = 25
+					}
+				}
+			}
+		}
+	}
+	else_if = { #medium
+		limit = {
+			var:landowner_demands < 6
+		}
+		if = {
+			limit = {
+				NOR = {
+					has_country_modifier = law_advantages_1
+					has_country_modifier = law_advantages_2
+					has_country_modifier = law_advantages_3
+					has_country_modifier = law_advantages_4
+					has_country_modifier = law_advantages_5
+				}
+			}
+			add_country_modifier = {
+				name = law_advantages_2
+				duration = 5500
+			}
+		}
+		else_if = {
+			limit = {
+				has_country_modifier = law_advantages_1
+			}
+			custom_tooltip = give_law_change_evolve_tt1
+			hidden_effect = {
+				remove_country_modifier = law_advantages_1
+			}
+			add_country_modifier = {
+				name = law_advantages_3
+				duration = 5500
+			}
+		}
+		else_if = {
+			limit = {
+				has_country_modifier = law_advantages_2
+			}
+			custom_tooltip = give_law_change_evolve_tt1
+			hidden_effect = {
+				remove_country_modifier = law_advantages_2
+			}
+			add_country_modifier = {
+				name = law_advantages_4
+				duration = 5500
+			}
+		}
+		else_if = {
+			limit = {
+				has_country_modifier = law_advantages_3
+			}
+			custom_tooltip = give_law_change_evolve_tt1
+			hidden_effect = {
+				remove_country_modifier = law_advantages_3
+			}
+			add_country_modifier = {
+				name = law_advantages_5
+				duration = 5500
+			}
+		}
+		else_if = {
+			limit = {
+				has_country_modifier = law_advantages_4
+			}
+			custom_tooltip = give_law_change_evolve_tt1
+			hidden_effect = {
+				remove_country_modifier = law_advantages_4
+			}
+			add_country_modifier = {
+				name = law_advantages_5
+				duration = 7300
+			}
+		}
+		else = {
+			add_stability = -5
+			current_ruler = {
+				add_corruption = 15
+			}
+			scope:asked_landowner = {
+				add_corruption = 35
+			}
+		}
+	}
+	else_if = { #strong
+		limit = {
+			var:landowner_demands >= 6
+		}
+		if = {
+			limit = {
+				NOR = {
+					has_country_modifier = law_advantages_1
+					has_country_modifier = law_advantages_2
+					has_country_modifier = law_advantages_3
+					has_country_modifier = law_advantages_4
+					has_country_modifier = law_advantages_5
+				}
+			}
+			add_country_modifier = {
+				name = law_advantages_3
+				duration = 5500
+			}
+		}
+		else_if = {
+			limit = {
+				has_country_modifier = law_advantages_1
+			}
+			custom_tooltip = give_law_change_evolve_tt1
+			hidden_effect = {
+				remove_country_modifier = law_advantages_1
+			}
+			add_country_modifier = {
+				name = law_advantages_4
+				duration = 5500
+			}
+		}
+		else_if = {
+			limit = {
+				has_country_modifier = law_advantages_2
+			}
+			custom_tooltip = give_law_change_evolve_tt1
+			hidden_effect = {
+				remove_country_modifier = law_advantages_2
+			}
+			add_country_modifier = {
+				name = law_advantages_5
+				duration = 5500
+			}
+		}
+		else_if = {
+			limit = {
+				has_country_modifier = law_advantages_3
+			}
+			custom_tooltip = give_law_change_evolve_tt1
+			hidden_effect = {
+				remove_country_modifier = law_advantages_3
+			}
+			add_country_modifier = {
+				name = law_advantages_5
+				duration = 7300
+			}
+		}
+		else_if = {
+			limit = {
+				has_country_modifier = law_advantages_4
+			}
+			custom_tooltip = give_law_change_evolve_tt1
+			hidden_effect = {
+				remove_country_modifier = law_advantages_4
+			}
+			add_country_modifier = {
+				name = law_advantages_5
+				duration = 9125
+			}
+		}
+		else = {
+			add_stability = -7
+			current_ruler = {
+				add_corruption = 20
+			}
+			scope:asked_landowner = {
+				add_corruption = 45
+			}
+		}
+	}
+}
+
+reduce_landowner_domain = {
+	#scope country
+	#need a asked_landowner scope
+	hidden_effect = {
+		every_owned_province = {
+			limit = {
+				exists = holding_owner
+				holding_owner = scope:asked_landowner
+			}
+			random_list = {
+				2 = {}
+				1 = {
+					holding_owner = {
+						remove_holding = prev
+					}
+				}
+			}
+		}
+	}
+}

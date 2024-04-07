@@ -17,7 +17,13 @@
 				has_variable = country_ownership
 			}
 			save_scope_as = influent_character_parse
-			custom_tooltip = c3rd_influent_characters_owners_tt2
+			if = {
+				limit = {is_ruler = yes}
+				custom_tooltip = c3rd_influent_characters_owners_tt2_1
+			}
+			else = {
+				custom_tooltip = c3rd_influent_characters_owners_tt2
+			}
 			if = {
 				limit = {
 					employer = {
@@ -44,7 +50,13 @@
 					has_character_modifier = political_power_character
 				}
 				save_scope_as = politician_character_parse
-				custom_tooltip = c3rd_influent_characters_owners_tt5
+				if = {
+					limit = {is_ruler = yes}
+					custom_tooltip = c3rd_influent_characters_owners_tt5_1
+				}
+				else = {
+					custom_tooltip = c3rd_influent_characters_owners_tt5
+				}
 			}
 		}
 	}

@@ -6489,7 +6489,7 @@ c3rd_other_events.85 = { #event when you have  the tax inspection culture law : 
                             value = 1
                         }
                     }
-                    40 = { #demand political power (chances to coup)
+                    4 = { #demand political power (chances to coup)
                         modifier = {
                             add = 2
                             scope:target = {
@@ -6595,6 +6595,14 @@ c3rd_other_events.85 = { #event when you have  the tax inspection culture law : 
                             scope:target = {
                                 has_trait = proud
                             }
+                        }
+                        modifier = {
+                            add = -2
+                            has_country_modifier = law_advantages_4
+                        }
+                        modifier = {
+                            add = -4
+                            has_country_modifier = law_advantages_5
                         }
                         set_variable = {
                             name = answer_landowner
@@ -6866,6 +6874,31 @@ c3rd_other_events.86 = { #answer from landowner
             }
             give_political_power_modifier = yes
         }
+        else_if = {
+            limit = {
+                has_variable = landowner_demands
+                has_variable = answer_landowner
+                var:answer_landowner = 4
+                scope:asked_landowner = {
+                    is_alive = yes
+                }
+            }
+            give_law_change_pol = yes
+        }
+        if = {
+            limit = {
+                var:what_are_we_asking = 1
+            }
+            reduce_landowner_domain = yes
+        }
+        else_if = {
+            limit = {
+                var:what_are_we_asking = 2
+            }
+            scope:asked_landowner = {
+                add_loyalty = loyalty_acquired
+            }
+        }
     }
 
     option = { #offer gold
@@ -6903,6 +6936,20 @@ c3rd_other_events.86 = { #answer from landowner
         }
         current_ruler = {
             add_corruption = 10
+        }
+        if = {
+            limit = {
+                var:what_are_we_asking = 1
+            }
+            reduce_landowner_domain = yes
+        }
+        else_if = {
+            limit = {
+                var:what_are_we_asking = 2
+            }
+            scope:asked_landowner = {
+                add_loyalty = loyalty_acquired
+            }
         }
     }
 
@@ -6973,6 +7020,31 @@ c3rd_other_events.86 = { #answer from landowner
             }
             give_political_power_modifier = yes
         }
+        else_if = {
+            limit = {
+                has_variable = landowner_demands
+                has_variable = answer_landowner
+                var:answer_landowner = 4
+                scope:asked_landowner = {
+                    is_alive = yes
+                }
+            }
+            give_law_change_pol = yes
+        }
+        if = {
+            limit = {
+                var:what_are_we_asking = 1
+            }
+            reduce_landowner_domain = yes
+        }
+        else_if = {
+            limit = {
+                var:what_are_we_asking = 2
+            }
+            scope:asked_landowner = {
+                add_loyalty = loyalty_acquired
+            }
+        }
     }
     
     option = { #say no
@@ -7021,6 +7093,12 @@ c3rd_other_events.86 = { #answer from landowner
                 has_variable = answer_landowner
             }
             remove_variable = answer_landowner
+        }
+        if = {
+            limit = {
+                has_variable = what_are_we_asking
+            }
+            remove_variable = what_are_we_asking
         }
         scope:asked_landowner = {
 			recalculate_ownership_char = yes

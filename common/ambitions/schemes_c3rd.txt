@@ -890,6 +890,30 @@ scheme_buy_holding = {
 			is_head_of_family = yes
 		}
 		modifier = {
+			factor = 2
+			employer = {
+				OR = {
+					has_country_modifier = law_advantages_1
+					has_country_modifier = law_advantages_2
+				}
+			}
+		}
+		modifier = {
+			factor = 3
+			employer = {
+				OR = {
+					has_country_modifier = law_advantages_3
+					has_country_modifier = law_advantages_4
+				}
+			}
+		}
+		modifier = {
+			factor = 5
+			employer = {
+				has_country_modifier = law_advantages_5
+			}
+		}
+		modifier = {
 			factor = 4
 			is_governor = yes
 			is_head_of_family = no

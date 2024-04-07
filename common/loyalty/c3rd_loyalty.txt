@@ -127,4 +127,9 @@ coup_unloyal = {
 	yearly_decay = 1
 }
 
+loyalty_acquired = {
+	value = 40
+	yearly_decay = 3
+}
+
 

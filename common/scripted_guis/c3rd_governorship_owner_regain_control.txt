@@ -52,8 +52,27 @@
 		custom_tooltip = c3rd_governorship_owner_regain_control_tt3
 		if = {
 			limit = {
+				var:governorship_owner = owner.current_ruler
+			}
+			custom_tooltip  = c3rd_governorship_owner_regain_control_tt3_2
+			if = {
+				limit = {
+					governor = {
+						family = employer.current_ruler.family
+					}
+					var:governorship_owner = {
+						is_head_of_family = yes
+					}
+					var:governorship_owner_ratio > 25
+				}
+				custom_tooltip  = c3rd_governorship_owner_regain_control_tt3_3
+			}
+		}
+		if = {
+			limit = {
 				has_variable = governorship_owner
 				has_variable = governorship_owner_ratio
+				NOT = {var:governorship_owner = owner.current_ruler}
 				var:governorship_owner_ratio < 25
 				var:governorship_owner_ratio > 10
 			}
@@ -64,94 +83,108 @@
 		hidden_effect = {
 			if = {
 				limit = {
-
+					var:governorship_owner = owner.current_ruler
+				}
+				if = {
+					limit = {
+						has_variable = governorship_owner
+					}
+					remove_variable = governorship_owner
+				}
+				if = {
+					limit = {
+						has_variable = governorship_owner_ratio
+					}
+					remove_variable = governorship_owner_ratio
 				}
 			}
-			random_list = {
-				40 = {
-					modifier = {
-						var:governorship_owner_ratio < 10
-						add = 40
-					}
-					modifier = {
-						var:governorship_owner = {
-							has_trait = content
+			else = {
+				random_list = {
+					40 = {
+						modifier = {
+							var:governorship_owner_ratio < 10
+							add = 40
 						}
-						add = 10
-					}
-					modifier = {
-						var:governorship_owner = {
-							has_trait = guileless
+						modifier = {
+							var:governorship_owner = {
+								has_trait = content
+							}
+							add = 10
 						}
-						add = 10
-					}
-					if = {
-						limit = {
-							has_variable = governorship_owner
+						modifier = {
+							var:governorship_owner = {
+								has_trait = guileless
+							}
+							add = 10
 						}
-						remove_variable = governorship_owner
-					}
-					if = {
-						limit = {
-							has_variable = governorship_owner_ratio
+						if = {
+							limit = {
+								has_variable = governorship_owner
+							}
+							remove_variable = governorship_owner
 						}
-						remove_variable = governorship_owner_ratio
-					}
-				}
-				10 = {
-					modifier = {
-						var:governorship_owner = {
-							is_disloyal = yes
+						if = {
+							limit = {
+								has_variable = governorship_owner_ratio
+							}
+							remove_variable = governorship_owner_ratio
 						}
-						add = 10
 					}
-					modifier = {
-						var:governorship_owner = {
-							has_trait = ambitious
+					10 = {
+						modifier = {
+							var:governorship_owner = {
+								is_disloyal = yes
+							}
+							add = 10
 						}
-						add = 10
-					}
-					modifier = {
-						var:governorship_owner = {
-							has_trait = crafty
+						modifier = {
+							var:governorship_owner = {
+								has_trait = ambitious
+							}
+							add = 10
 						}
-						add = 10
-					}
-					modifier = {
-						var:governorship_owner = {
-							has_trait = gluttonous
+						modifier = {
+							var:governorship_owner = {
+								has_trait = crafty
+							}
+							add = 10
 						}
-						add = 10
-					}
-					modifier = {
+						modifier = {
+							var:governorship_owner = {
+								has_trait = gluttonous
+							}
+							add = 10
+						}
+						modifier = {
+							owner = {
+								has_country_modifier = solidus_introduced
+							}
+							add = 20
+						}
+						modifier = {
+							owner = {
+								has_law = decentralized_administration_law
+							}
+							add = 10
+						}
+						modifier = {
+							var:governorship_owner = {
+								NOT = {employer = scope:regaining_governorship.owner}
+							}
+							factor = 0.1
+						}
+						modifier = {
+							var:governorship_owner_ratio >= 21
+							factor = 2
+						}
+						set_variable = {
+							name = tried_to_regain_gov
+							days = 165
+						}
 						owner = {
-							has_country_modifier = solidus_introduced
-						}
-						add = 20
-					}
-					modifier = {
-						owner = {
-							has_law = decentralized_administration_law
-						}
-						add = 10
-					}
-					modifier = {
-						var:governorship_owner = {
-							NOT = {employer = scope:regaining_governorship.owner}
-						}
-						factor = 0.1
-					}
-					modifier = {
-						var:governorship_owner_ratio >= 21
-						factor = 2
-					}
-					set_variable = {
-						name = tried_to_regain_gov
-						days = 165
-					}
-					owner = {
-						trigger_event = {
-							id = c3rd_other_events.83
+							trigger_event = {
+								id = c3rd_other_events.83
+							}
 						}
 					}
 				}
