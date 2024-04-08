@@ -701,10 +701,80 @@ reduce_landowner_domain = {
 			random_list = {
 				2 = {}
 				1 = {
+					modifier = {
+						add = 1
+						owner = {
+							has_variable = negociated_better
+						}
+					}
 					holding_owner = {
 						remove_holding = prev
 					}
 				}
+			}
+		}
+	}
+}
+
+apply_landowner_bonuses = {
+	hidden_effect = {
+		if = {
+			limit = {
+				has_variable = negociated_better
+			}
+			every_owned_province = {
+				limit = {
+					exists = holding_owner
+					holding_owner = scope:asked_landowner
+				}
+				add_province_modifier = {
+					name = extract_more
+					duration = 5500
+				}
+			}
+			scope:asked_landowner = {
+				set_variable = {
+					name = got_extract_more
+					days = 5500
+				}
+			}
+		}
+		else = {
+			every_owned_province = {
+				limit = {
+					exists = holding_owner
+					holding_owner = scope:asked_landowner
+				}
+				add_province_modifier = {
+					name = extract_more
+					duration = 3650
+				}
+			}
+			scope:asked_landowner = {
+				set_variable = {
+					name = got_extract_more
+					days = 3650
+				}
+			}
+		}
+	}
+	every_subject = {
+		limit = {
+			is_subject_type = autonomous_domain
+			has_variable = owner_from_another_empire
+			var:owner_from_another_empire = scope:asked_landowner
+		}
+		if = {
+			limit = {
+				has_variable = negociated_better
+			}
+			root = {
+				add_political_influence = 35
+			}
+		}
+		else = {
+			root = {
+				add_political_influence = 25
 			}
 		}
 	}

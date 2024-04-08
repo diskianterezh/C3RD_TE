@@ -927,6 +927,11 @@ scheme_buy_holding = {
 			factor = 2
 			employer = {has_country_modifier = solidus_introduced}
 		}
+		modifier = { #nerf a bit the "before solidus"
+			factor = 0.2
+			employer = {NOT = {has_law = basic_administrative_law}}
+			employer = {NOT = {has_country_modifier = solidus_introduced}}
+		}
 		modifier = {
 			factor = 0.2
 			employer = {

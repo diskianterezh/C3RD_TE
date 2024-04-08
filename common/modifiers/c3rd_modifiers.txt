@@ -463,6 +463,11 @@ law_advantages_5 = {
 	global_nobles_output = -0.2
 }
 
+extract_more = {
+	local_tax_modifier = 0.1
+	local_manpower_modifier = 0.1
+}
+
 # barbarian_spawn_buff_x = {
 # 	discipline = 0.05 - 0.1
 # 	emblematic_unit_1_offensive = 0.1

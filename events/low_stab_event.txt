@@ -794,6 +794,7 @@ low_stab_event.7 = {
 			}
 			save_scope_as = byebye_domain
 		}
+        custom_tooltip = low_stab_event.7.tt1
 		hidden_effect = {
 			release_subject = scope:byebye_domain
 			make_subject = {
@@ -843,7 +844,7 @@ low_stab_event.7 = {
 						}
 					}
 				}
-				random_governorships = {
+				every_governorships = {
 					limit = {
 						OR = {
 							NOT = {

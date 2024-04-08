@@ -11,9 +11,16 @@
 			employer = scope:actor
 			has_character_modifier = major_influence_aristocrat
 			employer = {
-				any_governorships = {
-					has_variable = governorship_owner
-					var:governorship_owner = scope:target
+				OR = {
+					any_governorships = {
+						has_variable = governorship_owner
+						var:governorship_owner = scope:target
+					}
+					any_subject = {
+						is_subject_type = autonomous_domain
+						has_variable = owner_from_another_empire
+						var:owner_from_another_empire = scope:target
+					}
 				}
 			}
 			is_ruler = no

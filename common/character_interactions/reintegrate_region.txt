@@ -51,6 +51,27 @@
 				}
 			}
 		}
+		trigger_if = {
+			limit = {
+				scope:target = {
+					employer = {
+						var:owner_from_another_empire = {
+							has_variable = got_negociated_recently
+						}
+					}
+				}
+			}
+			custom_tooltip = {
+				text = reintegrate_region_tt3
+				scope:target = {
+					employer = {
+						var:owner_from_another_empire = {
+							NOT ={has_variable = got_negociated_recently}
+						}
+					}
+				}
+			}
+		}
 	}
 
 	effect = {
