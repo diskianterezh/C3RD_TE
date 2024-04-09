@@ -5877,6 +5877,9 @@ c3rd_other_events.83 = { #Retake governorship failed :  you'll have to negociate
             }
 
         }
+        scope:ex_owner_calc_purp = {
+            recalculate_ownership_char = yes
+        }
         custom_tooltip = c3rd_other_events.83.a.tt2
     }
 
@@ -5931,6 +5934,9 @@ c3rd_other_events.83 = { #Retake governorship failed :  you'll have to negociate
                 remove_variable = governorship_owner_ratio
             }
         }
+        scope:ex_owner_calc_purp = {
+            recalculate_ownership_char = yes
+        }
         custom_tooltip = c3rd_other_events.83.a.tt2
     }
     option = { #the hard way
@@ -5953,6 +5959,9 @@ c3rd_other_events.83 = { #Retake governorship failed :  you'll have to negociate
                 }
                 remove_variable = governorship_owner_ratio
             }
+        }
+        scope:ex_owner_calc_purp = {
+            recalculate_ownership_char = yes
         }
         custom_tooltip = c3rd_other_events.83.a.tt2
         
@@ -5985,6 +5994,9 @@ c3rd_other_events.83 = { #Retake governorship failed :  you'll have to negociate
                 }
                 remove_variable = governorship_owner_ratio
             }
+        }
+        scope:ex_owner_calc_purp = {
+            recalculate_ownership_char = yes
         }
         custom_tooltip = c3rd_other_events.83.a.tt2
     }
@@ -6024,6 +6036,9 @@ c3rd_other_events.83 = { #Retake governorship failed :  you'll have to negociate
                 remove_variable = governorship_owner_ratio
             }
         }
+        scope:ex_owner_calc_purp = {
+            recalculate_ownership_char = yes
+        }
         custom_tooltip = c3rd_other_events.83.a.tt2
     }
     option = { #the blackmail way
@@ -6058,6 +6073,9 @@ c3rd_other_events.83 = { #Retake governorship failed :  you'll have to negociate
                 }
                 remove_variable = governorship_owner_ratio
             }
+        }
+        scope:ex_owner_calc_purp = {
+            recalculate_ownership_char = yes
         }
         custom_tooltip = c3rd_other_events.83.a.tt2
     }
@@ -6176,7 +6194,7 @@ c3rd_other_events.84 = { #event when you have  the tax inspection culture law : 
     option = { #stop this evasion
         name = c3rd_other_events.84.b
         custom_tooltip = c3rd_other_events.84.b.tt1
-        add_tyranny = 10
+        add_tyranny = 6
         every_character = {
             limit = {
                 is_head_of_family = yes
@@ -8315,7 +8333,7 @@ c3rd_other_events.91 = { #political powerful character - coup
                 }
             }
         }
-        add_tyranny = 10
+        add_tyranny = 5
         custom_tooltip = c3rd_other_events.91.c.tt4
         hidden_effect = {
             every_character = { #the powerful are mixed
@@ -8344,6 +8362,545 @@ c3rd_other_events.91 = { #political powerful character - coup
                     add_loyalty = coup_loyal
                 }
             }
+        }
+    }
+}
+
+
+c3rd_other_events.92 = { #governor complain about excessive control of another character
+    type = country_event
+    title = "c3rd_other_events.92.t"
+    desc = "c3rd_other_events.92.desc"
+    left_portrait = gov_owner_target_complain
+    right_portrait = gov_target_complain
+
+    picture = senator_conversing
+    trigger = {
+        has_land = yes
+        is_tribal = no
+        has_civil_war = no
+        current_date >= 700.1.1
+        has_country_modifier = solidus_introduced #only solidus, because i need differences with just the minor law
+        has_variable = recent_holding_affair_overall
+        any_character = {
+            is_governor = yes
+            is_ruler = no
+            save_temporary_scope_as = gov_check_gov_owner
+            NOT = {
+                has_variable = recent_holding_affair
+            }
+            employer = {
+                any_governorships = {
+                    governor = scope:gov_check_gov_owner
+                    has_variable = governorship_owner
+                    NOT = {
+                        var:governorship_owner = scope:gov_check_gov_owner
+                    }
+                    var:governorship_owner = {
+                        NOR = {
+                            is_friend = scope:gov_check_gov_owner
+                            family = scope:gov_check_gov_owner.family
+                            is_ruler = yes #different event for ruler
+                        }
+                    }
+                    has_variable = governorship_owner_ratio
+                    var:governorship_owner_ratio >= 40 #have a good grip
+                    region_control_value >= 10 #governor started his own puppetting
+                }
+            }
+        }
+    }
+    weight_multiplier = {
+		modifier = {
+			factor = 2
+            any_character = {
+                is_governor = yes
+                is_ruler = no
+                save_temporary_scope_as = gov_check_gov_owner2
+                NOT = {
+                    has_variable = recent_holding_affair
+                }
+                employer = {
+                    any_governorships = {
+                        governor = scope:gov_check_gov_owner2
+                        has_variable = governorship_owner
+                        NOT = {
+                            var:governorship_owner = scope:gov_check_gov_owner2
+                        }
+                        var:governorship_owner = {
+                            is_rival = scope:gov_check_gov_owner2
+                            is_ruler = no
+                        }
+                    }
+                }
+            }
+		}
+        modifier = {
+            factor = 2
+            any_character = {
+                count >= 5
+                is_governor = yes
+                is_ruler = no
+                save_temporary_scope_as = gov_check_gov_owner3
+                NOT = {
+                    has_variable = recent_holding_affair
+                }
+                employer = {
+                    any_governorships = {
+                        governor = scope:gov_check_gov_owner3
+                        has_variable = governorship_owner
+                        NOT = {
+                            var:governorship_owner = scope:gov_check_gov_owner3
+                        }
+                        var:governorship_owner = {
+                            NOR = {
+                                is_friend = scope:gov_check_gov_owner3
+                                family = scope:gov_check_gov_owner3.family
+                                is_ruler = yes
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    immediate = {
+        random_character = {
+            limit = {
+                is_governor = yes
+                is_ruler = no
+                save_temporary_scope_as = gov_check_gov_owner4
+                NOT = {
+                    has_variable = recent_holding_affair
+                }
+                employer = {
+                    any_governorships = {
+                        governor = scope:gov_check_gov_owner4
+                        has_variable = governorship_owner
+                        NOT = {
+                            var:governorship_owner = scope:gov_check_gov_owner4
+                            has_variable = recent_holding_affair
+                        }
+                        var:governorship_owner = {
+                            NOR = {
+                                is_friend = scope:gov_check_gov_owner4
+                                family = scope:gov_check_gov_owner4.family
+                            }
+                        }
+                        has_variable = governorship_owner_ratio
+                        var:governorship_owner_ratio >= 40 #have a good grip
+                        region_control_value >= 10 #governor started his own puppetting
+                    }
+                }
+            }
+            weight = {
+                modifier = {
+                    factor = 4
+                    employer = {
+                        any_governorships = {
+                            governor = prevprev
+                            has_variable = governorship_owner
+                            NOT = {
+                                var:governorship_owner = prevprev
+                            }
+                            var:governorship_owner = {
+                                is_rival = prevprevprev
+                                is_ruler = no
+                            }
+                        }
+                    }
+                }
+            }
+            save_scope_as = gov_target_complain
+            set_variable = {
+                name = recent_holding_affair
+                days = 3650
+            }
+        }
+        random_governorships = {
+            limit = {
+                has_variable = governorship_owner
+                governor = scope:gov_target_complain
+            }
+            save_scope_as = govship_target_complain
+            var:governorship_owner = {
+                save_scope_as = gov_owner_target_complain
+            }
+        }
+        set_variable = {
+            name = recent_holding_affair_overall
+            days = 365
+        }
+    }
+
+    option = {#yeah, let him do - owner lose popularity gain corruption, gov gain holdings
+        name = c3rd_other_events.92.a
+        custom_tooltip = c3rd_other_events.92.a.tt1
+        scope:gov_owner_target_complain = {
+            add_popularity = -20
+            add_corruption = 5
+            if = {
+                limit = {
+                    NOT = {
+                        is_rival = scope:gov_target_complain
+                    }
+                }
+                add_rival = scope:gov_target_complain
+            }
+        }
+        scope:gov_target_complain = {
+            add_corruption = 5
+        }
+        add_political_influence = 10
+        while = {
+            count = 6
+            custom_tooltip = c3rd_other_events.92.a.tt2
+            hidden_effect = {
+                random_owned_province = {
+                    limit = {
+                        governorship = scope:govship_target_complain
+                        exists = holding_owner
+                        holding_owner = scope:gov_owner_target_complain
+                    }
+                    holding_owner = {
+                        remove_holding = prev
+                    }
+                    save_scope_as = dat_holding
+                }
+                random_list = {
+                    1 = {}
+                    2 = {
+                        scope:gov_target_complain = {
+                            add_holding = scope:dat_holding
+                        }
+                    }
+                }
+            }
+        }
+        if = {
+            limit = {
+                scope:gov_owner_target_complain = {
+                    is_head_of_family = no
+                }
+                any_owned_province = {
+                    count < 6
+                    exists = holding_owner
+                    governorship = scope:govship_target_complain
+                    holding_owner = scope:gov_owner_target_complain
+                }
+                any_owned_province = {
+                    exists = holding_owner
+                    governorship = scope:govship_target_complain
+                    holding_owner = {
+                        is_head_of_family = yes
+                        family = scope:gov_owner_target_complain.family
+                    }
+                }
+            }
+            custom_tooltip = c3rd_other_events.92.a.tt3
+        }
+    }
+
+    option = {#we see nothing
+        name = c3rd_other_events.92.b
+        custom_tooltip = c3rd_other_events.92.b.tt1
+        add_political_influence = 30
+        current_ruler = {
+            add_corruption = 5
+        }
+        scope:gov_owner_target_complain = {
+            add_loyalty = holding_protected
+        }
+    }
+    
+    option = {#no corruption in our lands ! use it to restrain both their power
+        name = c3rd_other_events.92.c
+        custom_tooltip = c3rd_other_events.92.c.tt1
+        trigger = {
+            NOT = {
+                has_law = decentralized_administration_law
+            }
+        }
+        scope:gov_target_complain = {
+            add_loyalty = disappointed
+        }
+        scope:gov_owner_target_complain = {
+            add_loyalty = disappointed
+        }
+        add_political_influence = -5
+        if = {
+            limit = {
+                has_country_modifier = solidus_introduced
+            }
+            add_tyranny = 2
+        }
+        while = {
+            count = 6
+            random_owned_province = {
+                limit = {
+                    governorship = scope:govship_target_complain
+                    exists = holding_owner
+                    holding_owner = scope:gov_owner_target_complain
+                }
+                holding_owner = {
+                    remove_holding = prev
+                }
+            }
+        }
+        while = {
+            count = 3
+            random_owned_province = {
+                limit = {
+                    governorship = scope:govship_target_complain
+                    exists = holding_owner
+                    holding_owner = scope:gov_target_complain
+                }
+                holding_owner = {
+                    remove_holding = prev
+                }
+            }
+        }
+    }
+}
+
+
+c3rd_other_events.93 = { #governor complain about excessive control of ruler
+    type = country_event
+    title = "c3rd_other_events.93.t"
+    desc = "c3rd_other_events.93.desc"
+    left_portrait = current_ruler
+    right_portrait = gov_target_complain2
+
+    picture = senator_conversing
+
+    trigger = {
+        has_land = yes
+        is_tribal = no
+        has_civil_war = no
+        current_date >= 700.1.1
+        has_country_modifier = solidus_introduced #only solidus, because i need differences with just the minor law
+        NOT = {
+            has_variable = recent_holding_affair_ruler
+        }
+        any_character = {
+            is_governor = yes
+            loyalty <= 40
+            is_ruler = no
+            NOR = {
+                is_friend = root.current_ruler
+                family = root.current_ruler.family
+                has_variable = recent_holding_affair
+            }
+            save_temporary_scope_as = gov_check_gov_owner
+            employer = {
+                any_governorships = {
+                    governor = scope:gov_check_gov_owner
+                    has_variable = governorship_owner
+                    var:governorship_owner = root.current_ruler
+                    has_variable = governorship_owner_ratio
+                    region_control_value >= 10 #governor started his own puppetting
+                }
+            }
+        }
+    }
+    weight_multiplier = {
+		modifier = {
+			factor = 2
+            any_character = {
+                is_governor = yes
+                is_ruler = no
+                is_rival = root.current_ruler
+                loyalty <= 40
+                NOR = {
+                    is_friend = root.current_ruler
+                    family = root.current_ruler.family
+                    has_variable = recent_holding_affair
+                }
+                save_temporary_scope_as = gov_check_gov_owner
+                employer = {
+                    any_governorships = {
+                        governor = scope:gov_check_gov_owner
+                        has_variable = governorship_owner
+                        var:governorship_owner = root.current_ruler
+                        has_variable = governorship_owner_ratio
+                        region_control_value >= 10 #governor started his own puppetting
+                    }
+                }
+            }
+		}
+        modifier = {
+            factor = 2
+            any_character = {
+                count >= 3
+                is_governor = yes
+                is_ruler = no
+                loyalty <= 40
+                NOR = {
+                    is_friend = root.current_ruler
+                    family = root.current_ruler.family
+                    has_variable = recent_holding_affair
+                }
+                save_temporary_scope_as = gov_check_gov_owner
+                employer = {
+                    any_governorships = {
+                        governor = scope:gov_check_gov_owner
+                        has_variable = governorship_owner
+                        var:governorship_owner = root.current_ruler
+                        has_variable = governorship_owner_ratio
+                        region_control_value >= 10 #governor started his own puppetting
+                    }
+                }
+            }
+        }
+    }
+
+    immediate = {
+        random_character = {
+            limit = {
+                is_governor = yes
+                is_ruler = no
+                loyalty <= 40
+                NOR = {
+                    is_friend = root.current_ruler
+                    family = root.current_ruler.family
+                    has_variable = recent_holding_affair
+                }
+                save_temporary_scope_as = gov_check_gov_owner
+                employer = {
+                    any_governorships = {
+                        governor = scope:gov_check_gov_owner
+                        has_variable = governorship_owner
+                        var:governorship_owner = root.current_ruler
+                        has_variable = governorship_owner_ratio
+                        region_control_value >= 0 #governor started his own puppetting
+                    }
+                }
+            }
+            weight = {
+                modifier = {
+                    factor = 4
+                    is_rival = root.current_ruler
+                }
+            }
+            save_scope_as = gov_target_complain2
+            set_variable = {
+                name = recent_holding_affair
+                days = 3650
+            }
+        }
+        random_governorships = {
+            limit = {
+                has_variable = governorship_owner
+                governor = scope:gov_target_complain2
+            }
+            save_scope_as = govship_target_complain2
+        }
+        set_variable = {
+            name = recent_holding_affair_ruler
+            days = 730
+        }
+    }
+
+    option = {#let's have an accord of good principle
+        name = c3rd_other_events.93.a
+        custom_tooltip = c3rd_other_events.93.a.tt1
+        target = {
+            any_owned_province = {
+                count >= 5
+                governorship = scope:govship_target_complain2
+                exists = holding_owner
+                OR = {
+                    holding_owner = root.current_ruler
+                    holding_owner = {
+                        family = root.current_ruler.family
+                    }
+                }
+            }
+        }
+        scope:gov_target_complain2 = {
+            add_popularity = 10
+            add_corruption = 5
+        }
+        add_political_influence = 30
+        while = {
+            count = 8
+            custom_tooltip = c3rd_other_events.93.a.tt2
+            hidden_effect = {
+                random_owned_province = {
+                    limit = {
+                        governorship = scope:govship_target_complain2
+                        exists = holding_owner
+                        OR = {
+                            holding_owner = root.current_ruler
+                            holding_owner = {
+                                family = root.current_ruler.family
+                            }
+                        }
+                    }
+                    holding_owner = {
+                        remove_holding = prev
+                    }
+                    save_scope_as = dat_holding
+                }
+                random_list = {
+                    1 = {}
+                    1 = {
+                        scope:gov_target_complain2 = {
+                            add_holding = scope:dat_holding
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    option = {#we'll lose the ownership
+        name = c3rd_other_events.93.b
+        custom_tooltip = c3rd_other_events.93.b.tt1
+        add_political_influence = 5
+        scope:govship_target_complain2 = {
+            if = {
+                limit = {
+                    has_variable = governorship_owner
+                }
+                remove_variable = governorship_owner
+            }
+            if = {
+                limit = {
+                    has_variable = governorship_owner_ratio
+                }
+                remove_variable = governorship_owner_ratio
+            }
+        }
+        current_ruler = {
+            add_popularity = -15
+            add_legitimacy = -7
+			recalculate_ownership_char = yes
+        }
+    }
+    
+    option = {#we are sovereign !
+        name = c3rd_other_events.93.c
+        custom_tooltip = c3rd_other_events.93.c.tt1
+        trigger = {
+            NOT = {
+                has_law = decentralized_administration_law
+            }
+        }
+        current_ruler = {
+            add_popularity = -30
+            add_corruption = 10
+        }
+        scope:gov_target_complain2 = {
+            add_loyalty = disappointed
+        }
+        add_political_influence = -5
+        if = {
+            limit = {
+                has_country_modifier = solidus_introduced
+            }
+            add_tyranny = 5
         }
     }
 }

@@ -157,3 +157,8 @@ political_intervention3 = {
 	yearly_decay = 1
 }
 
+holding_protected = {
+	value = 10
+	yearly_decay = 1
+}
+

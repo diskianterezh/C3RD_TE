@@ -79,6 +79,9 @@
 			custom_tooltip  = c3rd_governorship_owner_regain_control_tt2
 		}
 		save_scope_as = regaining_governorship
+		var:governorship_owner = {
+			save_scope_as = ex_owner_calc_purp
+		}
 			
 		hidden_effect = {
 			if = {
@@ -96,6 +99,9 @@
 						has_variable = governorship_owner_ratio
 					}
 					remove_variable = governorship_owner_ratio
+				}
+				owner.current_ruler = {
+					recalculate_ownership_char = yes
 				}
 			}
 			else = {
@@ -128,6 +134,9 @@
 								has_variable = governorship_owner_ratio
 							}
 							remove_variable = governorship_owner_ratio
+						}
+						scope:ex_owner_calc_purp = {
+							recalculate_ownership_char = yes
 						}
 					}
 					10 = {

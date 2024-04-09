@@ -677,6 +677,12 @@ give_law_change_pol = {
 				duration = 9125
 			}
 		}
+		else_if = { #big bad law
+			limit = {
+				NOT = {has_law = decentralized_administration_law}
+			}
+			change_law = decentralized_administration_law
+		}
 		else = {
 			add_stability = -7
 			current_ruler = {

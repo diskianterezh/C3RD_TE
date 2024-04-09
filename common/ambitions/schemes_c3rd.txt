@@ -917,7 +917,6 @@ scheme_buy_holding = {
 			factor = 4
 			is_governor = yes
 			is_head_of_family = no
-			employer = {NOT = {has_law = basic_administrative_law}}
 		}
 		modifier = {
 			factor = 3
@@ -949,6 +948,252 @@ scheme_buy_holding = {
 	#on_monthly = xyz
 	on_start = scheme_buy_holding_start
 	on_finish = scheme_buy_holding_finish
+	on_abort = scheme_abort
+
+	modifier = {
+		monthly_character_popularity = -0.25
+	}
+}
+
+
+scheme_steal_holding = {
+	can_be_picked = {
+		scheme_preconditions = yes
+		NOR = {
+			has_variable = ongoing_scheme_target
+			has_variable = recent_holding_theft
+		}
+		employer = {
+			any_character = {
+				NOT = {
+					this = root
+				}
+				employer = root.employer
+				num_holdings_owned > 2
+				NOT = {
+					is_friend = root
+				}
+				OR = {
+					NOT = {
+						has_variable_list = targeted_by
+					}
+					AND = {
+						has_variable_list = targeted_by
+						variable_list_size = {
+							name = targeted_by
+							value <= 6  
+						}
+					}
+				}
+				OR = {
+					is_ruler = no
+					AND = {
+						is_ruler = yes
+						root = {
+							power_base >= 15
+						}
+					}
+				}
+			}
+		}
+		OR = {
+			title_importance_svalue > 1.25
+			power_base >= 1
+		}
+	}
+	
+	finished_when = {
+		custom_tooltip = {
+			text = "scheme_ambition_fulfillment_conditions_tooltip"
+		}
+	}
+	
+	duration = 730
+	
+	skip_initial_abort = yes
+	
+	abort = {
+		OR = {
+			NOT = {
+				exists = employer
+			}
+			prisoner = yes
+			NOT = {
+				exists = scope:ongoing_scheme_target
+			}
+			scope:ongoing_scheme_target = {
+				OR = {
+					NOT = {
+						employer = root.employer
+					}
+					is_alive = no
+					NOT = {
+						num_holdings_owned > 0
+					}
+				}
+			}
+			has_character_modifier = indisposed_charmod
+		}
+	}
+	
+	chance = {
+		base = 1
+		likely_thief = yes
+		modifier = {
+			add = 9
+			is_governor = yes
+			OR = {
+				employer = {NOT = {has_law = basic_administrative_law}}
+				employer = {has_country_modifier = solidus_introduced}
+			}
+			employer = {
+				any_character = {
+					NOT = {
+						this = root
+					}
+					employer = root.employer
+					num_holdings_owned > 2
+					NOT = {
+						is_friend = root
+					}
+					OR = {
+						NOT = {
+							has_variable_list = targeted_by
+						}
+						AND = {
+							has_variable_list = targeted_by
+							variable_list_size = {
+								name = targeted_by
+								value <= 6  
+							}
+						}
+					}
+					OR = {
+						is_ruler = no
+						AND = {
+							is_ruler = yes
+							root = {
+								power_base >= 15
+							}
+						}
+					}
+					any_holdings = {
+						governor = root
+					}
+				}
+			}
+		}
+		modifier = {
+			factor = 10
+			is_governor = yes
+			OR = {
+				employer = {NOT = {has_law = basic_administrative_law}}
+				employer = {has_country_modifier = solidus_introduced}
+			}
+			NOT = {
+				employer = {
+					any_owned_province = {
+						controller = root.employer
+						exists = governor
+						governor = root
+						AND = {
+							NOT = {
+								this = root.employer.capital_scope
+							}
+							NOT = {
+								exists = holding_owner
+							}
+						}
+					}
+				}
+			}
+			employer = {
+				any_character = {
+					NOT = {
+						this = root
+					}
+					employer = root.employer
+					num_holdings_owned > 2
+					NOT = {
+						is_friend = root
+					}
+					OR = {
+						NOT = {
+							has_variable_list = targeted_by
+						}
+						AND = {
+							has_variable_list = targeted_by
+							variable_list_size = {
+								name = targeted_by
+								value <= 6  
+							}
+						}
+					}
+					OR = {
+						is_ruler = no
+						AND = {
+							is_ruler = yes
+							root = {
+								power_base >= 15
+							}
+						}
+					}
+					any_holdings = {
+						governor = root
+					}
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			employer = {
+				OR = {
+					has_country_modifier = law_advantages_1
+					has_country_modifier = law_advantages_2
+				}
+			}
+		}
+		modifier = {
+			factor = 3
+			employer = {
+				OR = {
+					has_country_modifier = law_advantages_3
+					has_country_modifier = law_advantages_4
+				}
+			}
+		}
+		modifier = {
+			factor = 5
+			employer = {
+				has_country_modifier = law_advantages_5
+			}
+		}
+		modifier = {
+			factor = 2
+			employer = {has_law = decentralized_administration_law}
+		}
+		modifier = { #nerf a bit the "before solidus"
+			factor = 0.5
+			employer = {NOT = {has_law = basic_administrative_law}}
+			employer = {NOT = {has_country_modifier = solidus_introduced}}
+		}
+		modifier = {
+			factor = 0.2
+			employer = {
+				num_of_provinces < 10
+			}
+		}
+		modifier = {
+			factor = 2
+			employer = {
+				num_of_provinces > 100
+			}
+		}
+	}
+	
+	#on_monthly = xyz
+	on_start = scheme_steal_holding_start
+	on_finish = scheme_steal_holding_finish
 	on_abort = scheme_abort
 
 	modifier = {
