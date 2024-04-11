@@ -132,6 +132,20 @@
  desc_law_advantages_5:0 "A political figure negotiated greater freedom of land ownership for powerful figures"
  extract_more:0 "Agreement with owner"
  desc_extract_more:0 "The local owner has concluded an agreement with the state to transfer more local resources"
+ polinf_ruler_owner20: "Ruler domain"
+ desc_polinf_ruler_owner20: "The greater the proportion of the country controlled by our leader, the greater the political gain."
+ polinf_ruler_owner30: "Ruler domain"
+ desc_polinf_ruler_owner30: "The greater the proportion of the country controlled by our leader, the greater the political gain."
+ polinf_ruler_owner40: "Ruler domain"
+ desc_polinf_ruler_owner40: "The greater the proportion of the country controlled by our leader, the greater the political gain."
+ polinf_ruler_owner50: "Ruler domain"
+ desc_polinf_ruler_owner50: "The greater the proportion of the country controlled by our leader, the greater the political gain."
+ polinf_ruler_owner60: "Ruler domain"
+ desc_polinf_ruler_owner60: "The greater the proportion of the country controlled by our leader, the greater the political gain."
+ polinf_ruler_owner70: "Ruler domain"
+ desc_polinf_ruler_owner70: "The greater the proportion of the country controlled by our leader, the greater the political gain."
+ polinf_ruler_owner80: "Ruler domain"
+ desc_polinf_ruler_owner80: "The greater the proportion of the country controlled by our leader, the greater the political gain."
 
  #opinion:
  empire_rivals:0 "Rivals Empires"
@@ -155,7 +169,7 @@
  constantine_reform_law_desc:0 "A new management structure was put in place. Military and civilian careers were definitively separated: the prefects of the praetorium and the vicars were confined to purely administrative functions and the governors were relieved of all military concerns, in favour of war professionals. \n\n#G Generals will no longer ask for external wars\nGenerals are now less likely to trigger a Military Anarchy #! \n\n #R Governors are able to extend their personal influence in the regions they govern #! "
  decentralized_administration_law:0 "Total Autonomy"
  decentralized_administration_law_desc:0 "Governors were given greater autonomy, with large powers and acquired rights for the major families. This means that they tend to lose interest in imperial politics and concentrate on their own lands.\n\n #R Governors are able to extend their personal influence in the regions they govern and are muchmore likely to take independant actions #!"
- reduced_the_autonomy_desc:0 "Provincial autonomy has been reduced"
+ reduced_the_autonomy_desc:0 "No character apart from the leader is a major landowner"
 
 
  #loyalty:

@@ -14,6 +14,7 @@
 		c3rd_no_more_wonder
 		c3rd_barbarian_sack
 		c3rd_custom_on_actions_rival_legitimate
+		c3rd_apply_pol_inf_ruler_ownership
 		delay = { days = { 1 15 } }
 		c3rd_custom_on_actions_instability
 		delay = { days = { 1 20 } }

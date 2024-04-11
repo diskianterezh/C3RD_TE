@@ -23,6 +23,7 @@
 			limit = {
 				has_variable = governorship_owner
 				has_variable = governorship_owner_ratio
+				NOT = {var:governorship_owner = owner.current_ruler}
 				var:governorship_owner_ratio >= 25
 			}
 			custom_tooltip = {

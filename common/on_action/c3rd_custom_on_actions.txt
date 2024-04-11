@@ -398,6 +398,7 @@ c3rd_other_events_monthly_pulse = { #check if events can happen
 		8 = c3rd_other_events.90 #political character doing his things
 		15 = c3rd_other_events.91 #coup from political character
 		8 = c3rd_other_events.92 #governor holding clash
+		8 = c3rd_other_events.93 #governor holding clash ruler
 	}
 }
 
@@ -2002,6 +2003,64 @@ c3rd_political_general_rampup = { #if general with political power and uunloyal,
                     }
                 }
             }
+		}
+	}
+}
+
+
+c3rd_apply_pol_inf_ruler_ownership = {
+	trigger = {
+		current_date > 900.1.1
+		num_of_cities >= 1
+		NOT = {
+			tag = BAR
+		}
+		OR = {
+			current_ruler = {
+				has_character_modifier = major_influence_aristocrat
+			}
+			AND = {
+				current_ruler = {
+					NOT = {has_character_modifier = major_influence_aristocrat}
+				}
+				OR = {
+					has_country_modifier = polinf_ruler_owner20
+					has_country_modifier = polinf_ruler_owner30
+					has_country_modifier = polinf_ruler_owner40
+					has_country_modifier = polinf_ruler_owner50
+					has_country_modifier = polinf_ruler_owner60
+					has_country_modifier = polinf_ruler_owner70
+					has_country_modifier = polinf_ruler_owner80
+				}
+			}
+			
+		}
+	}
+	effect = {
+		if = {
+			limit = {
+				current_ruler = {
+					has_character_modifier = major_influence_aristocrat
+				}
+			}
+			trigger_event = c3rd_other_events.100
+		}
+		else_if = {
+			limit = {
+				current_ruler = {
+					NOT = {has_character_modifier = major_influence_aristocrat}
+				}
+				OR = {
+					has_country_modifier = polinf_ruler_owner20
+					has_country_modifier = polinf_ruler_owner30
+					has_country_modifier = polinf_ruler_owner40
+					has_country_modifier = polinf_ruler_owner50
+					has_country_modifier = polinf_ruler_owner60
+					has_country_modifier = polinf_ruler_owner70
+					has_country_modifier = polinf_ruler_owner80
+				}
+			}
+			remove_polinf_modifiers = yes
 		}
 	}
 }

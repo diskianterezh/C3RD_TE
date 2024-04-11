@@ -5017,11 +5017,17 @@ c3rd_other_events.80 = { #Notification of governorship taken by family
                 limit = {
                     has_variable = governorship_owner
                 }
+                var:governorship_owner = {
+                    save_scope_as = ex_owner
+                }
                 remove_variable = governorship_owner
             }
             set_variable = {
                 name = governorship_owner
                 value = governor
+            }
+            scope:ex_owner = {
+                recalculate_ownership_char = yes
             }
             if = {
                 limit = {
@@ -8799,6 +8805,453 @@ c3rd_other_events.93 = { #governor complain about excessive control of ruler
         set_variable = {
             name = recent_holding_affair_ruler
             days = 730
+        }
+    }
+
+    option = {#let's have an accord of good principle
+        name = c3rd_other_events.93.a
+        custom_tooltip = c3rd_other_events.93.a.tt1
+        target = {
+            any_owned_province = {
+                count >= 5
+                governorship = scope:govship_target_complain2
+                exists = holding_owner
+                OR = {
+                    holding_owner = root.current_ruler
+                    holding_owner = {
+                        family = root.current_ruler.family
+                    }
+                }
+            }
+        }
+        scope:gov_target_complain2 = {
+            add_popularity = 10
+            add_corruption = 5
+        }
+        add_political_influence = 30
+        while = {
+            count = 8
+            custom_tooltip = c3rd_other_events.93.a.tt2
+            hidden_effect = {
+                random_owned_province = {
+                    limit = {
+                        governorship = scope:govship_target_complain2
+                        exists = holding_owner
+                        OR = {
+                            holding_owner = root.current_ruler
+                            holding_owner = {
+                                family = root.current_ruler.family
+                            }
+                        }
+                    }
+                    holding_owner = {
+                        remove_holding = prev
+                    }
+                    save_scope_as = dat_holding
+                }
+                random_list = {
+                    1 = {}
+                    1 = {
+                        scope:gov_target_complain2 = {
+                            add_holding = scope:dat_holding
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    option = {#we'll lose the ownership
+        name = c3rd_other_events.93.b
+        custom_tooltip = c3rd_other_events.93.b.tt1
+        add_political_influence = 5
+        scope:govship_target_complain2 = {
+            if = {
+                limit = {
+                    has_variable = governorship_owner
+                }
+                remove_variable = governorship_owner
+            }
+            if = {
+                limit = {
+                    has_variable = governorship_owner_ratio
+                }
+                remove_variable = governorship_owner_ratio
+            }
+        }
+        current_ruler = {
+            add_popularity = -15
+            add_legitimacy = -7
+			recalculate_ownership_char = yes
+        }
+    }
+    
+    option = {#we are sovereign !
+        name = c3rd_other_events.93.c
+        custom_tooltip = c3rd_other_events.93.c.tt1
+        trigger = {
+            NOT = {
+                has_law = decentralized_administration_law
+            }
+        }
+        current_ruler = {
+            add_popularity = -30
+            add_corruption = 10
+        }
+        scope:gov_target_complain2 = {
+            add_loyalty = disappointed
+        }
+        add_political_influence = -5
+        if = {
+            limit = {
+                has_country_modifier = solidus_introduced
+            }
+            add_tyranny = 5
+        }
+    }
+}
+
+c3rd_other_events.100 = {
+	#apply polinf modifier
+	type = country_event
+	hidden = yes
+	trigger = {
+		current_date >= 800.1.1
+        current_ruler = {
+            has_character_modifier = major_influence_aristocrat
+            has_variable = country_ownership
+            OR = {
+                AND = {
+                    var:country_ownership < 30
+                    root = {
+                        NOT = {
+                            has_country_modifier = polinf_ruler_owner20
+                        }
+                    }
+                }
+                AND = {
+                    var:country_ownership < 40
+                    var:country_ownership >= 30
+                    root = {
+                        NOT = {
+                            has_country_modifier = polinf_ruler_owner30
+                        }
+                    }
+                }
+                AND = {
+                    var:country_ownership < 50
+                    var:country_ownership >= 40
+                    root = {
+                        NOT = {
+                            has_country_modifier = polinf_ruler_owner40
+                        }
+                    }
+                }
+                AND = {
+                    var:country_ownership < 60
+                    var:country_ownership >= 50
+                    root = {
+                        NOT = {
+                            has_country_modifier = polinf_ruler_owner50
+                        }
+                    }
+                }
+                AND = {
+                    var:country_ownership < 70
+                    var:country_ownership >= 60
+                    root = {
+                        NOT = {
+                            has_country_modifier = polinf_ruler_owner60
+                        }
+                    }
+                }
+                AND = {
+                    var:country_ownership < 80
+                    var:country_ownership >= 70
+                    root = {
+                        NOT = {
+                            has_country_modifier = polinf_ruler_owner70
+                        }
+                    }
+                }
+                AND = {
+                    var:country_ownership >= 80
+                    root = {
+                        NOT = {
+                            has_country_modifier = polinf_ruler_owner80
+                        }
+                    }
+                }
+            }
+        }
+	}
+	immediate = {
+        if = {
+            limit = {
+                current_ruler = {
+                    has_character_modifier = major_influence_aristocrat
+                    has_variable = country_ownership
+                    var:country_ownership < 30
+                    root = {
+                        NOT = {
+                            has_country_modifier = polinf_ruler_owner20
+                        }
+                    }
+                }
+            }
+            remove_polinf_modifiers = yes
+            add_country_modifier = {
+                name = polinf_ruler_owner20
+                duration = -1
+            }
+        }
+        else_if = {
+            limit = {
+                current_ruler = {
+                    has_character_modifier = major_influence_aristocrat
+                    has_variable = country_ownership
+                    var:country_ownership < 40
+                    var:country_ownership >= 30
+                    root = {
+                        NOT = {
+                            has_country_modifier = polinf_ruler_owner30
+                        }
+                    }
+                } 
+            }
+            remove_polinf_modifiers = yes
+            add_country_modifier = {
+                name = polinf_ruler_owner30
+                duration = -1
+            }
+        }
+        else_if = {
+            limit = {
+                current_ruler = {
+                    has_character_modifier = major_influence_aristocrat
+                    has_variable = country_ownership
+                    var:country_ownership < 50
+                    var:country_ownership >= 40
+                    root = {
+                        NOT = {
+                            has_country_modifier = polinf_ruler_owner40
+                        }
+                    }
+                } 
+            }
+            remove_polinf_modifiers = yes
+            add_country_modifier = {
+                name = polinf_ruler_owner40
+                duration = -1
+            }
+        }
+        else_if = {
+            limit = {
+                current_ruler = {
+                    has_character_modifier = major_influence_aristocrat
+                    has_variable = country_ownership
+                    var:country_ownership < 60
+                    var:country_ownership >= 50
+                    root = {
+                        NOT = {
+                            has_country_modifier = polinf_ruler_owner50
+                        }
+                    }
+                } 
+            }
+            remove_polinf_modifiers = yes
+            add_country_modifier = {
+                name = polinf_ruler_owner50
+                duration = -1
+            }
+        }
+        else_if = {
+            limit = {
+                current_ruler = {
+                    has_character_modifier = major_influence_aristocrat
+                    has_variable = country_ownership
+                    var:country_ownership < 70
+                    var:country_ownership >= 60
+                    root = {
+                        NOT = {
+                            has_country_modifier = polinf_ruler_owner60
+                        }
+                    }
+                } 
+            }
+            remove_polinf_modifiers = yes
+            add_country_modifier = {
+                name = polinf_ruler_owner60
+                duration = -1
+            }
+        }
+        else_if = {
+            limit = {
+                current_ruler = {
+                    has_character_modifier = major_influence_aristocrat
+                    has_variable = country_ownership
+                    var:country_ownership < 80
+                    var:country_ownership >= 70
+                    root = {
+                        NOT = {
+                            has_country_modifier = polinf_ruler_owner70
+                        }
+                    }
+                } 
+            }
+            remove_polinf_modifiers = yes
+            add_country_modifier = {
+                name = polinf_ruler_owner70
+                duration = -1
+            }
+        }
+        else_if = {
+            limit = {
+                current_ruler = {
+                    has_character_modifier = major_influence_aristocrat
+                    has_variable = country_ownership
+                    var:country_ownership >= 80
+                    root = {
+                        NOT = {
+                            has_country_modifier = polinf_ruler_owner80
+                        }
+                    }
+                } 
+            }
+            remove_polinf_modifiers = yes
+            add_country_modifier = {
+                name = polinf_ruler_owner80
+                duration = -1
+            }
+        }
+	}
+}
+
+
+c3rd_other_events.110 = { #Intervention !
+    type = country_event
+    title = "c3rd_other_events.110.t"
+    desc = "c3rd_other_events.110.desc"
+    left_portrait = current_ruler
+    right_portrait = x
+
+    picture = roman_trial
+
+    trigger = {
+        has_land = yes
+        is_tribal = no
+        has_civil_war = no
+        current_date >= 700.1.1
+        NOT = {
+            has_variable = recent_intervention
+        }
+        any_character = {
+            is_head_of_family = yes
+            loyalty < 33
+        }
+        OR = {
+            disloyal_country_part >= 60
+            any_character = {
+                count >= 3
+                loyalty < 33
+                OR = {
+                    is_head_of_family = yes
+                    AND = {
+                        is_general = yes
+                        is_governor = no
+                        power_base > 10
+                    }
+                    power_base >= 15
+                    has_character_modifier = king_maker
+                    AND = {
+                        has_variable = country_ownership
+                        var:country_ownership > 25
+                    }
+                }
+            }
+        }
+    }
+    weight_multiplier = {
+		modifier = {
+			factor = 5
+            towards_civil_war = yes
+		}
+    }
+
+    immediate = {
+        set_variable = {
+            name = recent_intervention
+            days = 3650
+        }
+        random_character = {
+            limit = {
+                is_head_of_family = yes
+                loyalty < 33
+            }
+            weight = {
+                modifier = {
+                    factor = 2
+                    has_variable = country_ownership
+                }
+                modifier = {
+                    factor = 2
+                    has_variable = country_ownership
+                    var:country_ownership >= 25
+                }
+                modifier = {
+                    factor = 2
+                    has_variable = country_ownership
+                    var:country_ownership >= 50
+                }
+            }
+            save_scope_as = first_inter_char
+        }
+        random_character = {
+            limit = {
+                NOT = {
+                    this = scope:first_inter_char
+                }
+                loyalty < 33
+                OR = {
+                    is_head_of_family = yes
+                    AND = {
+                        is_general = yes
+                        is_governor = no
+                        power_base > 10
+                    }
+                    power_base >= 15
+                    has_character_modifier = king_maker
+                    AND = {
+                        has_variable = country_ownership
+                        var:country_ownership > 25
+                    }
+                }
+            }
+            save_scope_as = second_inter_char
+        }
+        random_character = {
+            limit = {
+                NOR = {
+                    this = scope:first_inter_char
+                    this = scope:second_inter_char
+                }
+                loyalty < 33
+                OR = {
+                    is_head_of_family = yes
+                    AND = {
+                        is_general = yes
+                        is_governor = no
+                        power_base > 10
+                    }
+                    power_base >= 15
+                    has_character_modifier = king_maker
+                    AND = {
+                        has_variable = country_ownership
+                        var:country_ownership > 25
+                    }
+                }
+            }
+            save_scope_as = third_inter_char
         }
     }
 

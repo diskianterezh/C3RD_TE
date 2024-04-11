@@ -17,7 +17,12 @@
 				NOT = {has_law = decentralized_administration_law}
 				custom_tooltip = {
 					text = reduced_the_autonomy_desc
-					has_variable = reduced_the_autonomy
+					NOT = {
+						any_character = {
+							is_ruler = no
+							has_character_modifier = major_influence_aristocrat
+						}
+					}
 				}
 			}
 		}

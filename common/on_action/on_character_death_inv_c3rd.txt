@@ -2536,6 +2536,7 @@ on_character_death = {
                     calculate_the_gov_ownership = yes
 				}
 			}
+			recalculate_ownership_char = yes
 			scope:ownership_target = {
                 recalculate_ownership_char = yes
 				trigger_event = {
@@ -2597,6 +2598,7 @@ on_character_death = {
 							calculate_the_gov_ownership = yes
 						}
 					}
+					recalculate_ownership_char = yes #to clean eventual modifiers and variables
 				}
 				else_if = {
 					limit = {
@@ -2636,6 +2638,7 @@ on_character_death = {
 							calculate_the_gov_ownership = yes
 						}
 					}
+					recalculate_ownership_char = yes #to clean eventual variables and modifiers
 				}
 			}
 		}

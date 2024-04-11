@@ -39,7 +39,7 @@ recalculate_ownership_char = {#scopechar
 	}
 	if = {
 		limit = { 
-			country_region_control >= 1
+			country_region_control >= 1 #25
 			NOT = {
 				has_character_modifier = major_influence_aristocrat
 			}
@@ -52,7 +52,7 @@ recalculate_ownership_char = {#scopechar
 	if = {
 		limit = { 
 			has_character_modifier = major_influence_aristocrat
-			country_region_control < 0
+			country_region_control < 1 #20
 		}
 		remove_character_modifier = major_influence_aristocrat
 	}
@@ -138,18 +138,6 @@ create_domain = {
 					move_country = scope:new_country_domain
 					set_home_country = scope:new_country_domain
 				}
-			}
-			if = {
-				limit = {
-					has_variable = governorship_owner
-				}
-				remove_variable = governorship_owner
-			}
-			if = {
-				limit = {
-					has_variable = governorship_owner_ratio
-				}
-				remove_variable = governorship_owner_ratio
 			}
 			every_governorship_state = {
 				every_state_province = {
@@ -783,5 +771,50 @@ apply_landowner_bonuses = {
 				add_political_influence = 25
 			}
 		}
+	}
+}
+
+remove_polinf_modifiers = {
+	if = {
+		limit = {
+			has_country_modifier = polinf_ruler_owner20
+		}
+		remove_country_modifier = polinf_ruler_owner20
+	}
+	if = {
+		limit = {
+			has_country_modifier = polinf_ruler_owner30
+		}
+		remove_country_modifier = polinf_ruler_owner30
+	}
+	if = {
+		limit = {
+			has_country_modifier = polinf_ruler_owner40
+		}
+		remove_country_modifier = polinf_ruler_owner40
+	}
+	if = {
+		limit = {
+			has_country_modifier = polinf_ruler_owner50
+		}
+		remove_country_modifier = polinf_ruler_owner50
+	}
+	if = {
+		limit = {
+			has_country_modifier = polinf_ruler_owner60
+		}
+		remove_country_modifier = polinf_ruler_owner60
+	}
+	if = {
+		limit = {
+			has_country_modifier = polinf_ruler_owner70
+		}
+		remove_country_modifier = polinf_ruler_owner70
+	}
+	if = {
+		limit = {
+			has_country_modifier = polinf_ruler_owner80
+		}
+		remove_country_modifier = polinf_ruler_owner80
 	}
 }
