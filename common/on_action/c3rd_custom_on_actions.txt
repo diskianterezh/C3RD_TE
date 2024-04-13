@@ -1972,8 +1972,10 @@ c3rd_political_general_rampup = { #if general with political power and uunloyal,
                     }
 					modifier = {
 						factor = 2
-						has_law = constantine_reform_law
-						has_law = decentralized_administration_law
+						OR = {
+							has_law = constantine_reform_law
+							has_law = decentralized_administration_law
+						}
 					}
                 }
                 1 = {

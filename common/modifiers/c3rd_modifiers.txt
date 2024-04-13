@@ -164,6 +164,13 @@ citizen_exemption_from_census_tax = { #vanilla one nerfed
 	monthly_corruption = 0.01
 }
 
+aristocratic_exemptions = {
+	character_loyalty = 5
+	global_nobles_output = -0.2
+	monthly_corruption = 0.05
+	global_monthly_state_loyalty = -0.02
+}
+
 tax_inspection = {
 	global_citizen_happyness = -0.1
 	global_nobles_happyness = -0.1
@@ -190,6 +197,7 @@ strict_control_assessed = {
 public_games_modifier = {
 	stability_monthly_change = 0.02
 	happiness_for_same_culture_modifier = 0.05
+	monthly_political_influence_modifier = 0.2
 }
 
 no_games_modifier = {

@@ -2,10 +2,11 @@ namespace = c3rd_events
 #Notes for Military Anarchy :
 # Military anarchy is called by c3rd_events.9 - ruler assassinated by generals. Rulers above 85 popularity are immune - THIS IS WHY POPULARITY MUST BE TANKED BY NEGATIVE EVENTS TO AVOID PLAYERS BEING INVULNERABLE TO THE ANARCHY
 # Chances to be called when :
-# -You dont accept the call to war of generals : c3rd_events.7
-# -Accepted it but did not declare : c3rd_events.75
-# -c3rd_events.81, which is the special case of having only one powerful general (edge case, very rare)
-# -Barbarians ransacking the lands : c3rd_other_events.60
+# - You dont accept the call to war of generals : c3rd_events.7
+# - Accepted it but did not declare : c3rd_events.75
+# - c3rd_events.81, which is the special case of having only one powerful general (edge case, very rare)
+# - Barbarians ransacking the lands : c3rd_other_events.60
+# - c3rd_political_general_rampup : disloyal general with political power
 # The chances are scaled by a hidden variable : unworthy_leader
 # It increases when :
 # - General intervention on succession crisis denied : c3rd_events.3 
@@ -365,10 +366,6 @@ c3rd_events.4 = { #succession crisis kill the target
                     has_variable = recent_military_anarchy
                 }
                 remove_variable = recent_military_anarchy
-                set_variable = {
-                    name = recent_military_anarchy
-                    days = 18000 #50 years
-                }
             }
             if = {
                 limit = {

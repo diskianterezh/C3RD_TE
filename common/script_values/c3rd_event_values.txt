@@ -314,6 +314,12 @@ c3rd_economic_factor = {
 	}
 	if = {
 		limit = {
+			has_country_modifier = aristocratic_exemptions
+		}
+		add = 1
+	}
+	if = {
+		limit = {
 			has_country_modifier = military_advantages
 		}
 		add = 1
@@ -834,5 +840,16 @@ owned_domain_num_of_cities = {#scope CHAR need a tmp_owner char scope
 				add = 1
 			}
 		}
+	}
+}
+
+disloyal_country_part = {#scope country
+	value = 0
+	every_character = {
+		limit = {
+			has_variable = country_ownership
+			loyalty < 33
+		}
+		add = var:country_ownership
 	}
 }

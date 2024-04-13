@@ -13,6 +13,9 @@
 	constantine_reform_law = {
 		allow = {
 			invention = administrative_military_reform_c3rd
+			NOT = {
+				has_country_modifier = military_anarchy
+			}
 			OR = {
 				NOT = {has_law = decentralized_administration_law}
 				custom_tooltip = {
