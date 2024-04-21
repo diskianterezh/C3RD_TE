@@ -1054,15 +1054,13 @@ base_window = {
 						}
 
 						
-						#button_round = {
-						icon = {
+						icon_button_square = {
 							size = { 40 40 }			
 							datacontext = "[GetScriptedGui('c3rd_domain_owner_toggle')]"
 							visible = "[ScriptedGui.IsShown( GuiScope.SetRoot( DiplomaticView.GetTargetCountry.MakeScope ).End )]"
 							tooltip = "c3rd_domain_owner_tt"
-							using = icon_disloyal_powerbase
-							#blockoverride "On_click" { onclick = "[DefaultOnCharacterClick(ScriptedGui.MakeScope.GetVariable('interestingcharacter').GetCharacter.GetID)]" }
-							tooltip = "SHOW_THEIR_CHARACTERS"
+							blockoverride "Icon" {using = icon_pop_nobles}
+							blockoverride "On_click" { onclick = "[DefaultOnCharacterClick(DiplomaticView.GetTargetCountry.MakeScope.GetVariable('owner_from_another_empire').GetCharacter.GetID)]" }
 						}
 					}
 				}

@@ -811,6 +811,13 @@ subject_partition_ratio = {#subject scope
 	ceiling = yes
 }
 
+subject_third_cities = {
+	value = 0
+	add = num_of_cities
+	divide = 3 
+	ceiling = yes
+}
+
 owned_governorship_num_of_cities = { #scope CHAR need a tmp_owner char scope
 	value = 0
 	employer = {

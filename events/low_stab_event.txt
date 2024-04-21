@@ -823,6 +823,7 @@ low_stab_event.7 = {
                     name = recent_client
                     days = 365
                 }
+				remove_variable = owner_from_another_empire
 			}
 			if = {
 				#edges

@@ -1877,6 +1877,28 @@ c3rd_variables_clear = {
 	}
 }
 
+c3rd_urgent_variables_clean = {
+	effect = {
+		every_country = {
+			limit = {
+				has_variable = owner_from_another_empire
+				var:owner_from_another_empire = {
+					is_alive = yes
+					employer = root
+				}
+				is_subject = no
+			}
+			save_scope_as = owner_without_subject
+			root = {
+				trigger_event = {
+					id = c3rd_other_events.891
+					days = 1
+				}
+			}
+		}
+	}
+}
+
 
 c3rd_political_general_rampup = { #if general with political power and uunloyal, tick the unworthy leader and try to coup
 	trigger = {

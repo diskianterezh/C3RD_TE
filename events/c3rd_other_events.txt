@@ -3257,6 +3257,132 @@ c3rd_other_events.31 = { # slaves culture revolts
 #     }
 # }
 
+c3rd_other_events.33 = { #new cultural identity
+    type = country_event
+    title = "c3rd_other_events.33.t"
+    desc = "c3rd_other_events.33.desc"
+    
+    picture = city_country
+
+    trigger = {
+        has_land = yes
+        is_tribal = no
+        current_date >= 950.1.1
+    }
+
+    immediate = {
+        random_country_culture = {
+            limit = {
+                NOT = {
+                    this.culture = root.culture
+                }
+                save_temporary_scope_as = checktempculture1
+                root = {
+                    capital_scope = {
+                        state = {
+                            any_state_province = {
+                                any_pops_in_province = {
+                                    pop_culture = scope:checktempculture1.culture
+                                }
+                            }
+                        }
+                    }
+                    NOT = {
+                        any_country = {
+                            rank = great_power
+                            NOT = {this = root}
+                            primary_culture = scope:checktempculture1.culture
+                        }
+                    }
+                }
+            }
+            weight = {
+                modifier = {
+                    factor = country_culture_pop_count
+                }
+                modifier = {
+                    factor = 10
+
+                }
+                modifier = {
+                    factor = 0.1
+                    this.culture.culture_group = root.country_culture_group
+                    any_country = {
+                        rank = great_power
+                        NOT = {this = root}
+                        country_culture_group = prev.culture.culture_group 
+                        NOT = {
+                            capital_scope.region ={
+                                any_neighbor_region = {
+                                    any_neighbor_region = {
+                                        any_neighbor_region = {
+                                            this = root.capital_scope.region
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            save_scope_as = new_cultural_identity
+        }
+        random_country_culture = {
+            limit = {
+                this.culture = root.culture
+            }
+            save_scope_as = old_culture_scope
+        }
+        set_variable = {
+            name = nope_not_this_culture
+            days = 7300
+        }
+    }
+
+    option = {#let's go, new culture and bonuses
+        name = c3rd_other_events.33.a
+        custom_tooltip = c3rd_other_events.33.a.tt1
+        set_primary_culture = scope:new_cultural_identity.culture
+        add_country_modifier = {
+            name = new_beginnings_mod
+            duration = 18500
+        }
+    }
+
+    option = {#oooops no ai should not choose this anyway
+        name = c3rd_other_events.33.b
+        custom_tooltip = c3rd_other_events.33.b.tt1
+		ai_chance = {
+			factor = 0
+		}
+        
+    }
+
+    after = {
+        hidden_effect = {
+            if = {
+                limit = {
+                    has_country_modifier = new_beginnings_mod
+                }
+                scope:old_culture_scope = {
+                    add_country_culture_modifier = {
+                        name = "new_beginnings_c3rd"
+                        duration = 7300 #20 years
+                    }
+                    set_country_culture_right = nobles
+                    add_integration_progress = 1
+                    remove_country_culture_modifier = integration_status_removed
+                    if = {
+                        limit = {
+                            has_country_culture_modifier = too_many_foreigners
+                        }
+                        remove_country_culture_modifier = too_many_foreigners
+                    }
+                }
+            }
+        }
+    }
+}
 
 c3rd_other_events.40 = { #corruption from gold
     type = country_event
@@ -7511,6 +7637,18 @@ c3rd_other_events.87 = { #take region from domain
                             owner = scope:target.employer
                         }
                         set_owned_by = root
+                        random_list = {
+                            2 = {}
+                            1 = {
+                                modifier = {
+                                    add = 1
+                                    has_law = decentralized_administration_law
+                                }
+                                scope:owner_reintegrated = {
+                                    add_holding = prev
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -7583,6 +7721,18 @@ c3rd_other_events.87 = { #take region from domain
                             owner = scope:target.employer
                         }
                         set_owned_by = root
+                        random_list = {
+                            2 = {}
+                            1 = {
+                                modifier = {
+                                    add = 1
+                                    has_law = decentralized_administration_law
+                                }
+                                scope:owner_reintegrated = {
+                                    add_holding = prev
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -7656,6 +7806,18 @@ c3rd_other_events.87 = { #take region from domain
                             owner = scope:target.employer
                         }
                         set_owned_by = root
+                        random_list = {
+                            2 = {}
+                            1 = {
+                                modifier = {
+                                    add = 1
+                                    has_law = decentralized_administration_law
+                                }
+                                scope:owner_reintegrated = {
+                                    add_holding = prev
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -7666,10 +7828,7 @@ c3rd_other_events.87 = { #take region from domain
             limit = {
                 has_country_modifier = solidus_introduced
             }
-            add_tyranny = 8
-        }
-        else = {
-            add_tyranny = 4
+            add_tyranny = 5
         }
         if = {
             limit = {
@@ -7764,6 +7923,9 @@ c3rd_other_events.88 = { #when one autonomous domain does not have any owner
                 target = scope:subject_without_owner
                 type = client_state
             }
+            scope:subject_without_owner = {
+                remove_variable = owner_from_another_empire
+            }
         }
         if = {
             limit = {
@@ -7806,21 +7968,7 @@ c3rd_other_events.89 = { #when one autonomous domain have owner in foreign count
                     save_scope_as = foreign_pretendant
                 }
             }
-            if = {
-                limit = {
-                    num_of_cities < 250
-                }
-                set_variable = {
-                    name = partition
-                    value = num_of_provinces
-                }
-                change_variable = {
-                    name = partition
-                    divide = 3
-                }
-            }
         }
-        
     }
 
     option = {#annex the domain - lose some
@@ -7879,6 +8027,253 @@ c3rd_other_events.89 = { #when one autonomous domain have owner in foreign count
             make_subject = {
                 target = scope:subject_with_foreign_owner
                 type = client_state
+            }
+            scope:subject_with_foreign_owner =  {
+                remove_variable = owner_from_another_empire
+            }
+        }
+    }
+}
+
+
+c3rd_other_events.891 = { #when one autonomous domain have been set independant for a reason or another and the owner is still here
+    type = country_event
+    title = "c3rd_other_events.891.t"
+    desc = "c3rd_other_events.891.desc"
+    goto_location = scope:owner_without_subject.capital_scope
+
+    picture = romans_marching
+    trigger = {
+        exists = scope:owner_without_subject
+        scope:owner_without_subject = {
+            has_land = yes
+            has_variable = owner_from_another_empire
+            var:owner_from_another_empire = {
+                is_alive = yes
+                employer = root
+            }
+        }
+    }
+
+    immediate = {
+        every_current_war = {
+            limit = {
+                is_war_leader = scope:owner_without_subject
+            }
+            force_white_peace = THIS
+        }
+        scope:owner_without_subject = {
+            var:owner_from_another_empire = {
+                save_scope_as = owner_of_nonsubject
+            }
+        }
+    }
+
+    option = {#reintegrate the domain - low num of cities
+        name = c3rd_other_events.891.a
+        custom_tooltip = c3rd_other_events.891.a.tt1
+        trigger = {
+            scope:owner_without_subject = {
+                subject_third_cities < root.num_of_cities
+            }
+        }
+        add_manpower = {
+            value = scope:owner_without_subject.num_of_provinces
+            multiply = -1
+        }
+        make_subject = {
+            target = scope:owner_without_subject
+            type = autonomous_domain
+        }
+    }
+    option = {#reintegrate the domain - high num of cities = client
+        name = c3rd_other_events.891.b
+        custom_tooltip = c3rd_other_events.891.b.tt1
+        trigger = {
+            scope:owner_without_subject = {
+                subject_third_cities >= root.num_of_cities
+            }
+        }
+        hidden_effect = {
+            make_subject = {
+                target = scope:owner_without_subject
+                type = client_state
+            }
+            add_truce = {
+                target = scope:owner_without_subject
+                duration = 3650
+            }
+			scope:owner_of_nonsubject = {
+				remove_all_positions = yes
+				move_country = scope:owner_without_subject
+				set_home_country = scope:owner_without_subject
+				every_child = {
+					limit = {
+						prisoner = no
+					}
+					remove_all_positions = yes
+					move_country = scope:owner_without_subject
+					set_home_country = scope:owner_without_subject
+				}
+			}
+			scope:owner_without_subject = {
+				set_as_ruler = scope:owner_of_nonsubject
+                set_variable = {
+                    name = recent_client
+                    days = 365
+                }
+				remove_variable = owner_from_another_empire
+			}
+			if = {
+				#edges
+				limit = {
+					any_governorships = {
+						OR = {
+							NOT = {
+								exists = governor
+							}
+							governor = {
+								is_ruler = no
+							}
+						}
+						has_variable = governorship_owner
+						var:governorship_owner = scope:owner_of_nonsubject
+						any_governorship_state = {
+							any_state_province = {
+								any_neighbor_province = {
+									owner = scope:owner_without_subject
+								}
+							}
+						}
+					}
+				}
+				every_governorships = {
+					limit = {
+						OR = {
+							NOT = {
+								exists = governor
+							}
+							governor = {
+								is_ruler = no
+							}
+						}
+						has_variable = governorship_owner
+						var:governorship_owner = scope:owner_of_nonsubject
+						any_governorship_state = {
+							any_state_province = {
+								any_neighbor_province = {
+									owner = scope:owner_without_subject
+								}
+							}
+						}
+					}
+					every_governorship_state = {
+						limit = {
+							any_state_province = {
+								any_neighbor_province = {
+									owner = scope:owner_without_subject
+								}
+							}
+						}
+						add_to_list = state_join_domain
+					}
+				}
+				every_country_state = {
+					limit = {
+						is_in_list = state_join_domain
+					}
+					remove_from_list = state_join_domain
+					every_state_province = {
+						set_owned_by = scope:owner_without_subject
+					}
+				}
+			}
+        }
+    }
+
+    option = {#conquer it 
+        name = c3rd_other_events.891.c
+        custom_tooltip = c3rd_other_events.891.c.tt1
+        if = {
+            limit = {
+                has_country_modifier = solidus_introduced
+            }
+            add_tyranny = 4
+        }
+        add_manpower = {
+            value = scope:owner_without_subject.num_of_cities
+            divide = -2
+        }
+        if = {
+            limit = {
+                scope:owner_without_subject = {
+                    num_of_cities < 100
+                }
+            }
+            add_stability = -5
+            add_tyranny = 3
+        }
+        else_if = {
+            limit = {
+                scope:owner_without_subject = {
+                    num_of_cities < 200
+                }
+            }
+            add_stability = -10
+            add_tyranny = 6
+        }
+        else_if = {
+            limit = {
+                scope:owner_without_subject = {
+                    num_of_cities < 400
+                }
+            }
+            add_stability = -20
+            add_tyranny = 9
+        }
+        else_if = {
+            limit = {
+                scope:owner_without_subject = {
+                    num_of_cities < 600
+                }
+            }
+            add_stability = -30
+            add_tyranny = 12
+        }
+        else_if = {
+            limit = {
+                scope:owner_without_subject = {
+                    num_of_cities < 1000
+                }
+            }
+            add_stability = -40
+            add_tyranny = 16
+        }
+        else = {
+            add_stability = -50
+            add_tyranny = 20
+        }
+        scope:owner_of_nonsubject = {
+            add_loyalty = reintegrated_domain
+        }
+        hidden_effect = {
+            scope:owner_without_subject = {
+                remove_variable = owner_from_another_empire
+                every_owned_province = {
+                    set_owned_by = root
+                    random_list = {
+                        1 = {}
+                        1 = {
+                            modifier = {
+                                add = 1
+                                has_law = decentralized_administration_law
+                            }
+                            scope:owner_of_nonsubject = {
+                                add_holding = prev
+                            }
+                        }
+                    }
+                }
             }
         }
     }
@@ -10555,6 +10950,7 @@ c3rd_other_events.110 = { #Intervention
                         name = recent_client
                         days = 365
                     }
+                    remove_variable = owner_from_another_empire
                 }
                 if = {
                     #edges

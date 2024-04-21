@@ -132,23 +132,24 @@
  desc_law_advantages_5:0 "A political figure negotiated greater freedom of land ownership for powerful figures\n #R This can increase the pace and opportunities for aristocrats to own land #!"
  extract_more:0 "Agreement with owner"
  desc_extract_more:0 "The local owner has concluded an agreement with the state to transfer more local resources"
- polinf_ruler_owner20: "Ruler domain"
- desc_polinf_ruler_owner20: "The greater the proportion of the country controlled by our leader, the greater the political gain."
- polinf_ruler_owner30: "Ruler domain"
- desc_polinf_ruler_owner30: "The greater the proportion of the country controlled by our leader, the greater the political gain."
- polinf_ruler_owner40: "Ruler domain"
- desc_polinf_ruler_owner40: "The greater the proportion of the country controlled by our leader, the greater the political gain."
- polinf_ruler_owner50: "Ruler domain"
- desc_polinf_ruler_owner50: "The greater the proportion of the country controlled by our leader, the greater the political gain."
- polinf_ruler_owner60: "Ruler domain"
- desc_polinf_ruler_owner60: "The greater the proportion of the country controlled by our leader, the greater the political gain."
- polinf_ruler_owner70: "Ruler domain"
- desc_polinf_ruler_owner70: "The greater the proportion of the country controlled by our leader, the greater the political gain."
- polinf_ruler_owner80: "Ruler domain"
- desc_polinf_ruler_owner80: "The greater the proportion of the country controlled by our leader, the greater the political gain."
+ polinf_ruler_owner20:0 "Ruler domain"
+ desc_polinf_ruler_owner20:0 "The greater the proportion of the country controlled by our leader, the greater the political gain."
+ polinf_ruler_owner30:0 "Ruler domain"
+ desc_polinf_ruler_owner30:0 "The greater the proportion of the country controlled by our leader, the greater the political gain."
+ polinf_ruler_owner40:0 "Ruler domain"
+ desc_polinf_ruler_owner40:0 "The greater the proportion of the country controlled by our leader, the greater the political gain."
+ polinf_ruler_owner50:0 "Ruler domain"
+ desc_polinf_ruler_owner50:0 "The greater the proportion of the country controlled by our leader, the greater the political gain."
+ polinf_ruler_owner60:0 "Ruler domain"
+ desc_polinf_ruler_owner60:0 "The greater the proportion of the country controlled by our leader, the greater the political gain."
+ polinf_ruler_owner70:0 "Ruler domain"
+ desc_polinf_ruler_owner70:0 "The greater the proportion of the country controlled by our leader, the greater the political gain."
+ polinf_ruler_owner80:0 "Ruler domain"
+ desc_polinf_ruler_owner80:0 "The greater the proportion of the country controlled by our leader, the greater the political gain."
  aristocratic_exemptions:0 "Total Exemption for Elites"
  desc_aristocratic_exemptions:0 "The aristocracy obtained an almost total absence of the state in their profits"
-
+ new_beginnings_mod:0 "New beginnings"
+ desc_new_beginnings_mod:0 "Our new identity will guide us on the path to glory"
  #opinion:
  empire_rivals:0 "Rivals Empires"
  border_money:0 "Cheap money flooding"
@@ -250,6 +251,8 @@
  overexpansion_the_reform_instability_desc:0 "In times of instability, many can force reforms through their will to enforce a solution....\n#G Any Republican overexpansion modifier will be removed #! "
  repair_great_work:0 "Repair the great works"
  repair_great_work_desc:0 "Start the reparations of a great work"
+ new_cultural_identity:0 "Adopt a new cultural identity"
+ new_cultural_identity_desc:0 "Are we really Roman? It seems that we are not the main power that can claim this heritage. \n\nPerhaps more local roots would benefit us?"
 
  #schemes
  scheme_care_of_relatives_effect_tt:1 "[SCOPE.GetRootScope.GetCharacter.GetName] Will share his wealth with his family."
@@ -291,7 +294,8 @@
  emancipation_c3rd_desc:0 "The emancipation of slaves as a reward for loyal service was put in place to respond to the dull anger of this minority"
  slaves_massacre_c3rd:0 "Revolt Massacred"
  slaves_massacre_c3rd_desc:0 "An uprising has been massacred, the slaves are subdued"
-
+ new_beginnings_c3rd:0 "New beginnings"
+ new_beginnings_c3rd_desc:0 "Shed the ornaments of the past"
 
 
  #Inventions
@@ -1062,6 +1066,12 @@ low_stab_event.8.c.tt1:0 "Things remain as they are, but [asked_landowner.GetNam
  c3rd_other_events.31.b:0 "To arms then"
  c3rd_other_events.31.b.tt1:0 "The predominantly [revolting_slave_culture.GetName] provinces will secede into a new state. You will declare war on it. Neighbouring rebel provinces will be able to join the secessionists, as well as provinces with low loyalty"
 
+ c3rd_other_events.33.t:0 "A new beginning ?"
+ c3rd_other_events.33.desc:0 "As time goes by, more and more differences are being felt between our population and our distant origins. Many of our people feel closer to local [new_cultural_identity.GetName] customs. In order to affirm our new cultural identity, we can officially support these trends and enter a new era."
+ c3rd_other_events.33.a:0 "Into the future!"
+ c3rd_other_events.33.a.tt1:0 "We will adopt a new culture. Our old culture will remain integrated"
+ c3rd_other_events.33.b:0 "No, bad idea"
+ c3rd_other_events.33.b.tt1:0 "Nothing will happen, but we won't be able to take this decision for a while."
 
  c3rd_other_events.40.t:0 "Mountains of gold"
  c3rd_other_events.40.desc:0 "Our country is full of wealth. And the greatest of these riches are in the best place; in the government's reserves. Our good management of the country's income is obvious and raises questions, what are our leaders doing with so much wealth?\n\n'It's absolutely endless! I couldn't even tell one pile of gold from the other'. This is the kind of phrase you hear at social events from the mouths of leaders. Leading one of the richest nations on earth is enough indeed to make a man's head spin. \nFortunately the national wealth is in the hands of the most honest!"
@@ -1182,7 +1192,7 @@ low_stab_event.8.c.tt1:0 "Things remain as they are, but [asked_landowner.GetNam
  c3rd_governorship_owner_regain_control_tt4:0 "You already tried to regain control on this Governorship recently"
  c3rd_governorship_owner_regain_control_tt5:0 "The owner is no longer in the country. His control over the land will pass to his family, or disappear naturally."
  
- c3rd_domain_owner_tt:0 "This autonomous domain is the property of [DiplomaticView.GetTargetCountry.MakeScope.GetVariable('owner_from_another_empire').GetCharacter.GetName]"
+ c3rd_domain_owner_tt:0 "This autonomous domain is the property of [DiplomaticView.GetTargetCountry.MakeScope.GetVariable('owner_from_another_empire').GetCharacter.GetName]\n#G 'Reintegrate Region' interaction is available on the ruler #!"
 
  c3rd_other_events.80.t:0 "Growing influence"
  c3rd_other_events.80.desc:0 "[autonomy_governorship.MakeScope.GetVariable('governorship_owner').GetCharacter.GetName] and his family have invested a lot of their resources in the Region of [autonomy_governorship.GetName]. Enough for the local authorities to answer to them directly."
@@ -1305,6 +1315,17 @@ low_stab_event.8.c.tt1:0 "Things remain as they are, but [asked_landowner.GetNam
  c3rd_other_events.89.a.tt1:0 "You will absorb most of the domain, #R but a part will get annexed by [subject_with_foreign_owner.MakeScope.GetVariable('owner_from_another_empire').GetCharacter.GetEmployer.GetName]#!"
  c3rd_other_events.89.b:0 "People of [subject_with_foreign_owner.GetName], rise up!"
  c3rd_other_events.89.b.tt1:0 "The domain will be changed to our client state, without any losses"
+
+
+
+ c3rd_other_events.891.t:0 "The issue of [owner_without_subject.GetName]"
+ c3rd_other_events.891.desc:0 "Whether by a twist of fate or administrative mishandling, [owner_of_nonsubject.GetName]'s land in [owner_without_subject.GetName] became officially independent. This is unfortunate and should be dealt with immediately. \nHowever, we can quickly regain control, thanks to the local administrations set up by [owner_of_nonsubject.GetName]. But perhaps this would be the perfect opportunity to put some order back into things by ... replacing the administrators ?."
+ c3rd_other_events.891.a:0 "Let's bring this domain back into [owner_of_nonsubject.GetName]'s hands"
+ c3rd_other_events.891.a.tt1:0 "[owner_without_subject.GetName] will become an autonomous domain in your country.\n #G Autonomous domains can have their regions peacefully reintegrated via the 'Reintegrate region' interaction on the domaine ruler. #!"
+ c3rd_other_events.891.b:0 "Let them keep their independence ... under control"
+ c3rd_other_events.891.b.tt1:0 "#R This is necessary because [owner_without_subject.GetName] is too big for your country#!\nThe country will be changed to our client state, some of [owner_of_nonsubject.GetName]'s neighbouring territories will join it\n [owner_of_nonsubject.GetName] will take over as ruler of [owner_without_subject.GetName]"
+ c3rd_other_events.891.c:0 "Regain direct control as quickly as possible"
+ c3rd_other_events.891.c.tt1:0 "You will annex all the lands of [owner_without_subject.GetName]"
 
  c3rd_other_events.90.t:0 "Machinations behind closed doors"
  c3rd_other_events.90.desc:0 "[pol_target.GetName], strengthened by his political favours, is not resting on his laurels. He can be seen using his charms on numerous officials in the capital, and informants even speak of unofficial contacts with powerful army officers. These manoeuvres are clearly not innocent and are designed to increase [pol_target.GetName]'s influence, no doubt for very ambitious ends. It remains to be seen how we will react."

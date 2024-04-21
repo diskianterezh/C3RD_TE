@@ -35,3 +35,7 @@ slaves_massacre_c3rd = {
 	culture_happiness_modifier = 0.05
 	culture_slaves_output = 0.1
 }
+
+new_beginnings_c3rd = {
+	culture_happiness_modifier = 0.2
+}
