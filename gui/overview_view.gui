@@ -8,7 +8,14 @@ base_window = {
 	widgetanchor = top|left
 	size = { @windowwidth @windowheight }
 	position = { 60 138 }
-	movable = no
+	
+	using = movable_windows
+
+	state = {
+		name = reset_overview
+		using = default_position
+		trigger_when = "[Not(ScriptedGui.IsShown(GuiScope.SetRoot(Player.MakeScope).End))]"
+	}
 
 	### Audio ###
 	state = {
@@ -64,6 +71,12 @@ base_window = {
 				shortcut = "previous_window"
 				onclick = "[OverviewView.OnPrevious]"
 				tooltip = "PREVIOUS_OVERVIEW_VIEW"
+			}
+			
+			button_reset = {
+				blockoverride "On_click" {
+					onclick = "[PdxGuiTriggerAllAnimations('reset_overview')]"
+				}
 			}
 
 			button_close = {
@@ -336,9 +349,9 @@ base_window = {
 									container = {
 										parentanchor = hcenter
 										flowcontainer = {
-											position = { 10 34 }
+											position = { -5 34 }
 											parentanchor = hcenter
-											spacing = 0
+											spacing = -8
 											name = "dummy_ideas_grid" 
 													
 											container = {
@@ -375,144 +388,158 @@ base_window = {
 											}
 										} 
 											
-										fixedgridbox = {
-											position = { 10 0 }
-											name = "ideas_grid"
-											flipdirection = yes
-											addcolumn = 74
-											addrow = 110
-											maxhorizontalslots = 4
-											maxverticalslots = 1
-											item = {
-												widget = { 
-													datacontext = "[IdeaItem.GetIdea]" 
-													size = { 74 110 }
-													
-													icon = {
-														parentanchor = hcenter
-														size = { 120 52 }
-														scale = 0.5
-														position = { 0 20 }
-														using = flat_background_white
-														alpha = 0.95
-														modify_texture = {
-															name = "Alpha"
-															texture = "gfx/interface/base_parts/header_l_x60bd_right_cut_alpha.dds"
-															blend_mode = alphamultiply
-															spriteType = Corneredtiled
-															spriteborder = { 60 -10 }
-														}
-													}
-													
-													icon = {
-														parentanchor = hcenter
-														using = positive_color_texture
-														size = { 120 52 }
-														scale = 0.5
-														position = { 0 20 }
-														visible = "[IdeaItem.IsValid]"
-														alpha = 0.95
-														modify_texture = {
-															name = "Alpha"
-															texture = "gfx/interface/base_parts/header_l_x60bd_right_cut_alpha.dds"
-															blend_mode = alphamultiply
-															spriteType = Corneredtiled
-															spriteborder = { 60 -10 }
-														}
-													}
-													
-													icon = {
-														#parentanchor = hcenter
-														using = negative_color_texture
-														size = { 120 52 }
-														scale = 0.5
-														visible = "[IdeaItem.IsMisMatch]"
-														position = { 0 20 }
-														alpha = 0.95
-														modify_texture = {
-															name = "Alpha"
-															texture = "gfx/interface/base_parts/header_l_x60bd_right_cut_alpha.dds"
-															blend_mode = alphamultiply
-															spriteType = Corneredtiled
-															spriteborder = { 60 -10 }
-														}	
-													}
-													### shadow for group icon
-													icon = {
-														size = { 32 32 }
-														texture = "[IdeaItem.GetGroupTexture]"
-														parentanchor = hcenter
-														position = { -2 6 }
-														tooltip = "[IdeaItem.GetGroupMatchingTooltip]"
-														color = { 0 0 0 0.4 }
-													}
-													### group icon
-													icon = {
-														size = { 32 32 }
-														texture = "[IdeaItem.GetGroupTexture]"
-														parentanchor = hcenter
-														position = { 0 4 }
-														tooltip = "[IdeaItem.GetGroupMatchingTooltip]"
-													}
-													
-													button = {
-														name = "Idea Button"
-														position = { 0 16 }
-														tooltipwidget = idea_item_desc_tooltip
+										scrollarea = {
+											size = { 310 110 }
+											maximumsize = { 310 110 }
 
-														visible = "[IdeaItem.IsValid]"
-														alwaystransparent = no
-														size = { 56 56 }
-														gfxtype = framedbuttongfx
-														widgetanchor = center
-														parentanchor = center	
-														enabled = yes
-														texture = "[IdeaItem.GetIcon]"
-														onclick = "[IdeaItem.OpenSelection]"
-														using = DropShadow
-													}
-													 
-													button = {
-														name = "No Picked Idea"
-														position = { 0 16 }
-														tooltipwidget = no_idea_tooltip
-														visible = "[Not(IdeaItem.IsValid)]"
-														alwaystransparent = no
-														size = { 56 56 }
-														gfxtype = framedbuttongfx
-														widgetanchor = center
-														parentanchor = center	
-														enabled = yes
-														onclick = "[IdeaItem.OpenSelection]"
-														framesize = { 200 200 }
-														upframe = 1
-														overframe = 1
-														downframe = 1
-														disableframe = 1
-														using = button_tiled_texture
-														modify_texture = {
-															name = "Alpha"
-															texture = "gfx/interface/base_parts/button2_inner_x8y8bd_alpha.dds"
-															blend_mode = alphamultiply
-															spriteType = Corneredtiled
-															spriteborder = { 6 6 }
-														}
-														#using = DropShadow
-														icon = {
-															name = "Pattern"
-															texture = "gfx/interface/base_parts/square_button_corner_pattern_x22y22bd.dds"
-															spriteType = Corneredtiled
-															spriteborder = { 11 11 }
-															size = { 100% 100% }
-															parentanchor = bottom
-														}
-														
-														icon = {
-															name = "Idea Mark"
-															widgetanchor = center
-															parentanchor = center	
-															texture = "gfx/interface/base_parts/idea_mark.dds"
-															size = { 70% 70% }
+											scrollbarpolicy_vertical = always_off
+											scrollbar_horizontal = {
+												using = HorizontalScrollBar
+											}
+
+											scrollwidget = {
+
+												fixedgridbox = {
+													resizeparent = yes
+													position = { 2 0 }
+													name = "ideas_grid"
+													flipdirection = yes
+													addcolumn = 66
+													addrow = 110
+													maxhorizontalslots = 8
+													maxverticalslots = 1
+													item = {
+														widget = {
+															datacontext = "[IdeaItem.GetIdea]"
+															size = { 60 110 }
+
+															icon = {
+																#parentanchor = hcenter
+																size = { 120 52 }
+																scale = 0.5
+																position = { 0 20 }
+																using = flat_background_white
+																alpha = 0.95
+																modify_texture = {
+																	name = "Alpha"
+																	texture = "gfx/interface/base_parts/header_l_x60bd_right_cut_alpha.dds"
+																	blend_mode = alphamultiply
+																	spriteType = Corneredtiled
+																	spriteborder = { 60 -10 }
+																}
+															}
+
+															icon = {
+																#parentanchor = hcenter
+																using = positive_color_texture
+																size = { 120 52 }
+																scale = 0.5
+																position = { 0 20 }
+																visible = "[IdeaItem.IsValid]"
+																alpha = 0.95
+																modify_texture = {
+																	name = "Alpha"
+																	texture = "gfx/interface/base_parts/header_l_x60bd_right_cut_alpha.dds"
+																	blend_mode = alphamultiply
+																	spriteType = Corneredtiled
+																	spriteborder = { 60 -10 }
+																}
+															}
+
+															icon = {
+																#parentanchor = hcenter
+																using = negative_color_texture
+																size = { 120 52 }
+																scale = 0.5
+																visible = "[IdeaItem.IsMisMatch]"
+																position = { 0 20 }
+																alpha = 0.95
+																modify_texture = {
+																	name = "Alpha"
+																	texture = "gfx/interface/base_parts/header_l_x60bd_right_cut_alpha.dds"
+																	blend_mode = alphamultiply
+																	spriteType = Corneredtiled
+																	spriteborder = { 60 -10 }
+																}
+															}
+															### shadow for group icon
+															icon = {
+																size = { 32 32 }
+																texture = "[IdeaItem.GetGroupTexture]"
+																parentanchor = hcenter
+																position = { -2 6 }
+																tooltip = "[IdeaItem.GetGroupMatchingTooltip]"
+																color = { 0 0 0 0.4 }
+															}
+															### group icon
+															icon = {
+																size = { 32 32 }
+																texture = "[IdeaItem.GetGroupTexture]"
+																parentanchor = hcenter
+																position = { 0 4 }
+																tooltip = "[IdeaItem.GetGroupMatchingTooltip]"
+															}
+
+															button = {
+																name = "Idea Button"
+																position = { 0 16 }
+																tooltipwidget = idea_item_desc_tooltip
+
+																visible = "[IdeaItem.IsValid]"
+																alwaystransparent = no
+																size = { 54 54 }
+																gfxtype = framedbuttongfx
+																widgetanchor = center
+																parentanchor = center
+																enabled = yes
+																texture = "[IdeaItem.GetIcon]"
+																onclick = "[IdeaItem.OpenSelection]"
+																using = DropShadow
+															}
+
+															button = {
+																name = "No Picked Idea"
+																position = { 0 16 }
+																tooltipwidget = no_idea_tooltip
+																visible = "[Not(IdeaItem.IsValid)]"
+																alwaystransparent = no
+																size = { 54 54 }
+																gfxtype = framedbuttongfx
+																widgetanchor = center
+																parentanchor = center
+																enabled = yes
+																onclick = "[IdeaItem.OpenSelection]"
+																framesize = { 200 200 }
+																upframe = 1
+																overframe = 1
+																downframe = 1
+																disableframe = 1
+																using = button_tiled_texture
+																modify_texture = {
+																	name = "Alpha"
+																	texture = "gfx/interface/base_parts/button2_inner_x8y8bd_alpha.dds"
+																	blend_mode = alphamultiply
+																	spriteType = Corneredtiled
+																	spriteborder = { 6 6 }
+																}
+																#using = DropShadow
+																icon = {
+																	name = "Pattern"
+																	texture = "gfx/interface/base_parts/square_button_corner_pattern_x22y22bd.dds"
+																	spriteType = Corneredtiled
+																	spriteborder = { 11 11 }
+																	size = { 100% 100% }
+																	parentanchor = bottom
+																}
+
+																icon = {
+																	name = "Idea Mark"
+																	widgetanchor = center
+																	parentanchor = center
+																	texture = "gfx/interface/base_parts/idea_mark.dds"
+																	size = { 70% 70% }
+																}
+															}
 														}
 													}
 												}

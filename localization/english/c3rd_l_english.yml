@@ -171,8 +171,8 @@
  constantine_reform_law_desc:0 "A new management structure was put in place. Military and civilian careers were definitively separated: the prefects of the praetorium and the vicars were confined to purely administrative functions and the governors were relieved of all military concerns, in favour of war professionals. \n\n#G Generals will no longer ask for external wars\nGenerals are now less likely to trigger a Military Anarchy #! \n\n #R Governors are able to extend their personal influence in the regions they govern #! "
  decentralized_administration_law:0 "Total Autonomy"
  decentralized_administration_law_desc:0 "Governors were given greater autonomy, with large powers and acquired rights for the major families. This means that they tend to lose interest in imperial politics and concentrate on their own lands.\n\n #R Governors are able to extend their personal influence in the regions they govern and are muchmore likely to take independant actions #!"
- reduced_the_autonomy_desc:0 "No character apart from the leader is a major landowner"
-
+ reduced_the_autonomy_desc:0 "No character is a major landowner, leader excluded"
+ constantine_reform_available_desc:0 "The reform was made accessible by the contribution of an enlightened ruler"
 
  #loyalty:
  independence_denied:0 "Autonomy denied"
@@ -393,8 +393,8 @@
 
 
  autonomous_domain:0 "Autonomous Region"
- AM_autonomous_domain:0 "Autonomous Domain of $LIST$\n#G 'Reintegrate Region' interaction is available on the ruler #!"
- LEAD_autonomous_domain:2 "#T $LIST$#!\nAutonomous Domain\n#G 'Reintegrate Region' interaction is available on the ruler #!"
+ AM_autonomous_domain:0 "Autonomous Domain of $LIST$\n#G 'Reintegrate Region' interaction is available on the ruler #!\n\nAn autonomous domain is a region so completely controlled by one character that it is de facto virtually independent, but is still considered part of the country "
+ LEAD_autonomous_domain:2 "#T $LIST$#!\nAutonomous Domain\n#G 'Reintegrate Region' interaction is available on the ruler #!\n\nAn autonomous domain is a region so completely controlled by one character that it is de facto virtually independent, but is still considered part of the country "
  
  CANCEL_autonomous_domainTITLE:0 "Give Independance"
  CANCEL_autonomous_domain_TOOLTIP_HEADER:0 "Give Independance to the governorship"
@@ -449,6 +449,14 @@ low_stab_event.7.b:0 "Traitor! Seize what he may have left"
 low_stab_event.7.b.tt1:0 "All the regions owned by [byebye_owner.GetName] will no longer be under his control, and therefore cannot be inherited by his family."
 
 
+low_stab_event.8.t:0 "Landowner Intervene"
+low_stab_event.8.desc:0 "[asked_landowner.GetName], a de facto owner of certain regions of our country, reached out to us with a proposal. At a time when the country's situation is deteriorating, he wishes to shelter some of his possessions and thus, in his words, 'guarantee the stability of his lands'. This would mean giving him even more autonomy... but do we really have a choice?"
+low_stab_event.8.a:0 "If we have to..."
+low_stab_event.8.a.tt1:0 "[asked_landowner.GetName] will gather some of his possessions into an autonomous estate"
+low_stab_event.8.b:0 "Nice try but no!"
+low_stab_event.8.b.tt1:0 "Things remain as they are, but [asked_landowner.GetName]'s resentment will have deleterious effects on the unity of the country"
+low_stab_event.8.c:0 "You traitor!"
+low_stab_event.8.c.tt1:0 "Things remain as they are, but [asked_landowner.GetName]'s resentment will have very deleterious effects on the unity of the country"
 
 
  c3rd_events.1.t:0 "Bureaucratic mess"
@@ -1173,7 +1181,8 @@ low_stab_event.7.b.tt1:0 "All the regions owned by [byebye_owner.GetName] will n
  c3rd_governorship_owner_regain_control_tt3_3:0 "#T As the current governor is related to the ruler, who still owns a large part of the governorate, there is a risk that he will repossess it later!#!"
  c3rd_governorship_owner_regain_control_tt4:0 "You already tried to regain control on this Governorship recently"
  c3rd_governorship_owner_regain_control_tt5:0 "The owner is no longer in the country. His control over the land will pass to his family, or disappear naturally."
-
+ 
+ c3rd_domain_owner_tt:0 "This autonomous domain is the property of [DiplomaticView.GetTargetCountry.MakeScope.GetVariable('owner_from_another_empire').GetCharacter.GetName]"
 
  c3rd_other_events.80.t:0 "Growing influence"
  c3rd_other_events.80.desc:0 "[autonomy_governorship.MakeScope.GetVariable('governorship_owner').GetCharacter.GetName] and his family have invested a lot of their resources in the Region of [autonomy_governorship.GetName]. Enough for the local authorities to answer to them directly."
@@ -1258,7 +1267,8 @@ low_stab_event.7.b.tt1:0 "All the regions owned by [byebye_owner.GetName] will n
  c3rd_other_events.86.d.tt1:0 "You refuse the proposal and end the negotiations"
  c3rd_other_events.86.e:0 "There is nothing to do"
  c3rd_other_events.86.e.tt1:0 "Nothing will be done"
- c3rd_other_events.86.tt13:0 "[SCOPE.ScriptValue('country_gov_ratio_number')|0Y] governorships will join an autonomous domain of [asked_landowner.GetName]" c3rd_other_events.86.tt1_1:0 "A part of the character's holdings will be removed"
+ c3rd_other_events.86.tt13:0 "[SCOPE.ScriptValue('country_gov_ratio_number')|0Y] governorships will join an autonomous domain of [asked_landowner.GetName]" 
+ c3rd_other_events.86.tt1_1:0 "A part of the character's holdings will be removed"
  c3rd_other_events.86.tt1_2:0 "The character gains a loyalty boost"
  c3rd_other_events.86.tt1_3:0 "Each of the character's holdings will gain bonuses in taxes and manpower, and you'll gain political influence for each autonomous domain he owns"
  c3rd_other_events.86.tt1_41:0 "All disloyal characters gain 10 loyalty"
@@ -1339,27 +1349,33 @@ low_stab_event.7.b.tt1:0 "All the regions owned by [byebye_owner.GetName] will n
  c3rd_other_events.93.c:0 "This land is PRIVATE property"
  c3rd_other_events.93.c.tt1:0 "Let's stand firm, whatever the consequences"
 
+ c3rd_other_events.101.t:0 "The [ROOT.GetCountry.GetRuler.GetName] reform"
+ c3rd_other_events.101.desc:0 "Our leader, [ROOT.GetCountry.GetRuler.GetName], has been reflecting for some time on the latest military unrest. For this man of law, the military takeover of the state is not an experience to be repeated. \nHis intimate knowledge of state affairs has inspired him to draft new legislation to restrict the possibility of renewed military anarchy. \nEvery law has its drawbacks, and it won't be long before we find them, but this is undoubtedly an opportunity to protect ourselves against future appetites."
+ c3rd_other_events.101.a:0 "Let's take this opportunity"
+ c3rd_other_events.101.a.tt1:0 "You will now be able to choose the #Y Reform of Contantine#! law in the administration laws"
+ c3rd_other_events.101.b:0 "No, there's no need"
+ c3rd_other_events.101.b.tt1:0 "You won't have this opportunity again for a while"
 
- c3rd_other_events.110.t:0 ""
- c3rd_other_events.110.desc:0 ""
- c3rd_other_events.110.a:0 ""
- c3rd_other_events.110.a.tt1:0 ""
+ c3rd_other_events.110.t:0 "Rebellion in high places"
+ c3rd_other_events.110.desc:0 "Power is a fickle thing, and very often depends on the goodwill of elites and the balance of power. \nIn any case, this balance is not in our favor, as [first_inter_char.GetName] has launched a full-scale political offensive against our government. Supported by [second_inter_char.GetName] and [third_inter_char.GetName], he is seeking to bring about a radical change commensurate with his discontent.\n\n Such a political crisis could shake the foundations of our empire, if we don't resolve it quickly... "
+ c3rd_other_events.110.a:0 "It's best to secure the support of these generals..."
+ c3rd_other_events.110.a.tt1:0 "It seems more prudent to listen to the word of these soldiers, and give them the influence they deserve."
  c3rd_other_events.110.a.tt2:0 "#R This will lead to a situation of military anarchy for the next few years#!"
- c3rd_other_events.110.b:0 ""
- c3rd_other_events.110.b.tt1:0 ""
- c3rd_other_events.110.c:0 ""
- c3rd_other_events.110.c.tt1:0 ""
- c3rd_other_events.110.d:0 ""
- c3rd_other_events.110.d.tt1:0 ""
- c3rd_other_events.110.e:0 ""
- c3rd_other_events.110.e.tt1:0 ""
- c3rd_other_events.110.f:0 ""
- c3rd_other_events.110.f.tt1:0 ""
- c3rd_other_events.110.g:0 ""
- c3rd_other_events.110.g.tt1:0 ""
+ c3rd_other_events.110.b:0 "It's the military that runs the country. Just talk amongst yourselves."
+ c3rd_other_events.110.b.tt1:0 "New strongmen for a time of turmoil. May they kill each other"
+ c3rd_other_events.110.c:0 "Money? Benefits? You'll get it all!"
+ c3rd_other_events.110.c.tt1:0 "You'll make major concessions on monetary policy.\n#R These changes will have a negative effect on the economic balance#!."
+ c3rd_other_events.110.d:0 "Your domains are of course guaranteed"
+ c3rd_other_events.110.d.tt1:0 "You will grant broad land rights to the rebels"
+ c3rd_other_events.110.e:0 "Let's give some benefits to solve the problem"
+ c3rd_other_events.110.e.tt1:0 "You will give some rights to the land. This will accentuate the government's apparent weakness."
+ c3rd_other_events.110.f:0 "Let's give owners more freedom. Much, much more freedom"
+ c3rd_other_events.110.f.tt1:0 "You will give very broad rights to owners"
+ c3rd_other_events.110.g:0 "But what more do they expect? Give them whatever they want"
+ c3rd_other_events.110.g.tt1:0 "Your government's extensive decentralization will lead to the disintegration of provincial unity."
  c3rd_other_events.110.g.tt2:0 "The autonomous domain of [byebye_owner.GetName] will change to client state. States in the regions owned by [byebye_owner.GetName] that are bordering [byebye_domain.GetName] will be owned by [byebye_domain.GetName]"
- c3rd_other_events.110.h:0 ""
- c3rd_other_events.110.h.tt1:0 ""
+ c3rd_other_events.110.h:0 "Traitors! You'll get NOTHING"
+ c3rd_other_events.110.h.tt1:0 "You will remain impassive in the face of demands, whatever the consequences."
 
  give_law_change_cultdec_tt1:0 "This modifier can be canceled in the primary culture decision tab"
  give_law_change_cultdec_tt2:0 "This have a #R negative impact#! on the monetary balance"

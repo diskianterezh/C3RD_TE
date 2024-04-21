@@ -1,0 +1,12 @@
+﻿c3rd_domain_owner_toggle = {
+	scope = country
+
+	ai_is_valid = {
+		always = no
+	}
+
+	is_shown = {
+		has_variable = owner_from_another_empire
+	}
+
+}

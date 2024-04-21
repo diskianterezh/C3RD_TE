@@ -123,6 +123,10 @@ create_domain = {
 							name = owner_from_another_empire
 							value = scope:asked_landowner
 						}
+						set_variable = {
+							name = recent_domain
+							days = 1850
+						}
 					}
 				}
 			}

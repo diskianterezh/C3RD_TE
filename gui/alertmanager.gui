@@ -55,10 +55,23 @@ widget = {
 	position = { 144 43 }
 	size = { 1460 116 }
 	layer = middle_top
-	scissor = yes
-	flowcontainer = {		
+	datacontext = "[GetScriptedGui('tiny_flag')]"
+
+	state = {
+		name = tiny_flag
+		trigger_when = "[ScriptedGui.IsShown(GuiScope.SetRoot(Player.MakeScope).End)]"
+		position = { 75 43 }
+	}
+
+	state = {
+		name = big_flag
+		trigger_when = "[Not(ScriptedGui.IsShown(GuiScope.SetRoot(Player.MakeScope).End))]"
+		position = { 144 43 }
+	}
+
+	flowcontainer = {	
 		ignoreinvisible = yes
-		visible = "[AlertManager.GetPlayer.Exists]"
+		visible = "[And(AlertManager.GetPlayer.Exists, Not(IsReplayShown))]"
 		spacing = 8
 		
 		###########################################################################
@@ -248,6 +261,19 @@ widget = {
 				texture = "gfx/interface/icons/shared_icons/civil_war_active_inactive.dds"
 				framesize = {50 50}
 				frame = 1
+			}
+			icon = {
+				position = { 0 0 }
+				size = { 100% 7 }
+				using = flat_background_black
+				color = { 0 0 0 0.5 }
+
+				progressbar = {
+					using = flat_background_white
+					color = { 0.9 0.2 0 0.9 }
+					size = { 100% 100% }
+					value = "[FixedPointToFloat(Player.GetProgressTowardsCivilWar)]"
+				}
 			}
 		}
 

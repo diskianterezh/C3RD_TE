@@ -1,0 +1,55 @@
+﻿movable_windows = { #IN CASE YOU ARE NOT USING BETTER UI THESE ARE THE USED SETTINGS FOR COMPATIBILITY
+	scope = country
+
+	ai_is_valid = {
+		always = no
+	}
+
+	is_shown = {
+		has_variable = movable_windows
+	}
+
+	effect = {
+		if = {
+			limit = {
+				has_variable = movable_windows
+			}
+			remove_variable = movable_windows
+		}
+		else = {
+			set_variable = {
+				name = movable_windows
+				value = 2
+			}
+		}
+	}
+}
+
+
+tiny_flag = { #IN CASE YOU ARE NOT USING BETTER UI THESE ARE THE USED SETTINGS FOR COMPATIBILITY
+	scope = country
+
+	ai_is_valid = {
+		always = no
+	}
+
+	is_shown = {
+		has_variable = tiny_flag
+	}
+
+	effect = {
+		if = {
+			limit = {
+				has_variable = tiny_flag
+			}
+			remove_variable = tiny_flag
+		}
+		else = {
+			set_variable = {
+				name = tiny_flag
+				value = 2
+			}
+		}
+	}
+}
+

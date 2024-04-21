@@ -9141,6 +9141,84 @@ c3rd_other_events.100 = {
 }
 
 
+c3rd_other_events.101 = { #good ruler can make the 2nd admin law available
+    type = country_event
+    title = "c3rd_other_events.101.t"
+    desc = "c3rd_other_events.101.desc"
+    left_portrait = current_ruler
+
+    picture = senator_conversing
+
+    trigger = {
+        has_land = yes
+        is_tribal = no
+        has_civil_war = no
+        current_date >= 700.1.1
+        NOR = {
+            has_country_modifier = military_anarchy
+            has_variable = constantine_reform_available
+            has_law = constantine_reform_law
+            invention = administrative_military_reform_c3rd
+        }
+        has_variable = recent_military_anarchy
+        ruler = {
+            finesse >= 10
+            charisma >= 5
+        }
+    }
+    weight_multiplier = {
+		modifier = {
+			factor = 2
+            ruler = {
+                finesse >= 12
+            }
+		}
+		modifier = {
+			factor = 2
+            ruler = {
+                finesse >= 15
+            }
+		}
+		modifier = {
+			factor = 2
+            ruler = {
+                OR = {
+                    has_trait = wise
+                    has_trait = scholar
+                    has_trait = intelligent
+                }
+            }
+		}
+    }
+
+    immediate = {
+        set_variable = {
+            name = tried_reform_constantine
+            days = 7300
+        }
+    }
+
+    option = {#yes ! let's do this
+        name = c3rd_other_events.101.a
+        custom_tooltip = c3rd_other_events.101.a.tt1
+        add_political_influence = -20
+        ruler = {
+            add_popularity = 20
+        }
+        set_variable = {
+            name = constantine_reform_available
+        }
+    }
+
+    option = {#we'll lose the ownership
+        name = c3rd_other_events.101.b
+        custom_tooltip = c3rd_other_events.101.b.tt1
+        add_political_influence = 5
+        add_legitimacy = 5
+    }
+    
+}
+
 c3rd_other_events.110 = { #Intervention
     type = country_event
     title = "c3rd_other_events.110.t"
@@ -9157,7 +9235,7 @@ c3rd_other_events.110 = { #Intervention
         is_tribal = no
         has_civil_war = no
         current_date >= 700.1.1
-        num_of_cities >= 300
+        num_of_cities >= 400 #the 400-500 buffer
         NOT = {
             has_variable = recent_intervention
         }
@@ -9190,6 +9268,8 @@ c3rd_other_events.110 = { #Intervention
                                     NOT = {
                                         has_variable = recent_military_anarchy
                                     }
+                                    has_variable = unworthy_leader
+                                    var:unworthy_leader >= 3
                                 }
                             }
                         }
@@ -9266,7 +9346,16 @@ c3rd_other_events.110 = { #Intervention
                 NOT = {
                     this = scope:first_inter_char
                 }
-                loyalty < 33
+                OR = {
+                    loyalty < 33
+                    AND = {
+                        is_friend = scope:first_inter_char
+                        is_ruler = no
+                        employer = {
+                            disloyal_country_part >= 60
+                        }
+                    }
+                }
                 OR = {
                     is_head_of_family = yes
                     AND = {
@@ -9287,6 +9376,8 @@ c3rd_other_events.110 = { #Intervention
                                     NOT = {
                                         has_variable = recent_military_anarchy
                                     }
+                                    has_variable = unworthy_leader
+                                    var:unworthy_leader >= 3
                                 }
                             }
                         }
@@ -9294,7 +9385,19 @@ c3rd_other_events.110 = { #Intervention
                     has_character_modifier = king_maker
                     AND = {
                         has_variable = country_ownership
-                        var:country_ownership > 25
+                        OR = {
+                            var:country_ownership > 25
+                            employer = {
+                                disloyal_country_part >= 60
+                            }
+                        }
+                    }
+                    AND = {
+                        employer = {
+                            disloyal_country_part >= 60
+                        }
+                        is_friend = scope:first_inter_char
+                        is_ruler = no
                     }
                 }
             }
@@ -9329,6 +9432,41 @@ c3rd_other_events.110 = { #Intervention
                     is_governor = no
                     employer = {
                         has_country_modifier = military_anarchy
+                    }
+                }
+                modifier = {
+                    factor = 0.1
+                    loyalty >= 33
+                }
+                modifier = {
+                    factor = 0.1
+                    NOR = {
+                        is_head_of_family = yes
+                        AND = {
+                            is_general = yes
+                            is_governor = no
+                            power_base > 10
+                            employer = {
+                                has_country_modifier = military_anarchy
+                            }
+                        }
+                        AND = {
+                            power_base >= 15
+                            OR = { #si général, ne doit pas être sous la loi anti militaires, ou avoir récemment eu une milanarch
+                                is_general = no
+                                employer = {
+                                    AND = {
+                                        has_law = basic_administrative_law
+                                        NOT = {
+                                            has_variable = recent_military_anarchy
+                                        }
+                                        has_variable = unworthy_leader
+                                        var:unworthy_leader >= 3
+                                    }
+                                }
+                            }
+                        }
+                        has_character_modifier = king_maker
                     }
                 }
             }
@@ -9340,7 +9478,16 @@ c3rd_other_events.110 = { #Intervention
                     this = scope:first_inter_char
                     this = scope:second_inter_char
                 }
-                loyalty < 33
+                OR = {
+                    loyalty < 33
+                    AND = {
+                        is_friend = scope:first_inter_char
+                        is_ruler = no
+                        employer = {
+                            disloyal_country_part >= 60
+                        }
+                    }
+                }
                 OR = {
                     is_head_of_family = yes
                     AND = {
@@ -9361,6 +9508,8 @@ c3rd_other_events.110 = { #Intervention
                                     NOT = {
                                         has_variable = recent_military_anarchy
                                     }
+                                    has_variable = unworthy_leader
+                                    var:unworthy_leader >= 3
                                 }
                             }
                         }
@@ -9368,7 +9517,19 @@ c3rd_other_events.110 = { #Intervention
                     has_character_modifier = king_maker
                     AND = {
                         has_variable = country_ownership
-                        var:country_ownership > 25
+                        OR = {
+                            var:country_ownership > 25
+                            employer = {
+                                disloyal_country_part >= 60
+                            }
+                        }
+                    }
+                    AND = {
+                        employer = {
+                            disloyal_country_part >= 60
+                        }
+                        is_friend = scope:first_inter_char
+                        is_ruler = no
                     }
                 }
             }
@@ -9403,6 +9564,41 @@ c3rd_other_events.110 = { #Intervention
                     is_governor = no
                     employer = {
                         has_country_modifier = military_anarchy
+                    }
+                }
+                modifier = {
+                    factor = 0.1
+                    loyalty >= 33
+                }
+                modifier = {
+                    factor = 0.1
+                    NOR = {
+                        is_head_of_family = yes
+                        AND = {
+                            is_general = yes
+                            is_governor = no
+                            power_base > 10
+                            employer = {
+                                has_country_modifier = military_anarchy
+                            }
+                        }
+                        AND = {
+                            power_base >= 15
+                            OR = { #si général, ne doit pas être sous la loi anti militaires, ou avoir récemment eu une milanarch
+                                is_general = no
+                                employer = {
+                                    AND = {
+                                        has_law = basic_administrative_law
+                                        NOT = {
+                                            has_variable = recent_military_anarchy
+                                        }
+                                        has_variable = unworthy_leader
+                                        var:unworthy_leader >= 3
+                                    }
+                                }
+                            }
+                        }
+                        has_character_modifier = king_maker
                     }
                 }
             }
@@ -9442,9 +9638,9 @@ c3rd_other_events.110 = { #Intervention
                     save_temporary_scope_as = temp_potential_domain_owner2
                     employer = {
                         any_governorships = {
-                            count > country_gov_ratio_number2
+                            count > country_gov_ratio_number
                             has_variable = governorship_owner
-                            var:governorship_owner = scope:temp_potential_domain_owner
+                            var:governorship_owner = scope:temp_potential_domain_owner2
                         }
                     }
                 }
@@ -9545,6 +9741,8 @@ c3rd_other_events.110 = { #Intervention
                     is_general = yes
                 }
             }
+            has_variable = unworthy_leader
+            var:unworthy_leader >= 3
         }
         if = {
             limit = {
@@ -9696,6 +9894,11 @@ c3rd_other_events.110 = { #Intervention
                     }
                 }
                 has_variable = recent_military_anarchy
+                NOT = {has_variable = unworthy_leader}
+                AND = {
+                    has_variable = unworthy_leader
+                    var:unworthy_leader < 3
+                }
             }
             has_law = basic_administrative_law
         }
@@ -9731,7 +9934,7 @@ c3rd_other_events.110 = { #Intervention
         }
         else_if = {
             limit = {
-                NOT = {has_country_modifier = aristocratic_exemptions}
+                NOT = {has_country_modifier = citizen_exemption_from_census_tax}
             }
             if = {
                 limit = { 
@@ -9823,11 +10026,11 @@ c3rd_other_events.110 = { #Intervention
                         has_country_modifier = law_advantages_5
                     }
                 }
-                custom_tooltip = give_law_change_set_tt1
                 add_country_modifier = {
                     name = law_advantages_2
                     duration = 5500
                 }
+                custom_tooltip = give_law_change_set_tt1
             }
             else_if = {
                 limit = {
@@ -9932,6 +10135,11 @@ c3rd_other_events.110 = { #Intervention
                     }
                 }
                 has_variable = recent_military_anarchy
+                NOT = {has_variable = unworthy_leader}
+                AND = {
+                    has_variable = unworthy_leader
+                    var:unworthy_leader < 3
+                }
             }
             has_law = basic_administrative_law
             has_country_modifier = solidus_introduced
@@ -9970,11 +10178,11 @@ c3rd_other_events.110 = { #Intervention
                     has_country_modifier = law_advantages_5
                 }
             }
-            custom_tooltip = give_law_change_set_tt1
             add_country_modifier = {
                 name = law_advantages_1
                 duration = 5500
             }
+            custom_tooltip = give_law_change_set_tt1
         }
         else_if = {
             limit = {
@@ -10112,11 +10320,11 @@ c3rd_other_events.110 = { #Intervention
                         has_country_modifier = law_advantages_5
                     }
                 }
-                custom_tooltip = give_law_change_set_tt1
                 add_country_modifier = {
                     name = law_advantages_3
                     duration = 5500
                 }
+                custom_tooltip = give_law_change_set_tt1
             }
             else_if = {
                 limit = {
@@ -10428,7 +10636,6 @@ c3rd_other_events.110 = { #Intervention
                     NOR = {
                         has_country_modifier = military_anarchy
                         has_variable = recent_military_anarchy
-                        has_country_modifier = solidus_introduced
                     }
                     has_law = basic_administrative_law
                     OR = {
@@ -10458,6 +10665,20 @@ c3rd_other_events.110 = { #Intervention
                         value = 4
                     }
                 }
+            }
+        }
+        if = {
+            limit = {
+                has_law = decentralized_administration_law
+            }
+            if = {
+                limit = {
+                    is_monarchy = yes
+                }
+                add_legitimacy = -15
+            }
+            else = {
+                add_political_influence = -30
             }
         }
     }

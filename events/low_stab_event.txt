@@ -758,6 +758,9 @@ low_stab_event.7 = {
 		any_subject = {
 			is_subject_type = autonomous_domain
 			has_variable = owner_from_another_empire
+			NOT = {
+				has_variable = recent_domain
+			}
 			var:owner_from_another_empire = {
 				is_ruler = no
 				is_alive = yes
@@ -922,5 +925,252 @@ low_stab_event.7 = {
 				}
 			}
 		}
+	}
+}
+
+
+low_stab_event.8 = {
+	#influent aristocrat gets domain if decentralized
+	type = country_event
+	title = "low_stab_event.8.t"
+	desc = "low_stab_event.8.desc"
+	picture = council_country
+	has_civil_war = no
+	trigger = {
+		has_land = yes
+		has_country_modifier = internal_collapse
+		NOT = {
+			stability >= 25
+		}
+		has_law = decentralized_administration_law
+		any_character = {
+			is_ruler = no
+			has_variable = country_ownership
+			save_temporary_scope_as = temp_potential_domain_owner
+			employer = {
+				any_governorships = {
+					count > 0 #country_gov_ratio_number
+					has_variable = governorship_owner
+					var:governorship_owner = scope:temp_potential_domain_owner
+				}
+			}
+		}
+	}
+	weight_multiplier = {
+		modifier = {
+			factor = 2
+			OR = {
+				towards_civil_war = yes
+				stability < 5
+			}
+		}
+	}
+	immediate = {
+		random_character = {
+			limit = {
+				has_variable = country_ownership
+				save_temporary_scope_as = temp_potential_domain_owner2
+				employer = {
+					any_governorships = {
+						count > 0 #country_gov_ratio_number
+						has_variable = governorship_owner
+						var:governorship_owner = scope:temp_potential_domain_owner2
+					}
+				}
+			}
+			save_scope_as = asked_landowner #need this name for the scripts
+		}
+		while = { #here i'm copying the same as in event 86
+			count = landowner_asked_ratio_number
+			random_governorships = {
+				limit = {
+					has_variable = governorship_owner
+					var:governorship_owner = scope:asked_landowner
+					NOT = {
+						is_in_list = family_domain_govs
+					}
+					OR = {
+						NOT = {
+							exists = governor
+						}
+						governor = {
+							is_ruler = no
+						}
+					}
+				}
+				weight = {
+					modifier = {
+						factor = 10
+						any_governorship_state = {
+							any_state_province = {
+								any_neighbor_province = {
+									governorship = {
+										is_in_list = family_domain_govs
+									}
+								}
+							}
+						}
+					}
+					modifier = {
+						factor = 10
+						any_governorship_state = {
+							any_state_province = {
+								any_neighbor_province = {
+									owner = {
+										has_variable = owner_from_another_empire
+										var:owner_from_another_empire = scope:asked_landowner
+									}
+								}
+							}
+						}
+					}
+					modifier = {
+						factor = 3
+						any_governorship_state = {
+							any_state_province = {
+								any_neighbor_province = {
+									NOT = {
+										owner = root
+									}
+								}
+							}
+						}
+					}
+					modifier = {
+						factor = 0.1
+						any_governorship_state = {
+							any_state_province = {
+								any_neighbor_province = {
+									governor = {
+										is_ruler = yes
+									}
+								}
+							}
+						}
+					}
+				}
+				add_to_list = family_domain_govs
+			}
+		}
+		
+	}
+	option = {
+		name = low_stab_event.8.a
+		custom_tooltip = low_stab_event.8.a.tt1
+		custom_tooltip = c3rd_other_events.86.tt13 #same loc, same variables
+		every_governorships = {
+			limit = {
+				is_in_list = family_domain_govs
+			}
+			save_scope_as = gov_tooltip
+			custom_tooltip = c3rd_other_events.86.a.tt2
+		}
+		hidden_effect = {
+			create_domain = yes
+			every_character = {
+				limit = {
+					has_variable = country_ownership
+				}
+				recalculate_ownership_char = yes
+			}
+		}
+		if = {
+			limit = {
+				num_of_cities <= 1000
+			}
+			add_stability = 5
+		}
+		else_if = {
+			limit = {
+				num_of_cities <= 2000
+			}
+			add_stability = 4
+		}
+		else_if = {
+			limit = {
+				num_of_cities <= 3000
+			}
+			add_stability = 3
+		}
+		else = {
+			add_stability = 2
+		}
+	}
+	option = {
+		name = low_stab_event.8.b
+		custom_tooltip = low_stab_event.8.b.tt1
+		trigger = {
+			scope:asked_landowner = {
+				loyalty >= 20
+			}
+		}
+		if = {
+			limit = {
+				num_of_cities <= 1000
+			}
+			add_political_influence = -10
+		}
+		else_if = {
+			limit = {
+				num_of_cities <= 2000
+			}
+			add_political_influence = -20
+		}
+		else_if = {
+			limit = {
+				num_of_cities <= 3000
+			}
+			add_political_influence = -30
+		}
+		else = {
+			add_political_influence = -40
+		}
+		add_stability = -3
+		scope:asked_landowner = {
+			add_loyalty = independence_denied
+		}
+	}
+	option = {
+		name = low_stab_event.8.c
+		custom_tooltip = low_stab_event.8.c.tt1
+		trigger = {
+			scope:independent_current_governor = {
+				loyalty < 20
+			}
+		}
+		if = {
+			limit = {
+				num_of_cities <= 1000
+			}
+			add_political_influence = -10
+		}
+		else_if = {
+			limit = {
+				num_of_cities <= 2000
+			}
+			add_political_influence = -20
+		}
+		else_if = {
+			limit = {
+				num_of_cities <= 3000
+			}
+			add_political_influence = -30
+		}
+		else = {
+			add_political_influence = -40
+		}
+		scope:independent_current_governor = {
+			add_loyalty = independence_denied
+		}
+		add_stability = -6
+	}
+
+	after = {
+        every_governorships = {
+            limit = {
+                is_in_list = family_domain_govs
+            }
+            remove_from_list = family_domain_govs
+        }
 	}
 }

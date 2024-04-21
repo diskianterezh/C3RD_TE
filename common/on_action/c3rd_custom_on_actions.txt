@@ -381,7 +381,7 @@ c3rd_other_events_monthly_pulse = { #check if events can happen
 	random_events = {
 		500 = 0
 		20 = c3rd_other_events.4 #too few nobles culture pop
-		20 = c3rd_other_events.8 #powerful characters asking to stop the tax controls
+		18 = c3rd_other_events.8 #powerful characters asking to stop the tax controls
 		5 = c3rd_other_events.9 #powerful characters asking for census
 		5 = c3rd_other_events.12 #games
 		3 = c3rd_other_events.30 #slave culture revolt
@@ -399,6 +399,8 @@ c3rd_other_events_monthly_pulse = { #check if events can happen
 		15 = c3rd_other_events.91 #coup from political character
 		8 = c3rd_other_events.92 #governor holding clash
 		8 = c3rd_other_events.93 #governor holding clash ruler
+		2 = c3rd_other_events.101 #ruler reform constantine
+		9 = c3rd_other_events.110 #intervention *5 toward civil war
 	}
 }
 
