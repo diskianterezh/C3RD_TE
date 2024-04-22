@@ -540,6 +540,47 @@
 				factor = 10
 			}
 		}
+	}	
+	
+	tutela_limitum = {
+		potential = {
+			is_subject_type = duchy_subject
+		}
+		allow = {
+			political_influence >= 10
+			manpower_percentage >= 0.5
+			any_owned_province = {
+				any_neighbor_province = {
+					owner = {
+						is_tribal = yes
+					}
+				}
+			}
+		}
+
+
+
+
+		effect = {
+			add_political_influence = -10
+			random_owned_province = {
+				limit = {
+					any_neighbor_province = {
+						owner = {
+							is_tribal = yes
+						}
+					}
+				}
+				random_neighbor_province = {
+					limit = {
+						owner = {
+							is_tribal = yes
+						}
+					}
+					add_claim = root
+				}
+			}
+		}
 	}
 
 		

@@ -1,0 +1,26 @@
+﻿
+duchy = {
+	military_ideas = 3
+	type = monarchy
+	
+	bonus = {
+		levy_size_multiplier = 0.25
+		land_morale_recovery = 0.1
+		land_morale = 0.3
+		discipline = 0.05
+	}
+	base = {
+		country_civilization_value = 20
+		global_freemen_city_desired_pop_ratio = 0.15
+		global_citizen_city_desired_pop_ratio  = -0.1
+		global_defensive = 0.5
+		global_commerce_modifier = -0.4
+	}
+	
+	election_delay = 0
+	use_regnal_numbers = yes
+	
+	ruler_consort_benefits = no
+	
+	color = hsv { 0  0.75  0.2 }
+}

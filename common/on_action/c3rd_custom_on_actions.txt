@@ -1804,6 +1804,17 @@ c3rd_variables_clear = {
 				recalculate_ownership_char = yes
 			}
 		}
+		if = {
+			limit = {
+				government = duchy
+				num_of_cities >= 50
+			}
+			trigger_event = {
+				id = c3rd_other_events.102
+				days = { 10 100}
+			}
+
+		}
 		random_subject = {
 			limit = {
 				is_subject_type = autonomous_domain
@@ -1895,6 +1906,21 @@ c3rd_urgent_variables_clean = {
 					days = 1
 				}
 			}
+		}
+		if = {
+			limit = {
+				any_subject = {
+					is_subject_type = duchy_subject
+					NOT = {
+						government = duchy
+					}
+				}
+			}
+			trigger_event = {
+				id = c3rd_other_events.103
+				days = 3
+			}
+
 		}
 	}
 }
@@ -2089,4 +2115,162 @@ c3rd_apply_pol_inf_ruler_ownership = {
 			remove_polinf_modifiers = yes
 		}
 	}
+}
+
+c3rd_barbarian_occupying_land = { #natural expansion of tribals on lands VERY SPECIFIC CONDITIONS
+	trigger = {
+		is_tribal = no
+		num_of_cities >= 1
+		current_date >= 900.1.1
+		NOR = {
+			tag = BAR
+			government = duchy #Duchies are protected
+		}
+		any_country_state = {
+			has_state_modifier = barbarians_border #is under attack
+			any_state_province = {
+				any_neighbor_province = { #border a tribal or a barbarian stronghold
+					OR = {
+						has_province_modifier = barbarian_invasion_war
+						has_province_modifier = barbarian_invasion_skirmish
+						has_province_modifier = minor_barbarian_spawn_place
+						has_province_modifier = generic_barbarian_spawn_place
+						has_province_modifier = major_barbarian_spawn_place
+						AND = {
+							NOT = {owner = root}
+							owner = {
+								is_tribal = yes
+								NOT = {is_subject_of = root}
+							}
+						}
+					}
+				}
+				owner = { #the dominant local culture is not integrated -> might be the barbarian one OR anything not integrated, even greeks or italian if possible, why not
+					any_country_culture = {
+						is_integrated = no
+						this.culture = prev.prev.culture
+					}
+				}
+			}
+			area = { #every states around of the country are also occupied by barbarians
+				NOT = {
+					any_neighbor_area = {
+						any_area_state = {
+							owner = root
+							NOT = {has_state_modifier = barbarians_border}
+						}
+					}
+				}
+			}
+		}
+	}
+	effect = {
+		random_country_state = {
+			limit = {
+				has_state_modifier = barbarians_border
+				any_state_province = {
+					any_neighbor_province = {
+						OR = {
+							has_province_modifier = barbarian_invasion_war
+							has_province_modifier = barbarian_invasion_skirmish
+							has_province_modifier = minor_barbarian_spawn_place
+							has_province_modifier = generic_barbarian_spawn_place
+							has_province_modifier = major_barbarian_spawn_place
+							AND = {
+								NOT = {owner = root}
+								owner = {
+									is_tribal = yes
+									NOT = {is_subject_of = root}
+								}
+							}
+						}
+					}
+					owner = {
+						any_country_culture = {
+							is_integrated = no
+							this.culture = prev.prev.culture
+						}
+					}
+				}
+				area = {
+					NOT = {
+						any_neighbor_area = {
+							any_area_state = {
+								owner = root
+								NOT = {has_state_modifier = barbarians_border}
+							}
+						}
+					}
+				}
+			}
+			random_state_province = {
+				limit = {
+					any_neighbor_province = {
+						OR = {
+							has_province_modifier = barbarian_invasion_war
+							has_province_modifier = barbarian_invasion_skirmish
+							has_province_modifier = minor_barbarian_spawn_place
+							has_province_modifier = generic_barbarian_spawn_place
+							has_province_modifier = major_barbarian_spawn_place
+							AND = {
+								NOT = {owner = root}
+								owner = {
+									is_tribal = yes
+									NOT = {is_subject_of = root}
+								}
+							}
+						}
+					}
+					owner = {
+						any_country_culture = {
+							is_integrated = no
+							this.culture = prev.prev.culture
+						}
+					}
+				}
+				save_scope_as = new_tribal_prov
+			}
+		}
+		random_country_culture = {
+			limit = {
+				this.culture = scope:new_tribal_prov.culture
+			}
+			save_scope_as = new_culture_tribal
+		}
+		if = {
+			limit = {
+				any_country = {
+					any_owned_province = {
+						any_neighbor_province = {
+							this = scope:new_tribal_prov
+						}
+					}
+					this.culture = scope:new_culture_tribal.culture
+				}
+			}
+			random_country = {
+				limit = {
+					any_owned_province = {
+						any_neighbor_province = {
+							this = scope:new_tribal_prov
+						}
+					}
+					this.culture = scope:new_culture_tribal.culture
+				}
+				save_scope_as = tribal_expanding
+			}
+			scope:new_tribal_prov = {
+				set_owned_by = scope:tribal_expanding
+			}
+		}
+		else = {
+			scope:new_tribal_prov = {
+				create_country = {
+					change_government = tribal_chiefdom
+					add_treasury = 50
+				}
+			}
+		}
+	}
+
 }

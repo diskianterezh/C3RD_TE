@@ -39,7 +39,7 @@ recalculate_ownership_char = {#scopechar
 	}
 	if = {
 		limit = { 
-			country_region_control >= 1 #25
+			country_region_control >= 25
 			NOT = {
 				has_character_modifier = major_influence_aristocrat
 			}
@@ -52,7 +52,7 @@ recalculate_ownership_char = {#scopechar
 	if = {
 		limit = { 
 			has_character_modifier = major_influence_aristocrat
-			country_region_control < 1 #20
+			country_region_control < 20
 		}
 		remove_character_modifier = major_influence_aristocrat
 	}
@@ -111,6 +111,7 @@ create_domain = {
         	create_character = { # General 
         		culture = scope:asked_landowner.culture
         		religion = scope:asked_landowner.religion
+				save_scope_as = ruler_domain
 			}
 			random_governorship_state = {
 				random_state_province = {
@@ -822,4 +823,45 @@ remove_polinf_modifiers = {
 		}
 		remove_country_modifier = polinf_ruler_owner80
 	}
+}
+
+
+create_duchy = { #scope country, 
+		#need a defined "duchy_capital" scope province
+		
+	
+	scope:duchy_capital = {
+		state = {
+			save_scope_as = state_duchy
+		}
+		create_country = {
+			create_character = {
+				culture = scope:duchy_capital.dominant_province_culture
+				religion = scope:duchy_capital.dominant_province_religion
+				age = 30
+				save_scope_as = saved_duchy_leader
+			}
+			set_as_ruler = scope:saved_duchy_leader
+			save_scope_as = new_duchy
+			scope:saved_duchy_leader = {
+				add_martial = 3
+			}
+			change_law = work_for_the_best
+		}
+	}
+	scope:new_duchy = {
+		change_government = duchy
+		capital_scope = {
+			add_building_level = fortress_building
+		}
+	}
+	every_owned_province = {
+		limit = {state = scope:state_duchy}
+		set_owned_by = scope:new_duchy
+	}
+	make_subject = {
+		target = scope:new_duchy
+		type = duchy_subject
+	}
+
 }

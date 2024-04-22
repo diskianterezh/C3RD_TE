@@ -105,7 +105,7 @@ dictatorial_extension_c3rd = {
 }
 
 civil_war_stab = {
-	stability_monthly_change = -0.25
+	stability_monthly_change = -0.5
 	happiness_for_same_culture_modifier = -0.1
 }
 

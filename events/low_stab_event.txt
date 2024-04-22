@@ -510,6 +510,14 @@ low_stab_event.4 = {
 			stability >= 25
 		}
 		any_governorships = {
+			any_governorship_state = {
+				any_state_province = {
+					NOT = {
+						dominant_province_culture = root.culture
+					}
+					owner = ROOT
+				}
+			}
 			exists = governor
 		}
 	}

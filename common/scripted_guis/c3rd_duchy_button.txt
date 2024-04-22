@@ -1,0 +1,130 @@
+﻿duchy_button = {
+    scope = province
+	saved_scopes = {
+		player
+	}
+	confirm_title = "duchy_title"
+	confirm_text = "duchy_desc"
+    is_shown = { 
+		has_owner = yes
+		controller = scope:player
+		owner = scope:player
+		owner = {
+			OR = {
+				has_country_modifier = solidus_introduced
+				has_law = constantine_reform_law
+			}
+		}
+    }
+	ai_is_valid = {
+		always = no
+	}
+    is_valid = {
+		trigger_if = {
+			limit = {
+				scope:player = {
+					is_tribal = yes
+				}
+			}
+			scope:player = {
+				is_tribal = no
+			}
+		}
+		trigger_if = {
+			limit = {
+				is_capital = yes
+			}
+			is_capital = no
+		}
+		trigger_if = {
+			limit = {
+				state = {
+					is_state_capital = yes
+				}
+			}
+			state = {
+				is_state_capital = yes
+			}
+		}
+		trigger_if = {
+			limit = {
+				scope:player = {
+					war = yes
+				}
+			}
+			scope:player = {
+				war = no 
+			}
+		}
+		trigger_if = {
+			limit = {
+				NOT = {
+					owner = {political_influence >= 20}
+				}
+			}
+			owner = {political_influence >= 20}
+		}
+		trigger_if = {
+			limit = {
+				NOT = {
+					state = {
+						any_state_province = {
+							any_neighbor_province = {
+								owner = {
+									has_land = yes
+									is_tribal = yes
+								}
+								NOR = {
+									owner = scope:player
+									owner = {
+										is_subject_of = scope:player
+									}
+									owner = {
+										alliance_with = scope:player
+									}
+								}
+			
+							}
+						}
+					}
+				}
+			}
+			custom_tooltip = {
+				text = duchy_borders_tt
+				state = {
+					any_state_province = {
+						any_neighbor_province = {
+							owner = {
+								has_land = yes
+								is_tribal = yes
+							}
+							NOR = {
+								owner = scope:player
+								owner = {
+									is_subject_of = scope:player
+								}
+								owner = {
+									alliance_with = scope:player
+								}
+							}
+		
+						}
+					}
+				}
+			}
+		}
+    }
+	
+    effect = {
+		custom_tooltip = "DUCHY_STATE_EFFECT_TT"
+		scope:player = {
+			add_political_influence = -20
+		} 
+		hidden_effect = {
+			save_scope_as = duchy_capital
+			owner = {
+				create_duchy = yes
+			}
+		}
+	}
+}

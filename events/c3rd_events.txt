@@ -1854,6 +1854,10 @@ c3rd_events.10 = { #oh no rival splitting
                         type = client_state
                     }
                 }
+                set_variable = {
+                    name = recent_client
+                    days = 365
+                }
 
             }
             every_subject = {

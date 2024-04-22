@@ -153,6 +153,7 @@
  #opinion:
  empire_rivals:0 "Rivals Empires"
  border_money:0 "Cheap money flooding"
+ empire_gave_independance:0 "Border guardian"
 
  #laws
  monetary_law:0 "Monetary laws"
@@ -253,6 +254,8 @@
  repair_great_work_desc:0 "Start the reparations of a great work"
  new_cultural_identity:0 "Adopt a new cultural identity"
  new_cultural_identity_desc:0 "Are we really Roman? It seems that we are not the main power that can claim this heritage. \n\nPerhaps more local roots would benefit us?"
+ tutela_limitum:0 "Tutela Limitum"
+ tutela_limitum_desc:0 "The borders of the empire must be defended, and what better defence than attack?"
 
  #schemes
  scheme_care_of_relatives_effect_tt:1 "[SCOPE.GetRootScope.GetCharacter.GetName] Will share his wealth with his family."
@@ -405,6 +408,49 @@
  CANCEL_autonomous_domain_DESC:0 "This will cut any ties between your two countries"
  CANCEL_autonomous_domain_FLAVOR:0 "This could be a way of reducing the influence of its owner in your country, but it would probably be wiser to use the "reintegrate regions" interaction on its ruler."
  CANCEL_autonomous_domain_NEWDESC:0 "Are you sure you want to give this region total independence? You will lose the mechanics of reintegrating the regions as well as its suzerainty."
+
+
+ duchy_subject:0 "Ducatus"
+ AM_duchy_subject:0 "Ducatus of $LIST$\n#R If it expands too much, it will become an autocratic client state monarchy #!"
+ LEAD_duchy_subject:2 "#T $LIST$#!\nDucatus\n#R If it expands too much, it will become an autocratic client state monarchy #!"
+ 
+ CANCEL_duchy_subjectTITLE:0 "Give Independance"
+ CANCEL_duchy_subject_TOOLTIP_HEADER:0 "Give Independance to the Ducatus"
+ CANCEL_duchy_subject_DESC:0 "This will cut any ties between your two countries"
+ CANCEL_duchy_subject_FLAVOR:0 "This country will no longer be considered a Ducatus."
+ CANCEL_duchy_subject_NEWDESC:0 "Are you sure you want to give this subject total independence?"
+ #Gvmt
+ 
+ duchy:0 "Ducatus"
+ duchy_desc:0 "A military command under the aegis of a Dux, with broad autonomy to defend the borders.\n The Ducatus can expand on their own and have access to a casus belli against nearby tribesmen."
+
+ #Titles
+
+ duchy_ruler:0 "Dux"
+ duchy_ruler_female:0 "Ducesse"
+ # Consort
+ duchy_consort:0 "Dux"
+ duchy_consort_female:0 "Ducesse"
+ ######Latin Monarchy
+ #consort
+ duchy_ruler_latin:0 "Dux"
+ duchy_ruler_female_latin:0 "Ducesse"
+ ######Indian/Aryan/Tibetan Monarchy
+ #Indian ruler
+ duchy_ruler_aryan:0 "Nawab "
+ duchy_ruler_female_aryan:0 "Begum"
+ duchy_ruler_indian:0 "Nawab "
+ duchy_ruler_female_indian:0 "Begum"
+ duchy_ruler_tibetan:0 "Nawab "
+ duchy_ruler_female_tibetan:0 "Begum"
+ duchy_ruler_pracyan:0 "$duchy_ruler_aryan$"
+ duchy_ruler_female_pracyan:0 "$duchy_ruler_female_aryan$"
+
+ #War Goal
+ 
+ duchy_wargoal:0 "Tutela Limitum"
+ war_goal_duchy_wargoal:0 "Tutela Limitum"
+ war_goal_duchy_wargoal_desc:0 "War goal is to win more battles for the glory of the empire"
 
  #Events
 
@@ -887,6 +933,7 @@ low_stab_event.8.c.tt1:0 "Things remain as they are, but [asked_landowner.GetNam
  c3rd_other_events.9.desc:0 "[character_taxed_1.GetName], [character_taxed_2.GetName] and [character_taxed_3.GetName] are three powerful figures of the state, and therefore represent quite clearly the claims of our elites. At a hearing, they expressed their concerns about the laws put in place on taxing duties. How can it be fair, according to these people, that the most important men and landowners should be subject to the same tax obligations as the rest of the population? Don't they naturally contribute much more to the wealth of the state than the populace?\nThey show themselves ready to reward a certain mercy of the state towards them by a powerful support to the government of the country"
  c3rd_other_events.9.a:0 "It's only natural!"
  c3rd_other_events.9.a.tt1:0 "Citizens and nobles will be exempt from the census\n#R It will not be possible to revoke it before 10 years #!"
+ c3rd_other_events.9.a.tt2:0 "#R This privilege will have negative effects on monetary equilibrium #!"
  c3rd_other_events.9.b:0 "Come on, the state can be more generous than mere taxes"
  c3rd_other_events.9.b.tt1:0 "You will buy the support of these men"
  c3rd_other_events.9.c:0 "The state is incorruptible"
@@ -1281,10 +1328,10 @@ low_stab_event.8.c.tt1:0 "Things remain as they are, but [asked_landowner.GetNam
  c3rd_other_events.86.tt1_1:0 "A part of the character's holdings will be removed"
  c3rd_other_events.86.tt1_2:0 "The character gains a loyalty boost"
  c3rd_other_events.86.tt1_3:0 "Each of the character's holdings will gain bonuses in taxes and manpower, and you'll gain political influence for each autonomous domain he owns"
- c3rd_other_events.86.tt1_41:0 "All disloyal characters gain 10 loyalty"
- c3rd_other_events.86.tt1_42:0 "All disloyal characters gain 15 loyalty"
- c3rd_other_events.86.tt1_43:0 "All disloyal characters gain 20 loyalty"
- c3rd_other_events.86.tt1_44:0 "All disloyal characters gain 30 loyalty"
+ c3rd_other_events.86.tt1_41:0 "All disloyal characters gain #G 10#! loyalty"
+ c3rd_other_events.86.tt1_42:0 "All disloyal characters gain #G 15#! loyalty"
+ c3rd_other_events.86.tt1_43:0 "All disloyal characters gain #G 20#! loyalty"
+ c3rd_other_events.86.tt1_44:0 "All disloyal characters gain #G 30#! loyalty"
 
 
  c3rd_other_events.87.t:0 "Back to administration"
@@ -1377,6 +1424,27 @@ low_stab_event.8.c.tt1:0 "Things remain as they are, but [asked_landowner.GetNam
  c3rd_other_events.101.b:0 "No, there's no need"
  c3rd_other_events.101.b.tt1:0 "You won't have this opportunity again for a while"
 
+ c3rd_other_events.102.t:0 "The Duchy is expanding"
+ c3rd_other_events.102.desc:0 "The Ducatus, once a simple military commandery on the borders of the empire, has over time become a vast estate with a wealth of resources. \nOur military administration has gradually evolved into a real kingdom, an important force in the region..."
+ c3rd_other_events.102.a:0 "We look to the future"
+ c3rd_other_events.102.a.tt1:0 "You are no longer a mere duchy"
+
+ c3rd_other_events.103.t:0 "The Duchy is expanding"
+ c3rd_other_events.103.desc:0 "One of our most prominent Ducatus, [ex_duchy.GetName] once a simple military commandery on the borders of the empire, has over time become a vast estate with a wealth of resources. \nThe military administration has gradually evolved into a real kingdom and an important force in the region...\nIts position is no longer that of a solitary fortification, so we need to evolve our relationship. It would be natural for us to maintain a strong link with it, but perhaps a greater degree of independence would be more beneficial to our relationship."
+ c3rd_other_events.103.a:0 "Let's keep [ex_duchy.GetName] under our control"
+ c3rd_other_events.103.a.tt1:0 "The Duchy will become our client state"
+ c3rd_other_events.103.b:0 "They can retain a solid level of autonomy"
+ c3rd_other_events.103.b.tt1:0 "The Duchy will become our tributary"
+ c3rd_other_events.103.c:0 "They'll be a major partner in the region!"
+ c3rd_other_events.103.c.tt1:0 "The Duchy will be completely independent, and we will benefit from a large bonus of opinion."
+
+ c3rd_other_events.104.t:0 "Creation of a Ducatus"
+ c3rd_other_events.104.desc:0 "Following the dangerous barbarian expansion into our lands, [duchy_creator.GetName] decided to grant [duchy_capital.GetOwner.GetRuler.GetName] a military command as Dux."
+ c3rd_other_events.104.a:0 "We should strengthen our control over the country"
+ c3rd_other_events.104.a.tt1:0 "The lands in the province of [duchy_capital.GetState.GetName] were grouped into a Duchy"
+ c3rd_other_events.104.a.tt2:0 "This happened because you have the 'Total Autonomy' law'"
+ c3rd_other_events.104.a.tt3:0 "This happened because the region is owned by [duchy_creator.GetName]"
+
  c3rd_other_events.110.t:0 "Rebellion in high places"
  c3rd_other_events.110.desc:0 "Power is a fickle thing, and very often depends on the goodwill of elites and the balance of power. \nIn any case, this balance is not in our favor, as [first_inter_char.GetName] has launched a full-scale political offensive against our government. Supported by [second_inter_char.GetName] and [third_inter_char.GetName], he is seeking to bring about a radical change commensurate with his discontent.\n\n Such a political crisis could shake the foundations of our empire, if we don't resolve it quickly... "
  c3rd_other_events.110.a:0 "It's best to secure the support of these generals..."
@@ -1403,6 +1471,16 @@ low_stab_event.8.c.tt1:0 "Things remain as they are, but [asked_landowner.GetNam
  give_law_change_set_tt1:0 "#R This privilege will increase the pace and opportunities for aristocrats to own land #!"
  give_law_change_evolve_tt1:0 "The State benefits for the landowners will evolve :"
 
+
+
+ #regain control
+
+
+ DUCHY_STATE_EFFECT_TT:0 "[SCOPE.GetRootScope.GetProvince.GetName|Y] will become the capital of a duchy, a military stronghold.\nThey will become our subject, with a bonus to their manpower and fort limit. They will not join us in wars, but will not cost a diplomatic relations slot, and cannot be integrated. If they expand above a certain size, they will be turned in a client state autocratic monarchy."
+ DUCHY_BUTTON:0 "#T Create Duchy#!\n[ScriptedGui.BuildTooltip( GuiScope.SetRoot( ProvinceWindow.GetProvince.MakeScope ).AddScope('player', Player.MakeScope ).End )]"
+ duchy_title:0 "Create Duchy"
+ duchy_desc:0 "Are you sure you want to create a Duchy? This will create a subject out of [SCOPE.GetRootScope.GetProvince.GetName|Y], #R and the entire local province #!."
+ duchy_borders_tt:0 "A duchy can only be created on a border state, bordering a non-allied, non-subject tribal country"
 #tribals fix
 
  tribal_flavour_events.41.t:0 "Imminent collapse"

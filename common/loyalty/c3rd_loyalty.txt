@@ -152,7 +152,7 @@ political_intervention3 = {
 	yearly_decay = 1
 }
 
-political_intervention3 = {
+political_intervention4 = {
 	value = 30
 	yearly_decay = 1
 }

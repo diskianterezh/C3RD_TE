@@ -1135,6 +1135,7 @@ c3rd_other_events.9 = { #event where people ask for census taxes
             name = "citizen_exemption_from_census_tax" #Applies to all integrated cultures
             duration = -1
         }
+        custom_tooltip = c3rd_other_events.9.a.tt2
         set_variable = {
             name = census_exemption_given_recently
             days = 3650
@@ -2878,6 +2879,10 @@ c3rd_other_events.31 = { # slaves culture revolts
                 save_scope_as = new_country_vassal
                 change_government = despotic_monarchy
                 add_treasury = 50.0
+                set_variable = {
+                    name = recent_client
+                    days = 365
+                }
             }
         }
         scope:new_country_vassal = {
@@ -3352,10 +3357,7 @@ c3rd_other_events.33 = { #new cultural identity
     option = {#oooops no ai should not choose this anyway
         name = c3rd_other_events.33.b
         custom_tooltip = c3rd_other_events.33.b.tt1
-		ai_chance = {
-			factor = 0
-		}
-        
+		
     }
 
     after = {
@@ -3582,7 +3584,7 @@ c3rd_other_events.50 = { #Great work gets pillaged by starving people
                 has_variable = wonder_food_given
                 has_province_modifier = wonder_destroyed_modifier
             }
-            unrest_in_province_svalue >= 3
+            unrest_in_province_svalue >= 5
             state = {
                 has_state_food = 0
             }
@@ -3606,7 +3608,7 @@ c3rd_other_events.50 = { #Great work gets pillaged by starving people
                     has_variable = wonder_food_given
                     has_province_modifier = wonder_destroyed_modifier
                 }
-                unrest_in_province_svalue >= 3
+                unrest_in_province_svalue >= 5
                 state = {
                     has_state_food = 0
                 }
@@ -3621,7 +3623,7 @@ c3rd_other_events.50 = { #Great work gets pillaged by starving people
                     has_variable = wonder_food_given
                     has_province_modifier = wonder_destroyed_modifier
                 }
-                unrest_in_province_svalue >= 3
+                unrest_in_province_svalue >= 5
                 state = {
                     has_state_food = 0
                 }
@@ -3636,7 +3638,7 @@ c3rd_other_events.50 = { #Great work gets pillaged by starving people
                     has_variable = wonder_food_given
                     has_province_modifier = wonder_destroyed_modifier
                 }
-                unrest_in_province_svalue >= 3
+                unrest_in_province_svalue >= 5
                 state = {
                     has_state_food = 0
                 }
@@ -3655,7 +3657,7 @@ c3rd_other_events.50 = { #Great work gets pillaged by starving people
                 state = {
                     has_state_food = 0
                 }
-                unrest_in_province_svalue >= 3
+                unrest_in_province_svalue >= 5
             }
             weight = {
                 modifier = {
@@ -3757,6 +3759,9 @@ c3rd_other_events.50 = { #Great work gets pillaged by starving people
                 duration = -1
             }
         }
+		ai_chance = {
+			factor = 0
+		}
     }
 
     after = {
@@ -3851,8 +3856,11 @@ c3rd_other_events.51 = { #Great work restaured
                 has_province_modifier = wonder_destroyed_modifier
             }
         }
-        add_treasury = -20000
-        add_political_influence = -180
+        add_treasury = {
+            value = num_of_cities
+            multiply = -5
+        }
+        add_political_influence = -100
         if = {
             limit = { is_monarchy = yes }
             add_legitimacy = 5
@@ -3874,8 +3882,11 @@ c3rd_other_events.51 = { #Great work restaured
                 has_province_modifier = wonder_destroyed_modifier
             }
         }
-        add_treasury = -20000
-        add_political_influence = -180
+        add_treasury = {
+            value = num_of_cities
+            multiply = -5
+        }
+        add_political_influence = -100
         if = {
             limit = { is_monarchy = yes }
             add_legitimacy = 5
@@ -3897,8 +3908,11 @@ c3rd_other_events.51 = { #Great work restaured
                 has_province_modifier = wonder_destroyed_modifier
             }
         }
-        add_treasury = -20000
-        add_political_influence = -180
+        add_treasury = {
+            value = num_of_cities
+            multiply = -5
+        }
+        add_political_influence = -100
         if = {
             limit = { is_monarchy = yes }
             add_legitimacy = 5
@@ -3920,8 +3934,11 @@ c3rd_other_events.51 = { #Great work restaured
                 has_province_modifier = wonder_destroyed_modifier
             }
         }
-        add_treasury = -20000
-        add_political_influence = -180
+        add_treasury = {
+            value = num_of_cities
+            multiply = -5
+        }
+        add_political_influence = -100
         if = {
             limit = { is_monarchy = yes }
             add_legitimacy = 5
@@ -4166,7 +4183,7 @@ c3rd_other_events.60 = { #filthy barbarians ransacking our lands
         hidden_effect = {
             if = {
                 limit = { 
-                    NOR = { #if already milanarch
+                    NOR = { #if not already milanarch
                         has_country_modifier = military_anarchy
                         has_variable = recent_military_anarchy
                         has_variable = on_going_rep_thingy
@@ -4174,51 +4191,122 @@ c3rd_other_events.60 = { #filthy barbarians ransacking our lands
                     }
                     has_variable = unworthy_leader
                 }
-            }
-            random_list = {
-                10 = {
-                    modifier = {
-                        add = 10
-                        var:unworthy_leader <= 2
+                random_list = {
+                    10 = {
+                        modifier = {
+                            add = 10
+                            var:unworthy_leader <= 2
+                        }
+                        modifier = {
+                            add = 2
+                            legitimacy >= 85
+                        }
+                        modifier = {
+                            add = 10
+                            has_law = constantine_reform_law
+                        }
+                        modifier = { #decentralized administration means the governor will take measures
+                            add = 12
+                            has_law = decentralized_administration_law
+                        }
                     }
-                    modifier = {
-                        add = 2
-                        legitimacy >= 85
-                    }
-                    modifier = {
-                        add = 10
-                        has_law = constantine_reform_law
-                    }
-                    modifier = { #decentralized administration means the governor will take measures
-                        add = 12
-                        has_law = decentralized_administration_law
+                    1 = {
+                        modifier = {
+                            add = var:unworthy_leader
+                            has_variable = unworthy_leader
+                        }
+                        modifier = {
+                            add = 1
+                            legitimacy < 50
+                        }
+                        modifier = {
+                            add = 1
+                            legitimacy < 25
+                        }
+                        modifier = {
+                            add = 2
+                            legitimacy < 0
+                        }
+                        modifier = {
+                            add = 2
+                            stability < 25
+                        }
+                        trigger_event = {
+                            id = c3rd_events.9
+                            days = 15
+                        }
                     }
                 }
-                1 = {
-                    modifier = {
-                        add = var:unworthy_leader
-                        has_variable = unworthy_leader
+            }
+            if = {
+                limit = {
+                    OR = {
+                        has_law = decentralized_administration_law
+                        any_governorships = {
+                            any_governorship_state = {
+                                has_state_modifier = barbarians_border
+                                any_state_province = {
+                                    any_neighbor_province = {
+                                        NOT = {owner = root}
+                                    }
+                                }
+                            }
+                            has_variable = governorship_owner
+                        }
                     }
-                    modifier = {
-                        add = 1
-                        legitimacy < 50
+                }
+                random_governorships = {
+                    limit = {
+                        OR = {
+                            has_variable = governorship_owner
+                            root = {has_law = decentralized_administration_law}
+                        }
+                        any_governorship_state = {
+                            has_state_modifier = barbarians_border
+                            any_state_province = {
+                                any_neighbor_province = {
+                                    NOT = {owner = root}
+                                }
+                            }
+                        }
                     }
-                    modifier = {
-                        add = 1
-                        legitimacy < 25
+                    if = {
+                        limit = {
+                            root = {has_law = decentralized_administration_law}
+                        }
+                        governor = {
+                            save_scope_as = duchy_creator
+                        }
                     }
-                    modifier = {
-                        add = 2
-                        legitimacy < 0
+                    else_if = {
+                        limit = {has_variable = governorship_owner}
+                        var:governorship_owner = {
+                            save_scope_as = duchy_creator
+                        }
                     }
-                    modifier = {
-                        add = 2
-                        stability < 25
+                    random_governorship_state = {
+                        limit = {
+                            has_state_modifier = barbarians_border
+                            any_state_province = {
+                                any_neighbor_province = {
+                                    NOT = {owner = root}
+                                }
+                            }
+                        }
+                        random_state_province = {
+                            weight = {
+                                modifier = {
+                                    add = total_population
+                                }
+                            }
+                            save_scope_as = duchy_capital
+                        }
                     }
-                    trigger_event = {
-                        id = c3rd_events.9
-                        days = 15
-                    }
+                }
+                create_duchy = yes
+                trigger_event = {
+                    id = c3rd_other_events.103
+                    days = 1
                 }
             }
         }
@@ -7086,8 +7174,8 @@ c3rd_other_events.86 = { #answer from landowner
                         limit = {
                             loyalty <= 33
                         }
+                        add_loyalty = political_intervention1
                     }
-                    add_loyalty = political_intervention1
                     
                 }
             }
@@ -7101,8 +7189,8 @@ c3rd_other_events.86 = { #answer from landowner
                         limit = {
                             loyalty <= 33
                         }
+                        add_loyalty = political_intervention2
                     }
-                    add_loyalty = political_intervention2
                     
                 }
             }
@@ -7113,8 +7201,8 @@ c3rd_other_events.86 = { #answer from landowner
                         limit = {
                             loyalty <= 33
                         }
+                        add_loyalty = political_intervention3
                     }
-                    add_loyalty = political_intervention3
                 }
             }
         }
@@ -7193,8 +7281,8 @@ c3rd_other_events.86 = { #answer from landowner
                         limit = {
                             loyalty <= 33
                         }
+                        add_loyalty = political_intervention1
                     }
-                    add_loyalty = political_intervention1
                     
                 }
             }
@@ -7208,8 +7296,8 @@ c3rd_other_events.86 = { #answer from landowner
                         limit = {
                             loyalty <= 33
                         }
+                        add_loyalty = political_intervention2
                     }
-                    add_loyalty = political_intervention2
                     
                 }
             }
@@ -7220,8 +7308,8 @@ c3rd_other_events.86 = { #answer from landowner
                         limit = {
                             loyalty <= 33
                         }
+                        add_loyalty = political_intervention3
                     }
-                    add_loyalty = political_intervention3
                 }
             }
         }
@@ -7346,8 +7434,8 @@ c3rd_other_events.86 = { #answer from landowner
                         limit = {
                             loyalty <= 33
                         }
+                        add_loyalty = political_intervention2
                     }
-                    add_loyalty = political_intervention2
                     
                 }
             }
@@ -7361,8 +7449,8 @@ c3rd_other_events.86 = { #answer from landowner
                         limit = {
                             loyalty <= 33
                         }
+                        add_loyalty = political_intervention3
                     }
-                    add_loyalty = political_intervention3
                     
                 }
             }
@@ -7373,8 +7461,8 @@ c3rd_other_events.86 = { #answer from landowner
                         limit = {
                             loyalty <= 33
                         }
+                        add_loyalty = political_intervention4
                     }
-                    add_loyalty = political_intervention4
                 }
             }
         }
@@ -7925,6 +8013,10 @@ c3rd_other_events.88 = { #when one autonomous domain does not have any owner
             }
             scope:subject_without_owner = {
                 remove_variable = owner_from_another_empire
+                set_variable = {
+                    name = recent_client
+                    days = 365
+                }
             }
         }
         if = {
@@ -8030,6 +8122,10 @@ c3rd_other_events.89 = { #when one autonomous domain have owner in foreign count
             }
             scope:subject_with_foreign_owner =  {
                 remove_variable = owner_from_another_empire
+                set_variable = {
+                    name = recent_client
+                    days = 365
+                }
             }
         }
     }
@@ -9614,6 +9710,146 @@ c3rd_other_events.101 = { #good ruler can make the 2nd admin law available
     
 }
 
+
+c3rd_other_events.102 = { #cannot be duchy anymore
+    type = country_event
+    title = "c3rd_other_events.102.t"
+    desc = "c3rd_other_events.102.desc"
+    left_portrait = current_ruler
+
+    picture = throneroom
+
+    trigger = {
+        government = duchy
+        num_of_cities >= 50
+    }
+
+    immediate = {
+        change_government = despotic_monarchy
+    }
+
+    option = {
+        name = c3rd_other_events.102.a
+        custom_tooltip = c3rd_other_events.102.a.tt1
+    }
+    
+}
+
+
+
+c3rd_other_events.103 = { #duchy subject no longer a duchy
+    type = country_event
+    title = "c3rd_other_events.103.t"
+    desc = "c3rd_other_events.103.desc"
+    left_portrait = current_ruler
+
+    picture = throneroom
+
+    trigger = {
+        any_subject = {
+            is_subject_type = duchy_subject
+            NOT = {
+                government = duchy
+            }
+        }
+    }
+
+    immediate = {
+        random_subject = {
+            limit = {
+                is_subject_type = duchy_subject
+                NOT = {
+                    government = duchy
+                }
+            }
+            save_scope_as = ex_duchy
+        }
+        hidden_effect = {
+            release_subject = scope:ex_duchy
+        }
+    }
+
+    option = { #client
+        name = c3rd_other_events.103.a
+        custom_tooltip = c3rd_other_events.103.a.tt1
+        make_subject = {
+            target = scope:ex_duchy
+            type = client_state
+        }
+        scope:ex_duchy = {
+            set_variable = {
+                name = recent_client
+                days = 365
+            }
+        }
+    }
+    option = { #tributary
+        name = c3rd_other_events.103.b
+        custom_tooltip = c3rd_other_events.103.b.tt1
+        make_subject = {
+            target = scope:ex_duchy
+            type = tributary
+        }
+        scope:ex_duchy = {
+            set_variable = {
+                name = subject_wants_more_cooldown
+                days = 3650
+            }
+        }
+        add_stability = 2
+        add_tyranny = -3
+    }
+    option = { #ally
+        name = c3rd_other_events.103.c
+        custom_tooltip = c3rd_other_events.103.c.tt1
+        scope:ex_duchy = {
+            add_opinion = {
+                modifier = empire_gave_independance
+                target = root
+            }
+        }
+        add_opinion = {
+            modifier = empire_gave_independance
+            target = scope:ex_duchy
+        }
+        add_stability = 5
+        add_aggressive_expansion = -10
+    }
+    
+}
+
+
+c3rd_other_events.104 = { #Notification of duchy created
+	type = minor_country_event
+	title= "c3rd_other_events.104.t"
+	desc = "c3rd_other_events.104.desc"
+	interface_lock = no
+	goto_location = scope:duchy_capital
+	left_portrait = scope:duchy_creator
+	
+	trigger = {
+	}
+	
+	immediate = {
+
+	}
+
+	option = {
+		name = "c3rd_other_events.104.a"
+        custom_tooltip = c3rd_other_events.104.a.tt1
+        if = {
+            limit = {
+                has_law = decentralized_administration_law
+            }
+            custom_tooltip = c3rd_other_events.104.a.tt2
+        }
+        else = {
+            custom_tooltip = c3rd_other_events.104.a.tt3
+            
+        }
+	}
+}
+
 c3rd_other_events.110 = { #Intervention
     type = country_event
     title = "c3rd_other_events.110.t"
@@ -11076,6 +11312,15 @@ c3rd_other_events.110 = { #Intervention
             else = {
                 add_political_influence = -30
             }
+        }
+        scope:first_inter_char = {
+            add_loyalty = disappointed
+        }
+        scope:second_inter_char = {
+            add_loyalty = disappointed
+        }
+        scope:third_inter_char = {
+            add_loyalty = disappointed
         }
     }
 

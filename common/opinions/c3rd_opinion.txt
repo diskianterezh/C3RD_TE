@@ -8,3 +8,8 @@ border_money = {
 	value = -25
 	yearly_decay = 1
 }
+
+empire_gave_independance = {
+	value = 100
+	yearly_decay = 1
+}
