@@ -3311,7 +3311,9 @@ c3rd_other_events.33 = { #new cultural identity
                 }
                 modifier = {
                     factor = 0.1
-                    this.culture.culture_group = root.country_culture_group
+                    root = {
+                        country_culture_group = prev.culture.culture_group
+                    }
                     any_country = {
                         rank = great_power
                         NOT = {this = root}
@@ -6394,9 +6396,9 @@ c3rd_other_events.84 = { #event when you have  the tax inspection culture law : 
                         save_scope_as = holding_target
                         governor = {
                             add_holding = scope:holding_target
+                            add_corruption = 5
                         }
                     }
-                    add_corruption = 5
                 }
             }
         }
@@ -7585,15 +7587,17 @@ c3rd_other_events.87 = { #take region from domain
                         this = scope:governorship_1
                     }
                 }
-                modifier = {
-                    any_governorship_state = {
-                        any_state_province = {
-                            any_neighbor_province = {
-                                owner = root
+                weight = {
+                    modifier = {
+                        any_governorship_state = {
+                            any_state_province = {
+                                any_neighbor_province = {
+                                    owner = root
+                                }
                             }
                         }
+                        factor = 10
                     }
-                    factor = 10
                 }
                 save_scope_as = governorship_2
             }
@@ -7604,15 +7608,17 @@ c3rd_other_events.87 = { #take region from domain
                         this = scope:governorship_2
                     }
                 }
-                modifier = {
-                    any_governorship_state = {
-                        any_state_province = {
-                            any_neighbor_province = {
-                                owner = root
+                weight = {
+                    modifier = {
+                        any_governorship_state = {
+                            any_state_province = {
+                                any_neighbor_province = {
+                                    owner = root
+                                }
                             }
                         }
+                        factor = 10
                     }
-                    factor = 10
                 }
                 save_scope_as = governorship_3
             }
@@ -7624,15 +7630,17 @@ c3rd_other_events.87 = { #take region from domain
                         this = scope:governorship_3
                     }
                 }
-                modifier = {
-                    any_governorship_state = {
-                        any_state_province = {
-                            any_neighbor_province = {
-                                owner = root
+                weight = {
+                    modifier = {
+                        any_governorship_state = {
+                            any_state_province = {
+                                any_neighbor_province = {
+                                    owner = root
+                                }
                             }
                         }
+                        factor = 10
                     }
-                    factor = 10
                 }
                 save_scope_as = governorship_4
             }
@@ -7730,7 +7738,7 @@ c3rd_other_events.87 = { #take region from domain
                             1 = {
                                 modifier = {
                                     add = 1
-                                    has_law = decentralized_administration_law
+                                    root= {has_law = decentralized_administration_law}
                                 }
                                 scope:owner_reintegrated = {
                                     add_holding = prev
@@ -7814,7 +7822,7 @@ c3rd_other_events.87 = { #take region from domain
                             1 = {
                                 modifier = {
                                     add = 1
-                                    has_law = decentralized_administration_law
+                                    root = {has_law = decentralized_administration_law}
                                 }
                                 scope:owner_reintegrated = {
                                     add_holding = prev
@@ -7899,7 +7907,7 @@ c3rd_other_events.87 = { #take region from domain
                             1 = {
                                 modifier = {
                                     add = 1
-                                    has_law = decentralized_administration_law
+                                    root = {has_law = decentralized_administration_law}
                                 }
                                 scope:owner_reintegrated = {
                                     add_holding = prev
@@ -8362,7 +8370,7 @@ c3rd_other_events.891 = { #when one autonomous domain have been set independant 
                         1 = {
                             modifier = {
                                 add = 1
-                                has_law = decentralized_administration_law
+                                root = {has_law = decentralized_administration_law}
                             }
                             scope:owner_of_nonsubject = {
                                 add_holding = prev
@@ -8881,8 +8889,8 @@ c3rd_other_events.92 = { #governor complain about excessive control of another c
     type = country_event
     title = "c3rd_other_events.92.t"
     desc = "c3rd_other_events.92.desc"
-    left_portrait = gov_owner_target_complain
-    right_portrait = gov_target_complain
+    left_portrait = scope:gov_owner_target_complain
+    right_portrait = scope:gov_target_complain
 
     picture = senator_conversing
     trigger = {
@@ -9015,7 +9023,7 @@ c3rd_other_events.92 = { #governor complain about excessive control of another c
                                 var:governorship_owner = prevprev
                             }
                             var:governorship_owner = {
-                                is_rival = prevprevprev
+                                is_rival = prev.governor
                                 is_ruler = no
                             }
                         }
@@ -9180,7 +9188,7 @@ c3rd_other_events.93 = { #governor complain about excessive control of ruler
     title = "c3rd_other_events.93.t"
     desc = "c3rd_other_events.93.desc"
     left_portrait = current_ruler
-    right_portrait = gov_target_complain2
+    right_portrait = scope:gov_target_complain2
 
     picture = senator_conversing
 
@@ -9315,7 +9323,7 @@ c3rd_other_events.93 = { #governor complain about excessive control of ruler
     option = {#let's have an accord of good principle
         name = c3rd_other_events.93.a
         custom_tooltip = c3rd_other_events.93.a.tt1
-        target = {
+        trigger = {
             any_owned_province = {
                 count >= 5
                 governorship = scope:govship_target_complain2
@@ -9383,9 +9391,9 @@ c3rd_other_events.93 = { #governor complain about excessive control of ruler
                 remove_variable = governorship_owner_ratio
             }
         }
+        add_legitimacy = -7
         current_ruler = {
             add_popularity = -15
-            add_legitimacy = -7
 			recalculate_ownership_char = yes
         }
     }
@@ -9652,7 +9660,7 @@ c3rd_other_events.101 = { #good ruler can make the 2nd admin law available
             invention = administrative_military_reform_c3rd
         }
         has_variable = recent_military_anarchy
-        ruler = {
+        current_ruler = {
             finesse >= 10
             charisma >= 5
         }
@@ -9693,7 +9701,7 @@ c3rd_other_events.101 = { #good ruler can make the 2nd admin law available
         name = c3rd_other_events.101.a
         custom_tooltip = c3rd_other_events.101.a.tt1
         add_political_influence = -20
-        ruler = {
+        current_ruler = {
             add_popularity = 20
         }
         set_variable = {
@@ -10496,9 +10504,7 @@ c3rd_other_events.110 = { #Intervention
             add_legitimacy = -25
         }
         else = {
-            current_ruler = { #should not be possible
-                add_political_influence = -50
-            }
+            add_political_influence = -50
         }
     }
 
@@ -10540,9 +10546,7 @@ c3rd_other_events.110 = { #Intervention
             add_legitimacy = -10
         }
         else = {
-            current_ruler = {
-                add_political_influence = -25
-            }
+            add_political_influence = -25
         }
         scope:first_inter_char = {
             add_loyalty = requests_fulfilled

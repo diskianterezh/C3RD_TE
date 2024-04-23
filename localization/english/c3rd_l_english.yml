@@ -280,6 +280,38 @@
  c3rd_influent_characters_owners_tt5:0 "[politician_character_parse.GetName]"
  c3rd_influent_characters_owners_tt5_1:0 "#G [politician_character_parse.GetName]#!"
 
+# GUI
+ c3rd_monetary_window_TITLE:0 "Monetary Crisis"
+ SOLIDUS_AVAILABLE:0 "[Player.Custom('solidus_available_custom_loc')]"
+ solidus_available_custom_loc_1:0 "Unavailable mechanic"
+ solidus_available_custom_loc_2:0 "Solidus Reform Unavailable "
+ solidus_available_custom_loc_3:0 "#G Solidus Reform Available#!"
+ solidus_available_custom_loc_4:0 "#G Solidus Introduced#!"
+ c3rd_solidus_available_tt:0 "[Player.Custom('solidus_available_custom_loc_tt')]"
+ solidus_available_custom_loc_tt1:0 "These mechanics are available later in the game"
+ solidus_available_custom_loc_tt2:0 "You need #G 'The Aurelian Intervention'#! invention to reform the Solidus"
+ solidus_available_custom_loc_tt3:0 "You have now access to the Solidus Mission tree"
+ solidus_available_custom_loc_tt4:0 "The Gold standard has been introduced\n #G  The monetary crisis is over for good#!\n#R The Aristocracy has been empowered #!"
+ solidus_available_custom_loc_tt5:0 "Tribals cannot do the Reform"
+ c3rd_monetary_integrated_tt:0 "The number of integrated pops in your country\n#R Integrated pops contribute negatively to the economy#!"
+ c3rd_monetary_unintegrated_tt:0 "The number of pops of an unintegrated but not enslaved culture in your country\n\nThey form the basis of contribution to the economy"
+ c3rd_monetary_slaves_tt:0 "The number of pops of an enslaved culture in your country\n\n#G They contribute twice as much to the economy #!"
+ c3rd_monetary_gold_tt:0 "The number of imported and produced gold in your country\n\n#G Gold have a huge positive impact on the economy #!"
+ c3rd_monetary_vassal_exploitation:0 "[Player.Custom('c3rd_monetary_vassal_exploitation_custom_loc')]"
+ c3rd_monetary_vassal_exploitation_custom_loc1:0 "[GuiScope.SetRoot( Player.MakeScope).ScriptValue('num_of_subject_pops')|0TF]"
+ c3rd_monetary_vassal_exploitation_custom_loc2:0 "[GuiScope.SetRoot( Player.MakeScope).ScriptValue('num_of_subject_pops')|0Y]"
+ c3rd_monetary_vassal_exploitation_tt:0 "[Player.Custom('c3rd_monetary_vassal_exploitation_custom_loc_tt')]"
+ c3rd_monetary_vassal_exploitation_custom_loctt1:0 "The #Y Vassal exploitation#! monetary law is not enabled\nThis is the number of vassal pops that could contribute to your economy if you enact it\n\n#Y Vassal pops contribute far less to your economy than your own pops #!"
+ c3rd_monetary_vassal_exploitation_custom_loctt2:0 "The number of pops from your vassals contributing to your economy\n\n#Y Vassal pops contribute far less to your economy than your own pops #!"
+ c3rd_monetary_citizen_exemption_tt:0 "The primary culture decision #Y No Census taxes for Citizen or Nobles#! has been taken or forced to your country\n\n#R This has a very negative impact on your economy#!\n\nYou can revoke it in the primary culture decisions"
+ c3rd_monetary_aristocratic_exemptions_tt:0 "A Total tax exemption has been decreed for your elites\n\n#R This has a negative impact on your economy#!"
+ c3rd_monetary_military_advantages_tt:0 "Military advantages have been bestowed on generals\n\n#R This has a negative impact on your economy#!"
+ c3rd_monetary_tax_inspection_tt:0 "Meticulous taxation has been put in place to ensure that no-one can avoid tax\n\n#G This has a very positive impact on your economy#!\n\nThis is a primary culture decision and can be revoked or re-applied in cultural decisions"
+ c3rd_monetary_consolidation_sol_tt:0 "A monetary consolidation is currently taking place\n\n#G This has a very positive impact on your economy#!"
+ c3rd_aristocratic_reforms_tt:0 "Tough reforms imposed by your aristocracy are consolidating the economy as they can\n\n#G This has a very positive impact on your economy#!"
+ c3rd_monetary_political_unstability_tt:0 "A political instability is affecting your country\n\n#R This has a negative impact on your economy#!"
+ c3rd_monetary_political_second_reform_law_tt:0 "The #Y Aurelian's reforms#! law has been enacted\n\n#G This has a positive impact on your economy#!"
+
 
  #Culture
 
@@ -1481,6 +1513,9 @@ low_stab_event.8.c.tt1:0 "Things remain as they are, but [asked_landowner.GetNam
  duchy_title:0 "Create Duchy"
  duchy_desc:0 "Are you sure you want to create a Duchy? This will create a subject out of [SCOPE.GetRootScope.GetProvince.GetName|Y], #R and the entire local province #!."
  duchy_borders_tt:0 "A duchy can only be created on a border state, bordering a non-allied, non-subject tribal country"
+
+
+ c3rd_monetary_window_button_tt1:0 "The monetary mechanics are not yet enabled"
 #tribals fix
 
  tribal_flavour_events.41.t:0 "Imminent collapse"

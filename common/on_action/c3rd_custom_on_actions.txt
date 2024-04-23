@@ -178,7 +178,7 @@ c3rd_custom_on_actions_rival_empire_in_war = {
 		any_current_war = {
 			NOT = {
 				any_war_participant = {
-					this = var:mother_empire
+					this = root.var:mother_empire
 				}
 			}
 			war_score = {
@@ -194,7 +194,7 @@ c3rd_custom_on_actions_rival_empire_in_war = {
 			limit = {
 				NOT = {
 					any_war_participant = {
-						this = var:mother_empire
+						this = root.var:mother_empire
 					}
 				}
 				war_score = {
@@ -437,6 +437,7 @@ c3rd_culture_noble_assimilation = {
 
 c3rd_mines_exhaustion_pulse = {
 	trigger = {
+		is_tribal = no
 		has_land = yes
 		current_date >= 750.1.1
 	}
@@ -525,6 +526,7 @@ c3rd_mines_exhaustion_pulse = {
 
 c3rd_mines_exhaustion_trigger = {
 	trigger = {
+		is_tribal = no
 		has_land = yes
 		any_owned_province = {
 			trade_goods = precious_metals
@@ -573,6 +575,7 @@ c3rd_calculate_deflation = {
 					has_variable = deflation_value
 				}
 				num_of_cities >= 500
+				is_tribal = no
 			}
 			set_variable = {
 				name = deflation_value
@@ -629,6 +632,7 @@ c3rd_calculate_deflation = {
 				}
 				has_law = monetary_reform_law
 				num_of_cities >= 500
+				is_tribal = no
 			}
 			set_variable = {
 				name = silver_unvalue
@@ -673,6 +677,7 @@ c3rd_calculate_deflation = {
 			limit = {
 				var:country_economy < 1
 				num_of_cities >= 500
+				is_tribal = no
 			}
 			if = {
 				limit = { NOT = {has_law = monetary_reform_law}} #if you have the monetary reform, you decrease the value of silver
@@ -692,6 +697,7 @@ c3rd_calculate_deflation = {
 			limit = {
 				var:country_economy < 0.8
 				num_of_cities >= 500
+				is_tribal = no
 			}
 			if = {
 				limit = { NOT = {has_law = monetary_reform_law}} #if you have the monetary reform, you decrease the value of silver
@@ -711,6 +717,7 @@ c3rd_calculate_deflation = {
 			limit = {
 				var:country_economy < 0.6
 				num_of_cities >= 500
+				is_tribal = no
 			}
 			if = {
 				limit = { NOT = {has_law = monetary_reform_law}} #if you have the monetary reform, you decrease the value of silver
@@ -730,6 +737,7 @@ c3rd_calculate_deflation = {
 			limit = {
 				var:country_economy < 0.4
 				num_of_cities >= 500
+				is_tribal = no
 			}
 			if = {
 				limit = { NOT = {has_law = monetary_reform_law}} #if you have the monetary reform, you decrease the value of silver
@@ -749,6 +757,7 @@ c3rd_calculate_deflation = {
 			limit = { 
 				has_law = monetary_reform_law
 				num_of_cities >= 500
+				is_tribal = no
 			}
 			change_variable = {
 				name = silver_unvalue
@@ -835,6 +844,7 @@ c3rd_apply_deflation = { #applying deflation modifiers events
 				}
 				var:deflation_value >= 30
 				num_of_cities >= 500
+				is_tribal = no
 			}
 			trigger_event = {
 				id = c3rd_other_events.20
@@ -848,6 +858,7 @@ c3rd_apply_deflation = { #applying deflation modifiers events
 				}
 				var:deflation_value >= 75
 				num_of_cities >= 500
+				is_tribal = no
 			}
 			trigger_event = {
 				id = c3rd_other_events.21
@@ -860,6 +871,7 @@ c3rd_apply_deflation = { #applying deflation modifiers events
 				}
 				var:deflation_value >= 130
 				num_of_cities >= 500
+				is_tribal = no
 			}
 			trigger_event = {
 				id = c3rd_other_events.22
@@ -934,6 +946,7 @@ c3rd_apply_silver_unvalue = { #applying silver modifiers events
 				}
 				var:silver_unvalue >= 60
 				num_of_cities >= 500
+				is_tribal = no
 			}
 			trigger_event = {
 				id = c3rd_other_events.26
@@ -947,6 +960,7 @@ c3rd_apply_silver_unvalue = { #applying silver modifiers events
 				}
 				var:silver_unvalue >= 95
 				num_of_cities >= 500
+				is_tribal = no
 			}
 			trigger_event = {
 				id = c3rd_other_events.27
@@ -959,6 +973,7 @@ c3rd_apply_silver_unvalue = { #applying silver modifiers events
 				}
 				var:silver_unvalue >= 130
 				num_of_cities >= 500
+				is_tribal = no
 			}
 			trigger_event = {
 				id = c3rd_other_events.28
@@ -1529,7 +1544,7 @@ c3rd_holding_gain_owner = { #owner gain control in his region
 				1 = {
 					modifier = {
 						add = 1
-						stability >= 75
+						root = {stability >= 75}
 					}
 					modifier = {
 						add = 1
@@ -1671,11 +1686,11 @@ c3rd_holding_tax_evasion = { #when tax evasion is on but also when you have the 
 					modifier = {
 						add = 1
 						OR = {
-							has_country_modifier = law_advantages_1
-							has_country_modifier = law_advantages_2
-							has_country_modifier = law_advantages_3
-							has_country_modifier = law_advantages_4
-							has_country_modifier = law_advantages_5
+							root = {has_country_modifier = law_advantages_1}
+							root = {has_country_modifier = law_advantages_2}
+							root = {has_country_modifier = law_advantages_3}
+							root = {has_country_modifier = law_advantages_4}
+							root = {has_country_modifier = law_advantages_5}
 						}
 					}
 					modifier = {

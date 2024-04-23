@@ -9,6 +9,42 @@ num_of_pops_integrated = {
 	}
 }
 
+
+num_of_pops_unintegrated = {
+	value = 0
+	ROOT = {
+		every_country_culture = {
+			limit = {
+				is_integrated = no
+				NOT = {has_pop_type_right = slaves}
+			}
+			add = country_culture_pop_count
+		}
+	}
+}
+
+
+num_of_pops_slaves = {
+	value = 0
+	ROOT = {
+		every_country_culture = {
+			limit = {
+				is_integrated = no
+				has_pop_type_right = slaves
+			}
+			add = country_culture_pop_count
+		}
+	}
+}
+
+num_of_subject_pops = {
+	value = 0
+	
+	every_subject = {
+		add = country_population
+	}
+}
+
 num_of_pops_noble = {
 	value = 0
 	ROOT = {
@@ -71,7 +107,7 @@ c3rd_base_economic_value = {
 			every_subject = {
 				add = {
 					value = country_population
-					multiply = 0.5
+					multiply = 0.35
 				}
 			}
 		}

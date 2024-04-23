@@ -1069,7 +1069,7 @@ scheme_steal_holding = {
 						}
 					}
 					OR = {
-						has_country_modifier = solidus_introduced
+						employer = {has_country_modifier = solidus_introduced}
 						is_ruler = no
 						AND = {
 							is_ruler = yes

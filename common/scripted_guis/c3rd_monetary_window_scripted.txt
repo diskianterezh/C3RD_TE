@@ -1,0 +1,146 @@
+﻿c3rd_monetary_is_normal = {
+	scope = country
+
+	
+    is_valid = {
+        NOR = {
+			has_country_modifier = medium_deflation
+			has_country_modifier = medium_monetary_crash
+			has_country_modifier = high_monetary_crash
+			has_country_modifier = high_monetary_crash
+		}
+    }
+    is_shown = {
+        NOR = {
+			has_country_modifier = medium_deflation
+			has_country_modifier = medium_monetary_crash
+			has_country_modifier = high_monetary_crash
+			has_country_modifier = high_monetary_crash
+		}
+    }
+}
+c3rd_monetary_medium = {
+	scope = country
+
+	
+    is_valid = {
+        NOR = {
+			has_country_modifier = high_monetary_crash
+			has_country_modifier = high_monetary_crash
+		}
+		OR = {
+			has_country_modifier = medium_deflation
+			has_country_modifier = medium_monetary_crash
+		}
+    }
+    is_shown = {
+        NOR = {
+			has_country_modifier = high_monetary_crash
+			has_country_modifier = high_monetary_crash
+		}
+		OR = {
+			has_country_modifier = medium_deflation
+			has_country_modifier = medium_monetary_crash
+		}
+    }
+}
+c3rd_monetary_high = {
+	scope = country
+
+	
+    is_valid = {
+		OR = {
+			has_country_modifier = high_monetary_crash
+			has_country_modifier = high_monetary_crash
+		}
+    }
+    is_shown = {
+		OR = {
+			has_country_modifier = high_monetary_crash
+			has_country_modifier = high_monetary_crash
+		}
+    }
+}
+
+
+c3rd_solidus_available = {
+	scope = country
+
+	
+    is_valid = {
+		OR = {
+			has_country_modifier = solidus_introduced
+			AND = {
+				is_tribal = no
+				invention = monetary_reform
+				has_civil_war = no
+			}
+		}
+    }
+    is_shown = {
+    }
+}
+
+c3rd_monetary_enslaved_culture = {
+	
+    is_shown = {
+		any_country_culture = {
+			has_pop_type_right = slaves
+		}
+    }
+}
+
+c3rd_monetary_vassal_exploitation_scripted = {
+	
+    is_valid = {
+		has_law = subject_exploitation_law
+    }
+}
+
+c3rd_monetary_citizen_exemption = {
+	is_shown = {
+		has_country_modifier = citizen_exemption_from_census_tax
+	}
+}
+
+c3rd_monetary_aristocratic_exemptions = {
+	is_shown = {
+		has_country_modifier = aristocratic_exemptions
+	}
+}
+
+c3rd_monetary_military_advantages = {
+	is_shown = {
+		has_country_modifier = military_advantages
+	}
+}
+
+c3rd_monetary_tax_inspection = {
+	is_shown = {
+		has_country_modifier = tax_inspection
+	}
+}
+
+c3rd_monetary_consolidation_sol = {
+	is_shown = {
+		has_country_modifier = monetary_consolidation_sol
+	}
+}
+
+c3rd_aristocratic_reforms = {
+	is_shown = {
+		has_country_modifier = aristocratic_reforms
+	}
+}
+
+c3rd_monetary_political_unstability = {
+	is_shown = {
+		has_country_modifier = political_unstability
+	}
+}
+
+c3rd_monetary_second_reform_law = {
+	is_shown = {
+		has_law = second_reform_law
+	}
+}

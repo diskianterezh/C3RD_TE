@@ -1,0 +1,430 @@
+# onclick = "[ExecuteConsoleCommand('gui.createwidget gui/ages_window.gui ages_window')]"
+
+@monetary_window_x = 675
+@monetary_window_y = 600
+
+# types AgeWindowTypes
+# {
+# 	type golden_age_button = widget {
+# 		using = DropShadow
+	
+# 		button = {
+# 			name = "Button_Outline"
+# 			using = button_tiled_texture
+# 			spriteType = Corneredtiled
+# 			spriteborder = { 200 200 }
+# 			gfxtype = framedbuttongfx
+# 			size = { 100% 100% }
+# 			framesize = { 200 200 }
+# 			upframe = 1
+# 			overframe = 2
+# 			downframe = 3
+# 			disableframe = 4
+# 			block "On_click" { }
+# 			block "Shortcut" { }
+
+# 			clicksound = "event:/SFX/UI/Generic/2.0/sfx_ui_button_primary"
+# 			widget = {
+# 				name = "Decorations"
+# 				size = { 100% 100% }
+# 				background = {
+# 					spriteType = Corneredtiled
+# 					texture = "gfx/interface/base_parts/button_lines_brown.dds"
+# 					shaderfile = "gfx/FX/pdxgui_default.shader"
+# 					alpha = 0.5
+# 					spriteborder = { 22 0 }
+
+# 					modify_texture = {
+# 						name = "Decay"
+# 						texture = "gfx/interface/base_parts/button_lines_alpha.dds"
+# 						blend_mode = alphamultiply
+# 						spriteType = Corneredtiled
+# 						alpha = 0.4
+# 					}					
+# 				}
+# 				background = {
+# 					name = "side_pattern"
+# 					texture = "gfx/interface/ages_window/golden_age_button_pattern.dds"
+# 					shaderfile = "gfx/FX/pdxgui_default.shader"
+# 					spriteType = Corneredtiled
+# 					spriteborder = { 22 0 }
+# 				}				
+# 			}
+# 			textbox = {
+# 				name = "Text"
+# 				position = { 0 -1 }
+# 				widgetanchor = center
+# 				parentanchor = center				
+# 				using = BaseFontS
+# 				using = Button_FontColor
+# 				autoresize = yes
+# 				align = center
+# 				block "Center_text"
+# 				{
+# 					text = "Button Text"
+# 				}
+# 			}
+# 		}
+# 	}
+# 	type age_objectives = container  {
+# 		flowcontainer = {
+# 			name = "hellenic_age_objectives"
+# 			direction = vertical
+# 			position = { 0 -49 }
+# 			spacing = -9
+# 			visible = "[GetScriptedGui('is_first_age').IsShown( GuiScope.SetRoot( Player.MakeScope ).End )]"
+# 			using = hellenic_objectives
+# 		}
+# 		flowcontainer = {
+# 			name = "migration_age_objectives"
+# 			direction = vertical
+# 			position = { 0 -49 }
+# 			spacing = -9
+# 			visible = "[GetScriptedGui('is_second_age').IsShown( GuiScope.SetRoot( Player.MakeScope ).End )]"
+# 			using = migration_objectives
+# 		}
+# 		flowcontainer = {
+# 			name = "empire_age_objectives"
+# 			direction = vertical
+# 			position = { 0 -47 }
+# 			spacing = -9
+# 			visible = "[GetScriptedGui('is_third_age').IsShown( GuiScope.SetRoot( Player.MakeScope ).End )]"
+# 			using = empire_objectives
+# 		}
+# 	}
+# 	type age_objective = margin_widget {
+# 		size = { @[ages_window_x - 45] 70 }
+# 		background = {
+# 			shaderfile = "gfx/FX/pdxgui_default.shader"
+# 			texture = "gfx/interface/base_parts/background_noninteractable_texture.dds"
+# 			spriteType = Corneredtiled
+# 			modify_texture = {
+# 				name = "Alpha"
+# 				texture = "gfx/interface/base_parts/background_x60bd_alpha.dds"
+# 				blend_mode = alphamultiply
+# 				spriteType = Corneredtiled
+# 				spriteborder = { 60 60 }
+# 			}
+# 		}
+# 		icon = {
+# 			position = { 20 7 }
+# 			size = { 55 55 }
+# 			block "Icon" {
+# 				texture = "gfx/interface/ages_window/icon_empire.dds"
+# 			}
+# 		}
+# 		# Title and desc
+# 		textbox = {
+# 			position = { 90 3 }
+# 			using = BaseFontM
+# 			using = Black_FontColor
+# 			autoresize = yes
+# 			alwaystransparent = no
+# 			align = left
+# 			block "objective_title"
+# 			{
+# 				text = "hi"
+# 			}
+# 		}
+# 		textbox = {
+# 			position = { 90 23 }
+# 			using = BaseFontM
+# 			using = Black_FontColor
+# 			fontsize = 14
+# 			multiline = yes
+# 			autoresize = yes
+# 			alwaystransparent = no
+# 			align = left
+# 			max_width = 400
+# 			maximumsize = { 400 -1 }
+# 			block "objective_desc"
+# 			{
+# 				text = "hi"
+# 			}
+# 		}
+# 		container = {
+# 			parentanchor = vcenter|right
+# 			position = { -38 6 }
+# 			textbox = {
+# 				position = { 8 -21 }
+# 				widgetanchor = center
+# 				parentanchor = center				
+# 				using = BaseFontS
+# 				using = Black_FontColor
+# 				autoresize = yes
+# 				max_width = 120 # todo
+# 				elide = right
+# 				align = center
+# 				block "progress_text"
+# 				{
+# 					text = "0 / 5"
+# 				}
+# 			}
+# 			progressbar = {
+# 				using = progressbar_green_horizontal
+# 				parentanchor = center
+# 				position = { 7 2 }
+# 				size = { 100 20 }
+# 				block "progress_value"
+# 				{
+# 					value = "[FixedPointToFloat(Player.GetProgressTowardsCivilWar)]"
+# 				}
+# 			}
+# 		}
+# 	}
+# 	type age_abilities = container {
+# 		flowcontainer = {
+# 			name = "hellenic_age_abilities"
+# 			direction = horizontal
+# 			spacing = 15
+# 			visible = "[GetScriptedGui('is_first_age').IsShown( GuiScope.SetRoot( Player.MakeScope ).End )]"
+# 			using = hellenic_abilities
+# 		}
+# 		flowcontainer = {
+# 			name = "migration_age_abilities"
+# 			direction = horizontal
+# 			spacing = 15
+# 			visible = "[GetScriptedGui('is_second_age').IsShown( GuiScope.SetRoot( Player.MakeScope ).End )]"
+# 			using = migration_abilities
+# 		}
+# 		flowcontainer = {
+# 			name = "empire_age_abilities"
+# 			direction = horizontal
+# 			spacing = 15
+# 			visible = "[GetScriptedGui('is_third_age').IsShown( GuiScope.SetRoot( Player.MakeScope ).End )]"
+# 			using = empire_abilities
+# 		}
+# 	}
+# 	type age_ability = icon_button_square {
+# 		size = { 40 40 }
+# 		blockoverride "Icon"
+# 		{
+# 			block "Texture" {
+# 				texture = "gfx/interface/icons/modifiers/agressive_expansion_impact.dds"
+# 			}
+# 		}
+# 		blockoverride "On_click" {
+# 			onclick = "[ScriptedGui.Execute( GuiScope.SetRoot( Player.MakeScope ).End )]"
+# 		}
+# 		enabled = "[ScriptedGui.IsValid( GuiScope.SetRoot( Player.MakeScope ).End )]"
+# 	}
+# }
+
+message_window = {
+	name = "c3rd_monetary_window"
+	size = { @monetary_window_x @monetary_window_y }
+	position = { 531 150 }
+	movable = yes
+
+	state = {
+		name = _show
+		start_sound = {
+			soundeffect = "event:/SFX/UI/Generic/2.0/sfx_ui_window_tab_close"
+		}
+	}
+	state = {
+		name = _hide
+		start_sound = {
+			soundeffect = "event:/SFX/UI/Generic/2.0/sfx_ui_window_tab_close"
+		}
+	}
+	
+	icon = {
+		texture = "gfx/interface/event_window/Event_great_thriving_city_seen_slightly_from_a_distance.dds"
+		visible = "[GetScriptedGui('c3rd_monetary_is_normal').IsShown( GuiScope.SetRoot( Player.MakeScope ).End )]"
+		scale = 0.4
+		alpha = 0.85
+		parentanchor = top|right
+		position = { 0 70 }
+	}
+
+	icon = {
+		texture = "gfx/interface/event_window/c3rd_event_monetary_medium.dds"
+		visible = "[GetScriptedGui('c3rd_monetary_medium').IsShown( GuiScope.SetRoot( Player.MakeScope ).End )]"
+		scale = 0.3
+		alpha = 0.85
+		parentanchor = top|right
+		position = { 0 30 }
+	}
+
+	icon = {
+		texture = "gfx/interface/event_window/Event_great_work_riot.dds"
+		visible = "[GetScriptedGui('c3rd_monetary_high').IsShown( GuiScope.SetRoot( Player.MakeScope ).End )]"
+		scale = 0.4
+		alpha = 0.85
+		parentanchor = top|right
+		position = { 0 70 }
+	}
+
+	blockoverride "Title_text" { text = "c3rd_monetary_window_TITLE" }
+
+	blockoverride "White_buttons"
+	{
+		button_close = {
+			tooltip = "CLOSE"
+			onclick = "[ExecuteConsoleCommand('gui.ClearWidgets c3rd_monetary_window')]"
+			onclick = "[GetVariableSystem.Clear('c3rd_monetary_window_opened')]"
+		}
+	}
+	icon_and_text = {
+		position = { 40 60 }
+		size = { 250 0 }
+		blockoverride "Text" { text = "SOLIDUS_AVAILABLE" }
+		
+		enabled = "[GetScriptedGui('c3rd_solidus_available').IsValid( GuiScope.SetRoot( Player.MakeScope ).End )]"
+		blockoverride "Icon" { texture = "gfx/interface/icons/shared_icons/leader.dds" }
+		tooltip = "c3rd_solidus_available_tt"
+		
+	}
+	
+
+	
+	flowcontainer = {
+		parentanchor = left
+		position = { 40 110 }
+		spacing = 15
+		direction = vertical
+		icon_and_text = {
+			size = { 100 0 }
+			blockoverride "Text" { text = "[GuiScope.SetRoot( Player.MakeScope).ScriptValue('num_of_pops_integrated')|0R]" }
+			blockoverride "Icon" { texture = "gfx/interface/icons/pop_types/nobles.dds" }
+			tooltip = "c3rd_monetary_integrated_tt"
+			
+		}
+		icon_and_text = {
+			size = { 100 0 }
+			blockoverride "Text" { text = "[GuiScope.SetRoot( Player.MakeScope).ScriptValue('num_of_pops_unintegrated')|0]" }
+			blockoverride "Icon" { texture = "gfx/interface/icons/pop_types/freemen.dds" }
+			tooltip = "c3rd_monetary_unintegrated_tt"
+			
+		}
+		icon_and_text = {
+			size = { 100 0 }
+			visible = "[GetScriptedGui('c3rd_monetary_enslaved_culture').IsValid( GuiScope.SetRoot( Player.MakeScope ).End )]"
+			blockoverride "Text" { text = "[GuiScope.SetRoot( Player.MakeScope).ScriptValue('num_of_pops_slaves')|0G]" }
+			blockoverride "Icon" { texture = "gfx/interface/icons/pop_types/slaves.dds" }
+			tooltip = "c3rd_monetary_slaves_tt"
+			
+		}
+	}
+	flowcontainer = {
+		parentanchor = left
+		position = { 160 157 }
+		spacing = 15
+		direction = vertical
+		icon_and_text = {
+			size = { 100 0 }
+			blockoverride "Text" { text = "[GuiScope.SetRoot( Player.MakeScope).ScriptValue('c3rd_gold_number')|0G]" }
+			blockoverride "Icon" { texture = "gfx/interface/icons/tradegoods/precious_metals.dds" }
+			tooltip = "c3rd_monetary_gold_tt"
+			
+		}
+		icon_and_text = {
+			size = { 100 0 }
+			enabled = "[GetScriptedGui('c3rd_monetary_vassal_exploitation_scripted').IsValid( GuiScope.SetRoot( Player.MakeScope ).End )]"
+			blockoverride "Text" { text = "c3rd_monetary_vassal_exploitation" }
+			blockoverride "Icon" { texture = "gfx/interface/icons/diplomatic_status/vassalized.dds" }
+			tooltip = "c3rd_monetary_vassal_exploitation_tt"
+			
+		}
+	}
+	hbox = {
+		margin = { 150 0 }
+		layoutpolicy_horizontal = expanding
+		spacing = 0
+		icon = {
+			size = { 30 30 }
+			#visible = "[GetScriptedGui('c3rd_monetary_citizen_exemption').IsShown( GuiScope.SetRoot( Player.MakeScope ).End )]"
+			texture = "gfx/interface/icons/pop_types/citizen.dds"
+			tooltip = "c3rd_monetary_citizen_exemption_tt"
+			color = { 1 0.5 0.5 1 }
+		}
+		icon = {
+			size = { 30 30 }
+			#visible = "[GetScriptedGui('c3rd_monetary_aristocratic_exemptions').IsShown( GuiScope.SetRoot( Player.MakeScope ).End )]"
+			texture = "gfx/interface/icons/pop_types/nobles.dds"
+			tooltip = "c3rd_monetary_aristocratic_exemptions_tt"
+			color = { 1 0.5 0.5 1 }
+		}
+		icon = {
+			size = { 30 30 }
+			visible = "[GetScriptedGui('c3rd_monetary_military_advantages').IsShown( GuiScope.SetRoot( Player.MakeScope ).End )]"
+			texture = "gfx/interface/icons/shared_icons/military_tradition.dds"
+			tooltip = "c3rd_monetary_military_advantages_tt"
+			color = { 1 0.5 0.5 1 }
+		}
+		icon = {
+			size = { 30 30 }
+			visible = "[GetScriptedGui('c3rd_monetary_tax_inspection').IsShown( GuiScope.SetRoot( Player.MakeScope ).End )]"
+			texture = "gfx/interface/icons/shared_icons/decision.dds"
+			tooltip = "c3rd_monetary_tax_inspection_tt"
+			color = { 0.5 1 0.5 1 }
+		}
+		icon = {
+			size = { 30 30 }
+			visible = "[GetScriptedGui('c3rd_monetary_consolidation_sol').IsShown( GuiScope.SetRoot( Player.MakeScope ).End )]"
+			texture = "gfx/interface/icons/shared_icons/leader.dds"
+			tooltip = "c3rd_monetary_consolidation_sol_tt"
+			color = { 0.5 1 0.5 1 }
+		}
+		icon = {
+			size = { 30 30 }
+			visible = "[GetScriptedGui('c3rd_aristocratic_reforms').IsShown( GuiScope.SetRoot( Player.MakeScope ).End )]"
+			texture = "gfx/interface/icons/shared_icons/disloyal_power_base.dds"
+			tooltip = "c3rd_aristocratic_reforms_tt"
+			color = { 0.5 1 0.5 1 }
+		}
+		icon = {
+			size = { 30 30 }
+			visible = "[GetScriptedGui('c3rd_monetary_political_unstability').IsShown( GuiScope.SetRoot( Player.MakeScope ).End )]"
+			texture = "gfx/interface/icons/shared_icons/senate_power.dds"
+			tooltip = "c3rd_monetary_political_unstability_tt"
+			color = { 1 0.5 0.5 1 }
+		}
+		icon = {
+			size = { 30 30 }
+			#visible = "[GetScriptedGui('c3rd_monetary_second_reform_law').IsShown( GuiScope.SetRoot( Player.MakeScope ).End )]"
+			texture = "gfx/interface/icons/shared_icons/ironman.dds"
+			tooltip = "c3rd_monetary_political_second_reform_law_tt"
+			color = { 0.5 1 0.5 1 }
+		}
+	}
+	flowcontainer = {
+		parentanchor = vcenter
+		position = { 37 110 }
+		spacing = 15
+		direction = horizontal
+		icon_and_text = {
+			size = { 100 0 }
+			blockoverride "Text" { text = "[GuiScope.SetRoot( Player.MakeScope).ScriptValue('c3rd_gold_number')|0G]" }
+			blockoverride "Icon" { texture = "gfx/interface/icons/tradegoods/precious_metals.dds" }
+			tooltip = "c3rd_monetary_gold_tt"
+			
+		}
+		icon_and_text = {
+			size = { 100 0 }
+			enabled = "[GetScriptedGui('c3rd_monetary_vassal_exploitation_scripted').IsValid( GuiScope.SetRoot( Player.MakeScope ).End )]"
+			blockoverride "Text" { text = "c3rd_monetary_vassal_exploitation" }
+			blockoverride "Icon" { texture = "gfx/interface/icons/diplomatic_status/vassalized.dds" }
+			tooltip = "c3rd_monetary_vassal_exploitation_tt"
+			
+		}
+		icon_and_text = {
+			size = { 100 0 }
+			enabled = "[GetScriptedGui('c3rd_monetary_vassal_exploitation_scripted').IsValid( GuiScope.SetRoot( Player.MakeScope ).End )]"
+			blockoverride "Text" { text = "c3rd_monetary_vassal_exploitation" }
+			blockoverride "Icon" { texture = "gfx/interface/icons/diplomatic_status/vassalized.dds" }
+			tooltip = "c3rd_monetary_vassal_exploitation_tt"
+			
+		}
+	}
+	
+	icon = {
+		texture = "gfx/interface/event_window/Event_open_chest.dds"
+		visible = "[GetScriptedGui('c3rd_monetary_is_normal').IsShown( GuiScope.SetRoot( Player.MakeScope ).End )]"
+		scale = 0.63
+		alpha = 0.2
+		parentanchor = center
+		position = { 0 150 }
+	}
+}

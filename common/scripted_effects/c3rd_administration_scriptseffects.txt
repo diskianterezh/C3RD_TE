@@ -108,16 +108,16 @@ create_domain = {
 			}
 		}
 		else = {
-        	create_character = { # General 
-        		culture = scope:asked_landowner.culture
-        		religion = scope:asked_landowner.religion
-				save_scope_as = ruler_domain
-			}
 			random_governorship_state = {
 				random_state_province = {
 					create_country = {
 						save_scope_as = new_country_domain
 						change_government = despotic_monarchy
+						create_character = { # General 
+							culture = scope:asked_landowner.culture
+							religion = scope:asked_landowner.religion
+							save_scope_as = ruler_domain
+						}
 						add_treasury = 50
 						set_as_ruler = scope:ruler_domain
 						set_variable = {

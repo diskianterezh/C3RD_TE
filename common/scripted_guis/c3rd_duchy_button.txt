@@ -39,11 +39,15 @@
 		trigger_if = {
 			limit = {
 				state = {
-					is_state_capital = yes
+					any_state_province = {
+						is_capital = yes
+					}
 				}
 			}
 			state = {
-				is_state_capital = yes
+				any_state_province = {
+					is_capital = yes
+				}
 			}
 		}
 		trigger_if = {
