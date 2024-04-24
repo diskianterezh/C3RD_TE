@@ -388,34 +388,210 @@ message_window = {
 			tooltip = "c3rd_monetary_political_second_reform_law_tt"
 			color = { 0.5 1 0.5 1 }
 		}
-	}
+	}	
 	flowcontainer = {
 		parentanchor = vcenter
 		position = { 37 110 }
-		spacing = 15
+		spacing = 90
 		direction = horizontal
 		icon_and_text = {
 			size = { 100 0 }
-			blockoverride "Text" { text = "[GuiScope.SetRoot( Player.MakeScope).ScriptValue('c3rd_gold_number')|0G]" }
-			blockoverride "Icon" { texture = "gfx/interface/icons/tradegoods/precious_metals.dds" }
-			tooltip = "c3rd_monetary_gold_tt"
-			
-		}
-		icon_and_text = {
-			size = { 100 0 }
+			scale = 1.5
 			enabled = "[GetScriptedGui('c3rd_monetary_vassal_exploitation_scripted').IsValid( GuiScope.SetRoot( Player.MakeScope ).End )]"
 			blockoverride "Text" { text = "c3rd_monetary_vassal_exploitation" }
-			blockoverride "Icon" { texture = "gfx/interface/icons/diplomatic_status/vassalized.dds" }
+			blockoverride "Icon" { texture = "gfx/interface/monetary/open_roman_chest.dds" }
 			tooltip = "c3rd_monetary_vassal_exploitation_tt"
 			
 		}
-		icon_and_text = {
-			size = { 100 0 }
-			enabled = "[GetScriptedGui('c3rd_monetary_vassal_exploitation_scripted').IsValid( GuiScope.SetRoot( Player.MakeScope ).End )]"
-			blockoverride "Text" { text = "c3rd_monetary_vassal_exploitation" }
-			blockoverride "Icon" { texture = "gfx/interface/icons/diplomatic_status/vassalized.dds" }
-			tooltip = "c3rd_monetary_vassal_exploitation_tt"
-			
+		flowcontainer = {
+			parentanchor = vcenter
+			position = { 40 110 }
+			spacing = 15
+			direction = vertical
+			icon_and_text_progress = {
+				blockoverride "TotalSize" { size = { 220 40} }
+				blockoverride "size" { size = { 100% 7 } margin_right = 13 }
+				alpha = "[TransparentIfTrue(Not(ProvinceWindow.GetProvince.HasPopActivity('assimilate')))]"
+	
+				blockoverride "Icon" {
+					flowcontainer = {
+						position = { 0 -3 }
+						spacing = -5
+						visible = "[ProvinceWindow.GetProvince.HasPopActivity('assimilate')]"
+						icon = {
+							using = icon_culture
+							size = { @icon_size @icon_size }
+						}
+						icon = {
+							texture = "[GetPopIcon(ProvinceWindow.GetProvince.GetPopActivity('assimilate').GetPop.GetType)]"
+							size = { @icon_size @icon_size }
+						}
+					}
+				}
+	
+				blockoverride "Text" {
+					text = "[ProvinceWindow.GetProvince.GetActivitySpeed('assimilate')|+=/%]"
+					margin_right = 0
+					#visible = "[ProvinceWindow.GetProvince.HasPopActivity('assimilate')]"
+				}
+				tooltip = "[ProvinceWindow.GetProvince.GetActivityInformation('assimilate')]"
+				icon = {
+					size = { 30 30 }
+					position = { 10 -3 }
+					#visible = "[GetScriptedGui('c3rd_monetary_second_reform_law').IsShown( GuiScope.SetRoot( Player.MakeScope ).End )]"
+					texture = "gfx/interface/icons/shared_icons/arrow_right.dds"
+					tooltip = "c3rd_monetary_political_second_reform_law_tt"
+					color = { 1 0.5 0.5 1 }
+				}
+				icon = {
+					size = { 30 30 }
+					position = { 10 -3 }
+					#visible = "[GetScriptedGui('c3rd_monetary_second_reform_law').IsShown( GuiScope.SetRoot( Player.MakeScope ).End )]"
+					texture = "gfx/interface/icons/shared_icons/arrow_left.dds"
+					tooltip = "c3rd_monetary_political_second_reform_law_tt"
+					color = { 0.5 1 0.5 1 }
+				}
+				icon = {
+					size = { 30 30 }
+					position = { 40 -3 }
+					#visible = "[GetScriptedGui('c3rd_monetary_second_reform_law').IsShown( GuiScope.SetRoot( Player.MakeScope ).End )]"
+					texture = "gfx/interface/icons/shared_icons/arrow_right.dds"
+					tooltip = "c3rd_monetary_political_second_reform_law_tt"
+					color = { 1 0.5 0.5 1 }
+				}
+				icon = {
+					size = { 30 30 }
+					position = { 40 -3 }
+					#visible = "[GetScriptedGui('c3rd_monetary_second_reform_law').IsShown( GuiScope.SetRoot( Player.MakeScope ).End )]"
+					texture = "gfx/interface/icons/shared_icons/arrow_left.dds"
+					tooltip = "c3rd_monetary_political_second_reform_law_tt"
+					color = { 0.5 1 0.5 1 }
+				}
+				icon = {
+					size = { 30 30 }
+					position = { 70 -3 }
+					#visible = "[GetScriptedGui('c3rd_monetary_second_reform_law').IsShown( GuiScope.SetRoot( Player.MakeScope ).End )]"
+					texture = "gfx/interface/icons/shared_icons/arrow_right.dds"
+					tooltip = "c3rd_monetary_political_second_reform_law_tt"
+					color = { 1 0.5 0.5 1 }
+				}
+				icon = {
+					size = { 30 30 }
+					position = { 70 -3 }
+					#visible = "[GetScriptedGui('c3rd_monetary_second_reform_law').IsShown( GuiScope.SetRoot( Player.MakeScope ).End )]"
+					texture = "gfx/interface/icons/shared_icons/arrow_left.dds"
+					tooltip = "c3rd_monetary_political_second_reform_law_tt"
+					color = { 0.5 1 0.5 1 }
+				}
+				icon = {
+					size = { 30 30 }
+					position = { 100 -3 }
+					#visible = "[GetScriptedGui('c3rd_monetary_second_reform_law').IsShown( GuiScope.SetRoot( Player.MakeScope ).End )]"
+					texture = "gfx/interface/icons/shared_icons/arrow_right.dds"
+					tooltip = "c3rd_monetary_political_second_reform_law_tt"
+					color = { 1 0.5 0.5 1 }
+				}
+				icon = {
+					size = { 30 30 }
+					position = { 100 -3 }
+					#visible = "[GetScriptedGui('c3rd_monetary_second_reform_law').IsShown( GuiScope.SetRoot( Player.MakeScope ).End )]"
+					texture = "gfx/interface/icons/shared_icons/arrow_left.dds"
+					tooltip = "c3rd_monetary_political_second_reform_law_tt"
+					color = { 0.5 1 0.5 1 }
+				}
+			}
+			icon_and_text_progress = {
+				blockoverride "TotalSize" { size = { 220 40} }
+				blockoverride "size" { size = { 100% 7 } margin_right = 13 }
+				alpha = "[TransparentIfTrue(Not(ProvinceWindow.GetProvince.HasPopActivity('assimilate')))]"
+	
+				blockoverride "Icon" {
+					flowcontainer = {
+						position = { 0 -3 }
+						spacing = -5
+						visible = "[ProvinceWindow.GetProvince.HasPopActivity('assimilate')]"
+						icon = {
+							using = icon_culture
+							size = { @icon_size @icon_size }
+						}
+						icon = {
+							texture = "[GetPopIcon(ProvinceWindow.GetProvince.GetPopActivity('assimilate').GetPop.GetType)]"
+							size = { @icon_size @icon_size }
+						}
+					}
+				}
+	
+				blockoverride "Text" {
+					text = "[ProvinceWindow.GetProvince.GetActivitySpeed('assimilate')|+=/%]"
+					margin_right = 0
+					#visible = "[ProvinceWindow.GetProvince.HasPopActivity('assimilate')]"
+				}
+				tooltip = "[ProvinceWindow.GetProvince.GetActivityInformation('assimilate')]"
+				icon = {
+					size = { 30 30 }
+					position = { 10 -3 }
+					#visible = "[GetScriptedGui('c3rd_monetary_second_reform_law').IsShown( GuiScope.SetRoot( Player.MakeScope ).End )]"
+					texture = "gfx/interface/icons/shared_icons/arrow_right.dds"
+					tooltip = "c3rd_monetary_political_second_reform_law_tt"
+					color = { 1 0.5 0.5 1 }
+				}
+				icon = {
+					size = { 30 30 }
+					position = { 10 -3 }
+					#visible = "[GetScriptedGui('c3rd_monetary_second_reform_law').IsShown( GuiScope.SetRoot( Player.MakeScope ).End )]"
+					texture = "gfx/interface/icons/shared_icons/arrow_left.dds"
+					tooltip = "c3rd_monetary_political_second_reform_law_tt"
+					color = { 0.5 1 0.5 1 }
+				}
+				icon = {
+					size = { 30 30 }
+					position = { 40 -3 }
+					#visible = "[GetScriptedGui('c3rd_monetary_second_reform_law').IsShown( GuiScope.SetRoot( Player.MakeScope ).End )]"
+					texture = "gfx/interface/icons/shared_icons/arrow_right.dds"
+					tooltip = "c3rd_monetary_political_second_reform_law_tt"
+					color = { 1 0.5 0.5 1 }
+				}
+				icon = {
+					size = { 30 30 }
+					position = { 40 -3 }
+					#visible = "[GetScriptedGui('c3rd_monetary_second_reform_law').IsShown( GuiScope.SetRoot( Player.MakeScope ).End )]"
+					texture = "gfx/interface/icons/shared_icons/arrow_left.dds"
+					tooltip = "c3rd_monetary_political_second_reform_law_tt"
+					color = { 0.5 1 0.5 1 }
+				}
+				icon = {
+					size = { 30 30 }
+					position = { 70 -3 }
+					#visible = "[GetScriptedGui('c3rd_monetary_second_reform_law').IsShown( GuiScope.SetRoot( Player.MakeScope ).End )]"
+					texture = "gfx/interface/icons/shared_icons/arrow_right.dds"
+					tooltip = "c3rd_monetary_political_second_reform_law_tt"
+					color = { 1 0.5 0.5 1 }
+				}
+				icon = {
+					size = { 30 30 }
+					position = { 70 -3 }
+					#visible = "[GetScriptedGui('c3rd_monetary_second_reform_law').IsShown( GuiScope.SetRoot( Player.MakeScope ).End )]"
+					texture = "gfx/interface/icons/shared_icons/arrow_left.dds"
+					tooltip = "c3rd_monetary_political_second_reform_law_tt"
+					color = { 0.5 1 0.5 1 }
+				}
+				icon = {
+					size = { 30 30 }
+					position = { 100 -3 }
+					#visible = "[GetScriptedGui('c3rd_monetary_second_reform_law').IsShown( GuiScope.SetRoot( Player.MakeScope ).End )]"
+					texture = "gfx/interface/icons/shared_icons/arrow_right.dds"
+					tooltip = "c3rd_monetary_political_second_reform_law_tt"
+					color = { 1 0.5 0.5 1 }
+				}
+				icon = {
+					size = { 30 30 }
+					position = { 100 -3 }
+					#visible = "[GetScriptedGui('c3rd_monetary_second_reform_law').IsShown( GuiScope.SetRoot( Player.MakeScope ).End )]"
+					texture = "gfx/interface/icons/shared_icons/arrow_left.dds"
+					tooltip = "c3rd_monetary_political_second_reform_law_tt"
+					color = { 0.5 1 0.5 1 }
+				}
+			}
 		}
 	}
 	
