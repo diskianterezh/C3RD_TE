@@ -126,3 +126,104 @@ c3rd_monetary_vassal_exploitation_custom_loc_tt = {
 	}
 
 }
+
+c3rd_monetary_what_is_my_eco_custom_loc = {
+	type = country
+	text = { #green
+		localization_key = c3rd_monetary_what_is_my_eco_custom_loc1
+		trigger = {
+			has_variable = what_is_my_eco
+			var:what_is_my_eco >= 1
+		}
+	}
+	text = { #red
+		localization_key = c3rd_monetary_what_is_my_eco_custom_loc2
+		trigger = {
+			has_variable = what_is_my_eco
+			var:what_is_my_eco < 1
+		}
+	}
+}
+
+c3rd_monetary_deflation_custom_loc = {
+	type = country
+	text = { 
+		localization_key = c3rd_monetary_deflation_custom_loc1
+		trigger = {
+			NOR = {
+				has_country_modifier = small_deflation
+				has_country_modifier = medium_deflation
+				has_country_modifier = high_deflation
+			}
+		}
+	}
+	text = { 
+		localization_key = c3rd_monetary_deflation_custom_loc2
+		trigger = {
+			has_country_modifier = small_deflation
+		}
+	}
+	text = { 
+		localization_key = c3rd_monetary_deflation_custom_loc3
+		trigger = {
+			has_country_modifier = medium_deflation
+		}
+	}
+	text = { 
+		localization_key = c3rd_monetary_deflation_custom_loc4
+		trigger = {
+			has_country_modifier = high_deflation
+		}
+	}
+
+}
+
+c3rd_monetary_silver_custom_loc = {
+	type = country
+	text = { 
+		localization_key = c3rd_monetary_silver_custom_loc1
+		trigger = {
+			NOR = {
+				has_country_modifier = small_monetary_crash
+				has_country_modifier = medium_monetary_crash
+				has_country_modifier = high_monetary_crash
+			}
+		}
+	}
+	text = {
+		localization_key = c3rd_monetary_silver_custom_loc2
+		trigger = {
+			has_country_modifier = small_monetary_crash
+		}
+	}
+	text = { 
+		localization_key = c3rd_monetary_silver_custom_loc3
+		trigger = {
+			has_country_modifier = medium_monetary_crash
+		}
+	}
+	text = {
+		localization_key = c3rd_monetary_silver_custom_loc4
+		trigger = {
+			has_country_modifier = high_monetary_crash
+		}
+	}
+
+}
+
+c3rd_monetary_silver_law_custom_loc = {
+	type = country
+	text = {
+		localization_key = c3rd_monetary_silver_law_custom_loc1
+		trigger = {
+			NOT = {has_law = monetary_reform_law}
+		}
+	}
+	text = { 
+		localization_key = c3rd_monetary_silver_law_custom_loc2
+		trigger = {
+			has_law = monetary_reform_law
+		}
+	}
+
+}

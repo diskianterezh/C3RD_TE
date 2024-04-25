@@ -589,6 +589,7 @@
 			current_date >=  1000.1.1
 			num_of_cities >= 25
 			is_ai = yes
+			is_ai = no #decision on hold
 			any_country_culture = { #any culture to swap
 				NOT = {this.culture = root.culture}
 				save_temporary_scope_as = checktempculture

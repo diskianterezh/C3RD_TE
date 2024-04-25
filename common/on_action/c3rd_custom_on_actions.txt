@@ -582,47 +582,13 @@ c3rd_calculate_deflation = {
 				value = 0
 			}
 		}
-		if = { #first reduction of the silver unvalue if aurelian
-			limit = {
-				has_variable = silver_unvalue
-				has_law = second_reform_law
-				var:silver_unvalue > 0
-			}
-			change_variable = {
-				name = silver_unvalue
-				add = -1
-			}
-		}
-		if = { #reduction if bartering
-			limit = {
-				has_variable = silver_unvalue
-				has_country_modifier = bartering_authorised
-				var:silver_unvalue > 0
-			}
-			change_variable = {
-				name = silver_unvalue
-				add = -1
-			}
-		}
-		if = { #reduction if silv consolidation (solidus)
-			limit = {
-				has_variable = silver_unvalue
-				has_country_modifier = silver_consolidation_sol
-				var:silver_unvalue > 0
-			}
-			change_variable = {
-				name = silver_unvalue
-				add = -1
-			}
-		}
-		if = { #silver law reduce deflation passively
+		if = {
 			limit = {
 				has_variable = deflation_value
-				has_law = monetary_reform_law
 			}
 			change_variable = {
 				name = deflation_value
-				add = -1
+				add = c3rd_deflation_increase
 			}
 		}
 		if = { #creation of the silver unvalue variable if >500 cities
@@ -639,155 +605,16 @@ c3rd_calculate_deflation = {
 				value = 0
 			}
 		}
-		if = { #reduce deflation if economy good
-			limit = {
-				has_variable = deflation_value
-				var:country_economy > 1
-				var:deflation_value > 0
-			}
-			change_variable = {
-				name = deflation_value
-				add = -1
-			}
-		}
-		if = { #economy very good
-			limit = {
-				has_variable = deflation_value
-				var:country_economy > 2
-				var:deflation_value > 0
-			}
-			change_variable = {
-				name = deflation_value
-				add = -2
-			}
-		}
-		if = { #veryvery good
-			limit = {
-				has_variable = deflation_value
-				var:country_economy > 4
-				var:deflation_value > 0
-			}
-			change_variable = {
-				name = deflation_value
-				add = -3
-			}
-		}
-		#increase deflation or silver unvalue, depending of the law - only if cities > 500
-		if = { 
-			limit = {
-				var:country_economy < 1
-				num_of_cities >= 500
-				is_tribal = no
-			}
-			if = {
-				limit = { NOT = {has_law = monetary_reform_law}} #if you have the monetary reform, you decrease the value of silver
-				change_variable = {
-					name = deflation_value
-					add = 1
-				}
-			}
-			else = {
-				change_variable = {
-					name = silver_unvalue
-					add = 1
-				}
-			}
-		}
 		if = {
 			limit = {
-				var:country_economy < 0.8
-				num_of_cities >= 500
-				is_tribal = no
-			}
-			if = {
-				limit = { NOT = {has_law = monetary_reform_law}} #if you have the monetary reform, you decrease the value of silver
-				change_variable = {
-					name = deflation_value
-					add = 1
-				}
-			}
-			else = {
-				change_variable = {
-					name = silver_unvalue
-					add = 1
-				}
-			}
-		}
-		if = {
-			limit = {
-				var:country_economy < 0.6
-				num_of_cities >= 500
-				is_tribal = no
-			}
-			if = {
-				limit = { NOT = {has_law = monetary_reform_law}} #if you have the monetary reform, you decrease the value of silver
-				change_variable = {
-					name = deflation_value
-					add = 1
-				}
-			}
-			else = {
-				change_variable = {
-					name = silver_unvalue
-					add = 1
-				}
-			}
-		}
-		if = {
-			limit = {
-				var:country_economy < 0.4
-				num_of_cities >= 500
-				is_tribal = no
-			}
-			if = {
-				limit = { NOT = {has_law = monetary_reform_law}} #if you have the monetary reform, you decrease the value of silver
-				change_variable = {
-					name = deflation_value
-					add = 1
-				}
-			}
-			else = {
-				change_variable = {
-					name = silver_unvalue
-					add = 1
-				}
-			}
-		}
-		if = { #passive unvalue of silver if silver law
-			limit = { 
-				has_law = monetary_reform_law
-				num_of_cities >= 500
-				is_tribal = no
-			}
-			change_variable = {
-				name = silver_unvalue
-				add = 1
-			}
-		}
-	}
-}
-c3rd_aurelien = {
-	trigger = {
-		has_land = yes
-		is_ai = no
-		NOT = {
-			has_country_modifier = solidus_introduced
-		}
-	}
-	effect = {
-		if = {
-			limit = { 
-				has_law = second_reform_law
 				has_variable = silver_unvalue
-				var:silver_unvalue > 0
 			}
 			change_variable = {
 				name = silver_unvalue
-				add = -1
+				add = c3rd_silver_increase
 			}
 		}
 	}
-
 }
 
 c3rd_economic_warning = {

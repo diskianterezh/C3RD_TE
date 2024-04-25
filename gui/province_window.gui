@@ -4197,7 +4197,7 @@ window = {
 													tooltip = "DUCHY_BUTTON"
 												}
 
-												blockoverride "Icon" { texture = "gfx/interface/icons/shared_icons/create_mercenary_state.dds" }
+												blockoverride "Icon" { texture = "gfx/interface/icons/shared_icons/fortification.dds" }
 											}
 										}
 

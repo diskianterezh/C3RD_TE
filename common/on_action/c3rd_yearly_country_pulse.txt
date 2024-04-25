@@ -6,7 +6,6 @@ yearly_country_pulse = {
 		c3rd_mines_exhaustion_pulse
 		c3rd_custom_on_actions_rival_empire_opinion
 		c3rd_calculate_deflation
-		c3rd_aurelien
 		c3rd_province_revolt_gain
 		c3rd_holding_control
 		c3rd_holding_clear

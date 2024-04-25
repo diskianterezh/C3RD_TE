@@ -504,8 +504,10 @@ widget = {
 			using = red_alert
 			blockoverride "On_click"
 			{
+				enabled = "[Not(GetVariableSystem.Exists('c3rd_monetary_window_opened'))]"
 				onclick = "[ExecuteConsoleCommand('gui.createwidget gui/c3rd_monetary_window.gui c3rd_monetary_window')]"
 				onclick = "[GetVariableSystem.Toggle('c3rd_monetary_window_opened')]"
+				onclick = "[GetScriptedGui('c3rd_monetary_recalculation').Execute( GuiScope.SetRoot( Player.MakeScope ).End )]"
 				onrightclick = "[AlertManager.ToggleShowAlert('c3rd_monetary_balance')]"
 			}
 				
@@ -1030,8 +1032,10 @@ widget = {
 			using = yellow_alert
 			blockoverride "On_click"
 			{
+				enabled = "[Not(GetVariableSystem.Exists('c3rd_monetary_window_opened'))]"
 				onclick = "[ExecuteConsoleCommand('gui.createwidget gui/c3rd_monetary_window.gui c3rd_monetary_window')]"
 				onclick = "[GetVariableSystem.Toggle('c3rd_monetary_window_opened')]"
+				onclick = "[GetScriptedGui('c3rd_monetary_recalculation').Execute( GuiScope.SetRoot( Player.MakeScope ).End )]"
 				onrightclick = "[AlertManager.ToggleShowAlert('c3rd_monetary_balance_medium')]"
 			}
 				

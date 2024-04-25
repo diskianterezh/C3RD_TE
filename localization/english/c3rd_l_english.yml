@@ -264,8 +264,8 @@
 
  #alerts
 
- ALERT_MONETARY_BALANCE:0 "#T Monetary balance low#!\nOur monetary balance is dangerously low. Our wealth creation and exploitation is lower than the consumption of the citizenry. \nOpen the great book (decision) to learn more about it"
- ALERT_MONETARY_BALANCE_MEDIUM:0 "#T Monetary balance low#!\nOur monetary balance is low. Our wealth creation and exploitation is slightly lower than the consumption of the citizenry. \nOpen the great book (decision) to learn more about it"
+ ALERT_MONETARY_BALANCE:0 "#T Monetary balance low#!\nOur monetary balance is dangerously low. Our wealth creation and exploitation is lower than the consumption of the citizenry. \nOpen here the Monetary Crisis window, or in the economy tab to know more"
+ ALERT_MONETARY_BALANCE_MEDIUM:0 "#T Monetary balance low#!\nOur monetary balance is low. Our wealth creation and exploitation is slightly lower than the consumption of the citizenry. \nOpen here the Monetary Crisis window, or in the economy tab to know more"
  ALERT_COLLAPSE:0 "#T Internal Collapse#!\nYour country is collapsing. As long as your stability is #R below 25#!, collapse events will occur."
  ALERT_MILITARY_ANARCHY:0 "#T Military Anarchy#!\nThe country is in a phase of military anarchy. As long as this continues, the generals will demand more important concessions and decisions."
  ALERT_MILITARY_ANARCHY_TT1:0 "\nSome characters are influent generals :\n"
@@ -289,8 +289,8 @@
  solidus_available_custom_loc_4:0 "#G Solidus Introduced#!"
  c3rd_solidus_available_tt:0 "[Player.Custom('solidus_available_custom_loc_tt')]"
  solidus_available_custom_loc_tt1:0 "These mechanics are available later in the game"
- solidus_available_custom_loc_tt2:0 "You need #G 'The Aurelian Intervention'#! invention to reform the Solidus"
- solidus_available_custom_loc_tt3:0 "You have now access to the Solidus Mission tree"
+ solidus_available_custom_loc_tt2:0 "The Solidus reform is a definitive solution to the currency crisis\n\nYou need #G 'The Aurelian Intervention'#! invention to reform the Solidus"
+ solidus_available_custom_loc_tt3:0 "The Solidus reform is a definitive solution to the currency crisis\n\n#G You have now access to the Solidus Mission tree #!"
  solidus_available_custom_loc_tt4:0 "The Gold standard has been introduced\n #G  The monetary crisis is over for good#!\n#R The Aristocracy has been empowered #!"
  solidus_available_custom_loc_tt5:0 "Tribals cannot do the Reform"
  c3rd_monetary_integrated_tt:0 "The number of integrated pops in your country\n#R Integrated pops contribute negatively to the economy#!"
@@ -311,7 +311,28 @@
  c3rd_aristocratic_reforms_tt:0 "Tough reforms imposed by your aristocracy are consolidating the economy as they can\n\n#G This has a very positive impact on your economy#!"
  c3rd_monetary_political_unstability_tt:0 "A political instability is affecting your country\n\n#R This has a negative impact on your economy#!"
  c3rd_monetary_political_second_reform_law_tt:0 "The #Y Aurelian's reforms#! law has been enacted\n\n#G This has a positive impact on your economy#!"
-
+ c3rd_monetary_recalculation_tt:0 "Refresh the Monetary Balance"
+ c3rd_monetary_what_is_my_eco:0 "[Player.Custom('c3rd_monetary_what_is_my_eco_custom_loc')]"
+ c3rd_monetary_what_is_my_eco_custom_loc1:0 "[SCOPE.GetRootScope.GetCountry.MakeScope.GetVariable('what_is_my_eco').GetValue|0G%] #!"
+ c3rd_monetary_what_is_my_eco_custom_loc2:0 "[SCOPE.GetRootScope.GetCountry.MakeScope.GetVariable('what_is_my_eco').GetValue|0R%] #!"
+ c3rd_monetary_deflation_tt:0 "Deflation status :\n[Player.Custom('c3rd_monetary_deflation_custom_loc')]"
+ c3rd_monetary_deflation_custom_loc1:0 "Your economy is not suffering any deflationary effects"
+ c3rd_monetary_deflation_custom_loc2:0 "#R Your economy is currently undergoing slight deflation#!\n\nA worsening of the situation will lead to significant deflation."
+ c3rd_monetary_deflation_custom_loc3:0 "#R Your economy is currently undergoing significant deflation#!\n#G The 'Silver Reform' law requirements have been bypassed #!\n\nA worsening of the situation will lead to overwhelming deflation"
+ c3rd_monetary_deflation_custom_loc4:0 "#R Your economy is currently undergoing overwhelming deflation#!\n#G The 'Silver Reform' law requirements have been bypassed #!\n\nDeflation is not capped and will continue to accumulate, making it increasingly difficult to reverse the tide"
+ c3rd_monetary_silver_tt:0 "Silver value :\n[Player.Custom('c3rd_monetary_silver_custom_loc')]"
+ c3rd_monetary_silver_custom_loc1:0 "Your currency is stable"
+ c3rd_monetary_silver_custom_loc2:0 "#R The currency is weakened#!\n\nA worsening of the situation will lead to a heavily devaluated currency."
+ c3rd_monetary_silver_custom_loc3:0 "#R The currency is heavily devaluated#!\n\nA worsening of the situation will lead to a crash of the currency"
+ c3rd_monetary_silver_custom_loc4:0 "#R Your currency has collapsed#!\n\nThe devaluation is not capped and will continue to accumulate, making it increasingly difficult to reverse the tide"
+ c3rd_monetary_silver_law_tt:0 "[Player.Custom('c3rd_monetary_silver_law_custom_loc')]"
+ c3rd_monetary_silver_law_custom_loc1:0 "The #Y Silver Reform#! is not enacted\n\nThe Silver reform allows you to combat deflation very effectively, by using lighter metals to mint more money. However, this will have a deleterious effect on the value of the currency"
+ c3rd_monetary_silver_law_custom_loc2:0 "The #Y Silver Reform#! is enacted\n\nYou are reducing deflation very effectively, by using lighter metals to mint more money. However, this will have a deleterious effect on the value of the currency"
+ c3rd_inject_liquidity_tt:0 "#G You'll reduce deflation #!"
+ c3rd_new_currency_tt:0 "#G You will reduce the devaluation#!"
+ has_deflation_modifier:0 "You're experiencing the effects of deflation"
+ has_silver_modifier:0 "You're experiencing the effects of a monetary devaluation"
+ c3rd_monetary_the_number_tt:0 "#Y Economy balance#!\n\nThis number represents the inner wealth of your country: how rich are people, how money flows between workers and owners. It has little to do with the amount of money in your coffers, nor your income... but the consequences of mismanagement can indirectly influence it.\n\nEvery pop of non-integrated culture contributes #G positively#! to this figure, symbolizing the exploitation of conquered populations in the service of the country.\n#G Each pop of culture with 'slave' cultural rights will contribute twice as much #! \nEvery precious mineral will contribute #G positively#! to this figure.\nEach integrated pop, symbolizing the privileges of the elites will contribute #R negatively#! to this figure\n\nThe ratio between positive and negative values will differ according to laws, certain cultural decisions as the #G tax inspection policy#!, and over time. It will be more and more difficult to satisfy this ratio with time, symbolizing the progressive corruption of a society that is proud of its success."
 
  #Culture
 

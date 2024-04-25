@@ -45,6 +45,28 @@ num_of_subject_pops = {
 	}
 }
 
+half_of_deflation = {
+	value = 0
+	if = {
+		limit = {
+			has_variable = deflation_value
+		}
+		add = var:deflation_value
+		divide = 1.5
+	}
+}
+
+half_of_silver_value = {
+	value = 0
+	if = {
+		limit = {
+			has_variable = silver_unvalue
+		}
+		add = var:silver_unvalue
+		divide = 1.5
+	}
+}
+
 num_of_pops_noble = {
 	value = 0
 	ROOT = {
@@ -894,5 +916,149 @@ disloyal_country_part = {#scope country
 			loyalty < 33
 		}
 		add = var:country_ownership
+	}
+}
+
+c3rd_deflation_increase = {
+	value = 0
+	if = { #silver law reduce deflation passively
+		limit = {
+			has_variable = deflation_value
+			has_law = monetary_reform_law
+		}
+		add = -1
+	}
+	if = { #reduce deflation if economy good
+		limit = {
+			has_variable = deflation_value
+			c3rd_economic_value > 1
+			var:deflation_value > 0
+		}
+		add = -1
+	}
+	if = { #economy very good
+		limit = {
+			has_variable = deflation_value
+			c3rd_economic_value > 2
+			var:deflation_value > 0
+		}
+		add = -1
+	}
+	if = { #veryvery good
+		limit = {
+			has_variable = deflation_value
+			c3rd_economic_value > 4
+			var:deflation_value > 0
+		}
+		add = -1
+	}
+	if = { 
+		limit = {
+			c3rd_economic_value < 1
+			num_of_cities >= 500
+			is_tribal = no
+			NOT = {has_law = monetary_reform_law}
+		}
+		add = 1
+	}
+	if = { 
+		limit = {
+			c3rd_economic_value < 0.8
+			num_of_cities >= 500
+			is_tribal = no
+			NOT = {has_law = monetary_reform_law}
+		}
+		add = 1
+	}
+	if = { 
+		limit = {
+			c3rd_economic_value < 0.6
+			num_of_cities >= 500
+			is_tribal = no
+			NOT = {has_law = monetary_reform_law}
+		}
+		add = 1
+	}
+	if = { 
+		limit = {
+			c3rd_economic_value < 0.4
+			num_of_cities >= 500
+			is_tribal = no
+			NOT = {has_law = monetary_reform_law}
+		}
+		add = 1
+	}
+}
+
+
+c3rd_silver_increase = {
+	value = 0
+	if = { #first reduction of the silver unvalue if aurelian
+		limit = {
+			has_variable = silver_unvalue
+			has_law = second_reform_law
+			var:silver_unvalue > 0
+		}
+		add = -2
+	}
+	if = { #reduction if bartering
+		limit = {
+			has_variable = silver_unvalue
+			has_country_modifier = bartering_authorised
+			var:silver_unvalue > 0
+		}
+		add = -1
+	}
+	if = { #reduction if silv consolidation (solidus)
+		limit = {
+			has_variable = silver_unvalue
+			has_country_modifier = silver_consolidation_sol
+			var:silver_unvalue > 0
+		}
+		add = -1
+	}
+	if = { #passive unvalue of silver if silver law
+		limit = { 
+			has_law = monetary_reform_law
+			num_of_cities >= 500
+			is_tribal = no
+		}
+		add = 1
+	}
+	if = { 
+		limit = {
+			c3rd_economic_value < 1
+			num_of_cities >= 500
+			is_tribal = no
+			has_law = monetary_reform_law
+		}
+		add = 1
+	}
+	if = { 
+		limit = {
+			c3rd_economic_value < 0.8
+			num_of_cities >= 500
+			is_tribal = no
+			has_law = monetary_reform_law
+		}
+		add = 1
+	}
+	if = { 
+		limit = {
+			c3rd_economic_value < 0.6
+			num_of_cities >= 500
+			is_tribal = no
+			has_law = monetary_reform_law
+		}
+		add = 1
+	}
+	if = { 
+		limit = {
+			c3rd_economic_value < 0.4
+			num_of_cities >= 500
+			is_tribal = no
+			has_law = monetary_reform_law
+		}
+		add = 1
 	}
 }

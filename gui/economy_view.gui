@@ -156,14 +156,14 @@ base_window = {
 						enabled = "[And(Not(GetVariableSystem.Exists('c3rd_monetary_window_opened')),GetScriptedGui('c3rd_monetary_window_button').IsValid( GuiScope.SetRoot( Player.MakeScope ).End ))]"
 						blockoverride "Icon" { 
 							texture = "gfx/interface/monetary/monetary_crisis.dds" 
-							scale = 1.3
-						}
+							scale = 1.2						}
 						tooltip = "c3rd_monetary_window_TITLE"
 						
 						blockoverride "On_click"
 						{
 							onclick = "[ExecuteConsoleCommand('gui.createwidget gui/c3rd_monetary_window.gui c3rd_monetary_window')]"
 							onclick = "[GetVariableSystem.Toggle('c3rd_monetary_window_opened')]"
+							onclick = "[GetScriptedGui('c3rd_monetary_recalculation').Execute( GuiScope.SetRoot( Player.MakeScope ).End )]"
 						}
 					}
 					
