@@ -589,6 +589,7 @@ region_owned_provinces = {
 			add = 1
 		}
 	}
+	min = 1
 
 }
 

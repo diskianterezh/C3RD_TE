@@ -5,15 +5,7 @@
 		always = no
 	}
     is_valid = {
-		trigger_if = {
-			limit = {
-				current_date < 700.1.1
-			}
-			custom_tooltip = {
-				text = c3rd_monetary_window_button_tt1
-				current_date >= 700.1.1
-			}
-		}
+		current_date >= 700.1.1
     }
 
 	is_shown = {

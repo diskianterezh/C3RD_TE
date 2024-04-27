@@ -4064,6 +4064,7 @@ c3rd_other_events.60 = { #filthy barbarians ransacking our lands
 
     trigger = {
         has_land = yes
+        current_date >= 800.1.1
         any_country_state = {
             count >= 5
             has_state_modifier = barbarians_border
@@ -9652,7 +9653,7 @@ c3rd_other_events.101 = { #good ruler can make the 2nd admin law available
         has_land = yes
         is_tribal = no
         has_civil_war = no
-        current_date >= 700.1.1
+        current_date >= 750.1.1
         NOR = {
             has_country_modifier = military_anarchy
             has_variable = constantine_reform_available

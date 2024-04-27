@@ -227,3 +227,20 @@ c3rd_monetary_silver_law_custom_loc = {
 	}
 
 }
+
+monetary_crisis_button_custom_loc = {
+	type = country
+	text = {
+		localization_key = c3rd_monetary_window_button_tt1
+		trigger = {
+			current_date < 700.1.1
+		}
+	}
+	text = { 
+		localization_key = c3rd_monetary_window_button_tt2
+		trigger = {
+			current_date >= 700.1.1
+		}
+	}
+
+}

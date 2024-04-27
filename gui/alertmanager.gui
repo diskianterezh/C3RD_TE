@@ -73,6 +73,7 @@ widget = {
 		ignoreinvisible = yes
 		visible = "[And(AlertManager.GetPlayer.Exists, Not(IsReplayShown))]"
 		spacing = 8
+		using = bigger_alerts
 		
 		###########################################################################
 		# RED ALERTS

@@ -82,6 +82,7 @@
 	strengthen_tax_inspection = {
 		potential = {
 			primary_culture = scope:target_culture.culture
+			current_date >= 750.1.1
 			NOR = { 
 				has_country_modifier = tax_inspection 
 				has_variable = tax_inspection_stopped

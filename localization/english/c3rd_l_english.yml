@@ -237,13 +237,11 @@
  has_noble_decision:0 "At least 20% of your population is part of a culture with noble rights"
  culture_group_boosted_c3rd_tt:0 "Cultures that are currently in our country and that belong to the #Y [SCOPE.sCountryCulture('chosen_new_nobles').GetCulture.GetCultureGroup.GetName]#! Culture Group gain #G 5%#! Happiness until the end of the game."
  check_the_great_book:0 "Check the great book"
- check_the_great_book_desc:0 "A great book with the status of the country's economy"
- establish_solidus:0 "Establishing the Solidus"
- establish_solidus_desc:0 "The introduction of gold value is necessary to solve the problems of value in place with the misuse of silver money. #G This will solve any economic balance problem forever #!\n #R The use of the gold value may lead to a strengthening of the elites #!"
+ check_the_great_book_desc:0 "A great book with the status of the country's economy\nThe informations of the great book have been moved to the 'Monetary Crisis' window you can access through a button in the economy tab, but you can still have access to the great book if you wish."
  inject_liquidity:0 "Inject Cash"
- inject_liquidity_desc:0 "To remedy the monetary balance, we can inject fresh money from the government.\n #G Monetary deflation will be reduced #!"
+ inject_liquidity_desc:0 "To remedy the monetary balance, we can inject fresh money from the government.\n #G Monetary deflation will be reduced #!\n\nThis decision can be taken either here, or on the 'Monetary Crisis' tab"
  new_silver_currency:0 "Introduce a new silver currency"
- new_silver_currency_desc:0 "In order to reduce monetary collapse, introducing a new currency in the image of our leader would stabilise rates. #G This will reduce the devaluation of silver #!"
+ new_silver_currency_desc:0 "In order to reduce monetary collapse, introducing a new currency in the image of our leader would stabilise rates. #G This will reduce the devaluation of silver #!\n\nThis decision can be taken either here, or on the 'Monetary Crisis' tab"
  has_deflation_decision:0 "You have any deflation"
  has_silver_decision:0 "You have any silver devaluation"
  overexpansion_the_reform:0 "Solving Republican overexpansion"
@@ -281,7 +279,7 @@
  c3rd_influent_characters_owners_tt5_1:0 "#G [politician_character_parse.GetName]#!"
 
 # GUI
- c3rd_monetary_window_TITLE:0 "Monetary Crisis"
+ c3rd_monetary_window_TITLE:0 "[Player.Custom('monetary_crisis_button_custom_loc')]"
  SOLIDUS_AVAILABLE:0 "[Player.Custom('solidus_available_custom_loc')]"
  solidus_available_custom_loc_1:0 "Unavailable mechanic"
  solidus_available_custom_loc_2:0 "Solidus Reform Unavailable "
@@ -1536,7 +1534,8 @@ low_stab_event.8.c.tt1:0 "Things remain as they are, but [asked_landowner.GetNam
  duchy_borders_tt:0 "A duchy can only be created on a border state, bordering a non-allied, non-subject tribal country"
 
 
- c3rd_monetary_window_button_tt1:0 "The monetary mechanics are not yet enabled"
+ c3rd_monetary_window_button_tt1:0 "The Monetary Crisis is not yet enabled"
+ c3rd_monetary_window_button_tt2:0 "Monetary Crisis"
 #tribals fix
 
  tribal_flavour_events.41.t:0 "Imminent collapse"
