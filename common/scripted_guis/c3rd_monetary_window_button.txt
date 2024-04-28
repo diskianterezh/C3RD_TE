@@ -5,7 +5,7 @@
 		always = no
 	}
     is_valid = {
-		current_date >= 700.1.1
+		current_date >= 750.1.1
     }
 
 	is_shown = {
