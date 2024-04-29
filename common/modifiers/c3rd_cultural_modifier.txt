@@ -39,3 +39,7 @@ slaves_massacre_c3rd = {
 new_beginnings_c3rd = {
 	culture_happiness_modifier = 0.2
 }
+
+nobles_revoked = {
+	culture_happiness_modifier = -0.1
+}

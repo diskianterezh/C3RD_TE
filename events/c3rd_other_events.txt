@@ -362,7 +362,7 @@ c3rd_other_events.4 = { #social crisis : too few integrated pops
         }
     }
 
-    option = {
+    option = {#new elite
         name = c3rd_other_events.4.a
         custom_tooltip = c3rd_other_events.4.a.tt1
         culture_state_loyalty_effect_c3rd = yes
@@ -393,7 +393,7 @@ c3rd_other_events.4 = { #social crisis : too few integrated pops
 
         }
     }
-    option = {
+    option = {#refuse
         name = c3rd_other_events.4.b
         custom_tooltip = c3rd_other_events.4.b.tt1
         scope:chosen_new_nobles = {
@@ -407,7 +407,7 @@ c3rd_other_events.4 = { #social crisis : too few integrated pops
             duration = -1
         }
     }
-    option = {
+    option = {#half
         name = c3rd_other_events.4.c
         custom_tooltip = c3rd_other_events.4.c.tt1
         highlight = yes
@@ -2823,7 +2823,7 @@ c3rd_other_events.31 = { # slaves culture revolts
         }
         modifier = {
             factor = 1.5
-            legitimacy <= 30
+            legitimacy <= 0
         }
     }
 
@@ -3031,6 +3031,266 @@ c3rd_other_events.31 = { # slaves culture revolts
 
     }
 }
+
+
+c3rd_other_events.321 = { # nobles have lost their rights
+    type = country_event
+    title = "c3rd_other_events.321.t"
+    desc = "c3rd_other_events.321.desc"
+
+    picture = roman_trial
+
+    trigger = {
+        has_land = yes
+        is_tribal = no
+        current_date >= 700.1.1
+        any_country_culture = {
+            NOT = {has_pop_type_right = nobles}
+            NOR = {
+                has_country_culture_modifier = on_going_revolt
+                has_country_culture_modifier = emancipation_c3rd
+                has_country_culture_modifier = slaves_massacre_c3rd
+            }
+            has_country_culture_modifier = nobles_revoked
+            save_temporary_scope_as = culture_ex_noble_check
+            root = {
+                any_owned_province = {
+                    count >= 5
+                    dominant_province_culture = scope:culture_ex_noble_check.culture
+                }
+            }
+        }
+    }
+
+    weight_multiplier = {
+        modifier = { #if recently
+            factor = 200
+            any_country_culture = {
+                NOR = {
+                    has_country_culture_modifier = on_going_revolt
+                    has_country_culture_modifier = emancipation_c3rd
+                    has_country_culture_modifier = slaves_massacre_c3rd
+                }
+                has_country_culture_modifier = nobles_revoked
+                has_country_culture_modifier = new_culture_elite
+                NOT = {has_pop_type_right = nobles}
+            }
+        }
+        modifier = {
+            factor = 1.5
+            any_country_culture = {
+                NOR = {
+                    has_country_culture_modifier = on_going_revolt
+                    has_country_culture_modifier = emancipation_c3rd
+                    has_country_culture_modifier = slaves_massacre_c3rd
+                }
+                country_culture_pop_count >= 500
+                has_country_culture_modifier = nobles_revoked
+                NOT = {has_pop_type_right = nobles}
+            }
+        }
+        modifier = {
+            factor = 1.5
+            any_country_culture = {
+                NOR = {
+                    has_country_culture_modifier = on_going_revolt
+                    has_country_culture_modifier = emancipation_c3rd
+                    has_country_culture_modifier = slaves_massacre_c3rd
+                }
+                country_culture_pop_count >= 200
+                has_country_culture_modifier = nobles_revoked
+                NOT = {has_pop_type_right = nobles}
+            }
+        }
+    }
+
+    immediate = {
+        random_country_culture = {
+            limit = {
+                NOT = {has_pop_type_right = nobles}
+                NOR = {
+                    has_country_culture_modifier = on_going_revolt
+                    has_country_culture_modifier = emancipation_c3rd
+                    has_country_culture_modifier = slaves_massacre_c3rd
+                }
+                has_country_culture_modifier = nobles_revoked
+                save_temporary_scope_as = culture_ex_noble_check
+                root = {
+                    any_owned_province = {
+                        count >= 5
+                        dominant_province_culture = scope:culture_ex_noble_check.culture
+                    }
+                }
+            }
+            weight = {
+                modifier = {
+                    factor = 10
+                    has_country_culture_modifier = integration_status_removed
+                }
+                modifier = {
+                    factor = 2
+                    save_temporary_scope_as = culture_slave_check2
+                    root = {
+                        any_owned_province = {
+                            count >= 10
+                            dominant_province_culture = scope:culture_slave_check2.culture
+                        }
+                    }
+                }
+                modifier = {
+                    factor = 2
+                    save_temporary_scope_as = culture_slave_check2
+                    root = {
+                        any_owned_province = {
+                            count >= 15
+                            dominant_province_culture = scope:culture_slave_check2.culture
+                        }
+                    }
+                }
+                modifier = {
+                    factor = 2
+                    country_culture_pop_count >= 200
+                }
+                modifier = {
+                    factor = 2
+                    country_culture_pop_count >= 500
+                }
+            }
+            save_scope_as = culture_slave_revolt
+        }
+        set_variable = {
+            name = max_number_massacre
+            value = 5
+        }
+        if = {
+            limit = { scope:culture_slave_revolt = {
+                country_culture_pop_count >= 200
+            }}
+            change_variable = {
+                name = max_number_massacre
+                add = 5
+            }
+        }
+        if = {
+            limit = { scope:culture_slave_revolt = {
+                country_culture_pop_count >= 500
+            }}
+            change_variable = {
+                name = max_number_massacre
+                add = 5
+            }
+        }
+    }
+
+    option = { #no
+        name = c3rd_other_events.30.a
+        custom_tooltip = c3rd_other_events.30.a.tt1
+        scope:culture_slave_revolt = {
+            add_country_culture_modifier = {
+                name = on_going_revolt
+                duration = 3650
+            }
+        }
+    }
+
+    option = { #diplo
+        name = c3rd_other_events.30.b
+        custom_tooltip = c3rd_other_events.30.b.tt1
+        trigger = {
+            current_ruler = {
+                NOT = {
+                    has_trait = stubborn
+                }
+                OR = {
+                    charisma >= 10
+                    has_trait = prominent
+                    has_trait = silver_tongued
+                    has_trait = orator
+                }
+            }
+        }
+        highlight = yes
+        hidden_effect = {
+            ordered_owned_province = {
+                limit = {
+                    dominant_province_culture = scope:culture_slave_revolt.culture
+                }
+                order_by = total_population
+                max = var:max_number_massacre
+                add_province_modifier = {
+                    name = local_autonomy_c3rd
+                    duration = 3650
+                }
+            }
+        }
+        add_political_influence = -10
+        scope:culture_slave_revolt = {
+            add_country_culture_modifier = {
+                name = emancipation_c3rd
+                duration = 1850
+            }
+        }
+    }
+
+    option = { #massacre
+        name = c3rd_other_events.30.c
+        custom_tooltip = c3rd_other_events.30.c.tt1
+        trigger = {
+            current_ruler = {
+                NOR = {
+                    has_trait = good_natured
+                    has_trait = merciful
+                    has_trait = benefactor
+                }
+                OR = {
+                    martial >= 10
+                    has_trait = cruel
+                    has_trait = energetic
+                    has_trait = harsh
+                }
+            }
+        }
+        highlight = yes
+        hidden_effect = {
+            ordered_owned_province = {
+                limit = {
+                    dominant_province_culture = scope:culture_slave_revolt.culture
+                }
+                order_by = total_population
+                max = var:max_number_massacre
+                every_pops_in_province = {
+                    limit = {
+                        pop_culture = scope:culture_slave_revolt.culture
+                    }
+                    random_list = {
+                        3 = {}
+                        1 = { kill_pop = yes}
+                    }
+                }
+            }
+        }
+        scope:culture_slave_revolt = {
+            add_country_culture_modifier = {
+                name = slaves_massacre_c3rd
+                duration = 1850
+            }
+        }
+    }
+
+    option = { #cede
+        name = c3rd_other_events.30.d
+        custom_tooltip = c3rd_other_events.30.d.tt1
+        add_stability = -3
+        scope:culture_slave_revolt = {
+            set_country_culture_right = freemen
+        }
+    }
+
+    after = {
+        remove_variable = max_number_massacre
+    }
+}
+
 # c3rd_other_events.32 = { # unintegrated revolts --- A FINIR
 #     type = country_event
 #     title = "c3rd_other_events.32.t"
@@ -3420,6 +3680,18 @@ c3rd_other_events.40 = { #corruption from gold
         modifier = {
             factor = 1.5
             treasury >= income_300
+        }
+        modifier = {
+            factor = 0.25
+            current_ruler = {
+                has_trait = honest
+            }
+        }
+        modifier = {
+            factor = 0.2
+            current_ruler = {
+                has_trait = righteous
+            }
         }
     }
     immediate = {

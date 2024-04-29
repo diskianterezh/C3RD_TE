@@ -337,6 +337,7 @@
  unworthy_ruler_tradition:0 "Ruler unworthy of traditions"
  new_culture_elite:0 "New cultural elite"
  new_elite_refused:0 "Social ascension denied"
+ nobles_revoked:0 "Elite disowned"
  strengthen_tax_inspection:0 "Strengthen Tax Inspections"
  strengthen_tax_inspection_desc:0 "The citizens with time pile up the privileges and learn new ways to maintain themselves in a privileged situation and do not feel that it is necessary to pay as much as the others. It is time to track down and eliminate these practices."
  tax_inspection_tt:0 "#G This will help to balance the monetary balance #!"
