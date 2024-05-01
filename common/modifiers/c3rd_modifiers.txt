@@ -276,6 +276,14 @@ high_monetary_crash = {
 
 local_autonomy_c3rd = {
 	local_pop_assimilation_speed_modifier = -0.5
+	local_slaves_output = -0.4
+}
+
+
+local_autonomy_nobles_c3rd = {
+	local_pop_assimilation_speed_modifier = -0.5
+	local_citizen_output = -0.3
+	local_freemen_output = -0.3
 }
 
 revolt_preparation = {
@@ -304,6 +312,10 @@ barbarians_border = {
 	local_migration_attraction = -5
 	local_migration_speed = 2
 	local_pop_assimilation_speed = -1
+}
+
+secess_preparation = {
+	local_unrest = 3
 }
 
 added_liquidity = {

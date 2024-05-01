@@ -385,7 +385,9 @@ c3rd_other_events_monthly_pulse = { #check if events can happen
 		5 = c3rd_other_events.9 #powerful characters asking for census
 		5 = c3rd_other_events.12 #games
 		3 = c3rd_other_events.30 #slave culture revolt
+		3 = c3rd_other_events.321 #ex-noble culture revolt
 		20 = c3rd_other_events.31 #slave culture uprising
+		15 = c3rd_other_events.32 #noble revoked culture uprising
 		30 = c3rd_other_events.50 #wonder threatened
 		5 = c3rd_other_events.52 #stabhit from wonders pillaged
 		4 = c3rd_other_events.60 #stabhit from barbarians
@@ -901,6 +903,156 @@ c3rd_province_revolt_gain = {
 					}
 					add_province_modifier = {
 						name = revolt_preparation
+						duration = 3650
+					}
+				}
+			}
+		}
+	}
+
+}
+
+
+c3rd_state_mass_revolt_gain = {
+	trigger = {
+		has_land = yes
+		is_ai = no
+		current_date >= 700.1.1
+		any_country_culture = {
+			NOT = {has_pop_type_right = nobles }
+			has_country_culture_modifier = on_going_mass_revolt
+		}
+	}
+	effect = {
+		every_country_state = {
+			limit = {
+				NOT = {
+					has_state_modifier = secess_preparation
+				}
+				NOT = {
+					this = root.capital_scope.state
+				}
+				any_state_province = {
+					count >= 4
+					save_temporary_scope_as = that_noble_province
+					any_pops_in_province = {
+						save_temporary_scope_as = that_pop_province
+						root = {
+							any_country_culture = {
+								this.culture = scope:that_pop_province.culture
+								has_country_culture_modifier = on_going_mass_revolt
+							}
+						}
+					}
+					owner = {
+						any_country_culture = {
+							this.culture.culture_group = scope:that_noble_province.dominant_province_culture_group
+							has_country_culture_modifier = on_going_mass_revolt
+						}
+					}
+
+				}
+			}
+			random_list = {
+				13 = {
+				}
+				1 = {
+					modifier = {
+						add = 1
+						root.stability <= 50
+					}
+					modifier = {
+						add = 1
+						root.stability <= 25
+					}
+					modifier = {
+						add = 1
+						root.legitimacy <= 50
+					}
+					modifier = {
+						add = 1
+						root.legitimacy <= 0
+					}
+					modifier = {
+						add = 1
+						root={num_of_cities >= 500}
+					}
+					modifier = {
+						add = 1
+						root={num_of_cities >= 2000}
+					}
+					add_state_modifier = {
+						name = secess_preparation
+						duration = 3650
+					}
+				}
+			}
+		}
+		every_country_state = {
+			limit = {
+				NOT = {
+					has_state_modifier = secess_preparation
+				}
+				NOT = {
+					this = root.capital_scope.state
+				}
+				any_state_province = {
+					state_loyalty <= 50
+					count >= 4
+					any_pops_in_province = {
+						save_temporary_scope_as = that_pop_province
+						root = {
+							any_country_culture = {
+								this.culture = scope:that_pop_province.culture
+								has_country_culture_modifier = on_going_mass_revolt
+							}
+						}
+					}
+				}
+				any_state_province = {
+					any_neighbor_province = {
+						this.state = {
+							has_state_modifier = secess_preparation
+						}
+					}
+				}
+			}
+			random_list = {
+				10 = {
+				}
+				1 = {
+					modifier = {
+						add = 1
+						root.stability <= 50
+					}
+					modifier = {
+						add = 1
+						root.stability <= 25
+					}
+					modifier = {
+						add = 1
+						root.legitimacy <= 50
+					}
+					modifier = {
+						add = 1
+						root.legitimacy <= 0
+					}
+					modifier = {
+						add = 1
+						any_state_province = {
+							state_loyalty <= 30
+						}
+					}
+					modifier = {
+						add = 1
+						root={num_of_cities >= 500}
+					}
+					modifier = {
+						add = 1
+						root={num_of_cities >= 2000}
+					}
+					add_state_modifier = {
+						name = secess_preparation
 						duration = 3650
 					}
 				}
