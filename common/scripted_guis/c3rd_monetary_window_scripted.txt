@@ -318,6 +318,7 @@ c3rd_inject_liquidity = {
 	}
 
 	effect = {
+		custom_tooltip = c3rd_inject_liquidity_tt1
 		add_political_influence = -50
 		add_treasury = {
 			value = -10
@@ -430,6 +431,7 @@ c3rd_new_silver_currency = {
 		}
 	}
 	effect = {
+		custom_tooltip = c3rd_new_currency_tt2
 		add_political_influence = -25
 		add_stability = -10
 		custom_tooltip = c3rd_new_currency_tt

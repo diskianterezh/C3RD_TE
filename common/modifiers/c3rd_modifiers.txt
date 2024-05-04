@@ -46,6 +46,7 @@ crisis_of_the_third_century = {
 	integrate_speed = -0.4
 	diplomatic_relations = -1
 	monthly_political_influence_modifier = -0.10
+	character_loyalty = -3
 }
 
 military_anarchy = {
@@ -106,7 +107,7 @@ dictatorial_extension_c3rd = {
 
 civil_war_stab = {
 	stability_monthly_change = -0.05
-	happiness_for_same_culture_modifier = -0.2
+	global_population_happiness = -0.2
 }
 
 unworthy_leader_1 = {
@@ -316,6 +317,11 @@ barbarians_border = {
 
 secess_preparation = {
 	local_unrest = 3
+}
+
+enough_tyranny = {
+	local_monthly_state_loyalty = -0.25
+	local_output_modifier = -0.5
 }
 
 added_liquidity = {

@@ -398,15 +398,15 @@ message_window = {
 		icon_button_square = {
 			size = { 40 40 }
 			position = { 100 -100 }
+			tooltip = "[GetScriptedGui('c3rd_inject_liquidity').BuildTooltip( GuiScope.SetRoot( Player.MakeScope ).End )]"
 			enabled = "[GetScriptedGui('c3rd_inject_liquidity').IsValid( GuiScope.SetRoot( Player.MakeScope ).End )]"
 			
 			blockoverride "ClickSound" { clicksound = "event:/SFX/UI/Actions/sfx_ui_action_goverment_interactions" }
 			
 			blockoverride "Icon" { 
-				texture = "gfx/interface/icons/shared_icons/treasury.dds" 
+				texture = "gfx/interface/monetary/open_roman_chest2.dds" 
 				scale = 1				
 			}
-			tooltip = "[GetScriptedGui('c3rd_inject_liquidity').BuildTooltip( GuiScope.SetRoot( Player.MakeScope ).End )]"
 			blockoverride "On_click"
 			{
 				onclick = "[GetScriptedGui('c3rd_inject_liquidity').Execute( GuiScope.SetRoot( Player.MakeScope ).End )]"
@@ -415,6 +415,7 @@ message_window = {
 		icon_button_square = {
 			size = { 40 40 }
 			position = { 100 -100 }
+			tooltip = "[GetScriptedGui('c3rd_new_silver_currency').BuildTooltip( GuiScope.SetRoot( Player.MakeScope ).End )]"
 			enabled = "[GetScriptedGui('c3rd_new_silver_currency').IsValid( GuiScope.SetRoot( Player.MakeScope ).End )]"
 			
 			blockoverride "ClickSound" { clicksound = "event:/SFX/UI/Actions/sfx_ui_action_goverment_interactions" }
@@ -423,7 +424,6 @@ message_window = {
 				texture = "gfx/interface/icons/shared_icons/research.dds" 
 				scale = 1					
 			}
-			tooltip = "[GetScriptedGui('c3rd_new_silver_currency').BuildTooltip( GuiScope.SetRoot( Player.MakeScope ).End )]"
 			blockoverride "On_click"
 			{
 				onclick = "[GetScriptedGui('c3rd_new_silver_currency').Execute( GuiScope.SetRoot( Player.MakeScope ).End )]"

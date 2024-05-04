@@ -1358,6 +1358,10 @@ c3rd_events.8 = { #Generals ask for a law
 			factor = 1.2
 			current_date >= 1100.1.1
 		}
+        modifier = {
+            factor = 2.5
+            has_country_modifier = internal_collapse
+        }
 
     }
 
@@ -1426,6 +1430,12 @@ c3rd_events.8 = { #Generals ask for a law
         if = {
             limit = { is_monarchy = yes }
             add_legitimacy = 5
+        }
+        if = {
+            limit = {
+                has_country_modifier = internal_collapse
+            }
+            add_stability = -3
         }
 
     }

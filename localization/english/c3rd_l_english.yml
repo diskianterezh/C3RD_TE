@@ -155,10 +155,13 @@
  desc_aristocratic_exemptions:0 "The aristocracy obtained an almost total absence of the state in their profits"
  new_beginnings_mod:0 "New beginnings"
  desc_new_beginnings_mod:0 "Our new identity will guide us on the path to glory"
+ enough_tyranny:0 "Rising up against tyranny"
+
  #opinion:
  empire_rivals:0 "Rivals Empires"
  border_money:0 "Cheap money flooding"
  empire_gave_independance:0 "Border guardian"
+ extension_stopped:0 "Extension Stopped"
 
  #laws
  monetary_law:0 "Monetary laws"
@@ -332,10 +335,12 @@
  c3rd_monetary_silver_law_custom_loc1:0 "The #Y Silver Reform#! is not enacted\n\nThe Silver reform allows you to combat deflation very effectively, by using lighter metals to mint more money. However, this will have a deleterious effect on the value of the currency"
  c3rd_monetary_silver_law_custom_loc2:0 "The #Y Silver Reform#! is enacted\n\nYou are reducing deflation very effectively, by using lighter metals to mint more money. However, this will have a deleterious effect on the value of the currency"
  c3rd_inject_liquidity_tt:0 "#G You'll reduce deflation #!"
+ c3rd_inject_liquidity_tt1:0 "#Y Inject Liquidity#!"
+ c3rd_new_currency_tt2:0 "#Y Introduce a new currency#!"
  c3rd_new_currency_tt:0 "#G You will reduce the devaluation#!"
  has_deflation_modifier:0 "You're experiencing the effects of deflation"
  has_silver_modifier:0 "You're experiencing the effects of a monetary devaluation"
- c3rd_monetary_the_number_tt:0 "#Y Economy balance#!\n\nThis number represents the inner wealth of your country: how rich are people, how money flows between workers and owners. It has little to do with the amount of money in your coffers, nor your income... but the consequences of mismanagement can indirectly influence it.\n\nEvery pop of non-integrated culture contributes #G positively#! to this figure, symbolizing the exploitation of conquered populations in the service of the country.\n#G Each pop of culture with 'slave' cultural rights will contribute twice as much #! \nEvery precious mineral will contribute #G positively#! to this figure.\nEach integrated pop, symbolizing the privileges of the elites will contribute #R negatively#! to this figure\n\nThe ratio between positive and negative values will differ according to laws, certain cultural decisions as the #G tax inspection policy#!, and over time. It will be more and more difficult to satisfy this ratio with time, symbolizing the progressive corruption of a society that is proud of its success."
+ c3rd_monetary_the_number_tt:0 "#Y Economy balance#!\n\nThis number represents the inner wealth of your country: how rich are people, how money flows between workers and owners. It has little to do with the amount of money in your coffers, nor your income... but the consequences of mismanagement can indirectly influence it.\n#R Below 100%#! not enough wealth is generated to fuel the economy and deflation gradually increases\n#G Above 100%#! your empire generates enough wealth to fuel the economy and deflation is reduced\n\nEvery pop of non-integrated culture contributes #G positively#! to this figure, symbolizing the exploitation of conquered populations in the service of the country.\n#G Each pop of culture with 'slave' cultural rights will contribute twice as much #! \nEvery precious mineral will contribute #G positively#! to this figure.\nEach integrated pop, symbolizing the privileges of the elites will contribute #R negatively#! to this figure\n\nThe ratio between positive and negative values will differ according to laws, certain cultural decisions as the #G tax inspection policy#!, and over time. It will be more and more difficult to satisfy this ratio with time, symbolizing the progressive corruption of a society that is proud of its success."
 
  #Culture
 
@@ -568,6 +573,31 @@ low_stab_event.8.b.tt1:0 "Things remain as they are, but [asked_landowner.GetNam
 low_stab_event.8.c:0 "You traitor!"
 low_stab_event.8.c.tt1:0 "Things remain as they are, but [asked_landowner.GetName]'s resentment will have very deleterious effects on the unity of the country"
 
+low_stab_event.9.t:0 "Extended protection"
+low_stab_event.9.desc:0 "[duchy_subject_grabber.GetName], Our Ducatus on the border has announced his intention to generously extend the protection of his strong walls to the [state_duchy_grab.GetName]. According to them, this state is also under border pressure, but they are 'generously' offering to extend their protectives efforts to it. \nMake no mistake about it, this is annexation pure and simple, and only the cataclysmic situation of our country could have given them the courage to take such action. However, giving them official authorisation would allow us to retain the trappings of sovereignty, at the cost of these lands ...."
+low_stab_event.9.a:0 "Here are the necessary documents"
+low_stab_event.9.a.tt1:0 "The [state_duchy_grab.GetName] will be annexed by [duchy_subject_grabber.GetName]"
+low_stab_event.9.a.tt2:0 "#R You don't have enough troops to prevent it#!"
+low_stab_event.9.b:0 "Mobilise an emergency garrison in the state"
+low_stab_event.9.b.tt1:0 "You will garrison the [state_duchy_grab.GetName] in order to put an end to any extension of [duchy_subject_grabber.GetName]"
+
+low_stab_event.10.t:0 "Independent Spirit"
+low_stab_event.10.desc:0 "In the midst of turmoil, an identity is reborn: the [asking_minority_want.GetName], a significant minority in our country, are the most striking example of this. As the pillars of our country crumble in these troubled times, members of this important culture rally around their shared values. \nBanal melancholy? The beginning of a wider movement? In any case, it would be a good idea to take action to bring these [asking_minority_want.GetName] into our cultural fold."
+low_stab_event.10.a:0 "This is their country too!"
+low_stab_event.10.a.tt1:0 "The [asking_minority_want.GetName] will win the #Y Nobles#! cultural right"
+low_stab_event.10.b:0 "Ignore these ...farmers"
+low_stab_event.10.b.tt1:0 "#R The [asking_minority_want.GetName] will plot to organise a wider secession#!"
+
+low_stab_event.11.t:0 "Revolt of the chained"
+low_stab_event.11.desc:0 "It is well known that our government is not the most tender-hearted and that [ROOT.GetCountry.GetRuler.GetName]'s iron fist firmly holds the country, repressing all opposition. However, as the country faces collapse, more and more voices calling for strong change have gathered around [tyranny_character.GetName].  \nUnited and strong, they are ready to go all the way to the total destruction of the tyrant state. \nReversing certain coercive measures could satisfy these rebels, but what price will this have on the stability of the government?"
+low_stab_event.11.a:0 "Let's give in, whatever it takes"
+low_stab_event.11.a.tt1:0 "The revolt will not spread"
+low_stab_event.11.b:0 "Treachery!"
+low_stab_event.11.b.tt1:0 "You refuse to budge, despite your inability to control this rebellion"
+low_stab_event.11.b.tt2:0 "Members of [tyranny_character.GetName]'s family will lose #R 10#! loyalty"
+low_stab_event.11.b.tt3:0 "#R All rebel governorates will suffer severe modifiers#!"
+low_stab_event.11.c:0 "Let's ask [king_maker_tyranny.GetName] to intervene"
+low_stab_event.11.c.tt1:0 "#G This is possible because [king_maker_tyranny.GetName] is a loyal king maker#!"
 
  c3rd_events.1.t:0 "Bureaucratic mess"
  c3rd_events.1.desc:0 "Our bureaucratic system is entangled in its diplomatic relations, and is no longer able to keep up with the affairs of the various countries that form the empire. Some subjects have adapted, however, and [chosen_subject.GetName] in particular has naturally filled the administrative gaps with his own administrators. In their own words, this will 'considerably lighten the administrative overload'..."

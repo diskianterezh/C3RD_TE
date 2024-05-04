@@ -521,6 +521,20 @@ low_stab_event.4 = {
 			exists = governor
 		}
 	}
+	weight_multiplier = {
+		modifier = {
+			factor = 1.5
+			num_of_cities >= 1000
+		}
+		modifier = {
+			factor = 1.5
+			num_of_cities >= 2000
+		}
+		modifier = {
+			factor = 1.5
+			num_of_cities >= 3000
+		}
+	}
 	immediate = {
 		random_governorships = {
 			limit = {
@@ -661,21 +675,84 @@ low_stab_event.4 = {
 				num_of_cities <= 1000
 			}
 			add_political_influence = -5
+			if = {
+				limit = {
+					is_monarchy = yes
+				}
+				add_legitimacy = -2
+			}
+			else_if = {
+				limit = {
+					is_republic = yes
+				}
+				add_party_approval = {
+					party = scope:independent_current_governor.character_party
+					value = -5
+				}
+			}
 		}
 		else_if = {
 			limit = {
 				num_of_cities <= 2000
 			}
 			add_political_influence = -10
+			add_tyranny = 2
+			if = {
+				limit = {
+					is_monarchy = yes
+				}
+				add_legitimacy = -5
+			}
+			else_if = {
+				limit = {
+					is_republic = yes
+				}
+				add_party_approval = {
+					party = scope:independent_current_governor.character_party
+					value = -7
+				}
+			}
 		}
 		else_if = {
 			limit = {
 				num_of_cities <= 3000
 			}
 			add_political_influence = -15
+			add_tyranny = 5
+			if = {
+				limit = {
+					is_monarchy = yes
+				}
+				add_legitimacy = -8
+			}
+			else_if = {
+				limit = {
+					is_republic = yes
+				}
+				add_party_approval = {
+					party = scope:independent_current_governor.character_party
+					value = -10
+				}
+			}
 		}
 		else = {
 			add_political_influence = -20
+			add_tyranny = 7
+			if = {
+				limit = {
+					is_monarchy = yes
+				}
+				add_legitimacy = -10
+			}
+			else_if = {
+				limit = {
+					is_republic = yes
+				}
+				add_party_approval = {
+					party = scope:independent_current_governor.character_party
+					value = -15
+				}
+			}
 		}
 		scope:independent_current_governor = {
 			add_loyalty = independence_denied
@@ -1181,5 +1258,541 @@ low_stab_event.8 = {
             }
             remove_from_list = family_domain_govs
         }
+	}
+}
+
+
+low_stab_event.9 = {
+	#Ducatus grab lands
+	type = country_event
+	title = "low_stab_event.9.t"
+	desc = "low_stab_event.9.desc"
+	goto_location = scope:duchy_subject_grabber.capital_scope
+	right_portrait = scope:duchy_subject_grabber.current_ruler
+	picture = army_desert
+	trigger = {
+		has_land = yes
+		has_country_modifier = internal_collapse
+		NOT = {
+			stability >= 25
+		}
+		any_subject = {
+			is_subject_type = duchy_subject
+			NOT = {
+				has_variable = recent_duchy_grab
+			}
+			save_temporary_scope_as = duchy_check
+			any_owned_province = {
+				any_neighbor_province = {
+					owner = root
+					any_neighbor_province = {
+						NOR = {
+							owner = root
+							owner = scope:duchy_check
+							owner = {
+								is_subject_of = root
+							}
+						}
+						owner = {
+							has_land = yes
+						}
+					}
+				}
+			}
+		}
+	}
+	weight_multiplier = {
+		modifier = {
+			factor = 1.5
+			num_of_cities >= 1000
+		}
+		modifier = {
+			factor = 1.5
+			num_of_cities >= 2000
+		}
+		modifier = {
+			factor = 1.5
+			num_of_cities >= 3000
+		}
+		modifier = {
+			factor = 3
+			has_law = decentralized_administration_law
+		}
+	}
+	immediate = {
+		random_subject = {
+			limit = {
+				is_subject_type = duchy_subject
+				NOT = {
+					has_variable = recent_duchy_grab
+				}
+				save_temporary_scope_as = duchy_check2
+				any_owned_province = {
+					any_neighbor_province = {
+						owner = root
+						any_neighbor_province = {
+							NOR = {
+								owner = root
+								owner = scope:duchy_check2
+								owner = {
+									is_subject_of = root
+								}
+							}
+							owner = {
+								has_land = yes
+							}
+						}
+					}
+				}
+			}
+			set_variable = {
+				name = recent_duchy_grab
+				days = 3650
+			}
+			save_scope_as = duchy_subject_grabber
+			random_owned_province = {
+				limit = {
+					any_neighbor_province = {
+						owner = root
+						any_neighbor_province = {
+							NOR = {
+								owner = root
+								owner = scope:duchy_subject_grabber
+								owner = {
+									is_subject_of = root
+								}
+							}
+							owner = {
+								has_land = yes
+							}
+						}
+					}
+				}
+				random_neighbor_province = {
+					limit = {
+						owner = root
+						any_neighbor_province = {
+							NOR = {
+								owner = root
+								owner = scope:duchy_subject_grabber
+								owner = {
+									is_subject_of = root
+								}
+							}
+							owner = {
+								has_land = yes
+							}
+						}
+					}
+					this.state = {
+						save_scope_as = state_duchy_grab
+					}
+				}
+			}
+		}
+	}
+	option = {
+		name = low_stab_event.9.a
+		custom_tooltip = low_stab_event.9.a.tt1
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 2
+				stability < 5
+			}
+			modifier = {
+				factor = 2
+				stability < 15
+			}
+		}
+		if = {
+			limit = {
+				manpower < num_of_provinces
+			}
+			custom_tooltip = low_stab_event.9.a.tt2
+		}
+		hidden_effect = {
+			scope:state_duchy_grab = {
+				every_state_province = {
+					limit = {
+						owner = root
+					}
+					set_owned_by = scope:duchy_subject_grabber
+				}
+			}
+		}
+		if = {
+			limit = {
+				num_of_cities <= 1000
+			}
+			add_stability = 3
+		}
+		else_if = {
+			limit = {
+				num_of_cities <= 3000
+			}
+			add_stability = 2
+		}
+		else = {
+			add_stability = 1
+		}
+	}
+	option = {
+		name = low_stab_event.9.b
+		custom_tooltip = low_stab_event.9.b.tt1
+		trigger = {
+			manpower >= root.num_of_provinces
+		}
+		if = {
+			limit = {
+				has_law = decentralized_administration_law
+			}
+			add_tyranny = 7
+		}
+        add_manpower = {
+            value = root.num_of_provinces
+            multiply = -1
+        }
+		if = {
+			limit = {
+				num_of_cities <= 1000
+			}
+			add_political_influence = -5
+		}
+		else_if = {
+			limit = {
+				num_of_cities <= 2000
+			}
+			add_political_influence = -10
+		}
+		else_if = {
+			limit = {
+				num_of_cities <= 3000
+			}
+			add_political_influence = -15
+		}
+		else = {
+			add_political_influence = -20
+		}
+		scope:duchy_subject_grabber = {
+			add_opinion = {
+				modifier = extension_stopped
+				target = root
+			}
+		}
+	}
+}
+
+low_stab_event.10 = {
+	#Most sized culture ask for noble rights or secede
+	type = country_event
+	title = "low_stab_event.10.t"
+	desc = "low_stab_event.10.desc"
+	left_portrait = current_ruler
+	picture = roman_trial
+	trigger = {
+		has_land = yes
+		has_country_modifier = internal_collapse
+		NOT = {
+			stability >= 25
+		}
+		NOT = {
+			has_variable = recent_minority_want
+		}
+		any_country_culture = {
+			NOT = {
+				has_pop_type_right = nobles
+			}
+		}
+	}
+	weight_multiplier = {
+		modifier = {
+			factor = 1.5
+			num_of_cities >= 1000
+		}
+		modifier = {
+			factor = 1.5
+			num_of_cities >= 2000
+		}
+		modifier = {
+			factor = 1.5
+			num_of_cities >= 3000
+		}
+		modifier = {
+			factor = 1.5
+			any_country_culture = {
+				NOT = {
+					has_pop_type_right = nobles
+				}
+				country_culture_pop_count >= 500
+			}
+		}
+		modifier = {
+			factor = 1.5
+			any_country_culture = {
+				NOT = {
+					has_pop_type_right = nobles
+				}
+				country_culture_pop_count >= 1000
+			}
+		}
+		modifier = {
+			factor = 1.5
+			any_country_culture = {
+				NOT = {
+					has_pop_type_right = nobles
+				}
+				country_culture_pop_count >= 2000
+			}
+		}
+	}
+	immediate = {
+		set_variable = {
+			name = recent_minority_want
+			days = 3650
+		}
+		ordered_country_culture = {
+			limit = {
+				NOT = {
+					has_pop_type_right = nobles
+				}
+			}
+			max = 1
+			order_by = country_culture_pop_count
+			save_scope_as = asking_minority_want
+		}
+	}
+	option = {
+		name = low_stab_event.10.a
+		custom_tooltip = low_stab_event.10.a.tt1
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 2
+				stability < 5
+			}
+			modifier = {
+				factor = 2
+				stability < 15
+			}
+		}
+		scope:asking_minority_want = {
+			set_country_culture_right = nobles
+		}
+		if = {
+			limit = {
+				num_of_cities <= 1000
+			}
+			add_stability = 2
+		}
+		else_if = {
+			limit = {
+				num_of_cities <= 3000
+			}
+			add_stability = 1
+		}
+		else = {
+		}
+	}
+	option = {
+		name = low_stab_event.10.b
+		custom_tooltip = low_stab_event.10.b.tt1
+		if = {
+			limit = {
+				num_of_cities <= 1000
+			}
+			add_political_influence = -5
+		}
+		else_if = {
+			limit = {
+				num_of_cities <= 2000
+			}
+			add_political_influence = -10
+			add_stability = -1
+		}
+		else_if = {
+			limit = {
+				num_of_cities <= 3000
+			}
+			add_political_influence = -15
+			add_stability = -2
+		}
+		else = {
+			add_political_influence = -20
+			add_stability = -3
+		}
+		scope:asking_minority_want = {
+			add_country_culture_modifier = {
+				name = on_going_mass_revolt
+				duration = 3650
+			}
+			set_variable = {
+				name = growing_revolt
+				days = 730
+			}
+			if = {#just in case
+				limit = {
+					has_country_culture_modifier = new_culture_elite
+				}
+				remove_country_culture_modifier = new_culture_elite
+			}
+		}
+	}
+}
+
+low_stab_event.11 = {
+	#High tyranny : time to revolt !
+	type = country_event
+	title = "low_stab_event.11.t"
+	desc = "low_stab_event.11.desc"
+	left_portrait = current_ruler
+	right_portrait = scope:tyranny_character
+	picture = senator_conversing
+	trigger = {
+		has_land = yes
+		has_country_modifier = internal_collapse
+		NOT = {
+			stability >= 25
+		}
+		tyranny >= 40
+		NOT = {
+			has_variable = recent_tyranny_revolt
+		}
+		any_character = {
+			power_base >= 15
+			loyalty < 33
+		}
+	}
+	weight_multiplier = {
+		modifier = {
+			factor = 1.5
+			num_of_cities >= 1000
+		}
+		modifier = {
+			factor = 1.5
+			num_of_cities >= 2000
+		}
+		modifier = {
+			factor = 1.5
+			num_of_cities >= 3000
+		}
+		modifier = {
+			factor = 2
+			tyranny >= 70
+		}
+	}
+	immediate = {
+		set_variable = {
+			name = recent_tyranny_revolt
+			days = 3650
+		}
+		random_character = {
+			limit = {
+				power_base >= 15
+				loyalty < 33
+			}
+			save_scope_as = tyranny_character
+		}
+		if = {
+			limit = {
+				has_country_modifier = military_anarchy
+				any_character = {
+					loyalty >= 50
+					has_character_modifier = king_maker
+				}
+			}
+			save_scope_as = king_maker_tyranny
+
+		}
+	}
+	option = {#reduce tyranny, high stabhit
+		name = low_stab_event.11.a
+		custom_tooltip = low_stab_event.11.a.tt1
+		add_tyranny = -10
+		if = {
+			limit = {
+				num_of_cities <= 1000
+			}
+			add_stability = -3
+		}
+		else_if = {
+			limit = {
+				num_of_cities <= 2000
+			}
+			add_stability = -5
+		}
+		else_if = {
+			limit = {
+				num_of_cities <= 3000
+			}
+			add_stability = -7
+		}
+		else = {
+			add_stability = -10
+		}
+	}
+	option = {#global unrest
+		name = low_stab_event.11.b
+		custom_tooltip = low_stab_event.11.b.tt1
+		scope:tyranny_character = {
+			add_loyalty = political_coup
+		}
+		custom_tooltip = low_stab_event.11.b.tt2
+		hidden_effect = {
+			every_character = {
+				limit =  {
+					NOT = {
+						this = scope:tyranny_character
+					}
+					family = {
+						this = scope:tyranny_character.family
+					}
+				}
+				add_loyalty = coup_unloyal
+			}
+		}
+		custom_tooltip = low_stab_event.11.b.tt3
+		hidden_effect = {
+			every_governorships = {
+				limit =  {
+					governor = {
+						OR = {
+							loyalty < 33
+							family = {
+								this = scope:tyranny_character.family
+							}
+						}
+					}
+				}
+				every_governorship_state = {
+					add_state_modifier = {
+						name = enough_tyranny
+						duration = 1850
+					}
+				}
+			}
+		}
+	}
+	option = {#loyal kingmaker has power
+		name = low_stab_event.11.c
+		custom_tooltip = low_stab_event.11.c.tt1
+		trigger = {
+			has_country_modifier = military_anarchy
+			any_character = {
+				loyalty >= 50
+				has_character_modifier = king_maker
+			}
+		}
+		scope:king_maker_tyranny = {
+			add_popularity = 25
+		}
+        scope:tyranny_character = {
+			death = {
+				death_reason = death_execution
+				killer = scope:king_maker_tyranny
+			}
+		}
+		add_tyranny = 5
+		add_stability = 2
 	}
 }

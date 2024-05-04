@@ -58,6 +58,9 @@
 			num_of_cities >= 1
 			has_country_modifier = crisis_of_the_third_century
 			is_republic = yes
+			NOT = {
+				has_variable = on_going_rep_thingy
+			}
 		}
 		allow = {
 			stability >= 60

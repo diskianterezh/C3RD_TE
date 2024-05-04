@@ -964,6 +964,10 @@ c3rd_other_events.9 = { #event where people ask for census taxes
             has_country_modifier = military_anarchy
         }
         modifier = {
+            factor = 2.5
+            has_country_modifier = internal_collapse
+        }
+        modifier = {
             factor = 0.7
             has_country_modifier = military_advantages
             has_country_modifier = military_anarchy
@@ -1160,7 +1164,15 @@ c3rd_other_events.9 = { #event where people ask for census taxes
         current_ruler = {
             add_corruption = 5
         }
-        add_stability = 5
+        if = {
+            limit = {
+                NOT = {has_country_modifier = internal_collapse}
+            }
+            add_stability = 5
+        }
+        else = {
+            add_stability = 2
+        }
 		add_treasury = {
 			value = 0
 			subtract = root.has_monthly_income
@@ -1207,7 +1219,15 @@ c3rd_other_events.9 = { #event where people ask for census taxes
         current_ruler = {
             add_popularity = 10
         }
-        add_stability = -3
+        if = {
+            limit = {
+                NOT = {has_country_modifier = internal_collapse}
+            }
+            add_stability = -3
+        }
+        else = {
+            add_stability = -6
+        }
         scope:character_taxed_1 = {
             add_loyalty = disappointed
         }
@@ -3244,6 +3264,10 @@ c3rd_other_events.321 = { # nobles have lost their rights
                 name = on_going_mass_revolt
                 duration = 3650
             }
+            set_variable = {
+                name = growing_revolt
+                days = 730
+            }
             if = {
                 limit = {
                     has_country_culture_modifier = new_culture_elite
@@ -3432,6 +3456,9 @@ c3rd_other_events.32 = { # noble revoked culture revolts
         current_date >= 700.1.1
         any_country_culture = {
             has_country_culture_modifier = on_going_mass_revolt
+            NOT = {
+                has_country_culture_modifier = growing_revolt
+            }
             save_temporary_scope_as = check_culture
             root = {
                 OR = {
@@ -3515,6 +3542,9 @@ c3rd_other_events.32 = { # noble revoked culture revolts
             limit = {
                 has_country_culture_modifier = on_going_mass_revolt
                 save_temporary_scope_as = check_culture2
+                NOT = {
+                    has_country_culture_modifier = growing_revolt
+                }
                 root = {
                     OR = {
                         any_country_state = {
