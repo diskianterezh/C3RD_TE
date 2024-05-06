@@ -368,6 +368,7 @@ c3rd_events_monthly_pulse = { #check if people in country can fuck shit up
 		20 = c3rd_events.81 #only general take some powa
 		20 = c3rd_events.45 #republican leader push reforms
 		50 = c3rd_events.39 #kingmaker no office
+		5 = c3rd_events.391 #kingmaker unloyal
 		5 = c3rd_events.48 #Republic above 1000 territories
 		40 = c3rd_events.21 #governor defect to rival
 	}
@@ -1015,6 +1016,7 @@ c3rd_state_mass_revolt_gain = {
 				}
 				any_state_province = {
 					any_neighbor_province = {
+						owner = root
 						this.state = {
 							has_state_modifier = secess_preparation
 						}
@@ -2259,6 +2261,22 @@ c3rd_barbarian_occupying_land = { #natural expansion of tribals on lands VERY SP
 			}
 			scope:new_tribal_prov = {
 				set_owned_by = scope:tribal_expanding
+				if = {
+					limit = {
+						root = {
+							OR = {
+								country_culture_group = iberia
+								country_culture_group = celt_iberia
+							}
+						}
+					}
+					random_neighbor_province = {
+						limit = {
+							owner = root
+						}
+						set_owned_by = scope:tribal_expanding
+					}
+				}
 			}
 		}
 		else = {

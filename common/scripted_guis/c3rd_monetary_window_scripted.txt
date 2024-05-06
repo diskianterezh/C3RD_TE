@@ -234,6 +234,9 @@ c3rd_monetary_deflation_arrow_4 = {
 c3rd_monetary_silver_arrow1 = {
 	scope = country
 	is_shown = {
+		NOT = {
+			has_country_modifier = solidus_introduced
+		}
 		has_variable = c3rd_silver_increase_var
 		var:c3rd_silver_increase_var >= 1
 	}
@@ -241,6 +244,9 @@ c3rd_monetary_silver_arrow1 = {
 c3rd_monetary_silver_arrow2 = {
 	scope = country
 	is_shown = {
+		NOT = {
+			has_country_modifier = solidus_introduced
+		}
 		has_variable = c3rd_silver_increase_var
 		var:c3rd_silver_increase_var >= 2
 	}
@@ -248,6 +254,9 @@ c3rd_monetary_silver_arrow2 = {
 c3rd_monetary_silver_arrow3 = {
 	scope = country
 	is_shown = {
+		NOT = {
+			has_country_modifier = solidus_introduced
+		}
 		has_variable = c3rd_silver_increase_var
 		var:c3rd_silver_increase_var >= 3
 	}
@@ -255,6 +264,9 @@ c3rd_monetary_silver_arrow3 = {
 c3rd_monetary_silver_arrow4 = {
 	scope = country
 	is_shown = {
+		NOT = {
+			has_country_modifier = solidus_introduced
+		}
 		has_variable = c3rd_silver_increase_var
 		var:c3rd_silver_increase_var >= 4
 	}
@@ -262,6 +274,9 @@ c3rd_monetary_silver_arrow4 = {
 c3rd_monetary_silver_arrow_1 = {
 	scope = country
 	is_shown = {
+		NOT = {
+			has_country_modifier = solidus_introduced
+		}
 		has_variable = c3rd_silver_increase_var
 		var:c3rd_silver_increase_var <= -1
 	}
@@ -269,6 +284,9 @@ c3rd_monetary_silver_arrow_1 = {
 c3rd_monetary_silver_arrow_2 = {
 	scope = country
 	is_shown = {
+		NOT = {
+			has_country_modifier = solidus_introduced
+		}
 		has_variable = c3rd_silver_increase_var
 		var:c3rd_silver_increase_var <= -2
 	}
@@ -276,6 +294,9 @@ c3rd_monetary_silver_arrow_2 = {
 c3rd_monetary_silver_arrow_3 = {
 	scope = country
 	is_shown = {
+		NOT = {
+			has_country_modifier = solidus_introduced
+		}
 		has_variable = c3rd_silver_increase_var
 		var:c3rd_silver_increase_var <= -3
 	}
@@ -283,6 +304,9 @@ c3rd_monetary_silver_arrow_3 = {
 c3rd_monetary_silver_arrow_4 = {
 	scope = country
 	is_shown = {
+		NOT = {
+			has_country_modifier = solidus_introduced
+		}
 		has_variable = c3rd_silver_increase_var
 		var:c3rd_silver_increase_var <= -4
 	}
@@ -306,7 +330,7 @@ c3rd_inject_liquidity = {
 				has_country_modifier = high_deflation
 			}
 		}
-		treasury >= 0
+		treasury > 0
 		political_influence >= 20
 		custom_tooltip = {
 			text = "has_deflation_decision"

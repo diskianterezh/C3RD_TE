@@ -74,6 +74,7 @@
 					state = {
 						any_state_province = {
 							any_neighbor_province = {
+								has_owner = yes
 								owner = {
 									has_land = yes
 									is_tribal = yes
@@ -98,6 +99,7 @@
 				state = {
 					any_state_province = {
 						any_neighbor_province = {
+							has_owner = yes
 							owner = {
 								has_land = yes
 								is_tribal = yes

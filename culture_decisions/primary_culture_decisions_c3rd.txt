@@ -42,12 +42,15 @@
 		potential = {
 			primary_culture = scope:target_culture.culture
 			has_country_modifier = citizen_exemption_from_census_tax
-			NOT = {
-				has_variable = census_exemption_given_recently
-			}
 		}
 		allow = {
 			has_country_modifier = citizen_exemption_from_census_tax
+			custom_tooltip = {
+				text = recently_revoked_tt
+				NOT = {
+					has_variable = census_exemption_given_recently
+				}
+			}
 		}
 		effect = {
 			remove_country_modifier = citizen_exemption_from_census_tax

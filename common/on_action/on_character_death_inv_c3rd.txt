@@ -2522,6 +2522,41 @@ on_character_death = {
 					scope:ownership_target = root
 				}
 			}
+			if = {
+				limit = { 
+					has_variable = country_ownership
+					var:country_ownership >= 50
+				}
+				random_list = {
+					9 = {}
+					1 = {
+						modifier = {
+							add = 1
+							var:country_ownership >= 70
+						}
+						modifier = {
+							add = 1
+							var:country_ownership >= 80
+						}
+						modifier = {
+							add = 1
+							var:country_ownership >= 90
+						}
+						modifier = {
+							add = 1
+							employer = {
+								stability <= 30
+							}
+						}
+						scope:ownership_target = {
+							set_variable = {
+								name = potential_sucession_ownership_crisis
+								days = 360
+							}
+						}
+					}
+				}
+			}
 			employer = {
 				every_governorships = {
 					limit = { 

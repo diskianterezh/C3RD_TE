@@ -1207,7 +1207,7 @@ c3rd_other_events.9 = { #event where people ask for census taxes
                 limit = { has_variable = deflation_value }
                 change_variable = {
                     name = deflation_value
-                    add = 1
+                    add = 2
                 }
             }
         }
@@ -1624,12 +1624,11 @@ c3rd_other_events.12 = { #games
         }
         else = {
             add_treasury = {
-                value = has_monthly_income
-                multiply = 20
-                min = country_population
+                value = country_population
                 multiply = -1
             }
         }
+        add_political_influence = 25
 
     }
     option = {#create money
@@ -1649,7 +1648,7 @@ c3rd_other_events.12 = { #games
         }
         add_treasury = {
             value = has_monthly_income
-            multiply = -10
+            multiply = -8
         }
 		if = {
 			limit = {
@@ -1661,6 +1660,7 @@ c3rd_other_events.12 = { #games
 				add = 1
 			}
 		}
+        add_political_influence = 10
     }
     option = {#little games
         name = c3rd_other_events.12.c
@@ -1676,8 +1676,8 @@ c3rd_other_events.12 = { #games
         }
         else = {
             add_treasury = {
-                value = has_monthly_income
-                multiply = 8
+                value = country_population
+                multiply = 0.3
                 min = {
                     value = num_of_cities
                     multiply = 5
@@ -1750,6 +1750,7 @@ c3rd_other_events.14 = { #Solidus 2 : gain control on the system
                 finesse >= 10
             }
         }
+        highlight = yes
         scope:office_treasure_man = {
             add_corruption = 25
         }
@@ -2519,6 +2520,7 @@ c3rd_other_events.30 = { # slave revolts
                 has_country_culture_modifier = on_going_revolt
                 has_country_culture_modifier = emancipation_c3rd
                 has_country_culture_modifier = slaves_massacre_c3rd
+                has_country_culture_modifier = revolting_slaves_c3rd
             }
             save_temporary_scope_as = culture_slave_check
             root = {
@@ -2538,6 +2540,7 @@ c3rd_other_events.30 = { # slave revolts
                     has_country_culture_modifier = on_going_revolt
                     has_country_culture_modifier = emancipation_c3rd
                     has_country_culture_modifier = slaves_massacre_c3rd
+                    has_country_culture_modifier = revolting_slaves_c3rd
                 }
                 has_country_culture_modifier = integration_status_removed
                 has_pop_type_right = slaves
@@ -2550,6 +2553,7 @@ c3rd_other_events.30 = { # slave revolts
                     has_country_culture_modifier = on_going_revolt
                     has_country_culture_modifier = emancipation_c3rd
                     has_country_culture_modifier = slaves_massacre_c3rd
+                    has_country_culture_modifier = revolting_slaves_c3rd
                 }
                 has_country_culture_modifier = nobles_revoked #because they use the other event
                 has_pop_type_right = slaves
@@ -2562,6 +2566,7 @@ c3rd_other_events.30 = { # slave revolts
                     has_country_culture_modifier = on_going_revolt
                     has_country_culture_modifier = emancipation_c3rd
                     has_country_culture_modifier = slaves_massacre_c3rd
+                    has_country_culture_modifier = revolting_slaves_c3rd
                 }
                 has_country_culture_modifier = nobles_revoked
                 has_pop_type_right = slaves
@@ -2574,6 +2579,7 @@ c3rd_other_events.30 = { # slave revolts
                     has_country_culture_modifier = on_going_revolt
                     has_country_culture_modifier = emancipation_c3rd
                     has_country_culture_modifier = slaves_massacre_c3rd
+                    has_country_culture_modifier = revolting_slaves_c3rd
                 }
                 country_culture_pop_count >= 500
                 has_pop_type_right = slaves
@@ -2586,6 +2592,7 @@ c3rd_other_events.30 = { # slave revolts
                     has_country_culture_modifier = on_going_revolt
                     has_country_culture_modifier = emancipation_c3rd
                     has_country_culture_modifier = slaves_massacre_c3rd
+                    has_country_culture_modifier = revolting_slaves_c3rd
                 }
                 country_culture_pop_count >= 200
                 has_pop_type_right = slaves
@@ -2601,6 +2608,7 @@ c3rd_other_events.30 = { # slave revolts
                     has_country_culture_modifier = on_going_revolt
                     has_country_culture_modifier = emancipation_c3rd
                     has_country_culture_modifier = slaves_massacre_c3rd
+                    has_country_culture_modifier = revolting_slaves_c3rd
                 }
                 save_temporary_scope_as = culture_slave_check
                 root = {
@@ -2899,6 +2907,10 @@ c3rd_other_events.31 = { # slaves culture revolts
                 }
             }
             save_scope_as = revolting_slave_culture
+            add_country_culture_modifier = {
+                name = revolting_slaves_c3rd
+                duration = 3650
+            }
         }
         ordered_owned_province = {
             limit = {
@@ -3071,6 +3083,11 @@ c3rd_other_events.31 = { # slaves culture revolts
             war_goal = conquer_wargoal
 			province = scope:new_country_vassal.capital_scope
             target = scope:new_country_vassal
+        }
+        scope:new_country_vassal = {
+            every_owned_province = {
+                add_claim = root
+            }
         }
 
     }
@@ -3264,9 +3281,9 @@ c3rd_other_events.321 = { # nobles have lost their rights
                 name = on_going_mass_revolt
                 duration = 3650
             }
-            set_variable = {
+            add_country_culture_modifier = {
                 name = growing_revolt
-                days = 730
+                duration = 1825
             }
             if = {
                 limit = {
@@ -3651,7 +3668,7 @@ c3rd_other_events.32 = { # noble revoked culture revolts
                                 owner = scope:new_country_vassal
                             }
                             NOT = {
-                                this = root.capital_scope.state
+                                this.state = root.capital_scope.state
                             }
                         }
                     }
@@ -3707,7 +3724,7 @@ c3rd_other_events.32 = { # noble revoked culture revolts
                     }
                     has_province_modifier = revolt_preparation
                     NOT = {
-                        this.state = {root.capital_scope.state}
+                        this.state = root.capital_scope.state
                     }
                 }
                 set_owned_by = scope:new_country_vassal
@@ -5724,13 +5741,13 @@ c3rd_other_events.80 = { #Notification of governorship taken by family
                     save_scope_as = ex_owner
                 }
                 remove_variable = governorship_owner
+                scope:ex_owner = {
+                    recalculate_ownership_char = yes
+                }
             }
             set_variable = {
                 name = governorship_owner
                 value = governor
-            }
-            scope:ex_owner = {
-                recalculate_ownership_char = yes
             }
             if = {
                 limit = {
@@ -5782,7 +5799,17 @@ c3rd_other_events.80 = { #Notification of governorship taken by family
 
 	option = {
 		name = "c3rd_other_events.80.a"
-        custom_tooltip = c3rd_other_events.80.a.tt1
+        if = {
+            limit = {
+                scope:influent_character = {
+                    is_minor_character = no
+                }
+            }
+            custom_tooltip = c3rd_other_events.80.a.tt1
+        }
+        else = {
+            custom_tooltip = c3rd_other_events.80.a.tt2
+        }
 	}
 }
 c3rd_other_events.801 = { #Notification of governorship taken by family ######  FOR DEBUG PURPOSES
@@ -7331,12 +7358,16 @@ c3rd_other_events.85 = { #You chose your demands, then the landowner answer 5 da
                             }
                         }
                         modifier = {
-                            add = -2
+                            add = -1
                             has_country_modifier = law_advantages_4
                         }
                         modifier = {
-                            add = -4
+                            add = -3
                             has_country_modifier = law_advantages_5
+                        }
+                        modifier = {
+                            factor = 0.1
+                            has_law = decentralized_administration_law
                         }
                         set_variable = {
                             name = answer_landowner
@@ -9495,12 +9526,13 @@ c3rd_other_events.92 = { #governor complain about excessive control of another c
             weight = {
                 modifier = {
                     factor = 4
+                    save_temporary_scope_as = govprevprev
                     employer = {
                         any_governorships = {
-                            governor = prevprev
+                            governor = scope:govprevprev
                             has_variable = governorship_owner
                             NOT = {
-                                var:governorship_owner = prevprev
+                                var:governorship_owner = scope:govprevprev
                             }
                             var:governorship_owner = {
                                 is_rival = prev.governor
@@ -10372,13 +10404,13 @@ c3rd_other_events.110 = { #Intervention
                     AND = {
                         is_general = yes
                         is_governor = no
-                        power_base > 8
+                        power_base > 5
                         employer = {
                             has_country_modifier = military_anarchy
                         }
                     }
                     AND = {
-                        power_base >= 15
+                        power_base >= 10
                         OR = { #si général, ne doit pas être sous la loi anti militaires, ou avoir récemment eu une milanarch
                             is_general = no
                             employer = {
@@ -10480,13 +10512,13 @@ c3rd_other_events.110 = { #Intervention
                     AND = {
                         is_general = yes
                         is_governor = no
-                        power_base > 10
+                        power_base > 5
                         employer = {
                             has_country_modifier = military_anarchy
                         }
                     }
                     AND = {
-                        power_base >= 15
+                        power_base >= 10
                         OR = { #si général, ne doit pas être sous la loi anti militaires, ou avoir récemment eu une milanarch
                             is_general = no
                             employer = {
@@ -10564,13 +10596,13 @@ c3rd_other_events.110 = { #Intervention
                         AND = {
                             is_general = yes
                             is_governor = no
-                            power_base > 10
+                            power_base > 5
                             employer = {
                                 has_country_modifier = military_anarchy
                             }
                         }
                         AND = {
-                            power_base >= 15
+                            power_base >= 10
                             OR = { #si général, ne doit pas être sous la loi anti militaires, ou avoir récemment eu une milanarch
                                 is_general = no
                                 employer = {
@@ -10612,13 +10644,13 @@ c3rd_other_events.110 = { #Intervention
                     AND = {
                         is_general = yes
                         is_governor = no
-                        power_base > 10
+                        power_base > 5
                         employer = {
                             has_country_modifier = military_anarchy
                         }
                     }
                     AND = {
-                        power_base >= 15
+                        power_base >= 10
                         OR = { #si général, ne doit pas être sous la loi anti militaires, ou avoir récemment eu une milanarch
                             is_general = no
                             employer = {
@@ -10696,13 +10728,13 @@ c3rd_other_events.110 = { #Intervention
                         AND = {
                             is_general = yes
                             is_governor = no
-                            power_base > 10
+                            power_base > 5
                             employer = {
                                 has_country_modifier = military_anarchy
                             }
                         }
                         AND = {
-                            power_base >= 15
+                            power_base >= 10
                             OR = { #si général, ne doit pas être sous la loi anti militaires, ou avoir récemment eu une milanarch
                                 is_general = no
                                 employer = {
@@ -10985,6 +11017,21 @@ c3rd_other_events.110 = { #Intervention
         }
         else = {
             add_political_influence = -50
+        }
+        if = {
+            limit = {
+                NOR = {
+                    has_country_modifier = military_advantages
+                    has_country_modifier = solidus_introduced
+                }
+            }
+            add_country_modifier = {
+                name = military_advantages
+                duration = 3650
+            }
+        }
+        else = {
+            add_political_influence = -25
         }
     }
 

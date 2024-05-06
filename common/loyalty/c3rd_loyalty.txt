@@ -3,7 +3,7 @@
 
 independence_denied = {
 	value = -15
-	yearly_decay = 2
+	yearly_decay = 1
 }
 
 requests_fulfilled = {
@@ -162,3 +162,7 @@ holding_protected = {
 	yearly_decay = 1
 }
 
+inspired_disloyalty_other_2 = {
+	value = -15
+	yearly_decay = 2
+}

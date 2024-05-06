@@ -698,6 +698,13 @@ c3rd_events.5 = {#general intervention : provoke military crisis where there is 
                         is_ai = yes
                         has_country_modifier = internal_collapse
                     }
+                    modifier = {
+                        add = 50
+                        OR = {
+                            has_law = constantine_reform_law
+                            has_law = decentralized_administration_law
+                        }
+                    }
                 }
                 40 = {
                     modifier = {
@@ -719,6 +726,13 @@ c3rd_events.5 = {#general intervention : provoke military crisis where there is 
                                 }
 
                             }
+                        }
+                    }
+                    modifier = {
+                        factor = 0.5
+                        OR = {
+                            has_law = constantine_reform_law
+                            has_law = decentralized_administration_law
                         }
                     }
                     trigger_event = {
@@ -2587,6 +2601,7 @@ c3rd_events.21 = {#governorship defects to rival empire
     type = country_event
     title = "c3rd_events.21.t"
     desc = "c3rd_events.21.desc"
+	goto_location = scope:governorship_defect.capital_scope
 
     picture = successors
     trigger = {
@@ -2705,6 +2720,9 @@ c3rd_events.21 = {#governorship defects to rival empire
             value = has_monthly_income
             multiply = -10
         }
+        current_ruler = {
+            add_corruption = 5
+        }
         scope:governor_defect = {
             add_loyalty = requests_fulfilled
             add_gold = {
@@ -2781,7 +2799,7 @@ c3rd_events.30 = {#general ultimatum : throne or rival empire
                 }
             }
             NOT = { is_friend = root.current_ruler }
-            popularity >= 50
+            popularity >= 60
             is_ruler = no
             save_temporary_scope_as = ambitious_general
         }
@@ -2815,6 +2833,26 @@ c3rd_events.30 = {#general ultimatum : throne or rival empire
                                 }
                                 NOT = {is_friend = root.current_ruler}
                             }
+                            governorship = {
+                                has_variable = governorship_owner
+                                trigger_if = {
+                                    limit = {
+                                        has_variable = governorship_owner 
+                                    }
+                                    var:governorship_owner = {
+                                        OR = {
+                                            is_friend = scope:ambitious_general
+                                            is_disloyal = yes
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    NOT = {
+                        any_region_province = {
+                            owner = root
+                            this = root.capital_scope
                         }
                     }
                 }
@@ -2862,7 +2900,7 @@ c3rd_events.30 = {#general ultimatum : throne or rival empire
                                         employer = {has_civil_war = yes}
                                     }
                                 }
-                                popularity >= 50
+                                popularity >= 60
                                 is_ruler = no
                                 NOT = { is_friend = root.current_ruler }
                                 save_temporary_scope_as = ambitious_general
@@ -2877,7 +2915,7 @@ c3rd_events.30 = {#general ultimatum : throne or rival empire
                                         employer = {has_civil_war = yes}
                                     }
                                 }
-                                popularity >= 50
+                                popularity >= 60
                                 is_ruler = no
                                 NOT = { is_friend = root.current_ruler }
                                 save_temporary_scope_as = ambitious_general
@@ -2907,8 +2945,28 @@ c3rd_events.30 = {#general ultimatum : throne or rival empire
                                         }
                                         NOT = {is_friend = root.current_ruler}
                                     }
+                                    governorship = {
+                                        has_variable = governorship_owner
+                                        trigger_if = {
+                                            limit = {
+                                                has_variable = governorship_owner 
+                                            }
+                                            var:governorship_owner = {
+                                                OR = {
+                                                    is_friend = scope:ambitious_general
+                                                    is_disloyal = yes
+                                                }
+                                            }
+                                        }
+                                    }
                                 }
 
+                            }
+                            NOT = {
+                                any_region_province = {
+                                    owner = root
+                                    this = root.capital_scope
+                                }
                             }
                         }
                     }
@@ -2925,7 +2983,7 @@ c3rd_events.30 = {#general ultimatum : throne or rival empire
                                     NOT = {exists = governor}
                                     governor = {
                                         OR = {
-                                            is_friend = scope:ambitious_general
+                                            is_friend = scope:rival_emperor
                                             OR = {
                                                 is_disloyal = yes
                                                 AND = {
@@ -2933,26 +2991,83 @@ c3rd_events.30 = {#general ultimatum : throne or rival empire
                                                     employer = {has_civil_war = yes}
                                                 }
                                             }
-                                            this = scope:ambitious_general
+                                            this = scope:rival_emperor
                                         }
                                         NOT = {is_friend = root.current_ruler}
                                     }
+                                    governorship = {
+                                        has_variable = governorship_owner
+                                        trigger_if = {
+                                            limit = {
+                                                has_variable = governorship_owner 
+                                            }
+                                            var:governorship_owner = {
+                                                OR = {
+                                                    is_friend = scope:rival_emperor
+                                                    is_disloyal = yes
+                                                }
+                                            }
+                                        }
+                                    }
                                 }
                                 save_temporary_scope_as = prov_region_joining
+                            }
+                            NOT = {
+                                any_region_province = {
+                                    owner = root
+                                    this = root.capital_scope
+                                }
                             }
                         }
                         random_region_province = {
                             limit = {
                                 owner = root
                             }
-                            governor = {
-                                if = {
-                                    limit = { NOT = {this = scope:rival_emperor} }
-                                    add_to_list = other_empire_govs
+                            if = {
+                                limit = {
+                                    exists = governor
+                                    governor = {
+                                        OR = {
+                                            is_friend = scope:rival_emperor
+                                            OR = {
+                                                is_disloyal = yes
+                                                AND = {
+                                                    loyalty <= 45
+                                                    employer = {has_civil_war = yes}
+                                                }
+                                            }
+                                            this = scope:rival_emperor
+                                        }
+                                        NOT = {is_friend = root.current_ruler}
+                                    }
+                                }
+                                governor = {
+                                    if = {
+                                        limit = { NOT = {this = scope:rival_emperor} }
+                                        add_to_list = other_empire_govs
+                                    }
                                 }
                             }
                             governorship = {
                                 add_to_list = other_empire_governorship
+                                if = {
+                                    limit = {
+                                        has_variable = governorship_owner
+                                    }
+                                    if = {
+                                        limit = {
+                                            var:governorship_owner = {
+                                                OR = {
+                                                    is_friend = scope:rival_emperor
+                                                    is_disloyal = yes
+                                                }
+                                            }
+                                        }
+                                        var:governorship_owner = {
+                                            add_to_list = other_empire_govs
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
@@ -2966,6 +3081,22 @@ c3rd_events.30 = {#general ultimatum : throne or rival empire
                 governorship = {
                     add_to_list = other_empire_governorship
                 }
+            }
+            every_character = {
+                limit = {
+                    has_character_modifier = major_influence_aristocrat
+                    OR = {
+                        AND = {
+                            is_friend = scope:rival_emperor
+                            loyalty <= 50
+                        }
+                        is_disloyal = yes
+                    }
+                    NOT = {
+                        is_in_list = other_empire_govs
+                    }
+                }
+                add_to_list = other_empire_govs
             }
             every_governorships = {
                 limit = {
@@ -2985,6 +3116,20 @@ c3rd_events.30 = {#general ultimatum : throne or rival empire
                             }
                             NOT = {is_friend = root.current_ruler}
                         }
+                        AND = {
+                            has_variable = governorship_owner
+                            trigger_if = {
+                                limit = {
+                                    has_variable = governorship_owner 
+                                }
+                                var:governorship_owner = {
+                                    OR = {
+                                        is_friend = scope:ambitious_general
+                                        is_disloyal = yes
+                                    }
+                                }
+                            }
+                        }
                     }
                     any_governorship_state = {
                         any_state_province = {
@@ -2992,6 +3137,14 @@ c3rd_events.30 = {#general ultimatum : throne or rival empire
                                 governorship = {
                                     is_in_list = other_empire_governorship
                                 }
+                            }
+                        }
+                    }
+                    NOT = {
+                        any_governorship_state = {
+                            any_state_province = {
+                                owner = root
+                                this = root.capital_scope
                             }
                         }
                     }
@@ -3005,6 +3158,18 @@ c3rd_events.30 = {#general ultimatum : throne or rival empire
                 }
 
             }
+            every_governorships = {
+                limit = {
+                    NOT = {
+                        is_in_list = other_empire_governorship
+                    }
+                    has_variable = governorship_owner
+                    var:governorship_owner = {
+                        is_in_list = other_empire_govs
+                    }
+                }
+                add_to_list = other_empire_governorship
+            }
             set_variable = {
                 name = recent_ultimatum
                 days = 365 #1 years
@@ -3015,7 +3180,27 @@ c3rd_events.30 = {#general ultimatum : throne or rival empire
     option = {
         name = c3rd_events.30.a
         custom_tooltip = c3rd_events.30.a.tt1
-        add_stability = -7
+        if = {
+            limit = {
+                num_of_cities <= 1000
+            }
+            add_stability = -7
+        }
+        else_if = {
+            limit = {
+                num_of_cities <= 2000
+            }
+            add_stability = -10
+        }
+        else_if = {
+            limit = {
+                num_of_cities <= 3000
+            }
+            add_stability = -15
+        }
+        else = {
+            add_stability = -20
+        }
         if = {
             limit = {
                 num_of_cities >= 900
@@ -3058,14 +3243,31 @@ c3rd_events.30 = {#general ultimatum : throne or rival empire
                 }
             }
         }
-        every_character = {
-            limit = {
-                is_friend = scope:rival_emperor
+        hidden_effect = {
+            every_character = {
+                limit = {
+                    OR = {
+                        is_friend = scope:rival_emperor
+                        is_in_list = other_empire_govs
+                    }
+                }
+                add_loyalty = requests_fulfilled
             }
-            add_loyalty = requests_fulfilled
         }
         scope:ex_ruler = {
             add_loyalty = deposed_king
+        }
+        every_governorships = {
+            limit = {
+                is_in_list = other_empire_governorship
+            }
+            remove_from_list = other_empire_governorship
+        }
+        every_character = {
+            limit = {
+                is_in_list = other_empire_govs
+            }
+            remove_from_list = other_empire_govs
         }
         trigger_event = {
             id = c3rd_other_events.11 #you should buy the loyalty of your fellow generals
@@ -3662,6 +3864,14 @@ c3rd_events.35 = {#general ask a governorship
                     }
                     NOT = {exists = governor}
                 }
+                NOT = {
+                    any_governorship_state = {
+                        any_state_province = {
+                            owner = root
+                            this = root.capital_scope
+                        }
+                    }
+                }
             }
             weight = {
                 modifier = {
@@ -3870,7 +4080,7 @@ c3rd_events.36 = {#general is pretty powerful, gain king maker
     option = {
         name = c3rd_events.36.b
         custom_tooltip = c3rd_events.36.b.tt1
-        add_stability = -2
+        add_stability = -5
         scope:new_king_maker = {
             add_loyalty = humiliated_powerful_general
             add_popularity = -50
@@ -4140,15 +4350,17 @@ c3rd_events.39 = {#king maker have no office
                 limit = {
                     is_governor = yes
                     loyalty > 30
+                    NOT = {has_variable = disloyed}
                 }
                 weight = {
                     modifier = {
                         factor = 10
+                        save_temporary_scope_as = governor_to_get
 						employer = {
 							any_owned_province = {
 								exists = governor
 								governor = {
-									this = prevprevprev
+									this = scope:governor_to_get
 								}
 								region = {
 									any_neighbor_region = {
@@ -4168,6 +4380,10 @@ c3rd_events.39 = {#king maker have no office
                     }
                 }
                 add_loyalty = inspired_disloyalty_other_l
+                set_variable = {
+                    name = disloyed
+                    days = 1650 #4 years
+                }
 
             }
             scope:king_maker_unhappy = {
@@ -4176,6 +4392,116 @@ c3rd_events.39 = {#king maker have no office
         }
         set_variable = {
             name = recent_king_maker_plot
+            days = 730 #2 years
+        }
+
+    }
+    option = {
+        name = c3rd_events.39.a
+        custom_tooltip = c3rd_events.39.a.tt1
+    }
+}
+
+
+c3rd_events.391 = {#king maker is disloyal and spend money to prepare rebellion
+    type = country_event
+    title = "c3rd_events.391.t"
+    desc = "c3rd_events.391.desc"
+
+    picture = senator_conversing
+    left_portrait = current_ruler
+    right_portrait = scope:king_maker_unloyal
+
+    trigger = {
+        has_country_modifier = military_anarchy
+        NOT = {has_variable = recent_king_maker_plot2}
+        any_character = {
+            has_character_modifier = king_maker
+            loyalty < 33
+            is_ruler = no
+            wealth >= 1000 #please be somewhat powerful
+            NOT = {has_variable = king_maker_did391}
+        }
+    }
+    weight_multiplier = {
+        modifier = {
+            factor = 2
+            any_character = {
+                has_character_modifier = king_maker
+                loyalty < 15
+                is_ruler = no
+                wealth >= 1000 #please be somewhat powerful
+                NOT = {has_variable = king_maker_did391}
+            }
+        }
+    }
+    immediate = {
+
+        random_character = {
+            limit = {
+                has_character_modifier = king_maker
+                loyalty < 15
+                is_ruler = no
+                wealth >= 1000 #please be somewhat powerful
+                NOT = {has_variable = king_maker_did391}
+            }
+            save_scope_as = king_maker_unloyal
+            add_gold = -250
+            add_popularity = 20
+            set_variable = {
+                name = king_maker_did391
+                days = 1625 #5 years
+            }
+        }
+        while = {
+            count = 3
+            random_character = {
+                limit = {
+                    is_governor = yes
+                    loyalty > 30
+                    is_ruler = no
+                    NOT = {has_variable = disloyed2}
+                }
+                weight = {
+                    modifier = {
+                        factor = 10
+                        save_temporary_scope_as = governor_to_get
+						employer = {
+							any_owned_province = {
+								exists = governor
+								governor = {
+									this = scope:governor_to_get
+								}
+								region = {
+									any_neighbor_region = {
+										any_region_province = {
+											owner = root
+											exists = governor
+											governor = {
+												is_friend = scope:king_maker_unloyal
+											}
+
+										}
+									}
+								}
+							}
+						}
+
+                    }
+                }
+                add_loyalty = inspired_disloyalty_other_2
+                set_variable = {
+                    name = disloyed2
+                    days = 1650 #4 years
+                }
+
+            }
+            scope:king_maker_unloyal = {
+                add_gold = -250
+            }
+        }
+        set_variable = {
+            name = recent_king_maker_plot2
             days = 730 #2 years
         }
 

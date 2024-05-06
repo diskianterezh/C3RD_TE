@@ -235,7 +235,7 @@
 		
 
 		on_completion = {
-			custom_tooltip = "sol_first_deflation_mission"
+			custom_tooltip = "solidus_reform_main_tt"
 			add_political_influence = -50
 			trigger_event = {
 				id = c3rd_other_events.14
@@ -262,7 +262,7 @@
 		
 
 		on_completion = {
-			custom_tooltip = "sol_first_deflation_mission"
+			custom_tooltip = "solidus_reform_main_tt"
 			trigger_event = {
 				id = c3rd_other_events.15
 			}
@@ -288,7 +288,7 @@
 		
 
 		on_completion = {
-			custom_tooltip = "sol_first_deflation_mission"
+			custom_tooltip = "solidus_reform_final_tt"
 			trigger_event = {
 				id = c3rd_other_events.16
 			}

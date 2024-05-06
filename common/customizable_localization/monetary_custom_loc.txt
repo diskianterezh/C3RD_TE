@@ -244,3 +244,19 @@ monetary_crisis_button_custom_loc = {
 	}
 
 }
+
+c3rd_monetary_the_number_customloc = {
+	type = country
+	text = {
+		localization_key = c3rd_monetary_the_number_customloc_tt
+		trigger = {
+			NOT = {has_country_modifier = solidus_introduced}
+		}
+	}
+	text = { 
+		localization_key = c3rd_monetary_the_number_customloc_tt1
+		trigger = {
+			has_country_modifier = solidus_introduced
+		}
+	}
+}

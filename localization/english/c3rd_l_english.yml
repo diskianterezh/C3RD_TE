@@ -180,7 +180,7 @@
  constantine_reform_law:0 "Reform of Constantine"
  constantine_reform_law_desc:0 "A new management structure was put in place. Military and civilian careers were definitively separated: the prefects of the praetorium and the vicars were confined to purely administrative functions and the governors were relieved of all military concerns, in favour of war professionals. \n\n#G Generals will no longer ask for external wars\nGenerals are now less likely to trigger a Military Anarchy #! \n\n #R Governors are able to extend their personal influence in the regions they govern #! "
  decentralized_administration_law:0 "Total Autonomy"
- decentralized_administration_law_desc:0 "Governors were given greater autonomy, with large powers and acquired rights for the major families. This means that they tend to lose interest in imperial politics and concentrate on their own lands.\n\n #R Governors are able to extend their personal influence in the regions they govern and are muchmore likely to take independant actions #!"
+ decentralized_administration_law_desc:0 "Governors were given greater autonomy, with large powers and acquired rights for the major families. This means that they tend to lose interest in imperial politics and concentrate on their own lands.\n\n #R Governors are able to extend their personal influence in the regions they govern and are muchmore likely to take independant actions\nInternal policy actions can be more costly\nThis law can only be imposed during internal revolts, but it will be very difficult to withdraw #!"
  reduced_the_autonomy_desc:0 "No character is a major landowner, leader excluded"
  constantine_reform_available_desc:0 "The reform was made accessible by the contribution of an enlightened ruler"
 
@@ -218,6 +218,7 @@
  political_intervention3:0 "Political intervention"
  political_intervention4:0 "Political intervention"
  holding_protected:0 "Holdings Protected"
+ inspired_disloyalty_other_2:0 "Plotting with general"
 
  #character modifiers
  king_maker:0 "Kingmaker"
@@ -297,7 +298,7 @@
  solidus_available_custom_loc_tt1:0 "These mechanics are available later in the game"
  solidus_available_custom_loc_tt2:0 "The Solidus reform is a definitive solution to the currency crisis\n\nYou need #G 'The Aurelian Intervention'#! invention to reform the Solidus"
  solidus_available_custom_loc_tt3:0 "The Solidus reform is a definitive solution to the currency crisis\n\n#G You have now access to the Solidus Mission tree #!"
- solidus_available_custom_loc_tt4:0 "The Gold standard has been introduced\n #G  The monetary crisis is over for good#!\n#R The Aristocracy has been empowered #!"
+ solidus_available_custom_loc_tt4:0 "The Gold standard has been introduced\n#G The monetary crisis is over for good#!\n#R The Aristocracy has been empowered #!"
  solidus_available_custom_loc_tt5:0 "Tribals cannot do the Reform"
  c3rd_monetary_integrated_tt:0 "The number of integrated pops in your country\n#R Integrated pops contribute negatively to the economy#!"
  c3rd_monetary_unintegrated_tt:0 "The number of pops of an unintegrated but not enslaved culture in your country\n\nThey form the basis of contribution to the economy"
@@ -340,7 +341,10 @@
  c3rd_new_currency_tt:0 "#G You will reduce the devaluation#!"
  has_deflation_modifier:0 "You're experiencing the effects of deflation"
  has_silver_modifier:0 "You're experiencing the effects of a monetary devaluation"
- c3rd_monetary_the_number_tt:0 "#Y Economy balance#!\n\nThis number represents the inner wealth of your country: how rich are people, how money flows between workers and owners. It has little to do with the amount of money in your coffers, nor your income... but the consequences of mismanagement can indirectly influence it.\n#R Below 100%#! not enough wealth is generated to fuel the economy and deflation gradually increases\n#G Above 100%#! your empire generates enough wealth to fuel the economy and deflation is reduced\n\nEvery pop of non-integrated culture contributes #G positively#! to this figure, symbolizing the exploitation of conquered populations in the service of the country.\n#G Each pop of culture with 'slave' cultural rights will contribute twice as much #! \nEvery precious mineral will contribute #G positively#! to this figure.\nEach integrated pop, symbolizing the privileges of the elites will contribute #R negatively#! to this figure\n\nThe ratio between positive and negative values will differ according to laws, certain cultural decisions as the #G tax inspection policy#!, and over time. It will be more and more difficult to satisfy this ratio with time, symbolizing the progressive corruption of a society that is proud of its success."
+ c3rd_monetary_the_number_tt:0 "[Player.Custom('c3rd_monetary_the_number_customloc')]"
+ c3rd_monetary_the_number_customloc_tt:0 "#Y Economy balance#!\n\nThis number represents the inner wealth of your country: how rich are people, how money flows between workers and owners. It has little to do with the amount of money in your coffers, nor your income... but the consequences of mismanagement can indirectly influence it.\n#R Below 100%#! not enough wealth is generated to fuel the economy and deflation gradually increases\n#G Above 100%#! your empire generates enough wealth to fuel the economy and deflation is reduced\n\nEvery pop of non-integrated culture contributes #G positively#! to this figure, symbolizing the exploitation of conquered populations in the service of the country.\n#G Each pop of culture with 'slave' cultural rights will contribute twice as much #! \nEvery precious mineral will contribute #G positively#! to this figure.\nEach integrated pop, symbolizing the privileges of the elites will contribute #R negatively#! to this figure\n\nThe ratio between positive and negative values will differ according to laws, certain cultural decisions as the #G tax inspection policy#!, and over time. It will be more and more difficult to satisfy this ratio with time, symbolizing the progressive corruption of a society that is proud of its success."
+ c3rd_monetary_the_number_customloc_tt1:0 "#Y Economy balance#!\n\n The monetary system has been reformed and the introduction of the Solidus has eliminated the chances of another currency crisis ... at least for this era\n\n Nevertheless, you can continue to watch this number change, if you so wish."
+
 
  #Culture
 
@@ -354,6 +358,7 @@
  tax_inspection_tt:0 "#G This will help to balance the monetary balance #!"
  revoke_strengthen_tax_inspection:0 "Stop the tax inspection zeal"
  revoke_strengthen_tax_inspection_desc:0 "Let's trust our elites... they surely wouldn't dare to hide wealth from us, right?"
+ recently_revoked_tt:0 "The census exemptions have been forced recently"
  on_going_revolt:0 "Slaves Turmoils"
  on_going_revolt_desc:0 "This culture foments a revolt against its oppressors"
  on_going_mass_revolt:0 "Aristocracy Turmoils"
@@ -364,7 +369,8 @@
  slaves_massacre_c3rd_desc:0 "An uprising has been massacred, the slaves are subdued"
  new_beginnings_c3rd:0 "New beginnings"
  new_beginnings_c3rd_desc:0 "Shed the ornaments of the past"
-
+ revolting_slaves_c3rd:0 "Slaves Revolt"
+ growing_revolt:0 "Growing revolt"
 
  #Inventions
  subject_exploitation_c3rd:0 "Vassal tithes"
@@ -436,6 +442,8 @@
  solidus_reform_3_c:0 "Control of the Silver"
  solidus_reform_3_d:0 "Stable Value"
  sol_solidus_reform_3_a_tt1:0 "Your vassals' territory is at least a third of yours"
+ solidus_reform_main_tt:0 "You'll make progress on the reform"
+ solidus_reform_final_tt:0 "You'll reform the monetary system for good"
 
  #character interactions
 
@@ -755,7 +763,7 @@ low_stab_event.11.c.tt1:0 "#G This is possible because [king_maker_tyranny.GetNa
  c3rd_events.18.t:0 "Opportunity in [rival_empire.GetName]"
  c3rd_events.18.desc:0 "Our informants tell us that the government in [rival_empire.GetName] is not at its best, some are beginning to say that the leader is not worthy, and that the split was a mistake. It seems that this is a brilliant opportunity for us to push their elites to join us."
  c3rd_events.18.a:0 "Spare no expense in gifts."
- c3rd_events.18.a.tt1:0 "You will show that their interests are much better served here"
+ c3rd_events.18.a.tt1:0 "You will show that their interests are much better served here\n#G This will increase the chances of reunification#!"
  c3rd_events.18.b:0 "Isn't this the proof that only we are legitimate?"
  c3rd_events.18.b.tt1:0 "You won't do anything"
 
@@ -770,7 +778,7 @@ low_stab_event.11.c.tt1:0 "#G This is possible because [king_maker_tyranny.GetNa
  c3rd_events.20.a.tt1:0 "The empire is definitively independent."
 
  c3rd_events.21.t:0 "Governor Defect"
- c3rd_events.21.desc:0 "As the empire is divided between two rival monarchs, some seem to see this as an opportunity to advance their interests and seek greener pastures. \n[governor_defect.GetName], governors of [governor_defect.GetName], in the grey area where sovereignties are still undecided, seems to have been won over by [rival_empire_defect_to.GetName]'s claims, and appears determined to recognise him as the legitimate ruler of the empire. This would be a dramatic setback for our influence in the region, but could be avoided ... if we act quickly!"
+ c3rd_events.21.desc:0 "As the empire is divided between two rival monarchs, some seem to see this as an opportunity to advance their interests and seek greener pastures. \n[governor_defect.GetName], governor of [governorship_defect.GetName], in the grey area where sovereignties are still undecided, seems to have been won over by [rival_empire_defect_to.GetName]'s claims, and appears determined to recognise him as the legitimate ruler of the empire. This would be a dramatic setback for our influence in the region, but could be avoided ... if we act quickly!"
  c3rd_events.21.a:0 "Gold will restore his sanity"
  c3rd_events.21.a.tt1:0 "The Governor's defection will be prevented"
  c3rd_events.21.b:0 "Great honours for our friend !"
@@ -849,6 +857,10 @@ low_stab_event.11.c.tt1:0 "#G This is possible because [king_maker_tyranny.GetNa
  c3rd_events.39.a:0 "This is annoying"
  c3rd_events.39.a.tt1:0 "[king_maker_unhappy.GetName]'s inactivity undermines your government"
 
+ c3rd_events.391.t:0 "Shenanigans in the open"
+ c3rd_events.391.desc:0 "[king_maker_unloyal.GetName], a powerful general currently in conflict with the government, seems to be preparing for action. From his place of posting, scouts have seen him organising clandestine meetings where, according to them, ‘they talk about maps and army movements’. \n\nWe don't yet know what all this excitement means, but it's best to be prepared.."
+ c3rd_events.391.a:0 "This is annoying"
+ c3rd_events.391.a.tt1:0 "[king_maker_unloyal.GetName]'s inactivity undermines your government"
 
  c3rd_events.40.t:0 "An extraordinary session"
  c3rd_events.40.desc:0 "After the assassination of our leader, an extraordinary session followed. However, the calm and concise debates that were the pride of our democracy were replaced this time by violent attacks between speakers, as well as open demands for the public proscription of everyone. It is unlikely that calm will ever return, while the coup d'état is still on everyone's mind."
@@ -1337,7 +1349,7 @@ low_stab_event.11.c.tt1:0 "#G This is possible because [king_maker_tyranny.GetNa
  c3rd_other_events.75.c:0 "I dont see any problem here"
  c3rd_other_events.75.c.tt1:0 "#R this will reduce the value of silver money \n This happened because of your leader's poor Statesmanship and he will surely make this mistake again#!"
 
- c3rd_governorship_owner_tt:0 "This Governorship is firmly controlled by [OverviewGovernorshipItem.GetGovernorship.MakeScope.GetVariable('governorship_owner').GetCharacter.GetName] of the family [OverviewGovernorshipItem.GetGovernorship.MakeScope.GetVariable('governorship_owner').GetCharacter.GetFamily.GetName]\n#R [OverviewGovernorshipItem.GetGovernorship.MakeScope.GetVariable('governorship_owner_ratio').GetValue] %#! of the region is controlled\n\nThis takes into account the percentage of holdings owned by the owner, or the head of the family. If too many of your country's regions are controlled by the same person, powerful landowners may emerge."
+ c3rd_governorship_owner_tt:0 "This Governorship is firmly controlled by [OverviewGovernorshipItem.GetGovernorship.MakeScope.GetVariable('governorship_owner').GetCharacter.GetName]\n#R [OverviewGovernorshipItem.GetGovernorship.MakeScope.GetVariable('governorship_owner_ratio').GetValue] %#! of the region is controlled\n\nThis takes into account the percentage of holdings owned by the owner, or the head of the family if the character is member of a great family. If too many of your country's regions are controlled by the same person, powerful landowners may emerge."
  c3rd_CanChange_tt1:0 "The Governor owns the Region and cannot be dismissed"
  c3rd_CanChange_tt2:0 "The head of the family owns the region and does not agree to the dismissal of one of its members"
  c3rd_CanChange_tt3:0 "You cannot change the Governor of your capital region"
@@ -1357,6 +1369,7 @@ low_stab_event.11.c.tt1:0 "#G This is possible because [king_maker_tyranny.GetNa
  c3rd_other_events.80.desc:0 "[autonomy_governorship.MakeScope.GetVariable('governorship_owner').GetCharacter.GetName] and his family have invested a lot of their resources in the Region of [autonomy_governorship.GetName]. Enough for the local authorities to answer to them directly."
  c3rd_other_events.80.a:0 "Now that's unpleasant"
  c3rd_other_events.80.a.tt1:0 "The region is now considered a stronghold of the [autonomy_governorship.MakeScope.GetVariable('governorship_owner').GetCharacter.GetFamily.GetName]\n\n #T You can check regional holdings and try to regain control in the 'Nation Overview', Administration tab. #!"
+ c3rd_other_events.80.a.tt2:0 "The region is now considered a stronghold of [autonomy_governorship.MakeScope.GetVariable('governorship_owner').GetCharacter.GetName]\n\n #T You can check regional holdings and try to regain control in the 'Nation Overview', Administration tab. #!"
 
  c3rd_other_events.802.desc:0 "[owner_target_for_number.GetName] Possesses [owner_target_for_number.MakeScope.GetVariable('country_ownership').GetValue]%"
 

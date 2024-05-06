@@ -51,3 +51,11 @@ nobles_revoked = {
 silver_coins_c3rd = {
 	culture_happiness_modifier = 0.05
 }
+
+revolting_slaves_c3rd = {
+	culture_slaves_output = -0.3
+}
+
+growing_revolt = {
+	culture_nobles_output = -0.2
+}

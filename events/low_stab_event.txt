@@ -501,7 +501,7 @@ low_stab_event.4 = {
 	type = country_event
 	title = "low_stab_event.4.t"
 	desc = "low_stab_event.4.desc"
-	goto_location = scope:client.capital_scope
+	goto_location = scope:independent_governorship_province
 	picture = council_country
 	trigger = {
 		has_land = yes
@@ -1626,10 +1626,10 @@ low_stab_event.10 = {
 				name = on_going_mass_revolt
 				duration = 3650
 			}
-			set_variable = {
-				name = growing_revolt
-				days = 730
-			}
+            add_country_culture_modifier = {
+                name = growing_revolt
+                duration = 1825
+            }
 			if = {#just in case
 				limit = {
 					has_country_culture_modifier = new_culture_elite
@@ -1654,6 +1654,7 @@ low_stab_event.11 = {
 		NOT = {
 			stability >= 25
 		}
+		stability >= 10 #so the stabhit is awful
 		tyranny >= 40
 		NOT = {
 			has_variable = recent_tyranny_revolt
