@@ -56,6 +56,7 @@
 				var:governorship_owner = owner.current_ruler
 			}
 			custom_tooltip  = c3rd_governorship_owner_regain_control_tt3_2
+			owner = {add_legitimacy = -5}
 			if = {
 				limit = {
 					governor = {

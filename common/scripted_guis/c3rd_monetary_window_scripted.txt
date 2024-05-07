@@ -176,6 +176,9 @@ c3rd_monetary_recalculation = {
 c3rd_monetary_deflation_arrow1 = {
 	scope = country
 	is_shown = {
+		NOT = {
+			has_country_modifier = solidus_introduced
+		}
 		has_variable = c3rd_deflation_increase_var
 		var:c3rd_deflation_increase_var >= 1
 	}
@@ -183,6 +186,9 @@ c3rd_monetary_deflation_arrow1 = {
 c3rd_monetary_deflation_arrow2 = {
 	scope = country
 	is_shown = {
+		NOT = {
+			has_country_modifier = solidus_introduced
+		}
 		has_variable = c3rd_deflation_increase_var
 		var:c3rd_deflation_increase_var >= 2
 	}
@@ -190,6 +196,9 @@ c3rd_monetary_deflation_arrow2 = {
 c3rd_monetary_deflation_arrow3 = {
 	scope = country
 	is_shown = {
+		NOT = {
+			has_country_modifier = solidus_introduced
+		}
 		has_variable = c3rd_deflation_increase_var
 		var:c3rd_deflation_increase_var >= 3
 	}
@@ -197,6 +206,9 @@ c3rd_monetary_deflation_arrow3 = {
 c3rd_monetary_deflation_arrow4 = {
 	scope = country
 	is_shown = {
+		NOT = {
+			has_country_modifier = solidus_introduced
+		}
 		has_variable = c3rd_deflation_increase_var
 		var:c3rd_deflation_increase_var >= 4
 	}
@@ -204,6 +216,9 @@ c3rd_monetary_deflation_arrow4 = {
 c3rd_monetary_deflation_arrow_1 = {
 	scope = country
 	is_shown = {
+		NOT = {
+			has_country_modifier = solidus_introduced
+		}
 		has_variable = c3rd_deflation_increase_var
 		var:c3rd_deflation_increase_var <= -1
 	}
@@ -211,6 +226,9 @@ c3rd_monetary_deflation_arrow_1 = {
 c3rd_monetary_deflation_arrow_2 = {
 	scope = country
 	is_shown = {
+		NOT = {
+			has_country_modifier = solidus_introduced
+		}
 		has_variable = c3rd_deflation_increase_var
 		var:c3rd_deflation_increase_var <= -2
 	}
@@ -218,6 +236,9 @@ c3rd_monetary_deflation_arrow_2 = {
 c3rd_monetary_deflation_arrow_3 = {
 	scope = country
 	is_shown = {
+		NOT = {
+			has_country_modifier = solidus_introduced
+		}
 		has_variable = c3rd_deflation_increase_var
 		var:c3rd_deflation_increase_var <= -3
 	}
@@ -225,6 +246,9 @@ c3rd_monetary_deflation_arrow_3 = {
 c3rd_monetary_deflation_arrow_4 = {
 	scope = country
 	is_shown = {
+		NOT = {
+			has_country_modifier = solidus_introduced
+		}
 		has_variable = c3rd_deflation_increase_var
 		var:c3rd_deflation_increase_var <= -4
 	}

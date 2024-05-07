@@ -989,9 +989,7 @@ scheme_steal_holding = {
 					is_ruler = no
 					AND = {
 						is_ruler = yes
-						root = {
-							power_base >= 15
-						}
+						employer = {has_country_modifier = solidus_introduced}
 					}
 				}
 			}
@@ -1008,7 +1006,7 @@ scheme_steal_holding = {
 		}
 	}
 	
-	duration = 730
+	duration = 180
 	
 	skip_initial_abort = yes
 	
@@ -1073,9 +1071,7 @@ scheme_steal_holding = {
 						is_ruler = no
 						AND = {
 							is_ruler = yes
-							root = {
-								power_base >= 15
-							}
+							employer = {has_country_modifier = solidus_introduced}
 						}
 					}
 					any_holdings = {
@@ -1134,9 +1130,7 @@ scheme_steal_holding = {
 						is_ruler = no
 						AND = {
 							is_ruler = yes
-							root = {
-								power_base >= 15
-							}
+							employer = {has_country_modifier = solidus_introduced}
 						}
 					}
 					any_holdings = {
@@ -1199,6 +1193,115 @@ scheme_steal_holding = {
 
 	modifier = {
 		monthly_character_popularity = -0.25
+	}
+}
+
+
+
+
+scheme_adopt_governor = {
+	can_be_picked = {
+		scheme_preconditions = yes
+		NOT = {
+			has_variable = ongoing_scheme_target
+		}
+		loyalty <= 80
+		wealth >= 2000
+		is_head_of_family = yes
+		save_temporary_scope_as = owner_tmp_check
+		employer = {
+			has_country_modifier = solidus_introduced
+			any_governorships = {
+				exists = governor
+				NOT = {
+					has_variable = governorship_owner
+					trigger_if = {
+						limit = {
+							has_variable = governorship_owner 
+						}
+						var:governorship_owner = root
+					}
+				}
+				governor = {
+					is_adult = yes
+					NOR = {
+						this = root
+						is_rival = root
+					}
+					is_ruler = no
+					is_minor_character = yes
+					is_governor = yes
+					OR = {
+						NOT = {
+							has_variable_list = targeted_by
+						}
+						AND = {
+							has_variable_list = targeted_by
+							variable_list_size = {
+								name = targeted_by
+								value <= 6  
+							}
+						}
+					}
+				}
+				region_control_value_char >= 25
+			}
+		}
+	}
+	
+	finished_when = {
+		custom_tooltip = {
+			text = "scheme_ambition_fulfillment_above_85_loyalty"
+			loyalty > 85
+		}
+	}
+	
+	duration = 730
+	
+	skip_initial_abort = yes
+	
+	abort = {
+		OR = {
+			loyalty > 85
+			is_ruler = yes
+			is_alive = no
+			prisoner = yes
+			has_character_modifier = indisposed_charmod
+			wealth < 1500
+		}
+	}
+	
+	chance = {
+		base = 15
+		modifier = {
+			add = 5
+			wealth >= 5000
+		}
+		modifier = {
+			add = 5
+			wealth >= 10000
+		}
+		modifier = {
+			add = 5
+			has_trait = ambitious
+		}
+		modifier = {
+			add = 5
+			has_trait = crafty
+		}
+		modifier = {
+			add = 5
+			corruption >= 25
+		}
+	}
+	
+	#on_monthly = xyz
+	on_start = scheme_adopt_governor_start
+	on_finish = scheme_adopt_governor_finish
+	on_abort = scheme_abort
+
+	modifier = {
+		monthly_character_wealth = -50
 	}
 }
 

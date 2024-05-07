@@ -50,6 +50,7 @@ clear_scheme_custom_tt = {
 				has_ambition = scheme_exploit_populous
 				has_ambition = scheme_increase_statesmenship
 				has_ambition = scheme_care_of_relatives
+				has_ambition = scheme_adopt_governor
 			}
 		}
 	}

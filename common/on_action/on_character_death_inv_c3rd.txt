@@ -2528,7 +2528,7 @@ on_character_death = {
 					var:country_ownership >= 50
 				}
 				random_list = {
-					9 = {}
+					5 = {}
 					1 = {
 						modifier = {
 							add = 1

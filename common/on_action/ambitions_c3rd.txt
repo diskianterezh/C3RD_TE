@@ -587,9 +587,7 @@ scheme_steal_holding_start = {
 						is_ruler = no
 						AND = {
 							is_ruler = yes
-							root = {
-								power_base >= 15
-							}
+							employer = {has_country_modifier = solidus_introduced}
 						}
 					}
 				}
@@ -597,6 +595,7 @@ scheme_steal_holding_start = {
 					modifier = {
 						factor = 0.25
 						is_ruler = yes
+						NOT = {employer = {has_country_modifier = solidus_introduced}}
 					}
 					modifier = {
 						factor = 50
@@ -646,7 +645,7 @@ scheme_steal_holding_finish = {
 				}
 				set_variable = {
 					name = recent_holding_theft
-					days = 365
+					days = 160
 				}
 			}
 			else_if = {
@@ -656,13 +655,13 @@ scheme_steal_holding_finish = {
 				}
 				set_variable = {
 					name = recent_holding_theft
-					days = 550
+					days = 360
 				}
 			}
 			else = {
 				set_variable = {
 					name = recent_holding_theft
-					days = 730
+					days = 550
 				}
 			}
 			set_variable = {
@@ -739,5 +738,105 @@ scheme_steal_holding_finish = {
 			}
 			remove_scheme_variables_effect = yes
 		}
+	}
+}
+
+
+scheme_adopt_governor_start = {
+	effect = {
+		save_temporary_scope_as = owner_tmp_check
+		employer = {
+			random_governorships = {
+				limit = {
+					exists = governor
+					NOT = {
+						has_variable = governorship_owner
+						trigger_if = {
+							limit = {
+								has_variable = governorship_owner
+							}
+							var:governorship_owner = root
+						}
+					}
+					governor = {
+						is_adult = yes
+						NOR = {
+							this = root
+							is_rival = root
+						}
+						is_ruler = no
+						is_minor_character = yes
+						is_governor = yes
+						OR = {
+							NOT = {
+								has_variable_list = targeted_by
+							}
+							AND = {
+								has_variable_list = targeted_by
+								variable_list_size = {
+									name = targeted_by
+									value <= 6  
+								}
+							}
+						}
+					}
+					region_control_value_char >= 25
+				}
+				weight = {
+					modifier = {
+						factor = 2
+						region_control_value_char >= 40
+					}
+					modifier = {
+						factor = 2
+						region_control_value_char >= 60
+					}
+					modifier = {
+						factor = 2
+						region_control_value_char >= 80
+					}
+				}
+				governor = {
+					save_scope_as = ongoing_scheme_target
+				}
+			}
+		}
+		set_variable = {
+			name = ongoing_scheme_target
+			value = scope:ongoing_scheme_target
+			days = 400
+		}
+		scope:ongoing_scheme_target = {
+			add_to_variable_list = {
+				name = targeted_by
+				target = root
+			}
+		}
+	}
+}
+
+
+scheme_adopt_governor_finish = {
+	effect = {
+		custom_tooltip = scheme_adopt_governor_effect_tt
+		save_scope_as = targeter
+		random_list = {
+			5 = {}
+			5 = {
+				modifier = {
+					add = scope:ongoing_scheme_target.corruption
+				}
+				scope:ongoing_scheme_target = {
+					set_family = root.family
+					add_gold = 1000
+					add_corruption = 5
+					root = {
+						add_gold = -1000
+					}
+				}
+
+			}
+		}
+		remove_scheme_variables_effect = yes
 	}
 }

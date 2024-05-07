@@ -3511,29 +3511,29 @@ c3rd_other_events.32 = { # noble revoked culture revolts
             factor = 1.5
             any_country_state = {
                 count >= 5
-                num_of_cities <= 500
-                has_province_modifier = revolt_preparation
+                root = {num_of_cities <= 500}
+                has_state_modifier = secess_preparation
             }
         }
         modifier = {
             factor = 1.5
             any_country_state = {
                 count >= 7
-                has_province_modifier = revolt_preparation
+                has_state_modifier = secess_preparation
             }
         }
         modifier = {
             factor = 1.5
             any_country_state = {
                 count >= 10
-                has_province_modifier = revolt_preparation
+                has_state_modifier = secess_preparation
             }
         }
         modifier = {
             factor = 1.5
             any_country_state = {
                 count >= 15
-                has_province_modifier = revolt_preparation
+                has_state_modifier = secess_preparation
             }
         }
         modifier = {
@@ -3626,6 +3626,9 @@ c3rd_other_events.32 = { # noble revoked culture revolts
             every_owned_province = {
                 limit = {
                     dominant_province_culture = scope:revolting_noble_culture.culture
+                    NOT = {
+                        this.state = root.capital_scope.state
+                    }
                 }
                 set_owned_by = scope:new_country_vassal
             }
@@ -4804,7 +4807,7 @@ c3rd_other_events.60 = { #filthy barbarians ransacking our lands
                 }
                 create_duchy = yes
                 trigger_event = {
-                    id = c3rd_other_events.103
+                    id = c3rd_other_events.104
                     days = 1
                 }
             }
@@ -5854,19 +5857,51 @@ immediate = {
                     region_control_value >= 40
                     root={has_country_modifier = solidus_introduced}
                 }
-                region_control_value >= 10
+                region_control_value >= 50
             }
-
+        }
+        weight = {
+            modifier = {
+                factor = 3
+                region_control_value >= 75
+            }
+            modifier = {
+                factor = 2
+                region_control_value >= 60
+            }
+            modifier = {
+                factor = 5
+                region_control_value >= 90
+            }
+            modifier = { #less chances close to the capital
+                factor = 0.4
+                any_governorship_state = {
+                    any_state_province = {
+                        region = {
+                            any_neighbor_region = {
+                                any_region_province = {
+                                    owner = root
+                                    is_capital = yes
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            modifier = { #more chances near foreign countries
+                factor = 2
+                any_governorship_state = {
+                    any_state_province = {
+                        any_neighbor_province = {
+                            NOT = {
+                                owner = root
+                            }
+                        }
+                    }
+                }
+            }
         }
         save_scope_as = autonomy_governorship
-        set_variable = {
-            name = governorship_owner
-            value = governor
-        }
-        set_variable = {
-            name = governorship_owner_ratio
-            value = region_control_value
-        }
         governor = {
             recalculate_ownership_char = yes
         }
@@ -6092,7 +6127,12 @@ c3rd_other_events.82 = { #take lands from landowner
                 has_variable = governorship_owner
                 NOR = {
                     this = scope:governorship_1
-                    this = scope:governorship_2
+                    trigger_if = {
+                        limit = {
+                            exists = scope:governorship_2
+                        }
+                        this = scope:governorship_2
+                    }
                 }
                 var:governorship_owner = scope:target
                 save_temporary_scope_as = govtmp_parse
@@ -6124,8 +6164,18 @@ c3rd_other_events.82 = { #take lands from landowner
                 has_variable = governorship_owner
                 NOR = {
                     this = scope:governorship_1
-                    this = scope:governorship_2
-                    this = scope:governorship_3
+                    trigger_if = {
+                        limit = {
+                            exists = scope:governorship_2
+                        }
+                        this = scope:governorship_2
+                    }
+                    trigger_if = {
+                        limit = {
+                            exists = scope:governorship_3
+                        }
+                        this = scope:governorship_3
+                    }
                 }
                 var:governorship_owner = scope:target
                 save_temporary_scope_as = govtmp_parse
@@ -6169,17 +6219,26 @@ c3rd_other_events.82 = { #take lands from landowner
             scope:target = {add_loyalty = property_seized}
             add_political_influence = -10
         }
-        else = {
+        else_if = {
+            limit = {
+                scope:target = {
+                    is_minor_character = no
+                }
+            }
             scope:target = {add_loyalty = property_seized}
             scope:target.family.head_of_family = {add_loyalty = property_seized_small}
             add_political_influence = -5
-            
+        }
+        else = {
+            scope:target = {add_loyalty = property_seized}
+            add_tyranny = 1
+            add_political_influence = -5
         }
         if = {
             limit = {
                 has_country_modifier = solidus_introduced
             }
-            add_tyranny = 5
+            add_tyranny = 2
         }
         if = {
             limit = {
@@ -6268,17 +6327,26 @@ c3rd_other_events.82 = { #take lands from landowner
             scope:target = {add_loyalty = property_seized}
             add_political_influence = -10
         }
-        else = {
+        else_if = {
+            limit = {
+                scope:target = {
+                    is_minor_character = no
+                }
+            }
             scope:target = {add_loyalty = property_seized}
             scope:target.family.head_of_family = {add_loyalty = property_seized_small}
             add_political_influence = -5
-            
+        }
+        else = {
+            scope:target = {add_loyalty = property_seized}
+            add_tyranny = 1
+            add_political_influence = -5
         }
         if = {
             limit = {
                 has_country_modifier = solidus_introduced
             }
-            add_tyranny = 5
+            add_tyranny = 2
         }
         if = {
             limit = {
@@ -6367,17 +6435,26 @@ c3rd_other_events.82 = { #take lands from landowner
             scope:target = {add_loyalty = property_seized}
             add_political_influence = -10
         }
-        else = {
+        else_if = {
+            limit = {
+                scope:target = {
+                    is_minor_character = no
+                }
+            }
             scope:target = {add_loyalty = property_seized}
             scope:target.family.head_of_family = {add_loyalty = property_seized_small}
             add_political_influence = -5
-            
+        }
+        else = {
+            scope:target = {add_loyalty = property_seized}
+            add_tyranny = 1
+            add_political_influence = -5
         }
         if = {
             limit = {
                 has_country_modifier = solidus_introduced
             }
-            add_tyranny = 5
+            add_tyranny = 2
         }
         if = {
             limit = {
@@ -6466,17 +6543,26 @@ c3rd_other_events.82 = { #take lands from landowner
             scope:target = {add_loyalty = property_seized}
             add_political_influence = -10
         }
-        else = {
+        else_if = {
+            limit = {
+                scope:target = {
+                    is_minor_character = no
+                }
+            }
             scope:target = {add_loyalty = property_seized}
             scope:target.family.head_of_family = {add_loyalty = property_seized_small}
             add_political_influence = -5
-            
+        }
+        else = {
+            scope:target = {add_loyalty = property_seized}
+            add_tyranny = 1
+            add_political_influence = -5
         }
         if = {
             limit = {
                 has_country_modifier = solidus_introduced
             }
-            add_tyranny = 5
+            add_tyranny = 2
         }
         if = {
             limit = {
@@ -9410,7 +9496,7 @@ c3rd_other_events.92 = { #governor complain about excessive control of another c
         has_civil_war = no
         current_date >= 700.1.1
         has_country_modifier = solidus_introduced #only solidus, because i need differences with just the minor law
-        has_variable = recent_holding_affair_overall
+        NOT = {has_variable = recent_holding_affair_overall}
         any_character = {
             is_governor = yes
             is_ruler = no
@@ -9692,6 +9778,13 @@ c3rd_other_events.92 = { #governor complain about excessive control of another c
             }
         }
     }
+    after = {
+        hidden_effect = {
+            scope:govship_target_complain = {
+                calculate_the_gov_ownership = yes
+            }
+        }
+    }
 }
 
 
@@ -9931,6 +10024,13 @@ c3rd_other_events.93 = { #governor complain about excessive control of ruler
                 has_country_modifier = solidus_introduced
             }
             add_tyranny = 5
+        }
+    }
+    after = {
+        hidden_effect = {
+            scope:govship_target_complain2 = {
+                calculate_the_gov_ownership = yes
+            }
         }
     }
 }
@@ -10368,6 +10468,404 @@ c3rd_other_events.104 = { #Notification of duchy created
             
         }
 	}
+}
+
+c3rd_other_events.105 = { #heritage of big landowner
+    type = country_event
+    title = "c3rd_other_events.105.t"
+    desc = "c3rd_other_events.105.desc"
+    left_portrait = current_ruler
+
+    picture = throneroom
+
+    trigger = {
+        has_land = yes
+        is_tribal = no
+        has_civil_war = no
+        current_date >= 750.1.1
+        has_country_modifier = solidus_introduced
+        any_character = {
+            employer = root
+            has_character_modifier = major_influence_aristocrat
+            has_variable = potential_sucession_ownership_crisis
+            save_temporary_scope_as = main_heir_landowner1
+            family = {
+                any_family_member = {
+                    count >= 3
+                    is_adult = yes
+                    employer = root
+                    NOT = {this = scope:main_heir_landowner1}
+                }
+            }
+        }
+    }
+
+    immediate = {
+        add_stability = -10
+        random_character = {
+            limit = {
+                employer = root
+                has_character_modifier = major_influence_aristocrat
+                has_variable = potential_sucession_ownership_crisis
+                save_temporary_scope_as = main_heir_landowner2
+                family = {
+                    any_family_member = {
+                        count >= 3
+                        is_adult = yes
+                        employer = root
+                        NOT = {this = scope:main_heir_landowner2}
+                    }
+                }
+            }
+            save_scope_as = main_heir_landowner
+            remove_variable = potential_sucession_ownership_crisis
+        }
+        random_character = {
+            limit = {
+                is_adult = yes
+                employer = root
+                NOT = {this = scope:main_heir_landowner}
+                family = scope:main_heir_landowner.family
+            }
+            weight = {
+                modifier = {
+                    add = power_base
+                }
+            }
+            save_scope_as = second_heir_landowner
+        }
+        random_character = {
+            limit = {
+                is_adult = yes
+                employer = root
+                NOR = {
+                    this = scope:main_heir_landowner
+                    this = scope:second_heir_landowner
+                }
+                family = scope:main_heir_landowner.family
+            }
+            weight = {
+                modifier = {
+                    add = power_base
+                }
+            }
+            save_scope_as = third_heir_landowner
+        }
+        random_character = {
+            limit = {
+                is_adult = yes
+                employer = root
+                NOR = {
+                    this = scope:main_heir_landowner
+                    this = scope:second_heir_landowner
+                    this = scope:third_heir_landowner
+                }
+                family = scope:main_heir_landowner.family
+            }
+            weight = {
+                modifier = {
+                    add = power_base
+                }
+            }
+            save_scope_as = fourth_heir_landowner
+        }
+    }
+
+    option = { #main heir
+        name = c3rd_other_events.105.a
+        custom_tooltip = c3rd_other_events.105.a.tt1
+        add_tyranny = 10
+        if = {
+            limit = {
+                scope:main_heir_landowner = {
+                    is_ruler = yes
+                }
+            }
+            add_stability = -10
+        }
+        scope:main_heir_landowner = {
+            add_loyalty = coup_loyal
+        }
+        scope:second_heir_landowner = {
+            add_loyalty = medium_requests_denied
+        }
+        scope:third_heir_landowner = {
+            add_loyalty = medium_requests_denied
+        }
+        scope:fourth_heir_landowner = {
+            add_loyalty = medium_requests_denied
+        }
+
+    }
+    option = { #share
+        name = c3rd_other_events.105.b
+        custom_tooltip = c3rd_other_events.105.b.tt1
+        hidden_effect = {
+            every_governorships = {
+                limit = {
+                    has_variable = governorship_owner
+                    var:governorship_owner = scope:main_heir_landowner
+                }
+                random_list = {
+                    1 = {}
+                    1 = {
+                        remove_variable = governorship_owner
+                        set_variable = {
+                            name = governorship_owner
+                            value = scope:second_heir_landowner
+                        }
+                        every_governorship_state = {
+                            every_state_province = {
+                                limit = {
+									exists = holding_owner
+									holding_owner = {
+										this = scope:main_heir_landowner
+									}
+                                }
+                                scope:main_heir_landowner = {
+                                    remove_holding = prev
+                                }
+                                scope:second_heir_landowner = {
+                                    add_holding = prev
+                                }
+                            }
+                        }
+                    }
+                    1 = {
+                        remove_variable = governorship_owner
+                        set_variable = {
+                            name = governorship_owner
+                            value = scope:third_heir_landowner
+                        }
+                        every_governorship_state = {
+                            every_state_province = {
+                                limit = {
+									exists = holding_owner
+									holding_owner = {
+										this = scope:main_heir_landowner
+									}
+                                }
+                                scope:main_heir_landowner = {
+                                    remove_holding = prev
+                                }
+                                scope:third_heir_landowner = {
+                                    add_holding = prev
+                                }
+                            }
+                        }
+                    }
+                    1 = {
+                        remove_variable = governorship_owner
+                        set_variable = {
+                            name = governorship_owner
+                            value = scope:fourth_heir_landowner
+                        }
+                        every_governorship_state = {
+                            every_state_province = {
+                                limit = {
+									exists = holding_owner
+									holding_owner = {
+										this = scope:main_heir_landowner
+									}
+                                }
+                                scope:main_heir_landowner = {
+                                    remove_holding = prev
+                                }
+                                scope:fourth_heir_landowner = {
+                                    add_holding = prev
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            every_subject = {
+                limit = {
+                    is_subject_type = autonomous_domain
+                    has_variable = owner_from_another_empire
+                    var:owner_from_another_empire = scope:main_heir_landowner
+                }
+                1 = {}
+                1 = {
+                    remove_variable = owner_from_another_empire
+                    set_variable = {
+                        name = owner_from_another_empire
+                        value = scope:second_heir_landowner
+                    }
+                }
+                1 = {
+                    remove_variable = owner_from_another_empire
+                    set_variable = {
+                        name = owner_from_another_empire
+                        value = scope:third_heir_landowner
+                    }
+                }
+                1 = {
+                    remove_variable = owner_from_another_empire
+                    set_variable = {
+                        name = owner_from_another_empire
+                        value = scope:fourth_heir_landowner
+                    }
+                }
+            }
+        }
+        current_ruler = {
+            add_popularity = 25
+        }
+        if = {
+            limit = {
+                scope:main_heir_landowner = {
+                    is_ruler = no
+                }
+            }
+            add_stability = -5
+        }
+        add_tyranny = -5
+    }
+    option = { #get the country's share
+        name = c3rd_other_events.105.c
+        custom_tooltip = c3rd_other_events.105.c.tt1
+        hidden_effect = {
+            every_governorships = {
+                limit = {
+                    has_variable = governorship_owner
+                    var:governorship_owner = scope:main_heir_landowner
+                }
+                random_list = {
+                    1 = {}
+                    1 = {
+                        remove_variable = governorship_owner
+                        set_variable = {
+                            name = governorship_owner
+                            value = scope:second_heir_landowner
+                        }
+                        every_governorship_state = {
+                            every_state_province = {
+                                limit = {
+									exists = holding_owner
+									holding_owner = {
+										this = scope:main_heir_landowner
+									}
+                                }
+                                scope:main_heir_landowner = {
+                                    remove_holding = prev
+                                }
+                                scope:second_heir_landowner = {
+                                    add_holding = prev
+                                }
+                            }
+                        }
+                    }
+                    1 = {
+                        remove_variable = governorship_owner
+                        set_variable = {
+                            name = governorship_owner
+                            value = scope:third_heir_landowner
+                        }
+                        every_governorship_state = {
+                            every_state_province = {
+                                limit = {
+									exists = holding_owner
+									holding_owner = {
+										this = scope:main_heir_landowner
+									}
+                                }
+                                scope:main_heir_landowner = {
+                                    remove_holding = prev
+                                }
+                                scope:third_heir_landowner = {
+                                    add_holding = prev
+                                }
+                            }
+                        }
+                    }
+                    1 = {
+                        remove_variable = governorship_owner
+                        set_variable = {
+                            name = governorship_owner
+                            value = scope:fourth_heir_landowner
+                        }
+                        every_governorship_state = {
+                            every_state_province = {
+                                limit = {
+									exists = holding_owner
+									holding_owner = {
+										this = scope:main_heir_landowner
+									}
+                                }
+                                scope:main_heir_landowner = {
+                                    remove_holding = prev
+                                }
+                                scope:fourth_heir_landowner = {
+                                    add_holding = prev
+                                }
+                            }
+                        }
+                    }
+                    1 = {
+                        remove_variable = governorship_owner
+                        every_governorship_state = {
+                            every_state_province = {
+                                limit = {
+									exists = holding_owner
+									holding_owner = {
+										this = scope:main_heir_landowner
+									}
+                                }
+                                scope:main_heir_landowner = {
+                                    remove_holding = prev
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            every_subject = {
+                limit = {
+                    is_subject_type = autonomous_domain
+                    has_variable = owner_from_another_empire
+                    var:owner_from_another_empire = scope:main_heir_landowner
+                }
+                1 = {}
+                1 = {
+                    remove_variable = owner_from_another_empire
+                    set_variable = {
+                        name = owner_from_another_empire
+                        value = scope:second_heir_landowner
+                    }
+                }
+                1 = {
+                    remove_variable = owner_from_another_empire
+                    set_variable = {
+                        name = owner_from_another_empire
+                        value = scope:third_heir_landowner
+                    }
+                }
+                1 = {
+                    remove_variable = owner_from_another_empire
+                    set_variable = {
+                        name = owner_from_another_empire
+                        value = scope:fourth_heir_landowner
+                    }
+                }
+            }
+        }
+        if = {
+            limit = {
+                scope:main_heir_landowner = {
+                    is_ruler = yes
+                }
+            }
+            add_stability = 5
+        }
+        else = {
+            add_tyranny = 10
+            add_stability = -5
+        }
+        scope:main_heir_landowner = {
+            add_loyalty = medium_requests_denied
+        }
+    }
 }
 
 c3rd_other_events.110 = { #Intervention
@@ -11407,6 +11905,42 @@ c3rd_other_events.110 = { #Intervention
                 add_corruption = 25
             }
         }
+        hidden_effect = {
+            ordered_governorships = {
+                limit = {
+                    NOT = {
+                        has_variable = governorship_owner
+                        var:governorship_owner = root.current_ruler
+                    }
+                    NOT = {
+                        governor = {family = root.current_ruler.family}
+                    }
+                    any_governorship_state = {
+                        any_state_province = {
+                            exists = holding_owner
+                            holding_owner = {
+                                this = root.current_ruler
+                            }
+                        }
+                    }
+                }
+                max = num_govruler_lost
+                every_governorship_state = {
+                    every_state_province = {
+                        limit = {
+                            exists = holding_owner
+                            holding_owner = {
+                                this = root.current_ruler
+                            }
+                        }
+                        root.current_ruler = {
+                            remove_holding = prev
+                        }
+                    }
+                }
+                
+            }
+        }
         if = {#also, you appear weak
             limit = {
                 has_variable = unworthy_leader
@@ -11547,6 +12081,42 @@ c3rd_other_events.110 = { #Intervention
                 change_law = decentralized_administration_law
             }
         }
+        hidden_effect = {
+            ordered_governorships = {
+                limit = {
+                    NOT = {
+                        has_variable = governorship_owner
+                        var:governorship_owner = root.current_ruler
+                    }
+                    NOT = {
+                        governor = {family = root.current_ruler.family}
+                    }
+                    any_governorship_state = {
+                        any_state_province = {
+                            exists = holding_owner
+                            holding_owner = {
+                                this = root.current_ruler
+                            }
+                        }
+                    }
+                }
+                max = num_govruler_lost
+                every_governorship_state = {
+                    every_state_province = {
+                        limit = {
+                            exists = holding_owner
+                            holding_owner = {
+                                this = root.current_ruler
+                            }
+                        }
+                        root.current_ruler = {
+                            remove_holding = prev
+                        }
+                    }
+                }
+                
+            }
+        }
         if = {
             limit = {
                 is_monarchy = yes
@@ -11650,6 +12220,42 @@ c3rd_other_events.110 = { #Intervention
                 add_corruption = 45
             }
 		}
+        hidden_effect = {
+            ordered_governorships = {
+                limit = {
+                    NOT = {
+                        has_variable = governorship_owner
+                        var:governorship_owner = root.current_ruler
+                    }
+                    NOT = {
+                        governor = {family = root.current_ruler.family}
+                    }
+                    any_governorship_state = {
+                        any_state_province = {
+                            exists = holding_owner
+                            holding_owner = {
+                                this = root.current_ruler
+                            }
+                        }
+                    }
+                }
+                max = num_govruler_lost
+                every_governorship_state = {
+                    every_state_province = {
+                        limit = {
+                            exists = holding_owner
+                            holding_owner = {
+                                this = root.current_ruler
+                            }
+                        }
+                        root.current_ruler = {
+                            remove_holding = prev
+                        }
+                    }
+                }
+                
+            }
+        }
         if = {
             limit = {
                 any_subject = {

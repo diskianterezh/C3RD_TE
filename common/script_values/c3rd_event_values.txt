@@ -614,6 +614,24 @@ region_control_value = {
 	round = yes
 	
 }
+region_control_value_char = {
+	value = 0
+	every_governorship_state = {
+		every_state_province = {
+			if = {
+				limit = {
+					exists = holding_owner
+					holding_owner = scope:owner_tmp_check
+				}
+				add = 1
+			}
+		}
+	}
+	multiply = 100
+	divide = region_owned_provinces
+	round = yes
+	
+}
 
 region_control_value_owner = {
 	value = 0
@@ -769,7 +787,7 @@ country_gov_ratio_number = {
 	
 }
 
-country_gov_ratio_number_minus = { #to get how many governorships should the landowner keep once the domain is created
+country_gov_ratio_number_minus = { #to get how many governorships should the landowner keep once the domain is created -
 	value = country_gov_ratio_number
 	add = 1
 	if = {
@@ -1059,6 +1077,64 @@ c3rd_silver_increase = {
 			num_of_cities >= 500
 			is_tribal = no
 			has_law = monetary_reform_law
+		}
+		add = 1
+	}
+}
+
+
+num_govruler_lost = { #scope governorship
+	value = 1
+	if = {
+		limit = {
+			owner = {
+				has_country_modifier = law_advantages_4
+			}
+		}
+		add = 1
+	}
+	if = {
+		limit = {
+			owner = {
+				has_country_modifier = law_advantages_5
+			}
+		}
+		add = 2
+	}
+	if = {
+		limit = {
+			owner = {
+				has_law = decentralized_administration_law
+			}
+		}
+		add = 1
+	}
+}
+
+country_size_ratio = { #to ask governorships sized with country size
+	value = country_gov_ratio_number
+	add = 1
+	if = {
+		limit = { 
+			num_of_cities >= 500
+		}
+		add = 1
+	}
+	if = {
+		limit = { 
+			num_of_cities >= 1000
+		}
+		add = 1
+	}
+	if = {
+		limit = { 
+			num_of_cities >= 2000
+		}
+		add = 1
+	}
+	if = {
+		limit = { 
+			num_of_cities >= 3000
 		}
 		add = 1
 	}

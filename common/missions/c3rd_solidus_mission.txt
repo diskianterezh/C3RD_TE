@@ -271,7 +271,7 @@
 	solidus_reform_2_b = {
 		icon = "task_economical"
 		requires = { solidus_reform_2_a } 
-
+		final = yes
 		allow = {
 			has_law = second_reform_law
 			NOR ={

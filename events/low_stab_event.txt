@@ -378,9 +378,13 @@ low_stab_event.3 = {
 			exists = governor
 			governor = {
 				is_disloyal = yes
+				is_head_of_family = no
 				NOT = {
 					has_character_modifier = major_influence_aristocrat
 				}
+			}
+			NOT = {
+				has_variable = governorship_owner
 			}
 		}
 	}
@@ -399,9 +403,13 @@ low_stab_event.3 = {
 				exists = governor
 				governor = {
 					is_disloyal = yes
+					is_head_of_family = no
 					NOT = {
 						has_character_modifier = major_influence_aristocrat
 					}
+				}
+				NOT = {
+					has_variable = governorship_owner
 				}
 			}
 			governor = {
@@ -519,6 +527,11 @@ low_stab_event.4 = {
 				}
 			}
 			exists = governor
+			NOT = {has_variable = recently_gavaway}
+			governor = {
+				is_head_of_family = no
+				NOT = {has_character_modifier = major_influence_aristocrat}
+			}
 		}
 	}
 	weight_multiplier = {
@@ -547,6 +560,11 @@ low_stab_event.4 = {
 					}
 				}
 				exists = governor
+				NOT = {has_variable = recently_gavaway}
+				governor = {
+					is_head_of_family = no
+					NOT = {has_character_modifier = major_influence_aristocrat}
+				}
 			}
 			check_range_bounds = no
 			weight = {
@@ -565,6 +583,10 @@ low_stab_event.4 = {
 							}
 						}
 					}
+				}
+				modifier = {
+					factor = 0.1
+					has_variable = governorship_owner
 				}
 			}
 			save_scope_as = independent_governorship
@@ -591,6 +613,23 @@ low_stab_event.4 = {
 				factor = 2
 				stability < 15
 			}
+		}
+		if = {
+			limit = {
+				has_country_modifier = solidus_introduced
+				scope:independent_governorship = {
+					has_variable = governorship_owner
+					var:governorship_owner = {
+						is_ruler = no
+						NOT = {this = scope:independent_governorship.governor}
+					}
+				}
+			}
+			add_tyranny = 2
+			var:governorship_owner = {
+				add_loyalty = governorship_lost_collapse
+			}
+
 		}
 		hidden_effect = {
 			scope:independent_governorship_province = {
@@ -1795,5 +1834,158 @@ low_stab_event.11 = {
 		}
 		add_tyranny = 5
 		add_stability = 2
+	}
+}
+
+
+low_stab_event.12 = {
+	#governors ask for country control
+	type = country_event
+	title = "low_stab_event.12.t"
+	desc = "low_stab_event.12.desc"
+	left_portrait = current_ruler
+	right_portrait = scope:tyranny_character
+	picture = senator_conversing
+	trigger = {
+		has_land = yes
+		has_country_modifier = internal_collapse
+		has_country_modifier = solidus_introduced
+		NOR = {
+			stability >= 25
+			has_variable = recent_governorship_givaway
+		}
+		current_ruler = {save_temporary_scope_as = owner_tmp_check}
+		any_governorships = {
+			exists = governor
+			governor = {
+				NOT = {
+					family = root.current_ruler.family
+				}
+			}
+			NOT = {has_variable = governorship_owner}
+			region_control_value_char > 20 #ruler have 20% holdings
+		}
+	}
+	weight_multiplier = {
+		modifier = {
+			factor = 1.5
+			num_of_cities >= 1000
+		}
+		modifier = {
+			factor = 1.5
+			num_of_cities >= 2000
+		}
+		modifier = {
+			factor = 1.5
+			num_of_cities >= 3000
+		}
+		modifier = {
+			factor = 5
+			NOT = {
+				any_character = {
+					has_character_modifier = major_influence_aristocrat
+				}
+			}
+		}
+	}
+	immediate = {
+		set_variable = {
+			name = recent_governorship_givaway
+			days = 365
+		}
+		current_ruler = {
+			save_scope_as = owner_tmp_check
+		}
+		ordered_governorships = {
+			limit = {
+				exists = governor
+				governor = {
+					NOT = {
+						family = root.current_ruler.family
+					}
+				}
+				NOT = {has_variable = governorship_owner}
+				region_control_value_char > 20 #ruler have 20% holdings
+			}
+			max = country_size_ratio
+			add_to_list = givaway_govships
+		}
+	}
+	option = {#givaway govs
+		name = low_stab_event.12.a
+		custom_tooltip = low_stab_event.12.a.tt1
+		every_governorships = {
+			limit = {
+				is_in_list = givaway_govships
+			}
+			save_scope_as = tmp_loc_govship
+			custom_tooltip = low_stab_event.12.a.tt2
+			hidden_effect = {
+				set_variable = {
+					name = recently_gavaway
+					days = 365
+				}
+				every_governorship_state = {
+					every_state_province = {
+						limit = {
+							exists = holding_owner
+							holding_owner = {
+								this = root.current_ruler
+							}
+						}
+						root.current_ruler = {
+							remove_holding = prev
+						}
+						governor = {
+							add_holding = prev
+						}
+					}
+				}
+			}
+		}
+		add_stability = 4
+	}
+	option = {#nope
+		name = low_stab_event.11.b
+		custom_tooltip = low_stab_event.11.b.tt1
+		add_tyranny = 8
+		every_governorships = {
+			limit = {
+				is_in_list = givaway_govships
+			}
+			governor = {
+				add_loyalty = medium_requests_denied
+			}
+		}
+		if = {
+			limit = {
+				num_of_cities <= 1000
+			}
+			add_stability = -1
+		}
+		else_if = {
+			limit = {
+				num_of_cities <= 2000
+			}
+			add_stability = -2
+		}
+		else_if = {
+			limit = {
+				num_of_cities <= 3000
+			}
+			add_stability = -3
+		}
+		else = {
+			add_stability = -5
+		}
+	}
+
+	after = {
+		every_governorships = {
+			limit = {
+				is_in_list = givaway_govships
+			}
+			remove_from_list = givaway_govships
+		}
 	}
 }

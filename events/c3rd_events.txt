@@ -531,6 +531,10 @@ c3rd_events.5 = {#general intervention : provoke military crisis where there is 
             is_republic = yes
         }
         modifier = {
+            factor = 0.2
+            has_law = constantine_reform_law
+        }
+        modifier = {
             factor = 2
             has_country_modifier = political_unstability
         }

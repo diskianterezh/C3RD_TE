@@ -219,6 +219,7 @@
  political_intervention4:0 "Political intervention"
  holding_protected:0 "Holdings Protected"
  inspired_disloyalty_other_2:0 "Plotting with general"
+ governorship_lost_collapse:0 "Properties ceded to a governor"
 
  #character modifiers
  king_maker:0 "Kingmaker"
@@ -268,6 +269,9 @@
  scheme_care_of_relatives_effect_tt:1 "[SCOPE.GetRootScope.GetCharacter.GetName] Will share his wealth with his family."
  scheme_care_of_relatives:1 "Taking care of the Family"
  scheme_care_of_relatives_desc:0 "This character is using his vast wealth to enrich his family"
+ scheme_adopt_governor_effect_tt:0 "[SCOPE.GetRootScope.GetCharacter.GetName] will try to adopt a Governor in his family"
+ scheme_adopt_governor:0 "Adopt Governor"
+ scheme_adopt_governor_desc:0 "This character is trying to adopt a minor character governor with an interesting governorship into his family"
 
  #alerts
 
@@ -606,6 +610,15 @@ low_stab_event.11.b.tt2:0 "Members of [tyranny_character.GetName]'s family will 
 low_stab_event.11.b.tt3:0 "#R All rebel governorates will suffer severe modifiers#!"
 low_stab_event.11.c:0 "Let's ask [king_maker_tyranny.GetName] to intervene"
 low_stab_event.11.c.tt1:0 "#G This is possible because [king_maker_tyranny.GetName] is a loyal king maker#!"
+
+low_stab_event.12.t:0 "Every crisis is an opportunity"
+low_stab_event.12.desc:0 "While our ruler is busy in the capital keeping in place an empire that is crumbling everywhere, in the provinces everyone is trying to get their hands on the rich lands left unguarded. Our ruler's private estates are a particular target: how can we justify, when the country is on the brink of implosion, such a profusion of private estates, the exploitation of which feeds directly into [ROOT.GetCountry.GetRuler.GetName]'s personal expenses? \n\nNo mention is made of the fact that everyone else is doing the same, but it's clear that this is an offensive aimed at the interests of the leader in lands not yet completely controlled by one faction..."
+low_stab_event.12.a:0 "Give up this land, for [ROOT.GetCountry.GetName]"
+low_stab_event.12.a.tt1:0 "Your ruler will give up his holdings completely in the governorates of :"
+low_stab_event.12.a.tt2:0 "\n[tmp_loc_govship.GetName]"
+low_stab_event.12.b:0 "These lands are just fine as they are!"
+low_stab_event.12.b.tt1:0 "Nothing will change"
+
 
  c3rd_events.1.t:0 "Bureaucratic mess"
  c3rd_events.1.desc:0 "Our bureaucratic system is entangled in its diplomatic relations, and is no longer able to keep up with the affairs of the various countries that form the empire. Some subjects have adapted, however, and [chosen_subject.GetName] in particular has naturally filled the administrative gaps with his own administrators. In their own words, this will 'considerably lighten the administrative overload'..."
@@ -1358,7 +1371,7 @@ low_stab_event.11.c.tt1:0 "#G This is possible because [king_maker_tyranny.GetNa
  c3rd_governorship_owner_regain_control_tt1:0 "You need an ownership of less than #R 25% #! to regain control of the governorship\nControl under #G 10% #! give a larger chance to regain control without trouble"
  c3rd_governorship_owner_regain_control_tt2:0 "An ownership below #G 10% #! give a larger chance to regain control without trouble"
  c3rd_governorship_owner_regain_control_tt3:0 "#T Attempt to regain control of the governorship #!"
- c3rd_governorship_owner_regain_control_tt3_2:0 "#G As the owner is the leader, control can be regained at any time #!"
+ c3rd_governorship_owner_regain_control_tt3_2:0 "#G As the owner is the ruler, control can be regained at any time #!"
  c3rd_governorship_owner_regain_control_tt3_3:0 "#T As the current governor is related to the ruler, who still owns a large part of the governorate, there is a risk that he will repossess it later!#!"
  c3rd_governorship_owner_regain_control_tt4:0 "You already tried to regain control on this Governorship recently"
  c3rd_governorship_owner_regain_control_tt5:0 "The owner is no longer in the country. His control over the land will pass to his family, or disappear naturally."
@@ -1569,6 +1582,15 @@ low_stab_event.11.c.tt1:0 "#G This is possible because [king_maker_tyranny.GetNa
  c3rd_other_events.104.a.tt1:0 "The lands in the province of [duchy_capital.GetState.GetName] were grouped into a Duchy"
  c3rd_other_events.104.a.tt2:0 "This happened because you have the 'Total Autonomy' law'"
  c3rd_other_events.104.a.tt3:0 "This happened because the region is owned by [duchy_creator.GetName]"
+
+ c3rd_other_events.105.t:0 "A chaotic succession"
+ c3rd_other_events.105.desc:0 "After the death of the previous head of the family, [main_heir_landowner.GetState.GetName] succeeded him at the head of a powerful accumulation of properties in our country. The succession to this powerful position was not without its problems, however, and [main_heir_landowner.GetState.GetName] found himself challenged within his own family by [second_heir_landowner.GetState.GetName], [third_heir_landowner.GetState.GetName] and [fourth_heir_landowner.GetState.GetName], who each claimed their share of the inheritance. \n\nThey all appealed to the authority of the state, which was undoubtedly able to decide in their favour."
+ c3rd_other_events.105.a:0 "Let's confirm [main_heir_landowner.GetState.GetName]'s position"
+ c3rd_other_events.105.a.tt1:0 "You will not be involved in the succession"
+ c3rd_other_events.105.b:0 "Share equally"
+ c3rd_other_events.105.b.tt1:0 "The properties will be divided between the contenders"
+ c3rd_other_events.105.c:0 "Share equally, including the state !"
+ c3rd_other_events.105.c.tt1:0 "The properties will be divided between the contenders, and some will be removed"
 
  c3rd_other_events.110.t:0 "Rebellion in high places"
  c3rd_other_events.110.desc:0 "Power is a fickle thing, and very often depends on the goodwill of elites and the balance of power. \nIn any case, this balance is not in our favor, as [first_inter_char.GetName] has launched a full-scale political offensive against our government. Supported by [second_inter_char.GetName] and [third_inter_char.GetName], he is seeking to bring about a radical change commensurate with his discontent.\n\n Such a political crisis could shake the foundations of our empire, if we don't resolve it quickly... "
