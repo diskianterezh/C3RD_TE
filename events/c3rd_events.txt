@@ -485,6 +485,7 @@ c3rd_events.5 = {#general intervention : provoke military crisis where there is 
             AND = {
                 is_monarchy = yes
                 legitimacy < 25
+                has_law = basic_administrative_law
             }
             AND = {
                 is_republic = yes
@@ -509,6 +510,7 @@ c3rd_events.5 = {#general intervention : provoke military crisis where there is 
         modifier = {
             factor = 2
             is_monarchy = yes
+            has_law = basic_administrative_law
             legitimacy < 0
         }
         modifier = {
@@ -605,9 +607,20 @@ c3rd_events.5 = {#general intervention : provoke military crisis where there is 
                 }
             }
         }
-        set_variable = {
-            name = recent_volontary_general
-            days = 1100 #3years
+        if = {
+            limit = {
+                has_law = basic_administrative_law
+            }
+            set_variable = {
+                name = recent_volontary_general
+                days = 1100 #3years
+            }
+        }
+        else = {
+            set_variable = {
+                name = recent_volontary_general
+                days = 3650 #10years
+            }
         }
 
     }
@@ -637,12 +650,19 @@ c3rd_events.5 = {#general intervention : provoke military crisis where there is 
             }
             add_stability = 15
         }
+        else_if = {
+            limit = {
+                has_law = constantine_reform_law
+            }
+            add_stability = 3
+        }
         else = {
             add_stability = 6
         }
         if = {
             limit = {
                 is_monarchy = yes
+                has_law = basic_administrative_law
             }
             add_legitimacy = 6
         }
@@ -703,7 +723,7 @@ c3rd_events.5 = {#general intervention : provoke military crisis where there is 
                         has_country_modifier = internal_collapse
                     }
                     modifier = {
-                        add = 50
+                        add = 30
                         OR = {
                             has_law = constantine_reform_law
                             has_law = decentralized_administration_law
@@ -2258,6 +2278,81 @@ c3rd_events.12 = { #reunification from mother
         name = c3rd_events.12.a
         custom_tooltip = c3rd_events.12.a.tt1
         scope:reunification = {
+            every_subject = {
+                save_scope_as = transfer_subject
+                if = {
+                    limit = {
+                        is_subject_type = client_state
+                    }
+                    scope:reunification = {release_subject = scope:transfer_subject}
+                    root = {
+                        make_subject = {
+                            target = scope:transfer_subject
+                            type = client_state
+                        }
+                    }
+                }
+                else_if = {
+                    limit = {
+                        is_subject_type = satrapy
+                    }
+                    scope:reunification = {release_subject = scope:transfer_subject}
+                    root = {
+                        make_subject = {
+                            target = scope:transfer_subject
+                            type = satrapy
+                        }
+                    }
+                }
+                else_if = {
+                    limit = {
+                        is_subject_type = feudatory
+                    }
+                    scope:reunification = {release_subject = scope:transfer_subject}
+                    root = {
+                        make_subject = {
+                            target = scope:transfer_subject
+                            type = feudatory
+                        }
+                    }
+                }
+                else_if = {
+                    limit = {
+                        is_subject_type = subject_league_city_state
+                    }
+                    scope:reunification = {release_subject = scope:transfer_subject}
+                    root = {
+                        make_subject = {
+                            target = scope:transfer_subject
+                            type = subject_league_city_state
+                        }
+                    }
+                }
+                else_if = {
+                    limit = {
+                        is_subject_type = autonomous_domain
+                    }
+                    scope:reunification = {release_subject = scope:transfer_subject}
+                    root = {
+                        make_subject = {
+                            target = scope:transfer_subject
+                            type = autonomous_domain
+                        }
+                    }
+                }
+                else_if = {
+                    limit = {
+                        is_subject_type = duchy_subject
+                    }
+                    scope:reunification = {release_subject = scope:transfer_subject}
+                    root = {
+                        make_subject = {
+                            target = scope:transfer_subject
+                            type = duchy_subject
+                        }
+                    }
+                }
+            }
             every_character = {
                 remove_all_positions = yes
                 move_country = root
@@ -5818,110 +5913,8 @@ c3rd_events.100 = { #debug event
 
     left_portrait = current_ruler
 	trigger = {
-		OR = {
-			any_governorships = {
-				has_variable = governorship_owner
-				var:governorship_owner = {
-					is_alive = yes
-					employer = root
-				}
-			}
-			any_subject = {
-				is_subject_type = autonomous_domain
-				has_variable = owner_from_another_empire
-			}
-			any_character = {
-				has_variable = country_ownership
-			}
-
-		}
 	}
 	immediate = {
-        random_character = {
-            limit = {
-                save_temporary_scope_as = tmp_char
-                employer = {
-                    any_governorships = {
-                        has_variable = governorship_owner
-                        var:governorship_owner = scope:tmp_char
-                        NOT = {
-                            is_in_list = family_domain_govs
-                        }
-                        governor = {
-                            is_ruler = no
-                        }
-                    }
-                }
-            }
-            save_scope_as = asked_landowner
-        }
-		while = {
-            count = country_gov_ratio_number
-            random_governorships = {
-                limit = {
-                    has_variable = governorship_owner
-                    var:governorship_owner = scope:asked_landowner
-                    NOT = {
-                        is_in_list = family_domain_govs
-                    }
-                    governor = {
-                        is_ruler = no
-                    }
-                }
-                weight = {
-                    modifier = {
-                        factor = 10
-                        any_governorship_state = {
-                            any_state_province = {
-                                any_neighbor_province = {
-                                    governorship = {
-                                        is_in_list = family_domain_govs
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    modifier = {
-                        factor = 10
-                        any_governorship_state = {
-                            any_state_province = {
-                                any_neighbor_province = {
-                                    owner = {
-                                        has_variable = owner_from_another_empire
-                                        var:owner_from_another_empire = scope:asked_landowner
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    modifier = {
-                        factor = 3
-                        any_governorship_state = {
-                            any_state_province = {
-                                any_neighbor_province = {
-                                    NOT = {
-                                        owner = root
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    modifier = {
-                        factor = 0.1
-                        any_governorship_state = {
-                            any_state_province = {
-                                any_neighbor_province = {
-                                    governor = {
-                                        is_ruler = yes
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-                add_to_list = family_domain_govs
-            }
-        }
 	}
 
 
@@ -5929,12 +5922,12 @@ c3rd_events.100 = { #debug event
         name = c3rd_events.100.a
         
         
-        every_governorships = {
+        every_character = {
             limit = {
-                is_in_list = family_domain_govs
+                has_variable = country_ownership
             }
-            save_scope_as = gov_tooltip
-            custom_tooltip = c3rd_other_events.86.a.tt2
+            save_scope_as = char_tooltip
+            custom_tooltip = c3rd_events.100.a.tt1
         }
     }
 }

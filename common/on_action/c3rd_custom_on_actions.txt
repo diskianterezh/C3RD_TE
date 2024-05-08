@@ -412,6 +412,131 @@ c3rd_other_events_monthly_pulse = { #check if events can happen
 				days = 5
 			}
 		}
+		every_character = {
+			limit = {
+				has_variable = head_intent_consolidate
+				wealth >= 1000
+			}
+			save_scope_as = consolidating_head
+			random_list = {
+				10 = {
+				}
+				1 = {
+					modifier = {
+						add = 1
+						wealth >= 5000
+					}
+					modifier = {
+						add = 1
+						employer = {
+							OR = {
+								has_country_modifier = law_advantages_1
+								has_country_modifier = law_advantages_2
+								has_country_modifier = law_advantages_3
+							}
+						}
+					}
+					modifier = {
+						add = 2
+						employer = {
+							OR = {
+								has_country_modifier = law_advantages_4
+								has_country_modifier = law_advantages_5
+							}
+						}
+					}
+					employer = {
+						random_owned_province = {
+							limit = {
+								NOT = {
+									exists = holding_owner
+								}
+							}
+							weight = {
+								modifier = {
+									factor = 10
+									governorship = {
+										NOT = {has_variable = governorship_owner}
+									}
+								}
+							}
+							scope:consolidating_head = {
+								add_holding = prev
+								add_gold = -250
+							}
+						}
+					}
+				}
+			}
+		}
+		every_character = {
+			limit = {
+				has_variable = head_intent_disloyal
+				wealth >= 2000
+			}
+			save_scope_as = disloyal_head
+			random_list = {
+				15 = {
+				}
+				1 = {
+					modifier = {
+						add = 1
+						wealth >= 5000
+					}
+					modifier = {
+						add = 1
+						employer = {
+							OR = {
+								has_country_modifier = law_advantages_1
+								has_country_modifier = law_advantages_2
+							}
+						}
+					}
+					modifier = {
+						add = 2
+						employer = {
+							OR = {
+								has_country_modifier = law_advantages_3
+								has_country_modifier = law_advantages_4
+							}
+						}
+					}
+					modifier = {
+						add = 3
+						employer = {
+							has_country_modifier = law_advantages_5
+						}
+					}
+					employer = {
+						random_character = {
+							limit = {
+								family = scope:disloyal_head.family
+								NOT = {this = scope:disloyal_head}
+								power_base > 0
+							}
+							weight = {
+								modifier = {
+									factor = 10
+									power_base >= 5
+								}
+								modifier = {
+									factor = 0.1
+									loyalty < 33
+								}
+								modifier = {
+									factor = 0.2
+									loyalty < 10
+								}
+							}
+							add_loyalty = inspired_disloyalty_other_3
+						}
+					}
+					scope:disloyal_head = {
+						add_gold = -500
+					}
+				}
+			}
+		}
 	}
 	random_events = {
 		500 = 0
@@ -437,6 +562,8 @@ c3rd_other_events_monthly_pulse = { #check if events can happen
 		8 = c3rd_other_events.92 #governor holding clash
 		8 = c3rd_other_events.93 #governor holding clash ruler
 		2 = c3rd_other_events.101 #ruler reform constantine
+		30 = c3rd_other_events.106 #coveted governor
+		15 = c3rd_other_events.107 #holdings clash with heads
 		9 = c3rd_other_events.110 #intervention *5 toward civil war
 		
 	}
@@ -450,21 +577,59 @@ c3rd_culture_noble_assimilation = {
 				has_pop_type_right = nobles
 			}
 			save_scope_as = that_noble_culture
-			root = {
-				every_owned_province = {
-					limit = {
-						dominant_province_culture = scope:that_noble_culture.culture
-						any_pops_in_province = {
-							pop_culture = scope:that_noble_culture.culture
+			random_list = {
+				1 = {
+					modifier = {
+						add = 2
+						country_culture_pop_count >= 1000
+					}
+					modifier = {
+						add = 3
+						country_culture_pop_count >= 2000
+					}
+					modifier = {
+						add = 5
+						country_culture_pop_count >= 3000
+					}
+					modifier = {
+						add = 15
+						country_culture_pop_count >= 5000
+					}
+				}
+				3 = {
+					modifier = {
+						add = 5
+						country_culture_pop_count <= 20
+					}
+					modifier = {
+						add = 5
+						country_culture_pop_count <= 50
+					}
+					modifier = {
+						add = 3
+						country_culture_pop_count <= 200
+					}
+					modifier = {
+						add = 2
+						country_culture_pop_count <= 500
+					}
+					root = {
+						every_owned_province = {
+							limit = {
+								dominant_province_culture = scope:that_noble_culture.culture
+								any_pops_in_province = {
+									pop_culture = scope:that_noble_culture.culture
+								}
+							}
+							random_pops_in_province = {
+								limit = {
+									pop_culture = root.culture 
+								}
+								set_pop_culture = scope:that_noble_culture.culture
+							}
+		
 						}
 					}
-					random_pops_in_province = {
-						limit = {
-							pop_culture = root.culture 
-						}
-						set_pop_culture = scope:that_noble_culture.culture
-					}
-
 				}
 			}
 		}
@@ -1340,62 +1505,65 @@ c3rd_holding_control = { #governor gain control of region
 					name = parsed_govship
 					days = 10
 				}
-			}
-			random_list = {
-				9 = {
-					modifier = {
-						add = 2
-						num_of_cities <= 200
-					}
-				}
-				1 = {
-					modifier = {
-						add = 1
-						stability <= 50
-					}
-					modifier = {
-						add = 1
-						has_law = decentralized_administration_law
-					}
-					modifier = {
-						add = 1
-						has_country_modifier = solidus_introduced
-					}
-					modifier = {
-						add = 1
-						scope:autonomy_governorship = {
-							region_control_value >= 70
+				root = {
+					random_list = {
+						9 = {
+							modifier = {
+								add = 2
+								num_of_cities <= 200
+							}
+						}
+						1 = {
+							modifier = {
+								add = 1
+								stability <= 50
+							}
+							modifier = {
+								add = 1
+								has_law = decentralized_administration_law
+							}
+							modifier = {
+								add = 1
+								has_country_modifier = solidus_introduced
+							}
+							modifier = {
+								add = 1
+								scope:autonomy_governorship = {
+									region_control_value >= 70
+								}
+							}
+							modifier = {
+								add = 1
+								scope:autonomy_governorship = {
+									region_control_value >= 80
+								}
+							}
+							modifier = {
+								add = 2
+								scope:autonomy_governorship = {
+									region_control_value >= 90
+								}
+							}
+							modifier = {
+								add = 1
+								num_of_cities >= 500
+							}
+							modifier = {
+								add = 1
+								num_of_cities >= 1000
+							}
+							modifier = {
+								add = 1
+								num_of_cities >= 2000
+							}
+							trigger_event = {
+								id = c3rd_other_events.80
+								days = { 30 360 }
+							}
+							
 						}
 					}
-					modifier = {
-						add = 1
-						scope:autonomy_governorship = {
-							region_control_value >= 80
-						}
-					}
-					modifier = {
-						add = 2
-						scope:autonomy_governorship = {
-							region_control_value >= 90
-						}
-					}
-					modifier = {
-						add = 1
-						num_of_cities >= 500
-					}
-					modifier = {
-						add = 1
-						num_of_cities >= 1000
-					}
-					modifier = {
-						add = 1
-						num_of_cities >= 2000
-					}
-					trigger_event = {
-						id = c3rd_other_events.80
-						days = { 30 360 }
-					}
-					
+
 				}
 			}
 		}
@@ -1438,6 +1606,28 @@ c3rd_holding_clear = {
 				}
 				var:governorship_owner = {
 					family.head_of_family = {
+						save_scope_as = ownership_target
+					}
+				}
+				remove_variable = governorship_owner
+				set_variable = {
+					name = governorship_owner
+					value = scope:ownership_target
+				}
+				calculate_the_gov_ownership = yes
+			}
+			else_if = {
+				limit = {
+					var:governorship_owner = {	
+						is_head_of_family = yes
+						exists = next_in_family
+						next_in_family = {
+							employer = root
+						}
+					}
+				}
+				var:governorship_owner = {
+					next_in_family = {
 						save_scope_as = ownership_target
 					}
 				}
@@ -1494,6 +1684,7 @@ c3rd_country_control_check = {
 						}
 					}
 					has_variable = country_ownership
+					is_head_of_family = yes
 				}
 			}
 			recalculate_ownership_char = yes
@@ -2363,4 +2554,180 @@ c3rd_barbarian_occupying_land = { #natural expansion of tribals on lands VERY SP
 		}
 	}
 
+}
+
+
+c3rd_head_of_family_shenanigans = {
+	trigger = {
+		current_date > 750.1.1
+		has_land = yes
+		num_of_cities >= 1
+		NOT = {
+			tag = BAR
+		}
+		has_country_modifier = solidus_introduced
+	}
+
+	effect = {
+		every_character = {
+			limit = {
+				is_head_of_family = yes
+				is_ruler = no
+			}
+			random_list = {  #roll the intent for head of family
+				20 = {
+					#nothing
+					modifier = {
+						factor = 2
+						has_character_modifier = major_influence_aristocrat
+						root = {
+							any_character = {
+								count = 1
+								has_character_modifier = major_influence_aristocrat
+							}
+						}
+					}
+					modifier = {
+						factor = 0.5
+						root = {
+							current_ruler = {
+								has_character_modifier = major_influence_aristocrat
+							}
+						}
+					}
+					modifier = {
+						factor = 1.5
+						root = {
+							has_law = basic_administrative_law
+						}
+					}
+				}
+				10 = {
+					#consolidate
+					modifier = {
+						factor = 2
+						root = {
+							NOT = {has_law = basic_administrative_law}
+						}
+					}
+					modifier = {
+						factor = 1.5
+						has_character_modifier = major_influence_aristocrat
+					}
+					modifier = {
+						factor = 3
+						save_temporary_scope_as = headtmpcheck
+						root = {
+							NOT = {
+								any_governorships = {
+									has_variable = governorship_owner
+									var:governorship_owner = scope:headtmpcheck
+								}
+							}
+						}
+					}
+					modifier = {
+						factor = 1.2
+						root = {
+							has_country_modifier = law_advantages_1
+						}
+					}
+					modifier = {
+						factor = 1.5
+						root = {
+							has_country_modifier = law_advantages_2
+						}
+					}
+					modifier = {
+						factor = 2
+						root = {
+							has_country_modifier = law_advantages_3
+						}
+					}
+					modifier = {
+						factor = 2.5
+						root = {
+							has_country_modifier = law_advantages_4
+						}
+					}
+					modifier = {
+						factor = 3
+						root = {
+							has_country_modifier = law_advantages_5
+						}
+					}
+					set_variable = {
+						name = head_intent_consolidate
+						days = 350
+					}
+				}
+				10 = {
+					#disloyal
+					modifier = {
+						factor = 0.1
+						loyalty >= 60
+					}
+					modifier = {
+						factor = 4
+						loyalty <= 33
+					}
+					modifier = {
+						factor = 1.1
+						root = {
+							has_country_modifier = law_advantages_3
+						}
+					}
+					modifier = {
+						factor = 1.3
+						root = {
+							has_country_modifier = law_advantages_4
+						}
+					}
+					modifier = {
+						factor = 1.5
+						root = {
+							has_country_modifier = law_advantages_5
+						}
+					}
+					modifier = {
+						factor = 2
+						is_rival = root.current_ruler
+					}
+					modifier = {
+						factor = 1.5
+						has_variable = country_ownership
+						var:country_ownership >= 40
+					}
+					modifier = {
+						factor = 1.5
+						has_variable = country_ownership
+						var:country_ownership >= 60
+					}
+					set_variable = {
+						name = head_intent_disloyal
+						days = 350
+					}
+				}
+				5 = { 
+					#loyal
+					modifier = {
+						factor = 4
+						loyalty >= 75
+					}
+					modifier = {
+						factor = 0.1
+						loyalty <= 33
+					}
+					modifier = {
+						factor = 2
+						is_friend = root.current_ruler
+					}
+					set_variable = {
+						name = head_intent_loyal
+						days = 350
+					}
+				}
+			}
+		}
+	}
 }

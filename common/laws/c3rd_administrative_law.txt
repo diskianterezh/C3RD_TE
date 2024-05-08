@@ -42,7 +42,8 @@
 		}
 		modifier = {
 			general_loyalty = -5
-			governor_loyalty = 5
+			governor_loyalty = 2
+			army_maintenance_cost = -0.05
 		}
 	}
 	

@@ -1,0 +1,282 @@
+﻿namespace = scheme
+# Each scheme requires the scope scheme_target to be set in the immediate, prior to adding the scheme.
+# Scheme title and description are associated with the ID, and stored in custom localization
+#
+
+
+
+scheme.12 = {
+	type = minor_country_event
+	title = "scheme.12.t"
+	desc = "scheme.12.desc"
+	
+	picture = revolt
+	
+	left_portrait = scope:ongoing_scheme_target
+	
+	interface_lock = no
+	
+	immediate = {
+		random_country = {
+			limit = {
+				NOT = {
+					this = root
+				}
+			}
+			weight = {
+				modifier = {
+					factor = 20
+					in_diplomatic_range = root
+				}
+			}
+			save_scope_as = escape_target
+		}
+		random_country_state = {
+			save_scope_as = target_state
+		}
+		save_scope_as = origin_country
+		if = {
+			limit = {
+				scope:ongoing_scheme_target = {	
+					is_head_of_family = no
+					exists = family.head_of_family
+					family.head_of_family = {
+						employer = root
+					}
+				}
+			}
+			var:governorship_owner = {
+				family.head_of_family = {
+					save_scope_as = ownership_target
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				scope:ongoing_scheme_target = {	
+					is_head_of_family = yes
+					exists = next_in_family
+					next_in_family = {
+						employer = root
+					}
+				}
+			}
+			scope:ongoing_scheme_target = {
+				next_in_family = {
+					save_scope_as = ownership_target
+				}
+			}
+		}
+		every_governorships = {
+			limit = {
+				has_variable = governorship_owner
+				var:governorship_owner = scope:ongoing_scheme_target
+			}
+			if = {
+				limit = {
+					exists = scope:ownership_target
+				}
+				remove_variable = governorship_owner
+				set_variable = {
+					name = governorship_owner
+					value = scope:ownership_target
+				}
+				calculate_the_gov_ownership = yes
+			}
+			else = {
+				remove_variable = governorship_owner
+			}
+		}
+		scope:ongoing_scheme_target = {
+			if = {
+				limit = {
+					exists = scope:ownership_target
+				}
+				while = {
+					limit = { num_holdings_owned > 0 }
+					random_holdings = { save_scope_as = holding_transfer }
+					remove_holding = scope:holding_transfer
+					scope:ownership_target = { add_holding = scope:holding_transfer }
+				}
+			}
+			remove_all_positions = yes
+			move_country = scope:escape_target
+			set_as_minor_character = this
+		}
+		if = {
+			limit = {
+				exists = scope:ownership_target
+			}
+			scope:ownership_target = {
+				recalculate_ownership_char = yes
+			}
+		}
+	}
+	
+	option = {
+		name = "scheme.12.a"
+		custom_tooltip = scheme.12.at
+		hidden_effect = {
+			scope:target_state = {
+				every_state_province = {
+					add_claim = scope:escape_target
+				}
+			}
+			scope:escape_target = {
+				trigger_event = {
+					id = scheme.13
+				}
+			}
+		}
+	}
+	
+	option = {
+		name = "scheme.12.b"
+		custom_tooltip = silver_tongued_tooltip
+		trigger = {
+			current_ruler = {
+				has_trait = silver_tongued
+			}
+		}
+		highlight = yes
+		add_stability = -5
+	}
+	
+}
+
+
+scheme.16 = {
+	type = minor_country_event
+	title = "scheme.16.t"
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = scheme.16.desc_1
+				trigger = { scope:target.var:notable_recruit = 1 }
+			}
+			triggered_desc = {
+				desc = scheme.16.desc_2
+				trigger = { scope:target.var:notable_recruit = 2 }
+			}
+			triggered_desc = {
+				desc = scheme.16.desc_3
+				trigger = { scope:target.var:notable_recruit = 3 }
+			}
+			triggered_desc = {
+				desc = scheme.16.desc_4
+				trigger = { scope:target.var:notable_recruit = 4 }
+			}
+			triggered_desc = {
+				desc = scheme.16.desc_5
+				trigger = { always = yes }
+			}
+		}
+		desc = scheme.16.desc
+	}
+	picture = senator_conversing
+	left_portrait = scope:target
+	
+	interface_lock = no
+	immediate = {
+		if = {
+			limit = {
+				scope:target = {	
+					is_head_of_family = no
+					exists = family.head_of_family
+					family.head_of_family = {
+						employer = root
+					}
+				}
+			}
+			var:governorship_owner = {
+				family.head_of_family = {
+					save_scope_as = ownership_target
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				scope:target = {	
+					is_head_of_family = yes
+					exists = next_in_family
+					next_in_family = {
+						employer = root
+					}
+				}
+			}
+			scope:target = {
+				next_in_family = {
+					save_scope_as = ownership_target
+				}
+			}
+		}
+		
+	}
+	
+	option = {
+		name = "scheme.16.a"
+		hidden_effect = {
+			every_governorships = {
+				limit = {
+					has_variable = governorship_owner
+					var:governorship_owner = scope:target
+				}
+				if = {
+					limit = {
+						exists = scope:ownership_target
+					}
+					remove_variable = governorship_owner
+					set_variable = {
+						name = governorship_owner
+						value = scope:ownership_target
+					}
+					calculate_the_gov_ownership = yes
+				}
+				else = {
+					remove_variable = governorship_owner
+				}
+			}
+		}
+		show_as_tooltip = {
+			add_opinion = { modifier = recruited_character target = scope:actor }
+			scope:target = {
+				if = {
+					limit = {
+						exists = scope:ownership_target
+					}
+					while = {
+						limit = { num_holdings_owned > 0 }
+						random_holdings = { save_scope_as = holding_transfer }
+						remove_holding = scope:holding_transfer
+						scope:ownership_target = { add_holding = scope:holding_transfer }
+					}
+				}
+				move_country = scope:actor
+				if = {
+					limit = {
+						is_married = yes
+						spouse.employer = scope:actor
+					}
+					spouse = { move_country = scope:actor }
+				}
+				if = {
+					limit = {
+						num_of_children > 0
+						any_child = {
+							is_alive = yes
+							employer = scope:actor
+						}
+					}
+					every_child = {
+						limit = {
+							is_alive = yes
+							employer = scope:actor
+						}
+						move_country = scope:actor
+					}
+				}
+			}
+		}
+		scope:target = { remove_variable = notable_recruit }
+	}
+}

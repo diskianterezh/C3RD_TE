@@ -3623,15 +3623,6 @@ c3rd_other_events.32 = { # noble revoked culture revolts
                     set_owned_by = scope:new_country_vassal
                 }
             }
-            every_owned_province = {
-                limit = {
-                    dominant_province_culture = scope:revolting_noble_culture.culture
-                    NOT = {
-                        this.state = root.capital_scope.state
-                    }
-                }
-                set_owned_by = scope:new_country_vassal
-            }
         }
     }
 
@@ -3663,6 +3654,15 @@ c3rd_other_events.32 = { # noble revoked culture revolts
         }
 
         hidden_effect = {
+            every_owned_province = {
+                limit = {
+                    dominant_province_culture = scope:revolting_noble_culture.culture
+                    NOT = {
+                        this.state = root.capital_scope.state
+                    }
+                }
+                set_owned_by = scope:new_country_vassal
+            }
             every_governorships = {
                 limit = {
                     any_governorship_state = {
@@ -4760,7 +4760,10 @@ c3rd_other_events.60 = { #filthy barbarians ransacking our lands
                 random_governorships = {
                     limit = {
                         OR = {
-                            has_variable = governorship_owner
+                            AND = {
+                                has_variable = governorship_owner
+                                NOT = {var:governorship_owner = root.current_ruler}
+                            }
                             root = {has_law = decentralized_administration_law}
                         }
                         any_governorship_state = {
@@ -5777,7 +5780,7 @@ c3rd_other_events.80 = { #Notification of governorship taken by family
                     }
                     if = {
                         limit = { 
-                            country_region_control >= 25
+                            country_region_control >= 20
                             NOT = {
                                 has_character_modifier = major_influence_aristocrat
                             }
@@ -5790,7 +5793,7 @@ c3rd_other_events.80 = { #Notification of governorship taken by family
                     if = {
                         limit = { 
                             has_character_modifier = major_influence_aristocrat
-                            country_region_control < 20
+                            country_region_control < 15
                         }
                         remove_character_modifier = major_influence_aristocrat
                     }
@@ -7076,7 +7079,7 @@ c3rd_other_events.85 = { #You chose your demands, then the landowner answer 5 da
         if = {
             limit = {
                 scope:target = {
-                    var:country_ownership >= 25
+                    var:country_ownership >= 20
                 }
             }
             change_variable = {
@@ -7087,7 +7090,7 @@ c3rd_other_events.85 = { #You chose your demands, then the landowner answer 5 da
         if = {
             limit = {
                 scope:target = {
-                    var:country_ownership >= 40
+                    var:country_ownership >= 35
                 }
             }
             change_variable = {
@@ -7098,7 +7101,7 @@ c3rd_other_events.85 = { #You chose your demands, then the landowner answer 5 da
         if = {
             limit = {
                 scope:target = {
-                    var:country_ownership >= 50
+                    var:country_ownership >= 45
                 }
             }
             change_variable = {
@@ -7109,7 +7112,7 @@ c3rd_other_events.85 = { #You chose your demands, then the landowner answer 5 da
         if = {
             limit = {
                 scope:target = {
-                    var:country_ownership >= 65
+                    var:country_ownership >= 60
                 }
             }
             change_variable = {
@@ -7120,7 +7123,7 @@ c3rd_other_events.85 = { #You chose your demands, then the landowner answer 5 da
         if = {
             limit = {
                 scope:target = {
-                    var:country_ownership >= 80
+                    var:country_ownership >= 75
                 }
             }
             change_variable = {
@@ -7417,6 +7420,16 @@ c3rd_other_events.85 = { #You chose your demands, then the landowner answer 5 da
                                 count < country_gov_ratio_number
                                 has_variable = governorship_owner
                                 var:governorship_owner = scope:target
+                            }
+                        }
+                        modifier = {
+                            factor = 2
+                            NOT = {
+                                any_subject = { {
+                                    is_subject_type = autonomous_domain
+                                    has_variable = owner_from_another_empire
+                                    var:owner_from_another_empire = scope:target
+                                }
                             }
                         }
                         set_variable = {
@@ -9543,8 +9556,11 @@ c3rd_other_events.92 = { #governor complain about excessive control of another c
                             var:governorship_owner = scope:gov_check_gov_owner2
                         }
                         var:governorship_owner = {
-                            is_rival = scope:gov_check_gov_owner2
-                            is_ruler = no
+                            NOR = {
+                                is_friend = scope:gov_check_gov_owner2
+                                family = scope:gov_check_gov_owner2.family
+                                is_ruler = yes #different event for ruler
+                            }
                         }
                     }
                 }
@@ -9601,6 +9617,7 @@ c3rd_other_events.92 = { #governor complain about excessive control of another c
                             NOR = {
                                 is_friend = scope:gov_check_gov_owner4
                                 family = scope:gov_check_gov_owner4.family
+                                is_ruler = yes #different event for ruler
                             }
                         }
                         has_variable = governorship_owner_ratio
@@ -10864,6 +10881,428 @@ c3rd_other_events.105 = { #heritage of big landowner
         }
         scope:main_heir_landowner = {
             add_loyalty = medium_requests_denied
+        }
+    }
+}
+
+
+c3rd_other_events.106 = { #Consolidate
+    type = country_event
+    title = "c3rd_other_events.106.t"
+    desc = "c3rd_other_events.106.desc"
+    left_portrait = current_ruler
+    left_portrait = scope:minor_owner
+    right_portrait = scope:first_head_pretender
+    right_portrait = scope:second_head_pretender
+
+    picture = senator_conversing
+
+    trigger = {
+        has_land = yes
+        is_tribal = no
+        has_civil_war = no
+        current_date >= 750.1.1
+        has_country_modifier = solidus_introduced
+        any_character = {
+            employer = root
+            is_minor_character = yes
+            save_temporary_scope_as = tmp_minor_owner
+            NOR = {
+                any_rival = {
+                    has_variable = head_intent_consolidate
+                }
+                has_variable = got_pretended_owner
+            }
+            root = {
+                any_governorships = {
+                    has_variable = governorship_owner
+                    var:governorship_owner = scope:tmp_minor_owner
+                }
+            }
+        }
+        any_character = {
+            count >= 2
+            is_head_of_family = yes
+            has_variable = head_intent_consolidate
+        }
+    }
+    weight_multiplier = {
+        modifier = {
+            factor = 2
+            any_character = {
+                count >= 3
+                employer = root
+                is_minor_character = yes
+                save_temporary_scope_as = tmp_minor_owner
+                NOR = {
+                    any_rival = {
+                        has_variable = head_intent_consolidate
+                    }
+                    has_variable = got_pretended_owner
+                }
+                root = {
+                    any_governorships = {
+                        has_variable = governorship_owner
+                        var:governorship_owner = scope:tmp_minor_owner
+                    }
+                }
+            }
+        }
+        modifier = {
+            factor = 2
+            any_character = {
+                count >= 5
+                employer = root
+                is_minor_character = yes
+                save_temporary_scope_as = tmp_minor_owner
+                NOR = {
+                    any_rival = {
+                        has_variable = head_intent_consolidate
+                    }
+                    has_variable = got_pretended_owner
+                }
+                root = {
+                    any_governorships = {
+                        has_variable = governorship_owner
+                        var:governorship_owner = scope:tmp_minor_owner
+                    }
+                }
+            }
+        }
+        modifier = {
+            factor = 2
+            num_of_cities >= 1000
+        }
+    }
+
+    immediate = {
+        random_character = {
+            limit = {
+                employer = root
+                is_minor_character = yes
+                save_temporary_scope_as = tmp_minor_owner
+                NOR = {
+                    any_rival = {
+                        has_variable = head_intent_consolidate
+                    }
+                    has_variable = got_pretended_owner
+                }
+                root = {
+                    any_governorships = {
+                        has_variable = governorship_owner
+                        var:governorship_owner = scope:tmp_minor_owner
+                    }
+                }
+            }
+            save_scope_as = minor_owner
+            set_variable = {
+                name = got_pretended_owner
+                days = 1850
+            }
+        }
+        random_character = {
+            limit = {
+                is_head_of_family = yes
+                has_variable = head_intent_consolidate
+            }
+            save_scope_as = first_head_pretender
+        }
+        random_character = {
+            limit = {
+                is_head_of_family = yes
+                has_variable = head_intent_consolidate
+                NOT = {this = scope:first_head_pretender}
+            }
+            save_scope_as = second_head_pretender
+        }
+    }
+
+    option = { #favour 1
+        name = c3rd_other_events.106.a
+        custom_tooltip = c3rd_other_events.106.a.tt1
+        scope:minor_owner = {
+            set_family = scope:first_head_pretender.family
+        }
+        scope:first_head_pretender = {
+            add_loyalty = supported_action
+        }
+        scope:second_head_pretender = {
+            add_loyalty = disappointed
+        }
+
+    }
+    option = { #favour 2
+        name = c3rd_other_events.106.b
+        custom_tooltip = c3rd_other_events.106.b.tt1
+        scope:minor_owner = {
+            set_family = scope:second_head_pretender.family
+        }
+        scope:first_head_pretender = {
+            add_loyalty = disappointed
+        }
+        scope:second_head_pretender = {
+            add_loyalty = supported_action
+        }
+    }
+    option = { #NONE
+        name = c3rd_other_events.106.c
+        custom_tooltip = c3rd_other_events.106.c.tt1
+        add_legitimacy = 5
+        if = {
+            limit = {
+                has_law = decentralized_administration_law
+            }
+            add_tyranny = 2
+        }
+        scope:minor_owner = {
+            add_loyalty = disappointed
+        }
+        scope:first_head_pretender = {
+            add_loyalty = disappointed
+        }
+        scope:second_head_pretender = {
+            add_loyalty = disappointed
+        }
+    }
+
+    after = {
+        scope:first_head_pretender = {
+            remove_variable = head_intent_consolidate
+        }
+        scope:second_head_pretender = {
+            remove_variable = head_intent_consolidate
+        }
+    }
+}
+
+
+c3rd_other_events.107 = { #disloyal head
+    type = country_event
+    title = "c3rd_other_events.107.t"
+    desc = "c3rd_other_events.107.desc"
+    left_portrait = current_ruler
+    right_portrait = scope:first_head_disloyal
+    right_portrait = scope:second_head_disloyal
+
+    picture = roman_trial
+
+    trigger = {
+        has_land = yes
+        is_tribal = no
+        has_civil_war = no
+        current_date >= 750.1.1
+        has_country_modifier = solidus_introduced
+        NOT = {
+            has_variable = got_disloyal_heads
+        }
+        any_character = {
+            count >= 2
+            is_head_of_family = yes
+            has_variable = head_intent_disloyal
+        }
+        any_governorships = {
+            NOR = {
+                has_variable = governorship_owner
+                has_variable = got_disloyal_head
+            }
+            save_temporary_scope_as = tmp_gowship_check
+            owner = {
+                any_owned_province = {
+                    count >= 10
+                    governorship = scope:tmp_gowship_check
+                    exists = holding_owner
+                    holding_owner = {
+                        this = root.current_ruler
+                    }
+                }
+            }
+        }
+    }
+    weight_multiplier = {
+        modifier = {
+            factor = 2
+            any_governorships = {
+                count >= 3
+                NOR = {
+                    has_variable = governorship_owner
+                    has_variable = got_disloyal_head
+                }
+                save_temporary_scope_as = tmp_gowship_check
+                owner = {
+                    any_owned_province = {
+                        count >= 10
+                        governorship = scope:tmp_gowship_check
+                        exists = holding_owner
+                        holding_owner = {
+                            this = root.current_ruler
+                        }
+                    }
+                }
+            }
+        }
+        modifier = {
+            factor = 2
+            any_governorships = {
+                count >= 5
+                NOR = {
+                    has_variable = governorship_owner
+                    has_variable = got_disloyal_head
+                }
+                save_temporary_scope_as = tmp_gowship_check
+                owner = {
+                    any_owned_province = {
+                        count >= 10
+                        governorship = scope:tmp_gowship_check
+                        exists = holding_owner
+                        holding_owner = {
+                            this = root.current_ruler
+                        }
+                    }
+                }
+            }
+        }
+        modifier = {
+            factor = 2
+            num_of_cities >= 1000
+        }
+        modifier = {
+            factor = 2
+            has_country_modifier = internal_collapse
+        }
+        modifier = {
+            factor = 2
+            towards_civil_war = yes
+        }
+    }
+
+    immediate = {
+        random_governorships = {
+            limit = {
+                NOR = {
+                    has_variable = governorship_owner
+                    has_variable = got_disloyal_head
+                }
+                save_temporary_scope_as = tmp_gowship_check
+                owner = {
+                    any_owned_province = {
+                        count >= 10
+                        governorship = scope:tmp_gowship_check
+                        exists = holding_owner
+                        holding_owner = {
+                            this = root.current_ruler
+                        }
+                    }
+                }
+            }
+            save_scope_as = target_governorship
+            set_variable = {
+                name = got_disloyal_head
+                days = 1850
+            }
+        }
+        random_character = {
+            limit = {
+                is_head_of_family = yes
+                has_variable = head_intent_disloyal
+            }
+            save_scope_as = first_head_disloyal
+        }
+        random_character = {
+            limit = {
+                is_head_of_family = yes
+                has_variable = head_intent_disloyal
+                NOT = {this = scope:first_head_disloyal}
+            }
+            save_scope_as = second_head_disloyal
+        }
+        random_character = {
+            limit = {
+                is_head_of_family = yes
+                has_variable = head_intent_loyal
+            }
+            save_scope_as = loyal_head
+        }
+        set_variable = {
+            name = got_disloyal_heads
+            days = 3650
+        }
+    }
+
+    option = { #okay
+        name = c3rd_other_events.107.a
+        custom_tooltip = c3rd_other_events.107.a.tt1
+        add_legitimacy = -5
+        scope:target_governorship = {
+			hidden_effect = {
+				set_variable = {
+					name = recently_gavaway
+					days = 365
+				}
+				every_governorship_state = {
+					every_state_province = {
+						limit = {
+							exists = holding_owner
+							holding_owner = {
+								this = root.current_ruler
+							}
+						}
+						root.current_ruler = {
+							remove_holding = prev
+						}
+						random_list = {
+                            2 = {}
+                            3 = {
+                                scope:first_head_disloyal = {
+                                    add_holding = prev
+                                }
+                            }
+                            3 = {
+                                scope:second_head_disloyal = {
+                                    add_holding = prev
+                                }
+                            }
+                        }
+					}
+				}
+			}
+        }
+    }
+    option = { #no !
+        name = c3rd_other_events.107.b
+        custom_tooltip = c3rd_other_events.107.b.tt1
+        add_tyranny = 5
+        add_stability = -5
+        scope:first_head_disloyal = {
+            add_loyalty = medium_requests_denied
+        }
+        scope:second_head_disloyal = {
+            add_loyalty = medium_requests_denied
+        }
+    }
+
+    option = { #help me
+        name = c3rd_other_events.107.c
+        custom_tooltip = c3rd_other_events.107.c.tt1
+        trigger = {
+            exists = scope:loyal_head
+        }
+        highlight = yes
+        add_legitimacy = 5
+        if = {
+            limit = {
+                has_law = decentralized_administration_law
+            }
+            add_tyranny = 2
+        }
+        add_political_influence = -5
+    }
+
+    after = {
+        scope:first_head_disloyal = {
+            remove_variable = head_intent_disloyal
+        }
+        scope:second_head_disloyal = {
+            remove_variable = head_intent_disloyal
         }
     }
 }

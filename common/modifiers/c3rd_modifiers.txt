@@ -490,8 +490,8 @@ law_advantages_5 = {
 }
 
 extract_more = {
-	local_tax_modifier = 0.1
-	local_manpower_modifier = 0.1
+	local_tax_modifier = 0.25
+	local_manpower_modifier = 0.25
 }
 
 polinf_ruler_owner20 = {

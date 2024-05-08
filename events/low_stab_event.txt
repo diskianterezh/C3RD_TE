@@ -1558,6 +1558,15 @@ low_stab_event.10 = {
 			num_of_cities >= 3000
 		}
 		modifier = {
+			factor = 0.1
+			NOT = {any_country_culture = {
+				NOT = {
+					has_pop_type_right = nobles
+				}
+				country_culture_pop_count >= 200
+			}}
+		}
+		modifier = {
 			factor = 1.5
 			any_country_culture = {
 				NOT = {

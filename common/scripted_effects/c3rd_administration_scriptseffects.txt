@@ -33,13 +33,14 @@ recalculate_ownership_char = {#scopechar
 	}
 	if = {
 		limit = {#clean
+			has_variable = country_ownership
 			var:country_ownership = 0
 		}
 		remove_variable = country_ownership
 	}
 	if = {
 		limit = { 
-			country_region_control >= 25
+			country_region_control >= 20
 			NOT = {
 				has_character_modifier = major_influence_aristocrat
 			}
@@ -52,7 +53,7 @@ recalculate_ownership_char = {#scopechar
 	if = {
 		limit = { 
 			has_character_modifier = major_influence_aristocrat
-			country_region_control < 20
+			country_region_control < 15
 		}
 		remove_character_modifier = major_influence_aristocrat
 	}
@@ -420,6 +421,7 @@ give_law_change_pol = {
 			else_if = {
 				limit = {
 					has_country_modifier = tax_inspection
+					NOT = {has_country_modifier = solidus_introduced}
 				}
 				remove_country_modifier = tax_inspection
 				set_variable = {
@@ -429,8 +431,9 @@ give_law_change_pol = {
 			}
 			else_if = {
 				limit = {
-					NOT = {
+					NOR = {
 						has_country_modifier = citizen_exemption_from_census_tax
+						has_country_modifier = solidus_introduced
 					}
 				}
 				add_country_modifier = { #copied from official, hence the ""
