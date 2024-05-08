@@ -554,6 +554,7 @@
 			manpower_percentage >= 0.5
 			any_owned_province = {
 				any_neighbor_province = {
+					has_owner = yes
 					owner = {
 						is_tribal = yes
 					}
@@ -569,6 +570,7 @@
 			random_owned_province = {
 				limit = {
 					any_neighbor_province = {
+						has_owner = yes
 						owner = {
 							is_tribal = yes
 						}
@@ -576,6 +578,7 @@
 				}
 				random_neighbor_province = {
 					limit = {
+						has_owner = yes
 						owner = {
 							is_tribal = yes
 						}

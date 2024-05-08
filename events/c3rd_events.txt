@@ -2730,6 +2730,7 @@ c3rd_events.21 = {#governorship defects to rival empire
                 }
             }
             any_neighbor_province = {
+                has_owner = yes
                 owner = {
                     has_variable = mother_empire
                     var:mother_empire = root
@@ -2793,6 +2794,7 @@ c3rd_events.21 = {#governorship defects to rival empire
                     }
                 }
                 any_neighbor_province = {
+                    has_owner = yes
                     owner = {
                         has_variable = mother_empire
                         var:mother_empire = root
@@ -3233,6 +3235,7 @@ c3rd_events.30 = {#general ultimatum : throne or rival empire
                     any_governorship_state = {
                         any_state_province = {
                             any_neighbor_province = {
+                                has_owner = yes
                                 governorship = {
                                     is_in_list = other_empire_governorship
                                 }

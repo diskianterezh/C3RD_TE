@@ -1212,6 +1212,7 @@ c3rd_state_mass_revolt_gain = {
 				}
 				any_state_province = {
 					any_neighbor_province = {
+						has_owner = yes
 						owner = root
 						this.state = {
 							has_state_modifier = secess_preparation
@@ -1492,6 +1493,7 @@ c3rd_holding_control = { #governor gain control of region
 						any_governorship_state = {
 							any_state_province = {
 								any_neighbor_province = {
+									has_owner = yes
 									NOT = {
 										owner = root
 									}
@@ -1850,6 +1852,7 @@ c3rd_holding_gain_owner = { #owner gain control in his region
 								modifier = {
 									factor = 10
 									any_neighbor_province = {
+										has_owner = yes
 										holding_owner = scope:new_holding_governorship.var:governorship_owner
 									}
 								}
@@ -1989,6 +1992,7 @@ c3rd_holding_tax_evasion = { #when tax evasion is on but also when you have the 
 								modifier = {
 									factor = 10
 									any_neighbor_province = {
+										has_owner = yes
 										holding_owner = scope:new_holding_governorship.var:governorship_owner
 									}
 								}

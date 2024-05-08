@@ -3025,6 +3025,7 @@ c3rd_other_events.31 = { # slaves culture revolts
                     any_governorship_state = {
                         any_state_province = {
                             any_neighbor_province = {
+                                has_owner = yes
                                 owner = scope:new_country_vassal
                             }
                         }
@@ -3051,6 +3052,7 @@ c3rd_other_events.31 = { # slaves culture revolts
                 limit = {
                     any_state_province = {
                         any_neighbor_province = {
+                            has_owner = yes
                             owner = scope:new_country_vassal
                         }
                     }
@@ -3071,6 +3073,7 @@ c3rd_other_events.31 = { # slaves culture revolts
             every_owned_province = {
                 limit = {
                     any_neighbor_province = {
+                        has_owner = yes
                         owner = scope:new_country_vassal
                     }
                     has_province_modifier = revolt_preparation
@@ -3668,6 +3671,7 @@ c3rd_other_events.32 = { # noble revoked culture revolts
                     any_governorship_state = {
                         any_state_province = {
                             any_neighbor_province = {
+                                has_owner = yes
                                 owner = scope:new_country_vassal
                             }
                             NOT = {
@@ -3700,6 +3704,7 @@ c3rd_other_events.32 = { # noble revoked culture revolts
                 limit = {
                     any_state_province = {
                         any_neighbor_province = {
+                            has_owner = yes
                             owner = scope:new_country_vassal
                         }
                     }
@@ -3723,6 +3728,7 @@ c3rd_other_events.32 = { # noble revoked culture revolts
             every_owned_province = {
                 limit = {
                     any_neighbor_province = {
+                        has_owner = yes
                         owner = scope:new_country_vassal
                     }
                     has_province_modifier = revolt_preparation
@@ -5896,6 +5902,7 @@ immediate = {
                 any_governorship_state = {
                     any_state_province = {
                         any_neighbor_province = {
+                            has_owner = yes
                             NOT = {
                                 owner = root
                             }
@@ -7044,7 +7051,8 @@ c3rd_other_events.84 = { #event when you have  the tax inspection culture law : 
 }
 
 
-c3rd_other_events.85 = { #You chose your demands, then the landowner answer 5 days later. Everything is determined through variables defined here :
+c3rd_other_events.85 = {
+    #You chose your demands, then the landowner answer 5 days later. Everything is determined through variables defined here :
     #landowner_demands : variable that count how powerful and demanding the character will be
     #what_are_we_asking : variable to track what we are asking
     #answer_landowner : variable that define what the landowner will ask (or refuse)
@@ -7297,6 +7305,7 @@ c3rd_other_events.85 = { #You chose your demands, then the landowner answer 5 da
         if = {
             limit = {
                 has_variable = landowner_demands
+                has_variable = what_are_we_asking
             }
             custom_tooltip = c3rd_other_events.85.desc2
             hidden_effect = {
@@ -7381,7 +7390,6 @@ c3rd_other_events.85 = { #You chose your demands, then the landowner answer 5 da
                             name = answer_landowner
                             value = 2
                         }
-                        
                     }
                     5 = { #demand independant domain
                         modifier = {
@@ -7634,6 +7642,7 @@ c3rd_other_events.86 = { #answer from landowner
                                 any_governorship_state = {
                                     any_state_province = {
                                         any_neighbor_province = {
+                                            exists = governorship
                                             governorship = {
                                                 is_in_list = family_domain_govs
                                             }
@@ -7646,6 +7655,7 @@ c3rd_other_events.86 = { #answer from landowner
                                 any_governorship_state = {
                                     any_state_province = {
                                         any_neighbor_province = {
+                                            exists = owner
                                             owner = {
                                                 has_variable = owner_from_another_empire
                                                 var:owner_from_another_empire = scope:asked_landowner
@@ -7659,6 +7669,7 @@ c3rd_other_events.86 = { #answer from landowner
                                 any_governorship_state = {
                                     any_state_province = {
                                         any_neighbor_province = {
+                                            has_owner = yes
                                             NOT = {
                                                 owner = root
                                             }
@@ -7671,6 +7682,7 @@ c3rd_other_events.86 = { #answer from landowner
                                 any_governorship_state = {
                                     any_state_province = {
                                         any_neighbor_province = {
+                                            exists = governor
                                             governor = {
                                                 is_ruler = yes
                                             }
@@ -8182,6 +8194,7 @@ c3rd_other_events.87 = { #take region from domain
                         any_governorship_state = {
                             any_state_province = {
                                 any_neighbor_province = {
+                                    has_owner = yes
                                     owner = root
                                 }
                             }
@@ -8202,6 +8215,7 @@ c3rd_other_events.87 = { #take region from domain
                         any_governorship_state = {
                             any_state_province = {
                                 any_neighbor_province = {
+                                    has_owner = yes
                                     owner = root
                                 }
                             }
@@ -8223,6 +8237,7 @@ c3rd_other_events.87 = { #take region from domain
                         any_governorship_state = {
                             any_state_province = {
                                 any_neighbor_province = {
+                                    has_owner = yes
                                     owner = root
                                 }
                             }
@@ -8245,6 +8260,7 @@ c3rd_other_events.87 = { #take region from domain
                         any_governorship_state = {
                             any_state_province = {
                                 any_neighbor_province = {
+                                    has_owner = yes
                                     owner = root
                                 }
                             }
@@ -8694,6 +8710,7 @@ c3rd_other_events.89 = { #when one autonomous domain have owner in foreign count
                                 factor = 30
                                 any_state_province = {
                                     any_neighbor_province = {
+										has_owner = yes
                                         owner = scope:foreign_pretendant
                                     }
                                 }
@@ -8702,6 +8719,7 @@ c3rd_other_events.89 = { #when one autonomous domain have owner in foreign count
                                 factor = 0.2
                                 any_state_province = {
                                     any_neighbor_province = {
+										has_owner = yes
                                         owner = root
                                     }
                                 }
@@ -8711,6 +8729,7 @@ c3rd_other_events.89 = { #when one autonomous domain have owner in foreign count
                                 NOT = {
                                     any_state_province = {
                                         any_neighbor_province = {
+                                            has_owner = yes
                                             owner = root
                                         }
                                     }
@@ -8855,6 +8874,7 @@ c3rd_other_events.891 = { #when one autonomous domain have been set independant 
 						any_governorship_state = {
 							any_state_province = {
 								any_neighbor_province = {
+                                    has_owner = yes
 									owner = scope:owner_without_subject
 								}
 							}
@@ -8876,6 +8896,7 @@ c3rd_other_events.891 = { #when one autonomous domain have been set independant 
 						any_governorship_state = {
 							any_state_province = {
 								any_neighbor_province = {
+                                    has_owner = yes
 									owner = scope:owner_without_subject
 								}
 							}
@@ -8885,6 +8906,7 @@ c3rd_other_events.891 = { #when one autonomous domain have been set independant 
 						limit = {
 							any_state_province = {
 								any_neighbor_province = {
+                                    has_owner = yes
 									owner = scope:owner_without_subject
 								}
 							}
@@ -11758,6 +11780,7 @@ c3rd_other_events.110 = { #Intervention
                             any_governorship_state = {
                                 any_state_province = {
                                     any_neighbor_province = {
+										has_owner = yes
                                         governorship = {
                                             is_in_list = family_domain_govs
                                         }
@@ -11770,6 +11793,7 @@ c3rd_other_events.110 = { #Intervention
                             any_governorship_state = {
                                 any_state_province = {
                                     any_neighbor_province = {
+										has_owner = yes
                                         owner = {
                                             has_variable = owner_from_another_empire
                                             var:owner_from_another_empire = scope:asked_landowner
@@ -11783,6 +11807,7 @@ c3rd_other_events.110 = { #Intervention
                             any_governorship_state = {
                                 any_state_province = {
                                     any_neighbor_province = {
+										has_owner = yes
                                         NOT = {
                                             owner = root
                                         }
@@ -11795,6 +11820,7 @@ c3rd_other_events.110 = { #Intervention
                             any_governorship_state = {
                                 any_state_province = {
                                     any_neighbor_province = {
+										has_owner = yes
                                         governor = {
                                             is_ruler = yes
                                         }
@@ -12781,6 +12807,7 @@ c3rd_other_events.110 = { #Intervention
                             any_governorship_state = {
                                 any_state_province = {
                                     any_neighbor_province = {
+										has_owner = yes
                                         owner = scope:byebye_domain
                                     }
                                 }
@@ -12802,6 +12829,7 @@ c3rd_other_events.110 = { #Intervention
                             any_governorship_state = {
                                 any_state_province = {
                                     any_neighbor_province = {
+										has_owner = yes
                                         owner = scope:byebye_domain
                                     }
                                 }
@@ -12811,6 +12839,7 @@ c3rd_other_events.110 = { #Intervention
                             limit = {
                                 any_state_province = {
                                     any_neighbor_province = {
+										has_owner = yes
                                         owner = scope:byebye_domain
                                     }
                                 }

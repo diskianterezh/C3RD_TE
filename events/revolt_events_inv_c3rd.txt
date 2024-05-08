@@ -58,6 +58,7 @@ revolt_events.1 = {
 					limit = {
 						any_state_province = {
 							any_neighbor_province = {
+								has_owner = yes
 								owner = scope:revolt_country
 							}
 						}
@@ -111,6 +112,7 @@ revolt_events.1 = {
 					limit = {
 						any_state_province = {
 							any_neighbor_province = {
+								has_owner = yes
 								owner = scope:revolt_country
 							}
 						}
@@ -232,6 +234,7 @@ revolt_events.1 = {
 					limit = {
 						any_state_province = {
 							any_neighbor_province = {
+								has_owner = yes
 								owner = scope:revolt_country
 							}
 						}
@@ -389,6 +392,7 @@ revolt_events.10 = {
 			limit = {
 				any_state_province = {
 					any_neighbor_province = {
+						has_owner = yes
 						owner = scope:revolt_country
 					}
 				}
