@@ -29,6 +29,7 @@
 			has_ambition = scheme_hold_religious_festival
 			#C3RD
 			has_ambition = scheme_care_of_relatives
+			has_ambition = scheme_adopt_governor
 			#Invictus schemes
 			has_ambition = scheme_ruler_popularity
 			has_ambition = scheme_ruler_corruption

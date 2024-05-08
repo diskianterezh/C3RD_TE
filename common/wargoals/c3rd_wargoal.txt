@@ -1,0 +1,32 @@
+﻿# INSTRUCTIONS:
+# -------------
+# conquer_cost = cost of taking provinces
+#
+# WAR GOAL TYPES:
+#	- take_province
+#	- naval_superiority
+#	- superiority					#If conquer cost in superiority wars is less than 0, AI will always try and select.
+#	- enforce_military_access
+#	- independence
+# --------------------------------------------------------------
+
+
+
+duchy_wargoal = {
+	type = superiority
+	allow = {
+		is_subject = yes
+		is_subject_type = duchy_subject
+		scope:defender = {
+			is_tribal = yes
+		}
+	}
+	
+	attacker = {
+		conquer_cost = -0.4
+	}
+	defender = {
+	}
+	ticking_war_score = 1
+}
+

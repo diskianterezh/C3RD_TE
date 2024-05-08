@@ -20,6 +20,10 @@ country_diplomacy.39 = {
 			has_subject_loyalty >= 60
 			NOT = { has_variable = subject_wants_more_cooldown }
 		}
+		OR = {
+			current_date < 700.1.1
+			num_active_relations < max_diplomatic_relations
+		}
 	}
 
 	immediate = {

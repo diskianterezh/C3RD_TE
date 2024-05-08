@@ -58,6 +58,9 @@
 			num_of_cities >= 1
 			has_country_modifier = crisis_of_the_third_century
 			is_republic = yes
+			NOT = {
+				has_variable = on_going_rep_thingy
+			}
 		}
 		allow = {
 			stability >= 60
@@ -530,7 +533,7 @@
 			political_influence >= 100
 		}
 		effect = {
-			trigger_event = { #get the overextension removed as you are in political instability
+			trigger_event = { 
 				id = c3rd_other_events.51
 			}
 		}
@@ -538,6 +541,390 @@
 		ai_will_do = {
 			modifier = {
 				factor = 10
+			}
+		}
+	}	
+	
+	tutela_limitum = {
+		potential = {
+			is_subject_type = duchy_subject
+		}
+		allow = {
+			political_influence >= 10
+			manpower_percentage >= 0.5
+			any_owned_province = {
+				any_neighbor_province = {
+					has_owner = yes
+					owner = {
+						is_tribal = yes
+					}
+				}
+			}
+		}
+
+
+
+
+		effect = {
+			add_political_influence = -10
+			random_owned_province = {
+				limit = {
+					any_neighbor_province = {
+						has_owner = yes
+						owner = {
+							is_tribal = yes
+						}
+					}
+				}
+				random_neighbor_province = {
+					limit = {
+						has_owner = yes
+						owner = {
+							is_tribal = yes
+						}
+					}
+					add_claim = root
+				}
+			}
+		}
+	}
+
+		
+	new_cultural_identity = {
+		potential = {
+			current_date >=  1000.1.1
+			num_of_cities >= 25
+			is_ai = yes
+			is_ai = no #decision on hold
+			any_country_culture = { #any culture to swap
+				NOT = {this.culture = root.culture}
+				save_temporary_scope_as = checktempculture
+                root = {
+                    capital_scope = {
+                        state = {
+                            any_state_province = {
+                                any_pops_in_province = {
+                                    pop_culture = scope:checktempculture.culture
+                                }
+                            }
+                        }
+                    }
+                    NOT = {
+                        any_country = { #no leader
+                            rank = great_power
+                            NOT = {this = root}
+                            primary_culture = scope:checktempculture.culture
+                        }
+                    }
+                }
+			}
+			any_country = { #another empire is the leader cultural head
+				rank = great_power
+				num_of_cities >= root.num_of_cities
+				NOT = {this = root}
+				primary_culture = root.culture
+			}
+			NOR = {
+				has_variable = nope_not_this_culture
+				AND = {
+					tag = MRY
+					primary_culture = magadhi
+				}
+				AND = {
+					tag = SEL
+					primary_culture = macedonian
+				}
+				AND = {
+					tag = PRY
+					primary_culture = macedonian
+				}
+				AND = {
+					tag = CAR
+					primary_culture = carthaginian
+				}
+				AND = {
+					tag = ARM
+					primary_culture = armenian
+				}
+				AND = {
+					tag = KSH
+					primary_culture = meroitic
+				}
+				AND = {
+					tag = MAP
+					primary_culture = median
+				}
+				AND = {
+					tag = ETR
+					primary_culture = etruscan
+				}
+				AND = {
+					tag = PND
+					primary_culture = tamil
+				}
+				AND = {
+					tag = KAL
+					primary_culture = kalingan
+				}
+				AND = {
+					tag = AET
+					primary_culture = aetolian
+				}
+				AND = {
+					tag = AXM
+					primary_culture = aksumite
+				}
+				AND = {
+					tag = ALB
+					primary_culture = albanian
+				}
+				AND = {
+					tag = ABN
+					primary_culture = dacian
+				}
+				AND = {
+					tag = ANG
+					primary_culture = anglian
+				}
+				AND = {
+					tag = MAS
+					primary_culture = massalian
+				}
+				AND = {
+					tag = MSP
+					primary_culture = messapian
+				}
+				AND = {
+					tag = MOE
+					primary_culture = moesi
+				}
+				AND = {
+					tag = NBT
+					primary_culture = nabatean
+				}
+				AND = {
+					tag = NRV
+					primary_culture = nervian
+				}
+				AND = {
+					tag = NRC
+					primary_culture = noric
+				}
+				AND = {
+					tag = ODR
+					primary_culture = odrysi
+				}
+				AND = {
+					tag = ORD
+					primary_culture = ordovitian
+				}
+				AND = {
+					tag = ORT
+					primary_culture = oretanian
+				}
+				AND = {
+					tag = ORO
+					primary_culture = oroandian
+				}
+				AND = {
+					tag = PAA
+					primary_culture = paeonian
+				}
+				AND = {
+					tag = ACH
+					primary_culture = achaean
+				}
+				AND = {
+					tag = AUA
+					primary_culture = aestian
+				}
+				AND = {
+					tag = AQI
+					primary_culture = aquitani
+				}
+				AND = {
+					tag = AGO
+					primary_culture = argolian
+				}
+				AND = {
+					tag = ARK
+					primary_culture = arcadian
+				}
+				AND = {
+					tag = ASX
+					primary_culture = aremorican
+				}
+				AND = {
+					tag = ATU
+					primary_culture = asturian
+				}
+				AND = {
+					tag = BOT
+					primary_culture = boeotian
+				}
+				AND = {
+					tag = CAB
+					primary_culture = cabalian
+				}
+				AND = {
+					tag = CNN
+					primary_culture = cantabrian
+				}
+				AND = {
+					tag = CPT
+					primary_culture = carpetanian
+				}
+				AND = {
+					tag = CBR
+					primary_culture = celtiberian
+				}
+				AND = {
+					tag = CYP
+					primary_culture = cypriot
+				}
+				AND = {
+					tag = EPR
+					primary_culture = epirote
+				}
+				AND = {
+					tag = EBO
+					primary_culture = euboean
+				}
+				AND = {
+					tag = ISU
+					primary_culture = isaurian
+				}
+				AND = {
+					tag = LST
+					primary_culture = lusitanian
+				}
+				AND = {
+					tag = LYC
+					primary_culture = lycian
+				}
+				AND = {
+					tag = LYD
+					primary_culture = lydian
+				}
+				AND = {
+					tag = MLD
+					primary_culture = milyadian
+				}
+				AND = {
+					tag = PPH
+					primary_culture = pamphylian
+				}
+				AND = {
+					tag = PIS
+					primary_culture = pisidian
+				}
+				AND = {
+					tag = SNB
+					primary_culture = suebian
+				}
+				AND = {
+					tag = VTT
+					primary_culture = vettonian
+				}
+				AND = {
+					tag = ASR
+					primary_culture = assyrian
+				}
+				AND = {
+					tag = BBY
+					primary_culture = babylonian
+				}
+				AND = {
+					tag = BGG
+					primary_culture = belgae
+				}
+				AND = {
+					tag = CCC
+					primary_culture = caledonian
+				}
+				AND = {
+					tag = CIA
+					primary_culture = carian
+				}
+				AND = {
+					tag = CCI
+					primary_culture = cilician
+				}
+				AND = {
+					tag = 1KR
+					primary_culture = cretan
+				}
+				AND = {
+					tag = EGT
+					primary_culture = egyptian
+				}
+				AND = {
+					tag = HVL
+					primary_culture = helvetian
+				}
+				AND = {
+					tag = HIB
+					primary_culture = hibernian
+				}
+				AND = {
+					tag = ILL
+					primary_culture = greco_illyrian
+				}
+				AND = {
+					tag = MCD
+					primary_culture = macedonian
+				}
+				AND = {
+					tag = MEE
+					primary_culture = median
+				}
+				AND = {
+					tag = NRM
+					primary_culture = noric
+				}
+				AND = {
+					tag = PRG
+					primary_culture = phrygian
+				}
+				AND = {
+					tag = PON
+					primary_culture = greco_pontic
+				}
+				AND = {
+					tag = PTU
+					primary_culture = greco_pontic
+				}
+				AND = {
+					tag = BRA
+					primary_culture = britannic
+				}
+				AND = {
+					tag = XXS
+					primary_culture = saxonian
+				}
+				AND = {
+					tag = YZI
+					primary_culture = yuezhi
+				}
+				AND = {
+					tag = ITA
+					primary_culture = italiotian
+				}
+			}
+		}
+		allow = {
+			political_influence >= 4
+		}
+		effect = {
+			trigger_event = { 
+				id = c3rd_other_events.33
+				days = 1
+			}
+		}
+		
+		ai_will_do = {
+			modifier = {
+				factor = 100
 			}
 		}
 	}

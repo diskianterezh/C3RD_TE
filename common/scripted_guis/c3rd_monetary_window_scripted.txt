@@ -1,0 +1,573 @@
+﻿c3rd_monetary_is_normal = {
+	scope = country
+
+	
+    is_valid = {
+        NOR = {
+			has_country_modifier = medium_deflation
+			has_country_modifier = medium_monetary_crash
+			has_country_modifier = high_monetary_crash
+			has_country_modifier = high_monetary_crash
+		}
+    }
+    is_shown = {
+        NOR = {
+			has_country_modifier = medium_deflation
+			has_country_modifier = medium_monetary_crash
+			has_country_modifier = high_monetary_crash
+			has_country_modifier = high_monetary_crash
+		}
+    }
+}
+c3rd_monetary_medium = {
+	scope = country
+
+	
+    is_valid = {
+        NOR = {
+			has_country_modifier = high_monetary_crash
+			has_country_modifier = high_monetary_crash
+		}
+		OR = {
+			has_country_modifier = medium_deflation
+			has_country_modifier = medium_monetary_crash
+		}
+    }
+    is_shown = {
+        NOR = {
+			has_country_modifier = high_monetary_crash
+			has_country_modifier = high_monetary_crash
+		}
+		OR = {
+			has_country_modifier = medium_deflation
+			has_country_modifier = medium_monetary_crash
+		}
+    }
+}
+c3rd_monetary_high = {
+	scope = country
+
+	
+    is_valid = {
+		OR = {
+			has_country_modifier = high_monetary_crash
+			has_country_modifier = high_monetary_crash
+		}
+    }
+    is_shown = {
+		OR = {
+			has_country_modifier = high_monetary_crash
+			has_country_modifier = high_monetary_crash
+		}
+    }
+}
+
+
+c3rd_solidus_available = {
+	scope = country
+
+	
+    is_valid = {
+		OR = {
+			has_country_modifier = solidus_introduced
+			AND = {
+				is_tribal = no
+				invention = monetary_reform
+				has_civil_war = no
+			}
+		}
+    }
+}
+
+c3rd_monetary_enslaved_culture = {
+	
+    is_shown = {
+		any_country_culture = {
+			has_pop_type_right = slaves
+		}
+    }
+}
+
+c3rd_monetary_vassal_exploitation_scripted = {
+	
+    is_valid = {
+		has_law = subject_exploitation_law
+    }
+}
+
+c3rd_monetary_citizen_exemption = {
+	is_shown = {
+		has_country_modifier = citizen_exemption_from_census_tax
+	}
+}
+
+c3rd_monetary_aristocratic_exemptions = {
+	is_shown = {
+		has_country_modifier = aristocratic_exemptions
+	}
+}
+
+c3rd_monetary_military_advantages = {
+	is_shown = {
+		has_country_modifier = military_advantages
+	}
+}
+
+c3rd_monetary_tax_inspection = {
+	is_shown = {
+		has_country_modifier = tax_inspection
+	}
+}
+
+c3rd_monetary_consolidation_sol = {
+	is_shown = {
+		has_country_modifier = monetary_consolidation_sol
+	}
+}
+
+c3rd_aristocratic_reforms = {
+	is_shown = {
+		has_country_modifier = aristocratic_reforms
+	}
+}
+
+c3rd_monetary_political_unstability = {
+	is_shown = {
+		has_country_modifier = political_unstability
+	}
+}
+
+c3rd_monetary_second_reform_law = {
+	is_shown = {
+		has_law = second_reform_law
+	}
+}
+
+c3rd_monetary_recalculation = {
+	scope = country
+	effect = {
+		if = {
+			limit = {has_variable = what_is_my_eco}
+			remove_variable = what_is_my_eco
+		}
+        set_variable = {
+            name = what_is_my_eco
+            value = c3rd_economic_value
+        }
+		if = {
+			limit = {has_variable = c3rd_deflation_increase_var}
+			remove_variable = c3rd_deflation_increase_var
+		}
+        set_variable = {
+            name = c3rd_deflation_increase_var
+            value = c3rd_deflation_increase
+        }
+		if = {
+			limit = {has_variable = c3rd_silver_increase_var}
+			remove_variable = c3rd_silver_increase_var
+		}
+        set_variable = {
+            name = c3rd_silver_increase_var
+            value = c3rd_silver_increase
+        }
+	}
+}
+
+c3rd_monetary_deflation_arrow1 = {
+	scope = country
+	is_shown = {
+		NOT = {
+			has_country_modifier = solidus_introduced
+		}
+		has_variable = c3rd_deflation_increase_var
+		var:c3rd_deflation_increase_var >= 1
+	}
+}
+c3rd_monetary_deflation_arrow2 = {
+	scope = country
+	is_shown = {
+		NOT = {
+			has_country_modifier = solidus_introduced
+		}
+		has_variable = c3rd_deflation_increase_var
+		var:c3rd_deflation_increase_var >= 2
+	}
+}
+c3rd_monetary_deflation_arrow3 = {
+	scope = country
+	is_shown = {
+		NOT = {
+			has_country_modifier = solidus_introduced
+		}
+		has_variable = c3rd_deflation_increase_var
+		var:c3rd_deflation_increase_var >= 3
+	}
+}
+c3rd_monetary_deflation_arrow4 = {
+	scope = country
+	is_shown = {
+		NOT = {
+			has_country_modifier = solidus_introduced
+		}
+		has_variable = c3rd_deflation_increase_var
+		var:c3rd_deflation_increase_var >= 4
+	}
+}
+c3rd_monetary_deflation_arrow_1 = {
+	scope = country
+	is_shown = {
+		NOT = {
+			has_country_modifier = solidus_introduced
+		}
+		has_variable = c3rd_deflation_increase_var
+		var:c3rd_deflation_increase_var <= -1
+	}
+}
+c3rd_monetary_deflation_arrow_2 = {
+	scope = country
+	is_shown = {
+		NOT = {
+			has_country_modifier = solidus_introduced
+		}
+		has_variable = c3rd_deflation_increase_var
+		var:c3rd_deflation_increase_var <= -2
+	}
+}
+c3rd_monetary_deflation_arrow_3 = {
+	scope = country
+	is_shown = {
+		NOT = {
+			has_country_modifier = solidus_introduced
+		}
+		has_variable = c3rd_deflation_increase_var
+		var:c3rd_deflation_increase_var <= -3
+	}
+}
+c3rd_monetary_deflation_arrow_4 = {
+	scope = country
+	is_shown = {
+		NOT = {
+			has_country_modifier = solidus_introduced
+		}
+		has_variable = c3rd_deflation_increase_var
+		var:c3rd_deflation_increase_var <= -4
+	}
+}
+
+
+c3rd_monetary_silver_arrow1 = {
+	scope = country
+	is_shown = {
+		NOT = {
+			has_country_modifier = solidus_introduced
+		}
+		has_variable = c3rd_silver_increase_var
+		var:c3rd_silver_increase_var >= 1
+	}
+}
+c3rd_monetary_silver_arrow2 = {
+	scope = country
+	is_shown = {
+		NOT = {
+			has_country_modifier = solidus_introduced
+		}
+		has_variable = c3rd_silver_increase_var
+		var:c3rd_silver_increase_var >= 2
+	}
+}
+c3rd_monetary_silver_arrow3 = {
+	scope = country
+	is_shown = {
+		NOT = {
+			has_country_modifier = solidus_introduced
+		}
+		has_variable = c3rd_silver_increase_var
+		var:c3rd_silver_increase_var >= 3
+	}
+}
+c3rd_monetary_silver_arrow4 = {
+	scope = country
+	is_shown = {
+		NOT = {
+			has_country_modifier = solidus_introduced
+		}
+		has_variable = c3rd_silver_increase_var
+		var:c3rd_silver_increase_var >= 4
+	}
+}
+c3rd_monetary_silver_arrow_1 = {
+	scope = country
+	is_shown = {
+		NOT = {
+			has_country_modifier = solidus_introduced
+		}
+		has_variable = c3rd_silver_increase_var
+		var:c3rd_silver_increase_var <= -1
+	}
+}
+c3rd_monetary_silver_arrow_2 = {
+	scope = country
+	is_shown = {
+		NOT = {
+			has_country_modifier = solidus_introduced
+		}
+		has_variable = c3rd_silver_increase_var
+		var:c3rd_silver_increase_var <= -2
+	}
+}
+c3rd_monetary_silver_arrow_3 = {
+	scope = country
+	is_shown = {
+		NOT = {
+			has_country_modifier = solidus_introduced
+		}
+		has_variable = c3rd_silver_increase_var
+		var:c3rd_silver_increase_var <= -3
+	}
+}
+c3rd_monetary_silver_arrow_4 = {
+	scope = country
+	is_shown = {
+		NOT = {
+			has_country_modifier = solidus_introduced
+		}
+		has_variable = c3rd_silver_increase_var
+		var:c3rd_silver_increase_var <= -4
+	}
+}
+
+c3rd_monetary_silver_reform = {
+	scope = country
+	is_valid = {
+		has_law = monetary_reform_law
+	}
+}
+
+c3rd_inject_liquidity = {
+	scope = country
+	is_valid = {
+		custom_tooltip = {
+			text = "has_deflation_modifier"
+			OR = {
+				has_country_modifier = small_deflation
+				has_country_modifier = medium_deflation
+				has_country_modifier = high_deflation
+			}
+		}
+		treasury > 0
+		political_influence >= 20
+		custom_tooltip = {
+			text = "has_deflation_decision"
+			has_variable = deflation_value
+		}
+		NOT = {
+			has_country_modifier = added_liquidity
+		}
+	}
+
+	effect = {
+		custom_tooltip = c3rd_inject_liquidity_tt1
+		add_political_influence = -50
+		add_treasury = {
+			value = -10
+			multiply = num_of_cities
+		}
+		custom_tooltip = c3rd_inject_liquidity_tt
+		if = {
+			limit = { 
+				num_of_cities <= 100
+			}
+			change_variable = {
+				name = deflation_value
+				add = -20
+			}
+		}
+		else_if = {
+			limit = { 
+				num_of_cities <= 250
+			}
+			change_variable = {
+				name = deflation_value
+				add = -15
+			}
+		}
+		else_if = {
+			limit = { 
+				num_of_cities <= 500
+			}
+			change_variable = {
+				name = deflation_value
+				add = -12
+			}
+		}
+		else = {
+			change_variable = {
+				name = deflation_value
+				add = -10
+			}
+		}
+		add_country_modifier = {
+			name = added_liquidity
+			duration = 1825
+		}
+		hidden_effect = {
+			if = {
+				limit = {
+					OR = {
+						has_country_modifier = small_deflation
+						has_country_modifier = medium_deflation
+						has_country_modifier = high_deflation
+					}
+					var:deflation_value <= 20
+				}
+				trigger_event = {
+					id = c3rd_other_events.25
+				}
+			}
+			else_if = {
+				limit = {
+					OR = {
+						has_country_modifier = medium_deflation
+						has_country_modifier = high_deflation
+					}
+					NOT = {
+						has_country_modifier = small_deflation
+					}
+					var:deflation_value <= 65
+				}
+				trigger_event = {
+					id = c3rd_other_events.24
+				}
+			}
+			else_if = {
+				limit = {
+					has_country_modifier = high_deflation
+					NOT = {
+						has_country_modifier = medium_deflation
+					}
+					var:deflation_value <= 120
+				}
+				trigger_event = {
+					id = c3rd_other_events.23
+				}
+			}
+		}
+
+	}
+
+}
+
+c3rd_new_silver_currency = {
+	scope = country
+	is_valid = {
+		custom_tooltip = {
+			text = "has_silver_modifier"
+			OR = {
+				has_country_modifier = small_monetary_crash
+				has_country_modifier = medium_monetary_crash
+				has_country_modifier = high_monetary_crash
+			}
+		}
+		stability >= 15
+		political_influence >= 20
+		custom_tooltip = {
+			text = "has_silver_decision"
+			has_variable = silver_unvalue
+		}
+		NOT = {
+			has_country_modifier = new_balance
+		}
+	}
+	effect = {
+		custom_tooltip = c3rd_new_currency_tt2
+		add_political_influence = -25
+		add_stability = -10
+		custom_tooltip = c3rd_new_currency_tt
+		if = {
+			limit = { 
+				num_of_cities <= 100
+			}
+			change_variable = {
+				name = silver_unvalue
+				add = -25
+			}
+		}
+		else_if = {
+			limit = { 
+				num_of_cities <= 250
+			}
+			change_variable = {
+				name = silver_unvalue
+				add = -20
+			}
+		}
+		else_if = {
+			limit = { 
+				num_of_cities <= 500
+			}
+			change_variable = {
+				name = silver_unvalue
+				add = -15
+			}
+		}
+		else = {
+			change_variable = {
+				name = silver_unvalue
+				add = -12
+			}
+		}
+		add_country_modifier = {
+			name = new_balance
+			duration = 1825
+		}
+		hidden_effect = {
+			if = {
+				limit = {
+					OR = {
+						has_country_modifier = medium_monetary_crash
+						has_country_modifier = high_monetary_crash
+						has_country_modifier = small_monetary_crash
+					}
+					var:silver_unvalue <= 20
+				}
+				trigger_event = {
+					id = c3rd_other_events.293
+				}
+			}
+			else_if = {
+				limit = {
+					OR = {
+						has_country_modifier = medium_monetary_crash
+						has_country_modifier = high_monetary_crash
+					}
+					NOT = {
+						has_country_modifier = small_monetary_crash
+					}
+					var:silver_unvalue <= 70
+				}
+				trigger_event = {
+					id = c3rd_other_events.292
+				}
+			}
+			else_if = {
+				limit = {
+					has_country_modifier = high_monetary_crash
+					NOT = {
+						has_country_modifier = medium_monetary_crash
+					}
+					var:silver_unvalue <= 100
+				}
+				trigger_event = {
+					id = c3rd_other_events.291
+				}
+			}
+			trigger_event = {
+				id = c3rd_other_events.75
+				days = 90
+			}
+		}
+
+	}
+
+
+}

@@ -9,6 +9,64 @@ num_of_pops_integrated = {
 	}
 }
 
+
+num_of_pops_unintegrated = {
+	value = 0
+	ROOT = {
+		every_country_culture = {
+			limit = {
+				is_integrated = no
+				NOT = {has_pop_type_right = slaves}
+			}
+			add = country_culture_pop_count
+		}
+	}
+}
+
+
+num_of_pops_slaves = {
+	value = 0
+	ROOT = {
+		every_country_culture = {
+			limit = {
+				is_integrated = no
+				has_pop_type_right = slaves
+			}
+			add = country_culture_pop_count
+		}
+	}
+}
+
+num_of_subject_pops = {
+	value = 0
+	
+	every_subject = {
+		add = country_population
+	}
+}
+
+half_of_deflation = {
+	value = 0
+	if = {
+		limit = {
+			has_variable = deflation_value
+		}
+		add = var:deflation_value
+		divide = 1.5
+	}
+}
+
+half_of_silver_value = {
+	value = 0
+	if = {
+		limit = {
+			has_variable = silver_unvalue
+		}
+		add = var:silver_unvalue
+		divide = 1.5
+	}
+}
+
 num_of_pops_noble = {
 	value = 0
 	ROOT = {
@@ -71,7 +129,7 @@ c3rd_base_economic_value = {
 			every_subject = {
 				add = {
 					value = country_population
-					multiply = 0.5
+					multiply = 0.35
 				}
 			}
 		}
@@ -314,6 +372,12 @@ c3rd_economic_factor = {
 	}
 	if = {
 		limit = {
+			has_country_modifier = aristocratic_exemptions
+		}
+		add = 1
+	}
+	if = {
+		limit = {
 			has_country_modifier = military_advantages
 		}
 		add = 1
@@ -515,5 +579,591 @@ num_vassal_provinces = {
 			value = num_of_cities
 			multiply = 3
 		}
+	}
+}
+
+region_owned_provinces = {
+	value = 0
+	every_governorship_state = {
+		every_state_province = {
+			add = 1
+		}
+	}
+	min = 1
+
+}
+
+region_control_value = {
+	value = 0
+	every_governorship_state = {
+		every_state_province = {
+			if = {
+				limit = {
+					exists = holding_owner
+					OR = {
+						holding_owner = governor
+						holding_owner = {
+							is_head_of_family = yes
+							family = prev.governor.family
+						}
+					}
+				}
+				add = 1
+			}
+		}
+	}
+	multiply = 100
+	divide = region_owned_provinces
+	round = yes
+	
+}
+region_control_value_char = {
+	value = 0
+	every_governorship_state = {
+		every_state_province = {
+			if = {
+				limit = {
+					exists = holding_owner
+					holding_owner = scope:owner_tmp_check
+				}
+				add = 1
+			}
+		}
+	}
+	multiply = 100
+	divide = region_owned_provinces
+	round = yes
+	
+}
+
+region_control_value_owner = {
+	value = 0
+	if = {
+		limit = {
+			has_variable = governorship_owner
+		}
+		every_governorship_state = {
+			every_state_province = {
+				if = {
+					limit = {
+						exists = holding_owner
+						OR = {
+							holding_owner = governorship.var:governorship_owner
+							holding_owner = governorship.var:governorship_owner.family.head_of_family
+						}
+					}
+					add = 1
+				}
+			}
+		}
+	}
+	multiply = 100
+	divide = region_owned_provinces
+	round = yes
+	
+}
+
+country_total_regions = { #scope COUNTRY
+	value = 0
+	every_governorships = {
+		if = {
+			limit = { #if the region is a small one, it count as half
+				region_owned_provinces < 20
+			}
+			add = 0.5
+		}
+		else = {
+			add= 1
+		}
+	}
+	every_subject = {
+		limit = {
+			is_subject_type = autonomous_domain
+			has_variable = owner_from_another_empire
+		}
+		if = {
+			limit = {
+				num_of_cities < 100
+			}
+			add = 0.5
+		}
+		else_if = {
+			limit = {
+				num_of_cities >= 100
+				num_of_cities < 250
+			}
+			add = 1
+		}
+		else_if = {
+			limit = {
+				num_of_cities >= 250
+				num_of_cities < 500
+			}
+			add = 1.5
+		}
+		else = {
+			add = 2
+		}
+	}
+}
+country_region_control = { #scope CHAR
+	value = 0
+	employer = { 
+		every_governorships = {
+			limit = {
+				has_variable = governorship_owner
+				var:governorship_owner = scope:influent_character
+			}
+			if = {
+				limit = { #if the region is a small one, it count as half
+					region_owned_provinces < 20
+				}
+				add = 0.5
+			}
+			else = {
+				add= 1
+			}
+		}
+		if = {
+			limit = {
+				scope:influent_character = {
+					is_head_of_family = yes
+				}
+			}
+			every_governorships = {
+				limit = {
+					has_variable = governorship_owner
+					NOT = {var:governorship_owner = scope:influent_character}
+					var:governorship_owner = {
+						family = scope:influent_character.family
+					}
+				}
+				if = {
+					limit = { #if the region is a small one, it count as half
+						region_owned_provinces < 20
+					}
+					add = 0.5
+				}
+				else = {
+					add= 1
+				}
+			}
+		}
+		every_subject = {
+			limit = {
+				is_subject_type = autonomous_domain
+				has_variable = owner_from_another_empire
+				var:owner_from_another_empire = scope:influent_character
+			}
+			if = {
+				limit = {
+					num_of_cities < 100
+				}
+				add = 0.5
+			}
+			else_if = {
+				limit = {
+					num_of_cities >= 100
+					num_of_cities < 250
+				}
+				add = 1
+			}
+			else_if = {
+				limit = {
+					num_of_cities >= 250
+					num_of_cities < 500
+				}
+				add = 1.5
+			}
+			else = {
+				add = 2
+			}
+		}
+		multiply = 100
+		divide = country_total_regions
+	}
+	round = yes
+}
+
+country_gov_ratio_number = {
+	value = 1
+	if = {
+		limit = { 
+			num_of_cities >= 1000
+		}
+		add = 1
+	}
+	if = {
+		limit = { 
+			num_of_cities >= 2000
+		}
+		add = 1
+	}
+	if = {
+		limit = { 
+			num_of_cities >= 5000
+		}
+		add = 1
+	}
+	if = {
+		limit = { 
+			has_variable = landowner_demands
+			var:landowner_demands >= 5
+		}
+		add = 1
+	}
+	
+}
+
+country_gov_ratio_number_minus = { #to get how many governorships should the landowner keep once the domain is created -
+	value = country_gov_ratio_number
+	add = 1
+	if = {
+		limit = { 
+			num_of_cities >= 1000
+		}
+		add = 1
+	}
+	if = {
+		limit = { 
+			num_of_cities >= 2000
+		}
+		add = 1
+	}
+	if = {
+		limit = { 
+			num_of_cities >= 5000
+		}
+		add = 1
+	}
+}
+landowner_asked_ratio_number = { #scope country, need asked_landowner
+	value = 0
+	if = {
+		limit = {
+			any_governorships = { #check if too small
+				count < country_gov_ratio_number
+				has_variable = governorship_owner
+				var:governorship_owner = scope:asked_landowner
+			}
+		}
+		every_governorships = {
+			limit = {
+				has_variable = governorship_owner
+				var:governorship_owner = scope:asked_landowner
+			}
+			add = 1
+		}
+		if = {
+			limit = { 
+				num_of_cities >= 1000
+			}
+			add = -1
+		}
+		if = {
+			limit = { 
+				num_of_cities >= 2000
+			}
+			add = -1
+		}
+		if = {
+			limit = { 
+				num_of_cities >= 5000
+			}
+			add = -1
+		}
+	}
+	else_if = {
+		limit = {
+			any_governorships = { #basically for a small country, he should have 1 more governorships than domain gov; 1000+ 2 more, 2000+ 3 more, ect... this to keep their power in a big country
+				count < country_gov_ratio_number_minus
+				has_variable = governorship_owner
+				var:governorship_owner = scope:asked_landowner
+			}
+		}
+		add = country_gov_ratio_number
+		if = {
+			limit = { 
+				num_of_cities >= 1000
+			}
+			add = -1
+		}
+		if = {
+			limit = { 
+				num_of_cities >= 2000
+			}
+			add = -1
+		}
+		if = {
+			limit = { 
+				num_of_cities >= 5000
+			}
+			add = -1
+		}
+
+	}
+	else = {
+		add = country_gov_ratio_number
+	}
+	min = 1
+
+}
+
+subject_partition_ratio = {#subject scope
+	value = 0
+	add = num_of_provinces
+	divide = 3
+	ceiling = yes
+}
+
+subject_third_cities = {
+	value = 0
+	add = num_of_cities
+	divide = 3 
+	ceiling = yes
+}
+
+owned_governorship_num_of_cities = { #scope CHAR need a tmp_owner char scope
+	value = 0
+	employer = {
+		every_owned_province = {
+			limit = {
+				governorship = {
+					has_variable = governorship_owner
+					var:governorship_owner = scope:tmp_owner
+				}
+			}
+			add = 1
+		}
+	}
+
+}
+
+owned_domain_num_of_cities = {#scope CHAR need a tmp_owner char scope
+	value = 0
+	employer = {
+		every_subject = {
+			limit = {
+				has_variable = owner_from_another_empire
+				is_subject_type = autonomous_domain
+				var:owner_from_another_empire = scope:tmp_owner
+			}
+			every_owned_province = {
+				add = 1
+			}
+		}
+	}
+}
+
+disloyal_country_part = {#scope country
+	value = 0
+	every_character = {
+		limit = {
+			has_variable = country_ownership
+			loyalty < 33
+		}
+		add = var:country_ownership
+	}
+}
+
+c3rd_deflation_increase = {
+	value = 0
+	if = { #silver law reduce deflation passively
+		limit = {
+			has_variable = deflation_value
+			has_law = monetary_reform_law
+		}
+		add = -1
+	}
+	if = { #reduce deflation if economy good
+		limit = {
+			has_variable = deflation_value
+			c3rd_economic_value > 1
+			var:deflation_value > 0
+		}
+		add = -1
+	}
+	if = { #economy very good
+		limit = {
+			has_variable = deflation_value
+			c3rd_economic_value > 2
+			var:deflation_value > 0
+		}
+		add = -1
+	}
+	if = { #veryvery good
+		limit = {
+			has_variable = deflation_value
+			c3rd_economic_value > 4
+			var:deflation_value > 0
+		}
+		add = -1
+	}
+	if = { 
+		limit = {
+			c3rd_economic_value < 1
+			num_of_cities >= 500
+			is_tribal = no
+			NOT = {has_law = monetary_reform_law}
+		}
+		add = 1
+	}
+	if = { 
+		limit = {
+			c3rd_economic_value < 0.8
+			num_of_cities >= 500
+			is_tribal = no
+			NOT = {has_law = monetary_reform_law}
+		}
+		add = 1
+	}
+	if = { 
+		limit = {
+			c3rd_economic_value < 0.6
+			num_of_cities >= 500
+			is_tribal = no
+			NOT = {has_law = monetary_reform_law}
+		}
+		add = 1
+	}
+	if = { 
+		limit = {
+			c3rd_economic_value < 0.4
+			num_of_cities >= 500
+			is_tribal = no
+			NOT = {has_law = monetary_reform_law}
+		}
+		add = 1
+	}
+}
+
+
+c3rd_silver_increase = {
+	value = 0
+	if = { #first reduction of the silver unvalue if aurelian
+		limit = {
+			has_variable = silver_unvalue
+			has_law = second_reform_law
+			var:silver_unvalue > 0
+		}
+		add = -2
+	}
+	if = { #reduction if bartering
+		limit = {
+			has_variable = silver_unvalue
+			has_country_modifier = bartering_authorised
+			var:silver_unvalue > 0
+		}
+		add = -1
+	}
+	if = { #reduction if silv consolidation (solidus)
+		limit = {
+			has_variable = silver_unvalue
+			has_country_modifier = silver_consolidation_sol
+			var:silver_unvalue > 0
+		}
+		add = -1
+	}
+	if = { #passive unvalue of silver if silver law
+		limit = { 
+			has_law = monetary_reform_law
+			num_of_cities >= 500
+			is_tribal = no
+		}
+		add = 1
+	}
+	if = { 
+		limit = {
+			c3rd_economic_value < 1
+			num_of_cities >= 500
+			is_tribal = no
+			has_law = monetary_reform_law
+		}
+		add = 1
+	}
+	if = { 
+		limit = {
+			c3rd_economic_value < 0.8
+			num_of_cities >= 500
+			is_tribal = no
+			has_law = monetary_reform_law
+		}
+		add = 1
+	}
+	if = { 
+		limit = {
+			c3rd_economic_value < 0.6
+			num_of_cities >= 500
+			is_tribal = no
+			has_law = monetary_reform_law
+		}
+		add = 1
+	}
+	if = { 
+		limit = {
+			c3rd_economic_value < 0.4
+			num_of_cities >= 500
+			is_tribal = no
+			has_law = monetary_reform_law
+		}
+		add = 1
+	}
+}
+
+
+num_govruler_lost = { #scope governorship
+	value = 1
+	if = {
+		limit = {
+			owner = {
+				has_country_modifier = law_advantages_4
+			}
+		}
+		add = 1
+	}
+	if = {
+		limit = {
+			owner = {
+				has_country_modifier = law_advantages_5
+			}
+		}
+		add = 2
+	}
+	if = {
+		limit = {
+			owner = {
+				has_law = decentralized_administration_law
+			}
+		}
+		add = 1
+	}
+}
+
+country_size_ratio = { #to ask governorships sized with country size
+	value = country_gov_ratio_number
+	add = 1
+	if = {
+		limit = { 
+			num_of_cities >= 500
+		}
+		add = 1
+	}
+	if = {
+		limit = { 
+			num_of_cities >= 1000
+		}
+		add = 1
+	}
+	if = {
+		limit = { 
+			num_of_cities >= 2000
+		}
+		add = 1
+	}
+	if = {
+		limit = { 
+			num_of_cities >= 3000
+		}
+		add = 1
 	}
 }

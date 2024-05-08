@@ -55,11 +55,25 @@ widget = {
 	position = { 144 43 }
 	size = { 1460 116 }
 	layer = middle_top
-	scissor = yes
-	flowcontainer = {		
+	datacontext = "[GetScriptedGui('tiny_flag')]"
+
+	state = {
+		name = tiny_flag
+		trigger_when = "[ScriptedGui.IsShown(GuiScope.SetRoot(Player.MakeScope).End)]"
+		position = { 75 43 }
+	}
+
+	state = {
+		name = big_flag
+		trigger_when = "[Not(ScriptedGui.IsShown(GuiScope.SetRoot(Player.MakeScope).End))]"
+		position = { 144 43 }
+	}
+
+	flowcontainer = {	
 		ignoreinvisible = yes
-		visible = "[AlertManager.GetPlayer.Exists]"
+		visible = "[And(AlertManager.GetPlayer.Exists, Not(IsReplayShown))]"
 		spacing = 8
+		using = bigger_alerts
 		
 		###########################################################################
 		# RED ALERTS
@@ -248,6 +262,19 @@ widget = {
 				texture = "gfx/interface/icons/shared_icons/civil_war_active_inactive.dds"
 				framesize = {50 50}
 				frame = 1
+			}
+			icon = {
+				position = { 0 0 }
+				size = { 100% 7 }
+				using = flat_background_black
+				color = { 0 0 0 0.5 }
+
+				progressbar = {
+					using = flat_background_white
+					color = { 0.9 0.2 0 0.9 }
+					size = { 100% 100% }
+					value = "[FixedPointToFloat(Player.GetProgressTowardsCivilWar)]"
+				}
 			}
 		}
 
@@ -478,7 +505,10 @@ widget = {
 			using = red_alert
 			blockoverride "On_click"
 			{
-				onclick = "[OpenGameView('culture')]"
+				enabled = "[Not(GetVariableSystem.Exists('c3rd_monetary_window_opened'))]"
+				onclick = "[ExecuteConsoleCommand('gui.createwidget gui/c3rd_monetary_window.gui c3rd_monetary_window')]"
+				onclick = "[GetVariableSystem.Toggle('c3rd_monetary_window_opened')]"
+				onclick = "[GetScriptedGui('c3rd_monetary_recalculation').Execute( GuiScope.SetRoot( Player.MakeScope ).End )]"
 				onrightclick = "[AlertManager.ToggleShowAlert('c3rd_monetary_balance')]"
 			}
 				
@@ -1003,7 +1033,10 @@ widget = {
 			using = yellow_alert
 			blockoverride "On_click"
 			{
-				onclick = "[OpenGameView('overview')]"
+				enabled = "[Not(GetVariableSystem.Exists('c3rd_monetary_window_opened'))]"
+				onclick = "[ExecuteConsoleCommand('gui.createwidget gui/c3rd_monetary_window.gui c3rd_monetary_window')]"
+				onclick = "[GetVariableSystem.Toggle('c3rd_monetary_window_opened')]"
+				onclick = "[GetScriptedGui('c3rd_monetary_recalculation').Execute( GuiScope.SetRoot( Player.MakeScope ).End )]"
 				onrightclick = "[AlertManager.ToggleShowAlert('c3rd_monetary_balance_medium')]"
 			}
 				
@@ -1019,7 +1052,7 @@ widget = {
 		alert = {
 			datacontext = "[GetScriptedGui('c3rd_military_anarchy_alert')]"
 			visible = "[And(ScriptedGui.IsShown(GuiScope.SetRoot(AlertManager.GetPlayer.MakeScope).End), AlertManager.ShowAlert('c3rd_military_anarchy_alert'))]"
-			tooltip = "ALERT_MILITARY_ANARCHY"
+			tooltip = "[ScriptedGui.BuildTooltip( GuiScope.SetRoot( AlertManager.GetPlayer.MakeScope ).End )]"
 			blockoverride "Color"
 			{
 				frame = 5
@@ -1036,7 +1069,32 @@ widget = {
 			{
 				texture = "gfx/interface/icons/shared_icons/invoke_devotio.dds"
 			}
-		}		
+		}	
+		#######################################
+		#C3RD - Influent Characters Ownership
+		#######################################
+
+		alert = {
+			datacontext = "[GetScriptedGui('c3rd_influent_characters_owners')]"
+			visible = "[And(ScriptedGui.IsShown(GuiScope.SetRoot(AlertManager.GetPlayer.MakeScope).End), AlertManager.ShowAlert('c3rd_influent_characters_owners'))]"
+			tooltip = "[ScriptedGui.BuildTooltip( GuiScope.SetRoot( AlertManager.GetPlayer.MakeScope ).End )]" 
+			blockoverride "Color"
+			{
+				frame = 5
+			}
+			using = yellow_alert
+			blockoverride "On_click"
+			{
+				onclick = "[OpenGameView('overview')]"
+				onrightclick = "[AlertManager.ToggleShowAlert('c3rd_influent_characters_owners')]"
+			}
+				
+				
+			blockoverride "Icon"
+			{
+				texture = "gfx/interface/icons/shared_icons/holdings.dds"
+			}
+		}	
 		###########################################################################
 		# GREEN ALERTS
 		###########################################################################			

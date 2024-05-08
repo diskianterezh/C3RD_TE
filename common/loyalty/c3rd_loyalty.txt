@@ -3,7 +3,7 @@
 
 independence_denied = {
 	value = -15
-	yearly_decay = 2
+	yearly_decay = 1
 }
 
 requests_fulfilled = {
@@ -76,4 +76,108 @@ assets_seized = {
 	yearly_decay = 2
 }
 
+property_seized = {
+	value = -10
+	yearly_decay = 1
+}
 
+
+property_seized_small = {
+	value = -5
+	yearly_decay = 1
+}
+
+traded_holding = {
+	value = 10
+	yearly_decay = 2
+}
+
+lost_gov_ownership = {
+	value = -10
+	yearly_decay = 2
+}
+
+is_tax_evading = {
+	value = 10
+	yearly_decay = 1
+}
+
+cant_tax_evading = {
+	value = -7
+	yearly_decay = 1
+}
+
+reintegrated_domain = {
+	value = -50
+	yearly_decay = 1
+}
+
+political_coup = {
+	value = -25
+	yearly_decay = 1
+}
+
+coup_loyal = {
+	value = 10
+	yearly_decay = 1
+}
+
+coup_unloyal = {
+	value = -10
+	yearly_decay = 1
+}
+
+loyalty_acquired = {
+	value = 40
+	yearly_decay = 3
+}
+
+loyalty_acquired2 = {
+	value = 60
+	yearly_decay = 3
+}
+
+political_intervention1 = {
+	value = 10
+	yearly_decay = 1
+}
+
+political_intervention2 = {
+	value = 15
+	yearly_decay = 1
+}
+
+political_intervention3 = {
+	value = 20
+	yearly_decay = 1
+}
+
+political_intervention4 = {
+	value = 30
+	yearly_decay = 1
+}
+
+holding_protected = {
+	value = 10
+	yearly_decay = 1
+}
+
+inspired_disloyalty_other_2 = {
+	value = -15
+	yearly_decay = 2
+}
+
+inspired_disloyalty_other_3 = {
+	value = -15
+	yearly_decay = 1
+}
+
+governorship_lost_collapse = {
+	value = -20
+	yearly_decay = 1
+}
+
+supported_action = {
+	value = 15
+	yearly_decay = -1
+}

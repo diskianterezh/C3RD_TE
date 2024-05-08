@@ -4,7 +4,17 @@ empire_rivals = {
 	yearly_decay = 1
 }
 
+extension_stopped = {
+	value = -75
+	yearly_decay = 1
+}
+
 border_money = {
 	value = -25
+	yearly_decay = 1
+}
+
+empire_gave_independance = {
+	value = 100
 	yearly_decay = 1
 }

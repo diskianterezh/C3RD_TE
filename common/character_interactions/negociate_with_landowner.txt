@@ -1,0 +1,102 @@
+﻿negociate_with_landowner = {
+
+	on_other_nation = no
+	on_own_nation = yes
+	needs_senate_approval = yes
+	
+	sound = "event:/SFX/UI/Character/Generic/sfx_ui_character_economy"
+	
+	potential_trigger = {
+		hidden:scope:target = {
+			employer = scope:actor
+			has_character_modifier = major_influence_aristocrat
+			employer = {
+				OR = {
+					any_governorships = {
+						has_variable = governorship_owner
+						var:governorship_owner = scope:target
+					}
+					any_subject = {
+						is_subject_type = autonomous_domain
+						has_variable = owner_from_another_empire
+						var:owner_from_another_empire = scope:target
+					}
+				}
+			}
+			is_ruler = no
+			is_alive = yes
+			employer = {
+				OR = {
+					is_monarchy = yes
+					is_republic = yes
+				}
+			}
+			NOT = { employer = { tag = REB } }
+			NOT = { employer = { tag = BAR } }
+		}
+	}
+	
+	allowed_trigger = {
+		scope:target = {
+			employer = {
+				trigger_if = {
+					limit = { has_country_modifier = internal_collapse }
+					NOT = { has_country_modifier = internal_collapse }
+				}
+			}
+		}
+		trigger_if = {
+			limit = {
+				scope:target = {
+					has_variable = got_negociated_recently
+				}
+			}
+			custom_tooltip = {
+				text = negociate_with_landowner_tt
+				scope:target = {
+					NOT = {has_variable = got_negociated_recently}
+				}
+			}
+		}
+		trigger_if = {
+			limit = {
+				scope:target = {
+					employer = {
+						has_variable = negociating_no_duplicate
+					}
+				}
+			}
+			custom_tooltip = {
+				text = negociate_with_landowner_tt2
+				NOT = {
+					scope:target = {
+						employer = {
+							has_variable = negociating_no_duplicate
+						}
+					}}
+			}
+		}
+	}
+
+	effect = {
+		custom_tooltip = negociate_with_landowner_effect
+		
+		scope:target = {
+			employer = {
+				set_variable = { #to prevent negociating with several landowners at the same time
+					name = negociating_no_duplicate
+					days = 30
+				}
+			}
+		}
+		scope:actor = {
+			trigger_event = {
+				id = c3rd_other_events.85
+			}
+		}
+	}
+	
+	ai_will_do = {
+	}
+	
+}	

@@ -25,6 +25,12 @@ c3rd_custom_on_actions_low_stab_event = {
 	random_events = {
 		60 = 0
         15 = low_stab_event.4
+		20 = low_stab_event.7
+		20 = low_stab_event.8
+		5 = low_stab_event.9 #duchy expanding
+		5 = low_stab_event.10
+		15 = low_stab_event.11
+		5 = low_stab_event.12
         1 = low_stab_event.3
 	}
 }
@@ -177,7 +183,7 @@ c3rd_custom_on_actions_rival_empire_in_war = {
 		any_current_war = {
 			NOT = {
 				any_war_participant = {
-					this = var:mother_empire
+					this = root.var:mother_empire
 				}
 			}
 			war_score = {
@@ -193,7 +199,7 @@ c3rd_custom_on_actions_rival_empire_in_war = {
 			limit = {
 				NOT = {
 					any_war_participant = {
-						this = var:mother_empire
+						this = root.var:mother_empire
 					}
 				}
 				war_score = {
@@ -363,6 +369,7 @@ c3rd_events_monthly_pulse = { #check if people in country can fuck shit up
 		20 = c3rd_events.81 #only general take some powa
 		20 = c3rd_events.45 #republican leader push reforms
 		50 = c3rd_events.39 #kingmaker no office
+		5 = c3rd_events.391 #kingmaker unloyal
 		5 = c3rd_events.48 #Republic above 1000 territories
 		40 = c3rd_events.21 #governor defect to rival
 	}
@@ -377,14 +384,170 @@ c3rd_other_events_monthly_pulse = { #check if events can happen
 			tag = BAR
 		}
 	}
+	effect = {
+		if = {
+			limit = {
+				has_land = yes
+				is_tribal = no
+				has_civil_war = no
+				current_date >= 750.1.1
+				has_country_modifier = solidus_introduced
+				any_character = {
+					employer = root
+					has_character_modifier = major_influence_aristocrat
+					has_variable = potential_sucession_ownership_crisis
+					save_temporary_scope_as = main_heir_landowner1
+					family = {
+						any_family_member = {
+							count >= 3
+							is_adult = yes
+							employer = root
+							NOT = {this = scope:main_heir_landowner1}
+						}
+					}
+				}
+			}
+			trigger_event = {
+				id = c3rd_other_events.105
+				days = 5
+			}
+		}
+		every_character = {
+			limit = {
+				has_variable = head_intent_consolidate
+				wealth >= 1000
+			}
+			save_scope_as = consolidating_head
+			random_list = {
+				10 = {
+				}
+				1 = {
+					modifier = {
+						add = 1
+						wealth >= 5000
+					}
+					modifier = {
+						add = 1
+						employer = {
+							OR = {
+								has_country_modifier = law_advantages_1
+								has_country_modifier = law_advantages_2
+								has_country_modifier = law_advantages_3
+							}
+						}
+					}
+					modifier = {
+						add = 2
+						employer = {
+							OR = {
+								has_country_modifier = law_advantages_4
+								has_country_modifier = law_advantages_5
+							}
+						}
+					}
+					employer = {
+						random_owned_province = {
+							limit = {
+								NOT = {
+									exists = holding_owner
+								}
+							}
+							weight = {
+								modifier = {
+									factor = 10
+									governorship = {
+										NOT = {has_variable = governorship_owner}
+									}
+								}
+							}
+							scope:consolidating_head = {
+								add_holding = prev
+								add_gold = -250
+							}
+						}
+					}
+				}
+			}
+		}
+		every_character = {
+			limit = {
+				has_variable = head_intent_disloyal
+				wealth >= 2000
+			}
+			save_scope_as = disloyal_head
+			random_list = {
+				15 = {
+				}
+				1 = {
+					modifier = {
+						add = 1
+						wealth >= 5000
+					}
+					modifier = {
+						add = 1
+						employer = {
+							OR = {
+								has_country_modifier = law_advantages_1
+								has_country_modifier = law_advantages_2
+							}
+						}
+					}
+					modifier = {
+						add = 2
+						employer = {
+							OR = {
+								has_country_modifier = law_advantages_3
+								has_country_modifier = law_advantages_4
+							}
+						}
+					}
+					modifier = {
+						add = 3
+						employer = {
+							has_country_modifier = law_advantages_5
+						}
+					}
+					employer = {
+						random_character = {
+							limit = {
+								family = scope:disloyal_head.family
+								NOT = {this = scope:disloyal_head}
+								power_base > 0
+							}
+							weight = {
+								modifier = {
+									factor = 10
+									power_base >= 5
+								}
+								modifier = {
+									factor = 0.1
+									loyalty < 33
+								}
+								modifier = {
+									factor = 0.2
+									loyalty < 10
+								}
+							}
+							add_loyalty = inspired_disloyalty_other_3
+						}
+					}
+					scope:disloyal_head = {
+						add_gold = -500
+					}
+				}
+			}
+		}
+	}
 	random_events = {
 		500 = 0
 		20 = c3rd_other_events.4 #too few nobles culture pop
-		20 = c3rd_other_events.8 #powerful characters asking to stop the tax controls
-		5 = c3rd_other_events.9 #powerful characters asking for census
+		18 = c3rd_other_events.8 #powerful characters asking to stop the tax controls
+		4 = c3rd_other_events.9 #powerful characters asking for census
 		5 = c3rd_other_events.12 #games
 		3 = c3rd_other_events.30 #slave culture revolt
+		3 = c3rd_other_events.321 #ex-noble culture revolt
 		20 = c3rd_other_events.31 #slave culture uprising
+		15 = c3rd_other_events.32 #noble revoked culture uprising
 		30 = c3rd_other_events.50 #wonder threatened
 		5 = c3rd_other_events.52 #stabhit from wonders pillaged
 		4 = c3rd_other_events.60 #stabhit from barbarians
@@ -393,8 +556,17 @@ c3rd_other_events_monthly_pulse = { #check if events can happen
 		5 = c3rd_other_events.72 #act against silver crash
 		7 = c3rd_other_events.73 #rpeople trying to escape taxes
 		2 = c3rd_other_events.74 #Decuriones fleeing
+		2 = c3rd_other_events.84 #nobles escaping tax through land
+		8 = c3rd_other_events.90 #political character doing his things
+		15 = c3rd_other_events.91 #coup from political character
+		8 = c3rd_other_events.92 #governor holding clash
+		8 = c3rd_other_events.93 #governor holding clash ruler
+		2 = c3rd_other_events.101 #ruler reform constantine
+		30 = c3rd_other_events.106 #coveted governor
+		15 = c3rd_other_events.107 #holdings clash with heads
+		9 = c3rd_other_events.110 #intervention *5 toward civil war
+		
 	}
-
 }
 
 c3rd_culture_noble_assimilation = {
@@ -405,21 +577,59 @@ c3rd_culture_noble_assimilation = {
 				has_pop_type_right = nobles
 			}
 			save_scope_as = that_noble_culture
-			root = {
-				every_owned_province = {
-					limit = {
-						dominant_province_culture = scope:that_noble_culture.culture
-						any_pops_in_province = {
-							pop_culture = scope:that_noble_culture.culture
+			random_list = {
+				1 = {
+					modifier = {
+						add = 2
+						country_culture_pop_count >= 1000
+					}
+					modifier = {
+						add = 3
+						country_culture_pop_count >= 2000
+					}
+					modifier = {
+						add = 5
+						country_culture_pop_count >= 3000
+					}
+					modifier = {
+						add = 15
+						country_culture_pop_count >= 5000
+					}
+				}
+				3 = {
+					modifier = {
+						add = 5
+						country_culture_pop_count <= 20
+					}
+					modifier = {
+						add = 5
+						country_culture_pop_count <= 50
+					}
+					modifier = {
+						add = 3
+						country_culture_pop_count <= 200
+					}
+					modifier = {
+						add = 2
+						country_culture_pop_count <= 500
+					}
+					root = {
+						every_owned_province = {
+							limit = {
+								dominant_province_culture = scope:that_noble_culture.culture
+								any_pops_in_province = {
+									pop_culture = scope:that_noble_culture.culture
+								}
+							}
+							random_pops_in_province = {
+								limit = {
+									pop_culture = root.culture 
+								}
+								set_pop_culture = scope:that_noble_culture.culture
+							}
+		
 						}
 					}
-					random_pops_in_province = {
-						limit = {
-							pop_culture = root.culture 
-						}
-						set_pop_culture = scope:that_noble_culture.culture
-					}
-
 				}
 			}
 		}
@@ -430,6 +640,7 @@ c3rd_culture_noble_assimilation = {
 
 c3rd_mines_exhaustion_pulse = {
 	trigger = {
+		is_tribal = no
 		has_land = yes
 		current_date >= 750.1.1
 	}
@@ -518,6 +729,7 @@ c3rd_mines_exhaustion_pulse = {
 
 c3rd_mines_exhaustion_trigger = {
 	trigger = {
+		is_tribal = no
 		has_land = yes
 		any_owned_province = {
 			trade_goods = precious_metals
@@ -566,53 +778,20 @@ c3rd_calculate_deflation = {
 					has_variable = deflation_value
 				}
 				num_of_cities >= 500
+				is_tribal = no
 			}
 			set_variable = {
 				name = deflation_value
 				value = 0
 			}
 		}
-		if = { #first reduction of the silver unvalue if aurelian
-			limit = {
-				has_variable = silver_unvalue
-				has_law = second_reform_law
-				var:silver_unvalue > 0
-			}
-			change_variable = {
-				name = silver_unvalue
-				add = -1
-			}
-		}
-		if = { #reduction if bartering
-			limit = {
-				has_variable = silver_unvalue
-				has_country_modifier = bartering_authorised
-				var:silver_unvalue > 0
-			}
-			change_variable = {
-				name = silver_unvalue
-				add = -1
-			}
-		}
-		if = { #reduction if silv consolidation (solidus)
-			limit = {
-				has_variable = silver_unvalue
-				has_country_modifier = silver_consolidation_sol
-				var:silver_unvalue > 0
-			}
-			change_variable = {
-				name = silver_unvalue
-				add = -1
-			}
-		}
-		if = { #silver law reduce deflation passively
+		if = {
 			limit = {
 				has_variable = deflation_value
-				has_law = monetary_reform_law
 			}
 			change_variable = {
 				name = deflation_value
-				add = -1
+				add = c3rd_deflation_increase
 			}
 		}
 		if = { #creation of the silver unvalue variable if >500 cities
@@ -622,156 +801,23 @@ c3rd_calculate_deflation = {
 				}
 				has_law = monetary_reform_law
 				num_of_cities >= 500
+				is_tribal = no
 			}
 			set_variable = {
 				name = silver_unvalue
 				value = 0
 			}
 		}
-		if = { #reduce deflation if economy good
-			limit = {
-				has_variable = deflation_value
-				var:country_economy > 1
-				var:deflation_value > 0
-			}
-			change_variable = {
-				name = deflation_value
-				add = -1
-			}
-		}
-		if = { #economy very good
-			limit = {
-				has_variable = deflation_value
-				var:country_economy > 2
-				var:deflation_value > 0
-			}
-			change_variable = {
-				name = deflation_value
-				add = -2
-			}
-		}
-		if = { #veryvery good
-			limit = {
-				has_variable = deflation_value
-				var:country_economy > 4
-				var:deflation_value > 0
-			}
-			change_variable = {
-				name = deflation_value
-				add = -3
-			}
-		}
-		#increase deflation or silver unvalue, depending of the law - only if cities > 500
-		if = { 
-			limit = {
-				var:country_economy < 1
-				num_of_cities >= 500
-			}
-			if = {
-				limit = { NOT = {has_law = monetary_reform_law}} #if you have the monetary reform, you decrease the value of silver
-				change_variable = {
-					name = deflation_value
-					add = 1
-				}
-			}
-			else = {
-				change_variable = {
-					name = silver_unvalue
-					add = 1
-				}
-			}
-		}
 		if = {
 			limit = {
-				var:country_economy < 0.8
-				num_of_cities >= 500
-			}
-			if = {
-				limit = { NOT = {has_law = monetary_reform_law}} #if you have the monetary reform, you decrease the value of silver
-				change_variable = {
-					name = deflation_value
-					add = 1
-				}
-			}
-			else = {
-				change_variable = {
-					name = silver_unvalue
-					add = 1
-				}
-			}
-		}
-		if = {
-			limit = {
-				var:country_economy < 0.6
-				num_of_cities >= 500
-			}
-			if = {
-				limit = { NOT = {has_law = monetary_reform_law}} #if you have the monetary reform, you decrease the value of silver
-				change_variable = {
-					name = deflation_value
-					add = 1
-				}
-			}
-			else = {
-				change_variable = {
-					name = silver_unvalue
-					add = 1
-				}
-			}
-		}
-		if = {
-			limit = {
-				var:country_economy < 0.4
-				num_of_cities >= 500
-			}
-			if = {
-				limit = { NOT = {has_law = monetary_reform_law}} #if you have the monetary reform, you decrease the value of silver
-				change_variable = {
-					name = deflation_value
-					add = 1
-				}
-			}
-			else = {
-				change_variable = {
-					name = silver_unvalue
-					add = 1
-				}
-			}
-		}
-		if = { #passive unvalue of silver if silver law
-			limit = { 
-				has_law = monetary_reform_law
-				num_of_cities >= 500
-			}
-			change_variable = {
-				name = silver_unvalue
-				add = 1
-			}
-		}
-	}
-}
-c3rd_aurelien = {
-	trigger = {
-		has_land = yes
-		is_ai = no
-		NOT = {
-			has_country_modifier = solidus_introduced
-		}
-	}
-	effect = {
-		if = {
-			limit = { 
-				has_law = second_reform_law
 				has_variable = silver_unvalue
-				var:silver_unvalue > 0
 			}
 			change_variable = {
 				name = silver_unvalue
-				add = -1
+				add = c3rd_silver_increase
 			}
 		}
 	}
-
 }
 
 c3rd_economic_warning = {
@@ -828,6 +874,7 @@ c3rd_apply_deflation = { #applying deflation modifiers events
 				}
 				var:deflation_value >= 30
 				num_of_cities >= 500
+				is_tribal = no
 			}
 			trigger_event = {
 				id = c3rd_other_events.20
@@ -841,6 +888,7 @@ c3rd_apply_deflation = { #applying deflation modifiers events
 				}
 				var:deflation_value >= 75
 				num_of_cities >= 500
+				is_tribal = no
 			}
 			trigger_event = {
 				id = c3rd_other_events.21
@@ -853,6 +901,7 @@ c3rd_apply_deflation = { #applying deflation modifiers events
 				}
 				var:deflation_value >= 130
 				num_of_cities >= 500
+				is_tribal = no
 			}
 			trigger_event = {
 				id = c3rd_other_events.22
@@ -927,6 +976,7 @@ c3rd_apply_silver_unvalue = { #applying silver modifiers events
 				}
 				var:silver_unvalue >= 60
 				num_of_cities >= 500
+				is_tribal = no
 			}
 			trigger_event = {
 				id = c3rd_other_events.26
@@ -940,6 +990,7 @@ c3rd_apply_silver_unvalue = { #applying silver modifiers events
 				}
 				var:silver_unvalue >= 95
 				num_of_cities >= 500
+				is_tribal = no
 			}
 			trigger_event = {
 				id = c3rd_other_events.27
@@ -952,6 +1003,7 @@ c3rd_apply_silver_unvalue = { #applying silver modifiers events
 				}
 				var:silver_unvalue >= 130
 				num_of_cities >= 500
+				is_tribal = no
 			}
 			trigger_event = {
 				id = c3rd_other_events.28
@@ -1061,6 +1113,158 @@ c3rd_province_revolt_gain = {
 
 }
 
+
+c3rd_state_mass_revolt_gain = {
+	trigger = {
+		has_land = yes
+		is_ai = no
+		current_date >= 700.1.1
+		any_country_culture = {
+			NOT = {has_pop_type_right = nobles }
+			has_country_culture_modifier = on_going_mass_revolt
+		}
+	}
+	effect = {
+		every_country_state = {
+			limit = {
+				NOT = {
+					has_state_modifier = secess_preparation
+				}
+				NOT = {
+					this = root.capital_scope.state
+				}
+				any_state_province = {
+					count >= 4
+					save_temporary_scope_as = that_noble_province
+					any_pops_in_province = {
+						save_temporary_scope_as = that_pop_province
+						root = {
+							any_country_culture = {
+								this.culture = scope:that_pop_province.culture
+								has_country_culture_modifier = on_going_mass_revolt
+							}
+						}
+					}
+					owner = {
+						any_country_culture = {
+							this.culture.culture_group = scope:that_noble_province.dominant_province_culture_group
+							has_country_culture_modifier = on_going_mass_revolt
+						}
+					}
+
+				}
+			}
+			random_list = {
+				13 = {
+				}
+				1 = {
+					modifier = {
+						add = 1
+						root.stability <= 50
+					}
+					modifier = {
+						add = 1
+						root.stability <= 25
+					}
+					modifier = {
+						add = 1
+						root.legitimacy <= 50
+					}
+					modifier = {
+						add = 1
+						root.legitimacy <= 0
+					}
+					modifier = {
+						add = 1
+						root={num_of_cities >= 500}
+					}
+					modifier = {
+						add = 1
+						root={num_of_cities >= 2000}
+					}
+					add_state_modifier = {
+						name = secess_preparation
+						duration = 3650
+					}
+				}
+			}
+		}
+		every_country_state = {
+			limit = {
+				NOT = {
+					has_state_modifier = secess_preparation
+				}
+				NOT = {
+					this = root.capital_scope.state
+				}
+				any_state_province = {
+					state_loyalty <= 50
+					count >= 4
+					any_pops_in_province = {
+						save_temporary_scope_as = that_pop_province
+						root = {
+							any_country_culture = {
+								this.culture = scope:that_pop_province.culture
+								has_country_culture_modifier = on_going_mass_revolt
+							}
+						}
+					}
+				}
+				any_state_province = {
+					any_neighbor_province = {
+						has_owner = yes
+						owner = root
+						this.state = {
+							has_state_modifier = secess_preparation
+						}
+					}
+				}
+			}
+			random_list = {
+				10 = {
+				}
+				1 = {
+					modifier = {
+						add = 1
+						root.stability <= 50
+					}
+					modifier = {
+						add = 1
+						root.stability <= 25
+					}
+					modifier = {
+						add = 1
+						root.legitimacy <= 50
+					}
+					modifier = {
+						add = 1
+						root.legitimacy <= 0
+					}
+					modifier = {
+						add = 1
+						any_state_province = {
+							state_loyalty <= 30
+						}
+					}
+					modifier = {
+						add = 1
+						root={num_of_cities >= 500}
+					}
+					modifier = {
+						add = 1
+						root={num_of_cities >= 2000}
+					}
+					add_state_modifier = {
+						name = secess_preparation
+						duration = 3650
+					}
+				}
+			}
+		}
+	}
+
+}
+
 c3rd_really_rich_country = {
 	trigger = {
 		has_land = yes
@@ -1118,7 +1322,7 @@ c3rd_barbarian_sack = {
 		}
 	}
 	effect = {
-		every_province = {
+		every_owned_province = {
 			limit = {
 				is_previous_controller = root
 				controller = { tag = BAR }
@@ -1144,4 +1348,1390 @@ c3rd_barbarian_sack = {
 		}
 	}
 
+}
+
+c3rd_holding_control = { #governor gain control of region
+	trigger = {
+		has_land = yes
+		OR = {
+			NOT = {
+				has_law = basic_administrative_law
+			}
+			has_country_modifier = solidus_introduced
+		}
+		any_governorships = {
+			exists = governor
+			governor = {
+				is_ruler = no
+			}
+			save_temporary_scope_as = governorship_tmp_scope
+			NOR = {
+				AND = {
+					has_variable = governorship_owner
+					var:governorship_owner = {
+						is_head_of_family = yes
+						family = scope:governorship_tmp_scope.governor.family
+					}
+				}
+				AND = {
+					has_variable = governorship_owner
+					var:governorship_owner = governor
+				}
+			}
+			OR = {
+				AND = {
+					region_control_value >= 25
+					root={has_law = decentralized_administration_law}
+				}
+				AND = {
+					region_control_value >= 35
+					root={has_country_modifier = solidus_introduced}
+				}
+				region_control_value >= 45
+			}
+		}
+	}
+	effect = {
+		while = {
+			count = country_size_ratio
+			limit = {
+				any_governorships = {
+					exists = governor
+					governor = {
+						is_ruler = no
+					}
+					save_temporary_scope_as = governorship_tmp_scope
+					NOR = {
+						AND = {
+							has_variable = governorship_owner
+							var:governorship_owner = {
+								is_head_of_family = yes
+								family = scope:governorship_tmp_scope.governor.family
+							}
+						}
+						AND = {
+							has_variable = governorship_owner
+							var:governorship_owner = governor
+						}
+						has_variable = parsed_govship
+					}
+					OR = {
+						AND = {
+							region_control_value >= 25
+							root={has_law = decentralized_administration_law}
+						}
+						AND = {
+							region_control_value >= 35
+							root={has_country_modifier = solidus_introduced}
+						}
+						region_control_value >= 45
+					}
+				}
+			}
+			random_governorships = {
+				limit = {
+					exists = governor
+					governor = {
+						is_ruler = no
+					}
+					save_temporary_scope_as = governorship_tmp_scope
+					NOR = {
+						AND = {
+							has_variable = governorship_owner
+							var:governorship_owner = {
+								is_head_of_family = yes
+								family = scope:governorship_tmp_scope.governor.family
+							}
+						}
+						AND = {
+							has_variable = governorship_owner
+							var:governorship_owner = governor
+						}
+					}
+					OR = {
+						AND = {
+							region_control_value >= 30
+							root={has_law = decentralized_administration_law}
+						}
+						AND = {
+							region_control_value >= 40
+							root={has_country_modifier = solidus_introduced}
+						}
+						region_control_value >= 50
+					}
+				}
+				weight = {
+					modifier = {
+						factor = 3
+						region_control_value >= 75
+					}
+					modifier = {
+						factor = 2
+						region_control_value >= 60
+					}
+					modifier = {
+						factor = 5
+						region_control_value >= 90
+					}
+					modifier = { #less chances close to the capital
+						factor = 0.4
+						any_governorship_state = {
+							any_state_province = {
+								region = {
+									any_neighbor_region = {
+										any_region_province = {
+											owner = root
+											is_capital = yes
+										}
+									}
+								}
+							}
+						}
+					}
+					modifier = { #more chances near foreign countries
+						factor = 2
+						any_governorship_state = {
+							any_state_province = {
+								any_neighbor_province = {
+									has_owner = yes
+									NOT = {
+										owner = root
+									}
+								}
+							}
+						}
+					}
+				}
+				save_scope_as = autonomy_governorship
+				set_variable = {
+					name = parsed_govship
+					days = 10
+				}
+				root = {
+					random_list = {
+						9 = {
+							modifier = {
+								add = 2
+								num_of_cities <= 200
+							}
+						}
+						1 = {
+							modifier = {
+								add = 1
+								stability <= 50
+							}
+							modifier = {
+								add = 1
+								has_law = decentralized_administration_law
+							}
+							modifier = {
+								add = 1
+								has_country_modifier = solidus_introduced
+							}
+							modifier = {
+								add = 1
+								scope:autonomy_governorship = {
+									region_control_value >= 70
+								}
+							}
+							modifier = {
+								add = 1
+								scope:autonomy_governorship = {
+									region_control_value >= 80
+								}
+							}
+							modifier = {
+								add = 2
+								scope:autonomy_governorship = {
+									region_control_value >= 90
+								}
+							}
+							modifier = {
+								add = 1
+								num_of_cities >= 500
+							}
+							modifier = {
+								add = 1
+								num_of_cities >= 1000
+							}
+							modifier = {
+								add = 1
+								num_of_cities >= 2000
+							}
+							trigger_event = {
+								id = c3rd_other_events.80
+								days = { 30 360 }
+							}
+							
+						}
+					}
+
+				}
+			}
+		}
+
+	}
+}
+
+c3rd_holding_clear = {
+	trigger = {
+		any_governorships = {
+			has_variable = governorship_owner
+			var:governorship_owner = {
+				OR = {
+					is_alive = no
+					NOT = {employer = root}
+				}
+			}
+		}
+	}
+	effect = {
+		every_governorships = {
+			limit = {
+				has_variable = governorship_owner
+				var:governorship_owner = {
+					OR = {
+						is_alive = no
+						NOT = {employer = root}
+					}
+				}
+			}
+			if = {
+				limit = {
+					var:governorship_owner = {	
+						is_head_of_family = no
+						exists = family.head_of_family
+						family.head_of_family = {
+							employer = root
+						}
+					}
+				}
+				var:governorship_owner = {
+					family.head_of_family = {
+						save_scope_as = ownership_target
+					}
+				}
+				remove_variable = governorship_owner
+				set_variable = {
+					name = governorship_owner
+					value = scope:ownership_target
+				}
+				calculate_the_gov_ownership = yes
+			}
+			else_if = {
+				limit = {
+					var:governorship_owner = {	
+						is_head_of_family = yes
+						exists = next_in_family
+						next_in_family = {
+							employer = root
+						}
+					}
+				}
+				var:governorship_owner = {
+					next_in_family = {
+						save_scope_as = ownership_target
+					}
+				}
+				remove_variable = governorship_owner
+				set_variable = {
+					name = governorship_owner
+					value = scope:ownership_target
+				}
+				calculate_the_gov_ownership = yes
+			}
+			else = {
+				remove_variable = governorship_owner
+			}
+		}
+	}
+}
+
+c3rd_country_control_check = {
+	trigger = {
+		OR = {
+			any_governorships = {
+				has_variable = governorship_owner
+				var:governorship_owner = {
+					is_alive = yes
+					employer = root
+				}
+			}
+			any_subject = {
+				is_subject_type = autonomous_domain
+				has_variable = owner_from_another_empire
+			}
+			any_character = {
+				has_variable = country_ownership
+			}
+
+		}
+	}
+	effect = {
+		every_character = {
+			limit = {
+				save_temporary_scope_as = charcheck_tmp
+				OR = {
+					employer = {
+						any_governorships = {
+							has_variable = governorship_owner
+							var:governorship_owner = scope:charcheck_tmp
+						}
+					}
+					employer = {
+						any_subject = {
+							has_variable = owner_from_another_empire
+							is_subject_type = autonomous_domain
+							var:owner_from_another_empire = scope:charcheck_tmp
+						}
+					}
+					has_variable = country_ownership
+					is_head_of_family = yes
+				}
+			}
+			recalculate_ownership_char = yes
+		}
+	}
+}
+
+c3rd_country_calculate_the_gov_ownership = {
+	trigger = {
+		any_governorships = {
+			has_variable = governorship_owner
+			var:governorship_owner = {
+				is_alive = yes
+				employer = root
+			}
+		}
+	}
+	effect = {
+		every_governorships = {
+			limit = {
+				has_variable = governorship_owner
+				var:governorship_owner = {
+					is_alive = yes
+					employer = root
+				}
+			}
+			calculate_the_gov_ownership = yes
+		}
+	}
+}
+
+
+c3rd_holding_gain_owner = { #owner gain control in his region
+	trigger = {
+		has_land = yes
+		OR = {
+			NOT = {
+				has_law = basic_administrative_law
+			}
+			has_country_modifier = solidus_introduced
+		}
+		any_governorships = { #check available governorship (thus owner)
+			exists = governor
+			governor = {
+				is_ruler = no
+			}
+			save_temporary_scope_as = governorship_tmp_scope
+			has_variable = governorship_owner
+			OR = {
+				AND = {
+					var:governorship_owner = {
+						is_head_of_family = yes
+						family = scope:governorship_tmp_scope.governor.family
+					}
+				}
+				var:governorship_owner = governor
+			}
+			any_governorship_state = {
+				any_state_province = {
+					NOT = {
+						exists = holding_owner
+					}
+				}
+			}
+		}
+	}
+	effect = {
+
+        every_governorships = {
+            limit = {
+				exists = governor
+				governor = {
+					is_ruler = no
+				}
+				save_temporary_scope_as = governorship_tmp_scope
+				has_variable = governorship_owner
+				OR = {
+					AND = {
+						var:governorship_owner = {
+							is_head_of_family = yes
+							family = scope:governorship_tmp_scope.governor.family
+						}
+					}
+					var:governorship_owner = governor
+				}
+				any_governorship_state = {
+					any_state_province = {
+						NOT = {
+							exists = holding_owner
+						}
+					}
+				}
+				var:governorship_owner = {
+					wealth >= 100
+				}
+            }
+            save_scope_as = new_holding_governorship
+			random_list = { #
+				6 = {
+					modifier = {
+						add = 4
+						root = {num_of_cities <= 200}
+					}
+				}
+				1 = {
+					modifier = {
+						add = 1
+						root = {stability >= 75}
+					}
+					modifier = {
+						add = 1
+						has_variable = governorship_owner
+						var:governorship_owner = {
+							wealth >= 500
+						}
+					}
+					modifier = {
+						add = 1
+						has_variable = governorship_owner
+						var:governorship_owner = {
+							wealth >= 2000
+						}
+					}
+					modifier = {
+						add = 1
+						has_variable = governorship_owner
+						var:governorship_owner = {
+							wealth >= 5000
+						}
+					}
+					modifier = {
+						add = 2
+						has_variable = governorship_owner
+						var:governorship_owner = {
+							wealth >= 10000
+						}
+					}
+					modifier = {
+						add = 1
+						root = {num_of_cities >= 1000}
+					}
+					modifier = {
+						add = 1
+						root = {num_of_cities >= 2000}
+					}
+					modifier = {
+						factor = 2
+						root = {has_country_modifier = solidus_introduced}
+					}
+					modifier = {
+						factor = 2
+						root = {has_law = decentralized_administration_law}
+					}
+					root = {
+						random_owned_province = {
+							limit = {
+								governorship = scope:new_holding_governorship
+								NOT = {
+									exists = holding_owner
+								}
+							}
+							weight = {
+								modifier = {
+									factor = 10
+									any_neighbor_province = {
+										has_owner = yes
+										holding_owner = scope:new_holding_governorship.var:governorship_owner
+									}
+								}
+							}
+							save_scope_as = new_holding_target
+						}
+						scope:new_holding_governorship = {
+							var:governorship_owner = {
+								add_gold = -100
+								add_holding = scope:new_holding_target
+							}
+						}
+					}
+				}
+			}
+        }
+	}
+}
+
+
+c3rd_holding_tax_evasion = { #when tax evasion is on but also when you have the law advantage modifier 3+
+	trigger = {
+		has_land = yes
+		OR = {
+			has_variable = land_tax_evasion_authorized
+			has_country_modifier = law_advantages_3
+			has_country_modifier = law_advantages_4
+			has_country_modifier = law_advantages_5
+		}
+		any_governorships = { #check available governorship (thus owner)
+			exists = governor
+			governor = {
+				is_ruler = no
+			}
+			any_governorship_state = {
+				any_state_province = {
+					NOT = {
+						exists = holding_owner
+					}
+				}
+			}
+		}
+	}
+	effect = {
+
+        every_governorships = {
+            limit = {
+				exists = governor
+				governor = {
+					is_ruler = no
+					OR = {
+						corruption > 30
+						loyalty < 50
+					}
+				}
+				any_governorship_state = {
+					any_state_province = {
+						NOT = {
+							exists = holding_owner
+						}
+					}
+				}
+				var:governorship_owner = {
+					wealth >= 50
+				}
+            }
+            save_scope_as = new_holding_governorship
+			random_list = { #base 16% up 82%
+				5 = {
+				}
+				1 = {
+					modifier = {
+						add = 1
+						owner = {stability >= 75}
+					}
+					modifier = {
+						add = 1
+						governor = {
+							wealth >= 500
+						}
+					}
+					modifier = {
+						add = 1
+						OR = {
+							root = {has_country_modifier = law_advantages_1}
+							root = {has_country_modifier = law_advantages_2}
+							root = {has_country_modifier = law_advantages_3}
+							root = {has_country_modifier = law_advantages_4}
+							root = {has_country_modifier = law_advantages_5}
+						}
+					}
+					modifier = {
+						add = 1
+						governor = {
+							wealth >= 2000
+						}
+					}
+					modifier = {
+						add = 1
+						governor = {
+							wealth >= 5000
+						}
+					}
+					modifier = {
+						add = 1
+						governor = {
+							wealth >= 10000
+						}
+					}
+					modifier = {
+						factor = 2
+						governor = {
+							corruption > 50
+						}
+					}
+					modifier = {
+						factor = 2
+						governor = {
+							corruption > 75
+						}
+					}
+					random_governorship_state = {
+						limit = {
+							any_state_province = {
+								NOT = {
+									exists = holding_owner
+								}
+							}
+						}
+						random_state_province = {
+							limit = {
+								NOT = {
+									exists = holding_owner
+								}
+							}
+							weight = {
+								modifier = {
+									factor = 10
+									any_neighbor_province = {
+										has_owner = yes
+										holding_owner = scope:new_holding_governorship.var:governorship_owner
+									}
+								}
+							}
+							save_scope_as = new_holding_target
+							governor = {
+								add_gold = -50
+								add_holding = scope:new_holding_target
+							}
+						}
+					}
+				}
+			}
+        }
+	}
+}
+
+c3rd_variables_clear = {
+	effect = {
+		every_country = {
+			limit = {
+				has_variable = owner_from_another_empire
+				OR = {
+					var:owner_from_another_empire = {
+						is_alive = no
+					}
+					has_land = no
+				}
+				
+			}
+			remove_variable = owner_from_another_empire
+		}
+		random_subject = {
+			limit = {
+				is_subject_type = autonomous_domain
+				NOT = {has_variable = owner_from_another_empire}
+				has_land = yes
+			}
+			save_scope_as = subject_without_owner
+			root = {
+				trigger_event = {
+					id = c3rd_other_events.88
+					days = { 10 100}
+				}
+			}
+		}
+		every_subject = {
+			limit = {
+				is_subject_type = autonomous_domain
+				has_variable = owner_from_another_empire
+				has_land = yes
+				var:owner_from_another_empire = {
+					NOT = {employer = root}
+					exists = family
+					family = {
+						any_family_member = {
+							employer = root
+							is_head_of_family = yes
+						}
+					}
+				}
+			}
+			var:owner_from_another_empire = {
+				family = {
+					head_of_family = {
+						save_scope_as = owner_target
+					}
+				}
+			}
+			remove_variable = owner_from_another_empire
+			set_variable = {
+				name = owner_from_another_empire
+				value = scope:owner_target
+			}
+			scope:owner_target = {
+				recalculate_ownership_char = yes
+			}
+		}
+		if = {
+			limit = {
+				government = duchy
+				num_of_cities >= 50
+			}
+			trigger_event = {
+				id = c3rd_other_events.102
+				days = { 10 100}
+			}
+
+		}
+		random_subject = {
+			limit = {
+				is_subject_type = autonomous_domain
+				has_variable = owner_from_another_empire
+				has_land = yes
+				var:owner_from_another_empire = {
+					NOT = {employer = root}
+				}
+			}
+
+			save_scope_as = subject_with_foreign_owner
+			root = {
+				trigger_event = {
+					id = c3rd_other_events.89
+					days = { 10 100}
+				}
+			}
+		}
+		if = { #2 domains of same guy
+			limit = {
+				any_character = {
+					save_temporary_scope_as = tmp_char
+					employer = {
+						any_subject = {
+							count >= 2
+							has_variable = owner_from_another_empire
+							is_subject_type = autonomous_domain
+							var:owner_from_another_empire = scope:tmp_char
+						}
+					}
+				}
+			}
+			random_character = {
+				limit = {
+					save_temporary_scope_as = tmp_char
+					employer = {
+						any_subject = {
+							count >= 2
+							has_variable = owner_from_another_empire
+							is_subject_type = autonomous_domain
+							var:owner_from_another_empire = scope:tmp_char
+						}
+					}
+				}
+				save_scope_as = dual_owner
+			}
+			random_subject = {
+				limit = {
+					has_variable = owner_from_another_empire
+					is_subject_type = autonomous_domain
+					var:owner_from_another_empire = scope:dual_owner
+				}
+				save_scope_as = domain_1
+			}
+			random_subject = {
+				limit = {
+					has_variable = owner_from_another_empire
+					is_subject_type = autonomous_domain
+					var:owner_from_another_empire = scope:dual_owner
+					NOT = {this = scope:domain_1}
+				}
+				save_scope_as = domain_2
+			}
+			scope:domain_2 = {
+				remove_variable = owner_from_another_empire
+				every_owned_province = {
+					set_owned_by = scope:domain_1
+				}
+			}
+		}
+	}
+}
+
+c3rd_urgent_variables_clean = {
+	effect = {
+		every_country = {
+			limit = {
+				has_variable = owner_from_another_empire
+				var:owner_from_another_empire = {
+					is_alive = yes
+					employer = root
+				}
+				is_subject = no
+			}
+			save_scope_as = owner_without_subject
+			root = {
+				trigger_event = {
+					id = c3rd_other_events.891
+					days = 1
+				}
+			}
+		}
+		if = {
+			limit = {
+				any_subject = {
+					is_subject_type = duchy_subject
+					NOT = {
+						government = duchy
+					}
+				}
+			}
+			trigger_event = {
+				id = c3rd_other_events.103
+				days = 3
+			}
+
+		}
+	}
+}
+
+
+c3rd_political_general_rampup = { #if general with political power and uunloyal, tick the unworthy leader and try to coup
+	trigger = {
+        NOR = {
+            has_country_modifier = military_anarchy
+            has_variable = recent_military_anarchy
+            has_variable = on_going_rep_thingy
+            has_country_modifier = political_unstability
+        }
+	}
+	effect = {
+		if = {
+			limit = {
+				any_character = {
+					has_character_modifier = political_power_character
+					is_alive = yes
+					is_ruler = no
+					NOT = {
+						is_friend = ruler
+					}
+					loyalty < 33
+					loyalty >= 15
+					is_general = yes
+				}
+			}
+			random_list = {
+				50 = {}
+				50 = {
+					if = {
+						limit = { has_variable = unworthy_leader}
+						change_variable = {
+							name = unworthy_leader
+							add = 1
+						}
+					}
+					else = {
+						set_variable = {
+							name = unworthy_leader
+							value = 1
+						}
+					}
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				any_character = {
+					has_character_modifier = political_power_character
+					is_alive = yes
+					is_ruler = no
+					NOT = {
+						is_friend = ruler
+					}
+					loyalty < 15
+					is_general = yes
+				} 
+			}
+			if = {
+				limit = { has_variable = unworthy_leader}
+				change_variable = {
+					name = unworthy_leader
+					add = 1
+				}
+			}
+			else = {
+				set_variable = {
+					name = unworthy_leader
+					value = 1
+				}
+			}
+		}
+		if = {
+			limit = { 
+				any_character = {
+					has_character_modifier = political_power_character
+					is_alive = yes
+					is_ruler = no
+					NOT = {
+						is_friend = ruler
+					}
+					loyalty < 33
+					is_general = yes
+				}
+			}
+			random_list = {
+                20 = {
+                    modifier = {
+                        add = 20
+                        has_variable = unworthy_leader
+                        var:unworthy_leader <= 2
+                    }
+                    modifier = {
+                        add = 2
+                        legitimacy >= 85
+                    }
+					modifier = {
+						factor = 2
+						OR = {
+							has_law = constantine_reform_law
+							has_law = decentralized_administration_law
+						}
+					}
+                }
+                1 = {
+                    modifier = {
+                        add = var:unworthy_leader
+                        has_variable = unworthy_leader
+                    }
+                    modifier = {
+                        add = 1
+                        legitimacy < 50
+                    }
+                    modifier = {
+                        add = 1
+                        legitimacy < 25
+                    }
+                    modifier = {
+                        add = 2
+                        legitimacy < 0
+                    }
+                    modifier = {
+                        add = 2
+                        stability < 25
+                    }
+                    trigger_event = {
+                        id = c3rd_events.9
+                        days = 15
+                    }
+                }
+            }
+		}
+	}
+}
+
+
+c3rd_apply_pol_inf_ruler_ownership = {
+	trigger = {
+		current_date > 900.1.1
+		has_land = yes
+		num_of_cities >= 1
+		NOT = {
+			tag = BAR
+		}
+		OR = {
+			current_ruler = {
+				has_character_modifier = major_influence_aristocrat
+			}
+			AND = {
+				current_ruler = {
+					NOT = {has_character_modifier = major_influence_aristocrat}
+				}
+				OR = {
+					has_country_modifier = polinf_ruler_owner20
+					has_country_modifier = polinf_ruler_owner30
+					has_country_modifier = polinf_ruler_owner40
+					has_country_modifier = polinf_ruler_owner50
+					has_country_modifier = polinf_ruler_owner60
+					has_country_modifier = polinf_ruler_owner70
+					has_country_modifier = polinf_ruler_owner80
+				}
+			}
+			
+		}
+	}
+	effect = {
+		if = {
+			limit = {
+				current_ruler = {
+					has_character_modifier = major_influence_aristocrat
+				}
+			}
+			trigger_event = c3rd_other_events.100
+		}
+		else_if = {
+			limit = {
+				current_ruler = {
+					NOT = {has_character_modifier = major_influence_aristocrat}
+				}
+				OR = {
+					has_country_modifier = polinf_ruler_owner20
+					has_country_modifier = polinf_ruler_owner30
+					has_country_modifier = polinf_ruler_owner40
+					has_country_modifier = polinf_ruler_owner50
+					has_country_modifier = polinf_ruler_owner60
+					has_country_modifier = polinf_ruler_owner70
+					has_country_modifier = polinf_ruler_owner80
+				}
+			}
+			remove_polinf_modifiers = yes
+		}
+	}
+}
+
+c3rd_barbarian_occupying_land = { #natural expansion of tribals on lands VERY SPECIFIC CONDITIONS
+	trigger = {
+		is_tribal = no
+		num_of_cities >= 1
+		current_date >= 900.1.1
+		NOR = {
+			tag = BAR
+			government = duchy #Duchies are protected
+		}
+		any_country_state = {
+			has_state_modifier = barbarians_border #is under attack
+			any_state_province = {
+				any_neighbor_province = { #border a tribal or a barbarian stronghold
+					OR = {
+						has_province_modifier = barbarian_invasion_war
+						has_province_modifier = barbarian_invasion_skirmish
+						has_province_modifier = minor_barbarian_spawn_place
+						has_province_modifier = generic_barbarian_spawn_place
+						has_province_modifier = major_barbarian_spawn_place
+						AND = {
+							exists = owner
+							NOT = {owner = root}
+							owner = {
+								is_tribal = yes
+								NOT = {is_subject_of = root}
+							}
+						}
+					}
+				}
+				owner = { #the dominant local culture is not integrated -> might be the barbarian one OR anything not integrated, even greeks or italian if possible, why not
+					any_country_culture = {
+						is_integrated = no
+						this.culture = prev.prev.culture
+					}
+				}
+			}
+			area = { #every states around of the country are also occupied by barbarians
+				NOT = {
+					any_neighbor_area = {
+						any_area_state = {
+							owner = root
+							NOT = {has_state_modifier = barbarians_border}
+						}
+					}
+				}
+			}
+		}
+	}
+	effect = {
+		random_country_state = {
+			limit = {
+				has_state_modifier = barbarians_border
+				any_state_province = {
+					any_neighbor_province = {
+						OR = {
+							has_province_modifier = barbarian_invasion_war
+							has_province_modifier = barbarian_invasion_skirmish
+							has_province_modifier = minor_barbarian_spawn_place
+							has_province_modifier = generic_barbarian_spawn_place
+							has_province_modifier = major_barbarian_spawn_place
+							AND = {
+								NOT = {owner = root}
+								owner = {
+									is_tribal = yes
+									NOT = {is_subject_of = root}
+								}
+							}
+						}
+					}
+					owner = {
+						any_country_culture = {
+							is_integrated = no
+							this.culture = prev.prev.culture
+						}
+					}
+				}
+				area = {
+					NOT = {
+						any_neighbor_area = {
+							any_area_state = {
+								owner = root
+								NOT = {has_state_modifier = barbarians_border}
+							}
+						}
+					}
+				}
+			}
+			random_state_province = {
+				limit = {
+					any_neighbor_province = {
+						OR = {
+							has_province_modifier = barbarian_invasion_war
+							has_province_modifier = barbarian_invasion_skirmish
+							has_province_modifier = minor_barbarian_spawn_place
+							has_province_modifier = generic_barbarian_spawn_place
+							has_province_modifier = major_barbarian_spawn_place
+							AND = {
+								NOT = {owner = root}
+								owner = {
+									is_tribal = yes
+									NOT = {is_subject_of = root}
+								}
+							}
+						}
+					}
+					owner = {
+						any_country_culture = {
+							is_integrated = no
+							this.culture = prev.prev.culture
+						}
+					}
+				}
+				save_scope_as = new_tribal_prov
+			}
+		}
+		random_country_culture = {
+			limit = {
+				this.culture = scope:new_tribal_prov.culture
+			}
+			save_scope_as = new_culture_tribal
+		}
+		if = {
+			limit = {
+				any_country = {
+					any_owned_province = {
+						any_neighbor_province = {
+							this = scope:new_tribal_prov
+						}
+					}
+					this.culture = scope:new_culture_tribal.culture
+				}
+			}
+			random_country = {
+				limit = {
+					any_owned_province = {
+						any_neighbor_province = {
+							this = scope:new_tribal_prov
+						}
+					}
+					this.culture = scope:new_culture_tribal.culture
+				}
+				save_scope_as = tribal_expanding
+			}
+			scope:new_tribal_prov = {
+				set_owned_by = scope:tribal_expanding
+				if = {
+					limit = {
+						root = {
+							OR = {
+								country_culture_group = iberia
+								country_culture_group = celt_iberia
+							}
+						}
+					}
+					random_neighbor_province = {
+						limit = {
+							owner = root
+						}
+						set_owned_by = scope:tribal_expanding
+					}
+				}
+			}
+		}
+		else = {
+			scope:new_tribal_prov = {
+				create_country = {
+					change_government = tribal_chiefdom
+					add_treasury = 50
+				}
+			}
+		}
+	}
+
+}
+
+
+c3rd_head_of_family_shenanigans = {
+	trigger = {
+		current_date > 750.1.1
+		has_land = yes
+		num_of_cities >= 1
+		NOT = {
+			tag = BAR
+		}
+		has_country_modifier = solidus_introduced
+	}
+
+	effect = {
+		every_character = {
+			limit = {
+				is_head_of_family = yes
+				is_ruler = no
+			}
+			random_list = {  #roll the intent for head of family
+				20 = {
+					#nothing
+					modifier = {
+						factor = 2
+						has_character_modifier = major_influence_aristocrat
+						root = {
+							any_character = {
+								count = 1
+								has_character_modifier = major_influence_aristocrat
+							}
+						}
+					}
+					modifier = {
+						factor = 0.5
+						root = {
+							current_ruler = {
+								has_character_modifier = major_influence_aristocrat
+							}
+						}
+					}
+					modifier = {
+						factor = 1.5
+						root = {
+							has_law = basic_administrative_law
+						}
+					}
+				}
+				10 = {
+					#consolidate
+					modifier = {
+						factor = 2
+						root = {
+							NOT = {has_law = basic_administrative_law}
+						}
+					}
+					modifier = {
+						factor = 1.5
+						has_character_modifier = major_influence_aristocrat
+					}
+					modifier = {
+						factor = 3
+						save_temporary_scope_as = headtmpcheck
+						root = {
+							NOT = {
+								any_governorships = {
+									has_variable = governorship_owner
+									var:governorship_owner = scope:headtmpcheck
+								}
+							}
+						}
+					}
+					modifier = {
+						factor = 1.2
+						root = {
+							has_country_modifier = law_advantages_1
+						}
+					}
+					modifier = {
+						factor = 1.5
+						root = {
+							has_country_modifier = law_advantages_2
+						}
+					}
+					modifier = {
+						factor = 2
+						root = {
+							has_country_modifier = law_advantages_3
+						}
+					}
+					modifier = {
+						factor = 2.5
+						root = {
+							has_country_modifier = law_advantages_4
+						}
+					}
+					modifier = {
+						factor = 3
+						root = {
+							has_country_modifier = law_advantages_5
+						}
+					}
+					set_variable = {
+						name = head_intent_consolidate
+						days = 350
+					}
+				}
+				10 = {
+					#disloyal
+					modifier = {
+						factor = 0.1
+						loyalty >= 60
+					}
+					modifier = {
+						factor = 4
+						loyalty <= 33
+					}
+					modifier = {
+						factor = 1.1
+						root = {
+							has_country_modifier = law_advantages_3
+						}
+					}
+					modifier = {
+						factor = 1.3
+						root = {
+							has_country_modifier = law_advantages_4
+						}
+					}
+					modifier = {
+						factor = 1.5
+						root = {
+							has_country_modifier = law_advantages_5
+						}
+					}
+					modifier = {
+						factor = 2
+						is_rival = root.current_ruler
+					}
+					modifier = {
+						factor = 1.5
+						has_variable = country_ownership
+						var:country_ownership >= 40
+					}
+					modifier = {
+						factor = 1.5
+						has_variable = country_ownership
+						var:country_ownership >= 60
+					}
+					set_variable = {
+						name = head_intent_disloyal
+						days = 350
+					}
+				}
+				5 = { 
+					#loyal
+					modifier = {
+						factor = 4
+						loyalty >= 75
+					}
+					modifier = {
+						factor = 0.1
+						loyalty <= 33
+					}
+					modifier = {
+						factor = 2
+						is_friend = root.current_ruler
+					}
+					set_variable = {
+						name = head_intent_loyal
+						days = 350
+					}
+				}
+			}
+		}
+	}
 }

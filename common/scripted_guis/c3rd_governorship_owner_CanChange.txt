@@ -1,0 +1,113 @@
+﻿c3rd_governorship_owner_CanChange = {
+	scope = governorship
+
+
+	is_valid = {
+		trigger_if = {
+			limit = {
+				exists = governor
+				has_variable = governorship_owner
+				var:governorship_owner = governor
+				governor.employer = {
+					OR = {
+						has_law = decentralized_administration_law 
+						has_country_modifier = solidus_introduced
+					}
+				}
+			}
+			custom_tooltip = {
+				text = c3rd_CanChange_tt1
+				NOT = {
+					has_variable = governorship_owner
+					var:governorship_owner = governor
+					governor.employer = {
+						OR = {
+							has_law = decentralized_administration_law 
+							has_country_modifier = solidus_introduced
+						}
+					}
+				}
+			}
+		}
+		trigger_if = {
+			limit = {
+				exists = governor
+				save_temporary_scope_as = governorship_tmp_scope
+				has_variable = governorship_owner
+				var:governorship_owner = {
+					is_head_of_family = yes
+					family = scope:governorship_tmp_scope.governor.family
+				}
+				governor.employer = {
+					OR = {
+						has_law = decentralized_administration_law 
+						has_country_modifier = solidus_introduced
+					}
+				}
+			}
+			custom_tooltip = {
+				text = c3rd_CanChange_tt2
+				NOT = {
+					has_variable = governorship_owner
+					var:governorship_owner = {
+						is_head_of_family = yes
+						family = scope:governorship_tmp_scope.governor.family
+					}
+					governor.employer = {
+						OR = {
+							has_law = decentralized_administration_law 
+							has_country_modifier = solidus_introduced
+						}
+					}
+				}
+			}
+		}
+		trigger_if = {
+			limit = {
+				exists = governor
+				governor = {is_ruler = yes}
+			}
+			custom_tooltip = {
+				text = c3rd_CanChange_tt3
+				governor = {is_ruler = no}
+			}
+		}
+		trigger_if = {
+			limit = {
+				exists = governor
+				governor = {is_disloyal = yes}
+			}
+			custom_tooltip = {
+				text = c3rd_CanChange_tt4
+				governor = {is_disloyal = no}
+			}
+		}
+		
+		# NOR = {
+		# 	AND = {
+		# 		has_variable = governorship_owner
+		# 		var:governorship_owner = governor
+		# 	}
+		# 	AND = {
+		# 		has_variable = governorship_owner
+		# 		governor.family = var:governorship_owner.family
+		# 		var:governorship_owner = {
+		# 			is_head_of_family = yes
+		# 		}
+		# 		governor.employer = {
+		# 			OR = {
+		# 				has_law = decentralized_administration_law 
+		# 				has_country_modifier = solidus_introduced
+		# 			}
+		# 		}
+		# 	}
+
+		# }
+	}
+
+	effect = {
+		custom_tooltip = c3rd_CanChange_tt
+
+
+	}
+}

@@ -13,3 +13,14 @@ pater_familias = {
 	monthly_character_popularity = 0.1
 	monthly_corruption = 0.05
 }
+
+major_influence_aristocrat = {
+	monthly_character_popularity = 0.25
+	monthly_corruption = 0.05
+	monthly_character_prominence = 0.1
+}
+
+political_power_character = {
+	monthly_character_popularity = 0.25
+	monthly_character_prominence = 0.1
+}

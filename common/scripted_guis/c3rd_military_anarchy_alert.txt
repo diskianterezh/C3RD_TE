@@ -4,4 +4,24 @@
 	is_shown = {
 		has_country_modifier = military_anarchy
 	}
+
+	effect = {
+		custom_tooltip = ALERT_MILITARY_ANARCHY
+		if = {
+			limit = {
+				any_character = {
+					has_character_modifier = king_maker
+				}
+			}
+			custom_tooltip = ALERT_MILITARY_ANARCHY_TT1
+			every_character = {
+				limit = {
+					has_character_modifier = king_maker
+				}
+				save_scope_as = king_maker_parse
+				custom_tooltip = ALERT_MILITARY_ANARCHY_TT2
+			}
+		}
+
+	}
 }

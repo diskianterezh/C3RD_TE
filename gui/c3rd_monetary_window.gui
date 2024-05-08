@@ -1,0 +1,457 @@
+# onclick = "[ExecuteConsoleCommand('gui.createwidget gui/ages_window.gui ages_window')]"
+
+@monetary_window_x = 675
+@monetary_window_y = 600
+
+
+message_window = {
+	name = "c3rd_monetary_window"
+	size = { @monetary_window_x @monetary_window_y }
+	position = { 531 150 }
+	movable = yes
+
+	state = {
+		name = _show
+		start_sound = {
+			soundeffect = "event:/SFX/UI/Generic/2.0/sfx_ui_window_tab_close"
+		}
+	}
+	state = {
+		name = _hide
+		start_sound = {
+			soundeffect = "event:/SFX/UI/Generic/2.0/sfx_ui_window_tab_close"
+		}
+	}
+	
+	icon = {
+		texture = "gfx/interface/event_window/Event_great_thriving_city_seen_slightly_from_a_distance.dds"
+		visible = "[GetScriptedGui('c3rd_monetary_is_normal').IsShown( GuiScope.SetRoot( Player.MakeScope ).End )]"
+		scale = 0.4
+		alpha = 0.85
+		parentanchor = top|right
+		position = { 0 70 }
+	}
+
+	icon = {
+		texture = "gfx/interface/event_window/c3rd_event_monetary_medium.dds"
+		visible = "[GetScriptedGui('c3rd_monetary_medium').IsShown( GuiScope.SetRoot( Player.MakeScope ).End )]"
+		scale = 0.3
+		alpha = 0.85
+		parentanchor = top|right
+		position = { 0 30 }
+	}
+
+	icon = {
+		texture = "gfx/interface/event_window/Event_great_work_riot.dds"
+		visible = "[GetScriptedGui('c3rd_monetary_high').IsShown( GuiScope.SetRoot( Player.MakeScope ).End )]"
+		scale = 0.4
+		alpha = 0.85
+		parentanchor = top|right
+		position = { 0 70 }
+	}
+
+	blockoverride "Title_text" { text = "c3rd_monetary_window_TITLE" }
+
+	blockoverride "White_buttons"
+	{
+		button_close = {
+			tooltip = "CLOSE"
+			onclick = "[ExecuteConsoleCommand('gui.ClearWidgets c3rd_monetary_window')]"
+			onclick = "[GetVariableSystem.Clear('c3rd_monetary_window_opened')]"
+		}
+	}
+	icon_and_text = {
+		position = { 40 60 }
+		size = { 250 0 }
+		blockoverride "Text" { text = "SOLIDUS_AVAILABLE" }
+		
+		enabled = "[GetScriptedGui('c3rd_solidus_available').IsValid( GuiScope.SetRoot( Player.MakeScope ).End )]"
+		blockoverride "Icon" { texture = "gfx/interface/icons/shared_icons/leader.dds" }
+		tooltip = "c3rd_solidus_available_tt"
+		
+	}
+	
+
+	
+	flowcontainer = {
+		parentanchor = left
+		position = { 40 110 }
+		spacing = 15
+		direction = vertical
+		icon_and_text = {
+			size = { 100 0 }
+			blockoverride "Text" { text = "[GuiScope.SetRoot( Player.MakeScope).ScriptValue('num_of_pops_integrated')|0R]" }
+			blockoverride "Icon" { texture = "gfx/interface/icons/pop_types/nobles.dds" }
+			tooltip = "c3rd_monetary_integrated_tt"
+			
+		}
+		icon_and_text = {
+			size = { 100 0 }
+			blockoverride "Text" { text = "[GuiScope.SetRoot( Player.MakeScope).ScriptValue('num_of_pops_unintegrated')|0]" }
+			blockoverride "Icon" { texture = "gfx/interface/icons/pop_types/freemen.dds" }
+			tooltip = "c3rd_monetary_unintegrated_tt"
+			
+		}
+		icon_and_text = {
+			size = { 100 0 }
+			visible = "[GetScriptedGui('c3rd_monetary_enslaved_culture').IsValid( GuiScope.SetRoot( Player.MakeScope ).End )]"
+			blockoverride "Text" { text = "[GuiScope.SetRoot( Player.MakeScope).ScriptValue('num_of_pops_slaves')|0G]" }
+			blockoverride "Icon" { texture = "gfx/interface/icons/pop_types/slaves.dds" }
+			tooltip = "c3rd_monetary_slaves_tt"
+			
+		}
+	}
+	flowcontainer = {
+		parentanchor = left
+		position = { 160 157 }
+		spacing = 15
+		direction = vertical
+		icon_and_text = {
+			size = { 100 0 }
+			blockoverride "Text" { text = "[GuiScope.SetRoot( Player.MakeScope).ScriptValue('c3rd_gold_number')|0G]" }
+			blockoverride "Icon" { texture = "gfx/interface/icons/tradegoods/precious_metals.dds" }
+			tooltip = "c3rd_monetary_gold_tt"
+			
+		}
+		icon_and_text = {
+			size = { 100 0 }
+			enabled = "[GetScriptedGui('c3rd_monetary_vassal_exploitation_scripted').IsValid( GuiScope.SetRoot( Player.MakeScope ).End )]"
+			blockoverride "Text" { text = "c3rd_monetary_vassal_exploitation" }
+			blockoverride "Icon" { texture = "gfx/interface/icons/diplomatic_status/vassalized.dds" }
+			tooltip = "c3rd_monetary_vassal_exploitation_tt"
+			
+		}
+	}
+	margin_widget = {
+		parentanchor = center
+		name = "modifiers"
+		size = { 400 100 }
+		using = NoninteractableBG
+		blockoverride "Margins"
+		{
+			margin = { 40 -20 }
+		}
+	}
+	hbox = {
+		margin = { 150 0 }
+		layoutpolicy_horizontal = expanding
+		spacing = 20
+		icon = {
+			size = { 30 30 }
+			visible = "[GetScriptedGui('c3rd_monetary_citizen_exemption').IsShown( GuiScope.SetRoot( Player.MakeScope ).End )]"
+			texture = "gfx/interface/icons/pop_types/citizen.dds"
+			tooltip = "c3rd_monetary_citizen_exemption_tt"
+			color = { 1 0.5 0.5 1 }
+		}
+		icon = {
+			size = { 30 30 }
+			visible = "[GetScriptedGui('c3rd_monetary_aristocratic_exemptions').IsShown( GuiScope.SetRoot( Player.MakeScope ).End )]"
+			texture = "gfx/interface/icons/pop_types/nobles.dds"
+			tooltip = "c3rd_monetary_aristocratic_exemptions_tt"
+			color = { 1 0.5 0.5 1 }
+		}
+		icon = {
+			size = { 30 30 }
+			visible = "[GetScriptedGui('c3rd_monetary_military_advantages').IsShown( GuiScope.SetRoot( Player.MakeScope ).End )]"
+			texture = "gfx/interface/icons/shared_icons/military_tradition.dds"
+			tooltip = "c3rd_monetary_military_advantages_tt"
+			color = { 1 0.5 0.5 1 }
+		}
+		icon = {
+			size = { 30 30 }
+			visible = "[GetScriptedGui('c3rd_monetary_tax_inspection').IsShown( GuiScope.SetRoot( Player.MakeScope ).End )]"
+			texture = "gfx/interface/icons/shared_icons/decision.dds"
+			tooltip = "c3rd_monetary_tax_inspection_tt"
+			color = { 0.5 1 0.5 1 }
+		}
+		icon = {
+			size = { 30 30 }
+			visible = "[GetScriptedGui('c3rd_monetary_consolidation_sol').IsShown( GuiScope.SetRoot( Player.MakeScope ).End )]"
+			texture = "gfx/interface/icons/shared_icons/leader.dds"
+			tooltip = "c3rd_monetary_consolidation_sol_tt"
+			color = { 0.5 1 0.5 1 }
+		}
+		icon = {
+			size = { 30 30 }
+			visible = "[GetScriptedGui('c3rd_aristocratic_reforms').IsShown( GuiScope.SetRoot( Player.MakeScope ).End )]"
+			texture = "gfx/interface/icons/shared_icons/disloyal_power_base.dds"
+			tooltip = "c3rd_aristocratic_reforms_tt"
+			color = { 0.5 1 0.5 1 }
+		}
+		icon = {
+			size = { 30 30 }
+			visible = "[GetScriptedGui('c3rd_monetary_political_unstability').IsShown( GuiScope.SetRoot( Player.MakeScope ).End )]"
+			texture = "gfx/interface/icons/shared_icons/senate_power.dds"
+			tooltip = "c3rd_monetary_political_unstability_tt"
+			color = { 1 0.5 0.5 1 }
+		}
+		icon = {
+			size = { 30 30 }
+			visible = "[GetScriptedGui('c3rd_monetary_second_reform_law').IsShown( GuiScope.SetRoot( Player.MakeScope ).End )]"
+			texture = "gfx/interface/icons/shared_icons/ironman.dds"
+			tooltip = "c3rd_monetary_political_second_reform_law_tt"
+			color = { 0.5 1 0.5 1 }
+		}
+	}	
+	flowcontainer = {
+		parentanchor = vcenter
+		position = { 30 110 }
+		spacing = 70
+		direction = horizontal
+		icon_and_text = {
+			size = { 100 0 }
+			parentanchor = vcenter
+			scale = 1.5
+			blockoverride "Text" { text = "c3rd_monetary_what_is_my_eco" }
+			blockoverride "Icon" { 
+				texture = "gfx/interface/icons/shared_icons/quantity.dds" 
+				color = { 1 1 1 1 }
+			}
+			tooltip = "c3rd_monetary_the_number_tt"
+			
+		}
+		flowcontainer = {
+			parentanchor = vcenter
+			position = { 40 110 }
+			spacing = 15
+			direction = vertical
+			icon_and_text_progress = {
+				blockoverride "TotalSize" { size = { 220 40} }
+				blockoverride "size" { size = { 100% 7 } margin_right = 13 }
+	
+				blockoverride "Icon" {
+					texture = "gfx/interface/icons/shared_icons/bankruptcy.dds"
+				}
+
+				blockoverride "Value"
+				{
+					value = "[FixedPointToFloat(GuiScope.SetRoot( Player.MakeScope).ScriptValue('half_of_deflation'))]"
+					color = { 1 0.3 0.3 1 }
+				}
+	
+				blockoverride "Text" {
+					visible = no
+				}
+				tooltip = "c3rd_monetary_deflation_tt"
+				icon = {
+					size = { 30 30 }
+					position = { 40 5 }
+					visible = "[GetScriptedGui('c3rd_monetary_deflation_arrow1').IsShown( GuiScope.SetRoot( Player.MakeScope ).End )]"
+					texture = "gfx/interface/icons/shared_icons/arrow_right.dds"
+					color = { 1 0.5 0.5 1 }
+				}
+				icon = {
+					size = { 30 30 }
+					position = { 40 5 }
+					visible = "[GetScriptedGui('c3rd_monetary_deflation_arrow_1').IsShown( GuiScope.SetRoot( Player.MakeScope ).End )]"
+					texture = "gfx/interface/icons/shared_icons/arrow_left.dds"
+					color = { 0.5 1 0.5 1 }
+				}
+				icon = {
+					size = { 30 30 }
+					position = { 50 5 }
+					visible = "[GetScriptedGui('c3rd_monetary_deflation_arrow2').IsShown( GuiScope.SetRoot( Player.MakeScope ).End )]"
+					texture = "gfx/interface/icons/shared_icons/arrow_right.dds"
+					color = { 1 0.5 0.5 1 }
+				}
+				icon = {
+					size = { 30 30 }
+					position = { 50 5 }
+					visible = "[GetScriptedGui('c3rd_monetary_deflation_arrow_2').IsShown( GuiScope.SetRoot( Player.MakeScope ).End )]"
+					texture = "gfx/interface/icons/shared_icons/arrow_left.dds"
+					color = { 0.5 1 0.5 1 }
+				}
+				icon = {
+					size = { 30 30 }
+					position = { 60 5 }
+					visible = "[GetScriptedGui('c3rd_monetary_deflation_arrow3').IsShown( GuiScope.SetRoot( Player.MakeScope ).End )]"
+					texture = "gfx/interface/icons/shared_icons/arrow_right.dds"
+					color = { 1 0.5 0.5 1 }
+				}
+				icon = {
+					size = { 30 30 }
+					position = { 60 5 }
+					visible = "[GetScriptedGui('c3rd_monetary_deflation_arrow_3').IsShown( GuiScope.SetRoot( Player.MakeScope ).End )]"
+					texture = "gfx/interface/icons/shared_icons/arrow_left.dds"
+					color = { 0.5 1 0.5 1 }
+				}
+				icon = {
+					size = { 30 30 }
+					position = { 70 5 }
+					visible = "[GetScriptedGui('c3rd_monetary_deflation_arrow4').IsShown( GuiScope.SetRoot( Player.MakeScope ).End )]"
+					texture = "gfx/interface/icons/shared_icons/arrow_right.dds"
+					color = { 1 0.5 0.5 1 }
+				}
+				icon = {
+					size = { 30 30 }
+					position = { 70 5 }
+					visible = "[GetScriptedGui('c3rd_monetary_deflation_arrow_4').IsShown( GuiScope.SetRoot( Player.MakeScope ).End )]"
+					texture = "gfx/interface/icons/shared_icons/arrow_left.dds"
+					color = { 0.5 1 0.5 1 }
+				}
+			}
+			icon_and_text_progress = {
+				blockoverride "TotalSize" { size = { 220 40} }
+				blockoverride "size" { size = { 100% 7 } margin_right = 13 }
+	
+				blockoverride "Icon" {
+					texture = "gfx/interface/icons/governor_policies/acquisition_of_wealth.dds"
+				}
+
+				blockoverride "Value"
+				{
+					value = "[FixedPointToFloat(GuiScope.SetRoot( Player.MakeScope).ScriptValue('half_of_silver_value'))]"
+					color = { 1 0.3 0.3 1 }
+				}
+	
+				blockoverride "Text" {
+					visible = no
+				}
+				tooltip = "c3rd_monetary_silver_tt"
+				icon = {
+					size = { 30 30 }
+					position = { 40 5 }
+					visible = "[GetScriptedGui('c3rd_monetary_silver_arrow1').IsShown( GuiScope.SetRoot( Player.MakeScope ).End )]"
+					texture = "gfx/interface/icons/shared_icons/arrow_right.dds"
+					color = { 1 0.5 0.5 1 }
+				}
+				icon = {
+					size = { 30 30 }
+					position = { 40 5 }
+					visible = "[GetScriptedGui('c3rd_monetary_silver_arrow_1').IsShown( GuiScope.SetRoot( Player.MakeScope ).End )]"
+					texture = "gfx/interface/icons/shared_icons/arrow_left.dds"
+					color = { 0.5 1 0.5 1 }
+				}
+				icon = {
+					size = { 30 30 }
+					position = { 50 5 }
+					visible = "[GetScriptedGui('c3rd_monetary_silver_arrow2').IsShown( GuiScope.SetRoot( Player.MakeScope ).End )]"
+					texture = "gfx/interface/icons/shared_icons/arrow_right.dds"
+					color = { 1 0.5 0.5 1 }
+				}
+				icon = {
+					size = { 30 30 }
+					position = { 50 5 }
+					visible = "[GetScriptedGui('c3rd_monetary_silver_arrow_2').IsShown( GuiScope.SetRoot( Player.MakeScope ).End )]"
+					texture = "gfx/interface/icons/shared_icons/arrow_left.dds"
+					color = { 0.5 1 0.5 1 }
+				}
+				icon = {
+					size = { 30 30 }
+					position = { 60 5 }
+					visible = "[GetScriptedGui('c3rd_monetary_silver_arrow3').IsShown( GuiScope.SetRoot( Player.MakeScope ).End )]"
+					texture = "gfx/interface/icons/shared_icons/arrow_right.dds"
+					color = { 1 0.5 0.5 1 }
+				}
+				icon = {
+					size = { 30 30 }
+					position = { 60 5 }
+					visible = "[GetScriptedGui('c3rd_monetary_silver_arrow_3').IsShown( GuiScope.SetRoot( Player.MakeScope ).End )]"
+					texture = "gfx/interface/icons/shared_icons/arrow_left.dds"
+					color = { 0.5 1 0.5 1 }
+				}
+				icon = {
+					size = { 30 30 }
+					position = { 70 5 }
+					visible = "[GetScriptedGui('c3rd_monetary_silver_arrow4').IsShown( GuiScope.SetRoot( Player.MakeScope ).End )]"
+					texture = "gfx/interface/icons/shared_icons/arrow_right.dds"
+					color = { 1 0.5 0.5 1 }
+				}
+				icon = {
+					size = { 30 30 }
+					position = { 70 5 }
+					visible = "[GetScriptedGui('c3rd_monetary_silver_arrow_4').IsShown( GuiScope.SetRoot( Player.MakeScope ).End )]"
+					texture = "gfx/interface/icons/shared_icons/arrow_left.dds"
+					color = { 0.5 1 0.5 1 }
+				}
+			}
+		}
+	}
+	flowcontainer = {
+		parentanchor = vcenter
+		position = { 420 120 }
+		spacing = 0
+		direction = horizontal
+		icon = {
+			size = { 30 30 }
+			position = { 0 5 }
+			parentanchor = vcenter
+			enabled = "[GetScriptedGui('c3rd_monetary_silver_reform').IsValid( GuiScope.SetRoot( Player.MakeScope ).End )]"
+			texture = "gfx/interface/monetary/arrow_side2.dds"
+			tooltip = "c3rd_monetary_silver_law_tt"
+		}
+		icon = {
+			size = { 30 30 }
+			position = { -10 5 }
+			scale = 1.5
+			parentanchor = vcenter
+			enabled = "[GetScriptedGui('c3rd_monetary_silver_reform').IsValid( GuiScope.SetRoot( Player.MakeScope ).End )]"
+			texture = "gfx/interface/monetary/silver_casting.dds"
+			tooltip = "c3rd_monetary_silver_law_tt"
+		}
+	}
+	flowcontainer = {
+		parentanchor = vcenter
+		position = { 600 120 }
+		spacing = 50
+		direction = vertical
+		icon_button_square = {
+			size = { 40 40 }
+			position = { 100 -100 }
+			tooltip = "[GetScriptedGui('c3rd_inject_liquidity').BuildTooltip( GuiScope.SetRoot( Player.MakeScope ).End )]"
+			enabled = "[GetScriptedGui('c3rd_inject_liquidity').IsValid( GuiScope.SetRoot( Player.MakeScope ).End )]"
+			
+			blockoverride "ClickSound" { clicksound = "event:/SFX/UI/Actions/sfx_ui_action_goverment_interactions" }
+			
+			blockoverride "Icon" { 
+				texture = "gfx/interface/monetary/open_roman_chest2.dds" 
+				scale = 1				
+			}
+			blockoverride "On_click"
+			{
+				onclick = "[GetScriptedGui('c3rd_inject_liquidity').Execute( GuiScope.SetRoot( Player.MakeScope ).End )]"
+			}
+		}
+		icon_button_square = {
+			size = { 40 40 }
+			position = { 100 -100 }
+			tooltip = "[GetScriptedGui('c3rd_new_silver_currency').BuildTooltip( GuiScope.SetRoot( Player.MakeScope ).End )]"
+			enabled = "[GetScriptedGui('c3rd_new_silver_currency').IsValid( GuiScope.SetRoot( Player.MakeScope ).End )]"
+			
+			blockoverride "ClickSound" { clicksound = "event:/SFX/UI/Actions/sfx_ui_action_goverment_interactions" }
+			
+			blockoverride "Icon" { 
+				texture = "gfx/interface/icons/shared_icons/research.dds" 
+				scale = 1					
+			}
+			blockoverride "On_click"
+			{
+				onclick = "[GetScriptedGui('c3rd_new_silver_currency').Execute( GuiScope.SetRoot( Player.MakeScope ).End )]"
+			}
+		}
+	}
+	icon_button_square = {
+		size = { 30 30 }
+		parentanchor = bottom
+		position = { 100 -100 }
+		
+		blockoverride "ClickSound" { clicksound = "event:/SFX/UI/Actions/sfx_ui_action_goverment_interactions" }
+		
+		blockoverride "Icon" { 
+			texture = "gfx/interface/icons/shared_icons/change.dds" 
+			scale = 0.6					}
+		tooltip = "c3rd_monetary_recalculation_tt"
+		blockoverride "On_click"
+		{
+			onclick = "[GetScriptedGui('c3rd_monetary_recalculation').Execute( GuiScope.SetRoot( Player.MakeScope ).End )]"
+		}
+	}
+	
+	icon = {
+		texture = "gfx/interface/event_window/Event_open_chest.dds"
+		scale = 0.63
+		alpha = 0.2
+		parentanchor = center
+		position = { 0 150 }
+	}
+}

@@ -410,3 +410,433 @@ scheme_care_of_relatives_finish = {
 		}
 	}
 }
+
+
+scheme_buy_holding_start = {
+	effect = {
+		employer = {
+			random_owned_province = {
+				limit = {
+					controller = root.employer
+					OR = {
+						root = {
+							is_head_of_family = yes
+						}
+						AND = {
+							governor = root
+							OR = {
+								owner = {has_variable = solidus_introduced}
+								NOT = {
+									owner = {has_law = basic_administrative_law}
+								}
+							}
+						}
+					}
+					AND = {
+						NOT = {
+							this = root.employer.capital_scope
+						}
+						OR = {
+							NOT = {
+								exists = holding_owner
+							}
+							AND = {
+								exists = holding_owner
+								holding_owner = {
+									is_alive = no
+								}
+							}
+						}
+					}
+				}
+				weight = {
+					modifier = {
+						factor = 10000
+						any_neighbor_province = {
+							trigger_if = {
+								limit = {
+									exists = holding_owner
+								}
+								holding_owner = root
+							}
+							trigger_else = {
+								always = no
+							}
+						}
+					}
+				}
+				save_scope_as = buy_holding_target
+			}
+		}
+		save_scope_as = ongoing_scheme_target
+		if = {
+			limit = {
+				exists = scope:ongoing_scheme_target
+			}
+			set_variable = {
+				name = ongoing_scheme_target
+				value = scope:ongoing_scheme_target
+				days = 770
+			}
+		}
+	}
+}
+
+
+scheme_buy_holding_finish = {
+	effect = {
+		custom_tooltip = "buy_holding_effect_tt"
+		if = {
+			limit = { 
+				employer = {
+					has_law = decentralized_administration_law
+					has_country_modifier = solidus_introduced
+				}
+			}
+			set_variable = {
+				name = bought_holding_recently
+				days = 180
+			}
+		}
+		else_if = {
+			limit = {
+				employer = {
+					has_law = constantine_reform_law
+					has_country_modifier = solidus_introduced
+				}
+			}
+			set_variable = {
+				name = bought_holding_recently
+				days = 300
+			}
+		}
+		else_if = {
+			limit = {
+				employer = {
+					has_law = decentralized_administration_law
+				}
+			}
+			set_variable = {
+				name = bought_holding_recently
+				days = 365
+			}
+		}
+		else_if = {
+			limit = {
+				employer = {
+					has_law = constantine_reform_law
+				}
+			}
+			set_variable = {
+				name = bought_holding_recently
+				days = 600
+			}
+		}
+		else_if = {
+			limit = {
+				employer = {
+					has_country_modifier = solidus_introduced
+				}
+			}
+			set_variable = {
+				name = bought_holding_recently
+				days = 365
+			}
+		}
+		else = {
+			set_variable = {
+				name = bought_holding_recently
+				days = 730
+			}
+		}
+		hidden_effect = {
+			add_holding = scope:buy_holding_target
+			add_gold = -10
+			remove_scheme_variables_effect = yes
+		}
+	}
+}
+
+
+scheme_steal_holding_start = {
+	effect = {
+		employer = {
+			random_character = {
+				limit = {
+					NOT = {
+						this = root
+					}
+					employer = root.employer
+					num_holdings_owned > 2
+					NOT = {
+						is_friend = root
+					}
+					OR = {
+						NOT = {
+							has_variable_list = targeted_by
+						}
+						AND = {
+							has_variable_list = targeted_by
+							variable_list_size = {
+								name = targeted_by
+								value <= 6  
+							}
+						}
+					}
+					OR = {
+						is_ruler = no
+						AND = {
+							is_ruler = yes
+							employer = {has_country_modifier = solidus_introduced}
+						}
+					}
+				}
+				weight = {
+					modifier = {
+						factor = 0.25
+						is_ruler = yes
+						NOT = {employer = {has_country_modifier = solidus_introduced}}
+					}
+					modifier = {
+						factor = 50
+						root = {
+							is_governor = yes
+							OR = {
+								employer = {NOT = {has_law = basic_administrative_law}}
+								employer = {has_country_modifier = solidus_introduced}
+							}
+						}
+						any_holdings = {
+							governor = root
+						}
+					}
+				}
+				save_scope_as = ongoing_scheme_target
+			}
+		}
+		if = {
+			limit = {
+				exists = scope:ongoing_scheme_target
+			}
+			set_variable = {
+				name = ongoing_scheme_target
+				value = scope:ongoing_scheme_target
+				days = 770
+			}
+			scope:ongoing_scheme_target = {
+				add_to_variable_list = {
+					name = targeted_by
+					target = root
+				}
+			}
+		}
+	}
+}
+
+
+scheme_steal_holding_finish = {
+	effect = {
+		custom_tooltip = "steal_holding_effect_tt"
+		hidden_effect = {
+			if = { #more theft when solidus
+				limit = {
+					is_governor = yes
+					employer = {has_country_modifier = solidus_introduced}
+				}
+				set_variable = {
+					name = recent_holding_theft
+					days = 160
+				}
+			}
+			else_if = {
+				limit = {
+					is_governor = yes
+					employer = {NOT = {has_law = basic_administrative_law}} 
+				}
+				set_variable = {
+					name = recent_holding_theft
+					days = 360
+				}
+			}
+			else = {
+				set_variable = {
+					name = recent_holding_theft
+					days = 550
+				}
+			}
+			set_variable = {
+				name = roll
+				value = { integer_range = { min = 1 max = 100 } }
+			}
+			save_scope_as = thief
+			if = { 
+				limit = {
+					exists = var:roll
+					var:roll <= root.assassinate_chance_scheme
+					scope:ongoing_scheme_target = {
+						num_holdings_owned > 0
+					}
+					NOR = {
+						employer = {NOT = {has_law = basic_administrative_law}}
+						employer = {has_country_modifier = solidus_introduced}
+					}
+				}
+				scope:ongoing_scheme_target = {
+					trigger_event = {
+						id = scheme.4
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					NOR = {
+						employer = {NOT = {has_law = basic_administrative_law}}
+						employer = {has_country_modifier = solidus_introduced}
+					}
+				}
+				scope:ongoing_scheme_target = {
+					trigger_event = {
+						id = scheme.5
+					}
+				}
+			}
+			else = {
+				scope:ongoing_scheme_target = {
+					random_holdings = {
+						limit = {
+							OR = {
+								NOR = { 
+									has_province_modifier = family_estate_modifier
+									has_province_modifier = family_estates_being_expanded_modifier
+								}
+								governor = scope:thief
+							}
+						}
+						weight = {
+							modifier = {
+								factor = 50
+								governor = scope:thief
+							}
+						}
+						save_scope_as = holding_prov
+					}
+					remove_holding = scope:holding_prov
+					scope:thief = {
+						add_holding = scope:holding_prov
+					}
+					scope:holding_prov = {
+						governorship = {
+							if = {
+								limit = {
+									has_variable = governorship_owner_ratio
+								}
+								calculate_the_gov_ownership = yes
+							}
+						}
+					}
+				}
+			}
+			remove_scheme_variables_effect = yes
+		}
+	}
+}
+
+
+scheme_adopt_governor_start = {
+	effect = {
+		save_temporary_scope_as = owner_tmp_check
+		employer = {
+			random_governorships = {
+				limit = {
+					exists = governor
+					NOT = {
+						has_variable = governorship_owner
+						trigger_if = {
+							limit = {
+								has_variable = governorship_owner
+							}
+							var:governorship_owner = root
+						}
+					}
+					governor = {
+						is_adult = yes
+						NOR = {
+							this = root
+							is_rival = root
+						}
+						is_ruler = no
+						is_minor_character = yes
+						is_governor = yes
+						OR = {
+							NOT = {
+								has_variable_list = targeted_by
+							}
+							AND = {
+								has_variable_list = targeted_by
+								variable_list_size = {
+									name = targeted_by
+									value <= 6  
+								}
+							}
+						}
+					}
+					region_control_value_char >= 25
+				}
+				weight = {
+					modifier = {
+						factor = 2
+						region_control_value_char >= 40
+					}
+					modifier = {
+						factor = 2
+						region_control_value_char >= 60
+					}
+					modifier = {
+						factor = 2
+						region_control_value_char >= 80
+					}
+				}
+				governor = {
+					save_scope_as = ongoing_scheme_target
+				}
+			}
+		}
+		set_variable = {
+			name = ongoing_scheme_target
+			value = scope:ongoing_scheme_target
+			days = 400
+		}
+		scope:ongoing_scheme_target = {
+			add_to_variable_list = {
+				name = targeted_by
+				target = root
+			}
+		}
+	}
+}
+
+
+scheme_adopt_governor_finish = {
+	effect = {
+		custom_tooltip = scheme_adopt_governor_effect_tt
+		save_scope_as = targeter
+		random_list = {
+			5 = {}
+			5 = {
+				modifier = {
+					add = scope:ongoing_scheme_target.corruption
+				}
+				scope:ongoing_scheme_target = {
+					set_family = root.family
+					add_gold = 1000
+					add_corruption = 5
+					root = {
+						add_gold = -1000
+					}
+				}
+
+			}
+		}
+		remove_scheme_variables_effect = yes
+	}
+}

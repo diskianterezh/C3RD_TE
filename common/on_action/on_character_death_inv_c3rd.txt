@@ -2442,6 +2442,20 @@ on_character_death = {
 			}
 		}
 		if = {
+			limit = {
+				is_ruler = yes
+				employer = {
+					has_variable = unworthy_leader
+				}
+			}
+			employer = {
+				change_variable = {
+					name = unworthy_leader
+					add = -1
+				}
+			}
+		}
+		if = {
 			limit = { 
 				is_ruler = yes
 				employer = {
@@ -2469,5 +2483,262 @@ on_character_death = {
 				}
 			}
 		}
+		#33 C3RD : If the dead man had some ownership on Regions owner_from_another_empire
+		if = {
+			limit = {
+				employer = {
+					any_governorships = {
+						has_variable = governorship_owner
+						var:governorship_owner = root
+					}
+				}
+			}
+			if = {
+				limit = {
+					is_head_of_family = yes
+					exists = next_in_family
+				}
+				next_in_family = {
+					save_scope_as = ownership_target
+				}
+			}
+			else_if = {
+				limit = {
+					is_head_of_family = no
+					exists = family.head_of_family
+					family.head_of_family = {
+						employer = root.employer
+					}
+				}
+				family.head_of_family = {
+					save_scope_as = ownership_target
+				}
+			}
+		}
+		if = { # Give ownership to relevant character based on above
+			limit = { 
+				exists = scope:ownership_target 
+				NOT = {
+					scope:ownership_target = root
+				}
+			}
+			if = {
+				limit = { 
+					has_variable = country_ownership
+					var:country_ownership >= 50
+				}
+				random_list = {
+					5 = {}
+					1 = {
+						modifier = {
+							add = 1
+							var:country_ownership >= 70
+						}
+						modifier = {
+							add = 1
+							var:country_ownership >= 80
+						}
+						modifier = {
+							add = 1
+							var:country_ownership >= 90
+						}
+						modifier = {
+							add = 1
+							employer = {
+								stability <= 30
+							}
+						}
+						scope:ownership_target = {
+							set_variable = {
+								name = potential_sucession_ownership_crisis
+								days = 360
+							}
+						}
+					}
+				}
+			}
+			employer = {
+				every_governorships = {
+					limit = { 
+						has_variable = governorship_owner
+						var:governorship_owner = root 
+					}
+					remove_variable = governorship_owner
+					set_variable = {
+						name = governorship_owner
+						value = scope:ownership_target
+					}
+                    calculate_the_gov_ownership = yes
+				}
+			}
+			recalculate_ownership_char = yes
+			scope:ownership_target = {
+                recalculate_ownership_char = yes
+				trigger_event = {
+					id = c3rd_other_events.81
+					days = 1 #Necessary
+				}
+			}
+		}
+		if = {
+			limit = {
+				is_minor_character = yes
+				num_holdings_owned > 0
+			}
+			if = {
+				limit = {
+					employer = {
+						OR = {
+							is_republic = no
+							has_country_modifier = solidus_introduced
+						}
+					}
+				}
+				if = {
+					limit = {
+						num_of_children > 0
+						any_child = {
+							is_alive = yes
+							age >= 14
+							employer = root.employer
+							is_ruler = no
+						}
+					}
+					random_child = {
+						limit = {
+							is_alive = yes
+							age >= 14
+							employer = root.employer
+							is_ruler = no
+						}
+						save_scope_as = heir_child
+					}
+					while = {
+						limit = { num_holdings_owned > 0 }
+						random_holdings = { save_scope_as = holding_transfer }
+						remove_holding = scope:holding_transfer
+						scope:heir_child = { add_holding = scope:holding_transfer }
+					}
+					employer = {
+						every_governorships = {
+							limit = { 
+								has_variable = governorship_owner
+								var:governorship_owner = root 
+							}
+							remove_variable = governorship_owner
+							set_variable = {
+								name = governorship_owner
+								value = scope:heir_child
+							}
+							calculate_the_gov_ownership = yes
+						}
+					}
+					recalculate_ownership_char = yes #to clean eventual modifiers and variables
+				}
+				else_if = {
+					limit = {
+						any_sibling = {
+							is_alive = yes
+							age >= 14
+							employer = root.employer
+							is_ruler = no
+						}
+					}
+					random_sibling = {
+						limit = {
+							is_alive = yes
+							age >= 14
+							employer = root.employer
+							is_ruler = no
+						}
+						save_scope_as = heir_child
+					}
+					while = {
+						limit = { num_holdings_owned > 0 }
+						random_holdings = { save_scope_as = holding_transfer }
+						remove_holding = scope:holding_transfer
+						scope:heir_child = { add_holding = scope:holding_transfer }
+					}
+					employer = {
+						every_governorships = {
+							limit = { 
+								has_variable = governorship_owner
+								var:governorship_owner = root 
+							}
+							remove_variable = governorship_owner
+							set_variable = {
+								name = governorship_owner
+								value = scope:heir_child
+							}
+							calculate_the_gov_ownership = yes
+						}
+					}
+					recalculate_ownership_char = yes #to clean eventual variables and modifiers
+				}
+			}
+		}
+		if = { #C3RD clear variables
+			limit = {
+				has_variable = country_ownership
+			}
+			remove_variable = country_ownership
+		}
+		#now for independant governorships
+		if = {
+			limit = {
+				any_country = {
+					has_variable = owner_from_another_empire
+					var:owner_from_another_empire = root
+				}
+			}
+			if = {
+				limit = {
+					is_head_of_family = yes
+					exists = next_in_family
+				}
+				next_in_family = {
+					save_scope_as = ownership_target
+				}
+			}
+			else_if = {
+				limit = {
+					is_head_of_family = no
+					exists = family.head_of_family
+					family.head_of_family = {
+						employer = root.employer
+					}
+				}
+				family.head_of_family = {
+					save_scope_as = ownership_target
+				}
+			}
+		}
+		if = { # Give ownership to relevant character based on above
+			limit = { 
+				exists = scope:ownership_target 
+				NOT = {
+					scope:ownership_target = root
+				}
+			}
+			random_country = {
+				limit = {
+					has_variable = owner_from_another_empire
+					var:owner_from_another_empire = root
+				}
+				remove_variable = owner_from_another_empire
+				set_variable = {
+					name = owner_from_another_empire
+					value = scope:ownership_target
+				}
+			}
+			scope:ownership_target = {
+                recalculate_ownership_char = yes
+				trigger_event = {
+					id = c3rd_other_events.811
+					days = 1 #Necessary
+				}
+			}
+		}
+		
 	}
 }

@@ -1,0 +1,17 @@
+﻿c3rd_monetary_window_button = {
+	scope = country
+
+	ai_is_valid = {
+		always = no
+	}
+    is_valid = {
+		current_date >= 750.1.1
+    }
+
+	is_shown = {
+	}
+
+	effect = {
+		
+	}
+}
