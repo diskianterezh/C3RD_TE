@@ -53,3 +53,28 @@ tiny_flag = { #IN CASE YOU ARE NOT USING BETTER UI THESE ARE THE USED SETTINGS F
 	}
 }
 
+
+small_province_view = { #IN CASE YOU ARE NOT USING BETTER UI THESE ARE THE USED SETTINGS FOR COMPATIBILITY
+	scope = country
+
+	ai_is_valid = {
+		always = no
+	}
+
+	is_shown = {
+		has_variable = small_province_view
+	}
+
+	effect = {
+		if = {
+			limit = {
+				has_variable = small_province_view
+			}
+			remove_variable = small_province_view
+		}
+		else = {
+			set_variable = small_province_view
+		}
+	}
+}
+

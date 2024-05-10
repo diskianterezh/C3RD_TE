@@ -1993,6 +1993,7 @@ c3rd_holding_tax_evasion = { #when tax evasion is on but also when you have the 
 									factor = 10
 									any_neighbor_province = {
 										has_owner = yes
+										exists = holding_owner
 										holding_owner = scope:new_holding_governorship.var:governorship_owner
 									}
 								}
