@@ -1,6 +1,7 @@
 ﻿namespace = tribal_flavour_events
 # this is a copy of the original file
 # Stability cap needed decreased to 20 to reduce the number of collapse through time, added condition of not high centralization
+# TODO
 tribal_flavour_events.1 = {
 	type = country_event
 	title = "tribal_flavour_event.1.t"
