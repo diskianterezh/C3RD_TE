@@ -1,6 +1,202 @@
 @windowwidth = 724
 @windowheight = 900
 
+
+types ImperialPowerTypes
+{
+	type imperial_power_widget = margin_widget {
+		visible = "[GetScriptedGui('is_imperial_power').IsShown( GuiScope.SetRoot( Player.MakeScope ).End )]"
+		# hide when not great power
+		size = { 216 45 }
+		using = NoninteractableBG
+		position = { -108 -31 }
+		parentanchor = right|vcenter
+		# Cash Numbers
+		container = {
+			visible = "[GetScriptedGui('has_money_imperial_power').IsShown( GuiScope.SetRoot( Player.MakeScope ).End )]"
+			icon = {
+				datacontext = "[GetScriptedGui('imperial_power_level_one')]"
+				enabled = "[ScriptedGui.IsValid( GuiScope.SetRoot( Player.MakeScope ).End )]"
+				position = { -1 5 }
+				size = { 40 40 }
+				texture = "gfx/numerals/effect_tier_01.dds"
+				tooltip = "has_guap_imperial_power_100_tt"
+			}
+			icon = {
+				datacontext = "[GetScriptedGui('imperial_power_level_two')]"
+				enabled = "[ScriptedGui.IsValid( GuiScope.SetRoot( Player.MakeScope ).End )]"
+				position = { 44 5 }
+				size = { 40 40 }
+				texture = "gfx/numerals/effect_tier_02.dds"
+				tooltip = "has_guap_imperial_power_200_tt"
+			}
+			icon = {
+				datacontext = "[GetScriptedGui('imperial_power_level_three')]"
+				enabled = "[ScriptedGui.IsValid( GuiScope.SetRoot( Player.MakeScope ).End )]"
+				position = { 88 5 }
+				size = { 40 40 }
+				texture = "gfx/numerals/effect_tier_03.dds"
+				tooltip = "has_guap_imperial_power_300_tt"
+			}
+			icon = {
+				datacontext = "[GetScriptedGui('imperial_power_level_four')]"
+				enabled = "[ScriptedGui.IsValid( GuiScope.SetRoot( Player.MakeScope ).End )]"
+				position = { 134 5 }
+				size = { 40 40 }
+				texture = "gfx/numerals/effect_tier_04.dds"
+				tooltip = "has_guap_imperial_power_400_tt"
+			}
+			icon = {
+				datacontext = "[GetScriptedGui('imperial_power_level_five')]"
+				enabled = "[ScriptedGui.IsValid( GuiScope.SetRoot( Player.MakeScope ).End )]"
+				position = { 178 5 }
+				size = { 40 40 }
+				texture = "gfx/numerals/effect_tier_05.dds"
+				tooltip = "has_guap_imperial_power_900_tt"
+			}
+		}
+		# Fighting numbers
+		container = {
+			visible = "[GetScriptedGui('has_warfare_imperial_power').IsShown( GuiScope.SetRoot( Player.MakeScope ).End )]"
+			icon = {
+				datacontext = "[GetScriptedGui('imperial_power_level_one')]"
+				enabled = "[ScriptedGui.IsValid( GuiScope.SetRoot( Player.MakeScope ).End )]"
+				position = { -1 5 }
+				size = { 40 40 }
+				texture = "gfx/numerals/effect_tier_01.dds"
+				tooltip = "has_warfare_1_tt"
+			}
+			icon = {
+				datacontext = "[GetScriptedGui('imperial_power_level_two')]"
+				enabled = "[ScriptedGui.IsValid( GuiScope.SetRoot( Player.MakeScope ).End )]"
+				position = { 44 5 }
+				size = { 40 40 }
+				texture = "gfx/numerals/effect_tier_02.dds"
+				tooltip = "has_warfare_2_tt"
+			}
+			icon = {
+				datacontext = "[GetScriptedGui('imperial_power_level_three')]"
+				enabled = "[ScriptedGui.IsValid( GuiScope.SetRoot( Player.MakeScope ).End )]"
+				position = { 88 5 }
+				size = { 40 40 }
+				texture = "gfx/numerals/effect_tier_03.dds"
+				tooltip = "has_warfare_3_tt"
+			}
+			icon = {
+				datacontext = "[GetScriptedGui('imperial_power_level_four')]"
+				enabled = "[ScriptedGui.IsValid( GuiScope.SetRoot( Player.MakeScope ).End )]"
+				position = { 134 5 }
+				size = { 40 40 }
+				texture = "gfx/numerals/effect_tier_04.dds"
+				tooltip = "has_warfare_4_tt"
+			}
+			icon = {
+				datacontext = "[GetScriptedGui('imperial_power_level_five')]"
+				enabled = "[ScriptedGui.IsValid( GuiScope.SetRoot( Player.MakeScope ).End )]"
+				position = { 178 5 }
+				size = { 40 40 }
+				texture = "gfx/numerals/effect_tier_05.dds"
+				tooltip = "has_warfare_5_tt"
+			}
+		}
+		# Political numbers
+		container = {
+			visible = "[GetScriptedGui('has_political_imperial_power').IsShown( GuiScope.SetRoot( Player.MakeScope ).End )]"
+			icon = {
+				datacontext = "[GetScriptedGui('imperial_power_level_one')]"
+				enabled = "[ScriptedGui.IsValid( GuiScope.SetRoot( Player.MakeScope ).End )]"
+				position = { -1 5 }
+				size = { 40 40 }
+				texture = "gfx/numerals/effect_tier_01.dds"
+				tooltip = "has_political_1_tt"
+			}
+			icon = {
+				datacontext = "[GetScriptedGui('imperial_power_level_two')]"
+				enabled = "[ScriptedGui.IsValid( GuiScope.SetRoot( Player.MakeScope ).End )]"
+				position = { 44 5 }
+				size = { 40 40 }
+				texture = "gfx/numerals/effect_tier_02.dds"
+				tooltip = "has_political_2_tt"
+			}
+			icon = {
+				datacontext = "[GetScriptedGui('imperial_power_level_three')]"
+				enabled = "[ScriptedGui.IsValid( GuiScope.SetRoot( Player.MakeScope ).End )]"
+				position = { 88 5 }
+				size = { 40 40 }
+				texture = "gfx/numerals/effect_tier_03.dds"
+				tooltip = "has_political_3_tt"
+			}
+			icon = {
+				datacontext = "[GetScriptedGui('imperial_power_level_four')]"
+				enabled = "[ScriptedGui.IsValid( GuiScope.SetRoot( Player.MakeScope ).End )]"
+				position = { 134 5 }
+				size = { 40 40 }
+				texture = "gfx/numerals/effect_tier_04.dds"
+				tooltip = "has_political_4_tt"
+			}
+			icon = {
+				datacontext = "[GetScriptedGui('imperial_power_level_five')]"
+				enabled = "[ScriptedGui.IsValid( GuiScope.SetRoot( Player.MakeScope ).End )]"
+				position = { 178 5 }
+				size = { 40 40 }
+				texture = "gfx/numerals/effect_tier_05.dds"
+				tooltip = "has_political_5_tt"
+			}
+		}
+		# Top box
+		flowcontainer = {
+			position = { -5 -2 }
+			direction = vertical
+			spacing = 47
+			icon = {
+				size = { 226 3 }
+				alpha = 0.75
+				texture = "gfx/interface/icons/arrows/arrow_texture_red_dark.dds"
+			}
+			icon = {
+				size = { 226 3 }
+				alpha = 0.75
+				texture = "gfx/interface/icons/arrows/arrow_texture_red_dark.dds"
+			}
+		}
+		# Mid box
+		flowcontainer = {
+			position = { -6 -1 }
+			spacing = 42
+			icon = {
+				size = { 3 52 }
+				alpha = 0.75
+				texture = "gfx/interface/icons/arrows/arrow_texture_red_dark.dds"
+			}
+			icon = {
+				size = { 3 52 }
+				alpha = 0.75
+				texture = "gfx/interface/icons/arrows/arrow_texture_red_dark.dds"
+			}
+			icon = {
+				size = { 3 52 }
+				alpha = 0.75
+				texture = "gfx/interface/icons/arrows/arrow_texture_red_dark.dds"
+			}
+			icon = {
+				size = { 3 52 }
+				alpha = 0.75
+				texture = "gfx/interface/icons/arrows/arrow_texture_red_dark.dds"
+			}
+			icon = {
+				size = { 3 52 }
+				alpha = 0.75
+				texture = "gfx/interface/icons/arrows/arrow_texture_red_dark.dds"
+			}
+			icon = {
+				size = { 3 52 }
+				alpha = 0.75
+				texture = "gfx/interface/icons/arrows/arrow_texture_red_dark.dds"
+			}
+		}
+	}
+}
+
 base_window = {
 	gfxtype = windowgfx
 	name = "overview_view"
@@ -8,14 +204,7 @@ base_window = {
 	widgetanchor = top|left
 	size = { @windowwidth @windowheight }
 	position = { 60 138 }
-	
-	using = movable_windows
-
-	state = {
-		name = reset_overview
-		using = default_position
-		trigger_when = "[Not(ScriptedGui.IsShown(GuiScope.SetRoot(Player.MakeScope).End))]"
-	}
+	movable = no
 
 	### Audio ###
 	state = {
@@ -71,12 +260,6 @@ base_window = {
 				shortcut = "previous_window"
 				onclick = "[OverviewView.OnPrevious]"
 				tooltip = "PREVIOUS_OVERVIEW_VIEW"
-			}
-			
-			button_reset = {
-				blockoverride "On_click" {
-					onclick = "[PdxGuiTriggerAllAnimations('reset_overview')]"
-				}
 			}
 
 			button_close = {
@@ -349,9 +532,9 @@ base_window = {
 									container = {
 										parentanchor = hcenter
 										flowcontainer = {
-											position = { -5 34 }
+											position = { 10 34 }
 											parentanchor = hcenter
-											spacing = -8
+											spacing = 0
 											name = "dummy_ideas_grid" 
 													
 											container = {
@@ -388,158 +571,144 @@ base_window = {
 											}
 										} 
 											
-										scrollarea = {
-											size = { 310 110 }
-											maximumsize = { 310 110 }
+										fixedgridbox = {
+											position = { 10 0 }
+											name = "ideas_grid"
+											flipdirection = yes
+											addcolumn = 74
+											addrow = 110
+											maxhorizontalslots = 4
+											maxverticalslots = 1
+											item = {
+												widget = { 
+													datacontext = "[IdeaItem.GetIdea]" 
+													size = { 74 110 }
+													
+													icon = {
+														parentanchor = hcenter
+														size = { 120 52 }
+														scale = 0.5
+														position = { 0 20 }
+														using = flat_background_white
+														alpha = 0.95
+														modify_texture = {
+															name = "Alpha"
+															texture = "gfx/interface/base_parts/header_l_x60bd_right_cut_alpha.dds"
+															blend_mode = alphamultiply
+															spriteType = Corneredtiled
+															spriteborder = { 60 -10 }
+														}
+													}
+													
+													icon = {
+														parentanchor = hcenter
+														using = positive_color_texture
+														size = { 120 52 }
+														scale = 0.5
+														position = { 0 20 }
+														visible = "[IdeaItem.IsValid]"
+														alpha = 0.95
+														modify_texture = {
+															name = "Alpha"
+															texture = "gfx/interface/base_parts/header_l_x60bd_right_cut_alpha.dds"
+															blend_mode = alphamultiply
+															spriteType = Corneredtiled
+															spriteborder = { 60 -10 }
+														}
+													}
+													
+													icon = {
+														#parentanchor = hcenter
+														using = negative_color_texture
+														size = { 120 52 }
+														scale = 0.5
+														visible = "[IdeaItem.IsMisMatch]"
+														position = { 0 20 }
+														alpha = 0.95
+														modify_texture = {
+															name = "Alpha"
+															texture = "gfx/interface/base_parts/header_l_x60bd_right_cut_alpha.dds"
+															blend_mode = alphamultiply
+															spriteType = Corneredtiled
+															spriteborder = { 60 -10 }
+														}	
+													}
+													### shadow for group icon
+													icon = {
+														size = { 32 32 }
+														texture = "[IdeaItem.GetGroupTexture]"
+														parentanchor = hcenter
+														position = { -2 6 }
+														tooltip = "[IdeaItem.GetGroupMatchingTooltip]"
+														color = { 0 0 0 0.4 }
+													}
+													### group icon
+													icon = {
+														size = { 32 32 }
+														texture = "[IdeaItem.GetGroupTexture]"
+														parentanchor = hcenter
+														position = { 0 4 }
+														tooltip = "[IdeaItem.GetGroupMatchingTooltip]"
+													}
+													
+													button = {
+														name = "Idea Button"
+														position = { 0 16 }
+														tooltipwidget = idea_item_desc_tooltip
 
-											scrollbarpolicy_vertical = always_off
-											scrollbar_horizontal = {
-												using = HorizontalScrollBar
-											}
-
-											scrollwidget = {
-
-												fixedgridbox = {
-													resizeparent = yes
-													position = { 2 0 }
-													name = "ideas_grid"
-													flipdirection = yes
-													addcolumn = 66
-													addrow = 110
-													maxhorizontalslots = 8
-													maxverticalslots = 1
-													item = {
-														widget = {
-															datacontext = "[IdeaItem.GetIdea]"
-															size = { 60 110 }
-
-															icon = {
-																#parentanchor = hcenter
-																size = { 120 52 }
-																scale = 0.5
-																position = { 0 20 }
-																using = flat_background_white
-																alpha = 0.95
-																modify_texture = {
-																	name = "Alpha"
-																	texture = "gfx/interface/base_parts/header_l_x60bd_right_cut_alpha.dds"
-																	blend_mode = alphamultiply
-																	spriteType = Corneredtiled
-																	spriteborder = { 60 -10 }
-																}
-															}
-
-															icon = {
-																#parentanchor = hcenter
-																using = positive_color_texture
-																size = { 120 52 }
-																scale = 0.5
-																position = { 0 20 }
-																visible = "[IdeaItem.IsValid]"
-																alpha = 0.95
-																modify_texture = {
-																	name = "Alpha"
-																	texture = "gfx/interface/base_parts/header_l_x60bd_right_cut_alpha.dds"
-																	blend_mode = alphamultiply
-																	spriteType = Corneredtiled
-																	spriteborder = { 60 -10 }
-																}
-															}
-
-															icon = {
-																#parentanchor = hcenter
-																using = negative_color_texture
-																size = { 120 52 }
-																scale = 0.5
-																visible = "[IdeaItem.IsMisMatch]"
-																position = { 0 20 }
-																alpha = 0.95
-																modify_texture = {
-																	name = "Alpha"
-																	texture = "gfx/interface/base_parts/header_l_x60bd_right_cut_alpha.dds"
-																	blend_mode = alphamultiply
-																	spriteType = Corneredtiled
-																	spriteborder = { 60 -10 }
-																}
-															}
-															### shadow for group icon
-															icon = {
-																size = { 32 32 }
-																texture = "[IdeaItem.GetGroupTexture]"
-																parentanchor = hcenter
-																position = { -2 6 }
-																tooltip = "[IdeaItem.GetGroupMatchingTooltip]"
-																color = { 0 0 0 0.4 }
-															}
-															### group icon
-															icon = {
-																size = { 32 32 }
-																texture = "[IdeaItem.GetGroupTexture]"
-																parentanchor = hcenter
-																position = { 0 4 }
-																tooltip = "[IdeaItem.GetGroupMatchingTooltip]"
-															}
-
-															button = {
-																name = "Idea Button"
-																position = { 0 16 }
-																tooltipwidget = idea_item_desc_tooltip
-
-																visible = "[IdeaItem.IsValid]"
-																alwaystransparent = no
-																size = { 54 54 }
-																gfxtype = framedbuttongfx
-																widgetanchor = center
-																parentanchor = center
-																enabled = yes
-																texture = "[IdeaItem.GetIcon]"
-																onclick = "[IdeaItem.OpenSelection]"
-																using = DropShadow
-															}
-
-															button = {
-																name = "No Picked Idea"
-																position = { 0 16 }
-																tooltipwidget = no_idea_tooltip
-																visible = "[Not(IdeaItem.IsValid)]"
-																alwaystransparent = no
-																size = { 54 54 }
-																gfxtype = framedbuttongfx
-																widgetanchor = center
-																parentanchor = center
-																enabled = yes
-																onclick = "[IdeaItem.OpenSelection]"
-																framesize = { 200 200 }
-																upframe = 1
-																overframe = 1
-																downframe = 1
-																disableframe = 1
-																using = button_tiled_texture
-																modify_texture = {
-																	name = "Alpha"
-																	texture = "gfx/interface/base_parts/button2_inner_x8y8bd_alpha.dds"
-																	blend_mode = alphamultiply
-																	spriteType = Corneredtiled
-																	spriteborder = { 6 6 }
-																}
-																#using = DropShadow
-																icon = {
-																	name = "Pattern"
-																	texture = "gfx/interface/base_parts/square_button_corner_pattern_x22y22bd.dds"
-																	spriteType = Corneredtiled
-																	spriteborder = { 11 11 }
-																	size = { 100% 100% }
-																	parentanchor = bottom
-																}
-
-																icon = {
-																	name = "Idea Mark"
-																	widgetanchor = center
-																	parentanchor = center
-																	texture = "gfx/interface/base_parts/idea_mark.dds"
-																	size = { 70% 70% }
-																}
-															}
+														visible = "[IdeaItem.IsValid]"
+														alwaystransparent = no
+														size = { 56 56 }
+														gfxtype = framedbuttongfx
+														widgetanchor = center
+														parentanchor = center	
+														enabled = yes
+														texture = "[IdeaItem.GetIcon]"
+														onclick = "[IdeaItem.OpenSelection]"
+														using = DropShadow
+													}
+													 
+													button = {
+														name = "No Picked Idea"
+														position = { 0 16 }
+														tooltipwidget = no_idea_tooltip
+														visible = "[Not(IdeaItem.IsValid)]"
+														alwaystransparent = no
+														size = { 56 56 }
+														gfxtype = framedbuttongfx
+														widgetanchor = center
+														parentanchor = center	
+														enabled = yes
+														onclick = "[IdeaItem.OpenSelection]"
+														framesize = { 200 200 }
+														upframe = 1
+														overframe = 1
+														downframe = 1
+														disableframe = 1
+														using = button_tiled_texture
+														modify_texture = {
+															name = "Alpha"
+															texture = "gfx/interface/base_parts/button2_inner_x8y8bd_alpha.dds"
+															blend_mode = alphamultiply
+															spriteType = Corneredtiled
+															spriteborder = { 6 6 }
+														}
+														#using = DropShadow
+														icon = {
+															name = "Pattern"
+															texture = "gfx/interface/base_parts/square_button_corner_pattern_x22y22bd.dds"
+															spriteType = Corneredtiled
+															spriteborder = { 11 11 }
+															size = { 100% 100% }
+															parentanchor = bottom
+														}
+														
+														icon = {
+															name = "Idea Mark"
+															widgetanchor = center
+															parentanchor = center	
+															texture = "gfx/interface/base_parts/idea_mark.dds"
+															size = { 70% 70% }
 														}
 													}
 												}
@@ -619,12 +788,11 @@ base_window = {
 								}	
 							}
 
-
 							widget = {
 								name = "civil_war_diamond"
 								size = { 52 52 }
 								parentanchor = right
-								position = { -20 -4 }
+								position = { -20 -10 }
 								tooltip = "[OverviewView.GetPlayer.GetPossibleCivilWarTooltip]"
 								
 								icon = {
@@ -664,10 +832,35 @@ base_window = {
 								}
 							}
 
+							imperial_power_widget = {}
+
+							icon_button_square = {
+								datacontext = "[GetScriptedGui('change_imperial_power_button')]"
+								size = { 52 52 }
+								position = { -21 -29 }
+								parentanchor = right|vcenter
+								blockoverride "Icon"
+								{
+									texture = "gfx/interface/icons/shared_icons/achieve.dds"
+									size = { 50 50 }
+									framesize = { 50 50 }
+									frame = 3
+								}
+								visible = "[ScriptedGui.IsShown( GuiScope.SetRoot( Player.MakeScope ).End )]"
+								enabled = "[ScriptedGui.IsValid( GuiScope.SetRoot( Player.MakeScope ).End )]"
+								tooltip = "IMPERIAL_POWER_UI_TOOLTIP"
+								blockoverride "On_click"
+								{
+									clicksound = "event:/SFX/UI/Province/sfx_ui_province_improvement"
+									onclick = "[ScriptedGui.Execute( GuiScope.SetRoot( Player.MakeScope ).End )]"
+								}
+								using = tooltip_se
+							}
+
 							margin_widget = {
 								size = { 318 230 }
 								#using = NoninteractableBG
-								position = { 0 22 }
+								position = { 0 55 }
 								parentanchor = right|vcenter
 
 								flowcontainer = {
@@ -1082,10 +1275,6 @@ base_window = {
 													onclick = "[GetVariableSystem.Set( OverviewGovernorshipItem.GetGovernorship.GetName, 'yes' )]"
 													visible = "[Or( Not( GetVariableSystem.Exists( OverviewGovernorshipItem.GetGovernorship.GetName ) ), GetVariableSystem.HasValue( OverviewGovernorshipItem.GetGovernorship.GetName, 'no' ) )]"
 													parentanchor = vcenter
-													cpt_button = {
-														size = { 40 60 }
-														datacontext = "[OverviewGovernorshipItem.GetGovernorship.GetGovernorOrRuler]"
-													}
 													cpt_button = {
 														size = { 40 60 }
 														datacontext = "[OverviewGovernorshipItem.GetGovernorship.GetGovernorOrRuler]"
@@ -2029,4 +2218,4 @@ base_window = {
 #			}	
 #		}
 #	}
-#}
+}
