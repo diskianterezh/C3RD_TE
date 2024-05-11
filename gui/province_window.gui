@@ -1783,6 +1783,18 @@ window = {
 							}
 							tooltip = "TOGGLE_LIST_PROVINCES"
 						}
+						button = {
+							visible = "[Player.Exists]"
+							clicksound = "event:/SFX/UI/Generic/sfx_ui_generic_click"
+							oversound = "event:/SFX/UI/Generic/sfx_ui_generic_mouse_over"
+							framesize = { 50 50 }
+							size = { 26 26 }
+							texture = "gfx/interface/icons/shared_icons/star.dds"
+							datacontext = "[GetScriptedGui('fav_territories')]"
+							frame = "[Select_int32(ScriptedGui.IsShown(GuiScope.SetRoot(ProvinceWindow.GetProvince.MakeScope).AddScope('player', Player.MakeScope).End),'(int32)2','(int32)1'))]"
+							onclick = "[ScriptedGui.Execute( GuiScope.SetRoot( ProvinceWindow.GetProvince.MakeScope ).AddScope('player', Player.MakeScope).End )]"
+							tooltip = "fav"
+						}
 						margin_right = 10
 					}
 				}
@@ -3683,6 +3695,7 @@ window = {
                 scissor = yes
                 resizeparent = yes
                 flowcontainer = {
+                	visible = "[Player.Exists]"
                     #margin_top = 2
                     margin_left = 2
                     ignoreinvisible = yes
@@ -3691,6 +3704,10 @@ window = {
                     position = { -36 -2 }
                     spacing = -50
                     resizeparent = yes
+                    widget = {
+                    	visible = "[ProvinceWindow.ShowMigrateButton]"
+                    	size = { 100 66 }
+                    }
                     icon_button_province = {
                         size = { 144 66 }
                         visible = "[ProvinceWindow.CanTransferOccupation]"
@@ -3715,6 +3732,7 @@ window = {
                     }
 
                     widget = {
+						visible = "[Not(ProvinceWindow.ShowMigrateButton)]"
                     	size = { 100 66 }
                     }
                     icon_card_province = {
