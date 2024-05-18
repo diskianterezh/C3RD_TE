@@ -1063,10 +1063,10 @@ low_stab_event.8 = {
 	title = "low_stab_event.8.t"
 	desc = "low_stab_event.8.desc"
 	picture = council_country
-	has_civil_war = no
 	trigger = {
 		has_land = yes
 		has_country_modifier = internal_collapse
+		has_civil_war = no
 		NOT = {
 			stability >= 25
 		}
