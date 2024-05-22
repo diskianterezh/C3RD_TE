@@ -412,6 +412,18 @@ c3rd_economic_factor = {
 		}
 		add = -1
 	}
+	if = { #added to reduce the vicious snowball
+		limit = {
+			has_country_modifier = high_deflation
+		}
+		add = -1
+	}
+	if = { #same
+		limit = {
+			has_country_modifier = high_monetary_crash
+		}
+		add = -1
+	}
 	if = {
 		limit = {
 			num_of_cities <= 200
