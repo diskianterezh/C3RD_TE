@@ -424,6 +424,12 @@ c3rd_economic_factor = {
 		}
 		add = -1
 	}
+	if = { #split
+		limit = {
+			has_country_modifier = divided_empire
+		}
+		add = -2
+	}
 	if = {
 		limit = {
 			num_of_cities <= 200
@@ -582,6 +588,36 @@ third_of_state_pop = {
 		add = total_population
 	}
 	divide = 3
+}
+
+govship_total_pops = {
+	value = 0
+	every_governorship_state = {
+		every_state_province = {
+			add = total_population
+		}
+	}
+}
+
+govship_primary_pops = {
+	value = 0
+	every_governorship_state = {
+		every_state_province = {
+			every_pops_in_province = {
+				limit = {
+					pop_culture = root.owner.culture
+				}
+				add = 1
+			}
+		}
+	}
+}
+
+govship_primary_rate = {
+	value = govship_primary_pops
+	multiply = 100
+	divide = govship_total_pops
+	round = yes
 }
 
 num_vassal_provinces = {

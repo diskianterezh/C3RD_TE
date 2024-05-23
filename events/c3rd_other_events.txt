@@ -5688,6 +5688,407 @@ c3rd_other_events.75 = { #new currency, but the leader is really bad at that
 }
 
 
+c3rd_other_events.76 = { #split the empire
+    type = country_event
+    title = "c3rd_other_events.76.t"
+    desc = "c3rd_other_events.76.desc"
+
+    picture = hellenic_marketplace
+
+    trigger = {
+        has_land = yes
+        num_of_cities >= 500
+    }
+
+    immediate = {
+        if = {
+            limit = {
+                exists = p:1453
+            }
+            p:1453 = {
+                save_scope_as = byzantium
+            }
+        }
+        random_owned_province = {
+            limit = {
+                dominant_province_culture = root.culture
+                governorship = {
+                    NOT = {
+                        this = root.capital_scope.governorship
+                    }
+                }
+            }
+            weight = {
+                modifier = {
+                    factor = total_population
+                }
+                modifier = {
+                    factor = 10
+                    has_province_rank = city
+                }
+                modifier = {
+                    factor = 100
+                    has_province_rank = metropolis
+                }
+                modifier = {
+                    factor = 0.01
+                    region = {
+                        any_neighbor_region = {
+                            any_region_province = {
+                                owner = root
+                                this = root.capital_scope
+                            }
+                        }
+                    }
+                }
+                modifier = {
+                    factor = 0.1
+                    distance_from = {
+                        province = root.capital_scope
+                        value < 600
+                    }
+                }
+                modifier = {
+                    factor = 10
+                    distance_from = {
+                        province = root.capital_scope
+                        value > 900
+                    }
+                }
+                modifier = {
+                    factor = 10
+                    distance_from = {
+                        province = root.capital_scope
+                        value > 1200
+                    }
+                }
+            }
+            save_scope_as = first_split_capital
+            governorship = {
+                save_scope_as = first_split_govship
+            }
+        }
+        random_owned_province = {
+            limit = {
+                dominant_province_culture = root.culture
+                NOT = {this = scope:first_split_capital}
+                governorship = {
+                    NOT = {
+                        this = root.capital_scope.governorship
+                    }
+                }
+            }
+            weight = {
+                modifier = {
+                    factor = total_population
+                }
+                modifier = {
+                    factor = 10
+                    has_province_rank = city
+                }
+                modifier = {
+                    factor = 100
+                    has_province_rank = metropolis
+                }
+                modifier = {
+                    factor = 0.01
+                    region = {
+                        any_neighbor_region = {
+                            any_region_province = {
+                                owner = root
+                                this = root.capital_scope
+                            }
+                        }
+                    }
+                }
+                modifier = {
+                    factor = 0.1
+                    distance_from = {
+                        province = root.capital_scope
+                        value < 600
+                    }
+                }
+                modifier = {
+                    factor = 0.1
+                    distance_from = {
+                        province = scope:first_split_capital
+                        value < 500
+                    }
+                }
+                modifier = {
+                    factor = 10
+                    distance_from = {
+                        province = root.capital_scope
+                        value > 900
+                    }
+                }
+                modifier = {
+                    factor = 10
+                    distance_from = {
+                        province = root.capital_scope
+                        value > 1200
+                    }
+                }
+            }
+            save_scope_as = second_split_capital
+            governorship = {
+                save_scope_as = second_split_govship
+            }
+        }
+        random_owned_province = {
+            limit = {
+                NOR = {
+                    this = scope:first_split_capital
+                    this = scope:second_split_capital
+                }
+                dominant_province_culture = root.culture
+                governorship = {
+                    NOT = {
+                        this = root.capital_scope.governorship
+                    }
+                }
+            }
+            weight = {
+                modifier = {
+                    factor = total_population
+                }
+                modifier = {
+                    factor = 10
+                    has_province_rank = city
+                }
+                modifier = {
+                    factor = 100
+                    has_province_rank = metropolis
+                }
+                modifier = {
+                    factor = 0.01
+                    region = {
+                        any_neighbor_region = {
+                            any_region_province = {
+                                owner = root
+                                this = root.capital_scope
+                            }
+                        }
+                    }
+                }
+                modifier = {
+                    factor = 0.1
+                    distance_from = {
+                        province = root.capital_scope
+                        value < 600
+                    }
+                }
+                modifier = {
+                    factor = 0.1
+                    distance_from = {
+                        province = scope:first_split_capital
+                        value < 500
+                    }
+                }
+                modifier = {
+                    factor = 0.1
+                    distance_from = {
+                        province = scope:second_split_capital
+                        value < 500
+                    }
+                }
+                modifier = {
+                    factor = 10
+                    distance_from = {
+                        province = root.capital_scope
+                        value > 900
+                    }
+                }
+                modifier = {
+                    factor = 10
+                    distance_from = {
+                        province = root.capital_scope
+                        value > 1200
+                    }
+                }
+            }
+            save_scope_as = third_split_capital
+            governorship = {
+                save_scope_as = third_split_govship
+            }
+        }
+
+    }
+
+    option = { #choice 1
+        name = c3rd_other_events.76.a
+        custom_tooltip = c3rd_other_events.76.a.tt1
+        add_stability = 20
+        scope:first_split_capital = {
+            save_scope_as = split_empire_capital
+        }
+        add_country_modifier = {
+            name = divided_empire
+            duration = 18250
+        }
+        custom_tooltip = c3rd_other_events.76.ttm
+        if = {
+            limit = {
+                has_variable = deflation_value
+            }
+            custom_tooltip = c3rd_other_events.76.ttd
+            change_variable = {
+                name = deflation_value
+                divide = 2
+            }
+        }
+        if = {
+            limit = {
+                has_variable = silver_unvalue
+            }
+            custom_tooltip = c3rd_other_events.76.tts
+            change_variable = {
+                name = silver_unvalue
+                divide = 2
+            }
+        }
+        custom_tooltip = c3rd_other_events.76.ttlag
+    }
+
+
+    option = { #choice2
+        name = c3rd_other_events.76.b
+        custom_tooltip = c3rd_other_events.76.b.tt1
+        add_stability = 20
+        scope:second_split_capital = {
+            save_scope_as = split_empire_capital
+        }
+        add_country_modifier = {
+            name = divided_empire
+            duration = 18250
+        }
+        custom_tooltip = c3rd_other_events.76.ttm
+        if = {
+            limit = {
+                has_variable = deflation_value
+            }
+            custom_tooltip = c3rd_other_events.76.ttd
+            change_variable = {
+                name = deflation_value
+                divide = 2
+            }
+        }
+        if = {
+            limit = {
+                has_variable = silver_unvalue
+            }
+            custom_tooltip = c3rd_other_events.76.tts
+            change_variable = {
+                name = silver_unvalue
+                divide = 2
+            }
+        }
+        custom_tooltip = c3rd_other_events.76.ttlag
+    }
+    
+    option = { #choice3
+        name = c3rd_other_events.76.c
+        custom_tooltip = c3rd_other_events.76.c.tt1
+        add_stability = 20
+        scope:third_split_capital = {
+            save_scope_as = split_empire_capital
+        }
+        add_country_modifier = {
+            name = divided_empire
+            duration = 18250
+        }
+        custom_tooltip = c3rd_other_events.76.ttm
+        if = {
+            limit = {
+                has_variable = deflation_value
+            }
+            custom_tooltip = c3rd_other_events.76.ttd
+            change_variable = {
+                name = deflation_value
+                divide = 2
+            }
+        }
+        if = {
+            limit = {
+                has_variable = silver_unvalue
+            }
+            custom_tooltip = c3rd_other_events.76.tts
+            change_variable = {
+                name = silver_unvalue
+                divide = 2
+            }
+        }
+        custom_tooltip = c3rd_other_events.76.ttlag
+    }
+
+    option = { #byzantion
+        name = c3rd_other_events.76.d
+        custom_tooltip = c3rd_other_events.76.d.tt1
+        add_stability = 20
+        trigger = {
+            root.culture_group = culture_group:latin
+            exists = p:1453
+            p:1453 = {
+                exists = owner
+                owner = root
+                NOT = {
+                    governorship = root.capital_scope.governorship
+                }
+            }
+        }
+        p:1453 = {
+            save_scope_as = split_empire_capital
+        }
+        add_country_modifier = {
+            name = divided_empire
+            duration = 18250
+        }
+        custom_tooltip = c3rd_other_events.76.ttm
+        if = {
+            limit = {
+                has_variable = deflation_value
+            }
+            custom_tooltip = c3rd_other_events.76.ttd
+            change_variable = {
+                name = deflation_value
+                divide = 2
+            }
+        }
+        if = {
+            limit = {
+                has_variable = silver_unvalue
+            }
+            custom_tooltip = c3rd_other_events.76.tts
+            change_variable = {
+                name = silver_unvalue
+                divide = 2
+            }
+        }
+        custom_tooltip = c3rd_other_events.76.ttlag
+    }
+
+    option = { #do nothing
+        name = c3rd_other_events.76.e
+        custom_tooltip = c3rd_other_events.76.e.tt1
+    }
+
+    after = {
+        if = {
+            limit = {exists = scope:split_empire_capital}
+            hidden_effect = { #after to save perf
+                create_split = yes
+            }
+        }
+        every_governorships = {
+            limit = {
+                is_in_list = old_empire
+            }
+            remove_from_list = old_empire
+        }
+    }
+}
+
+
 ### ADMINISTRATIVE EVENTS ####
 
 ### Basically nobles (great families) taking more power in the realm

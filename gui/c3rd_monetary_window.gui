@@ -173,6 +173,20 @@ message_window = {
 		}
 		icon = {
 			size = { 30 30 }
+			visible = "[GetScriptedGui('c3rd_bartering_authorised_sol').IsShown( GuiScope.SetRoot( Player.MakeScope ).End )]"
+			texture = "gfx/interface/icons/governor_policies/acquisition_of_wealth.dds"
+			tooltip = "c3rd_bartering_authorised_sol_tt"
+			color = { 0.5 1 0.5 1 }
+		}
+		icon = {
+			size = { 30 30 }
+			visible = "[GetScriptedGui('c3rd_silver_consolidation_sol').IsShown( GuiScope.SetRoot( Player.MakeScope ).End )]"
+			texture = "gfx/interface/icons/shared_icons/maintenance.dds"
+			tooltip = "c3rd_silver_consolidation_sol_tt"
+			color = { 0.5 1 0.5 1 }
+		}
+		icon = {
+			size = { 30 30 }
 			visible = "[GetScriptedGui('c3rd_aristocratic_reforms').IsShown( GuiScope.SetRoot( Player.MakeScope ).End )]"
 			texture = "gfx/interface/icons/shared_icons/disloyal_power_base.dds"
 			tooltip = "c3rd_aristocratic_reforms_tt"
@@ -190,6 +204,13 @@ message_window = {
 			visible = "[GetScriptedGui('c3rd_monetary_second_reform_law').IsShown( GuiScope.SetRoot( Player.MakeScope ).End )]"
 			texture = "gfx/interface/icons/shared_icons/ironman.dds"
 			tooltip = "c3rd_monetary_political_second_reform_law_tt"
+			color = { 0.5 1 0.5 1 }
+		}
+		icon = {
+			size = { 30 30 }
+			visible = "[GetScriptedGui('c3rd_divided_empire').IsShown( GuiScope.SetRoot( Player.MakeScope ).End )]"
+			texture = "gfx/interface/icons/shared_icons/reputation.dds"
+			tooltip = "c3rd_divided_empire_tt"
 			color = { 0.5 1 0.5 1 }
 		}
 	}	
