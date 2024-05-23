@@ -90,6 +90,19 @@
 				}
 			}
 		}
+		trigger_if = {
+			limit = {
+				scope:target = {
+					loyalty <= 0
+				}
+			}
+			custom_tooltip = {
+				text = taking_over_lands_trigger_tt2
+				scope:target = {
+					loyalty > 0
+				}
+			}
+		}
 	}
 
 	effect = {

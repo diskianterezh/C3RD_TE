@@ -8544,6 +8544,22 @@ window = {
 
 									blockoverride "Icon" { texture = "gfx/interface/icons/shared_icons/create_mercenary_state.dds" }
 								}
+
+								icon_button_square = {
+									size = { 42 42 }
+
+									datacontext = "[GetScriptedGui('duchy_button')]"
+									visible = "[ScriptedGui.IsShown( GuiScope.SetRoot( ProvinceWindow.GetProvince.MakeScope ).AddScope('player', Player.MakeScope ).End )]"
+
+									blockoverride "On_click"
+									{
+										enabled = "[ScriptedGui.IsValid( GuiScope.SetRoot( ProvinceWindow.GetProvince.MakeScope ).AddScope('player', Player.MakeScope ).End )]"
+										onclick = "[ScriptedGui.Execute( GuiScope.SetRoot( ProvinceWindow.GetProvince.MakeScope ).AddScope('player', Player.MakeScope ).End )]"
+										tooltip = "DUCHY_BUTTON"
+									}
+
+									blockoverride "Icon" { texture = "gfx/interface/icons/shared_icons/fortification.dds" }
+								}
 							}
 							margin_widget = {
 								size = { 100% 40 }
