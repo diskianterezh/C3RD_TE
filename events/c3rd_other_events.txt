@@ -1399,10 +1399,10 @@ c3rd_other_events.10 = { #great book
 }
 
 
-c3rd_other_events.10.5 = { #inform about book being available
+c3rd_other_events.1005 = { #inform about book being available
     type = country_event
-    title = "c3rd_other_events.10.5.t"
-    desc = "c3rd_other_events.10.5.desc"
+    title = "c3rd_other_events.1005.t"
+    desc = "c3rd_other_events.1005.desc"
 
     picture = great_library
 
@@ -1419,8 +1419,8 @@ c3rd_other_events.10.5 = { #inform about book being available
     }
 
     option = {
-        name = c3rd_other_events.10.5.a
-        custom_tooltip = c3rd_other_events.10.5.a.tt1
+        name = c3rd_other_events.1005.a
+        custom_tooltip = c3rd_other_events.1005.a.tt1
     }
 }
 

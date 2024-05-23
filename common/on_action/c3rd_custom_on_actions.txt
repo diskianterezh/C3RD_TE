@@ -1,4 +1,4 @@
-﻿
+
 c3rd_custom_on_actions_instability = {
 	trigger = {
 		current_date > 900.1.1
@@ -764,7 +764,7 @@ c3rd_calculate_deflation = {
 				NOT = {has_variable = monetary_mechanics_available_event}
 			}
 			trigger_event = {
-				id = c3rd_other_events.10.5
+				id = c3rd_other_events.1005
 			}
 		}
 		if = { #calculation of this year economy

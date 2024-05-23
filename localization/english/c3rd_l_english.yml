@@ -1,4 +1,4 @@
-﻿l_english:
+l_english:
  internal_collapse:0 "Internal collapse"
  desc_internal_collapse:0 "The catastrophic instability of the country has triggered a spiral that could well lead to the outright collapse of the country!"
  general_corruption:0 "General corruption"
@@ -1141,10 +1141,10 @@ low_stab_event.9.b.tt1:0 "You will garrison the [state_duchy_grab.GetName] in or
  c3rd_other_events.10.a.tt1:0 "This number represents the inner wealth of your country  how rich are people, how money flows between workers and owners. It has little to do with the amount of money in your coffers, nor your income... but the consequences of mismanagement can indirectly influence it.\n\nEvery pop of non-integrated culture contributes #G positively#! to this figure, symbolizing the exploitation of conquered populations in the service of the country.\n#G Each pop of culture with 'slave' cultural rights will contribute twice as much #! \nEvery precious mineral will contribute #G positively#! to this figure.\nEach integrated pop, symbolizing the privileges of the elites will contribute #R negatively#! to this figure\n\nThe ratio between positive and negative values will differ according to laws, certain cultural decisions as the #G tax inspection policy#!, and over time. It will be more and more difficult to satisfy this ratio with time, symbolizing the progressive corruption of a society that is proud of its success."
 
 
- c3rd_other_events.10.5.t:0 "The time of monetary economics"
- c3rd_other_events.10.5.desc:0 "Times are changing and if we were previously drowning in the resources of our conquests, the era to come will undoubtedly be richer ... in difficulties.\n\n #Y Information on monetary mechanics is now unlocked and accessible via the additional button in the economic interface. #!"
- c3rd_other_events.10.5.a:0 "Interesting"
- c3rd_other_events.10.5.a.tt1:0 "So much information at my disposal"
+ c3rd_other_events.1005.t:0 "The time of monetary economics"
+ c3rd_other_events.1005.desc:0 "Times are changing and if we were previously drowning in the resources of our conquests, the era to come will undoubtedly be richer ... in difficulties.\n\n #Y Information on monetary mechanics is now unlocked and accessible via the additional button in the economic interface. #!"
+ c3rd_other_events.1005.a:0 "Interesting"
+ c3rd_other_events.1005.a.tt1:0 "So much information at my disposal"
 
  c3rd_other_events.11.t:0 "A flawless succession"
  c3rd_other_events.11.desc:0 "A new leader is taking over. But while heads change and some key positions are redistributed, a faction remains powerful and must not be ignored... A king without the support of his army risks much more than a few sporadic disobediences! It would be wise to make sure, by some generous donations, that this succession will be flawless"
