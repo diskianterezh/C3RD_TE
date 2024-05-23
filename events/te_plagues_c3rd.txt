@@ -1,0 +1,165 @@
+﻿namespace = te_plagues
+
+
+
+#Antonine Plague epidemic � country
+#set global variable antonine_plague_pandemic, and on country either antonine_plague_country_outbreak or antonine_plague_country_quarantine
+te_plagues.11 = {
+	type = country_event
+	title = "te_plagues.11.t"
+	desc = "te_plagues.11.desc"
+	picture = natural_disaster
+
+	goto_location = scope:antonine_plague_city
+
+	fire_only_once = yes
+
+	trigger = {
+		current_date > 917.1.1
+		#current_date < 932.12.31
+		has_global_variable = antonine_plague_pandemic
+		num_of_cities > 1
+		NOR = {
+			p:1 = {
+				owner = root
+			}
+			has_variable = antonine_plague_country_outbreak
+			has_variable = antonine_plague_country_quarantine	
+		}
+		any_owned_province = {
+			total_population >= 20
+		}
+	}
+
+	immediate = {
+		add_stability = -10 #halved from TE, because i add other events 
+		random_owned_province = {
+			limit = {
+				NOT = { total_population < 20 }
+			}
+			save_scope_as = antonine_plague_city
+		}		
+	}	
+
+	option = {
+		name = "te_plagues.11.a"
+		trigger = { is_ai = no }
+		custom_tooltip = "plague_outbreak"
+			scope:antonine_plague_city = {	
+				add_province_modifier = {
+					name = "antonine_plague_epidemic_outbreak_city"
+					duration = 1080
+				}
+			}
+		set_variable = {
+			name = antonine_plague_country_outbreak
+			days = 5460	
+		}			
+	}
+	option = {
+		name = "te_plagues.11.b"
+		custom_tooltip = "plague_quarantine"
+			scope:antonine_plague_city = {	
+				add_province_modifier = {
+					name = "antonine_plague_epidemic_quarantine"
+					duration = 1080
+				}
+			}
+		set_variable = {
+			name = antonine_plague_country_quarantine
+			days = 5460	
+		}			
+	}
+}
+
+
+#Antonine outbreak provinces
+#give antonine_plague_epidemic_outbreak_city or antonine_plague_epidemic_quarantine or plague_outbreak_province
+
+
+
+#Cyprian Plague AD249�262
+#cyprian_plague_country_outbreak/cyprian_plague_epidemic_outbreak_city, cyprian_plague_country_quarantine/cyprian_plague_epidemic_quarantine + cyprian_plague_epidemic_quarantown, cyprian_plague_epidemic_outbreak_town or plague_outbreak_province
+
+
+#Cyprian Plague � country
+te_plagues.21 = {
+	type = country_event
+	title = "te_plagues.21.t"
+	desc = "te_plagues.21.desc"
+	picture = natural_disaster
+
+	goto_location = scope:cyprian_plague_city
+
+	fire_only_once = yes
+
+	trigger = {
+		current_date > 1001.1.1
+		#current_date < 1015.12.31
+		has_global_variable = cyprian_plague_pandemic
+		num_of_cities > 1
+		NOR = {
+			has_variable = cyprian_plague_country_outbreak
+			has_variable = cyprian_plague_country_quarantine
+			p:516 = {
+				owner = root
+			}
+		}
+		any_owned_province = {
+			total_population >= 20
+		}
+	}
+
+	immediate = {
+		add_stability = -15 #halved from TE, because i add other events 
+		if = {
+			limit = {
+				any_owned_province = { total_population >= 30 }
+			}
+			random_owned_province = {
+				limit = {
+					NOT = { total_population < 30 }
+				}	
+				save_scope_as = cyprian_plague_city
+			}
+		}
+		else = {
+			random_owned_province = {
+				limit = {
+					NOT = { total_population < 20 }
+				}
+				save_scope_as = cyprian_plague_city
+			}
+		}
+	}	
+
+	option = {
+		name = "te_plagues.21.a"
+		trigger = { is_ai = no }
+		custom_tooltip = "plague_outbreak"
+		scope:cyprian_plague_city = {	
+			add_province_modifier = {
+				name = "cyprian_plague_epidemic_outbreak_city"
+				duration = 1220
+			}
+		}
+		set_variable = {
+			name = cyprian_plague_country_outbreak
+			days = 4745	
+		}			
+	}
+	option = {
+		name = "te_plagues.21.b"
+		custom_tooltip = "plague_quarantine"
+		scope:cyprian_plague_city = {	
+			add_province_modifier = {
+				name = "cyprian_plague_epidemic_quarantine"
+				duration = 1220
+			}
+		}
+		set_variable = {
+			name = cyprian_plague_country_quarantine
+			days = 4745	
+		}			
+	}
+}

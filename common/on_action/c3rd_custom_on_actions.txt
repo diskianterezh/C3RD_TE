@@ -31,7 +31,10 @@ c3rd_custom_on_actions_low_stab_event = {
 		5 = low_stab_event.10
 		15 = low_stab_event.11
 		5 = low_stab_event.12
-        1 = low_stab_event.3
+		1 = low_stab_event.13
+        45 = low_stab_event.3
+		3 = low_stab_event.14
+        15 = low_stab_event.15
 	}
 }
 
@@ -565,6 +568,8 @@ c3rd_other_events_monthly_pulse = { #check if events can happen
 		30 = c3rd_other_events.106 #coveted governor
 		15 = c3rd_other_events.107 #holdings clash with heads
 		9 = c3rd_other_events.110 #intervention *5 toward civil war
+		15 = c3rd_other_events.120 #leader corruption, up to *2 *4 *12
+		10 = c3rd_other_events.130 #epidemy owner take action 
 		
 	}
 }
@@ -749,11 +754,19 @@ c3rd_calculate_deflation = {
 		has_land = yes
 		is_ai = no
 		current_date >= 750.1.1
-		NOR = {
+		NOT = {
 			has_country_modifier = solidus_introduced
 		}
 	}
 	effect = {
+		if = {
+			limit = {
+				NOT = {has_variable = monetary_mechanics_available_event}
+			}
+			trigger_event = {
+				id = c3rd_other_events.1005
+			}
+		}
 		if = { #calculation of this year economy
 			limit = {
 				NOT = {
@@ -772,12 +785,11 @@ c3rd_calculate_deflation = {
 				value = c3rd_economic_value
 			}
 		}
-		if = { #create the deflation variable if > 500 cities
+		if = { #create the deflation variable
 			limit = {
 				NOT = {
 					has_variable = deflation_value
 				}
-				num_of_cities >= 500
 				is_tribal = no
 			}
 			set_variable = {
@@ -794,13 +806,12 @@ c3rd_calculate_deflation = {
 				add = c3rd_deflation_increase
 			}
 		}
-		if = { #creation of the silver unvalue variable if >500 cities
+		if = { #creation of the silver unvalue variable
 			limit = {
 				NOT = {
 					has_variable = silver_unvalue
 				}
 				has_law = monetary_reform_law
-				num_of_cities >= 500
 				is_tribal = no
 			}
 			set_variable = {
@@ -873,7 +884,6 @@ c3rd_apply_deflation = { #applying deflation modifiers events
 					has_country_modifier = high_deflation
 				}
 				var:deflation_value >= 30
-				num_of_cities >= 500
 				is_tribal = no
 			}
 			trigger_event = {
@@ -887,7 +897,6 @@ c3rd_apply_deflation = { #applying deflation modifiers events
 					has_country_modifier = high_deflation
 				}
 				var:deflation_value >= 75
-				num_of_cities >= 500
 				is_tribal = no
 			}
 			trigger_event = {
@@ -900,7 +909,6 @@ c3rd_apply_deflation = { #applying deflation modifiers events
 					has_country_modifier = high_deflation
 				}
 				var:deflation_value >= 130
-				num_of_cities >= 500
 				is_tribal = no
 			}
 			trigger_event = {
@@ -975,7 +983,6 @@ c3rd_apply_silver_unvalue = { #applying silver modifiers events
 					has_country_modifier = high_monetary_crash
 				}
 				var:silver_unvalue >= 60
-				num_of_cities >= 500
 				is_tribal = no
 			}
 			trigger_event = {
@@ -989,7 +996,6 @@ c3rd_apply_silver_unvalue = { #applying silver modifiers events
 					has_country_modifier = high_monetary_crash
 				}
 				var:silver_unvalue >= 95
-				num_of_cities >= 500
 				is_tribal = no
 			}
 			trigger_event = {
@@ -1002,7 +1008,6 @@ c3rd_apply_silver_unvalue = { #applying silver modifiers events
 					has_country_modifier = high_monetary_crash
 				}
 				var:silver_unvalue >= 130
-				num_of_cities >= 500
 				is_tribal = no
 			}
 			trigger_event = {
@@ -1304,6 +1309,9 @@ c3rd_no_more_wonder = {
 c3rd_barbarian_sack = {
 	trigger = {
 		has_land = yes
+		NOT = {
+			government = duchy #Duchies are protected
+		}
 		any_owned_province = {
 			exists = controller
 			is_previous_controller = root
@@ -2287,6 +2295,10 @@ c3rd_political_general_rampup = { #if general with political power and uunloyal,
                         var:unworthy_leader <= 2
                     }
                     modifier = {
+                        add = 20
+                        NOT = {has_variable = unworthy_leader}
+                    }
+                    modifier = {
                         add = 2
                         legitimacy >= 85
                     }
@@ -2418,17 +2430,20 @@ c3rd_barbarian_occupying_land = { #natural expansion of tribals on lands VERY SP
 					}
 				}
 				owner = { #the dominant local culture is not integrated -> might be the barbarian one OR anything not integrated, even greeks or italian if possible, why not
-					any_country_culture = {
-						is_integrated = no
-						this.culture = prev.prev.culture
+					OR = {
+						has_country_modifier = internal_collapse #this bypasses the dominant culture requirement
+						any_country_culture = {
+							is_integrated = no
+							this.culture = prev.prev.culture
+						}
 					}
 				}
 			}
-			area = { #every states around of the country are also occupied by barbarians
-				NOT = {
-					any_neighbor_area = {
-						any_area_state = {
-							owner = root
+			NOT = {
+				any_state_province = {
+					any_neighbor_province = {
+						owner = root
+						state = {
 							NOT = {has_state_modifier = barbarians_border}
 						}
 					}
@@ -2457,18 +2472,26 @@ c3rd_barbarian_occupying_land = { #natural expansion of tribals on lands VERY SP
 							}
 						}
 					}
+					any_pops_in_province = {
+						NOT = {
+							pop_culture = root.culture
+						}
+					}
 					owner = {
-						any_country_culture = {
-							is_integrated = no
-							this.culture = prev.prev.culture
+						OR = {
+							has_country_modifier = internal_collapse
+							any_country_culture = {
+								is_integrated = no
+								this.culture = prev.prev.culture
+							}
 						}
 					}
 				}
-				area = {
-					NOT = {
-						any_neighbor_area = {
-							any_area_state = {
-								owner = root
+				NOT = {
+					any_state_province = {
+						any_neighbor_province = {
+							owner = root
+							state = {
 								NOT = {has_state_modifier = barbarians_border}
 							}
 						}
@@ -2493,21 +2516,51 @@ c3rd_barbarian_occupying_land = { #natural expansion of tribals on lands VERY SP
 							}
 						}
 					}
-					owner = {
-						any_country_culture = {
-							is_integrated = no
-							this.culture = prev.prev.culture
+					OR = {
+						AND = {
+							owner = {has_country_modifier = internal_collapse}
+							any_pops_in_province = {
+								NOT = { pop_culture = root.culture}
+							}
+						}
+						owner = {
+							any_country_culture = {
+								is_integrated = no
+								this.culture = prev.prev.culture
+							}
 						}
 					}
 				}
 				save_scope_as = new_tribal_prov
 			}
 		}
-		random_country_culture = {
+		if = {
 			limit = {
-				this.culture = scope:new_tribal_prov.culture
+				has_country_modifier = internal_collapse
 			}
-			save_scope_as = new_culture_tribal
+			scope:new_tribal_prov = {
+				random_pops_in_province = {
+					limit = {
+						NOT = {pop_culture = root.culture}
+					}
+					root = {
+						random_country_culture = {
+							limit = {
+								this.culture = prev.prev.pop_culture
+							}
+							save_scope_as = new_culture_tribal
+						}
+					}
+				}
+			}
+		}
+		else = {
+			random_country_culture = {
+				limit = {
+					this.culture = scope:new_tribal_prov.culture
+				}
+				save_scope_as = new_culture_tribal
+			}
 		}
 		if = {
 			limit = {
@@ -2556,6 +2609,22 @@ c3rd_barbarian_occupying_land = { #natural expansion of tribals on lands VERY SP
 				create_country = {
 					change_government = tribal_chiefdom
 					add_treasury = 50
+					set_variable = {
+						name = barbarian_border_tribal_country
+					}
+					if = {
+						limit = {current_date >= 1100.1.1 }
+						add_country_modifier = {
+							name = c3rd_barbarian_fury_discipline_2
+						}
+					}
+					else_if = {
+						limit = {current_date >= 1000.1.1 }
+						add_country_modifier = {
+							name = c3rd_barbarian_fury_discipline_1
+						}
+					}
+					add_military_experience_to_new_country_effect = yes
 				}
 			}
 		}
@@ -2563,6 +2632,107 @@ c3rd_barbarian_occupying_land = { #natural expansion of tribals on lands VERY SP
 
 }
 
+c3rd_barbarian_changing_pop = { #barbarian occupation enslave and migrate pops
+	trigger = {
+		is_tribal = no
+		num_of_cities >= 1
+		current_date >= 900.1.1
+		NOR = {
+			tag = BAR
+			government = duchy #Duchies are protected
+		}
+		any_country_state = {
+			has_state_modifier = barbarians_border #is under attack
+		}
+	}
+	effect = {
+		random_country = {
+			limit = {
+				is_tribal = yes
+				NOT = {is_subject_of = root}
+			}
+			weight = {
+				modifier = {
+					factor = 2
+					any_neighbour_country = {
+						this = root
+					}
+				}
+				modifier = {
+					factor = 5
+					any_owned_province = {
+						any_neighbor_province = {
+							owner = root
+							state = {
+								has_state_modifier = barbarians_border
+							}
+						}
+					}
+				}
+			}
+			capital_scope = {
+				save_scope_as = c3rd_slave_destination
+			}
+		}
+		every_country_state = {
+			limit = {
+				has_state_modifier = barbarians_border
+			}
+			every_state_province = {
+				limit = {
+					any_pops_in_province = {
+						count >= 2
+						OR = {
+							pop_culture = root.culture
+							pop_type = nobles
+							pop_type = citizen
+						}
+					}
+				}
+				random_list = {
+					5 = {}
+					1 = {
+						modifier = {
+							add = total_population
+						}
+						random_pops_in_province = {
+							limit = {
+								OR = {
+									pop_culture = root.culture
+									pop_type = nobles
+									pop_type = citizen
+								}
+							}
+							if = {
+								limit = {
+									NOT = { pop_type = slaves }
+								}
+								set_pop_type = slaves
+							}
+							move_pop = scope:c3rd_slave_destination
+						}
+					}
+					1 = {
+						modifier = {
+							add = total_population
+						}
+						random_pops_in_province = {
+							limit = {
+								OR = {
+									pop_culture = root.culture
+									pop_type = nobles
+									pop_type = citizen
+								}
+							}
+							move_pop = root.capital_scope
+						}
+					}
+				}
+			}
+		}
+	}
+
+}
 
 c3rd_head_of_family_shenanigans = {
 	trigger = {
@@ -2619,7 +2789,22 @@ c3rd_head_of_family_shenanigans = {
 					}
 					modifier = {
 						factor = 1.5
-						has_character_modifier = major_influence_aristocrat
+						NOT = {has_character_modifier = major_influence_aristocrat}
+						root = {
+							any_character = {
+								has_character_modifier = major_influence_aristocrat
+							}
+						}
+					}
+					modifier = {
+						factor = 2
+						root = {
+							NOT = {
+								any_character = {
+									has_character_modifier = major_influence_aristocrat
+								}
+							}
+						}
 					}
 					modifier = {
 						factor = 3
@@ -2675,25 +2860,36 @@ c3rd_head_of_family_shenanigans = {
 						loyalty >= 60
 					}
 					modifier = {
-						factor = 4
+						factor = 2
 						loyalty <= 33
 					}
 					modifier = {
-						factor = 1.1
+						factor = 3
+						has_character_modifier = major_influence_aristocrat
+						loyalty <= 33
+					}
+					modifier = { #the more decentralize, the less they care
+						factor = 0.9
 						root = {
 							has_country_modifier = law_advantages_3
 						}
 					}
 					modifier = {
-						factor = 1.3
+						factor = 0.8
 						root = {
 							has_country_modifier = law_advantages_4
 						}
 					}
 					modifier = {
-						factor = 1.5
+						factor = 0.7
 						root = {
 							has_country_modifier = law_advantages_5
+						}
+					}
+					modifier = {
+						factor = 0.5
+						root = {
+							has_law = decentralized_administration_law
 						}
 					}
 					modifier = {
@@ -2710,8 +2906,18 @@ c3rd_head_of_family_shenanigans = {
 						has_variable = country_ownership
 						var:country_ownership >= 60
 					}
+					modifier = {
+						factor = 0.5
+						root = {
+							NOT = {
+								any_character = {
+									has_character_modifier = major_influence_aristocrat
+								}
+							}
+						}
+					}
 					set_variable = {
-						name = head_intent_disloyal
+						name = head_intent_disloyal #trigger disloyal event easily, and intervention easier
 						days = 350
 					}
 				}
@@ -2736,5 +2942,47 @@ c3rd_head_of_family_shenanigans = {
 				}
 			}
 		}
+	}
+}
+
+
+c3rd_custom_on_actions_corruption_events = {
+
+	trigger = {
+        
+		OR = {
+        	has_country_modifier = encourage_global_corruption
+			has_variable = ruler_goes_corruption_unchecked
+		}
+
+    }
+	random_events = {
+		60 = 0
+        5 = c3rd_other_events.121 #heads
+        5 = c3rd_other_events.122 #office
+        3 = c3rd_other_events.123 #governors
+        2 = c3rd_other_events.124 #generals
+        5 = c3rd_other_events.125 #heads
+        5 = c3rd_other_events.126 #office
+        3 = c3rd_other_events.127 #governors
+        2 = c3rd_other_events.128 #generals
+	}
+}
+
+
+c3rd_barbarian_related_events = {
+	trigger = {
+		
+	}
+	events = {
+		c3rd_barbarian_events.1
+		c3rd_barbarian_events.2
+	}
+	random_events = {
+		500 = 0
+        9 = c3rd_barbarian_events.10
+		4 = c3rd_barbarian_events.11
+		4 = c3rd_barbarian_events.12
+		2 = c3rd_barbarian_events.13
 	}
 }

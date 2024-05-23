@@ -159,6 +159,13 @@ message_window = {
 		}
 		icon = {
 			size = { 30 30 }
+			visible = "[GetScriptedGui('c3rd_epidemic_outbreak').IsShown( GuiScope.SetRoot( Player.MakeScope ).End )]"
+			texture = "gfx/interface/icons/shared_icons/attrition.dds"
+			tooltip = "c3rd_epidemic_outbreak_tt"
+			color = { 1 0.5 0.5 1 }
+		}
+		icon = {
+			size = { 30 30 }
 			visible = "[GetScriptedGui('c3rd_monetary_tax_inspection').IsShown( GuiScope.SetRoot( Player.MakeScope ).End )]"
 			texture = "gfx/interface/icons/shared_icons/decision.dds"
 			tooltip = "c3rd_monetary_tax_inspection_tt"
@@ -169,6 +176,20 @@ message_window = {
 			visible = "[GetScriptedGui('c3rd_monetary_consolidation_sol').IsShown( GuiScope.SetRoot( Player.MakeScope ).End )]"
 			texture = "gfx/interface/icons/shared_icons/leader.dds"
 			tooltip = "c3rd_monetary_consolidation_sol_tt"
+			color = { 0.5 1 0.5 1 }
+		}
+		icon = {
+			size = { 30 30 }
+			visible = "[GetScriptedGui('c3rd_bartering_authorised_sol').IsShown( GuiScope.SetRoot( Player.MakeScope ).End )]"
+			texture = "gfx/interface/icons/governor_policies/acquisition_of_wealth.dds"
+			tooltip = "c3rd_bartering_authorised_sol_tt"
+			color = { 0.5 1 0.5 1 }
+		}
+		icon = {
+			size = { 30 30 }
+			visible = "[GetScriptedGui('c3rd_silver_consolidation_sol').IsShown( GuiScope.SetRoot( Player.MakeScope ).End )]"
+			texture = "gfx/interface/icons/shared_icons/maintenance.dds"
+			tooltip = "c3rd_silver_consolidation_sol_tt"
 			color = { 0.5 1 0.5 1 }
 		}
 		icon = {
@@ -190,6 +211,20 @@ message_window = {
 			visible = "[GetScriptedGui('c3rd_monetary_second_reform_law').IsShown( GuiScope.SetRoot( Player.MakeScope ).End )]"
 			texture = "gfx/interface/icons/shared_icons/ironman.dds"
 			tooltip = "c3rd_monetary_political_second_reform_law_tt"
+			color = { 0.5 1 0.5 1 }
+		}
+		icon = {
+			size = { 30 30 }
+			visible = "[GetScriptedGui('c3rd_divided_empire').IsShown( GuiScope.SetRoot( Player.MakeScope ).End )]"
+			texture = "gfx/interface/icons/shared_icons/reputation.dds"
+			tooltip = "c3rd_divided_empire_tt"
+			color = { 0.5 1 0.5 1 }
+		}
+		icon = {
+			size = { 30 30 }
+			visible = "[GetScriptedGui('c3rd_small_country').IsShown( GuiScope.SetRoot( Player.MakeScope ).End )]"
+			texture = "gfx/interface/icons/shared_icons/city.dds"
+			tooltip = "c3rd_small_country_tt"
 			color = { 0.5 1 0.5 1 }
 		}
 	}	

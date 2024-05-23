@@ -33,9 +33,14 @@
 						NOT = {
 							any_character = {
 								is_ruler = no
+								loyalty <= 75
 								has_character_modifier = major_influence_aristocrat
 							}
 						}
+					}
+					custom_tooltip = {
+						text = recent_decentralization_desc
+						NOT = {has_variable = recent_decentralization}
 					}
 				}
 			}
@@ -56,6 +61,7 @@
 			monthly_corruption = 0.05
 			global_nobles_output = 0.1
 			global_tax_modifier = -0.2
+			stability_monthly_change = 0.03
 		}
 	}
 	
