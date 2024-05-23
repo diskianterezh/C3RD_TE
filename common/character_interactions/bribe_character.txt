@@ -1,0 +1,71 @@
+﻿bribe_character = {
+
+	on_other_nation = no
+	on_own_nation = yes
+	
+	sound = "event:/SFX/UI/Character/Unique/sfx_ui_character_bribe"
+	
+	potential_trigger = {
+		bribe_character_potential_trigger = yes
+	}
+	
+	
+	allowed_trigger = {
+		bribe_character_allowed_trigger = yes
+	}
+	
+
+	
+	effect = {
+		bribe_character_effect = yes
+		if = {
+			limit = {
+				scope:actor = {
+					has_country_modifier = fight_global_corruption
+				}
+			 }
+			 scope:actor = {
+				current_ruler = {
+					add_popularity = -10
+				}
+			 }
+		}
+	}
+	
+	ai_will_do = {
+		modifier = {
+			factor = 0
+		}
+	}
+	
+}	
+
+orator_bribe_character = {
+
+	on_other_nation = no
+	on_own_nation = yes
+	
+	sound = "event:/SFX/UI/Character/Unique/sfx_ui_character_bribe"
+	
+	potential_trigger = {
+		orator_bribe_character_potential_trigger = yes
+	}
+	
+	
+	allowed_trigger = { 
+		orator_bribe_character_allowed_trigger = yes
+	}
+	
+
+	
+	effect = {
+		orator_bribe_character_effect = yes
+	}
+	
+	ai_will_do = {
+		modifier = {
+			factor = 0
+		}
+	}
+	
+}	

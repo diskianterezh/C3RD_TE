@@ -49,6 +49,19 @@
 				}
 			}
 		}
+		trigger_if = {
+			limit = {
+				scope:actor = {
+					has_country_modifier = fight_global_corruption
+				}
+			}
+			custom_tooltip = {
+				text = fight_global_corruption_tt
+				scope:actor = {
+					NOT = {has_country_modifier = fight_global_corruption}
+				}
+			}
+		}
 	}
 	
 	
@@ -129,7 +142,24 @@
 				add_loyalty = granted_holding_l
 			}
 			else = {
+				if = { #c3rd
+					limit = {
+						corruption >= 98
+					}
+					add_popularity = -5
+					employer = {
+						add_legitimacy = -3
+					}
+				}
 				add_corruption = 5
+				employer = { #c3rd
+					if = {
+						limit = {
+							has_country_modifier = solidus_introduced
+						}
+						add_tyranny = 0.5
+					}
+				}
 			}
 			set_variable = {
 				name = got_holdings_recently

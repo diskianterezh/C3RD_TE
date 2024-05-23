@@ -133,6 +133,18 @@ c3rd_base_economic_value = {
 				}
 			}
 		}
+		if = { #to let small countries have the mechanics, without crushing
+			limit = {
+				num_of_cities <= 250
+			}
+			add = 250
+		}
+		if = {
+			limit = {
+				num_of_cities <= 150
+			}
+			add = 250
+		}
 	}
 }
 
@@ -424,6 +436,12 @@ c3rd_economic_factor = {
 		}
 		add = -1
 	}
+	if = { #split
+		limit = {
+			has_country_modifier = divided_empire
+		}
+		add = -2
+	}
 	if = {
 		limit = {
 			num_of_cities <= 200
@@ -451,6 +469,42 @@ c3rd_economic_factor = {
 	if = {
 		limit = {
 			num_of_cities >= 5000
+		}
+		add = 1
+	}
+	if = {
+		limit = {
+			num_of_cities <= 500
+		}
+		add = -2
+	}
+	if = {
+		limit = {
+			num_of_cities <= 400
+		}
+		add = -1
+	}
+	if = {
+		limit = {
+			num_of_cities <= 300
+		}
+		add = -1
+	}
+	if = {
+		limit = {
+			num_of_cities <= 200
+		}
+		add = -1
+	}
+	#epidemy penalty
+	if = {
+		limit = {
+			OR = {
+				has_variable = antonine_plague_country_outbreak
+				has_variable = antonine_plague_country_quarantine
+				has_variable = cyprian_plague_country_outbreak
+				has_variable = cyprian_plague_country_quarantine
+			}
 		}
 		add = 1
 	}
@@ -584,6 +638,36 @@ third_of_state_pop = {
 	divide = 3
 }
 
+govship_total_pops = {
+	value = 0
+	every_governorship_state = {
+		every_state_province = {
+			add = total_population
+		}
+	}
+}
+
+govship_primary_pops = {
+	value = 0
+	every_governorship_state = {
+		every_state_province = {
+			every_pops_in_province = {
+				limit = {
+					pop_culture = root.owner.culture
+				}
+				add = 1
+			}
+		}
+	}
+}
+
+govship_primary_rate = {
+	value = govship_primary_pops
+	multiply = 100
+	divide = govship_total_pops
+	round = yes
+}
+
 num_vassal_provinces = {
 	value = 0
 	every_subject = {
@@ -673,6 +757,30 @@ region_control_value_owner = {
 	divide = region_owned_provinces
 	round = yes
 	
+}
+
+region_control_value_owner_only = {
+	value = 0
+	if = {
+		limit = {
+			has_variable = governorship_owner
+		}
+		every_governorship_state = {
+			every_state_province = {
+				if = {
+					limit = {
+						exists = holding_owner
+						holding_owner = governorship.var:governorship_owner
+					}
+					add = 1
+				}
+			}
+		}
+	}
+	multiply = 100
+	divide = region_owned_provinces
+	round = yes
+
 }
 
 country_total_regions = { #scope COUNTRY
@@ -1014,7 +1122,6 @@ c3rd_deflation_increase = {
 	if = { 
 		limit = {
 			c3rd_economic_value < 1
-			num_of_cities >= 500
 			is_tribal = no
 			NOT = {has_law = monetary_reform_law}
 		}
@@ -1023,7 +1130,6 @@ c3rd_deflation_increase = {
 	if = { 
 		limit = {
 			c3rd_economic_value < 0.8
-			num_of_cities >= 500
 			is_tribal = no
 			NOT = {has_law = monetary_reform_law}
 		}
@@ -1032,7 +1138,6 @@ c3rd_deflation_increase = {
 	if = { 
 		limit = {
 			c3rd_economic_value < 0.6
-			num_of_cities >= 500
 			is_tribal = no
 			NOT = {has_law = monetary_reform_law}
 		}
@@ -1041,7 +1146,6 @@ c3rd_deflation_increase = {
 	if = { 
 		limit = {
 			c3rd_economic_value < 0.4
-			num_of_cities >= 500
 			is_tribal = no
 			NOT = {has_law = monetary_reform_law}
 		}
@@ -1079,7 +1183,6 @@ c3rd_silver_increase = {
 	if = { #passive unvalue of silver if silver law
 		limit = { 
 			has_law = monetary_reform_law
-			num_of_cities >= 500
 			is_tribal = no
 		}
 		add = 1
@@ -1087,7 +1190,6 @@ c3rd_silver_increase = {
 	if = { 
 		limit = {
 			c3rd_economic_value < 1
-			num_of_cities >= 500
 			is_tribal = no
 			has_law = monetary_reform_law
 		}
@@ -1096,7 +1198,6 @@ c3rd_silver_increase = {
 	if = { 
 		limit = {
 			c3rd_economic_value < 0.8
-			num_of_cities >= 500
 			is_tribal = no
 			has_law = monetary_reform_law
 		}
@@ -1105,7 +1206,6 @@ c3rd_silver_increase = {
 	if = { 
 		limit = {
 			c3rd_economic_value < 0.6
-			num_of_cities >= 500
 			is_tribal = no
 			has_law = monetary_reform_law
 		}
@@ -1114,7 +1214,6 @@ c3rd_silver_increase = {
 	if = { 
 		limit = {
 			c3rd_economic_value < 0.4
-			num_of_cities >= 500
 			is_tribal = no
 			has_law = monetary_reform_law
 		}
@@ -1177,5 +1276,165 @@ country_size_ratio = { #to ask governorships sized with country size
 			num_of_cities >= 3000
 		}
 		add = 1
+	}
+}
+
+legion_unit_neutral_count = {
+	value = 0
+	every_legion_unit = {
+		limit = {
+			commander = {
+				NOR = {
+					is_friend = root.current_ruler
+					loyalty >= 75
+				}
+			}
+		}
+		add = unit_size
+	}
+}
+
+political_influence_event_13 = {
+    value = 30
+	ordered_governorships = {
+		limit = {
+			exists = governor
+			governor = {
+				NOT = {
+					family = root.current_ruler.family
+				}
+			}
+			NOT = {has_variable = governorship_owner}
+			region_control_value_char > 20 #ruler have 20% holdings
+		}
+		add = 10
+	}
+    multiply = -1
+}
+
+political_influence_reclaim = {
+	value = 15
+	if = {
+		limit = {
+			has_country_modifier = law_advantages_1
+		}
+		add = 2
+	}
+	else_if = {
+		limit = {
+			has_country_modifier = law_advantages_2
+		}
+		add = 5
+	}
+	else_if = {
+		limit = {
+			has_country_modifier = law_advantages_3
+		}
+		add = 10
+	}
+	else_if = {
+		limit = {
+			has_country_modifier = law_advantages_4
+		}
+		add = 15
+	}
+	else_if = {
+		limit = {
+			has_country_modifier = law_advantages_5
+		}
+		add = 20
+	}
+	if = {
+		limit = {
+			has_law = decentralized_administration_law
+		} 
+		add = 10
+	}
+	multiply = -1
+}
+
+political_influence_global_ratio_price = {
+    value = 50
+    if = {
+        limit = {
+            scope:owner_overtake_char = {
+                has_character_modifier = major_influence_aristocrat
+            }
+        }
+        add = 50
+    }
+    if = {
+        limit = {
+            scope:owner_overtake_char = {
+                is_head_of_family = yes
+            }
+        }
+        add = 25
+    }
+    if = {
+        limit = {
+            scope:owner_overtake_char = {
+                has_character_modifier = political_power_character
+            }
+        }
+        add = 50
+    }
+    root={
+		every_character = {
+        	limit = {
+            	NOT = {this = scope:owner_overtake_char}
+            	OR = {
+                	has_office = yes
+                	is_head_of_family = yes
+            	}
+				OR = {
+            		loyalty < 50
+					has_variable = head_intent_disloyal
+				}
+				NOT = {has_variable = head_intent_loyal}
+        	}
+        	add = 10
+    	}
+		every_character = {
+        	limit = {
+				has_variable = head_intent_loyal
+        	}
+        	add = -20
+    	}
+	}
+    multiply = -1
+}
+
+count_reclaim = {
+	value = 5
+	if = {
+		limit = {
+			has_country_modifier = law_advantages_2
+		}
+		add = 1
+	}
+	else_if = {
+		limit = {
+			has_country_modifier = law_advantages_3
+		}
+		add = 2
+	}
+	else_if = {
+		limit = {
+			has_country_modifier = law_advantages_4
+		}
+		add = 3
+	}
+	else_if = {
+		limit = {
+			has_country_modifier = law_advantages_5
+		}
+		add = 4
+	}
+	if = {
+		limit = {
+			has_law = decentralized_administration_law
+		} 
+		add = 2
 	}
 }
