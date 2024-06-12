@@ -376,6 +376,19 @@
 						}
 					}
                 }
+                modifier = {
+                    factor = 5
+					root = {has_variable = eastern_empire}
+					any_governorship_state = {
+						any_state_province = {
+							OR = {
+								is_in_region = greece_region
+								is_in_region = macedonia_region
+								is_in_region = thrace_region
+							}
+						}
+					}
+                }
 			}
 			add_to_list = new_empire
 		}
@@ -400,6 +413,18 @@
 			every_state_province = {
 				set_owned_by = scope:new_empire_split
 			}
+		}
+	}
+	if = {
+		limit = {
+			has_variable = eastern_empire
+		}
+		scope:new_empire_split = {
+			change_country_flag = ERE
+			change_country_color = "eastern_roman_color"
+			change_country_name = "ERE"
+			change_country_adjective = "ERE_ADJ"
+			change_government = imperium
 		}
 	}
 }

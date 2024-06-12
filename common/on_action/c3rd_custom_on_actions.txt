@@ -2617,7 +2617,12 @@ c3rd_head_of_family_shenanigans = {
 					}
 					modifier = {
 						factor = 1.5
-						has_character_modifier = major_influence_aristocrat
+						NOT = {has_character_modifier = major_influence_aristocrat}
+						root = {
+							any_character = {
+								has_character_modifier = major_influence_aristocrat
+							}
+						}
 					}
 					modifier = {
 						factor = 3
