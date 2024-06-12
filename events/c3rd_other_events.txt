@@ -6036,6 +6036,10 @@ c3rd_other_events.76 = { #split the empire
                 }
             }
         }
+        set_variable = {
+            name = eastern_empire
+            duration = 10
+        }
         p:1453 = {
             save_scope_as = split_empire_capital
         }
