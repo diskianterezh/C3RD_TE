@@ -460,6 +460,7 @@
  taking_over_lands_tt1:0 "Not enough holdings in a controlled governorship to confiscate several of them"
  grant_holding_trigger_tt:0 "Was recently expropriated en masse"
  taking_over_lands_trigger_tt:0 "Recently received holdings"
+ taking_over_lands_trigger_tt2:0 "Loyalty is too low"
  negociate_with_landowner:0 "Negociate with Landowner"
  negociate_with_landowner_act:0 "Negociating with $CHAR$"
  negociate_with_landowner_act_past:0 "You negociated with $CHAR$ "
