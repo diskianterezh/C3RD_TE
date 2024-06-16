@@ -3892,6 +3892,7 @@ c3rd_other_events.40 = { #corruption from gold
         has_land = yes
         current_date >= 600.1.1
         treasury >= 10000
+        has_civil_war = no
         OR = {
             treasury >= income_150
             treasury >= 90000
@@ -10307,6 +10308,7 @@ c3rd_other_events.101 = { #good ruler can make the 2nd admin law available
         NOR = {
             has_country_modifier = military_anarchy
             has_variable = constantine_reform_available
+            has_variable = tried_reform_constantine
             has_law = constantine_reform_law
             invention = administrative_military_reform_c3rd
         }
