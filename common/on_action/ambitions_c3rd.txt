@@ -425,7 +425,7 @@ scheme_buy_holding_start = {
 						AND = {
 							governor = root
 							OR = {
-								owner = {has_variable = solidus_introduced}
+								owner = {has_country_modifier = solidus_introduced}
 								NOT = {
 									owner = {has_law = basic_administrative_law}
 								}
