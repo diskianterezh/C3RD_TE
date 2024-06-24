@@ -1305,6 +1305,7 @@ c3rd_barbarian_sack = {
 	trigger = {
 		has_land = yes
 		any_owned_province = {
+			exists = controller
 			is_previous_controller = root
 			controller = { tag = BAR }
 			is_state_capital = yes
@@ -1324,6 +1325,7 @@ c3rd_barbarian_sack = {
 	effect = {
 		every_owned_province = {
 			limit = {
+				exists = controller
 				is_previous_controller = root
 				controller = { tag = BAR }
 				is_state_capital = yes
