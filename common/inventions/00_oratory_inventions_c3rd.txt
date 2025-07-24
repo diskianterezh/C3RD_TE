@@ -1,4 +1,4 @@
-oratory_1 = {
+﻿oratory_1 = {
 	technology = oratory_tech
 	color = hsv { 0.38 0.8 0.3 }
 ##### FETIALES TREE #####	
@@ -3157,7 +3157,7 @@ oratory_2 = {
 				}
 			}
 		} 
-		i_will_do = {
+		ai_will_do = {
 			modifier = {
 				factor = irc_25
 			}

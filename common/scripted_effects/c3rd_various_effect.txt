@@ -1,4 +1,4 @@
-create_split = {#scope country, 
+﻿create_split = {#scope country, 
 #need a defined "split_empire_capital" scope province
 	capital_scope = {
 		governorship = {

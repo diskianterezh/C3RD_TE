@@ -45,10 +45,11 @@
 		}
 		allow = {
 			has_country_modifier = citizen_exemption_from_census_tax
-			custom_tooltip = {
-				text = recently_revoked_tt
-				NOT = {
-					has_variable = census_exemption_given_recently
+			trigger_if = {
+				limit = { has_variable = census_exemption_given_recently }
+				custom_tooltip = {
+					text = recently_revoked_tt
+					NOT = { has_variable = census_exemption_given_recently }
 				}
 			}
 		}

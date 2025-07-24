@@ -1,4 +1,4 @@
-
+﻿
 c3rd_custom_on_actions_instability = {
 	trigger = {
 		current_date > 900.1.1
@@ -2472,6 +2472,11 @@ c3rd_barbarian_occupying_land = { #natural expansion of tribals on lands VERY SP
 							}
 						}
 					}
+					any_pops_in_province = {
+						NOT = {
+							pop_culture = root.culture
+						}
+					}
 					owner = {
 						OR = {
 							has_country_modifier = internal_collapse
@@ -2536,7 +2541,7 @@ c3rd_barbarian_occupying_land = { #natural expansion of tribals on lands VERY SP
 			scope:new_tribal_prov = {
 				random_pops_in_province = {
 					limit = {
-						pop_culture = root.culture
+						NOT = {pop_culture = root.culture}
 					}
 					root = {
 						random_country_culture = {
