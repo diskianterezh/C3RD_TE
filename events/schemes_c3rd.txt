@@ -45,7 +45,7 @@ scheme.12 = {
 					}
 				}
 			}
-			var:governorship_owner = {
+			scope:ongoing_scheme_target = {
 				family.head_of_family = {
 					save_scope_as = ownership_target
 				}

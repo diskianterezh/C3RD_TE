@@ -7,6 +7,15 @@ get_trial_success_chance_character = {
 		value = corruption
 		divide = 2
 	}
+	add = { #C3RD to prevent holdings shenanigans
+		value = 0
+		employer = {
+			current_ruler = {
+				add = corruption
+			}
+		}
+		divide = -5
+	}
 	if = {
 		limit = {
 			is_co_ruler = yes

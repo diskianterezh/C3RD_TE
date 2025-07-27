@@ -589,6 +589,16 @@
 		}
 	}
 
+	split_empire = {
+		potential = {
+			num_of_cities >= 1000
+			current_date >= 900.1.1
+		}
+		effect = {
+			trigger_event = c3rd_other_events.76
+		}
+	}
+
 		
 	new_cultural_identity = {
 		potential = {

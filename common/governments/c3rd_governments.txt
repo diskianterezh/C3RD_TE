@@ -8,6 +8,8 @@ duchy = {
 		land_morale_recovery = 0.1
 		land_morale = 0.3
 		discipline = 0.05
+		fort_limit = 2
+		fort_maintenance_cost = -0.5
 	}
 	base = {
 		country_civilization_value = 20

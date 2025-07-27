@@ -6,17 +6,14 @@
 	# Level 0
 	agressive_expansion_impact_inv_1 = {
 		modifier = { agressive_expansion_impact = -0.025 }
+		# Defending Liberty, Gradual Economic Integration, Book Binding and Trigonometry trees
 		ai_will_do = {
 			modifier = {
-				add = 99999
-				OR = {
-					is_antagonist = yes
-					tag = SEL
-					tag = TRE
-					tag = EGY
-					tag = MAC
-					tag = ALX
-					rank > regional_power
+				factor = {
+					value = cdt_defending_liberty_75
+					min = cdt_gradual_economic_integration_35
+					min = cdt_book_binding_95
+					min = cdt_trigonometry_80
 				}
 			}
 		}
@@ -26,28 +23,22 @@
 	agressive_expansion_impact_inv_5 = {
 		modifier = { agressive_expansion_impact = -0.025 }		
 		requires = { agressive_expansion_impact_inv_1 }
-		ai_will_do = {
-			modifier = {
-				add = 25
-				is_antagonist = yes
-			}
-		}
 	}
 
 	agressive_expansion_monthly_decay_inv_1 = {
 		modifier = { agressive_expansion_monthly_change = -0.02 }		
 		requires = { agressive_expansion_impact_inv_1 }
+		# Gradual Economic Integration, Book Binding and Trigonometry trees
 		ai_will_do = {
 			modifier = {
-				add = 99999
-				OR = {
-					is_antagonist = yes
-					tag = SEL
-					tag = TRE
-					tag = EGY
-					tag = MAC
-					tag = ALX
-					rank > regional_power
+				factor = {
+					value = cdt_gradual_economic_integration_35
+					min = cdt_book_binding_95
+					min = cdt_trigonometry_80
+				}
+				# If we already have access to Defending Liberty, then we don't depend on this
+				NOT = {
+					invention = hold_triumph_cost_modifier_inv
 				}
 			}
 		}
@@ -59,10 +50,10 @@
 		on_activate = {
 			add_manpower = 10
 		}
+		# Defending Liberty tree
 		ai_will_do = {
 			modifier = {
-				add = 25
-				is_antagonist = yes
+				factor = cdt_defending_liberty_75
 			}
 		}
 	}
@@ -96,17 +87,14 @@
 		on_activate = {
 			add_aggressive_expansion = -10
 		}
+		# Defending Liberty (target), Gradual Economic Integration, Book Binding and Trigonometry trees
 		ai_will_do = {
 			modifier = {
-				add = 99999
-				OR = {
-					is_antagonist = yes
-					tag = SEL
-					tag = TRE
-					tag = EGY
-					tag = MAC
-					tag = ALX
-					rank > regional_power
+				factor = {
+					value = cdt_defending_liberty_target_100
+					min = cdt_gradual_economic_integration_35
+					min = cdt_book_binding_95
+					min = cdt_trigonometry_80
 				}
 			}
 		}
@@ -124,8 +112,7 @@
 					#Need a new text
 					text = integrated_any_egyptian_culture
 					has_variable = egyptian_science
-					any_country_culture = {
-						is_integrated = yes
+					any_integrated_culture = {
 						this.culture.culture_group = culture_group:north_african
 					}
 				}
@@ -138,14 +125,18 @@
 					has_variable = nubian_science
 					has_variable = new_egyptian_dynasty
 					}
-					any_country_culture = {
-						is_integrated = yes
+					any_integrated_culture = {
 						OR = {
 							this.culture.culture_group = culture_group:meroitic_group
 							this.culture.culture_group = culture_group:aksumite_group
 						}
 					}
 				}
+			}
+		}
+		ai_will_do = {
+			modifier = {
+				factor = irc_10
 			}
 		} 
     }
@@ -161,14 +152,64 @@
 					#Need a new text
 					text = integrated_legian_culture
 					#has_variable = egyptian_science
-					any_country_culture = {
-						is_integrated = yes
+					any_integrated_culture = {
 						is_culture = legian
 					}
 				}
 			}
+		}
+		
+		ai_will_do = {
+			modifier = {
+				factor = irc_45
+			}
+		}
+    }
+
+	royal_blemmyan_signature_inv = {
+    	modifier = { 
+			monthly_political_influence_modifier = 0.05
+			character_loyalty = 5
+			monthly_character_experience = 0.1
+		}
+        requires = { gw_effect_charisma_education_inv }
+        allow = {
+			OR = {
+				primary_culture = blemmyan
+				custom_tooltip = {
+					#Need a new text
+					text = integrated_any_egyptian_culture
+					has_variable = egyptian_science
+					any_integrated_culture = {
+						this.culture.culture_group = culture_group:north_african
+					}
+				}
+			}
 		} 
+		ai_will_do = {
+			modifier = {
+				factor = irc_65
+			}
+		}
 	}
+	sporting_theft_inv = {
+    	modifier = { 
+			max_friends = 2
+			character_loyalty = 5
+		}
+        requires = { assemble_raiding_inv }
+        allow = {
+			OR = {
+				primary_culture = abasgoi
+			}
+		}
+		
+		ai_will_do = {
+			modifier = {
+				factor = irc_50
+			}
+		}
+    }
 
 
 	# Level 2 Specific
@@ -215,16 +256,13 @@
 		modifier = { diplomatic_relations = 1  }
 		
 		requires = { agressive_expansion_impact_inv_3 }
+		# Gradual Economic Integration, Book Binding and Trigonometry trees
 		ai_will_do = {
 			modifier = {
-				add = 25
-				OR = {
-					tag = SEL
-					tag = TRE
-					tag = EGY
-					tag = MAC
-					tag = EPI
-					tag = ALX
+				factor = {
+					value = cdt_gradual_economic_integration_35
+					min = cdt_book_binding_95
+					min = cdt_trigonometry_80
 				}
 			}
 		}
@@ -248,18 +286,22 @@
 		modifier = { naval_range = 0.1 
 					 diplomatic_range_modifier = 0.1 }
 		requires = { subject_opinions_inv_2 }
-		 allow = {
+		allow = {
 			OR = {
 				country_culture_group = west_levantine
 				custom_tooltip = {
 					#Need a new text
 					text = integrated_any_punic_culture
 					has_variable = punic_science
-					any_country_culture = {
-						is_integrated = yes
+					any_integrated_culture = {
 						this.culture.culture_group = culture_group:west_levantine
 					}
 				}
+			}
+		}
+		ai_will_do = {
+			modifier = {
+				factor = irc_20
 			}
 		}
 	}
@@ -279,8 +321,7 @@
 					#Need a new text
 					text = integrated_any_egyptian_culture
 					has_variable = egyptian_science
-					any_country_culture = {
-						is_integrated = yes
+					any_integrated_culture = {
 						this.culture.culture_group = culture_group:north_african
 					}
 				}
@@ -293,8 +334,7 @@
 					has_variable = nubian_science
 					has_variable = new_egyptian_dynasty
 					}
-					any_country_culture = {
-						is_integrated = yes
+					any_integrated_culture = {
 						OR = {
 							this.culture.culture_group = culture_group:meroitic_group
 							this.culture.culture_group = culture_group:aksumite_group
@@ -303,6 +343,11 @@
 				}
 			}
 		} 
+		ai_will_do = {
+			modifier = {
+				factor = irc_60
+			}
+		}
     }
 
     #New Invictus invention
@@ -319,13 +364,17 @@
 					#Need a new text
 					text = integrated_any_egyptian_culture
 					has_variable = egyptian_science
-					any_country_culture = {
-						is_integrated = yes
+					any_integrated_culture = {
 						this.culture.culture_group = culture_group:north_african
 					}
 				}
 			}
 		} 
+		ai_will_do = {
+			modifier = {
+				factor = irc_45
+			}
+		}
     }
 
 	# Level 3 Specific
@@ -334,6 +383,12 @@
 		
 		requires = { subject_loyalty_inv }
 		modifier = { max_research_efficiency = 0.25 }
+		# Book Binding - target
+		ai_will_do = {
+			modifier = {
+				factor = cdt_book_binding_target_100
+			}
+		}
 	}
 
 	compass_inv = {
@@ -342,6 +397,11 @@
 		allow = {
 			primary_culture = tocharian
 		}
+		ai_will_do = {
+			modifier = {
+				factor = irc_15
+			}
+		}
 	}
 
 	acta_diurna_invention = {
@@ -349,6 +409,11 @@
 		
 		requires = { subject_loyalty_inv }
 		modifier = { happiness_for_same_culture_modifier = 0.06 }
+		ai_will_do = {
+			modifier = {
+				factor = irc_30
+			}
+		}
 	}
 
 	imperial_calendar_invention = {
@@ -361,6 +426,11 @@
 		
 		requires = { subject_loyalty_inv }
 		modifier = { global_population_capacity_modifier = 0.05 }
+		ai_will_do = {
+			modifier = {
+				factor = irc_20
+			}
+		}
 	}
 
 	#Vanilla invention modified for Invictus
@@ -374,8 +444,7 @@
 				custom_tooltip = {
 					text = integrated_any_indian_culture
 					has_variable = indian_science
-					any_country_culture = {
-						is_integrated = yes
+					any_integrated_culture = {
 						OR = {
 							is_culture = kannadan
 							is_culture = tamil
@@ -402,6 +471,12 @@
 		}
 		
 		modifier = { happiness_for_same_culture_modifier = 0.025 }
+		# Trigonometry tree
+		ai_will_do = {
+			modifier = {
+				factor = cdt_trigonometry_80
+			}
+		}
 	}
 
 	channeled_irrigation_invention = {
@@ -417,6 +492,11 @@
 		requires = { subject_loyalty_inv }  
 		
 		modifier = { global_goods_from_slaves = -1 }
+		ai_will_do = {
+			modifier = {
+				factor = irc_30
+			}
+		}
 	}
 
 	#New Invictus invention
@@ -433,11 +513,15 @@
 					#Need a new text
 					text = integrated_any_punic_culture
 					has_variable = punic_science
-					any_country_culture = {
-						is_integrated = yes
+					any_integrated_culture = {
 						this.culture.culture_group = culture_group:west_levantine
 					}
 				}
+			}
+		}
+		ai_will_do = {
+			modifier = {
+				factor = irc_50
 			}
 		}
 	}
@@ -454,13 +538,17 @@
 					#Need a new text
 					text = integrated_any_egyptian_culture
 					has_variable = egyptian_science
-					any_country_culture = {
-						is_integrated = yes
+					any_integrated_culture = {
 						this.culture.culture_group = culture_group:north_african
 					}
 				}
 			}
 		} 
+		ai_will_do = {
+			modifier = {
+				factor = irc_25
+			}
+		}
     }
 
     #New Invictus invention
@@ -477,8 +565,7 @@
 					#Need a new text
 					text = integrated_any_egyptian_culture
 					has_variable = egyptian_science
-					any_country_culture = {
-						is_integrated = yes
+					any_integrated_culture = {
 						this.culture.culture_group = culture_group:north_african
 					}
 				}
@@ -487,8 +574,7 @@
 					#Need a new text
 					text = integrated_any_east_levantine_culture
 					has_variable = mesopotamian_science
-					any_country_culture = {
-						is_integrated = yes
+					any_integrated_culture = {
 						is_mesopotamian_culture_group_trigger = yes
 					}
 				}
@@ -501,11 +587,15 @@
 					has_variable = nubian_science
 					has_variable = new_egyptian_dynasty
 					}
-					any_country_culture = {
-						is_integrated = yes
+					any_integrated_culture = {
 						is_old_egyptian_culture_group_trigger = yes
 					}	
 				}
+			}
+		}
+		ai_will_do = {
+			modifier = {
+				factor = irc_20
 			}
 		} 
     }
@@ -530,14 +620,18 @@
 					has_variable = nubian_science
 					has_variable = new_egyptian_dynasty
 					}
-					any_country_culture = {
-						is_integrated = yes
+					any_integrated_culture = {
 						OR = {
 							this.culture.culture_group = culture_group:meroitic_group
 							this.culture.culture_group = culture_group:aksumite_group
 						}
 					}
 				}
+			}
+		}
+		ai_will_do = {
+			modifier = {
+				factor = irc_45
 			}
 		} 
     }
@@ -568,19 +662,10 @@
 		keystone = yes
 		requires_or = { subject_loyalty_inv relation_inv_1 }
 		on_activate = { custom_tooltip = "unlocks_theater_tt" }
+		# Gradual Economic Integration tree - target
 		ai_will_do = {
 			modifier = {
-				add = 99999
-				OR = {
-					is_antagonist = yes
-					tag = SEL
-					tag = TRE
-					tag = EGY
-					tag = MAC
-					tag = EPI
-					tag = ALX
-					rank > regional_power
-				}
+				factor = cdt_gradual_economic_integration_target_100
 			}
 		}
 	}
@@ -594,6 +679,11 @@
 		}
 		requires = { alphabet_inv }
 		allow = { tag = CAR }
+		ai_will_do = {
+			modifier = {
+				factor = irc_75
+			}
+		}
 	}
 
 	#New Invictus invention
@@ -608,13 +698,17 @@
 					#Need a new text
 					text = integrated_any_egyptian_culture
 					has_variable = egyptian_science
-					any_country_culture = {
-						is_integrated = yes
+					any_integrated_culture = {
 						this.culture.culture_group = culture_group:north_african
 					}
 				}
 			}
 		} 
+		ai_will_do = {
+			modifier = {
+				factor = irc_15
+			}
+		}
     }
 
     #New Invictus invention
@@ -629,11 +723,15 @@
 					#Need a new text
 					text = integrated_any_egyptian_culture
 					has_variable = egyptian_science
-					any_country_culture = {
-						is_integrated = yes
+					any_integrated_culture = {
 						this.culture.culture_group = culture_group:north_african
 					}
 				}
+			}
+		}
+		ai_will_do = {
+			modifier = {
+				factor = irc_45
 			}
 		} 
     }
@@ -650,11 +748,15 @@
 					#Need a new text
 					text = integrated_any_east_levantine_culture
 					has_variable = mesopotamian_science
-					any_country_culture = {
-						is_integrated = yes
+					any_integrated_culture = {
 						is_mesopotamian_culture_group_trigger = yes
 					}
 				}
+			}
+		}
+		ai_will_do = {
+			modifier = {
+				factor = irc_60
 			}
 		} 
     }
@@ -678,8 +780,7 @@
 					has_variable = nubian_science
 					has_variable = new_egyptian_dynasty
 					}
-					any_country_culture = {
-						is_integrated = yes
+					any_integrated_culture = {
 						OR = {
 							this.culture.culture_group = culture_group:meroitic_group
 							this.culture.culture_group = culture_group:aksumite_group
@@ -688,6 +789,11 @@
 				}
 			}
 		} 
+		ai_will_do = {
+			modifier = {
+				factor = irc_40
+			}
+		}
     }
 
     #New Invictus invention
@@ -706,8 +812,7 @@
 					#Need a new text
 					text = integrated_any_arabian_culture
 					has_variable = arabian_science
-					any_country_culture = {
-						is_integrated = yes
+					any_integrated_culture = {
 						OR = {
 							this.culture.culture_group = culture_group:south_levantine
 							this.culture.culture_group = culture_group:south_arabian
@@ -716,6 +821,11 @@
 				}
 			}
 		} 
+		ai_will_do = {
+			modifier = {
+				factor = irc_70
+			}
+		}
     }
 
 	# Level 5
@@ -728,24 +838,12 @@
 				add_charisma = 2
 			}
 		}
-		ai_will_do = {
-			modifier = {
-				add = 25
-				is_antagonist = yes
-			}
-		}
 	}
 
 	war_score_cost_inv_2 = { 
 		modifier = { war_score_cost = -0.05  }
 		
 		requires = { war_score_cost_inv_1 }
-		ai_will_do = {
-			modifier = {
-				add = 25
-				is_antagonist = yes
-			}
-		}
 	}
 
 	agressive_expansion_impact_inv_2 = {
@@ -780,11 +878,15 @@
 					#Need a new text
 					text = integrated_any_egyptian_culture
 					has_variable = egyptian_science
-					any_country_culture = {
-						is_integrated = yes
+					any_integrated_culture = {
 						this.culture.culture_group = culture_group:north_african
 					}
 				}
+			}
+		}
+		ai_will_do = {
+			modifier = {
+				factor = irc_35
 			}
 		} 
     }
@@ -801,11 +903,15 @@
 					#Need a new text
 					text = integrated_any_east_levantine_culture
 					has_variable = mesopotamian_science
-					any_country_culture = {
-						is_integrated = yes
+					any_integrated_culture = {
 						is_mesopotamian_culture_group_trigger = yes
 					}
 				}
+			}
+		}
+		ai_will_do = {
+			modifier = {
+				factor = irc_55
 			}
 		} 
     }
@@ -826,8 +932,7 @@
 					#Need a new text
 					text = integrated_any_arabian_culture
 					has_variable = arabian_science
-					any_country_culture = {
-						is_integrated = yes
+					any_integrated_culture = {
 						OR = {
 							this.culture.culture_group = culture_group:south_levantine
 							this.culture.culture_group = culture_group:south_arabian
@@ -836,6 +941,11 @@
 				}
 			}
 		} 
+		ai_will_do = {
+			modifier = {
+				factor = irc_45
+			}
+		}
     }
 
 
@@ -848,6 +958,12 @@
 		}
 		keystone = yes
 		requires = { agressive_expansion_impact_inv_4 }
+		# Prohibited for AI
+		ai_will_do = {
+			modifier = {
+				factor = 0
+			}
+		}
 	}
 
 	relation_inv_2 = {
@@ -889,13 +1005,17 @@
 					#Need a new text
 					text = integrated_any_east_levantine_culture
 					has_variable = mesopotamian_science
-					any_country_culture = {
-						is_integrated = yes
+					any_integrated_culture = {
 						is_mesopotamian_culture_group_trigger = yes
 					}
 				}
 			}
 		} 
+		ai_will_do = {
+			modifier = {
+				factor = irc_35
+			}
+		}
     }
 
 	# Level 7
@@ -920,13 +1040,17 @@
 					#Need a new text
 					text = integrated_any_east_levantine_culture
 					has_variable = mesopotamian_science
-					any_country_culture = {
-						is_integrated = yes
+					any_integrated_culture = {
 						is_mesopotamian_culture_group_trigger = yes
 					}
 				}
 			}
 		} 
+		ai_will_do = {
+			modifier = {
+				factor = irc_30
+			}
+		}
     }
 	#New Invictus invention
 	achaemenid_legacy_inv = {
@@ -939,12 +1063,14 @@
 		allow = {
 			OR = { 
 				tag = PER
-				AND = {
-					exists = current_ruler
-					current_ruler = {
-						has_trait = achaemenid
-					}
+				current_ruler = {
+					has_trait = achaemenid
 				}
+			}
+		}
+		ai_will_do = {
+			modifier = {
+				factor = irc_35
 			}
 		}
 	}
@@ -1081,8 +1207,7 @@
 		requires_or = { agressive_expansion_monthly_decay_inv_5 relation_inv_4 }
 		ai_will_do = {
 			modifier = {
-				add = 50
-				is_antagonist = yes
+				factor = cds_high_tyranny_35_to_65
 			}
 		}
 	}
@@ -1126,8 +1251,7 @@
 				custom_tooltip = {
 					text = integrated_any_indian_culture
 					has_variable = indian_science
-					any_country_culture = {
-						is_integrated = yes
+					any_integrated_culture = {
 						OR = {
 							is_culture = kannadan
 							is_culture = tamil
@@ -1150,6 +1274,12 @@
 						}
 					}
 				}
+			}
+		}
+		# Trigonometry tree
+		ai_will_do = {
+			modifier = {
+				factor = cdt_trigonometry_80
 			}
 		}
     }
@@ -1169,8 +1299,7 @@
 				custom_tooltip = {
 					text = integrated_any_indian_culture
 					has_variable = indian_science
-					any_country_culture = {
-						is_integrated = yes
+					any_integrated_culture = {
 						OR = {
 							is_culture = kannadan
 							is_culture = tamil
@@ -1195,6 +1324,12 @@
 				}
 			}
 		}
+		# Trigonometry tree
+		ai_will_do = {
+			modifier = {
+				factor = cdt_trigonometry_80
+			}
+		}
     }
 
     #Vanilla invention modified for Invictus
@@ -1209,8 +1344,7 @@
 				custom_tooltip = {
 					text = integrated_any_indian_culture
 					has_variable = indian_science
-					any_country_culture = {
-						is_integrated = yes
+					any_integrated_culture = {
 						OR = {
 							is_culture = kannadan
 							is_culture = tamil
@@ -1233,6 +1367,12 @@
 						}
 					}
 				}
+			}
+		}
+		# Trigonometry tree
+		ai_will_do = {
+			modifier = {
+				factor = cdt_trigonometry_80
 			}
 		}
     }
@@ -1250,8 +1390,7 @@
 				custom_tooltip = {
 					text = integrated_any_indian_culture
 					has_variable = indian_science
-					any_country_culture = {
-						is_integrated = yes
+					any_integrated_culture = {
 						OR = {
 							is_culture = kannadan
 							is_culture = tamil
@@ -1276,6 +1415,12 @@
 				}
 			}
 		}
+		# Trigonometry tree
+		ai_will_do = {
+			modifier = {
+				factor = cdt_trigonometry_80
+			}
+		}
     }
 
     #Vanilla invention modified for Invictus
@@ -1291,8 +1436,7 @@
 				custom_tooltip = {
 					text = integrated_any_indian_culture
 					has_variable = indian_science
-					any_country_culture = {
-						is_integrated = yes
+					any_integrated_culture = {
 						OR = {
 							is_culture = kannadan
 							is_culture = tamil
@@ -1315,6 +1459,12 @@
 						}
 					}
 				}
+			}
+		}
+		# Trigonometry tree
+		ai_will_do = {
+			modifier = {
+				factor = cdt_trigonometry_80
 			}
 		}
     }
@@ -1333,8 +1483,7 @@
 				custom_tooltip = {
 					text = integrated_any_indian_culture
 					has_variable = indian_science
-					any_country_culture = {
-						is_integrated = yes
+					any_integrated_culture = {
 						OR = {
 							is_culture = kannadan
 							is_culture = tamil
@@ -1359,6 +1508,12 @@
 				}
 			}
 		}
+		# Trigonometry tree
+		ai_will_do = {
+			modifier = {
+				factor = cdt_trigonometry_80
+			}
+		}
     }
 
     ## Indian Specific - Level 4
@@ -1375,15 +1530,35 @@
 				custom_tooltip = {
 					text = integrated_any_indian_culture
 					has_variable = indian_science
-					any_country_culture = {
-						is_integrated = yes
+					any_integrated_culture = {
 						OR = {
-							this.culture.culture_group = culture_group:aryan
-							this.culture.culture_group = culture_group:pracyan
-							this.culture.culture_group = culture_group:indian
+							is_culture = kannadan
+							is_culture = tamil
+							is_culture = telugu
+							is_culture = kalingan
+							is_culture = kamarupi
+							is_culture = bangli
+							is_culture = atavi
+							is_culture = magadhi
+							is_culture = himalayan
+							is_culture = vidharban
+							is_culture = saurashtran
+							is_culture = lankan
+							is_culture = maharashtran
+							is_culture = gandhari
+							is_culture = shauraseni
+							is_culture = avanti
+							is_culture = sindhi
+							is_culture = dardic
 						}
 					}
 				}
+			}
+		}
+		# Trigonometry tree
+		ai_will_do = {
+			modifier = {
+				factor = cdt_trigonometry_80
 			}
 		}
     }
@@ -1401,15 +1576,35 @@
 				custom_tooltip = {
 					text = integrated_any_indian_culture
 					has_variable = indian_science
-					any_country_culture = {
-						is_integrated = yes
+					any_integrated_culture = {
 						OR = {
-							this.culture.culture_group = culture_group:aryan
-							this.culture.culture_group = culture_group:pracyan
-							this.culture.culture_group = culture_group:indian
+							is_culture = kannadan
+							is_culture = tamil
+							is_culture = telugu
+							is_culture = kalingan
+							is_culture = kamarupi
+							is_culture = bangli
+							is_culture = atavi
+							is_culture = magadhi
+							is_culture = himalayan
+							is_culture = vidharban
+							is_culture = saurashtran
+							is_culture = lankan
+							is_culture = maharashtran
+							is_culture = gandhari
+							is_culture = shauraseni
+							is_culture = avanti
+							is_culture = sindhi
+							is_culture = dardic
 						}
 					}
 				}
+			}
+		}
+		# Trigonometry tree
+		ai_will_do = {
+			modifier = {
+				factor = cdt_trigonometry_80
 			}
 		}
     }
@@ -1428,15 +1623,35 @@
 				custom_tooltip = {
 					text = integrated_any_indian_culture
 					has_variable = indian_science
-					any_country_culture = {
-						is_integrated = yes
+					any_integrated_culture = {
 						OR = {
-							this.culture.culture_group = culture_group:aryan
-							this.culture.culture_group = culture_group:pracyan
-							this.culture.culture_group = culture_group:indian
+							is_culture = kannadan
+							is_culture = tamil
+							is_culture = telugu
+							is_culture = kalingan
+							is_culture = kamarupi
+							is_culture = bangli
+							is_culture = atavi
+							is_culture = magadhi
+							is_culture = himalayan
+							is_culture = vidharban
+							is_culture = saurashtran
+							is_culture = lankan
+							is_culture = maharashtran
+							is_culture = gandhari
+							is_culture = shauraseni
+							is_culture = avanti
+							is_culture = sindhi
+							is_culture = dardic
 						}
 					}
 				}
+			}
+		}
+		# Trigonometry tree
+		ai_will_do = {
+			modifier = {
+				factor = cdt_trigonometry_80
 			}
 		}
     }
@@ -1483,6 +1698,19 @@ oratory_2 = {
 	# Level 0
 	monthly_character_loyalty_inv_1 = {
 		modifier = { character_loyalty = 2 }
+		# Census Data, Military Patronage, Town Criers, Approved Familia and Dictatorship trees, also loyalty is good
+		ai_will_do = {
+			modifier = {
+				factor = {
+					value = irc_60
+					min = cdt_census_data_70_to_95
+					min = cdt_military_patronage_30_to_75
+					min = cdt_town_criers_45
+					min = cdt_dictatorship_25_to_60
+					min = cdt_approved_familia_30_to_55
+				}
+			}
+		}
 	}
 
 	antikythera_mechanism_inv = {
@@ -1490,6 +1718,11 @@ oratory_2 = {
 		requires = { monthly_character_loyalty_inv_1 }
 		allow = {
 			primary_culture = aegean
+		}
+		ai_will_do = {
+			modifier = {
+				factor = irc_55
+			}
 		}
 	}
 
@@ -1511,6 +1744,11 @@ oratory_2 = {
 				primary_culture = sindhi
 			}
 		}
+		ai_will_do = {
+			modifier = {
+				factor = irc_25
+			}
+		}
 	}
 
 	# Level 1
@@ -1518,9 +1756,15 @@ oratory_2 = {
 		modifier = { change_governor_policy_cost_modifier = -0.2  }
 		
 		requires_or = { monthly_character_loyalty_inv_1 diplomatic_reputation_inv_1 }
+		# Census Data, Military Patronage, Approved Familia and Dictatorship trees
 		ai_will_do = {
 			modifier = {
-				add = 30
+				factor = {
+					value = cdt_census_data_70_to_95
+					min = cdt_military_patronage_30_to_75
+					min = cdt_dictatorship_25_to_60
+					min = cdt_approved_familia_30_to_55
+				}
 			}
 		}
 	}
@@ -1529,6 +1773,17 @@ oratory_2 = {
 		modifier = { monthly_tyranny = -0.01 }
 		
 		requires_or = { monthly_character_loyalty_inv_1 diplomatic_reputation_inv_1 }
+		# Town Criers tree
+		ai_will_do = {
+			modifier = {
+				factor = cdt_town_criers_45
+				cdt_town_criers_45 >= cds_high_tyranny_35_to_65
+			}
+			modifier = {
+				factor = cds_high_tyranny_35_to_65
+				cdt_town_criers_45 < cds_high_tyranny_35_to_65
+			}
+		}
 	}
 
 	italic_cursuspublicus_inv = { # postal service
@@ -1540,6 +1795,11 @@ oratory_2 = {
         allow = {
 			country_culture_group = latin
 		}
+		ai_will_do = {
+			modifier = {
+				factor = irc_45
+			}
+		}
     }
 
 	agathrysi_song_laws_inv = {
@@ -1548,6 +1808,11 @@ oratory_2 = {
 		requires = { tyranny_inv_1 }
 		allow = {
 			primary_culture = agathyrsian
+		}
+		ai_will_do = {
+			modifier = {
+				factor = cds_province_loyalty_55
+			}
 		}
 	}
 	
@@ -1565,8 +1830,7 @@ oratory_2 = {
 		requires = { change_governor_policy_inv }
 		ai_will_do = {
 			modifier = {
-				add = 30
-				tag = ROM
+				factor = cdt_dictatorship_25_to_60
 			}
 		}
 	}
@@ -1583,6 +1847,11 @@ oratory_2 = {
     			tag = ALB
     		}
     	}
+		ai_will_do = {
+			modifier = {
+				factor = cds_province_loyalty_55
+			}
+		}
     }
 
 	#New Invictus invention
@@ -1596,8 +1865,7 @@ oratory_2 = {
 			custom_tooltip = {
 				text = integrated_any_persian_culture
 				has_variable = persian_science
-				any_country_culture = {
-					is_integrated = yes
+				any_integrated_culture = {
 					is_persian_culture_group_trigger = yes
 				}
 			}
@@ -1606,6 +1874,11 @@ oratory_2 = {
     			tag = ALB
     		}
     	}
+		ai_will_do = {
+			modifier = {
+				factor = irc_35
+			}
+		}
     }
 	
 	# Become dictatorship
@@ -1637,23 +1910,29 @@ oratory_2 = {
 				always = yes
 			}
 		}
+		requires = { assassinate_attempt_cost_modifier_inv }
+
+		# Dictatorship tree
 		ai_will_do = {
 			modifier = {
-				add = 30
-				AND = {
-					is_republic = yes
-					num_of_cities >= 200
-					current_date > 560.1.1
-				}
+				factor = cdt_dictatorship_25_to_60
 			}
 		}
-		requires = { assassinate_attempt_cost_modifier_inv }
 	}
 	
 	dictatorship_step_2 = {
 		modifier = { 
 			stability_monthly_change = -0.03
 			character_loyalty = -5
+		}
+		allow = {
+			OR = {
+				government = oligarchic_republic
+				government = aristocratic_republic
+				government = plutocratic_republic
+				government = theocratic_republic
+				government = punic_republic
+			}
 		}
 		potential = {
 			trigger_if = {
@@ -1699,6 +1978,9 @@ oratory_2 = {
 				limit = {
 					tag = ROM
 					is_ai = yes
+					NOT = {
+						has_law = princeps_civitatis
+					}
 				}
 				change_law = princeps_civitatis
 			}
@@ -1706,26 +1988,30 @@ oratory_2 = {
 				limit = {
 					tag = CAR
 					is_ai = yes
+					NOT = {
+						has_law = republican_election_car_4
+					}
 				}
 				change_law = republican_election_car_4
 			}
 			else_if = {
 				limit = {
 					is_ai = yes
+					NOT = {
+						has_law = republican_election_4
+					}
 				}
 				change_law = republican_election_4
 			}
 		}
+		requires = { dictatorship_step_1 }
+
+		# Dictatorship tree (target)
 		ai_will_do = {
 			modifier = {
-				add = 30
-				AND = {
-					is_republic = yes
-					num_of_cities >= 300
-				}
+				factor = cdt_dictatorship_target_100
 			}
 		}
-		requires = { dictatorship_step_1 }
 	}
 	
 	dictatorship_step_3 = {
@@ -1788,28 +2074,28 @@ oratory_2 = {
 					limit = {
 						stability > 85
 					}
-					add_stability = -35
+					add_stability = -25
 				}
 				else_if = {
 					limit = {
 						stability > 70
 					}
-					add_stability = -25
+					add_stability = -20
 				}
 				else_if = {
 					limit = {
 						stability > 50
 					}
-					add_stability = -20
+					add_stability = -15
 				}
 				else_if = {
 					limit = {
 						stability > 30
 					}
-					add_stability = -15
+					add_stability = -10
 				}
 				else = {
-					add_stability = -10
+					add_stability = -5
 				}
 			}
 			else = {
@@ -1867,7 +2153,7 @@ oratory_2 = {
 					root = {
 						change_variable = {
 							name = lcounter
-							subtract = 1.25
+							subtract = 1.5
 						}
 					}
 				}
@@ -1973,16 +2259,14 @@ oratory_2 = {
 			republic_to_monarchy_law_change_effect = yes # change legion law based on variable if present
 			custom_tooltip = "creates_stability_scaled_civil_war"
 		}
+		requires = { dictatorship_step_2 }
+
+		# Prohibited for AI, it goes for the invention without civil war instead
 		ai_will_do = {
 			modifier = {
-				add = 30
-				AND = {
-					is_republic = yes
-					num_of_cities >= 400
-				}
+				factor = 0
 			}
 		}
-		requires = { dictatorship_step_2 }
 	}
 	
 	dictatorship_step_4 = {
@@ -1990,13 +2274,31 @@ oratory_2 = {
 			monthly_political_influence_modifier = 0.1
 		}
 		keystone = yes
+		allow = {
+			OR = {
+				government = oligarchic_republic
+				government = aristocratic_republic
+				government = plutocratic_republic
+				government = theocratic_republic
+				government = punic_republic
+			}
+		}
 		potential = {
 			war = no
 			has_civil_war = no
-			country_dictatorship_party_trigger = yes
-			tyranny >= 50
-			political_influence >= 150
 			num_of_cities >= 50
+			trigger_if = {
+				limit = {
+					is_ai = no
+				}
+				# Not required for AI cause they very rarely have this much, but on_activate should still reduce PI
+				political_influence >= 150
+				tyranny >= 50
+				country_dictatorship_party_trigger = yes
+			}
+			trigger_else = {
+				always = yes
+			}
 		}
 		on_activate = {
 			add_stability = -25
@@ -2017,6 +2319,12 @@ oratory_2 = {
 			}
 		}
 		requires = { dictatorship_step_2 }
+		# Dictatorship tree (target)
+		ai_will_do = {
+			modifier = {
+				factor = cdt_dictatorship_target_100
+			}
+		}
 	}
 
 	oratory_tech_investment_inv_1 = { 
@@ -2036,6 +2344,16 @@ oratory_2 = {
 				create_state_pop = freemen
 			}
 		}
+		# Census Data (target), Military Patronage and Approved Familia trees
+		ai_will_do = {
+			modifier = {
+				factor = {
+					value = cdt_census_data_target_100
+					min = cdt_military_patronage_30_to_75
+					min = cdt_approved_familia_30_to_55
+				}
+			}
+		}
 	}	
 
 	smear_character_cost_modifier_inv = { 
@@ -2051,6 +2369,12 @@ oratory_2 = {
 		}
 		keystone = yes
 		requires = { tyranny_inv_1 }
+		# Town Criers tree (target)
+		ai_will_do = {
+			modifier = {
+				factor = cdt_town_criers_target_55
+			}
+		}
 	}	
 
 	# Level 2 Specific
@@ -2075,6 +2399,11 @@ oratory_2 = {
 		allow = {
 			primary_culture = suani
 		}
+		ai_will_do = {
+			modifier = {
+				factor = irc_45
+			}
+		}
 	}
 
 	#New Invictus invention
@@ -2090,8 +2419,7 @@ oratory_2 = {
 				custom_tooltip = {
 					text = integrated_any_haemic_culture
 					has_variable = haemic_science
-					any_country_culture = {
-						is_integrated = yes
+					any_integrated_culture = {
 						OR = {
 							this.culture.culture_group = culture_group:illyrian_group
 							this.culture.culture_group = culture_group:dacia_group
@@ -2099,6 +2427,11 @@ oratory_2 = {
 						}
 					}
 				}
+			}
+		}
+		ai_will_do = {
+			modifier = {
+				factor = irc_25
 			}
 		}
 	}
@@ -2115,13 +2448,17 @@ oratory_2 = {
 					#Need a new text
 					text = integrated_any_anatolian_culture
 					has_variable = anatolian_science
-					any_country_culture = {
-						is_integrated = yes
+					any_integrated_culture = {
 						this.culture.culture_group = culture_group:anatolian
 					}
 				}
 			}
 		} 
+		ai_will_do = {
+			modifier = {
+				factor = irc_25
+			}
+		}
     }
 
     #New Invictus invention
@@ -2135,14 +2472,18 @@ oratory_2 = {
     	allow = {
     		OR = {
     			country_culture_group = north_african
-    			any_country_culture = {
-					is_integrated = yes
+    			any_integrated_culture = {
 					OR = {
 						this.culture.culture_group = culture_group:north_african
 					}
 				}
     		}
     	}
+		ai_will_do = {
+			modifier = {
+				factor = irc_35
+			}
+		}
     }
 
 
@@ -2151,6 +2492,15 @@ oratory_2 = {
 		modifier = { diplomatic_relations = 1   }
 		
 		requires = { oratory_tech_investment_inv_1 }
+		# Military Patronage and Approved Familia trees
+		ai_will_do = {
+			modifier = {
+				factor = {
+					value = cdt_approved_familia_30_to_55
+					min = cdt_military_patronage_30_to_75
+				}
+			}
+		}
 	}
 
 	diplomatic_reputation_inv_2 = {
@@ -2175,6 +2525,11 @@ oratory_2 = {
 		}
 		
 		requires = { diplo_range_inv_1 }
+		ai_will_do = {
+			modifier = {
+				factor = irc_20
+			}
+		}
 	}
 
 	#New Invictus invention
@@ -2193,8 +2548,7 @@ oratory_2 = {
 				custom_tooltip = {
 					text = integrated_any_haemic_culture
 					has_variable = haemic_science
-					any_country_culture = {
-						is_integrated = yes
+					any_integrated_culture = {
 						OR = {
 							this.culture.culture_group = culture_group:illyrian_group
 							this.culture.culture_group = culture_group:dacia_group
@@ -2202,6 +2556,11 @@ oratory_2 = {
 						}
 					}
 				}
+			}
+		}
+		ai_will_do = {
+			modifier = {
+				factor = irc_55
 			}
 		}
 	}
@@ -2218,13 +2577,17 @@ oratory_2 = {
 					#Need a new text
 					text = integrated_any_anatolian_culture
 					has_variable = anatolian_science
-					any_country_culture = {
-						is_integrated = yes
+					any_integrated_culture = {
 						this.culture.culture_group = culture_group:anatolian
 					}
 				}
 			}
 		} 
+		ai_will_do = {
+			modifier = {
+				factor = irc_15
+			}
+		}
     }
 
     #New Invictus invention
@@ -2235,6 +2598,11 @@ oratory_2 = {
     	}
     	requires = { oratory_tech_investment_inv_2 }
     	allow = { country_culture_group = north_african }
+		ai_will_do = {
+			modifier = {
+				factor = cds_province_loyalty_55
+			}
+		}
     }
 
 	# Level 4
@@ -2242,6 +2610,15 @@ oratory_2 = {
 		modifier = { control_range_modifier = 0.05  }
 		
 		requires = { diplomatic_relations_inv }
+		# Military Patronage and Approved Familia trees
+		ai_will_do = {
+			modifier = {
+				factor = {
+					value = cdt_approved_familia_30_to_55
+					min = cdt_military_patronage_30_to_75
+				}
+			}
+		}
 	}
 
 	diplo_range_inv_2 = {
@@ -2266,13 +2643,17 @@ oratory_2 = {
 					#Need a new text
 					text = integrated_any_anatolian_culture
 					has_variable = anatolian_science
-					any_country_culture = {
-						is_integrated = yes
+					any_integrated_culture = {
 						this.culture.culture_group = culture_group:anatolian
 					}
 				}
 			}
 		} 
+		ai_will_do = {
+			modifier = {
+				factor = irc_20
+			}
+		}
     }
 
 	# Level 5
@@ -2281,6 +2662,12 @@ oratory_2 = {
 		
 		requires_or = { assassinate_attempt_cost_modifier_inv control_range_modifier_inv }
 		on_activate = { custom_tooltip = "allows_espionage_character_interaction" }
+		# Military Patronage tree
+		ai_will_do = {
+			modifier = {
+				factor = cdt_military_patronage_30_to_75
+			}
+		}
 	}
 
 	tyranny_inv_2 = {
@@ -2297,12 +2684,23 @@ oratory_2 = {
 				custom_tooltip = contract_law_tooltip
 			}
 		}
+		# Approved Familia tree
+		ai_will_do = {
+			modifier = {
+				factor = cdt_approved_familia_30_to_55
+			}
+		}
 	}
 
 	tyranny_inv_3 = {
 		modifier = { monthly_tyranny = -0.01 }
 		
 		requires =  { diplo_range_inv_2 }
+		ai_will_do = {
+			modifier = {
+				factor = cds_high_tyranny_35_to_65
+			}
+		}
 	}
 
 	diplomatic_relations_inv_2 = { 
@@ -2320,6 +2718,11 @@ oratory_2 = {
 		allow = {
 			country_culture_group = north_african
 		}
+		ai_will_do = {
+			modifier = {
+				factor = irc_15
+			}
+		}
 	}
 
 	# Level 6
@@ -2335,12 +2738,23 @@ oratory_2 = {
 		allow = {
 			primary_culture = babylonian
 		}
+		ai_will_do = {
+			modifier = {
+				factor = irc_15
+			}
+		}
 	}
 
 	diplomatic_reputation_inv_3 = {
 		modifier = { diplomatic_reputation = 1   }
 		
 		requires = { inspire_disloyalty_cost_modifier_inv }
+		# Military Patronage tree
+		ai_will_do = {
+			modifier = {
+				factor = cdt_military_patronage_30_to_75
+			}
+		}
 	}
 
 	monthly_governor_inv = { 
@@ -2357,6 +2771,12 @@ oratory_2 = {
 					}
 					add_finesse = 1
 				}
+			}
+		}
+		# Approved Familia tree
+		ai_will_do = {
+			modifier = {
+				factor = cdt_approved_familia_30_to_55
 			}
 		}
 	}
@@ -2388,6 +2808,11 @@ oratory_2 = {
 		}
 		
 		requires = { monthly_governor_inv }
+		ai_will_do = {
+			modifier = {
+				factor = irc_40
+			}
+		}
 	}
 
 	ritual_suicide_inv = { 
@@ -2403,14 +2828,18 @@ oratory_2 = {
 				custom_tooltip = {
 					text = integrated_any_iberian_culture
 					has_variable = iberian_science
-					any_country_culture = {
-						is_integrated = yes
+					any_integrated_culture = {
 						OR = {
 							this.culture.culture_group = culture_group:celt_iberia
 							this.culture.culture_group = culture_group:iberia
 						}
 					}
 				}
+			}
+		}
+		ai_will_do = {
+			modifier = {
+				factor = irc_35
 			}
 		}
 
@@ -2425,6 +2854,12 @@ oratory_2 = {
 		}
 		keystone = yes
 		requires_or = { diplo_range_inv_3 diplomatic_reputation_inv_3 }
+		# Military Patronage tree
+		ai_will_do = {
+			modifier = {
+				factor = cdt_military_patronage_30_to_75
+			}
+		}
 	}
 
 	
@@ -2434,6 +2869,11 @@ oratory_2 = {
         allow = {
 			primary_culture = roman
 		}
+		ai_will_do = {
+			modifier = {
+				factor = irc_15
+			}
+		}
     }
 
 	monthly_character_loyalty_inv_3 = {
@@ -2441,6 +2881,12 @@ oratory_2 = {
 			monthly_corruption = -0.01
 		}
 		requires_or = { diplomatic_reputation_inv_3 monthly_governor_inv }
+		# Military Patronage tree
+		ai_will_do = {
+			modifier = {
+				factor = cdt_military_patronage_30_to_75
+			}
+		}
 	}
 
 	monthly_character_loyalty_inv_2 = {
@@ -2467,6 +2913,12 @@ oratory_2 = {
 				custom_tooltip = "allow_gw_effect_noble_pop_doctrine"
 			}
 		}
+		# Approved Familia - target 
+		ai_will_do = {
+			modifier = {
+				factor = cdt_approved_familia_target_100
+			}
+		}
 	}
 
 
@@ -2482,8 +2934,7 @@ oratory_2 = {
 					#Need a new text
 					text = integrated_any_persian_culture
 					has_variable = persian_science
-					any_country_culture = {
-						is_integrated = yes
+					any_integrated_culture = {
 						is_persian_culture_group_trigger = yes
 					}
 				}
@@ -2492,13 +2943,17 @@ oratory_2 = {
 					#Need a new text
 					text = integrated_any_east_levantine_culture
 					has_variable = mesopotamian_science
-					any_country_culture = {
-						is_integrated = yes
+					any_integrated_culture = {
 						is_mesopotamian_culture_group_trigger = yes
 					}
 				}
 			}
 		} 
+		ai_will_do = {
+			modifier = {
+				factor = irc_25
+			}
+		}
     }
 
     #New Invictus invention
@@ -2516,13 +2971,17 @@ oratory_2 = {
 					#Need a new text
 					text = integrated_any_anatolian_culture
 					has_variable = anatolian_science
-					any_country_culture = {
-						is_integrated = yes
+					any_integrated_culture = {
 						this.culture.culture_group = culture_group:anatolian
 					}
 				}
 			}
 		} 
+		ai_will_do = {
+			modifier = {
+				factor = cds_province_loyalty_55
+			}
+		}
     }
 
 
@@ -2551,12 +3010,24 @@ oratory_2 = {
 				}
 			}
 		}
+		# Military Patronage tree - target
+		ai_will_do = {
+			modifier = {
+				factor = cdt_military_patronage_target_45_to_85
+			}
+		}
 	}
 
 	tyranny_inv_4 = {
 		modifier = { monthly_tyranny = -0.01 }
 		
 		requires = { monthly_character_loyalty_inv_2  }
+		# Patrocinium tree
+		ai_will_do = {
+			modifier = {
+				factor = uct_patrocinium_40
+			}
+		}
 	}	
 
 	# Level 8 Specific
@@ -2582,26 +3053,30 @@ oratory_2 = {
 					#Need a new text
 					text = integrated_any_persian_culture
 					has_variable = persian_science
-					any_country_culture = {
-						is_integrated = yes
+					any_integrated_culture = {
 						is_persian_culture_group_trigger = yes
 					}
 				}
 			}
 		} 
+		ai_will_do = {
+			modifier = {
+				factor = irc_30
+			}
+		}
     }
 
 	# Level 9
 	diplomatic_reputation_inv_4 = {
 		modifier = { diplomatic_reputation = 2   }
-		on_activate = {
-			if = {
-				limit = { is_monarchy = yes }
-				custom_tooltip = unlocks_might_of_majesty
+		requires = { tyranny_inv_4 }
+
+		# Patrocinium tree
+		ai_will_do = {
+			modifier = {
+				factor = uct_patrocinium_40
 			}
 		}
-		
-		requires = { tyranny_inv_4 }
 	}
 
 	# Level 9 Specific
@@ -2612,7 +3087,21 @@ oratory_2 = {
 		modifier = { research_points_modifier = 0.1 }
 		on_activate = {
 			add_innovation = 2
-			custom_tooltip = unlocks_sponsored_scholars
+			if = {
+				limit = {
+					is_monarchy = yes
+				}
+				custom_tooltip = unlocks_monarchy_legitimacy_laws_tt
+				hidden_effect = {
+					ai_choose_and_enact_law = yes
+				}
+			}
+		}
+
+		ai_will_do = {
+			modifier = {
+				factor = irc_100
+			}
 		}
 	}
 
@@ -2621,12 +3110,23 @@ oratory_2 = {
 		modifier = { monthly_tyranny = -0.01 }
 		
 		requires_or = { monthly_character_loyalty_inv_5 diplomatic_reputation_inv_4 }
+		# Patrocinium tree
+		ai_will_do = {
+			modifier = {
+				factor = uct_patrocinium_40
+			}
+		}
 	}
 
 	diplomatic_reputation_inv_5 = {
 		modifier = { diplomatic_reputation = 1   }
 		
 		requires = { diplomatic_reputation_inv_4 }
+		ai_will_do = {
+			modifier = {
+				factor = irc_100
+			}
+		}
 		
 	}
 
@@ -2651,13 +3151,17 @@ oratory_2 = {
 					#Need a new text
 					text = integrated_any_persian_culture
 					has_variable = persian_science
-					any_country_culture = {
-						is_integrated = yes
+					any_integrated_culture = {
 						is_persian_culture_group_trigger = yes
 					}
 				}
 			}
 		} 
+		ai_will_do = {
+			modifier = {
+				factor = irc_25
+			}
+		}
     }
 
 	# Level 11
@@ -2668,6 +3172,12 @@ oratory_2 = {
 		}
 		keystone = yes
 		requires = { tyranny_inv_5 }
+		# Patrocinium tree - target
+		ai_will_do = {
+			modifier = {
+				factor = uct_patrocinium_target_100
+			}
+		}
 	}
 
 	diplo_range_inv_4 = {
@@ -2703,13 +3213,17 @@ oratory_2 = {
 					#Need a new text
 					text = integrated_any_persian_culture
 					has_variable = persian_science
-					any_country_culture = {
-						is_integrated = yes
+					any_integrated_culture = {
 						is_persian_culture_group_trigger = yes
 					}
 				}
 			}
 		} 
+		ai_will_do = {
+			modifier = {
+				factor = irc_20
+			}
+		}
     }
 
     #New Invictus invention
@@ -2724,13 +3238,17 @@ oratory_2 = {
 					#Need a new text
 					text = integrated_any_persian_culture
 					has_variable = persian_science
-					any_country_culture = {
-						is_integrated = yes
+					any_integrated_culture = {
 						is_persian_culture_group_trigger = yes
 					}
 				}
 			}
 		} 
+		ai_will_do = {
+			modifier = {
+				factor = irc_35
+			}
+		}
     }
 
 	#C3RD
