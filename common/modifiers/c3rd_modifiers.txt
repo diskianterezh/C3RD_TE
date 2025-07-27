@@ -313,6 +313,8 @@ barbarians_border = {
 	local_migration_attraction = -5
 	local_migration_speed = 2
 	local_pop_assimilation_speed = -1
+	local_goods_from_slaves = 5
+	local_defensive = -0.5
 }
 
 secess_preparation = {
@@ -365,6 +367,7 @@ too_giant_republic = {
 	global_freemen_output = -0.1
 	monthly_corruption = 0.1
 	global_monthly_state_loyalty = -0.1
+	stability_monthly_change = -0.02
 }
 
 huns_buffs_c3rd = {
@@ -435,7 +438,7 @@ little_freemen_happy = {
 city_against_deflation = {
 	local_freemen_output = 0.1
 	local_nobles_happyness = 0.05
-	local_commerce_value_modifier = 0.1
+	state_commerce_modifier = 0.1
 	local_tax_modifier = -0.1
 }
 
@@ -467,12 +470,14 @@ law_advantages_2 = {
 	monthly_governor_wage = 0.05
 	global_tax_modifier = -0.05
 	monthly_corruption = 0.01
+	stability_monthly_change = 0.01
 }
 
 law_advantages_3 = {
 	monthly_governor_wage = 0.1
 	global_tax_modifier = -0.1
 	monthly_corruption = 0.01
+	stability_monthly_change = 0.01
 }
 
 law_advantages_4 = {
@@ -480,6 +485,7 @@ law_advantages_4 = {
 	global_tax_modifier = -0.15
 	monthly_corruption = 0.02
 	global_nobles_output = -0.1
+	stability_monthly_change = 0.02
 }
 
 law_advantages_5 = {
@@ -487,6 +493,7 @@ law_advantages_5 = {
 	global_tax_modifier = -0.20
 	monthly_corruption = 0.03
 	global_nobles_output = -0.2
+	stability_monthly_change = 0.02
 }
 
 extract_more = {
@@ -501,25 +508,146 @@ polinf_ruler_owner30 = {
 	monthly_political_influence_modifier = 0.3
 }
 polinf_ruler_owner40 = {
-	monthly_political_influence_modifier = 0.7
+	monthly_political_influence_modifier = 0.4
+	monthly_tyranny = 0.01
 }
 polinf_ruler_owner50 = {
 	monthly_political_influence_modifier = 0.5
+	monthly_tyranny = 0.02
 }
 polinf_ruler_owner60 = {
 	monthly_political_influence_modifier = 0.65
+	monthly_tyranny = 0.03
 }
 polinf_ruler_owner70 = {
 	monthly_political_influence_modifier = 0.8
+	monthly_tyranny = 0.04
 }
 polinf_ruler_owner80 = {
 	monthly_political_influence_modifier = 1
+	monthly_tyranny = 0.05
 }
 
 new_beginnings_mod = {
 	stability_monthly_change = 0.1
 	global_population_happiness = 0.1
 	manpower_recovery_speed = 0.25
+}
+
+divided_empire = {
+	stability_monthly_change = 0.03
+	global_population_happiness = 0.1
+	manpower_recovery_speed = 0.1
+	monthly_political_influence_modifier = 0.1
+}
+
+fight_global_corruption = {
+	monthly_corruption = -0.2
+	monthly_tyranny = 0.08
+	stability_monthly_change = -0.1
+	monthly_political_influence_modifier = -0.3
+}
+
+encourage_global_corruption = {
+	monthly_corruption = 0.2
+	monthly_tyranny = -0.1
+	stability_monthly_change = 0.02
+	civil_war_threshold = 0.05
+}
+
+global_corruption = {
+	stability_monthly_change = -0.1
+	monthly_political_influence_modifier = 0.1
+	global_tax_modifier = -0.5
+	build_time = 0.5
+	build_cost = 0.5
+	global_freemen_output = -0.3
+	global_citizen_output = -0.4
+	global_nobles_output = -0.5
+	global_defensive = -0.5
+	land_morale_modifier = -0.2
+	army_maintenance_cost = 0.25
+}
+
+c3rd_epidemy_cruel = {
+	local_tax_modifier = -0.3
+	local_manpower_modifier = -0.2
+	local_monthly_food_modifier = -0.25
+	local_monthly_civilization = -0.03
+	local_population_growth = -0.1
+	local_unrest = 2
+}
+
+c3rd_epidemy_normal = {
+	local_output_modifier = -0.5
+	local_population_growth = 0.5
+	local_tax_modifier = -0.4
+	local_population_happiness = 0.1
+	state_commerce_modifier = -0.5
+	local_monthly_state_loyalty = 0.25
+}
+
+c3rd_epidemy_ruler = {
+	local_output_modifier = -0.25
+	local_manpower_modifier = -0.1
+	local_monthly_food_modifier = -0.2
+	local_monthly_civilization = -0.01
+	local_unrest = 1
+	state_commerce_modifier = -0.2
+	local_tax_modifier = -0.2
+}
+
+local_gov_defense = {
+	local_defensive = 0.4
+	local_manpower_modifier = 0.1
+}
+local_gov_defense2 = {
+	local_defensive = 0.2
+}
+
+c3rd_border_pressure = {
+	stability_monthly_decay = 0.0035
+	stability_monthly_change = -0.07
+	stability_cost_modifier = 0.5
+	fort_maintenance_cost = 0.5
+	army_maintenance_cost = 0.25
+}
+
+humiliated_army = {
+	land_morale_modifier = -0.2
+	army_movement_speed = -0.25
+	loyalty_gain_chance_modifier = 0.05
+}
+
+defender_of_the_empire = {
+	land_morale_modifier = 0.05
+	loyalty_gain_chance_modifier = 0.05
+	army_movement_speed = 0.1
+	land_morale_recovery = 0.05
+	discipline = 0.1
+}
+
+disavowed_army = {
+	land_morale_modifier = -0.2
+	discipline = -0.2
+}
+
+
+political_turmoils = {
+	monthly_tyranny = 0.03
+	monthly_corruption = 0.05
+	stability_monthly_change = -0.05
+	monthly_political_influence_modifier = -0.25
+	civil_war_threshold = -0.02
+}
+
+
+collapse_autonomy = {
+	local_unrest = 1
+	local_output_modifier = -0.65
+	local_pop_assimilation_speed_modifier = -0.5
+	local_tax_modifier = -0.5
+	local_defensive = -0.5
 }
 
 # barbarian_spawn_buff_x = {
@@ -533,3 +661,54 @@ new_beginnings_mod = {
 # 	siege_engineers = 1
 # }
 
+c3rd_barbarian_fury_discipline_1 = {
+	discipline = 0.15
+	siege_ability = 0.2 
+	siege_engineers = 1
+	archers_offensive = 0.15
+	archers_defensive = 0.15
+	light_infantry_offensive = 0.15
+	light_infantry_defensive = 0.15
+	horse_archers_offensive = 0.1
+	horse_archers_defensive = 0.1
+	light_cavalry_offensive = 0.15
+	light_cavalry_defensive = 0.15
+	heavy_cavalry_offensive = 0.1
+	heavy_cavalry_defensive = 0.1
+	chariots_offensive = 0.1
+	chariots_defensive = 0.1
+	heavy_infantry_offensive = 0.1
+	heavy_infantry_defensive = 0.1
+    army_movement_speed = 0.5
+    land_unit_attrition = -0.50
+    experience_decay = -0.05
+    land_morale_modifier = 0.75
+    land_morale_recovery = 0.15
+    monthly_experience_gain = 0.1
+}
+
+c3rd_barbarian_fury_discipline_2 = {
+	discipline = 0.25
+	siege_ability = 0.3
+	siege_engineers = 2
+	archers_offensive = 0.3
+	archers_defensive = 0.3
+	light_infantry_offensive = 0.3
+	light_infantry_defensive = 0.3
+	horse_archers_offensive = 0.2
+	horse_archers_defensive = 0.2
+	light_cavalry_offensive = 0.3
+	light_cavalry_defensive = 0.3
+	heavy_cavalry_offensive = 0.2
+	heavy_cavalry_defensive = 0.2
+	chariots_offensive = 0.2
+	chariots_defensive = 0.2
+	heavy_infantry_offensive = 0.2
+	heavy_infantry_defensive = 0.2
+    army_movement_speed = 1
+    land_unit_attrition = -0.75
+    experience_decay = -0.1
+    land_morale_modifier = 1.5
+    land_morale_recovery = 0.25
+    monthly_experience_gain = 0.2
+}

@@ -125,6 +125,18 @@ c3rd_monetary_consolidation_sol = {
 	}
 }
 
+c3rd_bartering_authorised_sol = {
+	is_shown = {
+		has_country_modifier = bartering_authorised
+	}
+}
+
+c3rd_silver_consolidation_sol = {
+	is_shown = {
+		has_country_modifier = silver_consolidation_sol
+	}
+}
+
 c3rd_aristocratic_reforms = {
 	is_shown = {
 		has_country_modifier = aristocratic_reforms
@@ -140,6 +152,29 @@ c3rd_monetary_political_unstability = {
 c3rd_monetary_second_reform_law = {
 	is_shown = {
 		has_law = second_reform_law
+	}
+}
+
+c3rd_divided_empire = {
+	is_shown = {
+		has_country_modifier = divided_empire
+	}
+}
+
+c3rd_small_country = {
+	is_shown = {
+		num_of_cities < 500
+	}
+}
+
+c3rd_epidemic_outbreak = {
+	is_shown = {
+		OR = {
+			has_variable = antonine_plague_country_outbreak
+			has_variable = antonine_plague_country_quarantine
+			has_variable = cyprian_plague_country_outbreak
+			has_variable = cyprian_plague_country_quarantine
+		}
 	}
 }
 

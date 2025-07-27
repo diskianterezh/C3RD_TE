@@ -367,29 +367,44 @@ c3rd_other_events.4 = { #social crisis : too few integrated pops
         custom_tooltip = c3rd_other_events.4.a.tt1
         culture_state_loyalty_effect_c3rd = yes
         scope:chosen_new_nobles = {
-            set_country_culture_right = nobles
-            add_country_culture_modifier = {
-                name = "new_culture_elite"
-                duration = 1825
+            if = { #workaround if things bug
+                limit = { root={primary_culture = scope:chosen_new_nobles.culture}}
+                root={
+                    random_country_culture = {
+                        limit = {
+                            NOT = {this = scope:chosen_new_nobles}
+                        }
+                        save_scope_as = culture_debug
+                    }
+                    set_primary_culture = scope:culture_debug.culture
+                    set_primary_culture = scope:chosen_new_nobles.culture
+                }
             }
-            add_country_culture_modifier = {
-                name = "promoted_administrators_in_subcultures"
-                duration = -1
+            else = {
+                set_country_culture_right = nobles
+                add_country_culture_modifier = {
+                    name = "new_culture_elite"
+                    duration = 1825
+                }
+                add_country_culture_modifier = {
+                    name = "promoted_administrators_in_subcultures"
+                    duration = -1
+                }
+                custom_tooltip = culture_group_boosted_c3rd_tt
+                hidden_effect = {
+                    root={every_country_culture = {
+                        limit = {
+                            this.culture.culture_group = scope:chosen_new_nobles.culture.culture_group
+                            NOT = { this = scope:chosen_new_nobles }
+                            NOT = { has_country_culture_modifier = administrators_cultmodifier }
+                        }
+                        add_country_culture_modifier = {
+                            name = "administrators_cultmodifier"
+                            duration = -1
+                        }
+                    }}
+                }
             }
-			custom_tooltip = culture_group_boosted_c3rd_tt
-			hidden_effect = {
-				root={every_country_culture = {
-					limit = {
-						this.culture.culture_group = scope:chosen_new_nobles.culture.culture_group
-						NOT = { this = scope:chosen_new_nobles }
-						NOT = { has_country_culture_modifier = administrators_cultmodifier }
-					}
-					add_country_culture_modifier = {
-						name = "administrators_cultmodifier"
-						duration = -1
-					}
-				}}
-			}
 
         }
     }
@@ -936,6 +951,7 @@ c3rd_other_events.9 = { #event where people ask for census taxes
         any_character = {
             count >= 3
             power_base >= 1
+            is_ruler = no
             trigger_if = {
                 limit = { root = {has_country_modifier = military_anarchy}}
                 OR = {
@@ -1379,6 +1395,32 @@ c3rd_other_events.10 = { #great book
 
     after = {
         remove_variable = what_is_my_eco
+    }
+}
+
+
+c3rd_other_events.1005 = { #inform about book being available
+    type = country_event
+    title = "c3rd_other_events.1005.t"
+    desc = "c3rd_other_events.1005.desc"
+
+    picture = great_library
+
+    trigger = {
+        is_ai = no
+        has_land = yes
+        current_date >= 750.1.1
+        NOT = { has_variable = monetary_mechanics_available_event}
+    }
+
+
+    immediate = {
+        set_variable = {name = monetary_mechanics_available_event}
+    }
+
+    option = {
+        name = c3rd_other_events.1005.a
+        custom_tooltip = c3rd_other_events.1005.a.tt1
     }
 }
 
@@ -4662,6 +4704,50 @@ c3rd_other_events.60 = { #filthy barbarians ransacking our lands
         current_ruler = {
             add_popularity = -10
         }
+        if = { #the owner is the ruler
+            limit = {
+                any_governorships = {
+                    count >= 6
+                    any_governorship_state = {
+                        has_state_modifier = barbarians_border
+                    }
+                    has_variable = governorship_owner
+                    var:governorship_owner = root.current_ruler
+                }
+            }
+            custom_tooltip = c3rd_other_events.60.desc.tt1
+            add_legitimacy = -30
+            add_stability = -5
+        }
+        else_if = {
+            limit = {
+                any_governorships = {
+                    count >= 3
+                    any_governorship_state = {
+                        has_state_modifier = barbarians_border
+                    }
+                    has_variable = governorship_owner
+                    var:governorship_owner = root.current_ruler
+                }
+            }
+            custom_tooltip = c3rd_other_events.60.desc.tt1
+            add_legitimacy = -20
+            add_stability = -2
+        }
+        else_if = {
+            limit = {
+                any_governorships = {
+                    count >= 1
+                    any_governorship_state = {
+                        has_state_modifier = barbarians_border
+                    }
+                    has_variable = governorship_owner
+                    var:governorship_owner = root.current_ruler
+                }
+            }
+            custom_tooltip = c3rd_other_events.60.desc.tt1
+            add_legitimacy = -10
+        }
     }
 
     option = { #legitimacy cost
@@ -4705,6 +4791,10 @@ c3rd_other_events.60 = { #filthy barbarians ransacking our lands
                         modifier = {
                             add = 10
                             var:unworthy_leader <= 2
+                        }
+                        modifier = {
+                            add = 10
+                            NOT = {has_variable = unworthy_leader}
                         }
                         modifier = {
                             add = 2
@@ -5689,6 +5779,473 @@ c3rd_other_events.75 = { #new currency, but the leader is really bad at that
 }
 
 
+c3rd_other_events.76 = { #split the empire
+    type = country_event
+    title = "c3rd_other_events.76.t"
+    desc = "c3rd_other_events.76.desc"
+
+    picture = hellenic_marketplace
+
+    trigger = {
+        has_land = yes
+        num_of_cities >= 500
+    }
+
+    immediate = {
+        if = {
+            limit = {
+                exists = p:1453
+            }
+            p:1453 = {
+                save_scope_as = byzantium
+            }
+        }
+        random_owned_province = {
+            limit = {
+                dominant_province_culture = root.culture
+                governorship = {
+                    NOT = {
+                        this = root.capital_scope.governorship
+                    }
+                }
+            }
+            weight = {
+                modifier = {
+                    factor = total_population
+                }
+                modifier = {
+                    factor = 10
+                    has_province_rank = city
+                }
+                modifier = {
+                    factor = 100
+                    has_province_rank = city_metropolis
+                }
+                modifier = {
+                    factor = 0.01
+                    region = {
+                        any_neighbor_region = {
+                            any_region_province = {
+                                owner = root
+                                this = root.capital_scope
+                            }
+                        }
+                    }
+                }
+                modifier = {
+                    factor = 0.1
+                    distance_from = {
+                        province = root.capital_scope
+                        value < 600
+                    }
+                }
+                modifier = {
+                    factor = 10
+                    distance_from = {
+                        province = root.capital_scope
+                        value > 900
+                    }
+                }
+                modifier = {
+                    factor = 10
+                    distance_from = {
+                        province = root.capital_scope
+                        value > 1200
+                    }
+                }
+            }
+            save_scope_as = first_split_capital
+            governorship = {
+                save_scope_as = first_split_govship
+            }
+        }
+        random_owned_province = {
+            limit = {
+                dominant_province_culture = root.culture
+                NOT = {this = scope:first_split_capital}
+                governorship = {
+                    NOT = {
+                        this = root.capital_scope.governorship
+                    }
+                }
+            }
+            weight = {
+                modifier = {
+                    factor = total_population
+                }
+                modifier = {
+                    factor = 10
+                    has_province_rank = city
+                }
+                modifier = {
+                    factor = 100
+                    has_province_rank = city_metropolis
+                }
+                modifier = {
+                    factor = 0.01
+                    region = {
+                        any_neighbor_region = {
+                            any_region_province = {
+                                owner = root
+                                this = root.capital_scope
+                            }
+                        }
+                    }
+                }
+                modifier = {
+                    factor = 0.1
+                    distance_from = {
+                        province = root.capital_scope
+                        value < 600
+                    }
+                }
+                modifier = {
+                    factor = 0.1
+                    distance_from = {
+                        province = scope:first_split_capital
+                        value < 500
+                    }
+                }
+                modifier = {
+                    factor = 10
+                    distance_from = {
+                        province = root.capital_scope
+                        value > 900
+                    }
+                }
+                modifier = {
+                    factor = 10
+                    distance_from = {
+                        province = root.capital_scope
+                        value > 1200
+                    }
+                }
+            }
+            save_scope_as = second_split_capital
+            governorship = {
+                save_scope_as = second_split_govship
+            }
+        }
+        random_owned_province = {
+            limit = {
+                NOR = {
+                    this = scope:first_split_capital
+                    this = scope:second_split_capital
+                }
+                dominant_province_culture = root.culture
+                governorship = {
+                    NOT = {
+                        this = root.capital_scope.governorship
+                    }
+                }
+            }
+            weight = {
+                modifier = {
+                    factor = total_population
+                }
+                modifier = {
+                    factor = 10
+                    has_province_rank = city
+                }
+                modifier = {
+                    factor = 100
+                    has_province_rank = city_metropolis
+                }
+                modifier = {
+                    factor = 0.01
+                    region = {
+                        any_neighbor_region = {
+                            any_region_province = {
+                                owner = root
+                                this = root.capital_scope
+                            }
+                        }
+                    }
+                }
+                modifier = {
+                    factor = 0.1
+                    distance_from = {
+                        province = root.capital_scope
+                        value < 600
+                    }
+                }
+                modifier = {
+                    factor = 0.1
+                    distance_from = {
+                        province = scope:first_split_capital
+                        value < 500
+                    }
+                }
+                modifier = {
+                    factor = 0.1
+                    distance_from = {
+                        province = scope:second_split_capital
+                        value < 500
+                    }
+                }
+                modifier = {
+                    factor = 10
+                    distance_from = {
+                        province = root.capital_scope
+                        value > 900
+                    }
+                }
+                modifier = {
+                    factor = 10
+                    distance_from = {
+                        province = root.capital_scope
+                        value > 1200
+                    }
+                }
+            }
+            save_scope_as = third_split_capital
+            governorship = {
+                save_scope_as = third_split_govship
+            }
+        }
+
+    }
+
+    option = { #choice 1
+        name = c3rd_other_events.76.a
+        custom_tooltip = c3rd_other_events.76.a.tt1
+        add_stability = 20
+        scope:first_split_capital = {
+            save_scope_as = split_empire_capital
+        }
+        add_country_modifier = {
+            name = divided_empire
+            duration = 18250
+        }
+        if = {
+            limit = {
+                has_country_modifier = solidus_introduced
+            }
+            custom_tooltip = c3rd_other_events.76.ttm2
+        }
+        else = {
+            custom_tooltip = c3rd_other_events.76.ttm
+
+        }
+        if = {
+            limit = {
+                has_variable = deflation_value
+            }
+            custom_tooltip = c3rd_other_events.76.ttd
+            change_variable = {
+                name = deflation_value
+                divide = 2
+            }
+        }
+        if = {
+            limit = {
+                has_variable = silver_unvalue
+            }
+            custom_tooltip = c3rd_other_events.76.tts
+            change_variable = {
+                name = silver_unvalue
+                divide = 2
+            }
+        }
+        custom_tooltip = c3rd_other_events.76.ttlag
+    }
+
+
+    option = { #choice2
+        name = c3rd_other_events.76.b
+        custom_tooltip = c3rd_other_events.76.b.tt1
+        add_stability = 20
+        scope:second_split_capital = {
+            save_scope_as = split_empire_capital
+        }
+        add_country_modifier = {
+            name = divided_empire
+            duration = 18250
+        }
+        if = {
+            limit = {
+                has_country_modifier = solidus_introduced
+            }
+            custom_tooltip = c3rd_other_events.76.ttm2
+        }
+        else = {
+            custom_tooltip = c3rd_other_events.76.ttm
+
+        }
+        if = {
+            limit = {
+                has_variable = deflation_value
+            }
+            custom_tooltip = c3rd_other_events.76.ttd
+            change_variable = {
+                name = deflation_value
+                divide = 2
+            }
+        }
+        if = {
+            limit = {
+                has_variable = silver_unvalue
+            }
+            custom_tooltip = c3rd_other_events.76.tts
+            change_variable = {
+                name = silver_unvalue
+                divide = 2
+            }
+        }
+        custom_tooltip = c3rd_other_events.76.ttlag
+    }
+    
+    option = { #choice3
+        name = c3rd_other_events.76.c
+        custom_tooltip = c3rd_other_events.76.c.tt1
+        add_stability = 20
+        scope:third_split_capital = {
+            save_scope_as = split_empire_capital
+        }
+        add_country_modifier = {
+            name = divided_empire
+            duration = 18250
+        }
+        if = {
+            limit = {
+                has_country_modifier = solidus_introduced
+            }
+            custom_tooltip = c3rd_other_events.76.ttm2
+        }
+        else = {
+            custom_tooltip = c3rd_other_events.76.ttm
+
+        }
+        if = {
+            limit = {
+                has_variable = deflation_value
+            }
+            custom_tooltip = c3rd_other_events.76.ttd
+            change_variable = {
+                name = deflation_value
+                divide = 2
+            }
+        }
+        if = {
+            limit = {
+                has_variable = silver_unvalue
+            }
+            custom_tooltip = c3rd_other_events.76.tts
+            change_variable = {
+                name = silver_unvalue
+                divide = 2
+            }
+        }
+        custom_tooltip = c3rd_other_events.76.ttlag
+    }
+
+    option = { #byzantion
+        name = c3rd_other_events.76.d
+        custom_tooltip = c3rd_other_events.76.d.tt1
+        add_stability = 20
+        trigger = {
+            root.culture_group = culture_group:latin
+            exists = p:1453
+            p:1453 = {
+                exists = owner
+                owner = root
+                NOT = {
+                    governorship = root.capital_scope.governorship
+                }
+            }
+        }
+        set_variable = {
+            name = eastern_empire
+            days = 10
+        }
+        p:1453 = {
+            save_scope_as = split_empire_capital
+        }
+        add_country_modifier = {
+            name = divided_empire
+            duration = 18250
+        }
+        if = {
+            limit = {
+                has_country_modifier = solidus_introduced
+            }
+            custom_tooltip = c3rd_other_events.76.ttm2
+        }
+        else = {
+            custom_tooltip = c3rd_other_events.76.ttm
+
+        }
+        if = {
+            limit = {
+                has_variable = deflation_value
+            }
+            custom_tooltip = c3rd_other_events.76.ttd
+            change_variable = {
+                name = deflation_value
+                divide = 2
+            }
+        }
+        if = {
+            limit = {
+                has_variable = silver_unvalue
+            }
+            custom_tooltip = c3rd_other_events.76.tts
+            change_variable = {
+                name = silver_unvalue
+                divide = 2
+            }
+        }
+        custom_tooltip = c3rd_other_events.76.ttlag
+    }
+
+    option = { #do nothing
+        name = c3rd_other_events.76.e
+        custom_tooltip = c3rd_other_events.76.e.tt1
+    }
+
+    after = {
+        if = {
+            limit = {exists = scope:split_empire_capital}
+            trigger_event = c3rd_other_events.77
+        }
+    }
+}
+
+c3rd_other_events.77 = {
+    type = country_event
+    title = "c3rd_other_events.77.t"
+    desc = "c3rd_other_events.77.desc"
+    picture = ship_in_storm
+    option = {
+        name = c3rd_other_events.77.a
+        custom_tooltip = c3rd_other_events.77.a.tt1
+        if = {
+            limit = {exists = scope:split_empire_capital}
+            hidden_effect = { 
+                create_split = yes
+            }
+        }
+        every_governorships = {
+            limit = {
+                is_in_list = old_empire
+            }
+            remove_from_list = old_empire
+        }
+    }
+    
+    option = {
+        name = c3rd_other_events.77.b
+        custom_tooltip = c3rd_other_events.77.b.tt1
+        every_governorships = {
+            limit = {
+                is_in_list = old_empire
+            }
+            remove_from_list = old_empire
+        }
+    }
+}
+
+
 ### ADMINISTRATIVE EVENTS ####
 
 ### Basically nobles (great families) taking more power in the realm
@@ -6249,7 +6806,7 @@ c3rd_other_events.82 = { #take lands from landowner
             limit = {
                 has_country_modifier = solidus_introduced
             }
-            add_tyranny = 2
+            add_tyranny = 1
         }
         if = {
             limit = {
@@ -6465,7 +7022,7 @@ c3rd_other_events.82 = { #take lands from landowner
             limit = {
                 has_country_modifier = solidus_introduced
             }
-            add_tyranny = 2
+            add_tyranny = 1
         }
         if = {
             limit = {
@@ -6573,7 +7130,7 @@ c3rd_other_events.82 = { #take lands from landowner
             limit = {
                 has_country_modifier = solidus_introduced
             }
-            add_tyranny = 2
+            add_tyranny = 1
         }
         if = {
             limit = {
@@ -6682,7 +7239,8 @@ c3rd_other_events.83 = { #Retake governorship failed :  you'll have to negociate
 
         add_treasury = {
             value = has_monthly_income
-            multiply = -6
+            multiply = count_reclaim
+            multiply = -1
         }
         current_ruler = {
             add_corruption = 5
@@ -6720,7 +7278,7 @@ c3rd_other_events.83 = { #Retake governorship failed :  you'll have to negociate
         name = c3rd_other_events.83.b
         custom_tooltip = c3rd_other_events.83.b.tt1
         while = {
-            count = 5
+            count = count_reclaim
             random_owned_province = {
                 limit = {
                     is_capital = no
@@ -6775,7 +7333,7 @@ c3rd_other_events.83 = { #Retake governorship failed :  you'll have to negociate
     option = { #the hard way
         name = c3rd_other_events.83.c
         custom_tooltip = c3rd_other_events.83.c.tt1
-        add_tyranny = 7
+        add_tyranny = count_reclaim
         scope:regaining_governorship = {
             var:governorship_owner = {
                 add_loyalty = lost_gov_ownership
@@ -6813,7 +7371,7 @@ c3rd_other_events.83 = { #Retake governorship failed :  you'll have to negociate
                 finesse >= 8
             }
         }
-        add_political_influence = -15
+        add_political_influence = political_influence_reclaim
         scope:regaining_governorship = {
             if = {
                 limit = {
@@ -6993,6 +7551,7 @@ c3rd_other_events.84 = { #event when you have  the tax inspection culture law : 
                 owner = {
                     random_owned_province = {
                         limit = {
+                            governorship = scope:governorship_parse
                             NOT = {
                                 exists = holding_owner
                             }
@@ -9209,7 +9768,6 @@ c3rd_other_events.91 = { #political powerful character - coup
                     power_base >= 5
                 }
             }
-            
         }
     }
 
@@ -9353,6 +9911,13 @@ c3rd_other_events.91 = { #political powerful character - coup
             }
             add_loyalty = requests_fulfilled
         }
+        if = {
+            limit = { NOT = {has_country_modifier = political_turmoils} }
+            add_country_modifier = {
+                name = political_turmoils
+				duration = 2200
+            }
+        }
         
     }
 
@@ -9392,6 +9957,13 @@ c3rd_other_events.91 = { #political powerful character - coup
             add_loyalty = requests_fulfilled
         }
         add_legitimacy = -10
+        if = {
+            limit = { NOT = {has_country_modifier = political_turmoils} }
+            add_country_modifier = {
+                name = political_turmoils
+				duration = 1400
+            }
+        }
         
         
     }
@@ -10058,7 +10630,7 @@ c3rd_other_events.93 = { #governor complain about excessive control of ruler
         scope:gov_target_complain2 = {
             add_loyalty = disappointed
         }
-        add_political_influence = -5
+        add_political_influence = -15
         if = {
             limit = {
                 has_country_modifier = solidus_introduced
@@ -10910,7 +11482,7 @@ c3rd_other_events.105 = { #heritage of big landowner
 }
 
 
-c3rd_other_events.106 = { #Consolidate
+c3rd_other_events.106 = { #Consolidate, coveted owner heads want in their family
     type = country_event
     title = "c3rd_other_events.106.t"
     desc = "c3rd_other_events.106.desc"
@@ -11351,15 +11923,21 @@ c3rd_other_events.110 = { #Intervention
         NOT = {
             has_variable = recent_intervention
         }
-        any_character = {
+        any_character = { #minimum = 1 head of family is disloyal
             is_head_of_family = yes
             loyalty < 33
         }
         OR = {
             disloyal_country_part >= 60
-            any_character = {
+            any_character = { #we need 3 characters at the very least that are disloyal and either : heavy general in milanarch, king maker, own 25% of the country, powerbase >10 no general, powerbase >10 general with milanarch possible and unworthy_leader > 3
                 count >= 3
-                loyalty < 33
+                OR = {
+                    loyalty < 33
+                    AND = {
+                        has_variable = head_intent_disloyal
+                        loyalty <= 45
+                    }
+                }
                 OR = {
                     is_head_of_family = yes
                     AND = {
@@ -12867,8 +13445,25 @@ c3rd_other_events.110 = { #Intervention
     option = {#refusing
         name = c3rd_other_events.110.h
         custom_tooltip = c3rd_other_events.110.h.tt1
-        add_stability = -13
-        add_tyranny = 5
+        if = {
+            limit = {
+                has_country_modifier = solidus_introduced
+            }
+            add_stability = -15
+        }
+        else = {
+            add_stability = -10
+        }
+        if = {
+            limit = {
+                has_law = constantine_reform_law
+            }
+            add_tyranny = 8
+        }
+        else = {
+            add_tyranny = 5
+        }
+
         hidden_effect = {
             if = { #generals were ready for milanarch but you refused x(
                 limit = {
@@ -12904,6 +13499,9 @@ c3rd_other_events.110 = { #Intervention
                         value = 4
                     }
                 }
+                current_ruler = {
+                    add_popularity = -25
+                }
             }
         }
         if = {
@@ -12918,6 +13516,25 @@ c3rd_other_events.110 = { #Intervention
             }
             else = {
                 add_political_influence = -30
+            }
+        }
+        if = { #in milanarch, every general is not happy
+            limit = {
+                has_country_modifier = military_anarchy
+            }
+            current_ruler = {
+                add_popularity = -25
+            }
+            every_character = {
+                limit = {
+                    NOR = {
+                        this = scope:first_inter_char
+                        this = scope:second_inter_char
+                        this = scope:third_inter_char
+                    }
+                    is_general = yes
+                }
+                add_loyalty = disappointed
             }
         }
         scope:first_inter_char = {
@@ -12937,6 +13554,1336 @@ c3rd_other_events.110 = { #Intervention
                 is_in_list = family_domain_govs
             }
             remove_from_list = family_domain_govs
+        }
+    }
+}
+
+c3rd_other_events.120 = { #ruler extremely corrupted
+    type = country_event
+    title = "c3rd_other_events.120.t"
+    desc = "c3rd_other_events.120.desc"
+    left_portrait = current_ruler
+
+    picture = greek_court
+
+    trigger = {
+        has_land = yes
+        is_tribal = no
+        has_civil_war = no
+        current_date >= 600.1.1
+        current_ruler = {
+            corruption >= 80
+        }
+        NOR = {
+            has_variable = recent_ruler_corrupted
+        }
+    }
+
+    weight_multiplier = {
+		modifier = {
+			factor = 2
+            current_ruler = {
+                corruption >= 90
+            }
+		}
+		modifier = {
+			factor = 2
+            current_ruler = {
+                corruption >= 95
+            }
+		}
+		modifier = {
+			factor = 3
+            current_ruler = {
+                corruption >= 99
+            }
+		}
+		modifier = {
+			factor = 1.5
+            has_country_modifier = solidus_introduced
+		}
+    }
+
+    immediate = {
+        set_variable = {
+            name = recent_ruler_corrupted
+            days = 3650
+        }
+    }
+
+    option = { #go uncorrupted
+        name = c3rd_other_events.120.a
+        custom_tooltip = c3rd_other_events.120.a.tt1
+        current_ruler = {
+            add_popularity = -10
+            add_corruption = -5
+        }
+        add_country_modifier = {
+            name = fight_global_corruption
+            duration = 3650
+        }
+
+    }
+    
+    option = { #go corrupted
+        name = c3rd_other_events.120.b
+        custom_tooltip = c3rd_other_events.120.b.tt1
+        add_stability = 5
+        current_ruler = {
+            add_popularity = 10
+            add_corruption = 5
+        }
+        every_character = {
+            limit = {
+                is_head_of_family = yes
+                is_ruler = no
+            }
+            add_corruption = 10
+        }
+        add_country_modifier = {
+            name = encourage_global_corruption
+            duration = 3650
+        }
+        
+    }
+    
+    option = { #don't move
+        name = c3rd_other_events.120.c
+        custom_tooltip = c3rd_other_events.120.c.tt1
+        add_stability = -6
+        add_tyranny = 5
+        add_political_influence = -25
+        add_legitimacy = -20
+        current_ruler = {
+            add_popularity = -25
+            add_corruption = 10
+        }
+        set_variable = {
+            name = ruler_goes_corruption_unchecked
+            days = 3650
+        }
+        
+    }
+
+}
+
+c3rd_other_events.121 = { #minor event global corruption : head of family gain corruption
+	type = minor_country_event
+	title= "c3rd_other_events.121.t"
+	desc = "c3rd_other_events.121.desc"
+	interface_lock = no
+	
+	left_portrait = scope:global_corr_head
+	
+	trigger = {
+        has_land = yes
+        is_tribal = no
+        has_civil_war = no
+        current_date >= 600.1.1
+        has_country_modifier = encourage_global_corruption
+        any_character = {
+            is_head_of_family = yes
+            is_ruler = no
+            NOT = {
+                has_variable = recent_head_global_corruption
+            }
+        }
+	}
+	
+	immediate = {
+        random_character = {
+            limit = {
+                is_head_of_family = yes
+                is_ruler = no
+                NOT = {
+                    has_variable = recent_head_global_corruption
+                }
+            }
+            save_scope_as = global_corr_head
+            set_variable = {
+                name = recent_head_global_corruption
+                days = 500
+            }
+        }
+
+	}
+
+	option = { #yes stabgain
+		name = "c3rd_other_events.121.a"
+        add_stability = 3
+        scope:global_corr_head = {
+            add_corruption = 10
+        }
+	}
+	option = { #no, stabhit
+		name = "c3rd_other_events.121.b"
+        add_stability = -2
+	}
+}
+
+
+c3rd_other_events.122 = { #minor event global corruption : office holder gains corruption
+	type = minor_country_event
+	title= "c3rd_other_events.122.t"
+	desc = "c3rd_other_events.122.desc"
+	interface_lock = no
+	
+	left_portrait = scope:global_corr_off
+	
+	trigger = {
+        has_land = yes
+        is_tribal = no
+        has_civil_war = no
+        current_date >= 600.1.1
+        has_country_modifier = encourage_global_corruption
+        any_character = {
+            has_any_office = yes
+            is_ruler = no
+            NOT = {
+                has_variable = recent_off_global_corruption
+            }
+        }
+	}
+	
+	immediate = {
+        random_character = {
+            limit = {
+                has_any_office = yes
+                is_ruler = no
+                NOT = {
+                    has_variable = recent_off_global_corruption
+                }
+            }
+            save_scope_as = global_corr_off
+            set_variable = {
+                name = recent_off_global_corruption
+                days = 500
+            }
+        }
+
+	}
+
+	option = { #yes polinf gain
+		name = "c3rd_other_events.122.a"
+        add_political_influence = 10
+        scope:global_corr_off = {
+            add_corruption = 10
+        }
+	}
+	option = { #no, polinf hit
+		name = "c3rd_other_events.122.b"
+        add_political_influence = -8
+	}
+}
+
+
+c3rd_other_events.123 = { #minor event global corruption : governor gains corruption
+	type = minor_country_event
+	title= "c3rd_other_events.123.t"
+	desc = "c3rd_other_events.123.desc"
+	interface_lock = no
+	
+	left_portrait = scope:global_corr_gov
+	
+	trigger = {
+        has_land = yes
+        is_tribal = no
+        has_civil_war = no
+        current_date >= 600.1.1
+        has_country_modifier = encourage_global_corruption
+        any_character = {
+            is_governor = yes
+            is_ruler = no
+            NOT = {
+                has_variable = recent_gov_global_corruption
+            }
+        }
+	}
+
+    weight_multiplier = {
+		modifier = {
+			factor = 1.5
+            num_of_cities >= 500
+		}
+		modifier = {
+			factor = 1.5
+            num_of_cities >= 750
+		}
+		modifier = {
+			factor = 1.5
+            num_of_cities >= 1000
+		}
+		modifier = {
+			factor = 1.5
+            num_of_cities >= 1500
+		}
+		modifier = {
+			factor = 1.5
+            num_of_cities >= 2000
+		}
+		modifier = {
+			factor = 1.5
+            num_of_cities >= 2500
+		}
+		modifier = {
+			factor = 1.5
+            num_of_cities >= 3000
+		}
+    }
+	
+	immediate = {
+        random_character = {
+            limit = {
+                is_governor = yes
+                is_ruler = no
+                NOT = {
+                    has_variable = recent_gov_global_corruption
+                }
+            }
+            weight = {
+                modifier = {
+                    add = power_base
+                }
+            }
+            save_scope_as = global_corr_gov
+            set_variable = {
+                name = recent_gov_global_corruption
+                days = 500
+            }
+        }
+
+	}
+
+	option = { #yes tyranny loss
+		name = "c3rd_other_events.123.a"
+        add_tyranny = -4
+        scope:global_corr_gov = {
+            add_corruption = 10
+        }
+	}
+	option = { #no, tyranny gain
+		name = "c3rd_other_events.123.b"
+        add_tyranny = 2
+	}
+}
+
+c3rd_other_events.124 = { #minor event global corruption : general gains corruption
+	type = minor_country_event
+	title= "c3rd_other_events.124.t"
+	desc = "c3rd_other_events.124.desc"
+	interface_lock = no
+	
+	left_portrait = scope:global_corr_gen
+	
+	trigger = {
+        has_land = yes
+        is_tribal = no
+        has_civil_war = no
+        current_date >= 600.1.1
+        has_country_modifier = encourage_global_corruption
+        any_character = {
+            is_general = yes
+            is_ruler = no
+            NOT = {
+                has_variable = recent_gen_global_corruption
+            }
+        }
+	}
+
+    weight_multiplier = {
+		modifier = {
+			factor = 1.5
+            any_character = {
+                count >= 5
+                is_general = yes
+            }
+		}
+		modifier = {
+			factor = 1.5
+            any_character = {
+                count >= 10
+                is_general = yes
+            }
+		}
+		modifier = {
+			factor = 1.5
+            any_character = {
+                count >= 15
+                is_general = yes
+            }
+		}
+		modifier = {
+			factor = 1.5
+            any_character = {
+                count >= 20
+                is_general = yes
+            }
+		}
+    }
+	
+	immediate = {
+        random_character = {
+            limit = {
+                is_general = yes
+                is_ruler = no
+                NOT = {
+                    has_variable = recent_gen_global_corruption
+                }
+            }
+            weight = {
+                modifier = {
+                    add = power_base
+                }
+            }
+            save_scope_as = global_corr_gen
+            set_variable = {
+                name = recent_gen_global_corruption
+                days = 1250
+            }
+        }
+
+	}
+
+	option = { #yes loyalty gain
+		name = "c3rd_other_events.124.a"
+        scope:global_corr_gen = {
+            add_corruption = 20
+            add_loyalty = honored_general
+        }
+	}
+	option = { #no, loyalty loss
+		name = "c3rd_other_events.124.b"
+        scope:global_corr_gen = {
+            add_loyalty = humiliated_general
+        }
+	}
+}
+
+
+c3rd_other_events.125 = { #minor event ruler corruption : head of family refuse to comply
+	type = minor_country_event
+	title= "c3rd_other_events.125.t"
+	desc = "c3rd_other_events.125.desc"
+	interface_lock = no
+	
+	left_portrait = scope:ruler_corr_head
+	
+	trigger = {
+        has_land = yes
+        is_tribal = no
+        has_civil_war = no
+        current_date >= 600.1.1
+        has_variable = ruler_goes_corruption_unchecked
+        current_ruler = {
+            corruption >= 90
+        }
+        any_character = {
+            is_head_of_family = yes
+            loyalty <= 50
+            is_ruler = no
+            NOT = {
+                has_variable = recent_head_ruler_corruption
+            }
+        }
+	}
+	
+	immediate = {
+        random_character = {
+            limit = {
+                is_head_of_family = yes
+                loyalty <= 50
+                is_ruler = no
+                NOT = {
+                    has_variable = recent_head_ruler_corruption
+                }
+            }
+            weight = {
+                modifier = {
+                    add = power_base
+                }
+            }
+            save_scope_as = ruler_corr_head
+            set_variable = {
+                name = recent_head_ruler_corruption
+                days = 1250
+            }
+        }
+
+	}
+
+	option = { #let polinfit
+		name = "c3rd_other_events.125.a"
+        add_political_influence = -50
+	}
+	option = { #no, tyranny hit
+		name = "c3rd_other_events.125.b"
+        add_tyranny = 8
+	}
+}
+
+
+c3rd_other_events.126 = { #minor event ruler corruption : office holder
+	type = minor_country_event
+	title= "c3rd_other_events.126.t"
+	desc = "c3rd_other_events.126.desc"
+	interface_lock = no
+	
+	left_portrait = scope:ruler_corr_off
+	
+	trigger = {
+        has_land = yes
+        is_tribal = no
+        has_civil_war = no
+        current_date >= 600.1.1
+        has_variable = ruler_goes_corruption_unchecked
+        current_ruler = {
+            corruption >= 90
+        }
+        any_character = {
+            has_any_office = yes
+            loyalty <= 50
+            is_ruler = no
+            NOT = {
+                has_variable = recent_off_ruler_corruption
+            }
+        }
+	}
+	
+	immediate = {
+        random_character = {
+            limit = {
+                has_any_office = yes
+                loyalty <= 50
+                is_ruler = no
+                NOT = {
+                    has_variable = recent_off_ruler_corruption
+                }
+            }
+            save_scope_as = ruler_corr_off
+            set_variable = {
+                name = recent_off_ruler_corruption
+                days = 500
+            }
+        }
+	}
+
+	option = { #stabhit
+		name = "c3rd_other_events.126.a"
+        add_stability = -6
+	}
+	option = { #no, polinf hit
+		name = "c3rd_other_events.126.b"
+        add_tyranny = 4
+	}
+}
+
+
+c3rd_other_events.127 = { #minor event ruler corruption : governor
+	type = minor_country_event
+	title= "c3rd_other_events.127.t"
+	desc = "c3rd_other_events.127.desc"
+	interface_lock = no
+	
+	left_portrait = scope:ruler_corr_gov
+	
+	trigger = {
+        has_land = yes
+        is_tribal = no
+        has_civil_war = no
+        current_date >= 600.1.1
+        has_variable = ruler_goes_corruption_unchecked
+        current_ruler = {
+            corruption >= 90
+        }
+        any_character = {
+            is_governor = yes
+            loyalty <= 50
+            is_ruler = no
+            NOT = {
+                has_variable = recent_gov_ruler_corruption
+            }
+        }
+	}
+
+    weight_multiplier = {
+		modifier = {
+			factor = 1.5
+            num_of_cities >= 500
+		}
+		modifier = {
+			factor = 1.5
+            num_of_cities >= 750
+		}
+		modifier = {
+			factor = 1.5
+            num_of_cities >= 1000
+		}
+		modifier = {
+			factor = 1.5
+            num_of_cities >= 1500
+		}
+		modifier = {
+			factor = 1.5
+            num_of_cities >= 2000
+		}
+		modifier = {
+			factor = 1.5
+            num_of_cities >= 2500
+		}
+		modifier = {
+			factor = 1.5
+            num_of_cities >= 3000
+		}
+    }
+	
+	immediate = {
+        random_character = {
+            limit = {
+                is_governor = yes
+                loyalty <= 50
+                is_ruler = no
+                NOT = {
+                    has_variable = recent_gov_ruler_corruption
+                }
+            }
+            save_scope_as = ruler_corr_gov
+            set_variable = {
+                name = recent_gov_ruler_corruption
+                days = 500
+            }
+        }
+	}
+
+	option = { #loyalty
+		name = "c3rd_other_events.127.a"
+        current_ruler = {
+            add_popularity = -15
+        }
+        add_stability = -2
+	}
+	option = { #no, tyranny hit
+		name = "c3rd_other_events.127.b"
+        add_tyranny = 3
+	}
+}
+
+c3rd_other_events.128 = { #minor event ruler corruption : general
+	type = minor_country_event
+	title= "c3rd_other_events.128.t"
+	desc = "c3rd_other_events.128.desc"
+	interface_lock = no
+	
+	left_portrait = scope:ruler_corr_gen
+	
+	trigger = {
+        has_land = yes
+        is_tribal = no
+        has_civil_war = no
+        current_date >= 600.1.1
+        has_variable = ruler_goes_corruption_unchecked
+        current_ruler = {
+            corruption >= 90
+        }
+        any_character = {
+            is_general = yes
+            is_ruler = no
+            NOT = {
+                has_variable = recent_gen_ruler_corruption
+            }
+        }
+	}
+
+    weight_multiplier = {
+		modifier = {
+			factor = 1.5
+            any_character = {
+                count >= 5
+                is_general = yes
+            }
+		}
+		modifier = {
+			factor = 1.5
+            any_character = {
+                count >= 10
+                is_general = yes
+            }
+		}
+		modifier = {
+			factor = 1.5
+            any_character = {
+                count >= 15
+                is_general = yes
+            }
+		}
+		modifier = {
+			factor = 1.5
+            any_character = {
+                count >= 20
+                is_general = yes
+            }
+		}
+    }
+	
+	immediate = {
+        random_character = {
+            limit = {
+                is_general = yes
+                is_ruler = no
+                NOT = {
+                    has_variable = recent_gen_ruler_corruption
+                }
+            }
+            weight = {
+                modifier = {
+                    add = power_base
+                }
+            }
+            save_scope_as = ruler_corr_gen
+            set_variable = {
+                name = recent_gen_ruler_corruption
+                days = 1250
+            }
+        }
+
+	}
+
+	option = { #legitimacy loss
+		name = "c3rd_other_events.128.a"
+        add_legitimacy = -20
+	}
+	option = { #stabhit
+		name = "c3rd_other_events.128.b"
+        add_stability = -4
+	}
+}
+
+
+c3rd_other_events.129 = { #ruler and heads are all corrupted
+    type = country_event
+    title = "c3rd_other_events.129.t"
+    desc = "c3rd_other_events.129.desc"
+    left_portrait = current_ruler
+
+    picture = greek_court
+
+    trigger = {
+        has_land = yes
+        is_tribal = no
+        has_civil_war = no
+        current_date >= 600.1.1
+        NOT={any_character = {
+            OR = {
+                is_ruler = yes
+                is_head_of_family = yes
+            }
+            corruption < 95
+        }}
+        has_country_modifier = encourage_global_corruption
+        NOT = {
+            has_country_modifier = global_corruption
+        }
+    }
+
+    weight_multiplier = {
+		modifier = {
+			factor = 2
+            current_ruler = {
+                corruption >= 98
+            }
+		}
+		modifier = {
+			factor = 3
+            current_ruler = {
+                corruption >= 99
+            }
+		}
+		modifier = {
+			factor = 1.5
+            has_country_modifier = solidus_introduced
+		}
+    }
+
+    immediate = {
+        add_country_modifier = {
+            name = global_corruption
+            duration = 3650
+        }
+    }
+
+    option = { #pay stab
+        name = c3rd_other_events.129.a
+        custom_tooltip = c3rd_other_events.129.a.tt1
+        add_stability = -10
+
+    }
+    
+    option = { #pay tyranny
+        name = c3rd_other_events.129.b
+        custom_tooltip = c3rd_other_events.129.b.tt1
+        add_tyranny = 10
+        
+    }
+    
+
+}
+
+
+c3rd_other_events.130 = { #EPIDEMY owners take control
+    type = country_event
+    title = "c3rd_other_events.130.t"
+    desc = {
+        triggered_desc = { #owner is ruler
+            trigger = {
+                scope:owner_epidemy_action = {
+                    is_ruler = yes
+                }
+            }
+            desc = "c3rd_other_events.130.desc.1"
+
+        }
+        triggered_desc = { #owner is smart : less mortality, but less taxes and trade
+            trigger = {
+                scope:owner_epidemy_action = {
+                    NOR = {
+                        has_trait = cruel
+                        has_trait = selfish
+                        has_trait = corrupt
+                        is_ruler = yes
+                    }
+                }
+            }
+            desc = "c3rd_other_events.130.desc.2"
+        }
+        triggered_desc = { #owner is cruel : provincila loyalty and mortality
+            trigger = {
+                scope:owner_epidemy_action = {
+                    NOT = {
+                        is_ruler = yes
+                    }
+                    OR = {
+                        has_trait = cruel
+                        has_trait = selfish
+                        has_trait = corrupt
+                    }
+                }
+            }
+            desc = "c3rd_other_events.130.desc.3"
+
+        }
+    }
+    left_portrait = scope:owner_epidemy_action
+
+    picture = senator_conversing
+
+    trigger = {
+        has_land = yes
+        is_tribal = no
+        has_civil_war = no
+        current_date >= 600.1.1
+        any_owned_province = {
+            OR = {
+                has_province_modifier = "antonine_plague_epidemic_outbreak_city"
+                has_province_modifier = "antonine_plague_epidemic_quarantine"
+                has_province_modifier = "plague_outbreak_province"
+                has_province_modifier = "cyprian_plague_epidemic_outbreak_city"
+                has_province_modifier = "cyprian_plague_epidemic_quarantine"
+                has_province_modifier = "cyprian_plague_epidemic_outbreak_town"
+                has_province_modifier = "cyprian_plague_epidemic_quarantown"
+            }
+            governorship = {
+                has_variable = governorship_owner
+                var:governorship_owner = {
+                    employer = root
+                }
+                NOR = {
+                    has_variable = recent_epidemy_owner_choice
+                    var:governorship_owner = {
+                        has_variable = recent_epidemy_owner_choice_char
+                    }
+                }
+            }
+        }
+    }
+
+    weight_multiplier = {
+		modifier = {
+			factor = 2
+            any_owned_province = {
+                count >= 10
+                OR = {
+                    has_province_modifier = "antonine_plague_epidemic_outbreak_city"
+                    has_province_modifier = "antonine_plague_epidemic_quarantine"
+                    has_province_modifier = "plague_outbreak_province"
+                    has_province_modifier = "cyprian_plague_epidemic_outbreak_city"
+                    has_province_modifier = "cyprian_plague_epidemic_quarantine"
+                    has_province_modifier = "cyprian_plague_epidemic_outbreak_town"
+                    has_province_modifier = "cyprian_plague_epidemic_quarantown"
+                }
+                governorship = {
+                    has_variable = governorship_owner
+                    var:governorship_owner = {
+                        employer = root
+                    }
+                    NOR = {
+                        has_variable = recent_epidemy_owner_choice
+                        var:governorship_owner = {
+                            has_variable = recent_epidemy_owner_choice_char
+                        }
+                    }
+                }
+            }
+		}
+		modifier = {
+			factor = 2
+            any_owned_province = {
+                count >= 20
+                OR = {
+                    has_province_modifier = "antonine_plague_epidemic_outbreak_city"
+                    has_province_modifier = "antonine_plague_epidemic_quarantine"
+                    has_province_modifier = "plague_outbreak_province"
+                    has_province_modifier = "cyprian_plague_epidemic_outbreak_city"
+                    has_province_modifier = "cyprian_plague_epidemic_quarantine"
+                    has_province_modifier = "cyprian_plague_epidemic_outbreak_town"
+                    has_province_modifier = "cyprian_plague_epidemic_quarantown"
+                }
+                governorship = {
+                    has_variable = governorship_owner
+                    var:governorship_owner = {
+                        employer = root
+                    }
+                    NOR = {
+                        has_variable = recent_epidemy_owner_choice
+                        var:governorship_owner = {
+                            has_variable = recent_epidemy_owner_choice_char
+                        }
+                    }
+                }
+            }
+		}
+		modifier = {
+			factor = 2
+            any_owned_province = {
+                count >= 40
+                OR = {
+                    has_province_modifier = "antonine_plague_epidemic_outbreak_city"
+                    has_province_modifier = "antonine_plague_epidemic_quarantine"
+                    has_province_modifier = "plague_outbreak_province"
+                    has_province_modifier = "cyprian_plague_epidemic_outbreak_city"
+                    has_province_modifier = "cyprian_plague_epidemic_quarantine"
+                    has_province_modifier = "cyprian_plague_epidemic_outbreak_town"
+                    has_province_modifier = "cyprian_plague_epidemic_quarantown"
+                }
+                governorship = {
+                    has_variable = governorship_owner
+                    var:governorship_owner = {
+                        employer = root
+                    }
+                    NOR = {
+                        has_variable = recent_epidemy_owner_choice
+                        var:governorship_owner = {
+                            has_variable = recent_epidemy_owner_choice_char
+                        }
+                    }
+                }
+            }
+		}
+		modifier = {
+			factor = 1.5
+            has_country_modifier = solidus_introduced
+		}
+    }
+
+    immediate = {
+        random_owned_province = {
+            limit = {
+                OR = {
+                    has_province_modifier = "antonine_plague_epidemic_outbreak_city"
+                    has_province_modifier = "antonine_plague_epidemic_quarantine"
+                    has_province_modifier = "plague_outbreak_province"
+                    has_province_modifier = "cyprian_plague_epidemic_outbreak_city"
+                    has_province_modifier = "cyprian_plague_epidemic_quarantine"
+                    has_province_modifier = "cyprian_plague_epidemic_outbreak_town"
+                    has_province_modifier = "cyprian_plague_epidemic_quarantown"
+                }
+                governorship = {
+                    has_variable = governorship_owner
+                    var:governorship_owner = {
+                        employer = root
+                    }
+                    NOR = {
+                        has_variable = recent_epidemy_owner_choice
+                        var:governorship_owner = {
+                            has_variable = recent_epidemy_owner_choice_char
+                        }
+                    }
+                }
+            }
+            weight = {
+                modifier = {
+                    factor = 2
+                    governorship = {
+                        var:governorship_owner = {
+                            has_character_modifier = major_influence_aristocrat
+                        }
+                    }
+                }
+                modifier = {
+                    factor = 2
+                    governorship = {
+                        var:governorship_owner = {
+                            OR = {
+                                is_head_of_family = yes
+                                is_ruler = yes
+                            }
+                        }
+                    }
+                }
+                modifier = {
+                    factor = 2
+                    governorship = {
+                        var:governorship_owner = {
+                            has_character_modifier = major_influence_aristocrat
+                            has_variable = country_ownership
+                            var:country_ownership >= 40
+                        }
+                    }
+                }
+                modifier = {
+                    factor = 2
+                    governorship = {
+                        var:governorship_owner = {
+                            has_character_modifier = major_influence_aristocrat
+                            has_variable = country_ownership
+                            var:country_ownership >= 60
+                        }
+                    }
+                }
+            }
+            governorship = {
+                var:governorship_owner = {
+                    save_scope_as = owner_epidemy_action
+                }
+            }
+        }
+        scope:owner_epidemy_action = {
+            set_variable = {
+                name = recent_epidemy_owner_choice_char
+                days = 3650
+            }
+        }
+    }
+
+    option = { #let the owner do as he pleases : big provincial modifiers
+        name = c3rd_other_events.130.a
+        custom_tooltip = c3rd_other_events.130.a.tt1
+        trigger = {
+            scope:owner_epidemy_action = {
+                is_ruler = no
+            }
+        }
+        if = {
+            limit = {
+                scope:owner_epidemy_action = {
+                    OR = {
+                        has_trait = cruel
+                        has_trait = selfish
+                        has_trait = corrupt
+                    }
+                }
+            }
+            every_governorships = {
+                limit = {
+                    has_variable = governorship_owner
+                    var:governorship_owner = scope:owner_epidemy_action
+                    NOT = {
+                        has_variable = recent_epidemy_owner_choice
+                    }
+                }
+                set_variable = {
+                    name = recent_epidemy_owner_choice
+                    days = 3650
+                }
+                every_governorship_state = {
+                    limit = {
+                        NOT = {
+                            has_state_modifier = c3rd_epidemy_cruel
+                        }
+                        any_state_province = {
+                            OR = {
+                                has_province_modifier = "antonine_plague_epidemic_outbreak_city"
+                                has_province_modifier = "antonine_plague_epidemic_quarantine"
+                                has_province_modifier = "plague_outbreak_province"
+                                has_province_modifier = "cyprian_plague_epidemic_outbreak_city"
+                                has_province_modifier = "cyprian_plague_epidemic_quarantine"
+                                has_province_modifier = "cyprian_plague_epidemic_outbreak_town"
+                                has_province_modifier = "cyprian_plague_epidemic_quarantown"
+                            }
+                        }
+                    }
+                    add_state_modifier = {
+                        name = c3rd_epidemy_cruel
+                        duration = 3650
+                    }
+                }
+            }
+        }
+        else = {
+            every_governorships = {
+                limit = {
+                    has_variable = governorship_owner
+                    var:governorship_owner = scope:owner_epidemy_action
+                    NOT = {
+                        has_variable = recent_epidemy_owner_choice
+                    }
+                }
+                set_variable = {
+                    name = recent_epidemy_owner_choice
+                    days = 3650
+                }
+                every_governorship_state = {
+                    limit = {
+                        NOT = {
+                            has_state_modifier = c3rd_epidemy_normal
+                        }
+                        any_state_province = {
+                            OR = {
+                                has_province_modifier = "antonine_plague_epidemic_outbreak_city"
+                                has_province_modifier = "antonine_plague_epidemic_quarantine"
+                                has_province_modifier = "plague_outbreak_province"
+                                has_province_modifier = "cyprian_plague_epidemic_outbreak_city"
+                                has_province_modifier = "cyprian_plague_epidemic_quarantine"
+                                has_province_modifier = "cyprian_plague_epidemic_outbreak_town"
+                                has_province_modifier = "cyprian_plague_epidemic_quarantown"
+                            }
+                        }
+                    }
+                    add_state_modifier = {
+                        name = c3rd_epidemy_normal
+                        duration = 3650
+                    }
+                }
+            }
+        }
+        if = {
+            limit = {
+                scope:owner_epidemy_action = {
+                    has_character_modifier = major_influence_aristocrat
+                }
+            }
+            add_legitimacy = -25
+        }
+    }
+    
+    option = { #stop the owner, loyalty + provincial loyalty
+        name = c3rd_other_events.130.b
+        custom_tooltip = c3rd_other_events.130.b.tt1
+        trigger = {
+            scope:owner_epidemy_action = {
+                is_ruler = no
+            }
+        }
+        every_governorships = {
+            limit = {
+                has_variable = governorship_owner
+                var:governorship_owner = scope:owner_epidemy_action
+            }
+            set_variable = {
+                name = recent_epidemy_owner_choice
+                days = 3650
+            }
+            every_governorship_state = {
+                random_state_province = {
+                    add_state_loyalty = -10
+                }
+            }
+        }
+        scope:owner_epidemy_action = {
+            add_loyalty = state_interference
+        }
+        if = {
+            limit = {
+                stability >= 80
+            }
+            add_stability = -10
+        }
+        else_if = {
+            limit = {
+                stability >= 65
+            }
+            add_stability = -5
+        }
+        else_if = {
+            limit = {
+                stability >= 50
+            }
+            add_stability = -5
+        }
+        else_if = {
+            limit = {
+                stability < 50
+            }
+            add_stability = -2
+        }
+        if = {
+            limit = {
+                scope:owner_epidemy_action = {
+                    has_character_modifier = major_influence_aristocrat
+                    has_variable = country_ownership
+                    var:country_ownership >= 40
+                }
+            }
+            add_tyranny = 10
+            add_political_influence = -50
+        }
+        else_if = {
+            limit = {
+                scope:owner_epidemy_action = {
+                    has_character_modifier = major_influence_aristocrat
+                }
+            }
+            add_tyranny = 5
+            add_political_influence = -30
+        }
+        if = {
+            limit = {
+                has_country_modifier = solidus_introduced
+            }
+            add_stability = -2
+            add_political_influence = -25
+        }
+        
+    }
+    
+    option = { #the owner is the ruler : let him protect his stuff stab and popularity hit
+        name = c3rd_other_events.130.c
+        custom_tooltip = c3rd_other_events.130.c.tt1
+        trigger = {
+            scope:owner_epidemy_action = {
+                this = root.current_ruler
+            }
+        }
+        current_ruler = {
+            add_popularity = -80
+        }
+        if = {
+            limit = {
+                stability >= 80
+            }
+            add_stability = -15
+        }
+        else_if = {
+            limit = {
+                stability >= 65
+            }
+            add_stability = -10
+        }
+        else_if = {
+            limit = {
+                stability >= 50
+            }
+            add_stability = -8
+        }
+        else_if = {
+            limit = {
+                stability < 50
+            }
+            add_stability = -5
+        }
+        every_governorships = {
+            limit = {
+                has_variable = governorship_owner
+                var:governorship_owner = scope:owner_epidemy_action
+                NOT = {
+                    has_variable = recent_epidemy_owner_choice
+                }
+            }
+            set_variable = {
+                name = recent_epidemy_owner_choice
+                days = 3650
+            }
+            every_governorship_state = {
+                limit = {
+                    NOT = {
+                        has_state_modifier = c3rd_epidemy_ruler
+                    }
+                    any_state_province = {
+                        OR = {
+                            has_province_modifier = "antonine_plague_epidemic_outbreak_city"
+                            has_province_modifier = "antonine_plague_epidemic_quarantine"
+                            has_province_modifier = "plague_outbreak_province"
+                            has_province_modifier = "cyprian_plague_epidemic_outbreak_city"
+                            has_province_modifier = "cyprian_plague_epidemic_quarantine"
+                            has_province_modifier = "cyprian_plague_epidemic_outbreak_town"
+                            has_province_modifier = "cyprian_plague_epidemic_quarantown"
+                        }
+                    }
+                }
+                add_state_modifier = {
+                    name = c3rd_epidemy_ruler
+                    duration = 3650
+                }
+                random_state_province = {
+                    add_state_loyalty = -10
+                }
+            }
+        }
+    }
+    
+    
+    option = { #the owner is the ruler : let him abandon some holdings there
+        name = c3rd_other_events.130.d
+        custom_tooltip = c3rd_other_events.130.d.tt1
+        trigger = {
+            scope:owner_epidemy_action = {
+                this = root.current_ruler
+            }
+        }
+        add_stability = 5
+        add_legitimacy = -10
+        hidden_effect = {
+            every_governorships = {
+                limit = {
+                    has_variable = governorship_owner
+                    var:governorship_owner = root.current_ruler
+                    any_governorship_state = {
+                        any_state_province = {
+                            OR = {
+                                has_province_modifier = "antonine_plague_epidemic_outbreak_city"
+                                has_province_modifier = "antonine_plague_epidemic_quarantine"
+                                has_province_modifier = "plague_outbreak_province"
+                                has_province_modifier = "cyprian_plague_epidemic_outbreak_city"
+                                has_province_modifier = "cyprian_plague_epidemic_quarantine"
+                                has_province_modifier = "cyprian_plague_epidemic_outbreak_town"
+                                has_province_modifier = "cyprian_plague_epidemic_quarantown"
+                            }
+                        }
+                    }
+                }
+                random_list = {
+                    2 = {}
+                    3 = {
+                        remove_variable = governorship_owner
+                    }
+                }
+				every_governorship_state = {
+					every_state_province = {
+						limit = {
+							exists = holding_owner
+							holding_owner = {
+								this = root.current_ruler
+							}
+						}
+						random_list = {
+                            2 = {}
+                            3 = {
+                                root.current_ruler = {
+                                    remove_holding = prev
+                                }
+                            }
+                        }
+					}
+				}
+            }
         }
     }
 }

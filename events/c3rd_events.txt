@@ -163,7 +163,19 @@ c3rd_events.3 = { #succession crisis
         has_land = yes
         is_tribal = no
         current_date >= 900.1.1
-        num_of_cities > 900
+        OR = {
+            num_of_cities > 900
+            AND = {
+                has_country_modifier = solidus_introduced
+                num_of_cities >= 600
+                has_law = basic_administrative_law
+            }
+            AND = {
+                has_country_modifier = solidus_introduced
+                num_of_cities >= 750
+                NOT = { has_law = basic_administrative_law }
+            }
+        }
         has_country_modifier = crisis_of_the_third_century
         scope:general_target = { is_alive = yes }
         scope:king_maker_general = { is_alive = yes }
@@ -276,10 +288,13 @@ c3rd_events.3 = { #succession crisis
         }
         if = {#to prevent players from avoiding the military anarchy forever without a cost
             limit = {current_date >= 1100.1.1 }
-            add_stability = -4
+            add_stability = -6
         }
         else_if = {
             limit = {current_date >= 1000.1.1 }
+            add_stability = -4
+        }
+        else = {
             add_stability = -2
         }
         if = {
@@ -455,7 +470,19 @@ c3rd_events.5 = {#general intervention : provoke military crisis where there is 
         has_land = yes
         is_tribal = no
         current_date >= 900.1.1
-        num_of_cities >= 900
+        OR = {
+            num_of_cities > 900
+            AND = {
+                has_country_modifier = solidus_introduced
+                num_of_cities >= 600
+                has_law = basic_administrative_law
+            }
+            AND = {
+                has_country_modifier = solidus_introduced
+                num_of_cities >= 750
+                NOT = { has_law = basic_administrative_law }
+            }
+        }
         any_character = {
             is_general = yes
             is_ruler = no
@@ -536,6 +563,14 @@ c3rd_events.5 = {#general intervention : provoke military crisis where there is 
             factor = 0.2
             has_law = constantine_reform_law
         }
+		modifier = {
+			factor = 0.7
+			num_of_cities <= 800
+		}
+		modifier = {
+			factor = 0.7
+			num_of_cities <= 700
+		}
         modifier = {
             factor = 2
             has_country_modifier = political_unstability
@@ -962,7 +997,14 @@ c3rd_events.7 = { #Generals ask for a war
             has_law = constantine_reform_law
             has_law = decentralized_administration_law
         }
-        num_of_cities >= 900
+        OR = {
+            num_of_cities > 900
+            AND = {
+                has_country_modifier = solidus_introduced
+                num_of_cities >= 750
+                has_law = basic_administrative_law
+            }
+        }
         any_character = {
             count >= 3 #you should have a quite important military establishment
             is_general = yes
@@ -1029,6 +1071,14 @@ c3rd_events.7 = { #Generals ask for a war
             factor = 2
             has_aggressive_expansion = 0
         }
+		modifier = {
+			factor = 0.7
+			num_of_cities <= 800
+		}
+		modifier = {
+			factor = 0.7
+			num_of_cities <= 700
+		}
 
     }
 
@@ -1178,6 +1228,10 @@ c3rd_events.7 = { #Generals ask for a war
                         var:unworthy_leader <= 2
                     }
                     modifier = {
+                        add = 10
+                        NOT = {has_variable = unworthy_leader}
+                    }
+                    modifier = {
                         add = 2
                         legitimacy >= 85
                     }
@@ -1231,7 +1285,14 @@ c3rd_events.75 = { #not at war
             has_variable = recent_military_anarchy
             has_variable = on_going_rep_thingy
         }
-        num_of_cities >= 900
+        OR = {
+            num_of_cities > 900
+            AND = {
+                has_country_modifier = solidus_introduced
+                num_of_cities >= 750
+                has_law = basic_administrative_law
+            }
+        }
         NOR = {
             war_with = scope:target_neighbour
             scope:target_neighbour = {
@@ -1286,6 +1347,10 @@ c3rd_events.75 = { #not at war
                         add = 10
                         has_variable = unworthy_leader
                         var:unworthy_leader <= 2
+                    }
+                    modifier = {
+                        add = 10
+                        NOT = {has_variable = unworthy_leader}
                     }
                     modifier = {
                         add = 2
@@ -1483,7 +1548,6 @@ c3rd_events.81 = { #Only general with power ; he wants recognition
     type = country_event
     title = "c3rd_events.81.t"
     desc = "c3rd_events.81.desc"
-
     picture = army_desert
 
     trigger = {
@@ -1497,8 +1561,17 @@ c3rd_events.81 = { #Only general with power ; he wants recognition
             has_variable = recent_general_asking
             has_variable = on_going_rep_thingy
             has_country_modifier = political_unstability
+            has_law = decentralized_administration_law
+            has_law = constantine_reform_law
         }
-        num_of_cities >= 900
+        OR = {
+            num_of_cities > 900
+            AND = {
+                has_country_modifier = solidus_introduced
+                num_of_cities >= 750
+                has_law = basic_administrative_law
+            }
+        }
         any_character = {
             count = 1
             is_general = yes
@@ -1540,6 +1613,14 @@ c3rd_events.81 = { #Only general with power ; he wants recognition
 		modifier = {
 			factor = 2
 			war = yes
+		}
+		modifier = {
+			factor = 0.7
+			num_of_cities <= 800
+		}
+		modifier = {
+			factor = 0.7
+			num_of_cities <= 700
 		}
 
     }
@@ -1619,6 +1700,10 @@ c3rd_events.81 = { #Only general with power ; he wants recognition
                         add = 10
                         has_variable = unworthy_leader
                         var:unworthy_leader <= 2
+                    }
+                    modifier = {
+                        add = 10
+                        NOT = {has_variable = unworthy_leader}
                     }
                     modifier = {
                         add = 2
@@ -1707,7 +1792,19 @@ c3rd_events.9 = { #Assassination of the ruler by the generals
         current_ruler = {
             popularity < 85
         }
-        num_of_cities >= 900
+        OR = {
+            num_of_cities > 900
+            AND = {
+                has_country_modifier = solidus_introduced
+                num_of_cities >= 600
+                has_law = basic_administrative_law
+            }
+            AND = {
+                has_country_modifier = solidus_introduced
+                num_of_cities >= 750
+                NOT = { has_law = basic_administrative_law }
+            }
+        }
         any_character = {
             count >= 1 #you should have at least a general not the primary heir
             is_general = yes
@@ -3305,7 +3402,19 @@ c3rd_events.30 = {#general ultimatum : throne or rival empire
         }
         if = {
             limit = {
-                num_of_cities >= 900
+                OR = {
+                    num_of_cities > 900
+                    AND = {
+                        has_country_modifier = solidus_introduced
+                        num_of_cities >= 600
+                        has_law = basic_administrative_law
+                    }
+                    AND = {
+                        has_country_modifier = solidus_introduced
+                        num_of_cities >= 750
+                        NOT = { has_law = basic_administrative_law }
+                    }
+                }
                 has_variable = recent_military_anarchy
             }
             hidden_effect = {

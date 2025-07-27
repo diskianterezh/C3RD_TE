@@ -398,9 +398,24 @@ scheme_care_of_relatives_finish = {
 					}
 				}
 			}
-			set_variable = {
-				name = bought_relatives_care
-				days = 730
+			if = {
+				limit = { #if ruler corrupted, this can happen more often
+					employer = {
+						current_ruler = {
+							corruption >= 75
+						}
+					}
+				}
+				set_variable = {
+					name = bought_relatives_care
+					days = 365
+				}
+			}
+			else = {
+				set_variable = {
+					name = bought_relatives_care
+					days = 730
+				}
 			}
 			add_character_modifier = {
 				name = pater_familias

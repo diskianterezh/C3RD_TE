@@ -741,6 +741,28 @@ scheme_care_of_relatives = {
 			add = 5
 			corruption >= 25
 		}
+		modifier = {
+			add = 5
+			employer = {
+				current_ruler = {
+					corruption >= 50
+				}
+			}
+		}
+		modifier = {
+			add = 5
+			employer = {
+				current_ruler = {
+					corruption >= 75
+				}
+			}
+		}
+		modifier = {
+			add = 10
+			employer = {
+				has_country_modifier = encourage_global_corruption
+			}
+		}
 	}
 	
 	#on_monthly = xyz

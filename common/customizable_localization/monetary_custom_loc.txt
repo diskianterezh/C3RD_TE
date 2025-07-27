@@ -56,10 +56,10 @@ solidus_available_custom_loc_tt = {
 			NOT = {
 				has_country_modifier = solidus_introduced
 			}
+			is_tribal = no
 			OR = {
 				NOT = {invention = monetary_reform}
 				has_civil_war = yes
-				is_tribal = no
 			}
 		}
 	}
@@ -133,6 +133,7 @@ c3rd_monetary_what_is_my_eco_custom_loc = {
 		trigger = {
 			has_variable = what_is_my_eco
 			var:what_is_my_eco >= 1
+			NOT = {has_country_modifier = solidus_introduced}
 		}
 	}
 	text = { #red
@@ -140,6 +141,13 @@ c3rd_monetary_what_is_my_eco_custom_loc = {
 		trigger = {
 			has_variable = what_is_my_eco
 			var:what_is_my_eco < 1
+			NOT = {has_country_modifier = solidus_introduced}
+		}
+	}
+	text = { #red
+		localization_key = c3rd_monetary_what_is_my_eco_custom_loc3
+		trigger = {
+			has_country_modifier = solidus_introduced
 		}
 	}
 }
