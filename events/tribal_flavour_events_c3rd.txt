@@ -5,17 +5,14 @@
 tribal_flavour_events.1 = {
 	type = country_event
 	title = "tribal_flavour_event.1.t"
-	desc =  "tribal_flavour_event.1.desc"
+	desc = "tribal_flavour_event.1.desc"
 	picture = celtic_diplomacy
-
 	left_portrait = root.current_ruler
 	right_portrait = scope:duelist_1
 	right_portrait = scope:duelist_2
-
 	trigger = {
 		is_tribal = yes
 	}
-
 	immediate = {
 		random_character = {
 			limit = {
@@ -28,53 +25,47 @@ tribal_flavour_events.1 = {
 			limit = {
 				is_ruler = no
 				is_adult = yes
-				NOT = { this = scope:duelist_1 }
+				NOT = {
+					this = scope:duelist_1
+				}
 			}
 			save_scope_as = duelist_2
 		}
 	}
-
 	option = {
 		name = "tribal_flavour_event.1.a"
 		scope:duelist_1 = {
 			add_loyalty = loyalty_picked_side
 			add_gold = add_gold_small
-
 		}
 		scope:duelist_2 = {
 			add_loyalty = loyalty_picked_other_side
 		}
 	}
-
 	option = {
 		name = "tribal_flavour_event.1.b"
 		scope:duelist_2 = {
 			add_loyalty = loyalty_picked_side
 			add_gold = add_gold_small
-
 		}
 		scope:duelist_1 = {
 			add_loyalty = loyalty_picked_other_side
 		}
 	}
-
 	option = {
 		name = "tribal_flavour_event.1.c"
 		add_tyranny = 5
 		add_treasury = add_gold_small
 		scope:duelist_1 = {
 			add_loyalty = loyalty_chided_bickering
-
 		}
 		scope:duelist_2 = {
 			add_loyalty = loyalty_chided_bickering
 		}
 	}
-
 	option = {
 		name = "tribal_flavour_event.1.d"
 		add_stability_effect = yes
-
 		scope:duelist_1 = {
 			add_loyalty = loyalty_chided_bickering_2
 		}
@@ -87,7 +78,6 @@ tribal_flavour_events.1 = {
 tribal_flavour_events.2 = {
 	type = country_event
 	hidden = yes
-
 	trigger = {
 		is_ai = yes
 		is_tribal = yes
@@ -104,15 +94,36 @@ tribal_flavour_events.2 = {
 		NOT = {
 			centralization > 90
 		}
-		current_date < 760.1.1 #yeah, now tribals are allowed to grow
+		current_date < 760.1.1		#yeah, now tribals are allowed to grow
 	}
-
+	weight_multiplier = {
+		modifier = {
+			factor = 1.35
+			num_of_cities >= 150
+		}
+		modifier = {
+			factor = 1.25
+			num_of_cities >= 200
+		}
+		modifier = {
+			factor = 1.2
+			num_of_cities >= 300
+		}
+		modifier = {
+			factor = 1.2
+			num_of_cities >= 400
+		}
+		modifier = {
+			factor = 1.2
+			num_of_cities >= 500
+		}
+	}
 	immediate = {
 		#FROM INVICTUS
 		#kind of a last hurrah
 		set_variable = is_facing_tribal_crisis
 		if = {
-			limit = { 
+			limit = {
 				OR = {
 					country_culture_group = scythia
 					country_culture_group = scythian_east
@@ -128,7 +139,10 @@ tribal_flavour_events.2 = {
 			}
 			trigger_event = {
 				id = tribal_flavour_events.4
-				days = { 7300 8000 }
+				days = {
+					7300
+					8000
+				}
 			}
 			change_government = steppe_horde
 			switch_government_type_event_clearup_effect = yes
@@ -324,7 +338,7 @@ tribal_flavour_events.2 = {
 			}
 		}
 		else_if = {
-			limit = { 
+			limit = {
 				government = tribal_chiefdom
 				NOT = {
 					has_variable = has_been_through_tribal_collapse
@@ -336,7 +350,10 @@ tribal_flavour_events.2 = {
 			}
 			trigger_event = {
 				id = tribal_flavour_events.4
-				days = { 7300 8000 }
+				days = {
+					7300
+					8000
+				}
 			}
 		}
 		else_if = {
@@ -351,50 +368,47 @@ tribal_flavour_events.2 = {
 			}
 			trigger_event = {
 				id = tribal_flavour_events.4
-				days = { 7300 8000 }
+				days = {
+					7300
+					8000
+				}
 			}
 		}
 		else = {
 			trigger_event = {
 				id = tribal_flavour_events.4
 				days = 1
-			}			
+			}
 		}
-
-
 		#END INVICTUS
 	}
-
 }
 
-tribal_flavour_events.3 = {#News that tribal empire has collapsed
+tribal_flavour_events.3 = {
+	#News that tribal empire has collapsed
 	type = country_event
 	title = "tribal_flavour_events.3.t"
-	desc =  "tribal_flavour_events.3.desc"
+	desc = "tribal_flavour_events.3.desc"
 	picture = celtic_diplomacy
 	goto_location = scope:origin_crisis.capital_scope
-
 	left_portrait = root.current_ruler
 	right_portrait = scope:origin_crisis.current_ruler
-
 	trigger = {
 	}
-
 	option = {
 		name = "tribal_flavour_events.3.a"
 		custom_tooltip = "target_fallen_tfe3"
 	}
 }
-tribal_flavour_events.4 = { #Tribal collapse
+
+tribal_flavour_events.4 = {
+	#Tribal collapse
 	type = country_event
 	hidden = yes
-
 	trigger = {
 		is_ai = yes
 		is_tribal = yes
 	}
-	
-	
 	immediate = {
 		save_scope_as = origin_crisis
 		# Revert laws to default
@@ -507,7 +521,7 @@ tribal_flavour_events.4 = { #Tribal collapse
 		}
 		every_country_state = {
 			limit = {
-				exists = capital_scope #this might be necessary to avoid errors... for some reason
+				exists = capital_scope				#this might be necessary to avoid errors... for some reason
 				NOT = {
 					this.region = scope:origin_crisis.capital_scope.state.region
 				}
@@ -531,7 +545,9 @@ tribal_flavour_events.4 = { #Tribal collapse
 					scope:origin_crisis = {
 						#kill them properly the second time, no subjects
 						if = {
-							limit = { has_variable = has_been_through_tribal_collapse }
+							limit = {
+								has_variable = has_been_through_tribal_collapse
+							}
 							add_country_modifier = {
 								name = has_collapsed_tribe_crisis_again
 								duration = 1900
@@ -566,18 +582,17 @@ tribal_flavour_events.4 = { #Tribal collapse
 			}
 		}
 		set_variable = has_been_through_tribal_collapse
-		
 		remove_variable = is_facing_tribal_crisis
-	}	
+	}
 }
 
-tribal_flavour_events.41 = {#C3RD PLAYER COLLAPSE
+tribal_flavour_events.41 = {
+	#C3RD PLAYER COLLAPSE
 	type = country_event
 	title = "tribal_flavour_events.41.t"
-	desc =  "tribal_flavour_events.41.desc"
+	desc = "tribal_flavour_events.41.desc"
 	picture = celtic_diplomacy
 	goto_location = scope:origin_crisis.capital_scope
-
 	left_portrait = root.current_ruler
 	trigger = {
 		is_tribal = yes
@@ -591,29 +606,26 @@ tribal_flavour_events.41 = {#C3RD PLAYER COLLAPSE
 				stability < 30
 			}
 		}
-		current_date > 750.1.1 #to replace the deleted tribalxplosion
+		current_date > 750.1.1		#to replace the deleted tribalxplosion
 		NOT = {
 			has_variable = tribal_xplosion
 		}
 	}
-
 	weight_multiplier = {
 		modifier = {
 			factor = 2
 			is_ai = yes
 		}
 	}
-
 	immediate = {
 		set_variable = {
 			name = tribal_xplosion
 			days = 3650
 		}
 	}
-
 	option = {
 		name = "tribal_flavour_events.41.a"
-        custom_tooltip = tribal_flavour_events.41.a.tt1
+		custom_tooltip = tribal_flavour_events.41.a.tt1
 		random_list = {
 			50 = {
 				modifier = {
@@ -643,7 +655,7 @@ tribal_flavour_events.41 = {#C3RD PLAYER COLLAPSE
 	}
 	option = {
 		name = "tribal_flavour_events.41.b"
-        custom_tooltip = tribal_flavour_events.41.b.tt1
+		custom_tooltip = tribal_flavour_events.41.b.tt1
 		trigger = {
 			is_ai = no
 			centralization >= 0
@@ -651,12 +663,12 @@ tribal_flavour_events.41 = {#C3RD PLAYER COLLAPSE
 		add_political_influence = -50
 		add_country_modifier = {
 			name = collapse_avoided_dec
-			duration = 3650 #5y
+			duration = 3650			#5y
 		}
 	}
 	option = {
 		name = "tribal_flavour_events.41.c"
-        custom_tooltip = tribal_flavour_events.41.c.tt1
+		custom_tooltip = tribal_flavour_events.41.c.tt1
 		trigger = {
 			is_ai = no
 			centralization <= 0
@@ -665,21 +677,19 @@ tribal_flavour_events.41 = {#C3RD PLAYER COLLAPSE
 		add_stability = -5
 		add_country_modifier = {
 			name = collapse_avoided_decdec
-			duration = 3650 #5y
+			duration = 3650			#5y
 		}
 	}
 }
 
-tribal_flavour_events.51 = {#C3RD PLAYER COLLAPSE
+tribal_flavour_events.51 = {
+	#C3RD PLAYER COLLAPSE
 	type = country_event
 	title = "tribal_flavour_events.51.t"
-	desc =  "tribal_flavour_events.51.desc"
+	desc = "tribal_flavour_events.51.desc"
 	picture = celtic_diplomacy
-
 	trigger = {
-
 	}
-
 	immediate = {
 		save_scope_as = origin_crisis
 		every_governorships = {
@@ -733,10 +743,8 @@ tribal_flavour_events.51 = {#C3RD PLAYER COLLAPSE
 			}
 		}
 	}
-
 	option = {
 		name = "tribal_flavour_events.51.a"
-        custom_tooltip = tribal_flavour_events.51.a.tt1
-
+		custom_tooltip = tribal_flavour_events.51.a.tt1
 	}
 }

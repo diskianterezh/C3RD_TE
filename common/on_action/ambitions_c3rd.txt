@@ -656,7 +656,10 @@ scheme_steal_holding_finish = {
 			if = { #more theft when solidus
 				limit = {
 					is_governor = yes
-					employer = {has_country_modifier = solidus_introduced}
+					OR = {
+						employer = {has_country_modifier = solidus_introduced}
+						has_character_modifier = takes_governorships_control
+					}
 				}
 				set_variable = {
 					name = recent_holding_theft
