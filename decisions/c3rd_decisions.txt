@@ -533,6 +533,15 @@
 			political_influence >= 100
 		}
 		effect = {
+			custom_tooltip = repair_great_work_tt1
+			every_owned_province = {
+				limit = {
+					has_great_work = yes
+					has_province_modifier = wonder_destroyed_modifier
+				}
+				save_scope_as = province_wonder_tooltip
+				custom_tooltip = repair_great_work_tt2
+			}
 			trigger_event = { 
 				id = c3rd_other_events.51
 			}

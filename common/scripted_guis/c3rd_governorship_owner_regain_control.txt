@@ -1,15 +1,16 @@
 ﻿c3rd_governorship_owner_regain_control = {
 	scope = governorship
-
 	ai_is_valid = {
 		always = no
 	}
-    is_valid = {
+	is_valid = {
 		trigger_if = {
 			limit = {
 				has_variable = governorship_owner
 				var:governorship_owner = {
-					NOT = {employer = root.owner}
+					NOT = {
+						employer = root.owner
+					}
 				}
 			}
 			custom_tooltip = {
@@ -44,24 +45,26 @@
 			}
 			custom_tooltip = {
 				text = c3rd_governorship_owner_regain_control_tt4
-				NOT = {has_variable = tried_to_regain_gov}
+				NOT = {
+					has_variable = tried_to_regain_gov
+				}
 			}
 		}
-    }
-
+	}
 	is_shown = {
 		has_variable = governorship_owner
 		has_variable = governorship_owner_ratio
 	}
-
 	effect = {
 		custom_tooltip = c3rd_governorship_owner_regain_control_tt3
 		if = {
-			limit = { #owner is ruler
+			limit = {
+				#owner is ruler
 				var:governorship_owner = owner.current_ruler
 			}
-			custom_tooltip  = c3rd_governorship_owner_regain_control_tt3_2
-			if = { #owner is ruler but the governor is of ruler family
+			custom_tooltip = c3rd_governorship_owner_regain_control_tt3_2
+			if = {
+				#owner is ruler but the governor is of ruler family
 				limit = {
 					governor = {
 						family = employer.current_ruler.family
@@ -71,16 +74,17 @@
 					}
 					var:governorship_owner_ratio > 25
 				}
-				custom_tooltip  = c3rd_governorship_owner_regain_control_tt3_3
+				custom_tooltip = c3rd_governorship_owner_regain_control_tt3_3
 			}
 		}
-		else_if = { # owner of the family of the ruler 
+		else_if = {
+			# owner of the family of the ruler 
 			limit = {
 				var:governorship_owner = {
 					family = employer.current_ruler.family
 				}
 			}
-			custom_tooltip  = c3rd_governorship_owner_regain_control_tt3_4
+			custom_tooltip = c3rd_governorship_owner_regain_control_tt3_4
 			var:governorship_owner = {
 				add_loyalty = lost_gov_ownership
 			}
@@ -106,13 +110,8 @@
 				limit = {
 					region_control_value_owner_only > 25
 				}
-				owner = {add_legitimacy = -5}
-			}
-		}
-		else_if = {
-			limit = {
-				var:governorship_owner = {
-					family = employer.current_ruler.family
+				owner = {
+					add_legitimacy = -5
 				}
 			}
 		}
@@ -120,20 +119,22 @@
 			limit = {
 				has_variable = governorship_owner
 				has_variable = governorship_owner_ratio
-				NOT = {var:governorship_owner = owner.current_ruler}
+				NOT = {
+					var:governorship_owner = owner.current_ruler
+				}
 				var:governorship_owner_ratio < 25
 				var:governorship_owner_ratio > 10
 			}
-			custom_tooltip  = c3rd_governorship_owner_regain_control_tt2
+			custom_tooltip = c3rd_governorship_owner_regain_control_tt2
 		}
 		save_scope_as = regaining_governorship
 		var:governorship_owner = {
 			save_scope_as = ex_owner_calc_purp
 		}
-			
 		hidden_effect = {
 			if = {
-				limit = { #
+				limit = {
+					#
 					var:governorship_owner = owner.current_ruler
 				}
 				if = {
@@ -155,7 +156,8 @@
 							holding_owner = owner.current_ruler
 						}
 						random_list = {
-							1 = {}
+							1 = {
+							}
 							1 = {
 								holding_owner = {
 									remove_holding = prev
@@ -227,6 +229,10 @@
 						}
 						scope:ex_owner_calc_purp = {
 							recalculate_ownership_char = yes
+							set_variable = {
+								name = recently_lost_control
+								days = 1825	#5years
+							}
 						}
 					}
 					10 = {
@@ -298,7 +304,9 @@
 						}
 						modifier = {
 							var:governorship_owner = {
-								NOT = {employer = scope:regaining_governorship.owner}
+								NOT = {
+									employer = scope:regaining_governorship.owner
+								}
 							}
 							factor = 0.1
 						}

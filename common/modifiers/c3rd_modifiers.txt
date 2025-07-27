@@ -65,7 +65,7 @@ stability_boosted_mother = {
 }
 
 political_unstability = {
-	monthly_tyranny = 0.20
+	monthly_tyranny = 0.15
 	monthly_corruption = 0.1
 	stability_monthly_change = -0.05
 	happiness_for_same_culture_modifier = -0.15
@@ -309,12 +309,13 @@ wonder_destroyed_modifier = {
 
 barbarians_border = {
 	local_monthly_civilization = -0.05
+	local_output_modifier = -0.5
 	local_unrest = 2
 	local_migration_attraction = -5
 	local_migration_speed = 2
 	local_pop_assimilation_speed = -1
 	local_goods_from_slaves = 5
-	local_defensive = -0.5
+	local_defensive = -0.75
 }
 
 secess_preparation = {
@@ -334,8 +335,48 @@ new_balance = {
 	stability_monthly_change = -0.05
 }
 
-games_games = {
+more_gold_for_peoples = {
+	monthly_governor_wage = 0.5
+	monthly_corruption = -0.01
+	character_loyalty = 1
+}
+
+more_gold_help_yourself = {
+	monthly_corruption = 0.03
 	happiness_for_same_culture_modifier = 0.1
+	global_monthly_state_loyalty = 0.1
+	global_tax_modifier = -0.25
+}
+
+more_gold_for_military = {
+	monthly_governor_wage = 0.5
+	monthly_corruption = -0.01
+	character_loyalty = 1
+	army_maintenance_cost = 0.5
+	fort_maintenance_cost = 0.5
+}
+
+more_gold_help_mil = {
+	monthly_corruption = 0.03
+	happiness_for_same_culture_modifier = 0.1
+	global_monthly_state_loyalty = 0.1
+	global_tax_modifier = -0.25
+	army_maintenance_cost = 0.5
+	fort_maintenance_cost = 0.5
+}
+
+more_gold_for_military_2 = {
+	monthly_governor_wage = 0.5
+	monthly_corruption = -0.01
+	character_loyalty = 1
+	global_tax_modifier = -0.25
+	global_monthly_state_loyalty = -0.1
+}
+
+more_gold_help_mil_2 = {
+	monthly_corruption = 0.03
+	happiness_for_same_culture_modifier = 0.1
+	global_tax_modifier = -0.5
 }
 
 provinces_republican_reforms = {
@@ -611,6 +652,7 @@ c3rd_border_pressure = {
 	stability_cost_modifier = 0.5
 	fort_maintenance_cost = 0.5
 	army_maintenance_cost = 0.25
+	global_commerce_modifier = -0.20
 }
 
 humiliated_army = {
@@ -685,6 +727,8 @@ c3rd_barbarian_fury_discipline_1 = {
     land_morale_modifier = 0.75
     land_morale_recovery = 0.15
     monthly_experience_gain = 0.1
+	army_weight_modifier = -0.75
+	global_tribesmen_output = 0.1
 }
 
 c3rd_barbarian_fury_discipline_2 = {
@@ -711,4 +755,34 @@ c3rd_barbarian_fury_discipline_2 = {
     land_morale_modifier = 1.5
     land_morale_recovery = 0.25
     monthly_experience_gain = 0.2
+	army_weight_modifier = -0.75
+	global_tribesmen_output = 0.2
+}
+
+epidemy_modifier_solidus_1 = {
+	stability_monthly_change = -0.05
+	monthly_political_influence_modifier = -0.35
+	civil_war_threshold = -0.02
+	stability_cost_modifier = 0.5
+	character_loyalty = -5
+    land_morale_modifier = -0.25
+    land_morale_recovery = -0.05
+	monthly_corruption = 0.2
+}
+
+epidemy_modifier_solidus_2 = {
+	stability_monthly_change = -0.02
+	monthly_political_influence_modifier = -0.25
+	civil_war_threshold = -0.01
+	stability_cost_modifier = 0.25
+	character_loyalty = -2
+    land_morale_modifier = -0.15
+	monthly_corruption = 0.1
+}
+
+event_5_civil_war = {
+    experience_decay = -0.05
+    land_morale_modifier = 0.1
+    land_morale_recovery = 0.1
+	siege_ability = 0.1
 }
