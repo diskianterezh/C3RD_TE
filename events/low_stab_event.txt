@@ -22,10 +22,7 @@ low_stab_event.1 = {
 		current_date >= 900.1.1
 	}
 	immediate = {
-		add_country_modifier = {
-			name = internal_collapse
-			duration = -1
-		}
+		save_scope_as = collapse_center
 		if = {
 			limit = {
 				#players are usually better than AI
@@ -67,6 +64,39 @@ low_stab_event.1 = {
 		#do nothing - get the modifier
 		name = low_stab_event.1.a
 		custom_tooltip = low_stab_event.1.a.tt1
+		add_country_modifier = {
+			name = internal_collapse
+			duration = -1
+		}
+		every_country = {
+			limit = {
+				OR = {
+					AND = {
+						has_civil_war = yes
+						civil_war_with = root
+					}
+					AND = {
+						has_variable = mother_empire
+						var:mother_empire = root
+					}
+				}
+			}
+			trigger_event = {
+				id = low_stab_event.19
+				days = 1
+			}
+		}
+		if = {
+			limit = {
+				has_variable = mother_empire
+			}
+			var:mother_empire = {
+				trigger_event = {
+					id = low_stab_event.19
+					days = 1
+				}
+			}
+		}
 	}
 	option = {
 		name = low_stab_event.1.b
@@ -84,7 +114,45 @@ low_stab_event.1 = {
 			}
 		}
 		highlight = no
-		remove_country_modifier = internal_collapse
+		if = {
+			limit = {
+				stability <= 5
+				is_ai = no
+			}
+			add_country_modifier = {
+				name = internal_collapse
+				duration = -1
+			}
+			every_country = {
+				limit = {
+					OR = {
+						AND = {
+							has_civil_war = yes
+							civil_war_with = root
+						}
+						AND = {
+							has_variable = mother_empire
+							var:mother_empire = root
+						}
+					}
+				}
+				trigger_event = {
+					id = low_stab_event.19
+					days = 1
+				}
+			}
+			if = {
+				limit = {
+					has_variable = mother_empire
+				}
+				var:mother_empire = {
+					trigger_event = {
+						id = low_stab_event.19
+						days = 1
+					}
+				}
+			}
+		}
 		add_legitimacy = -75
 		current_ruler = {
 			add_popularity = -50
@@ -105,7 +173,45 @@ low_stab_event.1 = {
 			}
 		}
 		highlight = yes
-		remove_country_modifier = internal_collapse
+		if = {
+			limit = {
+				stability <= 5
+				is_ai = no
+			}
+			add_country_modifier = {
+				name = internal_collapse
+				duration = -1
+			}
+			every_country = {
+				limit = {
+					OR = {
+						AND = {
+							has_civil_war = yes
+							civil_war_with = root
+						}
+						AND = {
+							has_variable = mother_empire
+							var:mother_empire = root
+						}
+					}
+				}
+				trigger_event = {
+					id = low_stab_event.19
+					days = 1
+				}
+			}
+			if = {
+				limit = {
+					has_variable = mother_empire
+				}
+				var:mother_empire = {
+					trigger_event = {
+						id = low_stab_event.19
+						days = 1
+					}
+				}
+			}
+		}
 		if = {
 			limit = {
 				has_party_type = optimates_party
@@ -163,7 +269,45 @@ low_stab_event.1 = {
 				factor = 10
 			}
 		}
-		remove_country_modifier = internal_collapse
+		if = {
+			limit = {
+				stability <= 5
+				is_ai = no
+			}
+			add_country_modifier = {
+				name = internal_collapse
+				duration = -1
+			}
+			every_country = {
+				limit = {
+					OR = {
+						AND = {
+							has_civil_war = yes
+							civil_war_with = root
+						}
+						AND = {
+							has_variable = mother_empire
+							var:mother_empire = root
+						}
+					}
+				}
+				trigger_event = {
+					id = low_stab_event.19
+					days = 1
+				}
+			}
+			if = {
+				limit = {
+					has_variable = mother_empire
+				}
+				var:mother_empire = {
+					trigger_event = {
+						id = low_stab_event.19
+						days = 1
+					}
+				}
+			}
+		}
 		add_tyranny = 25
 		add_country_modifier = {
 			name = general_corruption
@@ -231,7 +375,45 @@ low_stab_event.1 = {
 				factor = 10
 			}
 		}
-		remove_country_modifier = internal_collapse
+		if = {
+			limit = {
+				stability <= 5
+				is_ai = no
+			}
+			add_country_modifier = {
+				name = internal_collapse
+				duration = -1
+			}
+			every_country = {
+				limit = {
+					OR = {
+						AND = {
+							has_civil_war = yes
+							civil_war_with = root
+						}
+						AND = {
+							has_variable = mother_empire
+							var:mother_empire = root
+						}
+					}
+				}
+				trigger_event = {
+					id = low_stab_event.19
+					days = 1
+				}
+			}
+			if = {
+				limit = {
+					has_variable = mother_empire
+				}
+				var:mother_empire = {
+					trigger_event = {
+						id = low_stab_event.19
+						days = 1
+					}
+				}
+			}
+		}
 		scope:agenda_culture = {
 			set_country_culture_right = citizen
 		}
@@ -294,7 +476,45 @@ low_stab_event.1 = {
 				factor = 10
 			}
 		}
-		remove_country_modifier = internal_collapse
+		if = {
+			limit = {
+				stability <= 5
+				is_ai = no
+			}
+			add_country_modifier = {
+				name = internal_collapse
+				duration = -1
+			}
+			every_country = {
+				limit = {
+					OR = {
+						AND = {
+							has_civil_war = yes
+							civil_war_with = root
+						}
+						AND = {
+							has_variable = mother_empire
+							var:mother_empire = root
+						}
+					}
+				}
+				trigger_event = {
+					id = low_stab_event.19
+					days = 1
+				}
+			}
+			if = {
+				limit = {
+					has_variable = mother_empire
+				}
+				var:mother_empire = {
+					trigger_event = {
+						id = low_stab_event.19
+						days = 1
+					}
+				}
+			}
+		}
 		scope:unagenda_culture = {
 			set_country_culture_right = freemen
 		}
@@ -442,9 +662,9 @@ low_stab_event.3 = {
 				set_home_country = scope:byebye
 			}
 		}
-        scope:byebye = {
-            set_as_ruler = scope:byebye_governor
-        }
+		scope:byebye = {
+			set_as_ruler = scope:byebye_governor
+		}
 	}
 	option = {
 		name = low_stab_event.3.a
@@ -524,7 +744,9 @@ low_stab_event.4 = {
 			}
 			governor = {
 				is_head_of_family = no
-				NOT = {has_character_modifier = major_influence_aristocrat}
+				NOT = {
+					has_character_modifier = major_influence_aristocrat
+				}
 			}
 		}
 	}
@@ -554,13 +776,15 @@ low_stab_event.4 = {
 					}
 				}
 				exists = governor
-			NOR = {
-				has_variable = recently_gavaway
-				has_variable = recently_nicely_asked
-			}
+				NOR = {
+					has_variable = recently_gavaway
+					has_variable = recently_nicely_asked
+				}
 				governor = {
 					is_head_of_family = no
-					NOT = {has_character_modifier = major_influence_aristocrat}
+					NOT = {
+						has_character_modifier = major_influence_aristocrat
+					}
 				}
 			}
 			weight = {
@@ -621,7 +845,9 @@ low_stab_event.4 = {
 					has_variable = governorship_owner
 					var:governorship_owner = {
 						is_ruler = no
-						NOT = {this = scope:independent_governorship.governor}
+						NOT = {
+							this = scope:independent_governorship.governor
+						}
 					}
 				}
 			}
@@ -629,7 +855,6 @@ low_stab_event.4 = {
 			var:governorship_owner = {
 				add_loyalty = governorship_lost_collapse
 			}
-
 		}
 		hidden_effect = {
 			scope:independent_governorship_province = {
@@ -662,7 +887,6 @@ low_stab_event.4 = {
 					set_home_country = scope:client
 				}
 			}
-            
 			make_subject = {
 				target = scope:client
 				type = client_state
@@ -672,11 +896,11 @@ low_stab_event.4 = {
 					name = autonomy_granted
 					duration = 3650
 				}
-                set_as_ruler = scope:independent_current_governor
-                set_variable = {
-                    name = recent_client
-                    days = 365
-                }
+				set_as_ruler = scope:independent_current_governor
+				set_variable = {
+					name = recent_client
+					days = 365
+				}
 			}
 		}
 		if = {
@@ -866,7 +1090,8 @@ low_stab_event.6 = {
 	}
 }
 
-low_stab_event.7 = { #influent aristocrat retreating in his domain
+low_stab_event.7 = {
+	#influent aristocrat retreating in his domain
 	type = country_event
 	title = "low_stab_event.7.t"
 	desc = "low_stab_event.7.desc"
@@ -920,7 +1145,7 @@ low_stab_event.7 = { #influent aristocrat retreating in his domain
 			}
 			save_scope_as = byebye_domain
 		}
-        custom_tooltip = low_stab_event.7.tt1
+		custom_tooltip = low_stab_event.7.tt1
 		hidden_effect = {
 			release_subject = scope:byebye_domain
 			make_subject = {
@@ -942,10 +1167,10 @@ low_stab_event.7 = { #influent aristocrat retreating in his domain
 			}
 			scope:byebye_domain = {
 				set_as_ruler = scope:byebye_owner
-                set_variable = {
-                    name = recent_client
-                    days = 365
-                }
+				set_variable = {
+					name = recent_client
+					days = 365
+				}
 				remove_variable = owner_from_another_empire
 			}
 			if = {
@@ -1055,8 +1280,8 @@ low_stab_event.7 = { #influent aristocrat retreating in his domain
 	}
 }
 
-
-low_stab_event.8 = {#influent aristocrat gets domain if decentralized or very low stab
+low_stab_event.8 = {
+	#influent aristocrat gets domain if decentralized or very low stab
 	type = country_event
 	title = "low_stab_event.8.t"
 	desc = "low_stab_event.8.desc"
@@ -1107,9 +1332,10 @@ low_stab_event.8 = {#influent aristocrat gets domain if decentralized or very lo
 					}
 				}
 			}
-			save_scope_as = asked_landowner #need this name for the scripts
+			save_scope_as = asked_landowner			#need this name for the scripts
 		}
-		while = { #here i'm copying the same as in event 86
+		while = {
+			#here i'm copying the same as in event 86
 			count = landowner_asked_ratio_number
 			random_governorships = {
 				limit = {
@@ -1184,12 +1410,11 @@ low_stab_event.8 = {#influent aristocrat gets domain if decentralized or very lo
 				add_to_list = family_domain_govs
 			}
 		}
-		
 	}
 	option = {
 		name = low_stab_event.8.a
 		custom_tooltip = low_stab_event.8.a.tt1
-		custom_tooltip = c3rd_other_events.86.tt13 #same loc, same variables
+		custom_tooltip = c3rd_other_events.86.tt13		#same loc, same variables
 		every_governorships = {
 			limit = {
 				is_in_list = family_domain_govs
@@ -1298,19 +1523,18 @@ low_stab_event.8 = {#influent aristocrat gets domain if decentralized or very lo
 		}
 		add_stability = -6
 	}
-
 	after = {
-        every_governorships = {
-            limit = {
-                is_in_list = family_domain_govs
-            }
-            remove_from_list = family_domain_govs
-        }
+		every_governorships = {
+			limit = {
+				is_in_list = family_domain_govs
+			}
+			remove_from_list = family_domain_govs
+		}
 	}
 }
 
-
-low_stab_event.9 = {#Ducatus grab lands
+low_stab_event.9 = {
+	#Ducatus grab lands
 	type = country_event
 	title = "low_stab_event.9.t"
 	desc = "low_stab_event.9.desc"
@@ -1503,10 +1727,10 @@ low_stab_event.9 = {#Ducatus grab lands
 			}
 			add_tyranny = 7
 		}
-        add_manpower = {
-            value = root.num_of_provinces
-            multiply = -1
-        }
+		add_manpower = {
+			value = root.num_of_provinces
+			multiply = -1
+		}
 		if = {
 			limit = {
 				num_of_cities <= 1000
@@ -1537,7 +1761,8 @@ low_stab_event.9 = {#Ducatus grab lands
 	}
 }
 
-low_stab_event.10 = {#Most sized culture ask for noble rights or secede
+low_stab_event.10 = {
+	#Most sized culture ask for noble rights or secede
 	type = country_event
 	title = "low_stab_event.10.t"
 	desc = "low_stab_event.10.desc"
@@ -1573,12 +1798,14 @@ low_stab_event.10 = {#Most sized culture ask for noble rights or secede
 		}
 		modifier = {
 			factor = 0.1
-			NOT = {any_country_culture = {
-				NOT = {
-					has_pop_type_right = nobles
+			NOT = {
+				any_country_culture = {
+					NOT = {
+						has_pop_type_right = nobles
+					}
+					country_culture_pop_count >= 200
 				}
-				country_culture_pop_count >= 200
-			}}
+			}
 		}
 		modifier = {
 			factor = 1.5
@@ -1688,11 +1915,12 @@ low_stab_event.10 = {#Most sized culture ask for noble rights or secede
 				name = on_going_mass_revolt
 				duration = 3650
 			}
-            add_country_culture_modifier = {
-                name = growing_revolt
-                duration = 1825
-            }
-			if = {#just in case
+			add_country_culture_modifier = {
+				name = growing_revolt
+				duration = 1825
+			}
+			if = {
+				#just in case
 				limit = {
 					has_country_culture_modifier = new_culture_elite
 				}
@@ -1702,7 +1930,8 @@ low_stab_event.10 = {#Most sized culture ask for noble rights or secede
 	}
 }
 
-low_stab_event.11 = {#High tyranny : time to revolt !
+low_stab_event.11 = {
+	#High tyranny : time to revolt !
 	type = country_event
 	title = "low_stab_event.11.t"
 	desc = "low_stab_event.11.desc"
@@ -1715,7 +1944,7 @@ low_stab_event.11 = {#High tyranny : time to revolt !
 		NOT = {
 			stability >= 25
 		}
-		stability >= 10 #so the stabhit is awful
+		stability >= 10		#so the stabhit is awful
 		tyranny >= 40
 		NOT = {
 			has_variable = recent_tyranny_revolt
@@ -1770,10 +1999,10 @@ low_stab_event.11 = {#High tyranny : time to revolt !
 				}
 				save_scope_as = king_maker_tyranny
 			}
-
 		}
 	}
-	option = {#reduce tyranny, high stabhit
+	option = {
+		#reduce tyranny, high stabhit
 		name = low_stab_event.11.a
 		custom_tooltip = low_stab_event.11.a.tt1
 		add_tyranny = -10
@@ -1799,7 +2028,8 @@ low_stab_event.11 = {#High tyranny : time to revolt !
 			add_stability = -10
 		}
 	}
-	option = {#global unrest
+	option = {
+		#global unrest
 		name = low_stab_event.11.b
 		custom_tooltip = low_stab_event.11.b.tt1
 		scope:tyranny_character = {
@@ -1808,7 +2038,7 @@ low_stab_event.11 = {#High tyranny : time to revolt !
 		custom_tooltip = low_stab_event.11.b.tt2
 		hidden_effect = {
 			every_character = {
-				limit =  {
+				limit = {
 					NOT = {
 						this = scope:tyranny_character
 					}
@@ -1842,7 +2072,7 @@ low_stab_event.11 = {#High tyranny : time to revolt !
 		}
 		hidden_effect = {
 			every_governorships = {
-				limit =  {
+				limit = {
 					governor = {
 						OR = {
 							loyalty < 33
@@ -1861,7 +2091,8 @@ low_stab_event.11 = {#High tyranny : time to revolt !
 			}
 		}
 	}
-	option = {#loyal kingmaker has power
+	option = {
+		#loyal kingmaker has power
 		name = low_stab_event.11.c
 		custom_tooltip = low_stab_event.11.c.tt1
 		trigger = {
@@ -1874,7 +2105,7 @@ low_stab_event.11 = {#High tyranny : time to revolt !
 		scope:king_maker_tyranny = {
 			add_popularity = 25
 		}
-        scope:tyranny_character = {
+		scope:tyranny_character = {
 			death = {
 				death_reason = death_execution
 				killer = scope:king_maker_tyranny
@@ -1885,8 +2116,8 @@ low_stab_event.11 = {#High tyranny : time to revolt !
 	}
 }
 
-
-low_stab_event.12 = {#governors ask for country control on a region where ruler have holding without control
+low_stab_event.12 = {
+	#governors ask for country control on a region where ruler have holding without control
 	type = country_event
 	title = "low_stab_event.12.t"
 	desc = "low_stab_event.12.desc"
@@ -1901,7 +2132,9 @@ low_stab_event.12 = {#governors ask for country control on a region where ruler 
 			stability >= 25
 			has_variable = recent_governorship_givaway
 		}
-		current_ruler = {save_temporary_scope_as = owner_tmp_check}
+		current_ruler = {
+			save_temporary_scope_as = owner_tmp_check
+		}
 		any_governorships = {
 			exists = governor
 			governor = {
@@ -1909,8 +2142,10 @@ low_stab_event.12 = {#governors ask for country control on a region where ruler 
 					family = root.current_ruler.family
 				}
 			}
-			NOT = {has_variable = governorship_owner}
-			region_control_value_char > 20 #ruler have 20% holdings
+			NOT = {
+				has_variable = governorship_owner
+			}
+			region_control_value_char > 20			#ruler have 20% holdings
 		}
 	}
 	weight_multiplier = {
@@ -1951,14 +2186,17 @@ low_stab_event.12 = {#governors ask for country control on a region where ruler 
 						family = root.current_ruler.family
 					}
 				}
-				NOT = {has_variable = governorship_owner}
-				region_control_value_char > 20 #ruler have 20% holdings
+				NOT = {
+					has_variable = governorship_owner
+				}
+				region_control_value_char > 20				#ruler have 20% holdings
 			}
 			max = country_size_ratio
 			add_to_list = givaway_govships
 		}
 	}
-	option = {#givaway govs
+	option = {
+		#givaway govs
 		name = low_stab_event.12.a
 		custom_tooltip = low_stab_event.12.a.tt1
 		every_governorships = {
@@ -1992,7 +2230,8 @@ low_stab_event.12 = {#governors ask for country control on a region where ruler 
 		}
 		add_stability = 4
 	}
-	option = {#nope
+	option = {
+		#nope
 		name = low_stab_event.12.b
 		custom_tooltip = low_stab_event.12.b.tt1
 		add_tyranny = 6
@@ -2030,7 +2269,6 @@ low_stab_event.12 = {#governors ask for country control on a region where ruler 
 			add_stability = -5
 		}
 	}
-
 	after = {
 		every_governorships = {
 			limit = {
@@ -2041,8 +2279,8 @@ low_stab_event.12 = {#governors ask for country control on a region where ruler 
 	}
 }
 
-
-low_stab_event.13 = {#governors and heads take thing into control, as the ruler refused last event. It forces the event 12, because you have tyranny and disloyal consolidating head
+low_stab_event.13 = {
+	#governors and heads take thing into control, as the ruler refused last event. It forces the event 12, because you have tyranny and disloyal consolidating head
 	type = country_event
 	title = "low_stab_event.13.t"
 	desc = "low_stab_event.13.desc"
@@ -2058,7 +2296,9 @@ low_stab_event.13 = {#governors and heads take thing into control, as the ruler 
 			stability >= 25
 			has_variable = recent_thing_control
 		}
-		current_ruler = {save_temporary_scope_as = owner_tmp_check}
+		current_ruler = {
+			save_temporary_scope_as = owner_tmp_check
+		}
 		tyranny >= 10
 		any_character = {
 			has_variable = head_intent_consolidate
@@ -2071,8 +2311,10 @@ low_stab_event.13 = {#governors and heads take thing into control, as the ruler 
 					family = root.current_ruler.family
 				}
 			}
-			NOT = {has_variable = governorship_owner}
-			region_control_value_char > 20 #ruler have 20% holdings
+			NOT = {
+				has_variable = governorship_owner
+			}
+			region_control_value_char > 20			#ruler have 20% holdings
 		}
 	}
 	weight_multiplier = {
@@ -2146,14 +2388,17 @@ low_stab_event.13 = {#governors and heads take thing into control, as the ruler 
 						family = root.current_ruler.family
 					}
 				}
-				NOT = {has_variable = governorship_owner}
-				region_control_value_char > 20 #ruler have 20% holdings
+				NOT = {
+					has_variable = governorship_owner
+				}
+				region_control_value_char > 20				#ruler have 20% holdings
 			}
 			max = country_size_ratio
 			add_to_list = givaway_govships
 		}
 	}
-	option = {#givaway govs
+	option = {
+		#givaway govs
 		name = low_stab_event.13.a
 		custom_tooltip = low_stab_event.13.a.tt1
 		every_governorships = {
@@ -2196,7 +2441,8 @@ low_stab_event.13 = {#governors and heads take thing into control, as the ruler 
 		}
 		add_stability = 2
 	}
-	option = {#nope
+	option = {
+		#nope
 		name = low_stab_event.13.b
 		custom_tooltip = low_stab_event.13.b.tt1
 		trigger = {
@@ -2223,7 +2469,8 @@ low_stab_event.13 = {#governors and heads take thing into control, as the ruler 
 							}
 						}
 						random_list = {
-							1 = {}
+							1 = {
+							}
 							1 = {
 								root.current_ruler = {
 									remove_holding = prev
@@ -2259,7 +2506,6 @@ low_stab_event.13 = {#governors and heads take thing into control, as the ruler 
 			add_stability = -7
 		}
 	}
-
 	after = {
 		every_governorships = {
 			limit = {
@@ -2270,7 +2516,8 @@ low_stab_event.13 = {#governors and heads take thing into control, as the ruler 
 	}
 }
 
-low_stab_event.14 = {#way out of IC --> big reforms
+low_stab_event.14 = {
+	#way out of IC --> big reforms
 	type = country_event
 	title = "low_stab_event.14.t"
 	desc = "low_stab_event.14.desc"
@@ -2286,7 +2533,9 @@ low_stab_event.14 = {#way out of IC --> big reforms
 			has_variable = recent_big_reforms
 			has_law = decentralized_administration_law
 		}
-		current_ruler = {save_temporary_scope_as = owner_tmp_check}
+		current_ruler = {
+			save_temporary_scope_as = owner_tmp_check
+		}
 		any_character = {
 			OR = {
 				has_variable = head_intent_loyal
@@ -2336,7 +2585,8 @@ low_stab_event.14 = {#way out of IC --> big reforms
 			save_scope_as = event_14_character
 		}
 	}
-	option = {#yes, big reforms
+	option = {
+		#yes, big reforms
 		name = low_stab_event.14.a
 		custom_tooltip = low_stab_event.14.a.tt1
 		every_character = {
@@ -2345,7 +2595,8 @@ low_stab_event.14 = {#way out of IC --> big reforms
 			}
 			add_loyalty = softened
 		}
-		if = { #more stability the furthest you are
+		if = {
+			#more stability the furthest you are
 			limit = {
 				NOR = {
 					has_country_modifier = law_advantages_1
@@ -2379,7 +2630,8 @@ low_stab_event.14 = {#way out of IC --> big reforms
 		}
 		law_change_pol = yes
 	}
-	option = {#nope
+	option = {
+		#nope
 		name = low_stab_event.14.b
 		custom_tooltip = low_stab_event.14.b.tt1
 		add_political_influence = -50
@@ -2412,10 +2664,10 @@ low_stab_event.14 = {#way out of IC --> big reforms
 			add_loyalty = disappointed
 		}
 	}
-
 }
 
-low_stab_event.15 = {# ++ when full culture --> local people want to take things into their hands
+low_stab_event.15 = {
+	# ++ when full culture --> local people want to take things into their hands
 	type = country_event
 	title = "low_stab_event.15.t"
 	desc = "low_stab_event.15.desc"
@@ -2427,7 +2679,8 @@ low_stab_event.15 = {# ++ when full culture --> local people want to take things
 		has_country_modifier = internal_collapse
 		NOR = {
 			stability >= 25
-			any_governorships = { #not a possibility for event 4, and avoid capital region
+			any_governorships = {
+				#not a possibility for event 4, and avoid capital region
 				NOR = {
 					has_variable = recently_gavaway
 					has_variable = recently_nicely_asked
@@ -2437,9 +2690,10 @@ low_stab_event.15 = {# ++ when full culture --> local people want to take things
 					any_state_province = {
 						OR = {
 							is_capital = yes
-							NOT = {dominant_province_culture = root.culture}
+							NOT = {
+								dominant_province_culture = root.culture
+							}
 						}
-
 					}
 				}
 			}
@@ -2492,8 +2746,10 @@ low_stab_event.15 = {# ++ when full culture --> local people want to take things
 					any_governorship_state = {
 						any_state_province = {
 							OR = {
-								is_capital =  yes
-								NOT = {dominant_province_culture = root.culture}
+								is_capital = yes
+								NOT = {
+									dominant_province_culture = root.culture
+								}
 							}
 						}
 					}
@@ -2511,7 +2767,9 @@ low_stab_event.15 = {# ++ when full culture --> local people want to take things
 						any_state_province = {
 							any_neighbor_province = {
 								exists = owner
-								NOT = {owner = root}
+								NOT = {
+									owner = root
+								}
 							}
 						}
 					}
@@ -2532,7 +2790,7 @@ low_stab_event.15 = {# ++ when full culture --> local people want to take things
 										this = root.capital_scope.area
 									}
 								}
-							}	
+							}
 						}
 					}
 				}
@@ -2725,9 +2983,318 @@ low_stab_event.15 = {# ++ when full culture --> local people want to take things
 					exists = governor
 				}
 				governor = {
-					add_loyalty = independence_denied	
+					add_loyalty = independence_denied
 				}
 			}
 		}
+	}
+}
+
+low_stab_event.16 = {
+	#governors looking for the civil war opponent
+	type = country_event
+	hidden = yes
+	trigger = {
+		has_land = yes
+		has_country_modifier = internal_collapse
+		AND = {
+			stability < 7
+			has_civil_war = yes
+		}
+		any_current_war = {
+			is_civil_war = yes
+		}
+		any_governorships = {
+			exists = governor
+			governor = {
+				is_disloyal = yes
+				is_head_of_family = no
+				NOR = {
+					has_character_modifier = major_influence_aristocrat
+					has_variable = recent_traitor_char
+				}
+			}
+			any_governorship_state = {
+				count >= 2
+				any_state_province = {
+					count >= 2
+				}
+			}
+			NOT = {
+				has_variable = recent_traitor
+			}
+		}
+	}
+	immediate = {
+		random_current_war = {
+			limit = {
+				is_civil_war = yes
+				is_war_leader = root
+			}
+			random_war_participant = {
+				limit = {
+					civil_war_with = root
+				}
+				save_scope_as = civil_war_rival
+			}
+		}
+		random_governorships = {
+			limit = {
+				exists = governor
+				governor = {
+					is_disloyal = yes
+					is_head_of_family = no
+					NOR = {
+						has_character_modifier = major_influence_aristocrat
+						has_variable = recent_traitor_char
+					}
+				}
+				any_governorship_state = {
+					count >= 2
+					any_state_province = {
+						count >= 2
+					}
+				}
+				NOT = {
+					has_variable = recent_traitor
+				}
+			}
+			weight = {
+				modifier = {
+					factor = 5
+					any_governorship_state = {
+						any_state_province = {
+							any_neighbor_province = {
+								owner = scope:civil_war_rival
+							}
+						}
+					}
+				}
+				modifier = {
+					factor = 10
+					any_governorship_state = {
+						count >= 3
+						any_state_province = {
+							count >= 3
+							any_neighbor_province = {
+								owner = scope:civil_war_rival
+							}
+						}
+					}
+				}
+				modifier = {
+					factor = 15
+					any_governorship_state = {
+						count >= 6
+						any_state_province = {
+							count >= 3
+							any_neighbor_province = {
+								owner = scope:civil_war_rival
+							}
+						}
+					}
+				}
+			}
+			governor = {
+				save_scope_as = byebye_governor_civilwar
+				set_variable = {
+					name = recent_traitor_char
+					days = 730
+				}
+			}
+			save_scope_as = byebye_governorship_civilwar
+			set_variable = {
+				name = recent_traitor
+				days = 730
+			}
+		}
+		scope:civil_war_rival = {
+			trigger_event = {
+				id = low_stab_event.17
+				days = 1
+			}
+		}
+	}
+}
+
+low_stab_event.17 = {
+	#governor proposes to civil war opponent to join him
+	type = country_event
+	title = "low_stab_event.17.t"
+	desc = "low_stab_event.17.desc"
+	goto_location = scope:byebye_governorship_civilwar.capital_scope
+	picture = council_country
+	trigger = {
+		has_land = yes
+		has_civil_war = yes
+		exists = scope:byebye_governorship_civilwar
+		scope:byebye_governor_civilwar = {
+			is_alive = yes
+		}
+	}
+	immediate = {
+	}
+	option = {
+		name = low_stab_event.17.a
+		custom_tooltip = low_stab_event.17.a.tt1
+		ai_chance = {
+			factor = 100
+		}
+		add_legitimacy = -5
+		add_stability = -2
+		hidden_effect = {
+			scope:byebye_governorship_civilwar = {
+				capital_scope = {
+					save_scope_as = byebye_capital
+				}
+			}
+			scope:byebye_governor_civilwar = {
+				remove_all_positions = yes
+				move_country = root
+				set_home_country = root
+				every_child = {
+					limit = {
+						prisoner = no
+					}
+					remove_all_positions = yes
+					move_country = root
+					set_home_country = scope:client
+				}
+			}
+			if = {
+				limit = {
+					has_country_modifier = solidus_introduced
+				}
+				scope:byebye_governorship_civilwar = {
+					every_governorship_state = {
+						every_state_province = {
+							set_owned_by = root
+							scope:byebye_governor_civilwar = {
+								add_holding = prev
+							}
+						}
+					}
+				}
+				scope:byebye_capital = {
+					set_as_governor = scope:byebye_governor_civilwar
+				}
+			}
+			else = {
+				scope:byebye_governorship_civilwar = {
+					every_governorship_state = {
+						every_state_province = {
+							set_owned_by = root
+						}
+					}
+				}
+				scope:byebye_capital = {
+					set_as_governor = scope:byebye_governor_civilwar
+				}
+			}
+			random_current_war = {
+				limit = {
+					is_civil_war = yes
+					is_war_leader = root
+				}
+				random_war_participant = {
+					limit = {
+						civil_war_with = root
+					}
+					trigger_event = {
+						id = low_stab_event.18
+						days = 1
+					}
+				}
+			}
+		}
+	}
+	option = {
+		name = low_stab_event.17.b
+		custom_tooltip = low_stab_event.17.b.tt1
+		add_legitimacy = 15
+		current_ruler = {
+			add_popularity = 15
+		}
+	}
+}
+
+low_stab_event.18 = {
+	#notification of governor defecting
+	type = country_event
+	title = "low_stab_event.18.t"
+	desc = "low_stab_event.18.desc"
+	goto_location = scope:byebye_notif.capital_scope
+	picture = council_country
+	trigger = {
+		has_land = yes
+		exists = scope:byebye_capital
+	}
+	immediate = {
+		scope:byebye_capital = {
+			governorship = {
+				save_scope_as = byebye_notif
+			}
+		}
+	}
+	option = {
+		name = low_stab_event.18.a
+		custom_tooltip = low_stab_event.18.a.tt1
+		if = {
+			limit = {
+				num_of_cities <= 1000
+			}
+			add_stability = 5
+		}
+		else_if = {
+			limit = {
+				num_of_cities <= 2000
+			}
+			add_stability = 4
+		}
+		else_if = {
+			limit = {
+				num_of_cities <= 3000
+			}
+			add_stability = 3
+		}
+		else = {
+			add_stability = 2
+		}
+	}
+}
+
+low_stab_event.19 = {
+	#notification of enemy collapse
+	type = country_event
+	title = "low_stab_event.19.t"
+	desc = "low_stab_event.19.desc"
+	goto_location = scope:collapse_center.capital_scope
+	picture = great_work_riot
+	trigger = {
+		has_land = yes
+		exists = scope:collapse_center
+	}
+	immediate = {
+		scope:byebye_capital = {
+			governorship = {
+				save_scope_as = byebye_notif
+			}
+		}
+	}
+	option = { #help them
+		name = low_stab_event.19.a
+		custom_tooltip = low_stab_event.19.a.tt1
+		scope:collapse_center = {
+			add_stability = 3
+			add_country_modifier = {
+				name = stability_boosted_mother
+				duration = 60
+			}
+		}
+		add_legitimacy = 20
+	}
+	option = {
+		name = low_stab_event.19.b
+		custom_tooltip = low_stab_event.19.b.tt1
 	}
 }

@@ -22,7 +22,10 @@
 				is_head_of_family = yes
 				AND = {
 					employer = {
-						NOT = {has_law = basic_administrative_law}
+						OR = {
+							has_country_modifier = solidus_introduced
+							NOT = {has_law = basic_administrative_law}
+						}
 					}
 					is_governor = yes
 				}
@@ -82,9 +85,15 @@
 		trigger_if = {
 			limit = {
 				owner = {
-					NOT = {has_law = basic_administrative_law}
+					OR = {
+						NOT = {has_law = basic_administrative_law}
+						has_country_modifier = solidus_introduced
+					}
 				}
-				scope:target = {is_governor = yes}
+				scope:target = {
+					is_governor = yes
+					is_head_of_family = no
+				}
 			}
 			governor = scope:target
 		}

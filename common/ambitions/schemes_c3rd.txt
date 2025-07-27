@@ -908,6 +908,14 @@ scheme_buy_holding = {
 			corruption >= 50
 		}
 		modifier = {
+			add = 5
+			wealth >= 1000
+		}
+		modifier = {
+			add = 5
+			wealth >= 3000
+		}
+		modifier = {
 			factor = 5
 			is_head_of_family = yes
 		}
@@ -1101,6 +1109,18 @@ scheme_steal_holding = {
 					}
 				}
 			}
+		}
+		modifier = {
+			factor = 1.5
+			wealth >= 1000
+		}
+		modifier = {
+			factor = 1.5
+			wealth >= 3000
+		}
+		modifier = {
+			factor = 5
+			has_character_modifier = takes_governorships_control
 		}
 		modifier = {
 			factor = 10
