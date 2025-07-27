@@ -268,7 +268,7 @@
 			}
 		}
     }
-	#New Invictus invention
+	#New Invictus invention bool 17
 	iberian_capital_inv = { #Iberian Capitals
     	requires = { build_time_inv }
     	modifier = {
@@ -347,7 +347,7 @@
 		}
     } 
 
-    #New Invictus invention
+    #New Invictus invention bool 22
     illyrian_fishing_nets_inv = { 
         modifier = { 
         	global_population_growth = 0.02
@@ -376,7 +376,7 @@
 		}
     } 
 
-	#New Invictus invention
+	#New Invictus invention bool 23
     monoxyla_canoe_inv = { 
         modifier = { 
         	movement_speed_if_no_road = 0.1
@@ -397,7 +397,7 @@
 		}
     } 
 
-	#New Invictus invention
+	#New Invictus invention bool 24
     camarae_craft_inv = { 
         modifier = { 
         	global_supply_limit_modifier = 0.05
