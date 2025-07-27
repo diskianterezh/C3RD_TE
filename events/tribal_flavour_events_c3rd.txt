@@ -506,6 +506,7 @@ tribal_flavour_events.4 = { #Tribal collapse
 		}
 		every_country_state = {
 			limit = {
+				exists = capital_scope #this might be necessary to avoid errors... for some reason
 				NOT = {
 					this.region = scope:origin_crisis.capital_scope.state.region
 				}
