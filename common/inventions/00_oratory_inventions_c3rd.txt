@@ -142,7 +142,7 @@
     }
 	#New Invictus invention
 	lezgiwal_inv = {
-		modifier = { character_loyalty = 5 }
+		modifier = { character_loyalty = 3 }
 			
 		requires = { agressive_expansion_monthly_decay_inv_1 }
 		allow = {
@@ -166,7 +166,7 @@
 		}
     }
 
-	royal_blemmyan_signature_inv = {
+	royal_blemmyan_signature_inv = {#132 from the end +106 = 238
     	modifier = { 
 			monthly_political_influence_modifier = 0.05
 			character_loyalty = 5
@@ -192,10 +192,10 @@
 			}
 		}
 	}
-	sporting_theft_inv = {
+	sporting_theft_inv = { #131from the end +106 = 237
     	modifier = { 
 			max_friends = 2
-			character_loyalty = 5
+			character_loyalty = 3
 		}
         requires = { assemble_raiding_inv }
         allow = {
@@ -1132,7 +1132,7 @@
 	}
 
 	monthly_general_loyalty_inv = { 
-		modifier = { general_loyalty = 5 }
+		modifier = { general_loyalty = 3 }
 		
 		requires = { agressive_expansion_monthly_decay_inv_2 }
 		on_activate = {
@@ -1692,7 +1692,7 @@
 }
 
 
-oratory_2 = {
+oratory_2 = { #65 inventions
 	technology = oratory_tech
 	color = hsv { 0.48 0.6 0.4 }
 	# Level 0
@@ -2758,7 +2758,7 @@ oratory_2 = {
 	}
 
 	monthly_governor_inv = { 
-		modifier = { governor_loyalty = 5 }
+		modifier = { governor_loyalty = 3 }
 		
 		requires = { tyranny_inv_2 }
 		on_activate = {
@@ -2891,7 +2891,7 @@ oratory_2 = {
 
 	monthly_character_loyalty_inv_2 = {
 		modifier = { 
-			character_loyalty = 4
+			character_loyalty = 3
 			
 		
 		}

@@ -68,13 +68,43 @@ get_trial_success_chance_character = {
 	if = {
 		limit = {
 			has_character_modifier = king_maker
-		} #not so easy ;)
+		} #not so easy 
 		subtract = 10
 	}
 	if = {
 		limit = {
+			employer = {
+				has_country_modifier = solidus_introduced
+			}
+		} #not so easy 
+		subtract = 5
+	}
+	if = {
+		limit = {
+			has_character_modifier = major_influence_aristocrat
+		} #not so easy 
+		subtract = 5
+	}
+	if = {
+		limit = {
+			has_character_modifier = major_influence_aristocrat
+			has_variable = country_ownership
+			var:country_ownership >= 35
+		} #not so easy 
+		subtract = 5
+	}
+	if = {
+		limit = {
+			has_character_modifier = major_influence_aristocrat
+			has_variable = country_ownership
+			var:country_ownership >= 65
+		} #not so easy 
+		subtract = 5
+	}
+	if = {
+		limit = {
 			has_character_modifier = political_power_character
-		} #not so easy ;)
+		} #not so easy 
 		subtract = 10
 	}
 	min = 1
@@ -151,7 +181,7 @@ get_trial_success_chance = {
 			scope:target = {
 				has_character_modifier = king_maker
 			}
-		} #not so easy ;)
+		} #not so easy 
 		subtract = 10
 	}
 	if = {
@@ -159,7 +189,7 @@ get_trial_success_chance = {
 			scope:target = {
 				has_character_modifier = political_power_character
 			}
-		} #not so easy ;)
+		} #not so easy 
 		subtract = 10
 	}
 	if = {

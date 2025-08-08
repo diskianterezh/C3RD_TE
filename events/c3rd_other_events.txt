@@ -5148,7 +5148,7 @@ c3rd_other_events.71 = { #people revolt against the crash of currency - negative
             name = revolt_against_crash
             days = 3650
         }
-        add_stability = -10 #what do you mean, i want to trigger the collapse ? ;)
+        add_stability = -10 #what do you mean, i want to trigger the collapse ? 
     }
 
     option = { #we need to raise the wages
@@ -6382,99 +6382,24 @@ c3rd_other_events.80 = { #Notification of governorship taken by family
         }
 	}
 }
-c3rd_other_events.801 = { #Notification of governorship taken by family ######  FOR DEBUG PURPOSES
-type = minor_country_event
+c3rd_other_events.801 = { #DEBUG EVENT
+type = country_event
 title= "c3rd_other_events.80.t"
-desc = "c3rd_other_events.80.desc"
-interface_lock = no
+desc = "c3rd_other_events.802.desc"
 
-left_portrait = scope:autonomy_governorship.var:governorship_owner
+left_portrait = current_ruler
 
 trigger = {
     current_date > 750.1.1
 }
 
 immediate = {
-    random_governorships = {
-        limit = {
-            exists = governor
-            governor = {
-                is_ruler = no
-            }
-            save_temporary_scope_as = governorship_tmp_scope
-            NOR = {
-                AND = {
-                    has_variable = governorship_owner
-                    var:governorship_owner = {
-                        is_head_of_family = yes
-                        family = scope:governorship_tmp_scope.governor.family
-                    }
-                }
-                AND = {
-                    has_variable = governorship_owner
-                    var:governorship_owner = governor
-                }
-            }
-            OR = {
-                AND = {
-                    region_control_value >= 30
-                    root={has_law = decentralized_administration_law}
-                }
-                AND = {
-                    region_control_value >= 40
-                    root={has_country_modifier = solidus_introduced}
-                }
-                region_control_value >= 50
-            }
-        }
-        weight = {
-            modifier = {
-                factor = 3
-                region_control_value >= 75
-            }
-            modifier = {
-                factor = 2
-                region_control_value >= 60
-            }
-            modifier = {
-                factor = 5
-                region_control_value >= 90
-            }
-            modifier = { #less chances close to the capital
-                factor = 0.4
-                any_governorship_state = {
-                    any_state_province = {
-                        region = {
-                            any_neighbor_region = {
-                                any_region_province = {
-                                    owner = root
-                                    is_capital = yes
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            modifier = { #more chances near foreign countries
-                factor = 2
-                any_governorship_state = {
-                    any_state_province = {
-                        any_neighbor_province = {
-                            has_owner = yes
-                            NOT = {
-                                owner = root
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        save_scope_as = autonomy_governorship
-        governor = {
-            recalculate_ownership_char = yes
+    current_ruler = {
+        set_variable = {
+            name = bloodlinenumber
+            value = has_many_bloodlines
         }
     }
-
 }
 
 option = {
@@ -14885,5 +14810,93 @@ c3rd_other_events.130 = { #EPIDEMY owners take control
 				}
             }
         }
+    }
+}
+
+
+c3rd_other_events.131 = { #EPIDEMY modifier event when solidus (you enacted solidus too soon event type)
+    type = country_event
+    title = "c3rd_other_events.131.t"
+    desc = "c3rd_other_events.131.desc"
+    left_portrait = current_ruler
+
+    picture = successors
+
+    trigger = {
+        has_land = yes
+        is_tribal = no
+        has_civil_war = no
+        current_date >= 700.1.1
+        has_country_modifier = solidus_introduced
+        any_owned_province = {
+            count >= 10
+            OR = {
+                has_province_modifier = "antonine_plague_epidemic_outbreak_city"
+                has_province_modifier = "antonine_plague_epidemic_quarantine"
+            }
+        }
+        NOT = {
+            has_variable = already_epidemy_modifier_solidus_1
+        }
+    }
+
+    immediate = {
+        add_country_modifier = {
+            name = epidemy_modifier_solidus_1
+            duration = 14600 #40 years
+        }
+        set_variable = {
+            name = already_epidemy_modifier_solidus_1
+        }
+    }
+
+    option = { 
+        name = c3rd_other_events.131.a
+        custom_tooltip = c3rd_other_events.131.a.tt1
+    }
+}
+
+
+c3rd_other_events.132 = { #EPIDEMY modifier 2 event when solidus (you enacted solidus too soon event type)
+    type = country_event
+    title = "c3rd_other_events.132.t"
+    desc = "c3rd_other_events.132.desc"
+    left_portrait = current_ruler
+
+    picture = successors
+
+    trigger = {
+        has_land = yes
+        is_tribal = no
+        has_civil_war = no
+        current_date >= 800.1.1
+        has_country_modifier = solidus_introduced
+        any_owned_province = {
+            count >= 10
+            OR = {
+                has_province_modifier = "cyprian_plague_epidemic_outbreak_city"
+                has_province_modifier = "cyprian_plague_epidemic_quarantine"
+                has_province_modifier = "cyprian_plague_epidemic_outbreak_town"
+                has_province_modifier = "cyprian_plague_epidemic_quarantown"
+            }
+        }
+        NOT = {
+            has_variable = already_epidemy_modifier_solidus_2
+        }
+    }
+
+    immediate = {
+        add_country_modifier = {
+            name = epidemy_modifier_solidus_2
+            duration = 14600 #40 years
+        }
+        set_variable = {
+            name = already_epidemy_modifier_solidus_2
+        }
+    }
+
+    option = { 
+        name = c3rd_other_events.132.a
+        custom_tooltip = c3rd_other_events.132.a.tt1
     }
 }

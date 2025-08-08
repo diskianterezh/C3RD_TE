@@ -1438,3 +1438,427 @@ count_reclaim = {
 		add = 2
 	}
 }
+
+has_many_bloodlines = { #scope character
+	value = 0
+	if = {
+		limit = {
+			has_trait = alcimachid
+		}
+		add = 1
+	}
+	if = {
+		limit = {
+			has_trait = antigonids
+		}
+		add = 1
+	}
+	if = {
+		limit = {
+			has_trait = antipatrid
+		}
+		add = 1
+	}
+	if = {
+		limit = {
+			has_trait = argeads
+		}
+		add = 1
+	}
+	if = {
+		limit = {
+			has_trait = lagids
+		}
+		add = 1
+	}
+	if = {
+		limit = {
+			has_trait = seleucids
+		}
+		add = 1
+	}
+	if = {
+		limit = {
+			has_trait = aeacidae
+		}
+		add = 1
+	}
+	if = {
+		limit = {
+			has_trait = agiad
+		}
+		add = 1
+	}
+	if = {
+		limit = {
+			has_trait = achaemenid
+		}
+		add = 1
+	}
+	if = {
+		limit = {
+			has_trait = maurya
+		}
+		add = 1
+	}
+	if = {
+		limit = {
+			has_trait = zadok
+		}
+		add = 1
+	}
+	if = {
+		limit = {
+			has_trait = agathocles
+		}
+		add = 1
+	}
+	if = {
+		limit = {
+			has_trait = orontid
+		}
+		add = 1
+	}
+	if = {
+		limit = {
+			has_trait = atropates
+		}
+		add = 1
+	}
+	if = {
+		limit = {
+			has_trait = barca
+		}
+		add = 1
+	}
+	if = {
+		limit = {
+			has_trait = arsaces
+		}
+		add = 1
+	}
+	if = {
+		limit = {
+			has_trait = spartocid
+		}
+		add = 1
+	}
+	if = {
+		limit = {
+			has_trait = sophytid
+		}
+		add = 1
+	}
+	if = {
+		limit = {
+			has_trait = diodotus
+		}
+		add = 1
+	}
+	if = {
+		limit = {
+			has_trait = brennus
+		}
+		add = 1
+	}
+	if = {
+		limit = {
+			has_trait = illyrius
+		}
+		add = 1
+	}
+	if = {
+		limit = {
+			has_trait = ashokalegendary
+		}
+		add = 1
+	}
+	if = {
+		limit = {
+			has_trait = pyrrhuslegendary
+		}
+		add = 1
+	}
+	if = {
+		limit = {
+			has_trait = chandraguptalegendary
+		}
+		add = 1
+	}
+	if = {
+		limit = {
+			has_trait = claudii
+		}
+		add = 1
+	}
+	if = {
+		limit = {
+			has_trait = cornelii
+		}
+		add = 1
+	}
+	if = {
+		limit = {
+			has_trait = fabii
+		}
+		add = 1
+	}
+	if = {
+		limit = {
+			has_trait = demosthenid
+		}
+		add = 1
+	}
+	if = {
+		limit = {
+			has_trait = mithridates
+		}
+		add = 1
+	}
+	if = {
+		limit = {
+			has_trait = superbus
+		}
+		add = 1
+	}
+	if = {
+		limit = {
+			has_trait = vercingetorix
+		}
+		add = 1
+	}
+	if = {
+		limit = {
+			has_trait = chola
+		}
+		add = 1
+	}
+	if = {
+		limit = {
+			has_trait = pandya
+		}
+		add = 1
+	}
+	if = {
+		limit = {
+			has_trait = chera
+		}
+		add = 1
+	}
+	if = {
+		limit = {
+			has_trait = kalinga
+		}
+		add = 1
+	}
+	if = {
+		limit = {
+			has_trait = blood_of_david
+		}
+		add = 1
+	}
+	if = {
+		limit = {
+			has_trait = magonid
+		}
+		add = 1
+	}
+	if = {
+		limit = {
+			has_trait = dido
+		}
+		add = 1
+	}
+	if = {
+		limit = {
+			has_trait = blood_of_aratus
+		}
+		add = 1
+	}
+	if = {
+		limit = {
+			has_trait = blood_of_menander
+		}
+		add = 1
+	}
+	if = {
+		limit = {
+			has_trait = blood_of_bharata
+		}
+		add = 1
+	}
+	if = {
+		limit = {
+			has_trait = blood_of_porus
+		}
+		add = 1
+	}
+	if = {
+		limit = {
+			has_trait = blood_of_vijaya
+		}
+		add = 1
+	}
+	if = {
+		limit = {
+			has_trait = blood_of_zipoetes
+		}
+		add = 1
+	}
+	if = {
+		limit = {
+			has_trait = blood_of_pharnavazid
+		}
+		add = 1
+	}
+	if = {
+		limit = {
+			has_trait = blood_of_forcos
+		}
+		add = 1
+	}
+	if = {
+		limit = {
+			has_trait = blood_of_obodid
+		}
+		add = 1
+	}
+	if = {
+		limit = {
+			has_trait = blood_of_aretid
+		}
+		add = 1
+	}
+	if = {
+		limit = {
+			has_trait = pharnabazid
+		}
+		add = 1
+	}
+	if = {
+		limit = {
+			has_trait = aeetes
+		}
+		add = 1
+	}
+	if = {
+		limit = {
+			has_trait = blood_of_midas
+		}
+		add = 1
+	}
+	if = {
+		limit = {
+			has_trait = eumenid
+		}
+		add = 1
+	}
+	if = {
+		limit = {
+			has_trait = attalid
+		}
+		add = 1
+	}
+	if = {
+		limit = {
+			has_trait = blood_of_shaushtatar
+		}
+		add = 1
+	}
+	if = {
+		limit = {
+			has_trait = blood_of_pandava
+		}
+		add = 1
+	}
+	if = {
+		limit = {
+			has_trait = blood_of_arhan
+		}
+		add = 1
+	}
+	if = {
+		limit = {
+			has_trait = eurypontid
+		}
+		add = 1
+	}
+	if = {
+		limit = {
+			has_trait = balbid
+		}
+		add = 1
+	}
+	if = {
+		limit = {
+			has_trait = saba
+		}
+		add = 1
+	}
+	if = {
+		limit = {
+			has_trait = ateas
+		}
+		add = 1
+	}
+	if = {
+		limit = {
+			has_trait = blood_of_teres
+		}
+		add = 1
+	}
+	if = {
+		limit = {
+			has_trait = teucer
+		}
+		add = 1
+	}
+	if = {
+		limit = {
+			has_trait = blood_of_pylaemenes
+		}
+		add = 1
+	}
+	if = {
+		limit = {
+			has_trait = mahout
+		}
+		add = 1
+	}
+	if = {
+		limit = {
+			has_trait = arganthonios
+		}
+		add = 1
+	}
+	if = {
+		limit = {
+			has_trait = antenorid
+		}
+		add = 1
+	}
+	if = {
+		limit = {
+			has_trait = blood_of_albion_kings
+		}
+		add = 1
+	}
+	if = {
+		limit = {
+			has_trait = hecatomnid
+		}
+		add = 1
+	}
+	if = {
+		limit = {
+			has_trait = ariovistid
+		}
+		add = 1
+	}
+	if = {
+		limit = {
+			has_trait = oxyartid
+		}
+		add = 1
+	}
+}

@@ -211,6 +211,10 @@
  reduced_the_autonomy_desc:0 "Every #T major landowners#! are above #G 75#! loyalty"
  recent_decentralization_desc:0 "#R The decentralization have been too recently enacted #!"
  constantine_reform_available_desc:0 "The reform was made accessible by the contribution of an enlightened ruler"
+ epidemy_modifier_solidus_1:0 "National unity under pressure"
+ epidemy_modifier_solidus_1_desc:0 "One of the consequences of the Gold Standard was that it allowed the upper aristocracy to become much more independent... when the need arose."
+ epidemy_modifier_solidus_2:0 "National unity under pressure"
+ epidemy_modifier_solidus_2_desc:0 "One of the consequences of the Gold Standard was that it allowed the upper aristocracy to become much more independent... when the need arose."
 
 
  #loyalty:
@@ -346,7 +350,7 @@
  c3rd_monetary_vassal_exploitation_custom_loc1:0 "[GuiScope.SetRoot( Player.MakeScope).ScriptValue('num_of_subject_pops')|0TF]"
  c3rd_monetary_vassal_exploitation_custom_loc2:0 "[GuiScope.SetRoot( Player.MakeScope).ScriptValue('num_of_subject_pops')|0Y]"
  c3rd_monetary_vassal_exploitation_tt:0 "[Player.Custom('c3rd_monetary_vassal_exploitation_custom_loc_tt')]"
- c3rd_monetary_vassal_exploitation_custom_loctt1:0 "The #Y Vassal exploitation#! monetary law is not enabled\nThis is the number of vassal pops that could contribute to your economy if you enact it\n\n#Y Vassal pops contribute far less to your economy than your own pops #!"
+ c3rd_monetary_vassal_exploitation_custom_loctt1:0 "The #Y Vassal exploitation#! monetary law is #R not enabled#! \nThis is the number of vassal pops that could contribute to your economy if you enact it\n\n#Y Vassal pops contribute far less to your economy than your own pops #!"
  c3rd_monetary_vassal_exploitation_custom_loctt2:0 "The number of pops from your vassals contributing to your economy\n\n#Y Vassal pops contribute far less to your economy than your own pops #!"
  c3rd_monetary_citizen_exemption_tt:0 "The primary culture decision #Y No Census taxes for Citizen or Nobles#! has been taken or forced to your country\n\n#R This has a very negative impact on your economy#!\n\nYou can revoke it in the primary culture decisions"
  c3rd_monetary_aristocratic_exemptions_tt:0 "A Total tax exemption has been decreed for your elites\n\n#R This has a negative impact on your economy#!"
@@ -1482,7 +1486,7 @@ low_stab_event.9.b.tt1:0 "You will garrison the [state_duchy_grab.GetName] in or
  c3rd_other_events.80.a.tt1:0 "The region is now considered a stronghold of the [autonomy_governorship.MakeScope.GetVariable('governorship_owner').GetCharacter.GetFamily.GetName]\n\n #T You can check regional holdings and try to regain control in the 'Nation Overview', Administration tab. #!"
  c3rd_other_events.80.a.tt2:0 "The region is now considered a stronghold of [autonomy_governorship.MakeScope.GetVariable('governorship_owner').GetCharacter.GetName]\n\n #T You can check regional holdings and try to regain control in the 'Nation Overview', Administration tab. #!"
 
- c3rd_other_events.802.desc:0 "[owner_target_for_number.GetName] Possesses [owner_target_for_number.MakeScope.GetVariable('country_ownership').GetValue]%"
+ c3rd_other_events.802.desc:0 "[ROOT.GetCountry.GetRuler.GetName] Possesses [ROOT.GetCountry.GetRuler.MakeScope.GetVariable('bloodlinenumber').GetValue]"
 
  c3rd_other_events.82.t:0 "Confiscation of land"
  c3rd_other_events.82.desc:0 "[target.GetName]'s takeover of state-owned land must be controlled. A political offensive and the replacement of local administrators should make it possible to curb the problem. At the obvious cost of some tension with his family.\n"
@@ -1798,6 +1802,17 @@ low_stab_event.9.b.tt1:0 "You will garrison the [state_duchy_grab.GetName] in or
  c3rd_other_events.130.c.tt1:0 "Allowing the character to look after his domains as he sees fit will apply a #R heavy penalty to all provinces #! in governorates affected by the epidemic that have [owner_epidemy_action.GetName] as their owner.\n[owner_epidemy_action.GetName] being the ruler, the stability will be disturbed all the more if your country is already very stable."
  c3rd_other_events.130.d:0 "The state isn't always me"
  c3rd_other_events.130.d.tt1:0 "Your ruler will lose around 60% of the ownership he currently owns, and 60% of the holdings in the provinces of the governorates affected by the epidemic."
+
+
+ c3rd_other_events.131.t:0 "Gold Standard Consequences"
+ c3rd_other_events.131.desc.1:0 "While the plague ravages our country, and unity should be sought around the administration in order to fight this scourge as effectively as possible, it would seem that many aristocrats have instead withdrawn into their estates and prerogatives. \nThe increased political power granted to them by our monetary reforms seems to be incompatible with such a crisis situation..."
+ c3rd_other_events.131.a:0 "We will face it anyway"
+ c3rd_other_events.131.a.tt1:0 "#R The solidus reform makes you more vulnerable to plague events #!"
+
+ c3rd_other_events.132.t:0 "Gold Standard Consequences"
+ c3rd_other_events.132.desc.1:0 "While the plague ravages our country, and unity should be sought around the administration in order to fight this scourge as effectively as possible, it would seem that many aristocrats have instead withdrawn into their estates and prerogatives. \nThe increased political power granted to them by our monetary reforms seems to be incompatible with such a crisis situation..."
+ c3rd_other_events.132.a:0 "We will face it anyway"
+ c3rd_other_events.132.a.tt1:0 "#R The solidus reform makes you more vulnerable to plague events #!"
 
  give_law_change_cultdec_tt1:0 "This modifier can be canceled in the primary culture decision tab"
  give_law_change_cultdec_tt2:0 "This have a #R negative impact#! on the monetary balance"

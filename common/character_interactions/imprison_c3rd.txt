@@ -22,6 +22,7 @@
 			NOR = {
 				has_character_modifier = disloyal_successor_cmod
 				has_character_modifier = king_maker
+				has_character_modifier = major_influence_aristocrat
 			}
 			prisoner = no
 			is_ruler = no
@@ -79,6 +80,12 @@
 					add = 3
 					min = 5
 				}
+			}
+			if = {
+				limit = {
+					has_country_modifier = solidus_introduced
+				}
+				add_tyranny = 1
 			}
 		}
 		scope:actor = {

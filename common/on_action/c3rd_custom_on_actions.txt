@@ -2974,9 +2974,11 @@ c3rd_barbarian_related_events = {
 	trigger = {
 		
 	}
-	events = {
+	events = { #and plague related ones, because they're as good here as anywhere
 		c3rd_barbarian_events.1
 		c3rd_barbarian_events.2
+		c3rd_other_events.131
+		c3rd_other_events.132
 	}
 	random_events = {
 		500 = 0
@@ -2984,5 +2986,165 @@ c3rd_barbarian_related_events = {
 		4 = c3rd_barbarian_events.11
 		4 = c3rd_barbarian_events.12
 		2 = c3rd_barbarian_events.13
+	}
+}
+
+
+c3rd_traits_cumulation_balance = {
+	trigger = {
+		current_date > 750.1.1
+		has_land = yes
+		num_of_cities >= 1
+		NOT = {
+			tag = BAR
+		}
+		is_ai = no
+	}
+
+	effect = {
+		every_character = {
+			limit = {
+				age = 0
+				has_many_bloodlines >= 3
+			}
+			random_list = {  #roll the inbred chance
+				7 = {
+					#nothing
+					
+				}
+				1 = {
+					#inbred
+					modifier = {
+						add = has_many_bloodlines
+					}
+					modifier = {
+						factor = 1.5
+						has_many_bloodlines >= 5
+					}
+					modifier = {
+						factor = 1.5
+						has_many_bloodlines >= 8
+					}
+					modifier = {
+						factor = 2
+						has_many_bloodlines >= 10
+					}
+					add_trait = inbred
+				}
+			}
+		}
+		every_character = {
+			limit = {
+				age = 10
+				has_many_bloodlines >= 3
+			}
+			random_list = {  #roll the intent for head of family
+				10 = {
+					#nothing
+					
+				}
+				1 = {
+					#inbred
+					modifier = {
+						add = has_many_bloodlines
+					}
+					modifier = {
+						factor = 1.5
+						has_many_bloodlines >= 5
+					}
+					modifier = {
+						factor = 1.5
+						has_many_bloodlines >= 8
+					}
+					modifier = {
+						factor = 2
+						has_many_bloodlines >= 10
+					}
+					random_list = {
+						1 = {
+							add_trait = stutter
+						}
+						1 = {
+							add_trait = pneumonia
+						}
+						1 = {
+							add_trait = frail
+						}
+					}
+				}
+			}
+		}
+		every_character = {
+			limit = {
+				age = 20
+				has_many_bloodlines >= 3
+			}
+			random_list = {  #roll the intent for head of family
+				8 = {
+					#nothing
+					
+				}
+				1 = {
+					#inbred
+					modifier = {
+						add = has_many_bloodlines
+					}
+					modifier = {
+						factor = 1.5
+						has_many_bloodlines >= 5
+					}
+					modifier = {
+						factor = 1.5
+						has_many_bloodlines >= 8
+					}
+					modifier = {
+						factor = 2
+						has_many_bloodlines >= 10
+					}
+					random_list = {
+						1 = {
+							add_trait = epileptic
+						}
+						1 = {
+							add_trait = cancer
+						}
+						1 = {
+							add_trait = pox
+						}
+					}
+				}
+			}
+		}
+		every_character = {
+			limit = {
+				age = 30
+				has_many_bloodlines >= 3
+			}
+			random_list = {  #roll the intent for head of family
+				5 = {
+					#nothing
+					
+				}
+				1 = {
+					#inbred
+					modifier = {
+						add = has_many_bloodlines
+					}
+					modifier = {
+						factor = 1.5
+						has_many_bloodlines >= 5
+					}
+					modifier = {
+						factor = 1.5
+						has_many_bloodlines >= 8
+					}
+					modifier = {
+						factor = 2
+						has_many_bloodlines >= 10
+					}
+					add_health = -20
+				}
+			}
+		}
 	}
 }
