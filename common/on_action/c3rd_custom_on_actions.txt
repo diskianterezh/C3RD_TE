@@ -1187,6 +1187,10 @@ c3rd_state_mass_revolt_gain = {
 						add = 1
 						root={num_of_cities >= 2000}
 					}
+					modifier = {
+						factor = 0.5
+						root={stability >= 70}
+					}
 					add_state_modifier = {
 						name = secess_preparation
 						duration = 3650
@@ -1258,6 +1262,10 @@ c3rd_state_mass_revolt_gain = {
 					modifier = {
 						add = 1
 						root={num_of_cities >= 2000}
+					}
+					modifier = {
+						factor = 0.5
+						root={stability >= 70}
 					}
 					add_state_modifier = {
 						name = secess_preparation
@@ -3008,12 +3016,12 @@ c3rd_traits_cumulation_balance = {
 				has_many_bloodlines >= 3
 			}
 			random_list = {  #roll the inbred chance
-				7 = {
+				16 = {
 					#nothing
 					
 				}
 				1 = {
-					#inbred
+					#inbred, from 20% chance at 3, 36% at 5, 55% at 8, 75% at 10+
 					modifier = {
 						add = has_many_bloodlines
 					}
@@ -3039,12 +3047,12 @@ c3rd_traits_cumulation_balance = {
 				has_many_bloodlines >= 3
 			}
 			random_list = {  #roll the intent for head of family
-				10 = {
+				12 = {
 					#nothing
 					
 				}
 				1 = {
-					#inbred
+					#sick, 25% at 3, 43% at 5, 63% at 8, 80% at 10
 					modifier = {
 						add = has_many_bloodlines
 					}
@@ -3085,7 +3093,7 @@ c3rd_traits_cumulation_balance = {
 					
 				}
 				1 = {
-					#inbred
+					#vsick 33% at 3, 53% at 5, 71% at 8, 86% at 10
 					modifier = {
 						add = has_many_bloodlines
 					}
@@ -3121,12 +3129,12 @@ c3rd_traits_cumulation_balance = {
 				has_many_bloodlines >= 3
 			}
 			random_list = {  #roll the intent for head of family
-				5 = {
+				4 = {
 					#nothing
 					
 				}
 				1 = {
-					#inbred
+					#health, 50% at 3, 69% at 5, 83% at 8, 92% at 10
 					modifier = {
 						add = has_many_bloodlines
 					}

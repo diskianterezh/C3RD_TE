@@ -566,7 +566,10 @@ on_character_death = {
 			}
 		}
 		if = {
-			limit = { this = char:52 }
+			limit = { 
+				this = char:52 
+				exists = c:KIO
+			}
 			c:KIO = {
 				trigger_event = { id = dhe_mithridates.9 }
 			}

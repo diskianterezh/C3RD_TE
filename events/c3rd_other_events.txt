@@ -3150,6 +3150,10 @@ c3rd_other_events.321 = { # nobles have lost their rights
         has_land = yes
         is_tribal = no
         current_date >= 700.1.1
+        NOR = { #these are modifiers gained on missions when you cnage primary culture, exception with the modifier gained at this moment is to avoid large revolt of the previous primary culture pops
+            has_country_modifier = igk_mission_hybridization_modifier #hybridization from inv indo-germanic
+            has_country_modifier = indoparthia_cmod2 #indopartia mission tree
+        }
         any_country_culture = {
             NOT = {has_pop_type_right = nobles}
             NOR = {
@@ -3159,6 +3163,10 @@ c3rd_other_events.321 = { # nobles have lost their rights
                 has_country_culture_modifier = on_going_mass_revolt
                 has_country_culture_modifier = simili_elite
                 has_country_culture_modifier = silver_coins_c3rd
+            }
+            NOT = { #for the big diadochy hellenic culture
+                this.culture.culture_group = culture_group:hellenic
+                root = { has_country_modifier = heirs_of_alexander }
             }
             has_country_culture_modifier = nobles_revoked
             save_temporary_scope_as = culture_ex_noble_check
@@ -3186,6 +3194,10 @@ c3rd_other_events.321 = { # nobles have lost their rights
                 has_country_culture_modifier = nobles_revoked
                 has_country_culture_modifier = new_culture_elite
                 NOT = {has_pop_type_right = nobles}
+                NOT = { #for the big diadochy hellenic culture
+                    this.culture.culture_group = culture_group:hellenic
+                    root = { has_country_modifier = heirs_of_alexander }
+                }
             }
         }
         modifier = { #if recently promoted
@@ -3201,6 +3213,10 @@ c3rd_other_events.321 = { # nobles have lost their rights
                 }
                 has_country_culture_modifier = nobles_revoked
                 has_pop_type_right = slaves
+                NOT = { #for the big diadochy hellenic culture
+                    this.culture.culture_group = culture_group:hellenic
+                    root = { has_country_modifier = heirs_of_alexander }
+                }
             }
         }
         modifier = {
@@ -3217,6 +3233,10 @@ c3rd_other_events.321 = { # nobles have lost their rights
                 country_culture_pop_count >= 500
                 has_country_culture_modifier = nobles_revoked
                 NOT = {has_pop_type_right = nobles}
+                NOT = { #for the big diadochy hellenic culture
+                    this.culture.culture_group = culture_group:hellenic
+                    root = { has_country_modifier = heirs_of_alexander }
+                }
             }
         }
         modifier = {
@@ -3233,6 +3253,10 @@ c3rd_other_events.321 = { # nobles have lost their rights
                 country_culture_pop_count >= 200
                 has_country_culture_modifier = nobles_revoked
                 NOT = {has_pop_type_right = nobles}
+                NOT = { #for the big diadochy hellenic culture
+                    this.culture.culture_group = culture_group:hellenic
+                    root = { has_country_modifier = heirs_of_alexander }
+                }
             }
         }
     }
@@ -3250,6 +3274,10 @@ c3rd_other_events.321 = { # nobles have lost their rights
                     has_country_culture_modifier = silver_coins_c3rd
                 }
                 has_country_culture_modifier = nobles_revoked
+                NOT = { #for the big diadochy hellenic culture
+                    this.culture.culture_group = culture_group:hellenic
+                    root = { has_country_modifier = heirs_of_alexander }
+                }
                 save_temporary_scope_as = culture_ex_noble_check
                 root = {
                     any_owned_province = {
@@ -3518,8 +3546,9 @@ c3rd_other_events.32 = { # noble revoked culture revolts
         current_date >= 700.1.1
         any_country_culture = {
             has_country_culture_modifier = on_going_mass_revolt
-            NOT = {
+            NOR = {
                 has_country_culture_modifier = growing_revolt
+                has_pop_type_right = nobles
             }
             save_temporary_scope_as = check_culture
             root = {
@@ -9274,11 +9303,16 @@ c3rd_other_events.891 = { #when one autonomous domain have been set independant 
     }
 
     immediate = {
-        every_current_war = {
+        if = {
             limit = {
-                is_war_leader = scope:owner_without_subject
+                war = yes
             }
-            force_white_peace = THIS
+            every_current_war = {
+                limit = {
+                    is_war_leader = scope:owner_without_subject
+                }
+                force_white_peace = THIS
+            }
         }
         scope:owner_without_subject = {
             var:owner_from_another_empire = {
