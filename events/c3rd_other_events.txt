@@ -303,7 +303,7 @@ c3rd_other_events.3 = { #Divine imperium leader has too low zeal in a war
 }
 
 
-c3rd_other_events.4 = { #social crisis : too few integrated pops
+c3rd_other_events.4 = { #social crisis : too few integrated (nobles) pops
     type = country_event
     title = "c3rd_other_events.4.t"
     desc = "c3rd_other_events.4.desc"
@@ -14932,5 +14932,286 @@ c3rd_other_events.132 = { #EPIDEMY modifier 2 event when solidus (you enacted so
     option = { 
         name = c3rd_other_events.132.a
         custom_tooltip = c3rd_other_events.132.a.tt1
+    }
+}
+
+
+
+c3rd_other_events.140 = { #losing permanent modifiers
+    type = country_event
+    title = "c3rd_other_events.140.t"
+    desc = {
+        triggered_desc = {
+            trigger = {
+                has_country_modifier = internal_collapse
+            }
+            desc = "c3rd_other_events.140.desc.1"
+
+        }
+        triggered_desc = {
+            trigger = {
+                NOT = {
+                    has_country_modifier = internal_collapse
+                }
+            }
+            desc = "c3rd_other_events.140.desc.2"
+        }
+    }
+
+    picture = hellenic_temple
+
+    trigger = {
+        has_land = yes
+        is_tribal = no
+        has_civil_war = no
+        current_date >= 800.1.1
+        has_country_modifier = solidus_introduced
+        NOT = {
+            has_variable = recent_lost_glory
+        }
+        OR = {
+            has_country_modifier = heirs_of_alexander
+            has_country_modifier = egypt_mediterranean_lord
+            has_country_modifier = argead_empire_modifier
+        }
+        OR = {
+            AND = {
+                any_country = {
+                    has_variable = mother_empire
+                    var:mother_empire = root
+                    NOT = {
+                        has_variable = recent_empire_split
+                    }
+                }
+                stability <= 35
+            }
+            AND = {
+                has_country_modifier = internal_collapse
+                has_country_modifier = c3rd_border_pressure
+            }
+        }
+    }
+
+    immediate = {
+        set_variable = {
+            name = recent_lost_glory
+            days = 365
+        }
+        if = {
+            limit = {
+                has_country_modifier = heirs_of_alexander
+            }
+            remove_country_modifier = heirs_of_alexander
+        }
+        else_if = {
+            limit = {
+                has_country_modifier = argead_empire_modifier
+            }
+            remove_country_modifier = argead_empire_modifier
+        }
+        else_if = {
+            limit = {
+                has_country_modifier = egypt_mediterranean_lord
+            }
+            remove_country_modifier = egypt_mediterranean_lord
+        }
+        
+    }
+
+    option = { 
+        name = c3rd_other_events.140.a
+        custom_tooltip = c3rd_other_events.140.a.tt1
+    }
+}
+
+
+
+c3rd_other_events.141 = { #change bureaucracy modifiers
+    type = country_event
+    title = "c3rd_other_events.141.t"
+    desc = "c3rd_other_events.141.desc"
+    left_portrait = current_ruler
+
+    picture = successors
+
+    trigger = {
+        has_land = yes
+        is_tribal = no
+        has_civil_war = no
+        current_date >= 800.1.1
+        has_country_modifier = solidus_introduced
+        OR = {
+            has_country_modifier = appointed_bureaucracy
+            has_country_modifier = meritocratic_bureaucracy
+            has_country_modifier = noble_bureaucracy
+        }
+    }
+
+    immediate = {
+        
+    }
+
+    option = { #keep the modifier
+        name = c3rd_other_events.141.a
+        custom_tooltip = c3rd_other_events.141.a.tt1
+        if = {
+            limit = {
+                has_country_modifier = appointed_bureaucracy
+            }
+            hidden_effect = { 
+                remove_country_modifier = appointed_bureaucracy
+            }
+            add_country_modifier = {
+               name = late_appointed_bureaucracy
+                duration = -1
+            }
+        }
+        if = {
+            limit = {
+                has_country_modifier = meritocratic_bureaucracy
+            }
+            hidden_effect = { 
+                remove_country_modifier = meritocratic_bureaucracy
+            }
+            add_country_modifier = {
+               name = late_meritocratic_bureaucracy
+                duration = -1
+            }
+        }
+        if = {
+            limit = {
+                has_country_modifier = noble_bureaucracy
+            }
+            hidden_effect = { 
+                remove_country_modifier = noble_bureaucracy
+            }
+            add_country_modifier = {
+               name = late_noble_bureaucracy
+                duration = -1
+            }
+        }
+    }
+    
+    option = { #new modifier
+        name = c3rd_other_events.141.b
+        custom_tooltip = c3rd_other_events.141.b.tt1
+        if = {
+            limit = {
+                has_country_modifier = appointed_bureaucracy
+            }
+            remove_country_modifier = appointed_bureaucracy
+        }
+        if = {
+            limit = {
+                has_country_modifier = meritocratic_bureaucracy
+            }
+            remove_country_modifier = meritocratic_bureaucracy
+        }
+        if = {
+            limit = {
+                has_country_modifier = noble_bureaucracy
+            }
+            remove_country_modifier = noble_bureaucracy
+        }
+        add_country_modifier = {
+            name = late_bureaucracy_c3rd
+            duration = -1
+        }
+
+    }
+}
+
+
+c3rd_other_events.142 = { #change admin modifiers
+    type = country_event
+    title = "c3rd_other_events.142.t"
+    desc = "c3rd_other_events.142.desc"
+    left_portrait = current_ruler
+
+    picture = successors
+
+    trigger = {
+        has_land = yes
+        is_tribal = no
+        has_civil_war = no
+        current_date >= 800.1.1
+        has_country_modifier = solidus_introduced
+        OR = {
+            has_country_modifier = local_nobility_administration
+            has_country_modifier = metics_administration
+            has_country_modifier = emporos_focused_administration
+        }
+    }
+
+    immediate = {
+        
+    }
+
+    option = { #keep the modifier
+        name = c3rd_other_events.141.a
+        custom_tooltip = c3rd_other_events.141.a.tt1
+        if = {
+            limit = {
+                has_country_modifier = local_nobility_administration
+            }
+            hidden_effect = { 
+                remove_country_modifier = local_nobility_administration
+            }
+            add_country_modifier = {
+               name = late_local_nobility_administration
+                duration = -1
+            }
+        }
+        if = {
+            limit = {
+                has_country_modifier = metics_administration
+            }
+            hidden_effect = { 
+                remove_country_modifier = metics_administration
+            }
+            add_country_modifier = {
+               name = late_metics_administration
+                duration = -1
+            }
+        }
+        if = {
+            limit = {
+                has_country_modifier = emporos_focused_administration
+            }
+            hidden_effect = { 
+                remove_country_modifier = emporos_focused_administration
+            }
+            add_country_modifier = {
+               name = late_emporos_focused_administration
+                duration = -1
+            }
+        }
+    }
+    
+    option = { #new modifier
+        name = c3rd_other_events.141.b
+        custom_tooltip = c3rd_other_events.141.b.tt1
+        if = {
+            limit = {
+                has_country_modifier = local_nobility_administration
+            }
+            remove_country_modifier = local_nobility_administration
+        }
+        if = {
+            limit = {
+                has_country_modifier = metics_administration
+            }
+            remove_country_modifier = metics_administration
+        }
+        if = {
+            limit = {
+                has_country_modifier = emporos_focused_administration
+            }
+            remove_country_modifier = emporos_focused_administration
+        }
+        add_country_modifier = {
+            name = late_administration_c3rd
+            duration = -1
+        }
     }
 }

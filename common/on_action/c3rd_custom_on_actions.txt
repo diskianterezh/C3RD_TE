@@ -2987,6 +2987,8 @@ c3rd_barbarian_related_events = {
 		c3rd_barbarian_events.2
 		c3rd_other_events.131
 		c3rd_other_events.132
+		c3rd_other_events.141
+		c3rd_other_events.142
 	}
 	random_events = {
 		500 = 0

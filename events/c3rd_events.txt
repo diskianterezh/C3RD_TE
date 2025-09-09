@@ -2111,6 +2111,10 @@ c3rd_events.10 = { #oh no rival splitting
                     value = 0
                     days = 36500
                 }
+                set_variable = {
+                    name = recent_empire_split
+                    days = 9125 #25 years
+                }
                 add_opinion = {
                     modifier = empire_rivals
                     target = root

@@ -183,6 +183,22 @@
  desc_disavowed_army:0 "This army has been brutally brought back into line, undermining its leadership and the cohesion of its troops"
  collapse_autonomy:0 "Country is collapsing"
  desc_collapse_autonomy:0 "The state of the country pushed the locals to choose their own fate"
+ late_bureaucracy_c3rd:0 "Late bureaucracy"
+ desc_late_bureaucracy_c3rd:0 "The bureaucracy evolved around the pressing needs of the powerful aristocracy"
+ late_appointed_bureaucracy: "Bureaucracy by Appointment"
+ late_appointed_bureaucracy_desc: ""
+ late_meritocratic_bureaucracy: "Meritocratic Bureaucracy"
+ late_meritocratic_bureaucracy_desc: ""
+ late_noble_bureaucracy: "Noble Bureaucracy"
+ late_noble_bureaucracy_desc: ""
+ late_local_nobility_administration: "Local Nobility"
+ late_local_nobility_administration_desc: "The local nobility, always interested in maintaining their own privileges, rule effectively on our behalf."
+ late_metics_administration: "Metics Administrators"
+ late_metics_administration_desc: "We have chosen to rely on metics to help us when it comes to managing our bureaucracy."
+ late_emporos_focused_administration: "Emporos Tax Collectors"
+ late_emporos_focused_administration_desc: "We have entrusted tax collectors to administer on our behalf."
+ late_administration_c3rd:0 "Late administration"
+ desc_late_administration_c3rd:0 "The administration evolved around the pressing needs of the powerful aristocracy"
 
  #opinion:
  empire_rivals:0 "Rivals Empires"
@@ -1341,13 +1357,13 @@ low_stab_event.9.b.tt1:0 "You will garrison the [state_duchy_grab.GetName] in or
  c3rd_other_events.40.c.tt1:0 "Everyone will benefit. #G This will reduce any amount of deflation you could have #!"
 
  c3rd_other_events.50.t:0 "A great work in the midst of starvation"
- c3rd_other_events.50.desc:0 "For several weeks now, famine has been taking an increasingly heavy toll on the town of [wonder_province_starve.GetName]. Overwhelmed by this plague, the population is looking for those responsible and seems to have directed its anger towards a target symbolising the opulence they no longer have. \nAn angry mob seems to have made their way to the local wonder, intent on looting it in order to provide for their needs... or just to satisfy their rage. \nThe local guard seems to be holding them back but we must act to avoid the worst."
+ c3rd_other_events.50.desc:0 "For several weeks now, famine has been taking an increasingly heavy toll on the town of [wonder_province_starve.GetName]. Overwhelmed by this plague, the population is looking for those responsible and seems to have directed its anger towards a target symbolising the opulence they no longer have. \nAn angry mob seems to have made their way to the local #Y Great Work #!, intent on looting it in order to provide for their needs... or just to satisfy their rage. \nThe local guard seems to be holding them back but we must act to avoid the worst."
  c3rd_other_events.50.a:0 "Let us intervene personally to re-supply this province"
- c3rd_other_events.50.a.tt1:0 "You will organise the emergency resupply of this province, to resolve the situation and save the Great Work. This will prevent any further revolt for a while"
+ c3rd_other_events.50.a.tt1:0 "You will organise the emergency resupply of this province, to resolve the situation and save the #Y Great Work #!. This will prevent any further revolt for a while"
  c3rd_other_events.50.b:0 "Send the army"
- c3rd_other_events.50.b.tt1:0 "You will send a strong contingent to defend the Great Work. The people will be greatly affected."
+ c3rd_other_events.50.b.tt1:0 "You will send a strong contingent to defend the #Y Great Work #!. The people will be greatly affected."
  c3rd_other_events.50.c:0 "Ignore this"
- c3rd_other_events.50.c.tt1:0 "The Great Work will be considered looted.\n#G This modifier will be removed if the Great Work is restored or manually destroyed.#!"
+ c3rd_other_events.50.c.tt1:0 "The Great Work will be considered looted.\n#G This modifier will be removed if the #Y Great Work #! is restored or manually destroyed.#!"
 
  c3rd_other_events.51.t:0 "Great works"
  c3rd_other_events.51.desc:0 "It is time to start the necessary work to restore our damaged great works. Where should we focus our attention?"
@@ -1805,14 +1821,37 @@ low_stab_event.9.b.tt1:0 "You will garrison the [state_duchy_grab.GetName] in or
 
 
  c3rd_other_events.131.t:0 "Gold Standard Consequences"
- c3rd_other_events.131.desc.1:0 "While the plague ravages our country, and unity should be sought around the administration in order to fight this scourge as effectively as possible, it would seem that many aristocrats have instead withdrawn into their estates and prerogatives. \nThe increased political power granted to them by our monetary reforms seems to be incompatible with such a crisis situation..."
+ c3rd_other_events.131.desc:0 "While the plague ravages our country, and unity should be sought around the administration in order to fight this scourge as effectively as possible, it would seem that many aristocrats have instead withdrawn into their estates and prerogatives. \nThe increased political power granted to them by our monetary reforms seems to be incompatible with such a crisis situation..."
  c3rd_other_events.131.a:0 "We will face it anyway"
  c3rd_other_events.131.a.tt1:0 "#R The solidus reform makes you more vulnerable to plague events #!"
 
  c3rd_other_events.132.t:0 "Gold Standard Consequences"
- c3rd_other_events.132.desc.1:0 "While the plague ravages our country, and unity should be sought around the administration in order to fight this scourge as effectively as possible, it would seem that many aristocrats have instead withdrawn into their estates and prerogatives. \nThe increased political power granted to them by our monetary reforms seems to be incompatible with such a crisis situation..."
+ c3rd_other_events.132.desc:0 "While the plague ravages our country, and unity should be sought around the administration in order to fight this scourge as effectively as possible, it would seem that many aristocrats have instead withdrawn into their estates and prerogatives. \nThe increased political power granted to them by our monetary reforms seems to be incompatible with such a crisis situation..."
  c3rd_other_events.132.a:0 "We will face it anyway"
  c3rd_other_events.132.a.tt1:0 "#R The solidus reform makes you more vulnerable to plague events #!"
+
+
+ c3rd_other_events.140.t:0 "End of a glory"
+ c3rd_other_events.140.desc.1:0 "In the halls and squares commemorating our nation's glory, the lustre of the statues has long since faded. And invasive lichen is taking hold as the names and glories of our past tarnish. We must face the facts: the decline of our dominance is a reality, and while the future looks bleak amid the current turmoil, the radiance of our past is fading from memory.\nWhatever our future achievements may be, we will no longer be able to boast of the achievements of our ancestors."
+ c3rd_other_events.140.desc.2:0 "In the halls and squares commemorating our nation's glory, the lustre of the statues has long since faded. People lower their gaze and turn their backs on their former radiance. We must face the facts: how can we claim our heritage when our empire is divided and our stability is in jeopardy? \nWhatever our future achievements may be, we can no longer boast of the feats of our ancestors."
+ c3rd_other_events.140.a:0 "Thus flows the tide of time"
+ c3rd_other_events.141.a.tt1:0 "You have lost the following modifier:"
+
+ c3rd_other_events.141.t:0 "An evolving bureaucracy"
+ c3rd_other_events.141.desc:0 "Recent economic reforms are somewhat at odds with our bureaucracy. It would appear that the reforms of the past are no longer sufficient in this new era. We can either persevere with our traditions, at the cost of a few concessions, or adopt a more modern approach, better suited to the centuries to come."
+ c3rd_other_events.141.a:0 "Let us keep our bureaucracy"
+ c3rd_other_events.141.a.tt1:0 "The effects of bureaucracy will evolve as follows:"
+ c3rd_other_events.141.b:0 "Adaptation is survival."
+ c3rd_other_events.141.b.tt1:0 "A new bureaucracy will undoubtedly be less flamboyant, but much more robust."
+
+
+ c3rd_other_events.142.t:0 "An evolving administration"
+ c3rd_other_events.142.desc:0 "Recent economic reforms are somewhat at odds with our administration. It would appear that the reforms of the past are no longer sufficient in this new era. We can either persevere with our traditions, at the cost of a few concessions, or adopt a more modern approach, better suited to the centuries to come."
+ c3rd_other_events.142.a:0 "Let us keep our administration"
+ c3rd_other_events.142.a.tt1:0 "The effects of administration will evolve as follows:"
+ c3rd_other_events.142.b:0 "Adaptation is survival."
+ c3rd_other_events.142.b.tt1:0 "You will adopt a new administration :"
+
 
  give_law_change_cultdec_tt1:0 "This modifier can be canceled in the primary culture decision tab"
  give_law_change_cultdec_tt2:0 "This have a #R negative impact#! on the monetary balance"
@@ -1825,6 +1864,10 @@ low_stab_event.9.b.tt1:0 "You will garrison the [state_duchy_grab.GetName] in or
  c3rd_barbarian_events.1.a:0 "We'll be ready"
  c3rd_barbarian_events.1.a.tt1:0 "This event occurs because barbarian ravages are approaching our borders.\nThe effects of this modifier will last for at least 10 years, and then for as long as barbarian-ravaged lands exist on our border or in our empire. #G Ducatus#! have a military stability that makes them immune to barbarian ravages, making them efficient border guards."
  c3rd_barbarian_events.1.a.tt2:0 "Your neighbor [neighbor_got_barbarians.GetName]'s lands are being ravaged by barbarians, putting your borders on alert."
+ c3rd_barbarian_events.1.a.tt3:0 "Some of your states are under barbarian pressure :"
+ c3rd_barbarian_events.1.a.tt4:0 "[state_got_barbarians.GetName]"
+
+
 
  c3rd_barbarian_events.2.t:0 "Our borders safe again"
  c3rd_barbarian_events.2.desc:0 "The pressure on our borders has eased, and the hordes seem further away. The situation seems to have returned to normal for the time being!"

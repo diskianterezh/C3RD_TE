@@ -28,13 +28,14 @@ c3rd_barbarian_events.1 = { #barbarians pressure
                 }
             }
         }
-        current_date >= 900.1.1
+        current_date >= 1000.1.1
     }
 
 
     immediate = {
         add_country_modifier = {
             name = c3rd_border_pressure
+            duration = -1
         }
         set_variable = {
             name = ongoing_border_pressure
@@ -60,6 +61,22 @@ c3rd_barbarian_events.1 = { #barbarians pressure
                 owner = {
                     save_scope_as = neighbor_got_barbarians
                 }
+            }
+        }
+        if = {
+            limit = {
+                any_country_state = {
+                    has_state_modifier = barbarians_border
+                }
+            }
+            custom_tooltip = c3rd_barbarian_events.1.a.tt3
+            ordered_country_state = {
+                limit = {
+                    has_state_modifier = barbarians_border
+                }
+                max = 10
+                save_scope_as = state_got_barbarians
+                custom_tooltip = c3rd_barbarian_events.1.a.tt4
             }
         }
 
