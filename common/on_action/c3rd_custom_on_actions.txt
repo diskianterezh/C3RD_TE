@@ -1286,6 +1286,8 @@ c3rd_really_rich_country = {
 	random_events = {
 		500 = 0
 		50 = c3rd_other_events.40
+		50 = c3rd_other_events.41
+		500 = c3rd_other_events.42
 	}
 
 }
@@ -2786,6 +2788,12 @@ c3rd_head_of_family_shenanigans = {
 							has_law = basic_administrative_law
 						}
 					}
+					modifier = {
+						factor = 0.8
+						root = {
+            				treasury >= 90000
+						}
+					}
 				}
 				10 = {
 					#consolidate
@@ -2854,6 +2862,12 @@ c3rd_head_of_family_shenanigans = {
 						factor = 3
 						root = {
 							has_country_modifier = law_advantages_5
+						}
+					}
+					modifier = {
+						factor = 1.2
+						root = {
+            				treasury >= 90000
 						}
 					}
 					set_variable = {
@@ -3048,7 +3062,7 @@ c3rd_traits_cumulation_balance = {
 				age = 10
 				has_many_bloodlines >= 3
 			}
-			random_list = {  #roll the intent for head of family
+			random_list = {  #roll the disease chances
 				12 = {
 					#nothing
 					
@@ -3089,7 +3103,7 @@ c3rd_traits_cumulation_balance = {
 				age = 20
 				has_many_bloodlines >= 3
 			}
-			random_list = {  #roll the intent for head of family
+			random_list = {  #roll the disease
 				8 = {
 					#nothing
 					
@@ -3130,7 +3144,7 @@ c3rd_traits_cumulation_balance = {
 				age = 30
 				has_many_bloodlines >= 3
 			}
-			random_list = {  #roll the intent for head of family
+			random_list = {  #roll the health damage
 				4 = {
 					#nothing
 					

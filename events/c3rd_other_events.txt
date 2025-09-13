@@ -3952,10 +3952,12 @@ c3rd_other_events.33 = { #new cultural identity
     }
 }
 
-c3rd_other_events.40 = { #corruption from gold
+c3rd_other_events.40 = { #corruption from gold -- MODIFIED now it looks for head_intent_consolidate and propose you to pay people more
     type = country_event
     title = "c3rd_other_events.40.t"
     desc = "c3rd_other_events.40.desc"
+    right_portrait = scope:first_consolidate_more_gold
+    right_portrait = scope:second_consolidate_more_gold
 
     picture = greek_court
 
@@ -3970,6 +3972,29 @@ c3rd_other_events.40 = { #corruption from gold
         }
         NOT = {
             has_variable = got_chest_open
+        }
+        NOR = {
+            has_country_modifier = more_gold_for_peoples
+            has_country_modifier = more_gold_help_yourself
+        }
+        #part solidus
+        has_country_modifier = solidus_introduced
+        any_character = {
+            has_variable = head_intent_consolidate
+            is_ruler = no
+        }
+        any_character = {
+            count >= 2 
+            is_ruler = no
+            OR = {
+                has_variable = head_intent_consolidate
+                AND = {
+                    has_variable = head_intent_disloyal
+                    root = {
+                        towards_civil_war = no
+                    }
+                }
+            }
         }
     }
 
@@ -4001,74 +4026,43 @@ c3rd_other_events.40 = { #corruption from gold
     }
     immediate = {
         set_variable = {
-            name = leaders
-            value = 0
+            name = got_chest_open
+            days = 9125
         }
         set_variable = {
-            name = politics
-            value = 0
+            name = has_economic_reforms_variable
+            days = 19000
         }
-        every_character = {
+        random_character = {
             limit = {
+                is_ruler = no
+                has_variable = head_intent_consolidate
+            }
+            save_scope_as = first_consolidate_more_gold
+        }
+        random_character = {
+            limit = {
+                is_ruler = no
+                NOT = {
+                    this = scope:first_consolidate_more_gold
+                }
                 OR = {
-                    has_any_office = yes
-					has_tech_office = yes
-                    is_governor = yes
-                    is_general = yes
-                    is_ruler = yes
-                    is_co_ruler = yes
-                }
-            }
-            root = {
-                change_variable = {
-                    name = politics
-                    add = 1
-                }
-            }
-            if = {
-                limit = {
-                    OR = {
-                        has_any_office = yes
-                        is_ruler = yes
-                        is_co_ruler = yes
+                    has_variable = head_intent_consolidate
+                    AND = {
+                        has_variable = head_intent_disloyal
+                        root = {
+                            towards_civil_war = no
+                        }
                     }
                 }
-                root = {
-                    change_variable = {
-                        name = leaders
-                        add = 1
-                    }
-                }
-
             }
+            save_scope_as = second_consolidate_more_gold
         }
     }
-    option = { #leaders gets rich
+    option = { #more 
         name = c3rd_other_events.40.a
         custom_tooltip = c3rd_other_events.40.a.tt1
-        hidden_effect = {
-            every_character = {
-                limit = {
-                    OR = {
-                        has_any_office = yes
-                        is_ruler = yes
-                        is_co_ruler = yes
-                    }
-                }
-                add_gold = root.has_monthly_income
-                add_corruption = 50
-            }
-        }
-        add_treasury = {
-            value = var:leaders
-            multiply = has_monthly_income
-            multiply = -1
-        }
-    }
-    option = { #politics get rich
-        name = c3rd_other_events.40.b
-        custom_tooltip = c3rd_other_events.40.b.tt1
-        add_political_influence = 50
+        add_political_influence = 25
         hidden_effect = {
             every_character = {
                 limit = {
@@ -4076,75 +4070,558 @@ c3rd_other_events.40 = { #corruption from gold
                         has_any_office = yes
                         has_tech_office = yes
                         is_governor = yes
-                        is_general = yes
                         is_ruler = yes
                         is_co_ruler = yes
                     }
                 }
-                add_gold = root.has_monthly_income
-                add_corruption = 20
-            }
-        }
-        add_treasury = {
-            value = var:politics
-            multiply = has_monthly_income
-            multiply = -1
-        }
-    }
-    option = { #everyone gets rich
-        trigger = {
-            current_date >= 750.1.1
-        }
-        name = c3rd_other_events.40.c
-        custom_tooltip = c3rd_other_events.40.c.tt1
-        hidden_effect = {
-            every_character = {
-                limit = {
-                    OR = {
-                        has_any_office = yes
-                        has_tech_office = yes
-                        is_governor = yes
-                        is_general = yes
-                        is_ruler = yes
-                        is_co_ruler = yes
-                    }
-                }
-                add_gold = root.has_monthly_income
                 add_corruption = 10
             }
         }
-        add_treasury = {
-            value = var:politics
-            multiply = has_monthly_income
-            add = num_of_pops_integrated
-            multiply = -1
-        }
         add_country_modifier = {
-            name = games_games
-            duration = 365
+            name = more_gold_for_peoples
+            duration = 18250
         }
-		if = {
-			limit = {
-				has_variable = deflation_value
-				var:deflation_value > 5
-			}
-			change_variable = {
-				name = deflation_value
-				add = -5
-			}
-		}
     }
-    after = {
-        remove_variable = leaders
-        remove_variable = politics
-        set_variable = {
-            name = got_chest_open
-            days = 1850
+    option = { #nope, they'll serve themselves
+        name = c3rd_other_events.40.b
+        custom_tooltip = c3rd_other_events.40.b.tt1
+        add_political_influence = -10
+        
+        add_country_modifier = {
+            name = more_gold_help_yourself
+            duration = 18250
+        }
+    }
+    option = { #mine mine !
+        trigger = {
+            NOR = {
+                has_country_modifier = political_turmoils
+                has_country_modifier = political_unstability
+                scope:first_consolidate_more_gold = {
+                    has_character_modifier = political_power_character
+                }
+                scope:second_consolidate_more_gold = {
+                    has_character_modifier = political_power_character
+                }
+            }
+        }
+        name = c3rd_other_events.40.c
+        custom_tooltip = c3rd_other_events.40.c.tt1
+        add_tyranny = 25
+        if = {
+            limit = {
+                stability >= 80
+            }
+            add_stability = -15
+        }
+        else_if = {
+            limit = {
+                stability >= 70
+            }
+            add_stability = -10
+        }
+        else_if = {
+            limit = {
+                stability >= 60
+            }
+            add_stability = -8
+        }
+        else_if = {
+            limit = {
+                stability >= 50
+            }
+            add_stability = -5
+        }
+        else = {
+            add_stability = -3
         }
     }
 
 }
 
+
+c3rd_other_events.41 = { #corruption from gold -- the military now wants more
+    type = country_event
+    title = "c3rd_other_events.41.t"
+    desc = "c3rd_other_events.41.desc"
+    right_portrait = scope:first_consolidate_more_gold_soldier
+    right_portrait = scope:second_consolidate_more_gold_soldier
+
+    picture = greek_court
+
+    trigger = {
+        has_land = yes
+        current_date >= 600.1.1
+        treasury >= 10000
+        has_civil_war = no
+        OR = {
+            treasury >= income_150
+            treasury >= 90000
+        }
+        OR = {
+            has_country_modifier = more_gold_for_peoples
+            has_country_modifier = more_gold_help_yourself
+        }
+        NOR = {
+            has_country_modifier = more_gold_for_military
+            has_country_modifier = more_gold_help_mil
+            has_country_modifier = more_gold_for_military_2
+            has_country_modifier = more_gold_help_mil_2
+        }
+        NOR = {
+            has_variable = got_chest_open_2
+            has_variable = got_chest_open
+        }
+        has_country_modifier = solidus_introduced
+        any_character = {
+            has_variable = head_intent_consolidate
+            is_ruler = no
+        }
+        any_character = {
+            count >= 2 
+            is_ruler = no
+            OR = {
+                has_variable = head_intent_consolidate
+                AND = {
+                    has_variable = head_intent_disloyal
+                    root = {
+                        towards_civil_war = no
+                    }
+                }
+            }
+        }
+        OR = {
+            AND = {
+                has_law = basic_administrative_law
+                any_character = {
+                    is_general = yes
+                    power_base >= 5
+                    loyalty <= 35
+                }
+            }
+            any_governorships = {
+                has_legion_trigger = yes
+                has_variable = governorship_owner
+                legion = {
+                    any_legion_unit = {
+                        unit_size >= 60
+                        commander = {
+                            is_ruler = no
+                        }
+                    }
+                }
+            }
+
+        }
+    }
+
+    weight_multiplier = {
+        modifier = {
+            factor = 1.5
+            stability >= 60
+        }
+        modifier = {
+            factor = 1.5
+            stability >= 75
+        }
+        modifier = {
+            factor = 1.5
+            treasury >= income_300
+        }
+        modifier = {
+            factor = 0.25
+            current_ruler = {
+                has_trait = honest
+            }
+        }
+        modifier = {
+            factor = 0.2
+            current_ruler = {
+                has_trait = righteous
+            }
+        }
+    }
+    immediate = {
+        set_variable = {
+            name = got_chest_open_2
+            days = 9125
+        }
+        set_variable = {
+            name = has_economic_reforms_variable
+            days = 18000
+        }
+        random_character = {
+            limit = {
+                is_ruler = no
+                has_variable = head_intent_consolidate
+            }
+            save_scope_as = first_consolidate_more_gold
+        }
+        random_character = {
+            limit = {
+                is_ruler = no
+                NOT = {
+                    this = scope:first_consolidate_more_gold
+                }
+                OR = {
+                    has_variable = head_intent_consolidate
+                    AND = {
+                        has_variable = head_intent_disloyal
+                        root = {
+                            towards_civil_war = no
+                        }
+                    }
+                }
+            }
+            save_scope_as = second_consolidate_more_gold
+        }
+    }
+    option = { #more 
+        name = c3rd_other_events.41.a
+        custom_tooltip = c3rd_other_events.41.a.tt1
+        add_political_influence = 25
+        hidden_effect = {
+            every_character = {
+                limit = {
+                    OR = {
+                        is_general = yes
+                        is_governor = yes
+                        is_ruler = yes
+                        is_co_ruler = yes
+                    }
+                }
+                add_corruption = 10
+            }
+        }
+        custom_tooltip = c3rd_other_events.41.a.tt2
+        if = {
+            limit = {
+                has_country_modifier = more_gold_for_peoples
+            }
+            hidden_effect = {
+                remove_country_modifier = more_gold_for_peoples
+            }
+            add_country_modifier = {
+                name = more_gold_for_military
+                duration = 18250
+            }
+        }
+        else_if = {
+            limit = {
+                has_country_modifier = more_gold_help_yourself
+            }
+            hidden_effect = {
+                remove_country_modifier = more_gold_help_yourself
+            }
+            add_country_modifier = {
+                name = more_gold_help_mil
+                duration = 18250
+            }
+        }
+    }
+    option = { #nope, they'll serve themselves
+        name = c3rd_other_events.41.b
+        custom_tooltip = c3rd_other_events.41.b.tt1
+        add_political_influence = -10
+        custom_tooltip = c3rd_other_events.41.a.tt2
+        if = {
+            limit = {
+                has_country_modifier = more_gold_for_peoples
+            }
+            hidden_effect = {
+                remove_country_modifier = more_gold_for_peoples
+            }
+            add_country_modifier = {
+                name = more_gold_for_military_2
+                duration = 18250
+            }
+        }
+        else_if = {
+            limit = {
+                has_country_modifier = more_gold_help_yourself
+            }
+            hidden_effect = {
+                remove_country_modifier = more_gold_help_yourself
+            }
+            add_country_modifier = {
+                name = more_gold_help_mil_2
+                duration = 18250
+            }
+        }
+    }
+    option = { #mine mine !
+        trigger = {
+            NOR = {
+                has_country_modifier = political_turmoils
+                has_country_modifier = political_unstability
+                has_country_modifier = military_anarchy
+                scope:first_consolidate_more_gold = {
+                    has_character_modifier = political_power_character
+                }
+                scope:second_consolidate_more_gold = {
+                    has_character_modifier = political_power_character
+                }
+            }
+        }
+        name = c3rd_other_events.41.c
+        custom_tooltip = c3rd_other_events.41.c.tt1
+
+        if = {
+            limit = {
+                has_law = basic_administrative_law
+            }
+            custom_tooltip = c3rd_other_events.41.c.tt2
+            add_legitimacy = -10
+            every_character = {
+                limit = {
+                    is_general = yes
+                    is_ruler = no
+                    is_mercenary = no
+                }
+                add_loyalty = disappointed
+            }
+			if = {
+				limit = { has_variable = unworthy_leader}
+				change_variable = {
+					name = unworthy_leader
+					add = 1
+				}
+			}
+			else = {
+				set_variable = {
+					name = unworthy_leader
+					value = 1
+				}
+			}
+            
+        }
+        else = {
+            add_tyranny = 10
+            add_political_influence = -25
+        }
+        if = {
+            limit = {
+                stability >= 80
+            }
+            add_stability = -15
+        }
+        else_if = {
+            limit = {
+                stability >= 70
+            }
+            add_stability = -10
+        }
+        else_if = {
+            limit = {
+                stability >= 60
+            }
+            add_stability = -8
+        }
+        else_if = {
+            limit = {
+                stability >= 50
+            }
+            add_stability = -5
+        }
+        else = {
+            add_stability = -3
+        }
+    }
+
+}
+
+
+c3rd_other_events.42 = { #corruption from gold -- the military now wants more
+    type = country_event
+    title = "c3rd_other_events.42.t"
+    desc = "c3rd_other_events.42.desc"
+    right_portrait = scope:first_consolidate_more_gold_soldier
+    right_portrait = scope:second_consolidate_more_gold_soldier
+
+    picture = greek_court
+
+    trigger = {
+        has_land = yes
+        current_date >= 600.1.1
+        OR = {
+            has_country_modifier = more_gold_for_peoples
+            has_country_modifier = more_gold_help_yourself
+            has_country_modifier = more_gold_for_military
+            has_country_modifier = more_gold_help_mil
+            has_country_modifier = more_gold_for_military_2
+            has_country_modifier = more_gold_help_mil_2
+        }
+        NOR = {
+            has_variable = got_chest_open_2
+            has_variable = got_chest_open
+            has_variable = has_economic_reforms_variable
+        }
+        has_country_modifier = solidus_introduced
+    }
+    immediate = {
+    }
+    option = { #yes keep it
+        name = c3rd_other_events.42.a
+        custom_tooltip = c3rd_other_events.42.a.tt1
+        add_political_influence = 25
+        add_stability = 5
+        set_variable = {
+            name = has_economic_reforms_variable
+            days = 18000
+        }
+        hidden_effect = {
+            if = {
+                limit = {
+                    has_country_modifier = more_gold_for_peoples
+                }
+                remove_country_modifier = more_gold_for_peoples
+                add_country_modifier = {
+                    name = more_gold_for_peoples
+                    duration = 18250
+                }
+                set_variable = {
+                    name = got_chest_open
+                    days = 9125
+                }
+            }
+            else_if = {
+                limit = {
+                    has_country_modifier = more_gold_help_yourself
+                }
+                remove_country_modifier = more_gold_help_yourself
+                add_country_modifier = {
+                    name = more_gold_help_yourself
+                    duration = 18250
+                }
+                set_variable = {
+                    name = got_chest_open
+                    days = 9125
+                }
+            }
+            else_if = {
+                limit = {
+                    has_country_modifier = more_gold_for_military
+                }
+                remove_country_modifier = more_gold_for_military
+                add_country_modifier = {
+                    name = more_gold_for_military
+                    duration = 18250
+                }
+                set_variable = {
+                    name = got_chest_open_2
+                    days = 9125
+                }
+            }
+            else_if = {
+                limit = {
+                    has_country_modifier = more_gold_help_mil
+                }
+                remove_country_modifier = more_gold_help_mil
+                add_country_modifier = {
+                    name = more_gold_help_mil
+                    duration = 18250
+                }
+                set_variable = {
+                    name = got_chest_open_2
+                    days = 9125
+                }
+            }
+            else_if = {
+                limit = {
+                    has_country_modifier = more_gold_for_military_2
+                }
+                remove_country_modifier = more_gold_for_military_2
+                add_country_modifier = {
+                    name = more_gold_for_military_2
+                    duration = 18250
+                }
+                set_variable = {
+                    name = got_chest_open_2
+                    days = 9125
+                }
+            }
+            else_if = {
+                limit = {
+                    has_country_modifier = more_gold_help_mil_2
+                }
+                remove_country_modifier = more_gold_help_mil_2
+                add_country_modifier = {
+                    name = more_gold_help_mil_2
+                    duration = 18250
+                }
+                set_variable = {
+                    name = got_chest_open_2
+                    days = 9125
+                }
+            }
+        }
+    }
+    option = { #nope, no more 
+        name = c3rd_other_events.42.b
+        custom_tooltip = c3rd_other_events.42.b.tt1
+        set_variable = {
+            name = got_chest_open
+            days = 9125
+        }
+        set_variable = {
+            name = got_chest_open_2
+            days = 9125
+        }
+        if = {
+            limit = {
+                treasury >= 10000
+                has_civil_war = no
+                OR = {
+                    treasury >= income_150
+                    treasury >= 90000
+                }
+            }
+            add_political_influence = -50
+            if = {
+                limit = {
+                    stability >= 80
+                }
+                add_stability = -10
+            }
+            else_if = {
+                limit = {
+                    stability >= 70
+                }
+                add_stability = -8
+            }
+            else_if = {
+                limit = {
+                    stability >= 60
+                }
+                add_stability = -5
+            }
+            else_if = {
+                limit = {
+                    stability >= 50
+                }
+                add_stability = -3
+            }
+            else = {
+                add_stability = -2
+            }
+        }
+        else = {
+            add_political_influence = -25
+        }
+        every_character = {
+            limit = {
+                is_ruler = no
+                OR = {
+                    has_variable = head_intent_consolidate
+                    has_variable = head_intent_disloyal
+                }
+            }
+            add_loyalty = disappointed
+        }
+        
+    }
+
+}
 
 c3rd_other_events.50 = { #Great work gets pillaged by starving people
     type = country_event
@@ -4610,19 +5087,98 @@ c3rd_other_events.52 = { #stabhit because pillaged wonders
         trigger = {
             is_monarchy = yes
         }
-        add_legitimacy = -20
+        if = {
+            limit = {
+                stability >= 80
+            }
+            add_legitimacy = -40
+        }
+        else_if = {
+            limit = {
+                stability >= 70
+            }
+            add_legitimacy = -35
+        }
+        else_if = {
+            limit = {
+                stability >= 60
+            }
+            add_legitimacy = -30
+        }
+        else_if = {
+            limit = {
+                stability >= 50
+            }
+            add_legitimacy = -25
+        }
+        else = {
+            add_legitimacy = -20
+        }
     }
 
     option = { #stability
         name = c3rd_other_events.52.b
         custom_tooltip = c3rd_other_events.52.b.tt1
-        add_stability = -7
+        if = {
+            limit = {
+                stability >= 80
+            }
+            add_stability = -15
+        }
+        else_if = {
+            limit = {
+                stability >= 70
+            }
+            add_stability = -12
+        }
+        else_if = {
+            limit = {
+                stability >= 60
+            }
+            add_stability = -10
+        }
+        else_if = {
+            limit = {
+                stability >= 50
+            }
+            add_stability = -8
+        }
+        else = {
+            add_stability = -7
+        }
+        
     }
 
     option = { #stability and start repairing
         name = c3rd_other_events.52.c
         custom_tooltip = c3rd_other_events.52.c.tt1
-        add_stability = -7
+        if = {
+            limit = {
+                stability >= 80
+            }
+            add_stability = -15
+        }
+        else_if = {
+            limit = {
+                stability >= 70
+            }
+            add_stability = -12
+        }
+        else_if = {
+            limit = {
+                stability >= 60
+            }
+            add_stability = -10
+        }
+        else_if = {
+            limit = {
+                stability >= 50
+            }
+            add_stability = -8
+        }
+        else = {
+            add_stability = -7
+        }
         trigger_event = {
             id = c3rd_other_events.51
         }
@@ -14989,6 +15545,16 @@ c3rd_other_events.140 = { #losing permanent modifiers
                 has_country_modifier = internal_collapse
                 has_country_modifier = c3rd_border_pressure
             }
+            AND = {
+                current_date >= 1000.1.1
+                has_country_modifier = c3rd_border_pressure
+                stability <= 25
+            }
+            AND = {
+                current_date >= 1100.1.1
+                has_country_modifier = c3rd_border_pressure
+                stability <= 30
+            }
         }
     }
 
@@ -15021,6 +15587,7 @@ c3rd_other_events.140 = { #losing permanent modifiers
     option = { 
         name = c3rd_other_events.140.a
         custom_tooltip = c3rd_other_events.140.a.tt1
+        add_stability = 5
     }
 }
 
