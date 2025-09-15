@@ -1,0 +1,278 @@
+﻿grant_several_holding = {
+	on_other_nation = no
+	on_own_nation = yes
+	sound = "event:/SFX/UI/Character/Generic/sfx_ui_character_economy"
+	potential_trigger = {
+		hidden:scope:target = {
+			is_alive = yes
+			employer = scope:actor
+			NOT = {
+				employer = {
+					tag = REB
+				}
+			}
+			NOT = {
+				employer = {
+					tag = BAR
+				}
+			}
+			NOT = {
+				employer = {
+					tag = MER
+				}
+			}
+			is_mercenary = no
+			is_adult = yes
+			OR = {
+				is_head_of_family = yes
+				AND = {
+					employer = {
+						OR = {
+							NOT = {
+								has_law = basic_administrative_law
+							}
+							has_country_modifier = solidus_introduced
+						}
+					}
+					is_governor = yes
+				}
+			}
+		}
+	}
+	allowed_trigger = {
+		scope:actor = {
+			possible_holdings > 1
+			treasury >= character_holding_price_svalue_ci
+		}
+		trigger_if = {
+			limit = {
+				scope:target = {
+					has_variable = land_taken_recently
+				}
+			}
+			custom_tooltip = {
+				text = grant_holding_trigger_tt
+				scope:target = {
+					NOT = {
+						has_variable = land_taken_recently
+					}
+				}
+			}
+		}
+		trigger_if = {
+			limit = {
+				scope:actor = {
+					has_country_modifier = fight_global_corruption
+				}
+			}
+			custom_tooltip = {
+				text = fight_global_corruption_tt
+				scope:actor = {
+					NOT = {
+						has_country_modifier = fight_global_corruption
+					}
+				}
+			}
+		}
+		trigger_if = {
+			limit = {
+				OR = {
+					AND = {
+						scope:target = {
+							is_head_of_family = no
+							is_governor = yes
+						}
+						scope:actor = {
+							NOT = {
+								any_owned_province = {
+									count >= 4
+									governor = scope:target
+									NOT = {
+										exists = holding_owner
+									}
+								}
+							}
+						}
+					}
+					AND = {
+						scope:target = {
+							is_head_of_family = yes
+						}
+						scope:actor = {
+							NOT = {
+								any_owned_province = {
+									count >= 4
+									NOT = {
+										exists = holding_owner
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			custom_tooltip = {
+				text = grant_holding_nomore_tt
+				OR = {
+					AND = {
+						scope:target = {
+							is_head_of_family = no
+							is_governor = yes
+						}
+						scope:actor = {
+							any_owned_province = {
+								count >= 4
+								governor = scope:target
+								NOT = {
+									exists = holding_owner
+								}
+							}
+						}
+					}
+					AND = {
+						scope:target = {
+							is_head_of_family = yes
+						}
+						scope:actor = {
+							any_owned_province = {
+								count >= 4
+								NOT = {
+									exists = holding_owner
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	effect = {
+		scope:actor = {
+			add_treasury = {
+				value = 0
+				subtract = character_holding_price_svalue_ci
+				multiply = 4
+			}
+			if = {
+				limit = {
+					scope:target = {
+						is_head_of_family = yes
+					}
+					has_variable = senate_objective_grant_holding_count_optimates
+				}
+				change_variable = {
+					add = 4
+					name = senate_objective_grant_holding_count_optimates
+				}
+			}
+			if = {
+				limit = {
+					has_variable = senate_objective_grant_holding_count_populares
+					scope:target = {
+						is_minor_character = yes
+					}
+				}
+				change_variable = {
+					add = 4
+					name = senate_objective_grant_holding_count_populares
+				}
+			}
+			if = {
+				limit = {
+					has_variable = sen_obj_gra_hol_count
+					scope:target = {
+						is_head_of_family = yes
+					}
+				}
+				change_variable = {
+					name = sen_obj_gra_hol_count
+					add = 4
+				}
+			}
+			ordered_owned_province = {
+				limit = {
+					OR = {
+						NOT = {
+							exists = holding_owner
+						}
+						AND = {
+							exists = holding_owner
+							holding_owner = {
+								is_alive = no
+							}
+						}
+					}
+					trigger_if = {
+						limit = {
+							owner = {
+								NOT = {
+									has_law = basic_administrative_law
+								}
+							}
+							scope:target = {
+								is_governor = yes
+							}
+						}
+						governor = scope:target
+					}
+					NOT = {
+						this = scope:actor.capital_scope
+					}
+				}
+				max = 4
+				scope:target = {
+					add_holding = prev
+				}
+				if = {
+					limit = {
+						governorship = {
+							has_variable = governorship_owner
+							var:governorship_owner = scope:target
+						}
+					}
+					scope:recipient.governorship = {
+						calculate_the_gov_ownership = yes
+					}
+				}
+			}
+		}
+		scope:target = {
+			if = {
+				limit = {
+					is_ruler = no
+				}
+				add_loyalty = granted_holding_l
+				add_loyalty = granted_holding_l
+				add_loyalty = granted_holding_l
+				add_loyalty = granted_holding_l
+			}
+			else = {
+				if = {
+					#c3rd
+					limit = {
+						corruption >= 98
+					}
+					add_popularity = -20
+					employer = {
+						add_legitimacy = -15
+					}
+				}
+				add_corruption = 20
+				employer = {
+					#c3rd
+					if = {
+						limit = {
+							has_country_modifier = solidus_introduced
+						}
+						add_tyranny = 2
+					}
+				}
+			}
+			set_variable = {
+				name = got_holdings_recently
+				days = 365
+			}
+		}
+		custom_tooltip = "grant_several_holding_effect_tooltip"
+	}
+}

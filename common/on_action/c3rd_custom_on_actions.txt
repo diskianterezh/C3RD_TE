@@ -33,6 +33,7 @@ c3rd_custom_on_actions_low_stab_event = {
 		5 = low_stab_event.12
 		1 = low_stab_event.13
         45 = low_stab_event.3
+		40 = low_stab_event.16
 		3 = low_stab_event.14
         15 = low_stab_event.15
 	}

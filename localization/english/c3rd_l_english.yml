@@ -209,6 +209,10 @@
  desc_more_gold_for_military_2:0 "All salaries have been increased to match the incredible ressources of our nation and the reserves have been open to the military"
  more_gold_help_mil_2:0 "Open Chests"
  desc_more_gold_help_mil_2:0 "The country's vast wealth is redistributed to the population and reserves have been open to the soldiers"
+ epidemy_modifier_solidus_1:0 "National unity under pressure"
+ desc_epidemy_modifier_solidus_1:0 "One of the consequences of the Gold Standard was that it allowed the upper aristocracy to become much more independent... when the need arose."
+ epidemy_modifier_solidus_2:0 "National unity under pressure"
+ desc_epidemy_modifier_solidus_2:0 "One of the consequences of the Gold Standard was that it allowed the upper aristocracy to become much more independent... when the need arose."
 
  #opinion:
  empire_rivals:0 "Rivals Empires"
@@ -237,10 +241,6 @@
  reduced_the_autonomy_desc:0 "Every #T major landowners#! are above #G 75#! loyalty"
  recent_decentralization_desc:0 "#R The decentralization have been too recently enacted #!"
  constantine_reform_available_desc:0 "The reform was made accessible by the contribution of an enlightened ruler"
- epidemy_modifier_solidus_1:0 "National unity under pressure"
- epidemy_modifier_solidus_1_desc:0 "One of the consequences of the Gold Standard was that it allowed the upper aristocracy to become much more independent... when the need arose."
- epidemy_modifier_solidus_2:0 "National unity under pressure"
- epidemy_modifier_solidus_2_desc:0 "One of the consequences of the Gold Standard was that it allowed the upper aristocracy to become much more independent... when the need arose."
 
 
  #loyalty:
@@ -543,6 +543,12 @@
  reintegrate_region_tt2:0 "The owner, [target.GetEmployer.MakeScope.GetVariable('owner_from_another_empire').GetCharacter.GetName] is in another country, [target.GetEmployer.MakeScope.GetVariable('owner_from_another_empire').GetCharacter.GetEmployer.GetName] and not [actor.GetName]. The fate of the domain will soon be decided."
  reintegrate_region_tt3:0 "You recently negociated with the owner, [target.GetEmployer.MakeScope.GetVariable('owner_from_another_empire').GetCharacter.GetName]"
  fight_global_corruption_tt:0 "You are currently fighting global corruption"
+ grant_several_holding:0 "Grant Several Holding"
+ grant_several_holding_act:0 "Grant 4 holding to $CHAR$"
+ grant_several_holding_past:0 "Granted 4 holding to $CHAR$"
+ grant_several_holding_act_past:0 "$COUNTRY$ granted 4 Holding to $CHAR$"
+ grant_several_holding_effect_tooltip:0 "[target.GetName|Y] will be granted 4 random Holdings."
+ grant_holding_nomore_tt:0 "There is not enough holdings available to hand out"
 
  #subjects
 
@@ -712,6 +718,25 @@ low_stab_event.9.b.tt1:0 "You will garrison the [state_duchy_grab.GetName] in or
  low_stab_event.15.b:0 "Don't give up and stand firm!"
  low_stab_event.15.b.tt1:0 "As your stability above the minimum, you will be able to prevent these effects"
 
+
+ low_stab_event.17.t:0 "Rival collapse"
+ low_stab_event.17.desc:0 "Disturbing news is reaching us from the other side of the civil war tearing our country apart: it seems that enemy governors are seceding one after the other. One of them, [byebye_governor_civilwar.GetName], no doubt sensing the tide turning, has come to see us, wishing to join our legitimate government with the lands he controls in [byebye_governorship_civilwar.GetName]. It is clear that such a proposal would greatly benefit us by weakening our enemy, but can we really trust a traitor?"
+ low_stab_event.17.a:0 "Let us accept his return."
+ low_stab_event.17.a.tt1:0 "[byebye_governor_civilwar.GetName] will rejoin our empire, along with his lands, and will be governor of [byebye_governorship_civilwar.GetName]."
+ low_stab_event.17.b:0 "He will die like the others"
+ low_stab_event.17.b.tt1:0 "Nothing will happen."
+
+ low_stab_event.18.t:0 "Traitor to the nation"
+ low_stab_event.18.desc:0 "We have just received some devastating news. [byebye_governor_civilwar.GetName], governor of [byebye_notif.GetName], has deserted and joined the usurpers in our existential war. The collapse of our empire is taking a new turn."
+ low_stab_event.18.a:0 "Traitors, all of them traitors"
+ low_stab_event.18.a.tt1:0 "The governorate of [byebye_notif.GetName] has gone over to the enemy.."
+
+ low_stab_event.19.t:0 "The rival empire collapses"
+ low_stab_event.19.desc:0 "Interesting news is emerging about our imperial rival: all indicators suggest that [collapse_center.GetName]'s unity is collapsing and that their usurping state is falling apart. The misfortune of a rival is always gratifying... but these are lands that are rightfully ours that are about to be divided up. Our satisfaction is therefore relative..."
+ low_stab_event.19.a:0 "We must not allow the empire to fall apart!"
+ low_stab_event.19.a.tt1:0 "[collapse_center.GetName] is suffering an #R Internal collapse #! \nYou will support [collapse_center.GetName]'s stability in order to help it recover from collapse."
+ low_stab_event.19.b:0 "Perfect, divide then conquer"
+ low_stab_event.19.b.tt1:0 "[collapse_center.GetName] is suffering an #R Internal collapse #!"
 
  c3rd_events.1.t:0 "Bureaucratic mess"
  c3rd_events.1.desc:0 "Our bureaucratic system is entangled in its diplomatic relations, and is no longer able to keep up with the affairs of the various countries that form the empire. Some subjects have adapted, however, and [chosen_subject.GetName] in particular has naturally filled the administrative gaps with his own administrators. In their own words, this will 'considerably lighten the administrative overload'..."
@@ -1864,7 +1889,7 @@ low_stab_event.9.b.tt1:0 "You will garrison the [state_duchy_grab.GetName] in or
  c3rd_other_events.140.desc.1:0 "In the halls and squares commemorating our nation's glory, the lustre of the statues has long since faded. And invasive lichen is taking hold as the names and glories of our past tarnish. We must face the facts: the decline of our dominance is a reality, and while the future looks bleak amid the current turmoil, the radiance of our past is fading from memory.\nWhatever our future achievements may be, we will no longer be able to boast of the achievements of our ancestors."
  c3rd_other_events.140.desc.2:0 "In the halls and squares commemorating our nation's glory, the lustre of the statues has long since faded. People lower their gaze and turn their backs on their former radiance. We must face the facts: how can we claim our heritage when our empire is divided and our stability is in jeopardy? \nWhatever our future achievements may be, we can no longer boast of the feats of our ancestors."
  c3rd_other_events.140.a:0 "Thus flows the tide of time"
- c3rd_other_events.141.a.tt1:0 "You have lost the following modifier:"
+ c3rd_other_events.140.a.tt1:0 "You have lost the following modifier:"
 
  c3rd_other_events.141.t:0 "An evolving bureaucracy"
  c3rd_other_events.141.desc:0 "Recent economic reforms are somewhat at odds with our bureaucracy. It would appear that the reforms of the past are no longer sufficient in this new era. We can either persevere with our traditions, at the cost of a few concessions, or adopt a more modern approach, better suited to the centuries to come."

@@ -1598,6 +1598,7 @@ c3rd_other_events.12 = { #games
     trigger = {
         has_land = yes
         is_tribal = no
+        has_civil_war = no
         invention = public_games
         current_date >= 700.1.1
         NOT = {
