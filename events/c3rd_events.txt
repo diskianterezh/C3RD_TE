@@ -630,7 +630,7 @@ c3rd_events.5 = {
 			}
 			set_variable = {
 				name = recent_volontary_general
-				days = 1100				#3years
+				days = 1465				#4years
 			}
 		}
 		else = {
@@ -680,7 +680,27 @@ c3rd_events.5 = {
 				is_monarchy = yes
 				has_law = basic_administrative_law
 			}
-			add_legitimacy = 6
+			if = {
+				limit = {
+					legitimacy <= -50
+				}
+				add_legitimacy = 40
+			}
+			else_if = {
+				limit = {
+					legitimacy <= 0
+				}
+				add_legitimacy = 25
+			}
+			else_if = {
+				limit = {
+					legitimacy <= 25
+				}
+				add_legitimacy = 15
+			}
+			else = {
+				add_legitimacy = 10
+			}
 		}
 		else_if = {
 			limit = {
@@ -726,6 +746,15 @@ c3rd_events.5 = {
 				}
 			}
 			add_loyalty = loyalty_forced
+		}
+		if = {
+			limit = {
+				has_civil_war = yes
+			}
+			add_country_modifier = {
+				name = event_5_civil_war
+				duration = 1850 #5years
+			}
 		}
 		hidden_effect = {
 			random_list = {
@@ -2790,6 +2819,7 @@ c3rd_events.21 = {
 				NOR = {
 					has_variable = defection_prevented
 					is_friend = ruler
+					is_head_of_family = yes
 				}
 			}
 			any_neighbor_province = {
@@ -2857,6 +2887,7 @@ c3rd_events.21 = {
 					NOR = {
 						has_variable = defection_prevented
 						is_friend = ruler
+						is_head_of_family = yes
 					}
 				}
 				any_neighbor_province = {

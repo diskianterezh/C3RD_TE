@@ -773,3 +773,10 @@ epidemy_modifier_solidus_2 = {
     land_morale_modifier = -0.15
 	monthly_corruption = 0.1
 }
+
+event_5_civil_war = {
+    experience_decay = -0.05
+    land_morale_modifier = 0.1
+    land_morale_recovery = 0.1
+	siege_ability = 0.1
+}
