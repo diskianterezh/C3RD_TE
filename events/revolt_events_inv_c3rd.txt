@@ -1,28 +1,34 @@
 ﻿namespace = revolt_events
-
 revolt_events.1 = {
-    type = country_event
-    hidden = yes
-
-    immediate = {
-    	#root = player country
-    	scope:revolting_state_province = {
-    		owner = {
-    			#This is the revolting country
-    			add_military_experience_to_new_country_effect = yes #Give mil experience to revolts so they can compete
-    			random_current_war = {
-    				save_scope_as = revolt_war_scope
-    			}
-    			save_scope_as = revolt_country
-    		}
-    		area = {
-    			every_area_province = {
-    				add_claim = root
-    			}
-    		}
-    	}
-    	random_list = {
-    		60 = { #Single large rebellion
+	type = country_event
+	hidden = yes
+	trigger = {
+		scope:revolting_state_province.owner = {
+			NOT = {
+				this = root
+			}
+		}
+	}
+	immediate = {
+		#root = player country
+		scope:revolting_state_province = {
+			owner = {
+				#This is the revolting country
+				add_military_experience_to_new_country_effect = yes				#Give mil experience to revolts so they can compete
+				random_current_war = {
+					save_scope_as = revolt_war_scope
+				}
+				save_scope_as = revolt_country
+			}
+			area = {
+				every_area_province = {
+					add_claim = root
+				}
+			}
+		}
+		random_list = {
+			60 = {
+				#Single large rebellion
 				every_country_state = {
 					limit = {
 						NOT = {
@@ -48,8 +54,11 @@ revolt_events.1 = {
 					capital_scope = {
 						area = {
 							every_area_province = {
-								limit = { owner = root }
+								limit = {
+									owner = root
+								}
 								set_owned_by = scope:revolt_country
+								add_claim = root
 							}
 						}
 					}
@@ -71,14 +80,14 @@ revolt_events.1 = {
 						set_owned_by = scope:revolt_country
 					}
 				}
-
-	    	}
-			20 = { #Revolt buffed
-    			trigger = {
-    				num_of_cities > 100
-    			}
+			}
+			20 = {
+				#Revolt buffed
+				trigger = {
+					num_of_cities > 100
+				}
 				every_country_state = {
-		    		limit = {
+					limit = {
 						NOT = {
 							this = root.capital_scope.state
 						}
@@ -95,19 +104,22 @@ revolt_events.1 = {
 								}
 							}
 						}
-		    		}
+					}
 					capital_scope.culture = {
 						save_scope_as = new_culture_revolt
 					}
-		    		capital_scope = {
+					capital_scope = {
 						area = {
 							every_area_province = {
-								limit = { owner = root }
+								limit = {
+									owner = root
+								}
 								set_owned_by = scope:revolt_country
+								add_claim = root
 							}
 						}
-		    		}
-		    	}
+					}
+				}
 				every_country_state = {
 					limit = {
 						any_state_province = {
@@ -126,44 +138,45 @@ revolt_events.1 = {
 					}
 				}
 				scope:revolt_country = {
-    				random_list = {
-    					1 = {
-			    			create_unit = {
-			    				location = scope:revolt_country.capital_scope
-			    				add_subunit = heavy_infantry
-			    				add_subunit = heavy_infantry
-			    				add_subunit = heavy_infantry
-			    				add_subunit = light_infantry
-			    				add_subunit = light_infantry
-			    				add_subunit = light_infantry
-			    				add_subunit = light_infantry
-			    				add_subunit = archers
-			    				add_subunit = archers
-			    				add_subunit = supply_train
-			    			}
-		    			}
-		    			2 = {
-			    			create_unit = {
-			    				location = scope:revolt_country.capital_scope
-			    				add_subunit = heavy_infantry
-			    				add_subunit = light_infantry
-			    				add_subunit = light_infantry
-			    				add_subunit = light_infantry
-			    				add_subunit = light_infantry
-			    				add_subunit = archers
-			    				add_subunit = archers
-			    			}
-		    			}
-	    			}
-	    			add_country_modifier = {
-	    				name = lucky_revolt_mod
-	    				duration = 730
-	    			}
-    			}
-    		}
-			20 = { #Multiple revolts
-		    	every_country_state = {
-		    		limit = {
+					random_list = {
+						1 = {
+							create_unit = {
+								location = scope:revolt_country.capital_scope
+								add_subunit = heavy_infantry
+								add_subunit = heavy_infantry
+								add_subunit = heavy_infantry
+								add_subunit = light_infantry
+								add_subunit = light_infantry
+								add_subunit = light_infantry
+								add_subunit = light_infantry
+								add_subunit = archers
+								add_subunit = archers
+								add_subunit = supply_train
+							}
+						}
+						2 = {
+							create_unit = {
+								location = scope:revolt_country.capital_scope
+								add_subunit = heavy_infantry
+								add_subunit = light_infantry
+								add_subunit = light_infantry
+								add_subunit = light_infantry
+								add_subunit = light_infantry
+								add_subunit = archers
+								add_subunit = archers
+							}
+						}
+					}
+					add_country_modifier = {
+						name = lucky_revolt_mod
+						duration = 730
+					}
+				}
+			}
+			20 = {
+				#Multiple revolts
+				every_country_state = {
+					limit = {
 						NOT = {
 							this = root.capital_scope.state
 						}
@@ -180,16 +193,19 @@ revolt_events.1 = {
 								}
 							}
 						}
-		    		}
-		    		capital_scope = {
+					}
+					capital_scope = {
 						if = {
 							limit = {
-								dominant_province_culture = scope:revolt_country.culture #capital_scope.culture doesnt work in capital_scope, use dominant instead
+								dominant_province_culture = scope:revolt_country.culture								#capital_scope.culture doesnt work in capital_scope, use dominant instead
 							}
 							area = {
 								every_area_province = {
-									limit = { owner = root }
+									limit = {
+										owner = root
+									}
 									set_owned_by = scope:revolt_country
+									add_claim = root
 								}
 							}
 						}
@@ -197,39 +213,44 @@ revolt_events.1 = {
 							create_country = {
 								save_scope_as = revolt_snowball_country
 							}
+							add_claim = root
 						}
-		    			if = {
-		    				limit = {
-		    					exists = scope:revolt_snowball_country
-		    				}
-		    				scope:revolt_snowball_country = {
-		    					add_military_experience_to_new_country_effect = yes #Give mil experience to revolts so they can compete
+						if = {
+							limit = {
+								exists = scope:revolt_snowball_country
+							}
+							scope:revolt_snowball_country = {
+								add_military_experience_to_new_country_effect = yes								#Give mil experience to revolts so they can compete
 								capital_scope.area = {
 									every_area_province = {
-										limit = { owner = root }
+										limit = {
+											owner = root
+										}
 										set_owned_by = scope:revolt_snowball_country
 										add_claim = root
 									}
 								}
-								random_country_culture = {
+								ordered_country_culture = {
 									limit = {
 										is_integrated = no
 									}
-									ROOT = { integrate_country_culture = PREV }
+									order_by = country_culture_pop_count
+									ROOT = {
+										integrate_country_culture = PREV
+									}
 								}
 								add_to_war = {
 									target = scope:revolt_war_scope
-						            attacker = yes
-						            leader = no
+									attacker = yes
+									leader = no
 								}
 								trigger_event = {
 									id = revolt_events.4
 								}
-		    				}
-		    			}
-						
-		    		}
-		    	}
+							}
+						}
+					}
+				}
 				every_country_state = {
 					limit = {
 						any_state_province = {
@@ -247,22 +268,28 @@ revolt_events.1 = {
 						set_owned_by = scope:revolt_country
 					}
 				}
-	    	}
-    	}
+			}
+		}
 		scope:revolt_country = {
 			#Let them integrate a random culture
-			random_country_culture = {
+			ordered_country_culture = {
 				limit = {
 					is_integrated = no
 				}
-				ROOT = { integrate_country_culture = PREV }
+				order_by = country_culture_pop_count
+				max = 2
+				ROOT = {
+					integrate_country_culture = PREV
+				}
 			}
 			trigger_event = {
 				id = revolt_events.4
 			}
 		}
 		if = {
-			limit = { is_ai = yes }
+			limit = {
+				is_ai = yes
+			}
 			trigger_event = {
 				id = revolt_events.2
 				days = 1
@@ -270,67 +297,77 @@ revolt_events.1 = {
 		}
 	}
 }
-revolt_events.2 = {
-    type = country_event
-    hidden = yes
 
-    immediate = {
+revolt_events.2 = {
+	type = country_event
+	hidden = yes
+	immediate = {
 		every_country_state = {
 			capital_scope = {
 				add_state_loyalty = 10
 			}
 		}
-    }
+	}
 }
 
-revolt_events.3 = { #test
-    type = country_event
-    hidden = yes
-
-    immediate = {
-    	random_country_state = {
-    		capital_scope = {
-    			add_state_loyalty = -99
-    		}
-    	}
-    }
+revolt_events.3 = {
+	#test
+	type = country_event
+	hidden = yes
+	immediate = {
+		random_country_state = {
+			capital_scope = {
+				add_state_loyalty = -99
+			}
+		}
+	}
 }
 
-revolt_events.4 = { #integrating country culture workaround
-    type = country_event
-    hidden = yes
-
-    immediate = {
-    	random_country_culture = {
-			limit = { 
+revolt_events.4 = {
+	#integrating country culture workaround
+	type = country_event
+	hidden = yes
+	immediate = {
+		random_country_culture = {
+			limit = {
 				is_integrated = no
 			}
-			ROOT = { integrate_country_culture = PREV }
+			ROOT = {
+				integrate_country_culture = PREV
+			}
 		}
-    }
+	}
 }
-revolt_events.10 = {
-    type = country_event
-    hidden = yes
 
-    immediate = {
-    	#root = player country
-    	scope:revolting_state_province = {
-    		owner = {
-    			#This is the revolting country
-    			add_military_experience_to_new_country_effect = yes #Give mil experience to revolts so they can compete
-    			random_current_war = {
-    				save_scope_as = revolt_war_scope
-    			}
-    			save_scope_as = revolt_country
-    		}
-    		area = {
-    			every_area_province = {
-    				add_claim = root
-    			}
-    		}
-    	}
-		every_country_state = { #classic invictus revolt multiple
+revolt_events.10 = {
+	type = country_event
+	hidden = yes
+	trigger = {
+		scope:revolting_state_province.owner = {
+			NOT = {
+				this = root
+			}
+		}
+	}
+	immediate = {
+		#root = player country
+		scope:revolting_state_province = {
+			owner = {
+				#This is the revolting country
+				add_military_experience_to_new_country_effect = yes				#Give mil experience to revolts so they can compete
+				random_current_war = {
+					save_scope_as = revolt_war_scope
+				}
+				save_scope_as = revolt_country
+			}
+			area = {
+				every_area_province = {
+					add_claim = root
+				}
+			}
+		}
+		every_country_state = {
+			#classic invictus revolt multiple
 			limit = {
 				NOT = {
 					this = root.capital_scope.state
@@ -352,12 +389,15 @@ revolt_events.10 = {
 			capital_scope = {
 				if = {
 					limit = {
-						dominant_province_culture_group = scope:revolt_country.culture.culture_group #capital_scope.culture doesnt work in capital_scope, use dominant instead
+						dominant_province_culture_group = scope:revolt_country.culture.culture_group						#capital_scope.culture doesnt work in capital_scope, use dominant instead
 					}
 					area = {
 						every_area_province = {
-							limit = { owner = root }
+							limit = {
+								owner = root
+							}
 							set_owned_by = scope:revolt_country
+							add_claim = root
 						}
 					}
 				}
@@ -365,18 +405,30 @@ revolt_events.10 = {
 					create_country = {
 						save_scope_as = revolt_snowball_country
 					}
+					add_claim = root
 				}
 				if = {
 					limit = {
 						exists = scope:revolt_snowball_country
 					}
 					scope:revolt_snowball_country = {
-						add_military_experience_to_new_country_effect = yes #Give mil experience to revolts so they can compete
+						add_military_experience_to_new_country_effect = yes						#Give mil experience to revolts so they can compete
 						capital_scope.area = {
 							every_area_province = {
-								limit = { owner = root }
+								limit = {
+									owner = root
+								}
 								set_owned_by = scope:revolt_snowball_country
 								add_claim = root
+							}
+						}
+						ordered_country_culture = {
+							limit = {
+								is_integrated = no
+							}
+							order_by = country_culture_pop_count
+							ROOT = {
+								integrate_country_culture = PREV
 							}
 						}
 						add_to_war = {
@@ -406,7 +458,9 @@ revolt_events.10 = {
 			}
 		}
 		if = {
-			limit = { is_ai = yes }
+			limit = {
+				is_ai = yes
+			}
 			trigger_event = {
 				id = revolt_events.2
 				days = 1

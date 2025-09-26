@@ -9,9 +9,10 @@
 		ai_will_do = {
 			modifier = {
 				factor = {
-					value = cdt_civic_left_branch_30_to_75
+					value = cdt_civic_left_branch_15_to_75
 					min = cdt_silent_trade_80
 					min = cdt_world_port_school_of_philosophy_90
+					min = cdt_clock_mechanics_80 # For a few early Greek inventions
 				}
 			}
 		}
@@ -25,7 +26,7 @@
 		ai_will_do = {
 			modifier = {
 				factor = {
-					value = cdt_civic_left_branch_30_to_75
+					value = cdt_civic_left_branch_15_to_75
 					min = cdt_silent_trade_80
 				}
 			}
@@ -38,7 +39,7 @@
 		ai_will_do = {
 			modifier = {
 				factor = {
-					value = cdt_civic_left_branch_30_to_75
+					value = cdt_civic_left_branch_15_to_75
 					min = cdt_world_port_school_of_philosophy_90
 				}
 			}
@@ -56,7 +57,7 @@
 				country_culture_group = hellenic
 				custom_tooltip = {
 					#Need a new text
-					text = integrated_any_latin_culture
+					text = integrated_any_hellenic_culture
 					has_variable = greek_science
 					any_integrated_culture = {
 						is_greek_culture_group_trigger = yes
@@ -66,7 +67,9 @@
 		}
 		ai_will_do = {
 			modifier = {
-				factor = irc_45
+				factor = {
+					value = cdt_clock_mechanics_80 # For a few early Greek inventions
+				}
 			}
 		}
     }
@@ -82,7 +85,9 @@
 		}
 		ai_will_do = {
 			modifier = {
-				factor = irc_35
+				factor = {
+					value = cdt_clock_mechanics_80 # For a few early Greek inventions
+				}
 			}
 		}
 	}
@@ -97,7 +102,7 @@
 		ai_will_do = {
 			modifier = {
 				factor = {
-					value = cdt_civic_left_branch_30_to_75
+					value = cdt_civic_left_branch_15_to_75
 					min = cdt_silent_trade_80
 				}
 			}
@@ -130,7 +135,7 @@
 		ai_will_do = {
 			modifier = {
 				factor = {
-					value = cdt_civic_left_branch_30_to_75
+					value = cdt_civic_left_branch_15_to_75
 					min = cdt_world_port_school_of_philosophy_90
 				}
 			}
@@ -177,11 +182,6 @@
         modifier = { global_citizen_output = output_small_svalue}
         
         requires = { research_points_modifier_inv_1 }
-		ai_will_do = {
-			modifier = {
-				factor = irc_45
-			}
-		}
     }
 
 	taulantia_mead_honey_inv = { 
@@ -194,6 +194,11 @@
 		}
         
         requires = { research_points_modifier_inv_4 }
+		ai_will_do = {
+			modifier = {
+				factor = irc_45
+			}
+		}
     } 
 
     commerce_inv_2 = {
@@ -204,7 +209,7 @@
 		ai_will_do = {
 			modifier = {
 				factor = {
-					value = cdt_civic_left_branch_30_to_75
+					value = cdt_civic_left_branch_15_to_75
 					min = cdt_silent_trade_80
 				}
 			}
@@ -223,7 +228,7 @@
 		ai_will_do = {
 			modifier = {
 				factor = {
-					value = cdt_civic_left_branch_30_to_75
+					value = cdt_civic_left_branch_15_to_75
 					min = cdt_world_port_school_of_philosophy_90
 				}
 			}
@@ -237,7 +242,7 @@
 		# Civic Left Branch
 		ai_will_do = {
 			modifier = {
-				factor = cdt_civic_left_branch_30_to_75
+				factor = cdt_civic_left_branch_15_to_75
 			}
 		}
     }
@@ -285,18 +290,6 @@
 			}
 		}
     }
-	#New Invictus invention
-	iberian_capital_inv = { #Iberian Capitals
-    	requires = { build_time_inv }
-    	modifier = {
-    		build_cost = 0.05
-			global_pop_promotion_speed_modifier = 0.05
-			global_nobles_happyness = 0.04
-		}
-    	allow = {
-    		primary_culture = ibero
-    	}
-    }
 
     # Level 4
     thracian_mercs_inv = { 
@@ -325,7 +318,7 @@
 		ai_will_do = {
 			modifier = {
 				factor = {
-					value = cdt_civic_left_branch_30_to_75
+					value = cdt_civic_left_branch_15_to_75
 					min = cdt_silent_trade_80
 				}
 			}
@@ -340,14 +333,14 @@
 		ai_will_do = {
 			modifier = {
 				factor = {
-					value = cdt_civic_left_branch_30_to_75
+					value = cdt_civic_left_branch_15_to_75
 					min = cdt_world_port_school_of_philosophy_90
 				}
 			}
 		}
     } 
 
-    #New Invictus invention bool 22
+    #New Invictus invention bool 21
     illyrian_fishing_nets_inv = { 
         modifier = { 
         	global_population_growth = 0.02
@@ -371,12 +364,15 @@
 		}
 		ai_will_do = {
 			modifier = {
-				factor = irc_25
+				factor = {
+					value = irc_25
+					min = cds_global_monthly_food_60
+				}
 			}
 		}
     } 
 
-	#New Invictus invention bool 23
+	#New Invictus invention bool 22
     monoxyla_canoe_inv = { 
         modifier = { 
         	movement_speed_if_no_road = 0.1
@@ -397,7 +393,7 @@
 		}
     } 
 
-	#New Invictus invention bool 24
+	#New Invictus invention bool 23
     camarae_craft_inv = { 
         modifier = { 
         	global_supply_limit_modifier = 0.05
@@ -416,39 +412,7 @@
 				factor = irc_25
 			}
 		}
-    } 
-
-	#New Invictus invention
-    monoxyla_canoe_inv = { 
-        modifier = { 
-        	movement_speed_if_no_road = 0.1
-			global_state_trade_routes = 0.1
-        }
-        
-        requires = { state_trade_inv_2 } 
-        allow = {
-			OR = {
-				country_culture_group = caucasian
-				tag = COL
-			}
-		}
-    } 
-
-	#New Invictus invention
-    camarae_craft_inv = { 
-        modifier = { 
-        	global_supply_limit_modifier = 0.05
-			global_import_commerce_modifier = 0.1
-        }
-        
-        requires = { capital_trade_inv_1 } 
-        allow = {
-			OR = {
-				country_culture_group = caucasian
-				tag = COL
-			}
-		}
-    } 
+    }
 
 	#New Invictus invention
 	numidian_script_inv = { 
@@ -502,7 +466,10 @@
 		} 
 		ai_will_do = {
 			modifier = {
-				factor = irc_15
+				factor = {
+					value = irc_15
+					min = cds_global_monthly_food_60
+				}
 			}
 		}
     }
@@ -527,7 +494,10 @@
 		} 
 		ai_will_do = {
 			modifier = {
-				factor = irc_15
+				factor = {
+					value = irc_15
+					min = cds_global_monthly_food_60
+				}
 			}
 		}
     }
@@ -541,7 +511,7 @@
 		# Civic Left Branch
 		ai_will_do = {
 			modifier = {
-				factor = cdt_civic_left_branch_30_to_75
+				factor = cdt_civic_left_branch_15_to_75
 			}
 		}
     }
@@ -557,7 +527,7 @@
 		ai_will_do = {
 			modifier = {
 				factor = {
-					value = cdt_civic_left_branch_30_to_75
+					value = cdt_civic_left_branch_15_to_75
 					min = cdt_silent_trade_80
 				}
 			}
@@ -707,7 +677,7 @@
 		# Civic Left Branch
 		ai_will_do = {
 			modifier = {
-				factor = cdt_civic_left_branch_30_to_75
+				factor = cdt_civic_left_branch_15_to_75
 			}
 		}
     }
@@ -740,7 +710,7 @@
 		ai_will_do = {
 			modifier = {
 				factor = {
-					value = cdt_civic_left_branch_30_to_75
+					value = cdt_civic_left_branch_15_to_75
 					min = cdt_world_port_school_of_philosophy_90
 				}
 			}
@@ -881,7 +851,7 @@
 		}
 		ai_will_do = {
 			modifier = {
-				factor = irc_65
+				factor = irc_85
 			}
 		} 
     }
@@ -896,7 +866,7 @@
 		# Civic Left Branch
 		ai_will_do = {
 			modifier = {
-				factor = cdt_civic_left_branch_30_to_75
+				factor = cdt_civic_left_branch_15_to_75
 			}
 		}
     }
@@ -925,7 +895,7 @@
 		# Civic Left Branch
 		ai_will_do = {
 			modifier = {
-				factor = cdt_civic_left_branch_30_to_75
+				factor = cdt_civic_left_branch_15_to_75
 			}
 		} 
     } 
@@ -960,7 +930,7 @@
 		ai_will_do = {
 			modifier = {
 				factor = {
-					value = cdt_civic_left_branch_30_to_75
+					value = cdt_civic_left_branch_15_to_75
 					min = cdt_world_port_school_of_philosophy_90
 				}
 			}
@@ -1064,7 +1034,7 @@
 		}
 		ai_will_do = {
 			modifier = {
-				factor = irc_75
+				factor = irc_85
 			}
 		} 
     }
@@ -1085,8 +1055,8 @@
 					#Need a new text
 					text = integrated_any_nubian_culture
 					OR = {
-					has_variable = nubian_science
-					has_variable = new_egyptian_dynasty
+						has_variable = nubian_science
+						has_variable = new_egyptian_dynasty
 					}
 					any_integrated_culture = {
 						OR = {
@@ -1099,7 +1069,7 @@
 		}
 		ai_will_do = {
 			modifier = {
-				factor = irc_65
+				factor = irc_85
 			}
 		} 
     }
@@ -1123,7 +1093,7 @@
 		# Civic Left Branch
 		ai_will_do = {
 			modifier = {
-				# factor = cdt_civic_left_branch_30_to_75
+				# factor = cdt_civic_left_branch_15_to_75
 				factor = irc_99 # Very good for stability and stuff
 			}
 		}
@@ -1137,7 +1107,7 @@
 		ai_will_do = {
 			modifier = {
 				factor = {
-					value = cdt_civic_left_branch_30_to_75
+					value = cdt_civic_left_branch_15_to_75
 					min = cdt_world_port_school_of_philosophy_90
 				}
 			}
@@ -1199,7 +1169,7 @@
 		}
 		ai_will_do = {
 			modifier = {
-				factor = irc_65
+				factor = irc_85
 			}
 		} 
     }
@@ -1213,7 +1183,7 @@
 		# Civic Left Branch
 		ai_will_do = {
 			modifier = {
-				factor = cdt_civic_left_branch_30_to_75
+				factor = cdt_civic_left_branch_15_to_75
 			}
 		}
     }
@@ -1226,7 +1196,7 @@
 		ai_will_do = {
 			modifier = {
 				factor = {
-					value = cdt_civic_left_branch_30_to_75
+					value = cdt_civic_left_branch_15_to_75
 					min = cdt_world_port_school_of_philosophy_90
 				}
 			}
@@ -1240,7 +1210,7 @@
 		# Civic Left Branch
 		ai_will_do = {
 			modifier = {
-				factor = cdt_civic_left_branch_30_to_75
+				factor = cdt_civic_left_branch_15_to_75
 			}
 		}
     }
@@ -1300,7 +1270,7 @@
 		} 
 		ai_will_do = {
 			modifier = {
-				factor = irc_85
+				factor = irc_100
 			}
 		}
     }
@@ -1375,10 +1345,10 @@
 		}
         keystone = yes
         requires_or = { create_trade_route_inv global_tax_modifier_inv_5 }
-		# It's Civic Left Branch, it's World Port + School of Philosophy tree, it's lots of routes, it's everything
+		# World Port + School of Philosophy tree - target
 		ai_will_do = {
 			modifier = {
-				factor = irc_100
+				factor = cdt_world_port_school_of_philosophy_target_100
 			}
 		}
     }

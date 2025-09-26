@@ -204,13 +204,17 @@
 					}
 					trigger_if = {
 						limit = {
-							owner = {
-								NOT = {
-									has_law = basic_administrative_law
-								}
-							}
+							# owner = { #should be already verified in allowed
+							# 	OR = {
+							# 		NOT = {
+							# 			has_law = basic_administrative_law
+							# 		}
+							# 		has_country_modifier = solidus_introduced
+							# 	}
+							# }
 							scope:target = {
 								is_governor = yes
+								is_head_of_family = no
 							}
 						}
 						governor = scope:target

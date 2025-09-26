@@ -1,1050 +1,1059 @@
-namespace = c3rd_barbarian_events
+﻿namespace = c3rd_barbarian_events
 #file for barbarian related event
-c3rd_barbarian_events.1 = { #barbarians pressure
-    type = country_event
-    title = "c3rd_barbarian_events.1.t"
-    desc = "c3rd_barbarian_events.1.desc"
-
-    picture = looting
-
-    trigger = {
-
-        has_land = yes
-        NOR = {
-            has_country_modifier = c3rd_border_pressure
-            has_variable = protected_from_border_pressure
-        }
-        OR = {
-            any_country_state = {
-                has_state_modifier = barbarians_border
-            }
-            any_owned_province = {
-                any_neighbor_province = {
-                    has_owner = yes
-                    NOT = {owner = root}
-                    state = {
-                        has_state_modifier = barbarians_border
-                    }
-                }
-            }
-        }
-        current_date >= 1000.1.1
-    }
-
-
-    immediate = {
-        add_country_modifier = {
-            name = c3rd_border_pressure
-            duration = -1
-        }
-        set_variable = {
-            name = ongoing_border_pressure
-            days = 365
-        }
-        random_owned_province = {
-            limit = {
-                any_neighbor_province = {
-                    exists = owner
-                    NOT = {owner = root}
-                    state = {
-                        has_state_modifier = barbarians_border
-                    }
-                }
-            }
-            random_neighbor_province = {
-                limit = {
-                    NOT = {owner = root}
-                    state = {
-                        has_state_modifier = barbarians_border
-                    }
-                }
-                owner = {
-                    save_scope_as = neighbor_got_barbarians
-                }
-            }
-        }
-        if = {
-            limit = {
-                any_country_state = {
-                    has_state_modifier = barbarians_border
-                }
-            }
-            custom_tooltip = c3rd_barbarian_events.1.a.tt3
-            ordered_country_state = {
-                limit = {
-                    has_state_modifier = barbarians_border
-                }
-                max = 10
-                save_scope_as = state_got_barbarians
-                custom_tooltip = c3rd_barbarian_events.1.a.tt4
-            }
-        }
-
-    }
-
-    option = { #ok
-        name = c3rd_barbarian_events.1.a
-        custom_tooltip = c3rd_barbarian_events.1.a.tt1
-        if = {
-            limit = {
-                NOT = {
-                    any_country_state = {
-                        has_state_modifier = barbarians_border
-                    }
-                }
-            }
-            custom_tooltip = c3rd_barbarian_events.1.a.tt2
-        }
-    }
-
+c3rd_barbarian_events.1 = {
+	#barbarians pressure
+	type = country_event
+	title = "c3rd_barbarian_events.1.t"
+	desc = "c3rd_barbarian_events.1.desc"
+	picture = looting
+	trigger = {
+		has_land = yes
+		NOR = {
+			has_country_modifier = c3rd_border_pressure
+			has_variable = protected_from_border_pressure
+		}
+		OR = {
+			any_country_state = {
+				has_state_modifier = barbarians_border
+			}
+			any_owned_province = {
+				any_neighbor_province = {
+					has_owner = yes
+					NOT = {
+						owner = root
+					}
+					state = {
+						has_state_modifier = barbarians_border
+					}
+				}
+			}
+		}
+		current_date >= 1000.1.1
+	}
+	immediate = {
+		add_country_modifier = {
+			name = c3rd_border_pressure
+			duration = -1
+		}
+		set_variable = {
+			name = ongoing_border_pressure
+			days = 365
+		}
+		random_owned_province = {
+			limit = {
+				any_neighbor_province = {
+					exists = owner
+					NOT = {
+						owner = root
+					}
+					state = {
+						has_state_modifier = barbarians_border
+					}
+				}
+			}
+			random_neighbor_province = {
+				limit = {
+					NOT = {
+						owner = root
+					}
+					state = {
+						has_state_modifier = barbarians_border
+					}
+				}
+				owner = {
+					save_scope_as = neighbor_got_barbarians
+				}
+			}
+		}
+		if = {
+			limit = {
+				any_country_state = {
+					has_state_modifier = barbarians_border
+				}
+			}
+			custom_tooltip = c3rd_barbarian_events.1.a.tt3
+			ordered_country_state = {
+				limit = {
+					has_state_modifier = barbarians_border
+				}
+				max = 10
+				save_scope_as = state_got_barbarians
+				custom_tooltip = c3rd_barbarian_events.1.a.tt4
+			}
+		}
+	}
+	option = {
+		#ok
+		name = c3rd_barbarian_events.1.a
+		custom_tooltip = c3rd_barbarian_events.1.a.tt1
+		if = {
+			limit = {
+				NOT = {
+					any_country_state = {
+						has_state_modifier = barbarians_border
+					}
+				}
+			}
+			custom_tooltip = c3rd_barbarian_events.1.a.tt2
+		}
+	}
 }
 
-
-c3rd_barbarian_events.2 = { #barbarians pressure removal
-    type = country_event
-    title = "c3rd_barbarian_events.2.t"
-    desc = "c3rd_barbarian_events.2.desc"
-
-    picture = trade_port
-
-    trigger = {
-
-        has_land = yes
-        has_country_modifier = c3rd_border_pressure
-        NOR = {
-            has_variable = ongoing_border_pressure
-            any_country_state = {
-                has_state_modifier = barbarians_border
-            }
-            any_owned_province = {
-                any_neighbor_province = {
-                    NOT = {owner = root}
-                    state = {
-                        has_state_modifier = barbarians_border
-                    }
-                }
-            }
-        }
-    }
-
-
-    immediate = {
-        remove_country_modifier = c3rd_border_pressure
-        set_variable = {
-            name = protected_from_border_pressure
-            days = 1825
-        }
-
-    }
-
-    option = { #ok
-        name = c3rd_barbarian_events.2.a
-        custom_tooltip = c3rd_barbarian_events.2.a.tt1
-    }
-
+c3rd_barbarian_events.2 = {
+	#barbarians pressure removal
+	type = country_event
+	title = "c3rd_barbarian_events.2.t"
+	desc = "c3rd_barbarian_events.2.desc"
+	picture = trade_port
+	trigger = {
+		has_land = yes
+		has_country_modifier = c3rd_border_pressure
+		NOR = {
+			has_variable = ongoing_border_pressure
+			any_country_state = {
+				has_state_modifier = barbarians_border
+			}
+			any_owned_province = {
+				any_neighbor_province = {
+					NOT = {
+						owner = root
+					}
+					state = {
+						has_state_modifier = barbarians_border
+					}
+				}
+			}
+		}
+	}
+	immediate = {
+		remove_country_modifier = c3rd_border_pressure
+		set_variable = {
+			name = protected_from_border_pressure
+			days = 1825
+		}
+	}
+	option = {
+		#ok
+		name = c3rd_barbarian_events.2.a
+		custom_tooltip = c3rd_barbarian_events.2.a.tt1
+	}
 }
-
 
 c3rd_barbarian_events.10 = { #barbarian + admin law 1, the local governors try to take direct control
-    type = country_event
-    title = "c3rd_barbarian_events.10.t"
-    desc = "c3rd_barbarian_events.10.desc"
-    left_portrait = scope:local_gov_owner
-
-    picture = romans_marching
-
-    trigger = {
-        has_land = yes
-        has_country_modifier = solidus_introduced
-        has_country_modifier = c3rd_border_pressure
-        has_law = basic_administrative_law
-        NOT = {
-            has_variable = recent_local_military_control
-        }
-        any_governorships = {
-            has_variable = governorship_owner
-            NOT = {
-                has_variable = recent_local_military_control_gov
-            }
-            var:governorship_owner = {
-                employer = root
-                is_ruler = no
-                NOT = {
-                    has_variable = recent_local_military_control_char
-                }
-            }
-            OR = {
-                any_governorship_state = {
-                    has_state_modifier = barbarians_border
-                }
-                any_governorship_state = {
-                    any_state_province = {
-                        any_neighbor_province = {
-                            exists = owner
-                            NOT = {owner = root}
-                            state = {
-                                has_state_modifier = barbarians_border
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    weight_multiplier = {
-        modifier = {
-            factor = 2
-            any_country_state = {
-                count >= 5
-                has_state_modifier = barbarians_border
-                NOT = {
-                    governorship = {
-                        has_variable = recent_local_military_control_gov
-                    }
-                }
-            }
-        }
-        modifier = {
-            factor = 2
-            any_country_state = {
-                count >= 10
-                has_state_modifier = barbarians_border
-                NOT = {
-                    governorship = {
-                        has_variable = recent_local_military_control_gov
-                    }
-                }
-            }
-        }
-        modifier = {
-            factor = 2
-            any_governorships = {
-                NOT = {
-                    has_variable = recent_local_military_control_gov
-                }
-                has_variable = governorship_owner
-                var:governorship_owner = {
-                    NOT = {has_variable = recent_local_military_control_char}
-                    has_character_modifier = major_influence_aristocrat
-                }
-            }
-        }
-    }
-
-
-    immediate = {
-        set_variable = {
-            name = recent_local_military_control
-            days = 1000
-        }
-        random_governorships = {
-            limit = {
-                has_variable = governorship_owner
-                NOT = {
-                    has_variable = recent_local_military_control_gov
-                }
-                var:governorship_owner = {
-                    employer = root
-                    is_ruler = no
-                    NOT = {
-                        has_variable = recent_local_military_control_char
-                    }
-                }
-                OR = {
-                    any_governorship_state = {
-                        has_state_modifier = barbarians_border
-                    }
-                    any_governorship_state = {
-                        any_state_province = {
-                            any_neighbor_province = {
-                                exists = owner
-                                NOT = {owner = root}
-                                state = {
-                                    has_state_modifier = barbarians_border
-                                }
-                            }
-                        }
-                    }
-                }
-                
-            }
-            weight = {
-                modifier = {
-                    factor = 2
-                    any_governorship_state = {
-                        count >= 4
-                        has_state_modifier = barbarians_border
-                    }
-                }
-                modifier = {
-                    factor = 2
-                    has_variable = governorship_owner
-                    var:governorship_owner = {
-                        NOT = {has_variable = recent_local_military_control_char}
-                        has_character_modifier = major_influence_aristocrat
-                    }
-                }
-                modifier = {
-                    factor = 2
-                    has_variable = governorship_owner
-                    var:governorship_owner = {
-                        NOT = {has_variable = recent_local_military_control_char}
-                        has_character_modifier = major_influence_aristocrat
-                        has_variable = country_ownership
-                        var:country_ownership >= 40
-                    }
-                }
-                modifier = {
-                    factor = 2
-                    has_variable = governorship_owner
-                    var:governorship_owner = {
-                        NOT = {has_variable = recent_local_military_control_char}
-                        save_temporary_scope_as = parse_owner
-                        employer = {
-                            any_governorships = {
-                                count >= 3
-                                has_variable = governorship_owner
-                                var:governorship_owner = scope:parse_owner
-                                OR = {
-                                    any_governorship_state = {
-                                        has_state_modifier = barbarians_border
-                                    }
-                                    any_governorship_state = {
-                                        any_state_province = {
-                                            any_neighbor_province = {
-                                                NOT = {owner = root}
-                                                state = {
-                                                    has_state_modifier = barbarians_border
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-                
-            }
-            var:governorship_owner = {
-                save_scope_as = local_gov_owner
-                set_variable = {
-                    name = recent_local_military_control_char
-                    days = 3000
-                }
-            }
-        }
-        
-        every_governorships = {
-            limit = {
-                has_variable = governorship_owner
-                var:governorship_owner = scope:local_gov_owner
-                NOT = {
-                    has_variable = recent_local_military_control_gov
-                }
-                OR = {
-                    any_governorship_state = {
-                        has_state_modifier = barbarians_border
-                    }
-                    any_governorship_state = {
-                        any_state_province = {
-                            any_neighbor_province = {
-                                NOT = {owner = root}
-                                state = {
-                                    has_state_modifier = barbarians_border
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            add_to_list = local_control_gov
-        }
-
-    }
-
-    option = { #gov take direct control, more defenses but more political influence for the guy : gain the political_power_character modifier if very influencial, might reinforce his grip on the holding or even conquer other govs at the border, maybe duchy also
-        name = c3rd_barbarian_events.10.a
-        custom_tooltip = c3rd_barbarian_events.10.a.tt1
-        every_governorships = {
-            limit = {
-                is_in_list = local_control_gov
-            }
-            save_scope_as = local_control_gov_parse
-            custom_tooltip = c3rd_barbarian_events.10.a.tt2
-        }
-        custom_tooltip = c3rd_barbarian_events.10.a.tt3
-        show_as_tooltip = {
-            random_governorships = {
-                limit = {
-                    is_in_list = local_control_gov
-                }
-                random_governorship_state = {
-                    add_state_modifier = {
-                        name = local_gov_defense
-                        duration = 2700
-                    }
-                }
-            }
-        }
-        hidden_effect = {
-            every_governorships = {
-                limit = {
-                    is_in_list = local_control_gov
-                }
-                set_variable = {
-                    name = recent_local_military_control_gov
-                    days = 3650
-                }
-                every_governorship_state = {
-                    limit = {
-                        OR = {
-                            has_state_modifier = barbarians_border
-                            any_state_province = {
-                                any_neighbor_province = {
-                                    state = {
-                                        has_state_modifier = barbarians_border
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    add_state_modifier = {
-                        name = local_gov_defense
-                        duration = 2700
-                    }
-                }
-                every_governorship_state = {
-                    every_state_province = {
-                        limit = {
+	type = country_event
+	title = "c3rd_barbarian_events.10.t"
+	desc = "c3rd_barbarian_events.10.desc"
+	left_portrait = scope:local_gov_owner
+	picture = romans_marching
+	trigger = {
+		has_land = yes
+		has_country_modifier = solidus_introduced
+		has_country_modifier = c3rd_border_pressure
+		has_law = basic_administrative_law
+		NOT = {
+			has_variable = recent_local_military_control
+		}
+		any_governorships = {
+			has_variable = governorship_owner
+			NOT = {
+				has_variable = recent_local_military_control_gov
+			}
+			var:governorship_owner = {
+				employer = root
+				is_ruler = no
+				NOT = {
+					has_variable = recent_local_military_control_char
+				}
+			}
+			OR = {
+				any_governorship_state = {
+					has_state_modifier = barbarians_border
+				}
+				any_governorship_state = {
+					any_state_province = {
+						any_neighbor_province = {
+							exists = owner
+							NOT = {
+								owner = root
+							}
+							state = {
+								has_state_modifier = barbarians_border
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	weight_multiplier = {
+		modifier = {
+			factor = 2
+			any_country_state = {
+				count >= 5
+				has_state_modifier = barbarians_border
+				NOT = {
+					governorship = {
+						has_variable = recent_local_military_control_gov
+					}
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			any_country_state = {
+				count >= 10
+				has_state_modifier = barbarians_border
+				NOT = {
+					governorship = {
+						has_variable = recent_local_military_control_gov
+					}
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			any_governorships = {
+				NOT = {
+					has_variable = recent_local_military_control_gov
+				}
+				has_variable = governorship_owner
+				var:governorship_owner = {
+					NOT = {
+						has_variable = recent_local_military_control_char
+					}
+					has_character_modifier = major_influence_aristocrat
+				}
+			}
+		}
+	}
+	immediate = {
+		set_variable = {
+			name = recent_local_military_control
+			days = 1000
+		}
+		random_governorships = {
+			limit = {
+				has_variable = governorship_owner
+				NOT = {
+					has_variable = recent_local_military_control_gov
+				}
+				var:governorship_owner = {
+					employer = root
+					is_ruler = no
+					NOT = {
+						has_variable = recent_local_military_control_char
+					}
+				}
+				OR = {
+					any_governorship_state = {
+						has_state_modifier = barbarians_border
+					}
+					any_governorship_state = {
+						any_state_province = {
+							any_neighbor_province = {
+								exists = owner
+								NOT = {
+									owner = root
+								}
+								state = {
+									has_state_modifier = barbarians_border
+								}
+							}
+						}
+					}
+				}
+			}
+			weight = {
+				modifier = {
+					factor = 2
+					any_governorship_state = {
+						count >= 4
+						has_state_modifier = barbarians_border
+					}
+				}
+				modifier = {
+					factor = 2
+					has_variable = governorship_owner
+					var:governorship_owner = {
+						NOT = {
+							has_variable = recent_local_military_control_char
+						}
+						has_character_modifier = major_influence_aristocrat
+					}
+				}
+				modifier = {
+					factor = 2
+					has_variable = governorship_owner
+					var:governorship_owner = {
+						NOT = {
+							has_variable = recent_local_military_control_char
+						}
+						has_character_modifier = major_influence_aristocrat
+						has_variable = country_ownership
+						var:country_ownership >= 40
+					}
+				}
+				modifier = {
+					factor = 2
+					has_variable = governorship_owner
+					var:governorship_owner = {
+						NOT = {
+							has_variable = recent_local_military_control_char
+						}
+						save_temporary_scope_as = parse_owner
+						employer = {
+							any_governorships = {
+								count >= 3
+								has_variable = governorship_owner
+								var:governorship_owner = scope:parse_owner
+								OR = {
+									any_governorship_state = {
+										has_state_modifier = barbarians_border
+									}
+									any_governorship_state = {
+										any_state_province = {
+											any_neighbor_province = {
+												NOT = {
+													owner = root
+												}
+												state = {
+													has_state_modifier = barbarians_border
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			var:governorship_owner = {
+				save_scope_as = local_gov_owner
+				set_variable = {
+					name = recent_local_military_control_char
+					days = 3000
+				}
+			}
+		}
+		every_governorships = {
+			limit = {
+				has_variable = governorship_owner
+				var:governorship_owner = scope:local_gov_owner
+				NOT = {
+					has_variable = recent_local_military_control_gov
+				}
+				OR = {
+					any_governorship_state = {
+						has_state_modifier = barbarians_border
+					}
+					any_governorship_state = {
+						any_state_province = {
+							any_neighbor_province = {
+								NOT = {
+									owner = root
+								}
+								state = {
+									has_state_modifier = barbarians_border
+								}
+							}
+						}
+					}
+				}
+			}
+			add_to_list = local_control_gov
+		}
+	}
+	option = {
+		#gov take direct control, more defenses but more political influence for the guy : gain the political_power_character modifier if very influencial, might reinforce his grip on the holding or even conquer other govs at the border, maybe duchy also
+		name = c3rd_barbarian_events.10.a
+		custom_tooltip = c3rd_barbarian_events.10.a.tt1
+		every_governorships = {
+			limit = {
+				is_in_list = local_control_gov
+			}
+			save_scope_as = local_control_gov_parse
+			custom_tooltip = c3rd_barbarian_events.10.a.tt2
+		}
+		custom_tooltip = c3rd_barbarian_events.10.a.tt3
+		show_as_tooltip = {
+			random_governorships = {
+				limit = {
+					is_in_list = local_control_gov
+				}
+				random_governorship_state = {
+					add_state_modifier = {
+						name = local_gov_defense
+						duration = 2700
+					}
+				}
+			}
+		}
+		hidden_effect = {
+			every_governorships = {
+				limit = {
+					is_in_list = local_control_gov
+				}
+				set_variable = {
+					name = recent_local_military_control_gov
+					days = 3650
+				}
+				every_governorship_state = {
+					limit = {
+						OR = {
+							has_state_modifier = barbarians_border
+							any_state_province = {
+								any_neighbor_province = {
+									state = {
+										has_state_modifier = barbarians_border
+									}
+								}
+							}
+						}
+					}
+					add_state_modifier = {
+						name = local_gov_defense
+						duration = 2700
+					}
+				}
+				every_governorship_state = {
+					every_state_province = {
+						limit = {
 							OR = {
 								NOT = {
 									exists = holding_owner
 								}
 								AND = {
 									exists = holding_owner
-                                    NOR = {
-                                        holding_owner = scope:local_gov_owner
-                                        holding_owner = {
-                                            family = scope:local_gov_owner.family
-                                        }
-                                    }
+									NOR = {
+										holding_owner = scope:local_gov_owner
+										holding_owner = {
+											family = scope:local_gov_owner.family
+										}
+									}
 								}
 							}
-                        }
-                        random_list = {
-                            2 = {
-                                modifier = {
-                                    add = 2
-                                    scope:local_gov_owner = {
-                                        has_character_modifier = major_influence_aristocrat
-                                    }
-                                }
-                            }
-                            1 = {
-                                if = {
-                                    limit = {
-                                        exists = holding_owner
-                                    }
-                                    holding_owner = {
-                                        remove_holding = prev
-                                    }
-                                }
-                                scope:local_gov_owner = {
-                                    add_holding = prev
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        if = {
-            limit = {
-                scope:local_gov_owner = {
-                    has_character_modifier = major_influence_aristocrat
-                }
-            }
-            scope:local_gov_owner = {
-                add_character_modifier = {
-                    name = political_power_character
-                    duration = 3650
-                }
-            }
-        }
-        if = {
-            limit = {
-                scope:local_gov_owner = {
-                    has_character_modifier = political_power_character
-                }
-            }
-            add_legitimacy = -10
-        }
-        scope:local_gov_owner = {
-            add_popularity = 25
-        }
-        add_legitimacy = -5
-        every_governorships = {
-            limit = {
-                is_in_list = local_control_gov
-                has_legion_trigger = yes
-            }
-            legion = {
-                every_legion_unit = {
-                    add_unit_modifier = {
-                        name = command_restructuring
-                        duration = 1850
-                    }
-                }
-            }
-        }
-        
-    }
-    
-    option = { #stop him, anger him, might anger the population, the military and create tyranny - depends of his influence
-        name = c3rd_barbarian_events.10.b
-        custom_tooltip = c3rd_barbarian_events.10.b.tt1
-        scope:local_gov_owner = { #humiliated -15 1/y
-            add_loyalty = humiliated_general
-        }
-        current_ruler = {
-            add_popularity = -20
-        }
-        if = {
-            limit = {
-                scope:local_gov_owner = {
-                    has_character_modifier = major_influence_aristocrat
-                }
-            }
-            custom_tooltip = c3rd_barbarian_events.10.b.tt2
-            if = {
-                limit = { has_variable = unworthy_leader}
-                change_variable = {
-                    name = unworthy_leader
-                    add = 1
-                }
-            }
-            else = {
-                set_variable = {
-                    name = unworthy_leader
-                    value = 1
-                }
-            }
-        }
-        else = {
-            custom_tooltip = c3rd_barbarian_events.10.b.tt3
-            hidden_effect = {
-                random_list = {
-                    1 = {}
-                    1 = {
-                        if = {
-                            limit = { has_variable = unworthy_leader}
-                            change_variable = {
-                                name = unworthy_leader
-                                add = 1
-                            }
-                        }
-                        else = {
-                            set_variable = {
-                                name = unworthy_leader
-                                value = 1
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        if = {
-            limit = {
-                scope:local_gov_owner = {
-                    has_character_modifier = political_power_character
-                    has_character_modifier = major_influence_aristocrat
-                }
-            }
-            add_stability = -10
-            add_tyranny = 10
-        }
-        else_if = {
-            limit = {
-                scope:local_gov_owner = {
-                    has_character_modifier = major_influence_aristocrat
-                }
-            }
-            add_stability = -3
-            add_tyranny = {
-                value = 0 
-                scope:local_gov_owner = {
-                    add = var:country_ownership
-                }
-                multiply = 0.1
-            }
-        }
-    }
-    
-    option = { #charisma, persuade him to not - polinf cost
-        name = c3rd_barbarian_events.10.c
-        custom_tooltip = c3rd_barbarian_events.10.c.tt1
-        trigger = {
-            current_ruler = {
-                OR = {
-                    charisma >= 10
-                    has_trait = prominent
-                    has_trait = silver_tongued
-                    has_trait = orator
-                }
-            }
-        }
-        highlight = yes
-        add_political_influence = -25
-    }
-    
-    option = { #finesse, make it look like planned. Reduced effects 
-        name = c3rd_barbarian_events.10.d
-        custom_tooltip = c3rd_barbarian_events.10.d.tt1
-        trigger = {
-            current_ruler = {
-                OR = {
-                    finesse >= 10
-                    has_trait = crafty
-                    has_trait = intelligent
-                }
-            }
-        }
-        every_governorships = {
-            limit = {
-                is_in_list = local_control_gov
-            }
-            save_scope_as = local_control_gov_parse
-            custom_tooltip = c3rd_barbarian_events.10.a.tt2
-        }
-        custom_tooltip = c3rd_barbarian_events.10.a.tt3
-        show_as_tooltip = {
-            random_governorships = {
-                limit = {
-                    is_in_list = local_control_gov
-                }
-                random_governorship_state = {
-                    add_state_modifier = {
-                        name = local_gov_defense2
-                        duration = 2700
-                    }
-                }
-            }
-        }
-        highlight = yes
-        hidden_effect = {
-            every_governorships = {
-                limit = {
-                    is_in_list = local_control_gov
-                }
-                set_variable = {
-                    name = recent_local_military_control_gov
-                    days = 3650
-                }
-                every_governorship_state = {
-                    limit = {
-                        OR = {
-                            has_state_modifier = barbarians_border
-                            any_state_province = {
-                                any_neighbor_province = {
-                                    state = {
-                                        has_state_modifier = barbarians_border
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    add_state_modifier = {
-                        name = local_gov_defense2
-                        duration = 2700
-                    }
-                }
-                every_governorship_state = {
-                    every_state_province = {
-                        limit = {
+						}
+						random_list = {
+							2 = {
+								modifier = {
+									add = 2
+									scope:local_gov_owner = {
+										has_character_modifier = major_influence_aristocrat
+									}
+								}
+							}
+							1 = {
+								if = {
+									limit = {
+										exists = holding_owner
+									}
+									holding_owner = {
+										remove_holding = prev
+									}
+								}
+								scope:local_gov_owner = {
+									add_holding = prev
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		if = {
+			limit = {
+				scope:local_gov_owner = {
+					has_character_modifier = major_influence_aristocrat
+				}
+			}
+			scope:local_gov_owner = {
+				add_character_modifier = {
+					name = political_power_character
+					duration = 3650
+				}
+			}
+		}
+		if = {
+			limit = {
+				scope:local_gov_owner = {
+					has_character_modifier = political_power_character
+				}
+			}
+			add_legitimacy = -10
+		}
+		scope:local_gov_owner = {
+			add_popularity = 25
+		}
+		add_legitimacy = -5
+		every_governorships = {
+			limit = {
+				is_in_list = local_control_gov
+				has_legion_trigger = yes
+			}
+			legion = {
+				every_legion_unit = {
+					add_unit_modifier = {
+						name = command_restructuring
+						duration = 1850
+					}
+				}
+			}
+		}
+	}
+	option = {
+		#stop him, anger him, might anger the population, the military and create tyranny - depends of his influence
+		name = c3rd_barbarian_events.10.b
+		custom_tooltip = c3rd_barbarian_events.10.b.tt1
+		scope:local_gov_owner = {
+			#humiliated -15 1/y
+			add_loyalty = humiliated_general
+		}
+		current_ruler = {
+			add_popularity = -20
+		}
+		if = {
+			limit = {
+				scope:local_gov_owner = {
+					has_character_modifier = major_influence_aristocrat
+				}
+			}
+			custom_tooltip = c3rd_barbarian_events.10.b.tt2
+			if = {
+				limit = {
+					has_variable = unworthy_leader
+				}
+				change_variable = {
+					name = unworthy_leader
+					add = 1
+				}
+			}
+			else = {
+				set_variable = {
+					name = unworthy_leader
+					value = 1
+				}
+			}
+		}
+		else = {
+			custom_tooltip = c3rd_barbarian_events.10.b.tt3
+			hidden_effect = {
+				random_list = {
+					1 = {
+					}
+					1 = {
+						if = {
+							limit = {
+								has_variable = unworthy_leader
+							}
+							change_variable = {
+								name = unworthy_leader
+								add = 1
+							}
+						}
+						else = {
+							set_variable = {
+								name = unworthy_leader
+								value = 1
+							}
+						}
+					}
+				}
+			}
+		}
+		if = {
+			limit = {
+				scope:local_gov_owner = {
+					has_character_modifier = political_power_character
+					has_character_modifier = major_influence_aristocrat
+				}
+			}
+			add_stability = -10
+			add_tyranny = 10
+		}
+		else_if = {
+			limit = {
+				scope:local_gov_owner = {
+					has_character_modifier = major_influence_aristocrat
+				}
+			}
+			add_stability = -3
+			add_tyranny = {
+				value = 0
+				scope:local_gov_owner = {
+					add = var:country_ownership
+				}
+				multiply = 0.1
+			}
+		}
+	}
+	option = {
+		#charisma, persuade him to not - polinf cost
+		name = c3rd_barbarian_events.10.c
+		custom_tooltip = c3rd_barbarian_events.10.c.tt1
+		trigger = {
+			current_ruler = {
+				OR = {
+					charisma >= 10
+					has_trait = prominent
+					has_trait = silver_tongued
+					has_trait = orator
+				}
+			}
+		}
+		highlight = yes
+		add_political_influence = -25
+	}
+	option = {
+		#finesse, make it look like planned. Reduced effects 
+		name = c3rd_barbarian_events.10.d
+		custom_tooltip = c3rd_barbarian_events.10.d.tt1
+		trigger = {
+			current_ruler = {
+				OR = {
+					finesse >= 10
+					has_trait = crafty
+					has_trait = intelligent
+				}
+			}
+		}
+		every_governorships = {
+			limit = {
+				is_in_list = local_control_gov
+			}
+			save_scope_as = local_control_gov_parse
+			custom_tooltip = c3rd_barbarian_events.10.a.tt2
+		}
+		custom_tooltip = c3rd_barbarian_events.10.a.tt3
+		show_as_tooltip = {
+			random_governorships = {
+				limit = {
+					is_in_list = local_control_gov
+				}
+				random_governorship_state = {
+					add_state_modifier = {
+						name = local_gov_defense2
+						duration = 2700
+					}
+				}
+			}
+		}
+		highlight = yes
+		hidden_effect = {
+			every_governorships = {
+				limit = {
+					is_in_list = local_control_gov
+				}
+				set_variable = {
+					name = recent_local_military_control_gov
+					days = 3650
+				}
+				every_governorship_state = {
+					limit = {
+						OR = {
+							has_state_modifier = barbarians_border
+							any_state_province = {
+								any_neighbor_province = {
+									state = {
+										has_state_modifier = barbarians_border
+									}
+								}
+							}
+						}
+					}
+					add_state_modifier = {
+						name = local_gov_defense2
+						duration = 2700
+					}
+				}
+				every_governorship_state = {
+					every_state_province = {
+						limit = {
 							OR = {
 								NOT = {
 									exists = holding_owner
 								}
 								AND = {
 									exists = holding_owner
-                                    NOR = {
-                                        holding_owner = scope:local_gov_owner
-                                        holding_owner = {
-                                            family = scope:local_gov_owner.family
-                                        }
-                                    }
+									NOR = {
+										holding_owner = scope:local_gov_owner
+										holding_owner = {
+											family = scope:local_gov_owner.family
+										}
+									}
 								}
 							}
-                        }
-                    }
-                }
-            }
-        }
-        scope:local_gov_owner = {
-            add_popularity = 25
-        }
-        add_political_influence = -15
-    }
-
-    after = {
-        every_governorships = {
-            limit = {
-                is_in_list = local_control_gov
-            }
-            remove_from_list = local_control_gov
-        }
-    }
-
+						}
+					}
+				}
+			}
+		}
+		scope:local_gov_owner = {
+			add_popularity = 25
+		}
+		add_political_influence = -15
+	}
+	after = {
+		every_governorships = {
+			limit = {
+				is_in_list = local_control_gov
+			}
+			remove_from_list = local_control_gov
+		}
+	}
 }
 
 c3rd_barbarian_events.11 = { #admin law 2, strong army rivalry with governor
-    type = country_event
-    title = "c3rd_barbarian_events.11.t"
-    left_portrait = scope:rivalry_owner
-    right_portrait = scope:rivalry_commander
-    desc = {
-        triggered_desc = { #owner is ruler
-            trigger = {
-                scope:rivalry_owner = {
-                    is_ruler = yes
-                }
-            }
-            desc = "c3rd_barbarian_events.11.desc.1"
-
-        }
-        triggered_desc = { #owner is not ruler
-            trigger = {
-                scope:rivalry_owner = {
-                    NOR = {
-                        has_trait = cruel
-                        has_trait = selfish
-                        has_trait = corrupt
-                        is_ruler = yes
-                    }
-                }
-            }
-            desc = "c3rd_barbarian_events.11.desc.2"
-        }
-    }
-
-    picture = proscription
-
-    trigger = {
-        has_land = yes
-        has_country_modifier = solidus_introduced
-        has_law = constantine_reform_law
-        has_civil_war = no
-        NOT = {
-            has_variable = recent_army_governor_rivalry
-        }
-        any_army = {
-            has_legion_trigger = yes
-            has_commander = yes
-            unit_size >= 80
-            save_temporary_scope_as = temp_army
-            NOT = {
-                has_variable = recent_army_governor_rivalry_army
-            }
-            commander = {
-                NOT = {
-                    has_variable = recent_army_governor_rivalry_gen
-                }
-            }
-        }            
-        any_governorships = {
-            has_variable = governorship_owner
-            has_legion_trigger = yes
-            legion = scope:temp_army.legion
-            var:governorship_owner = {
-                employer = root
-                NOR = {
-                    is_friend = scope:temp_army.commander
-                    this = scope:temp_army.commander
-                }
-            }
-        }
-    }
-
-    weight_multiplier = {
-        modifier = {
-            factor = 2
-            any_army = {
-                has_legion_trigger = yes
-                has_commander = yes
-                unit_size >= 150
-                save_temporary_scope_as = temp_army
-                NOT = {
-                    has_variable = recent_army_governor_rivalry_army
-                }
-                commander = {
-                    NOT = {
-                        has_variable = recent_army_governor_rivalry_gen
-                    }
-                }
-            }            
-            any_governorships = {
-                has_variable = governorship_owner
-                has_legion_trigger = yes
-                legion = scope:temp_army.legion
-                var:governorship_owner = {
-                    employer = root
-                    NOR = {
-                        is_friend = scope:temp_army.commander
-                        this = scope:temp_army.commander
-                    }
-                }
-            }
-        }
-        modifier = {
-            factor = 2
-            any_army = {
-                has_legion_trigger = yes
-                has_commander = yes
-                unit_size >= 200
-                save_temporary_scope_as = temp_army
-                NOT = {
-                    has_variable = recent_army_governor_rivalry_army
-                }
-                commander = {
-                    NOT = {
-                        has_variable = recent_army_governor_rivalry_gen
-                    }
-                }
-            }            
-            any_governorships = {
-                has_variable = governorship_owner
-                has_legion_trigger = yes
-                legion = scope:temp_army.legion
-                var:governorship_owner = {
-                    employer = root
-                    NOR = {
-                        is_friend = scope:temp_army.commander
-                        this = scope:temp_army.commander
-                    }
-                }
-            }
-        }
-        modifier = {
-            factor = 2
-            any_army = {
-                has_legion_trigger = yes
-                has_commander = yes
-                unit_size >= 80
-                save_temporary_scope_as = temp_army
-                NOT = {
-                    has_variable = recent_army_governor_rivalry_army
-                }
-                commander = {
-                    NOT = {
-                        has_variable = recent_army_governor_rivalry_gen
-                    }
-                }
-            }            
-            any_governorships = {
-                has_variable = governorship_owner
-                has_legion_trigger = yes
-                legion = scope:temp_army.legion
-                var:governorship_owner = {
-                    employer = root
-                    NOR = {
-                        is_friend = scope:temp_army.commander
-                        this = scope:temp_army.commander
-                    }
-                    has_character_modifier = political_power_character
-                }
-            }
-        }
-        modifier = {
-            factor = 1.5
-            any_army = {
-                has_legion_trigger = yes
-                has_commander = yes
-                unit_size >= 100
-                save_temporary_scope_as = temp_army
-                NOT = {
-                    has_variable = recent_army_governor_rivalry_army
-                }
-                commander = {
-                    NOT = {
-                        has_variable = recent_army_governor_rivalry_gen
-                    }
-                }
-            }            
-            any_governorships = {
-                has_variable = governorship_owner
-                has_legion_trigger = yes
-                legion = scope:temp_army.legion
-                var:governorship_owner = {
-                    employer = root
-                    NOR = {
-                        is_friend = scope:temp_army.commander
-                        this = scope:temp_army.commander
-                    }
-                    has_character_modifier = major_influence_aristocrat
-                }
-            }
-        }
-    }
-
-
-    immediate = {
-        set_variable = {
-            name = recent_army_governor_rivalry
-            days = 1825
-        }
-        ordered_army = {
-            limit = {
-                has_legion_trigger = yes
-                has_commander = yes
-                unit_size >= 80
-                save_temporary_scope_as = temp_army
-                NOT = {
-                    has_variable = recent_army_governor_rivalry_army
-                }
-                commander = {
-                    NOT = {
-                        has_variable = recent_army_governor_rivalry_gen
-                    }
-                }
-                root = {          
-                    any_governorships = {
-                        has_variable = governorship_owner
-                        has_legion_trigger = yes
-                        legion = scope:temp_army.legion
-                        var:governorship_owner = {
-                            employer = root
-                            NOR = {
-                                is_friend = scope:temp_army.commander
-                                this = scope:temp_army.commander
-                            }
-                        }
-                    }
-                }
-            }
-            max = 1
-            order_by = unit_size
-            save_scope_as = rivalry_army
-            commander = {
-                save_scope_as = rivalry_commander
-			    set_variable = {
-				    name = recent_army_governor_rivalry_gen
-				    days = 3650
-			    }
-            }
+	type = country_event
+	title = "c3rd_barbarian_events.11.t"
+	left_portrait = scope:rivalry_owner
+	right_portrait = scope:rivalry_commander
+	desc = {
+		triggered_desc = {
+			#owner is ruler
+			trigger = {
+				scope:rivalry_owner = {
+					is_ruler = yes
+				}
+			}
+			desc = "c3rd_barbarian_events.11.desc.1"
+		}
+		triggered_desc = {
+			#owner is not ruler
+			trigger = {
+				scope:rivalry_owner = {
+					NOR = {
+						has_trait = cruel
+						has_trait = selfish
+						has_trait = corrupt
+						is_ruler = yes
+					}
+				}
+			}
+			desc = "c3rd_barbarian_events.11.desc.2"
+		}
+	}
+	picture = proscription
+	trigger = {
+		has_land = yes
+		has_country_modifier = solidus_introduced
+		has_law = constantine_reform_law
+		has_civil_war = no
+		NOT = {
+			has_variable = recent_army_governor_rivalry
+		}
+		any_army = {
+			has_legion_trigger = yes
+			has_commander = yes
+			unit_size >= 80
+			save_temporary_scope_as = temp_army
+			NOT = {
+				has_variable = recent_army_governor_rivalry_army
+			}
+			commander = {
+				NOT = {
+					has_variable = recent_army_governor_rivalry_gen
+				}
+			}
+			root = {
+				any_governorships = {
+					has_variable = governorship_owner
+					has_legion_trigger = yes
+					legion = scope:temp_army.legion
+					var:governorship_owner = {
+						is_alive = yes
+						employer = root
+						NOR = {
+							is_friend = scope:temp_army.commander
+							this = scope:temp_army.commander
+						}
+					}
+				}
+			}
+		}
+	}
+	weight_multiplier = {
+		modifier = {
+			factor = 2
+			any_army = {
+				has_legion_trigger = yes
+				has_commander = yes
+				unit_size >= 150
+				save_temporary_scope_as = temp_army
+				NOT = {
+					has_variable = recent_army_governor_rivalry_army
+				}
+				commander = {
+					NOT = {
+						has_variable = recent_army_governor_rivalry_gen
+					}
+				}
+			}
+			any_governorships = {
+				has_variable = governorship_owner
+				has_legion_trigger = yes
+				legion = scope:temp_army.legion
+				var:governorship_owner = {
+					is_alive = yes
+					employer = root
+					NOR = {
+						is_friend = scope:temp_army.commander
+						this = scope:temp_army.commander
+					}
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			any_army = {
+				has_legion_trigger = yes
+				has_commander = yes
+				unit_size >= 200
+				save_temporary_scope_as = temp_army
+				NOT = {
+					has_variable = recent_army_governor_rivalry_army
+				}
+				commander = {
+					NOT = {
+						has_variable = recent_army_governor_rivalry_gen
+					}
+				}
+			}
+			any_governorships = {
+				has_variable = governorship_owner
+				has_legion_trigger = yes
+				legion = scope:temp_army.legion
+				var:governorship_owner = {
+					is_alive = yes
+					employer = root
+					NOR = {
+						is_friend = scope:temp_army.commander
+						this = scope:temp_army.commander
+					}
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			any_army = {
+				has_legion_trigger = yes
+				has_commander = yes
+				unit_size >= 80
+				save_temporary_scope_as = temp_army
+				NOT = {
+					has_variable = recent_army_governor_rivalry_army
+				}
+				commander = {
+					NOT = {
+						has_variable = recent_army_governor_rivalry_gen
+					}
+				}
+			}
+			any_governorships = {
+				has_variable = governorship_owner
+				has_legion_trigger = yes
+				legion = scope:temp_army.legion
+				var:governorship_owner = {
+					is_alive = yes
+					employer = root
+					NOR = {
+						is_friend = scope:temp_army.commander
+						this = scope:temp_army.commander
+					}
+					has_character_modifier = political_power_character
+				}
+			}
+		}
+		modifier = {
+			factor = 1.5
+			any_army = {
+				has_legion_trigger = yes
+				has_commander = yes
+				unit_size >= 100
+				save_temporary_scope_as = temp_army
+				NOT = {
+					has_variable = recent_army_governor_rivalry_army
+				}
+				commander = {
+					NOT = {
+						has_variable = recent_army_governor_rivalry_gen
+					}
+				}
+			}
+			any_governorships = {
+				has_variable = governorship_owner
+				has_legion_trigger = yes
+				legion = scope:temp_army.legion
+				var:governorship_owner = {
+					is_alive = yes
+					employer = root
+					NOR = {
+						is_friend = scope:temp_army.commander
+						this = scope:temp_army.commander
+					}
+					has_character_modifier = major_influence_aristocrat
+				}
+			}
+		}
+	}
+	immediate = {
+		set_variable = {
+			name = recent_army_governor_rivalry
+			days = 1825
+		}
+		ordered_army = {
+			limit = {
+				has_legion_trigger = yes
+				has_commander = yes
+				unit_size >= 80
+				save_temporary_scope_as = temp_army
+				NOT = {
+					has_variable = recent_army_governor_rivalry_army
+				}
+				commander = {
+					NOT = {
+						has_variable = recent_army_governor_rivalry_gen
+					}
+				}
+				root = {
+					any_governorships = {
+						has_variable = governorship_owner
+						has_legion_trigger = yes
+						legion = scope:temp_army.legion
+						var:governorship_owner = {
+							is_alive = yes
+							employer = root
+							NOR = {
+								is_friend = scope:temp_army.commander
+								this = scope:temp_army.commander
+							}
+						}
+					}
+				}
+			}
+			max = 1
+			order_by = unit_size
+			save_scope_as = rivalry_army
+			commander = {
+				save_scope_as = rivalry_commander
+				set_variable = {
+					name = recent_army_governor_rivalry_gen
+					days = 3650
+				}
+			}
 			set_variable = {
 				name = recent_army_governor_rivalry_army
 				days = 3650
 			}
-        }
-        random_governorships = {
-            limit = {
-                has_variable = governorship_owner
-                has_legion_trigger = yes
-                legion = scope:rivalry_army.legion
-                var:governorship_owner = {
-                    employer = root
-                }
-            }
-            save_scope_as = rivalry_governorships
-            var:governorship_owner = {
-                save_scope_as = rivalry_owner
-            }
-        }
-
-    }
-
-    option = { #agree with owner
-        name = c3rd_barbarian_events.11.a
-        custom_tooltip = c3rd_barbarian_events.11.a.tt1
-        trigger = {
-            scope:rivalry_owner = {
-                is_ruler = no
-            }
-        }
-        scope:rivalry_army = {
-            add_unit_modifier = {
-                name = humiliated_army
-                duration = 1850
-            }
-        }
-        scope:rivalry_commander = {
-            add_loyalty = humiliated_general
-        }
-        if = {
-            limit = {
-                scope:rivalry_owner = {
-                    has_character_modifier = major_influence_aristocrat
-                }
-            }
-            add_political_influence = 20
-        }
-        else = {
-            add_political_influence = 5
-        }
-
-    }
-    option = { #agree with owner IS RULER
-        name = c3rd_barbarian_events.11.b
-        custom_tooltip = c3rd_barbarian_events.11.b.tt1
-        trigger = {
-            scope:rivalry_owner = {
-                is_ruler = yes
-            }
-        }
-        current_ruler = {
-            add_popularity = -20
-            add_corruption = 5
-        }
-        scope:rivalry_army = {
-            add_unit_modifier = {
-                name = humiliated_army
-                duration = 1850
-            }
-        }
-        scope:rivalry_commander = {
-            add_loyalty = humiliated_general
-        }
-    }
-    option = { #agree with general
-        name = c3rd_barbarian_events.11.c
-        custom_tooltip = c3rd_barbarian_events.11.c.tt1
-        trigger = {
-            scope:rivalry_owner = {
-                is_ruler = no
-            }  
-        }
-        scope:rivalry_commander = {
-            add_loyalty = honored_general
-        }
-        scope:rivalry_owner = {
-            add_loyalty = disappointed
-        }  
-        add_tyranny = 2
-        if = {
-            limit = {
-                scope:rivalry_owner = {
-                    has_character_modifier = political_power_character
-                }
-            }
-            add_stability = -4
-        }
-    }
-    option = { #agree with general against ruler
-        name = c3rd_barbarian_events.11.d
-        custom_tooltip = c3rd_barbarian_events.11.d.tt1
-        trigger = {
-            scope:rivalry_owner = {
-                is_ruler = yes
-            }
-        }
-        scope:rivalry_commander = {
-            add_loyalty = honored_general
-        }
-        hidden_effect = {
-            scope:rivalry_governorships = {
-                remove_variable = governorship_owner
+		}
+		random_governorships = {
+			limit = {
+				has_variable = governorship_owner
+				has_legion_trigger = yes
+				legion = scope:rivalry_army.legion
+				var:governorship_owner = {
+					employer = root
+				}
+			}
+			save_scope_as = rivalry_governorships
+			var:governorship_owner = {
+				save_scope_as = rivalry_owner
+			}
+		}
+	}
+	option = {
+		#agree with owner
+		name = c3rd_barbarian_events.11.a
+		custom_tooltip = c3rd_barbarian_events.11.a.tt1
+		trigger = {
+			scope:rivalry_owner = {
+				is_ruler = no
+			}
+		}
+		scope:rivalry_army = {
+			add_unit_modifier = {
+				name = humiliated_army
+				duration = 1850
+			}
+		}
+		scope:rivalry_commander = {
+			add_loyalty = humiliated_general
+		}
+		if = {
+			limit = {
+				scope:rivalry_owner = {
+					has_character_modifier = major_influence_aristocrat
+				}
+			}
+			add_political_influence = 20
+		}
+		else = {
+			add_political_influence = 5
+		}
+	}
+	option = {
+		#agree with owner IS RULER
+		name = c3rd_barbarian_events.11.b
+		custom_tooltip = c3rd_barbarian_events.11.b.tt1
+		trigger = {
+			scope:rivalry_owner = {
+				is_ruler = yes
+			}
+		}
+		current_ruler = {
+			add_popularity = -20
+			add_corruption = 5
+		}
+		scope:rivalry_army = {
+			add_unit_modifier = {
+				name = humiliated_army
+				duration = 1850
+			}
+		}
+		scope:rivalry_commander = {
+			add_loyalty = humiliated_general
+		}
+	}
+	option = {
+		#agree with general
+		name = c3rd_barbarian_events.11.c
+		custom_tooltip = c3rd_barbarian_events.11.c.tt1
+		trigger = {
+			scope:rivalry_owner = {
+				is_ruler = no
+			}
+		}
+		scope:rivalry_commander = {
+			add_loyalty = honored_general
+		}
+		scope:rivalry_owner = {
+			add_loyalty = disappointed
+		}
+		add_tyranny = 2
+		if = {
+			limit = {
+				scope:rivalry_owner = {
+					has_character_modifier = political_power_character
+				}
+			}
+			add_stability = -4
+		}
+	}
+	option = {
+		#agree with general against ruler
+		name = c3rd_barbarian_events.11.d
+		custom_tooltip = c3rd_barbarian_events.11.d.tt1
+		trigger = {
+			scope:rivalry_owner = {
+				is_ruler = yes
+			}
+		}
+		scope:rivalry_commander = {
+			add_loyalty = honored_general
+		}
+		hidden_effect = {
+			scope:rivalry_governorships = {
+				remove_variable = governorship_owner
 				every_governorship_state = {
 					every_state_province = {
 						limit = {
@@ -1054,770 +1063,772 @@ c3rd_barbarian_events.11 = { #admin law 2, strong army rivalry with governor
 							}
 						}
 						random_list = {
-                            2 = {}
-                            3 = {
-                                root.current_ruler = {
-                                    remove_holding = prev
-                                }
-                            }
-                        }
+							2 = {
+							}
+							3 = {
+								root.current_ruler = {
+									remove_holding = prev
+								}
+							}
+						}
 					}
 				}
-            }
-        }
-    }
-    option = { #neither
-        name = c3rd_barbarian_events.11.e
-        custom_tooltip = c3rd_barbarian_events.11.e.tt1
-        trigger = {
-            scope:rivalry_owner = {
-                is_ruler = no
-            }
-        }
-        scope:rivalry_commander = {
-            add_loyalty = disappointed
-        }
-        if = {
-            limit = {
-                scope:rivalry_owner = {
-                    has_character_modifier = major_influence_aristocrat
-                }
-            }
-            add_political_influence = -50
-        }
-        else = {
-            add_political_influence = -25
-        }
-        current_ruler = {
-            add_popularity = 15
-        }
-        if = {
-            limit = {
-                scope:rivalry_commander = {
-                    is_rival = scope:rivalry_owner
-                }
-            }
-            custom_tooltip = c3rd_barbarian_events.11.e.tt2
-            add_stability = -2
-        }
-        else = {
-            scope:rivalry_commander = {
-                add_rival = scope:rivalry_owner
-            }
-        }
-    }
+			}
+		}
+	}
+	option = {
+		#neither
+		name = c3rd_barbarian_events.11.e
+		custom_tooltip = c3rd_barbarian_events.11.e.tt1
+		trigger = {
+			scope:rivalry_owner = {
+				is_ruler = no
+			}
+		}
+		scope:rivalry_commander = {
+			add_loyalty = disappointed
+		}
+		if = {
+			limit = {
+				scope:rivalry_owner = {
+					has_character_modifier = major_influence_aristocrat
+				}
+			}
+			add_political_influence = -50
+		}
+		else = {
+			add_political_influence = -25
+		}
+		current_ruler = {
+			add_popularity = 15
+		}
+		if = {
+			limit = {
+				scope:rivalry_commander = {
+					is_rival = scope:rivalry_owner
+				}
+			}
+			custom_tooltip = c3rd_barbarian_events.11.e.tt2
+			add_stability = -2
+		}
+		else = {
+			scope:rivalry_commander = {
+				add_rival = scope:rivalry_owner
+			}
+		}
+	}
 }
-
 
 c3rd_barbarian_events.12 = { #barbarian admin law 2 magister militum taking control facing the barbarians and political power ++
-    type = country_event
-    title = "c3rd_barbarian_events.12.t"
-    desc = "c3rd_barbarian_events.12.desc"
-    picture = diadochi_legion_carrying_standard_honor
-    left_portrait = scope:magister_com
-
-    trigger = {
-        has_land = yes
-        has_country_modifier = solidus_introduced
-        has_law = constantine_reform_law
-        has_civil_war = no
-        NOT = {
-            has_variable = recent_army_magister_militum
-        }
-        any_governorships = {
-            NOT = {
-                has_variable = recent_gov_magister_militum
-            }
-            has_legion_trigger = yes
-            any_governorship_state = {
-                OR = {
-                    has_state_modifier = barbarians_border
-                    any_state_province = {
-                        any_neighbor_province = {
-                            has_owner = yes
-                            NOT = {owner = root}
-                            state = {
-                                has_state_modifier = barbarians_border
-                            }
-                        }
-                    }
-                }
-            }
-            legion = {
-                any_legion_unit = {
-                    has_commander = yes
-                    unit_size >= 20
-                    commander = {
-                        is_ruler = no
-                        NOT = {
-                            has_variable = recent_com_magister_militum
-                        }
-                    }
-                }
-            }
-        }
-    }
-    weight_multiplier = {
-        modifier = {
-            factor = 2
-            any_governorships = {
-                NOT = {
-                    has_variable = recent_gov_magister_militum
-                }
-                has_legion_trigger = yes
-                any_governorship_state = {
-                    OR = {
-                        has_state_modifier = barbarians_border
-                        any_state_province = {
-                            any_neighbor_province = {
-                                has_owner = yes
-                                NOT = {owner = root}
-                                state = {
-                                    has_state_modifier = barbarians_border
-                                }
-                            }
-                        }
-                    }
-                }
-                legion = {
-                    any_legion_unit = {
-                        has_commander = yes
-                        unit_size >= 20
-                        commander = {
-                            NOT = {
-                                has_variable = recent_com_magister_militum
-                            }
-                            has_character_modifier = major_influence_aristocrat
-                        }
-                    }
-                }
-            }
-        }
-        
-    }
-
-
-    immediate = {
-        set_variable = {
-            name = recent_army_magister_militum
-            days = 1825
-        }
-        random_governorships = {
-            limit = {
-                NOT = {
-                    has_variable = recent_gov_magister_militum
-                }
-                has_legion_trigger = yes
-                any_governorship_state = {
-                    OR = {
-                        has_state_modifier = barbarians_border
-                        any_state_province = {
-                            any_neighbor_province = {
-                                has_owner = yes
-                                NOT = {owner = root}
-                                state = {
-                                    has_state_modifier = barbarians_border
-                                }
-                            }
-                        }
-                    }
-                }
-                legion = {
-                    any_legion_unit = {
-                        has_commander = yes
-                        unit_size >= 20
-                        commander = {
-                            NOT = {
-                                has_variable = recent_com_magister_militum
-                            }
-                        }
-                    }
-                }
-            }
-            weight = {
-                modifier = {
-                    factor = 2
-                    has_legion_trigger = yes
-                    legion = {
-                        any_legion_unit = {
-                            has_commander = yes
-                            unit_size >= 50
-                        }
-                    }
-                }
-                modifier = {
-                    factor = 2
-                    has_legion_trigger = yes
-                    legion = {
-                        any_legion_unit = {
-                            has_commander = yes
-                            unit_size >= 100
-                        }
-                    }
-                }
-                modifier = {
-                    factor = 2
-                    has_legion_trigger = yes
-                    legion = {
-                        any_legion_unit = {
-                            has_commander = yes
-                            commander = {
-                                has_character_modifier = major_influence_aristocrat
-                            }
-                        }
-                    }
-                }
-            }
-            save_scope_as = magister_gov
-            set_variable = {
-                name = recent_gov_magister_militum
-                days = 5000
-            }
-            
-            legion = {
-                ordered_legion_unit = {
-                    order_by = unit_size
-                    max = 1
-                    save_scope_as = magister_army
-                    commander = {
-                        save_scope_as = magister_com
-                        set_variable = {
-                            name = recent_army_magister_militum
-                            days = 3650
-                        }
-                    }
-                }
-            }
-        }
-
-    }
-
-    option = { #ok, polinf and army buffs
-        name = c3rd_barbarian_events.12.a
-        custom_tooltip = c3rd_barbarian_events.12.a.tt1
-        every_country_state = {
-            limit = {
-                governorship = scope:magister_gov
-                has_state_modifier = barbarians_border
-            }
-            remove_state_modifier = barbarians_border
-        }
-        scope:magister_army = {
-            add_unit_modifier = {
-                name = defender_of_the_empire
-                duration = 1850
-            }
-        }
-        scope:magister_com = {
-            add_corruption = 10
-        }
-        if = {
-            limit = {
-                scope:magister_com = {
-                    has_character_modifier = major_influence_aristocrat
-                }
-            }
-            scope:magister_com = {
-                add_character_modifier = {
-                    name = political_power_character
-                    duration = 3650 #10 years
-                }
-            }
-        }
-        else_if = {
-            limit = {
-                scope:magister_gov = {
-                    NOT = {
-                        has_variable = governorship_owner 
-                    }
-                }
-            }
-            hidden_effect = {
-                every_owned_province = {
-                    limit = {
-                        governorship = scope:magister_gov
-                    }
-                    random_list = {
-                        5 = {
-                        }
-                        1 = {
-                            modifier = {
-                                add = 1
-                                NOT = {
-                                    exists = holding_owner
-                                }
-                            }
-                            modifier = {
-                                add = 1
-                                exists = holding_owner
-                                holding_owner = root.current_ruler
-                            }
-                            modifier = {
-                                add = 10
-                                any_neighbor_province = {
-                                    has_owner = yes
-                                    NOT = { owner = root}
-                                }
-                            }
-                            if = {
-                                limit = {
-                                    exists = holding_owner
-                                }
-                                holding_owner = {
-                                    remove_holding = prev
-                                }
-                            }
-                            scope:magister_com = {
-                                add_holding = prev
-                            }
-                        }
-                    }
-    
-                }
-            }
-            scope:magister_gov = {
-                set_variable = {
-                    name = governorship_owner
-                    value = scope:magister_com
-                }
-                calculate_the_gov_ownership = yes
-            }
-            scope:magister_com = {
-                recalculate_ownership_char = yes
-            }
-        }
-        else_if = {
-            limit = {
-                scope:magister_gov = {
-                    has_variable = governorship_owner 
-                    var:governorship_owner = {
-                        is_ruler = no
-                    }
-                }
-            }
-            add_political_influence = -10
-            add_legitimacy = -5
-            scope:magister_com = {
-                add_popularity = 25
-            }
-            hidden_effect = {
-                every_owned_province = {
-                    limit = {
-                        governorship = scope:magister_gov
-                        OR = {
-                            NOT = {
-                                exists = holding_owner
-                            }
-                            AND = {
-                                exists = holding_owner
-                                holding_owner = root.current_ruler
-                            }
-                        }
-                    }
-                    random_list = {
-                        1 = {
-                        }
-                        2 = {
-                            modifier = {
-                                add = -1
-                                exists = holding_owner
-                                holding_owner = root.current_ruler
-                            }
-                            modifier = {
-                                add = 5
-                                any_neighbor_province = {
-                                    has_owner = yes
-                                    NOT = { owner = root}
-                                }
-                            }
-                            if = {
-                                limit = {
-                                    exists = holding_owner
-                                }
-                                holding_owner = {
-                                    remove_holding = prev
-                                }
-                            }
-                            scope:magister_com = {
-                                add_holding = prev
-                            }
-                        }
-                    }
-    
-                }
-            }
-        }
-    }
-
-    option = { #stop him
-        name = c3rd_barbarian_events.12.b
-        custom_tooltip = c3rd_barbarian_events.12.b.tt1
-        scope:magister_com = {
-            add_loyalty = humiliated_general
-        }
-        current_ruler = {
-            add_popularity = -10
-        }
-        if = {
-            limit = {
-                scope:magister_com = {
-                    has_character_modifier = major_influence_aristocrat
-                }
-            }
-            add_political_influence = -30
-        }
-        if = {
-            limit = {
-                scope:magister_com = {
-                    has_character_modifier = political_power_character
-                }
-            }
-            add_stability = -5
-        }
-
-    }
-
-    option = { #punish him
-        name = c3rd_barbarian_events.12.c
-        custom_tooltip = c3rd_barbarian_events.12.c.tt1
-        trigger = {
-            scope:magister_com ={
-                NOR = {
-                    has_character_modifier = political_power_character
-                    has_character_modifier = major_influence_aristocrat
-                    is_head_of_family = yes
-                }
-            }
-        }
-        add_tyranny = 10
-        scope:magister_gov = {
-            legion = { remove_commander = scope:magister_com }
-            scope:magister_com = {
-                remove_command = yes
-                add_loyalty = humiliated_powerful_general
-            }
-            
-        }
-        imprison = {
-            target = scope:magister_com
-        }
-    }
-
+	type = country_event
+	title = "c3rd_barbarian_events.12.t"
+	desc = "c3rd_barbarian_events.12.desc"
+	picture = diadochi_legion_carrying_standard_honor
+	left_portrait = scope:magister_com
+	trigger = {
+		has_land = yes
+		has_country_modifier = solidus_introduced
+		has_law = constantine_reform_law
+		has_civil_war = no
+		NOT = {
+			has_variable = recent_army_magister_militum
+		}
+		any_governorships = {
+			NOT = {
+				has_variable = recent_gov_magister_militum
+			}
+			has_legion_trigger = yes
+			any_governorship_state = {
+				OR = {
+					has_state_modifier = barbarians_border
+					any_state_province = {
+						any_neighbor_province = {
+							has_owner = yes
+							NOT = {
+								owner = root
+							}
+							state = {
+								has_state_modifier = barbarians_border
+							}
+						}
+					}
+				}
+			}
+			legion = {
+				any_legion_unit = {
+					has_commander = yes
+					unit_size >= 20
+					commander = {
+						is_ruler = no
+						NOT = {
+							has_variable = recent_com_magister_militum
+						}
+					}
+				}
+			}
+		}
+	}
+	weight_multiplier = {
+		modifier = {
+			factor = 2
+			any_governorships = {
+				NOT = {
+					has_variable = recent_gov_magister_militum
+				}
+				has_legion_trigger = yes
+				any_governorship_state = {
+					OR = {
+						has_state_modifier = barbarians_border
+						any_state_province = {
+							any_neighbor_province = {
+								has_owner = yes
+								NOT = {
+									owner = root
+								}
+								state = {
+									has_state_modifier = barbarians_border
+								}
+							}
+						}
+					}
+				}
+				legion = {
+					any_legion_unit = {
+						has_commander = yes
+						unit_size >= 20
+						commander = {
+							NOT = {
+								has_variable = recent_com_magister_militum
+							}
+							has_character_modifier = major_influence_aristocrat
+						}
+					}
+				}
+			}
+		}
+	}
+	immediate = {
+		set_variable = {
+			name = recent_army_magister_militum
+			days = 1825
+		}
+		random_governorships = {
+			limit = {
+				NOT = {
+					has_variable = recent_gov_magister_militum
+				}
+				has_legion_trigger = yes
+				any_governorship_state = {
+					OR = {
+						has_state_modifier = barbarians_border
+						any_state_province = {
+							any_neighbor_province = {
+								has_owner = yes
+								NOT = {
+									owner = root
+								}
+								state = {
+									has_state_modifier = barbarians_border
+								}
+							}
+						}
+					}
+				}
+				legion = {
+					any_legion_unit = {
+						has_commander = yes
+						unit_size >= 20
+						commander = {
+							NOT = {
+								has_variable = recent_com_magister_militum
+							}
+						}
+					}
+				}
+			}
+			weight = {
+				modifier = {
+					factor = 2
+					has_legion_trigger = yes
+					legion = {
+						any_legion_unit = {
+							has_commander = yes
+							unit_size >= 50
+						}
+					}
+				}
+				modifier = {
+					factor = 2
+					has_legion_trigger = yes
+					legion = {
+						any_legion_unit = {
+							has_commander = yes
+							unit_size >= 100
+						}
+					}
+				}
+				modifier = {
+					factor = 2
+					has_legion_trigger = yes
+					legion = {
+						any_legion_unit = {
+							has_commander = yes
+							commander = {
+								has_character_modifier = major_influence_aristocrat
+							}
+						}
+					}
+				}
+			}
+			save_scope_as = magister_gov
+			set_variable = {
+				name = recent_gov_magister_militum
+				days = 5000
+			}
+			legion = {
+				ordered_legion_unit = {
+					order_by = unit_size
+					max = 1
+					save_scope_as = magister_army
+					commander = {
+						save_scope_as = magister_com
+						set_variable = {
+							name = recent_army_magister_militum
+							days = 3650
+						}
+					}
+				}
+			}
+		}
+	}
+	option = {
+		#ok, polinf and army buffs
+		name = c3rd_barbarian_events.12.a
+		custom_tooltip = c3rd_barbarian_events.12.a.tt1
+		every_country_state = {
+			limit = {
+				governorship = scope:magister_gov
+				has_state_modifier = barbarians_border
+			}
+			remove_state_modifier = barbarians_border
+		}
+		scope:magister_army = {
+			add_unit_modifier = {
+				name = defender_of_the_empire
+				duration = 1850
+			}
+		}
+		scope:magister_com = {
+			add_corruption = 10
+		}
+		if = {
+			limit = {
+				scope:magister_com = {
+					has_character_modifier = major_influence_aristocrat
+				}
+			}
+			scope:magister_com = {
+				add_character_modifier = {
+					name = political_power_character
+					duration = 3650					#10 years
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				scope:magister_gov = {
+					NOT = {
+						has_variable = governorship_owner
+					}
+				}
+			}
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						governorship = scope:magister_gov
+					}
+					random_list = {
+						5 = {
+						}
+						1 = {
+							modifier = {
+								add = 1
+								NOT = {
+									exists = holding_owner
+								}
+							}
+							modifier = {
+								add = 1
+								exists = holding_owner
+								holding_owner = root.current_ruler
+							}
+							modifier = {
+								add = 10
+								any_neighbor_province = {
+									has_owner = yes
+									NOT = {
+										owner = root
+									}
+								}
+							}
+							if = {
+								limit = {
+									exists = holding_owner
+								}
+								holding_owner = {
+									remove_holding = prev
+								}
+							}
+							scope:magister_com = {
+								add_holding = prev
+							}
+						}
+					}
+				}
+			}
+			scope:magister_gov = {
+				set_variable = {
+					name = governorship_owner
+					value = scope:magister_com
+				}
+				calculate_the_gov_ownership = yes
+			}
+			scope:magister_com = {
+				recalculate_ownership_char = yes
+			}
+		}
+		else_if = {
+			limit = {
+				scope:magister_gov = {
+					has_variable = governorship_owner
+					var:governorship_owner = {
+						is_ruler = no
+					}
+				}
+			}
+			add_political_influence = -10
+			add_legitimacy = -5
+			scope:magister_com = {
+				add_popularity = 25
+			}
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						governorship = scope:magister_gov
+						OR = {
+							NOT = {
+								exists = holding_owner
+							}
+							AND = {
+								exists = holding_owner
+								holding_owner = root.current_ruler
+							}
+						}
+					}
+					random_list = {
+						1 = {
+						}
+						2 = {
+							modifier = {
+								add = -1
+								exists = holding_owner
+								holding_owner = root.current_ruler
+							}
+							modifier = {
+								add = 5
+								any_neighbor_province = {
+									has_owner = yes
+									NOT = {
+										owner = root
+									}
+								}
+							}
+							if = {
+								limit = {
+									exists = holding_owner
+								}
+								holding_owner = {
+									remove_holding = prev
+								}
+							}
+							scope:magister_com = {
+								add_holding = prev
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	option = {
+		#stop him
+		name = c3rd_barbarian_events.12.b
+		custom_tooltip = c3rd_barbarian_events.12.b.tt1
+		scope:magister_com = {
+			add_loyalty = humiliated_general
+		}
+		current_ruler = {
+			add_popularity = -10
+		}
+		if = {
+			limit = {
+				scope:magister_com = {
+					has_character_modifier = major_influence_aristocrat
+				}
+			}
+			add_political_influence = -30
+		}
+		if = {
+			limit = {
+				scope:magister_com = {
+					has_character_modifier = political_power_character
+				}
+			}
+			add_stability = -5
+		}
+	}
+	option = {
+		#punish him
+		name = c3rd_barbarian_events.12.c
+		custom_tooltip = c3rd_barbarian_events.12.c.tt1
+		trigger = {
+			scope:magister_com = {
+				NOR = {
+					has_character_modifier = political_power_character
+					has_character_modifier = major_influence_aristocrat
+					is_head_of_family = yes
+				}
+			}
+		}
+		add_tyranny = 10
+		scope:magister_gov = {
+			legion = {
+				remove_commander = scope:magister_com
+			}
+			scope:magister_com = {
+				remove_command = yes
+				add_loyalty = humiliated_powerful_general
+			}
+		}
+		imprison = {
+			target = scope:magister_com
+		}
+	}
 }
 
-
-c3rd_barbarian_events.13 = { # admin law 1 disloyal influent landowner takes advantage of the army This is a medium coup scale bad event that happens if he's owner of a governorship with especially strong legion
-    type = country_event
-    title = "c3rd_barbarian_events.13.t"
-    desc = "c3rd_barbarian_events.13.desc"
-
-    picture = romans_marching
-
-    trigger = {
-        has_land = yes
-        has_country_modifier = solidus_introduced
-        has_law = basic_administrative_law
-        has_civil_war = no
-        NOT = {
-            has_variable = recent_owner_overtake_army
-        }
-        any_governorships = {
-            has_legion_trigger = yes
-            has_variable = governorship_owner
-            NOT = {
-                has_variable = recent_owner_overtake_army_gov
-            }
-            var:governorship_owner = {
-                NOR = {
-                    this = root.current_ruler
-                    is_friend = root.current_ruler
-                    has_variable = recent_owner_overtake_army_char
-                    prisoner = yes
-                }
-                OR = {
-                    loyalty <= 33
-                    AND = {
-                        loyalty <= 40
-                        has_variable = head_intent_disloyal
-                    }
-                }
-            }
-            legion = {
-                legion_unit_neutral_count >= 120
-            }
-        }
-    }
-
-    weight_multiplier = {
-        modifier = {
-            factor = 2
-            any_governorships = {
-                has_legion_trigger = yes
-                has_variable = governorship_owner
-                NOT = {
-                    has_variable = recent_owner_overtake_army_gov
-                }
-                var:governorship_owner = {
-                    NOR = {
-                        this = root.current_ruler
-                        is_friend = root.current_ruler
-                        has_variable = recent_owner_overtake_army_char
-                        prisoner = yes
-                    }
-                    AND = {
-                        loyalty <= 15
-                        has_variable = head_intent_disloyal
-                    }
-                }
-                legion = {
-                    legion_unit_neutral_count >= 120
-                }
-            }
-        }
-        modifier = {
-            factor = 1.5
-            any_governorships = {
-                has_legion_trigger = yes
-                has_variable = governorship_owner
-                NOT = {
-                    has_variable = recent_owner_overtake_army_gov
-                }
-                var:governorship_owner = {
-                    NOR = {
-                        this = root.current_ruler
-                        is_friend = root.current_ruler
-                        has_variable = recent_owner_overtake_army_char
-                        prisoner = yes
-                    }
-                    OR = {
-                        loyalty <= 33
-                        AND = {
-                            loyalty <= 40
-                            has_variable = head_intent_disloyal
-                        }
-                    }
-                }
-                legion = {
-                    legion_unit_neutral_count >= 200
-                }
-            }
-        }
-        modifier = {
-            factor = 1.5
-            tyranny >= 25
-        }
-        modifier = {
-            factor = 1.5
-            tyranny >= 50
-        }
-        modifier = {
-            factor = 1.5
-            tyranny >= 75
-        }
-        modifier = {
-            factor = 1.5
-            war = yes
-        }
-    }
-
-
-    immediate = {
-        set_variable = {
-            name = recent_owner_overtake_army
-            days = 3650
-        }
-        random_governorships = {
-            limit = {
-                has_legion_trigger = yes
-                has_variable = governorship_owner
-                NOT = {
-                    has_variable = recent_owner_overtake_army_gov
-                }
-                var:governorship_owner = {
-                    NOR = {
-                        this = root.current_ruler
-                        is_friend = root.current_ruler
-                        has_variable = recent_owner_overtake_army_char
-                        prisoner = yes
-                    }
-                    OR = {
-                        loyalty <= 33
-                        AND = {
-                            loyalty <= 40
-                            has_variable = head_intent_disloyal
-                        }
-                    }
-                }
-                legion = {
-                    legion_unit_neutral_count >= 120
-                }
-            }
-            weight = {
-                modifier = {
-                    has_variable = governorship_owner
-                    add = {
-                        value = 0
-                        var:governorship_owner = {
-                            add = power_base
-                        }
-                    }
-                }
-                modifier = {
-                    factor = 1.5
-                    has_legion_trigger = yes
-                    legion = {
-                        legion_unit_neutral_count >= 200
-                    }
-                }
-            }
-            save_scope_as = owner_overtake_gov
-            set_variable = {
-                name = recent_owner_overtake_army_gov
-                days = 7300
-            }
-            var:governorship_owner = {
-                set_variable = {
-                    name = recent_owner_overtake_army_char
-                    days = 7300
-                }
-                save_scope_as = owner_overtake_char
-            }
-            legion = {
-                save_scope_as = owner_overtake_legion
-            }
-        }
-    }
-
-    option = { #stop him with a political action, strong PI cost
-        name = c3rd_barbarian_events.13.a
-        custom_tooltip = c3rd_barbarian_events.13.a.tt1
-        trigger = {
-            political_influence >= 0
-        }
-        if = {
-            limit = {
-                stability >= 70
-            }
-            add_stability = -4
-        }
-        else_if = {
-            limit = {
-                stability >= 50
-            }
-            add_stability = -2
-        }
-        add_political_influence = political_influence_global_ratio_price
-        scope:owner_overtake_char = {
-            add_loyalty = disappointed
-        }
-    }
-    option = { #stop him with a military action, might create a coup, anger and stuff
-        name = c3rd_barbarian_events.13.b
-        custom_tooltip = c3rd_barbarian_events.13.b.tt1
-        add_political_influence = 25
-        trigger = {
-            scope:owner_overtake_legion = {
-                legion_unit_neutral_count <= root.manpower
-            }
-        }
-        add_manpower = {
-            value = 0
-            scope:owner_overtake_legion = {
-                add = legion_unit_neutral_count
-            }
-            multiply = -2
-        }
-        scope:owner_overtake_char = {
-            add_loyalty = state_interference
-        }
-        show_as_tooltip = {
-            scope:owner_overtake_legion = {
-                random_legion_unit = {
-                    limit = {
-                        commander = {
-                            NOR = {
-                                is_friend = root.current_ruler
-                                loyalty >= 75
-                            } 
-                        }
-                    }
-                    add_unit_modifier = {
-                        name = humiliated_army
-                        duration = 1850
-                    }
-                }
-            }
-        }
-        hidden_effect = {
-            scope:owner_overtake_legion = {
-                every_legion_unit = {
-                    limit = {
-                        commander = {
-                            NOR = {
-                                is_friend = root.current_ruler
-                                loyalty >= 75
-                            } 
-                        }
-                    }
-                    add_unit_modifier = {
-                        name = disavowed_army
-                        duration = 1850
-                    }
-                }
-            }
-        }
-        if = {
-            limit = {
-                scope:owner_overtake_char = {
-                    has_character_modifier = political_power_character
-                }
-            }
-            scope:owner_overtake_legion = { #makes the polinf coup easier
-                every_legion_commander = {
-                    limit = {
-                        NOR = {
-                            is_friend = root.current_ruler
-                            loyalty >= 75
-                        }
-                    }
-                    add_loyalty = disappointed
-                }
-            }
-            
-        }
-        if = {
-            limit = {
-                scope:owner_overtake_char = {
-                    OR = {
-                        has_character_modifier = political_power_character
-                        has_character_modifier = major_influence_aristocrat
-                    }
-                } 
-            }
-            if = {
-                limit = {        
-                    OR = {
-                        num_of_cities > 900
-                        AND = {
-                            has_country_modifier = solidus_introduced
-                            num_of_cities >= 600
-                            has_law = basic_administrative_law
-                        }
-                        AND = {
-                            has_country_modifier = solidus_introduced
-                            num_of_cities >= 750
-                            NOT = { has_law = basic_administrative_law }
-                        }
-                    }
-                }
-                custom_tooltip = c3rd_barbarian_events.13.b.tt2
-            }
-            else = {
-                custom_tooltip = c3rd_barbarian_events.13.b.tt3
-            }
-            hidden_effect = {
+c3rd_barbarian_events.13 = {
+	# admin law 1 disloyal influent landowner takes advantage of the army This is a medium coup scale bad event that happens if he's owner of a governorship with especially strong legion
+	type = country_event
+	title = "c3rd_barbarian_events.13.t"
+	desc = "c3rd_barbarian_events.13.desc"
+	picture = romans_marching
+	trigger = {
+		has_land = yes
+		has_country_modifier = solidus_introduced
+		has_law = basic_administrative_law
+		has_civil_war = no
+		NOT = {
+			has_variable = recent_owner_overtake_army
+		}
+		any_governorships = {
+			has_legion_trigger = yes
+			has_variable = governorship_owner
+			NOT = {
+				has_variable = recent_owner_overtake_army_gov
+			}
+			var:governorship_owner = {
+				NOR = {
+					this = root.current_ruler
+					is_friend = root.current_ruler
+					has_variable = recent_owner_overtake_army_char
+					prisoner = yes
+				}
+				OR = {
+					loyalty <= 33
+					AND = {
+						loyalty <= 40
+						has_variable = head_intent_disloyal
+					}
+				}
+			}
+			legion = {
+				legion_unit_neutral_count >= 120
+			}
+		}
+	}
+	weight_multiplier = {
+		modifier = {
+			factor = 2
+			any_governorships = {
+				has_legion_trigger = yes
+				has_variable = governorship_owner
+				NOT = {
+					has_variable = recent_owner_overtake_army_gov
+				}
+				var:governorship_owner = {
+					NOR = {
+						this = root.current_ruler
+						is_friend = root.current_ruler
+						has_variable = recent_owner_overtake_army_char
+						prisoner = yes
+					}
+					AND = {
+						loyalty <= 15
+						has_variable = head_intent_disloyal
+					}
+				}
+				legion = {
+					legion_unit_neutral_count >= 120
+				}
+			}
+		}
+		modifier = {
+			factor = 1.5
+			any_governorships = {
+				has_legion_trigger = yes
+				has_variable = governorship_owner
+				NOT = {
+					has_variable = recent_owner_overtake_army_gov
+				}
+				var:governorship_owner = {
+					NOR = {
+						this = root.current_ruler
+						is_friend = root.current_ruler
+						has_variable = recent_owner_overtake_army_char
+						prisoner = yes
+					}
+					OR = {
+						loyalty <= 33
+						AND = {
+							loyalty <= 40
+							has_variable = head_intent_disloyal
+						}
+					}
+				}
+				legion = {
+					legion_unit_neutral_count >= 200
+				}
+			}
+		}
+		modifier = {
+			factor = 1.5
+			tyranny >= 25
+		}
+		modifier = {
+			factor = 1.5
+			tyranny >= 50
+		}
+		modifier = {
+			factor = 1.5
+			tyranny >= 75
+		}
+		modifier = {
+			factor = 1.5
+			war = yes
+		}
+	}
+	immediate = {
+		set_variable = {
+			name = recent_owner_overtake_army
+			days = 3650
+		}
+		random_governorships = {
+			limit = {
+				has_legion_trigger = yes
+				has_variable = governorship_owner
+				NOT = {
+					has_variable = recent_owner_overtake_army_gov
+				}
+				var:governorship_owner = {
+					NOR = {
+						this = root.current_ruler
+						is_friend = root.current_ruler
+						has_variable = recent_owner_overtake_army_char
+						prisoner = yes
+					}
+					OR = {
+						loyalty <= 33
+						AND = {
+							loyalty <= 40
+							has_variable = head_intent_disloyal
+						}
+					}
+				}
+				legion = {
+					legion_unit_neutral_count >= 120
+				}
+			}
+			weight = {
+				modifier = {
+					has_variable = governorship_owner
+					add = {
+						value = 0
+						var:governorship_owner = {
+							add = power_base
+						}
+					}
+				}
+				modifier = {
+					factor = 1.5
+					has_legion_trigger = yes
+					legion = {
+						legion_unit_neutral_count >= 200
+					}
+				}
+			}
+			save_scope_as = owner_overtake_gov
+			set_variable = {
+				name = recent_owner_overtake_army_gov
+				days = 7300
+			}
+			var:governorship_owner = {
+				set_variable = {
+					name = recent_owner_overtake_army_char
+					days = 7300
+				}
+				save_scope_as = owner_overtake_char
+			}
+			legion = {
+				save_scope_as = owner_overtake_legion
+			}
+		}
+	}
+	option = {
+		#stop him with a political action, strong PI cost
+		name = c3rd_barbarian_events.13.a
+		custom_tooltip = c3rd_barbarian_events.13.a.tt1
+		trigger = {
+			political_influence >= 0
+		}
+		if = {
+			limit = {
+				stability >= 70
+			}
+			add_stability = -4
+		}
+		else_if = {
+			limit = {
+				stability >= 50
+			}
+			add_stability = -2
+		}
+		add_political_influence = political_influence_global_ratio_price
+		scope:owner_overtake_char = {
+			add_loyalty = disappointed
+		}
+	}
+	option = {
+		#stop him with a military action, might create a coup, anger and stuff
+		name = c3rd_barbarian_events.13.b
+		custom_tooltip = c3rd_barbarian_events.13.b.tt1
+		add_political_influence = 25
+		trigger = {
+			scope:owner_overtake_legion = {
+				legion_unit_neutral_count <= root.manpower
+			}
+		}
+		add_manpower = {
+			value = 0
+			scope:owner_overtake_legion = {
+				add = legion_unit_neutral_count
+			}
+			multiply = -2
+		}
+		scope:owner_overtake_char = {
+			add_loyalty = state_interference
+		}
+		show_as_tooltip = {
+			scope:owner_overtake_legion = {
+				random_legion_unit = {
+					limit = {
+						commander = {
+							NOR = {
+								is_friend = root.current_ruler
+								loyalty >= 75
+							}
+						}
+					}
+					add_unit_modifier = {
+						name = humiliated_army
+						duration = 1850
+					}
+				}
+			}
+		}
+		hidden_effect = {
+			scope:owner_overtake_legion = {
+				every_legion_unit = {
+					limit = {
+						commander = {
+							NOR = {
+								is_friend = root.current_ruler
+								loyalty >= 75
+							}
+						}
+					}
+					add_unit_modifier = {
+						name = disavowed_army
+						duration = 1850
+					}
+				}
+			}
+		}
+		if = {
+			limit = {
+				scope:owner_overtake_char = {
+					has_character_modifier = political_power_character
+				}
+			}
+			scope:owner_overtake_legion = {
+				#makes the polinf coup easier
+				every_legion_commander = {
+					limit = {
+						NOR = {
+							is_friend = root.current_ruler
+							loyalty >= 75
+						}
+					}
+					add_loyalty = disappointed
+				}
+			}
+		}
+		if = {
+			limit = {
+				scope:owner_overtake_char = {
+					OR = {
+						has_character_modifier = political_power_character
+						has_character_modifier = major_influence_aristocrat
+					}
+				}
+			}
+			if = {
+				limit = {
+					OR = {
+						num_of_cities > 900
+						AND = {
+							has_country_modifier = solidus_introduced
+							num_of_cities >= 600
+							has_law = basic_administrative_law
+						}
+						AND = {
+							has_country_modifier = solidus_introduced
+							num_of_cities >= 750
+							NOT = {
+								has_law = basic_administrative_law
+							}
+						}
+					}
+				}
+				custom_tooltip = c3rd_barbarian_events.13.b.tt2
+			}
+			else = {
+				custom_tooltip = c3rd_barbarian_events.13.b.tt3
+			}
+			hidden_effect = {
 				if = {
-					limit = { has_variable = unworthy_leader}
+					limit = {
+						has_variable = unworthy_leader
+					}
 					change_variable = {
 						name = unworthy_leader
 						add = 2
@@ -1829,81 +1840,87 @@ c3rd_barbarian_events.13 = { # admin law 1 disloyal influent landowner takes adv
 						value = 2
 					}
 				}
-                random_list = {
-                    12 = {
-                        modifier = {
-                            add = 10
-                            has_variable = unworthy_leader
-                            var:unworthy_leader <= 5
-                        }
-                        modifier = {
-                            add = 15
-                            NOT = {has_variable = unworthy_leader}
-                        }
-                        modifier = {
-                            add = 2
-                            legitimacy >= 85
-                        }
-                    }
-                    1 = {
-                        modifier = {
-                            add = var:unworthy_leader
-                            has_variable = unworthy_leader
-                        }
-                        modifier = {
-                            add = 1
-                            legitimacy < 50
-                        }
-                        modifier = {
-                            add = 1
-                            legitimacy < 25
-                        }
-                        modifier = {
-                            add = 2
-                            legitimacy < 0
-                        }
-                        modifier = {
-                            add = 2
-                            stability < 25
-                        }
-                        if = {
-                            limit = {        
-                                OR = {
-                                    num_of_cities > 900
-                                    AND = {
-                                        has_country_modifier = solidus_introduced
-                                        num_of_cities >= 600
-                                        has_law = basic_administrative_law
-                                    }
-                                    AND = {
-                                        has_country_modifier = solidus_introduced
-                                        num_of_cities >= 750
-                                        NOT = { has_law = basic_administrative_law }
-                                    }
-                                }
-                            }
-                            trigger_event = {
-                                id = c3rd_events.9
-                                days = 15
-                            }
-                        }
-                        else = {
-                            add_legitimacy = -20
-                        }
-                    }
-                }
-            }
-        }
-        else_if = {
-            limit = {
-                scope:owner_overtake_char = {
-                    has_variable = country_ownership
-                    var:country_ownership >= 15
-                }
-            }
-            hidden_effect = {
+				random_list = {
+					12 = {
+						modifier = {
+							add = 10
+							has_variable = unworthy_leader
+							var:unworthy_leader <= 5
+						}
+						modifier = {
+							add = 15
+							NOT = {
+								has_variable = unworthy_leader
+							}
+						}
+						modifier = {
+							add = 2
+							legitimacy >= 85
+						}
+					}
+					1 = {
+						modifier = {
+							add = var:unworthy_leader
+							has_variable = unworthy_leader
+						}
+						modifier = {
+							add = 1
+							legitimacy < 50
+						}
+						modifier = {
+							add = 1
+							legitimacy < 25
+						}
+						modifier = {
+							add = 2
+							legitimacy < 0
+						}
+						modifier = {
+							add = 2
+							stability < 25
+						}
+						if = {
+							limit = {
+								OR = {
+									num_of_cities > 900
+									AND = {
+										has_country_modifier = solidus_introduced
+										num_of_cities >= 600
+										has_law = basic_administrative_law
+									}
+									AND = {
+										has_country_modifier = solidus_introduced
+										num_of_cities >= 750
+										NOT = {
+											has_law = basic_administrative_law
+										}
+									}
+								}
+							}
+							trigger_event = {
+								id = c3rd_events.9
+								days = 15
+							}
+						}
+						else = {
+							add_legitimacy = -20
+						}
+					}
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				scope:owner_overtake_char = {
+					has_variable = country_ownership
+					var:country_ownership >= 15
+				}
+			}
+			hidden_effect = {
 				if = {
-					limit = { has_variable = unworthy_leader}
+					limit = {
+						has_variable = unworthy_leader
+					}
 					change_variable = {
 						name = unworthy_leader
 						add = 1
@@ -1915,192 +1932,197 @@ c3rd_barbarian_events.13 = { # admin law 1 disloyal influent landowner takes adv
 						value = 1
 					}
 				}
-            }
-        }
-    }
-    option = { #do nothing he get either political power or coup
-        name = c3rd_barbarian_events.13.c
-        custom_tooltip = c3rd_barbarian_events.13.c.tt1
-        if = {
-            limit = {        
-                OR = {
-                    num_of_cities > 900
-                    AND = {
-                        has_country_modifier = solidus_introduced
-                        num_of_cities >= 600
-                        has_law = basic_administrative_law
-                    }
-                    AND = {
-                        has_country_modifier = solidus_introduced
-                        num_of_cities >= 750
-                        NOT = { has_law = basic_administrative_law }
-                    }
-                }
-            }
-            custom_tooltip = c3rd_barbarian_events.13.c.tt2
-        }
-        else = {
-            custom_tooltip = c3rd_barbarian_events.13.c.tt3
-        }
-        add_legitimacy = -10
-        current_ruler = {
-            add_popularity = -25
-        }
-        if = {
-            limit = {
-                stability >= 70
-            }
-            add_stability = -8
-        }
-        else_if = {
-            limit = {
-                stability >= 50
-            }
-            add_stability = -4
-        }
-        else_if = {
-            limit = {
-                stability >= 40
-            }
-            add_stability = -2
-        }
-        hidden_effect = {
-            random_list = {
-                10 = {
-                    modifier = {
-                        add = 10
-                        has_variable = unworthy_leader
-                        var:unworthy_leader <= 2
-                    }
-                    modifier = {
-                        add = 10
-                        NOT = {has_variable = unworthy_leader}
-                    }
-                    modifier = {
-                        add = 2
-                        legitimacy >= 85
-                    }
-                    modifier = {
-                        add = 2
-                        scope:owner_overtake_char = {
-                            NOR = {
-                                has_character_modifier = political_power_character
-                                has_character_modifier = major_influence_aristocrat
-                            }
-                        }
-                    }
-                }
-                1 = {
-                    modifier = {
-                        add = var:unworthy_leader
-                        has_variable = unworthy_leader
-                    }
-                    modifier = {
-                        add = 1
-                        legitimacy < 50
-                    }
-                    modifier = {
-                        add = 1
-                        legitimacy < 25
-                    }
-                    modifier = {
-                        add = 2
-                        legitimacy < 0
-                    }
-                    modifier = {
-                        add = 2
-                        stability < 25
-                    }
-                    modifier = {
-                        add = 2
-                        scope:owner_overtake_char = {
-                            has_character_modifier = political_power_character
-                        }
-                    }
-                    if = {
-                        limit = {
-                            scope:owner_overtake_char = {
-                                has_character_modifier = political_power_character
-                                NOT = {
-                                    has_variable = pol_coup
-                                }
-                            } 
-                            any_character = { #the support
-                                count >= 3
-                                loyalty <= 30
-                                is_ruler = no
-                                OR = {
-                                    has_character_modifier = political_power_character
-                                    power_base >= 10
-                                    has_character_modifier = king_maker #in case
-                                    has_character_modifier = major_influence_aristocrat
-                                    AND = {
-                                        is_general = yes
-                                        is_mercenary = no
-                                        is_governor = no
-                                        power_base >= 5
-                                    }
-                                }
-                                
-                            }
-                        }
-                        trigger_event = {
-                            id = c3rd_other_events.91
-                            days = 15
-                        }
-                    }
-                    else = {
-                        if = {
-                            limit = {        
-                                OR = {
-                                    num_of_cities > 900
-                                    AND = {
-                                        has_country_modifier = solidus_introduced
-                                        num_of_cities >= 600
-                                        has_law = basic_administrative_law
-                                    }
-                                    AND = {
-                                        has_country_modifier = solidus_introduced
-                                        num_of_cities >= 750
-                                        NOT = { has_law = basic_administrative_law }
-                                    }
-                                }
-                            }
-                            trigger_event = {
-                                id = c3rd_events.9
-                                days = 15
-                            }
-                        }
-                        else = {
-                            add_legitimacy = -20
-                        }
-                    }
-                }
-            }
-        }
-        if = {
-            limit = {
-                scope:owner_overtake_char = {
-                    NOT = {has_character_modifier = political_power_character}
-                    OR = {
-                        has_character_modifier = major_influence_aristocrat
-                        is_head_of_family = yes
-                    }
-                } 
-            }
-            scope:owner_overtake_char = {
-                add_character_modifier = {
-                    name = political_power_character
-                    duration = 3650 #10 years
-                }
-            } 
-        }
-        scope:owner_overtake_char = {
-            add_corruption = 10
-        }
-    }
+			}
+		}
+	}
+	option = {
+		#do nothing he get either political power or coup
+		name = c3rd_barbarian_events.13.c
+		custom_tooltip = c3rd_barbarian_events.13.c.tt1
+		if = {
+			limit = {
+				OR = {
+					num_of_cities > 900
+					AND = {
+						has_country_modifier = solidus_introduced
+						num_of_cities >= 600
+						has_law = basic_administrative_law
+					}
+					AND = {
+						has_country_modifier = solidus_introduced
+						num_of_cities >= 750
+						NOT = {
+							has_law = basic_administrative_law
+						}
+					}
+				}
+			}
+			custom_tooltip = c3rd_barbarian_events.13.c.tt2
+		}
+		else = {
+			custom_tooltip = c3rd_barbarian_events.13.c.tt3
+		}
+		add_legitimacy = -10
+		current_ruler = {
+			add_popularity = -25
+		}
+		if = {
+			limit = {
+				stability >= 70
+			}
+			add_stability = -8
+		}
+		else_if = {
+			limit = {
+				stability >= 50
+			}
+			add_stability = -4
+		}
+		else_if = {
+			limit = {
+				stability >= 40
+			}
+			add_stability = -2
+		}
+		hidden_effect = {
+			random_list = {
+				10 = {
+					modifier = {
+						add = 10
+						has_variable = unworthy_leader
+						var:unworthy_leader <= 2
+					}
+					modifier = {
+						add = 10
+						NOT = {
+							has_variable = unworthy_leader
+						}
+					}
+					modifier = {
+						add = 2
+						legitimacy >= 85
+					}
+					modifier = {
+						add = 2
+						scope:owner_overtake_char = {
+							NOR = {
+								has_character_modifier = political_power_character
+								has_character_modifier = major_influence_aristocrat
+							}
+						}
+					}
+				}
+				1 = {
+					modifier = {
+						add = var:unworthy_leader
+						has_variable = unworthy_leader
+					}
+					modifier = {
+						add = 1
+						legitimacy < 50
+					}
+					modifier = {
+						add = 1
+						legitimacy < 25
+					}
+					modifier = {
+						add = 2
+						legitimacy < 0
+					}
+					modifier = {
+						add = 2
+						stability < 25
+					}
+					modifier = {
+						add = 2
+						scope:owner_overtake_char = {
+							has_character_modifier = political_power_character
+						}
+					}
+					if = {
+						limit = {
+							scope:owner_overtake_char = {
+								has_character_modifier = political_power_character
+								NOT = {
+									has_variable = pol_coup
+								}
+							}
+							any_character = {
+								#the support
+								count >= 3
+								loyalty <= 30
+								is_ruler = no
+								OR = {
+									has_character_modifier = political_power_character
+									power_base >= 10
+									has_character_modifier = king_maker									#in case
+									has_character_modifier = major_influence_aristocrat
+									AND = {
+										is_general = yes
+										is_mercenary = no
+										is_governor = no
+										power_base >= 5
+									}
+								}
+							}
+						}
+						trigger_event = {
+							id = c3rd_other_events.91
+							days = 15
+						}
+					}
+					else = {
+						if = {
+							limit = {
+								OR = {
+									num_of_cities > 900
+									AND = {
+										has_country_modifier = solidus_introduced
+										num_of_cities >= 600
+										has_law = basic_administrative_law
+									}
+									AND = {
+										has_country_modifier = solidus_introduced
+										num_of_cities >= 750
+										NOT = {
+											has_law = basic_administrative_law
+										}
+									}
+								}
+							}
+							trigger_event = {
+								id = c3rd_events.9
+								days = 15
+							}
+						}
+						else = {
+							add_legitimacy = -20
+						}
+					}
+				}
+			}
+		}
+		if = {
+			limit = {
+				scope:owner_overtake_char = {
+					NOT = {
+						has_character_modifier = political_power_character
+					}
+					OR = {
+						has_character_modifier = major_influence_aristocrat
+						is_head_of_family = yes
+					}
+				}
+			}
+			scope:owner_overtake_char = {
+				add_character_modifier = {
+					name = political_power_character
+					duration = 3650					#10 years
+				}
+			}
+		}
+		scope:owner_overtake_char = {
+			add_corruption = 10
+		}
+	}
 }
-
-
-
-

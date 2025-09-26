@@ -1,5 +1,4 @@
-﻿
-c3rd_custom_on_actions_instability = {
+﻿c3rd_custom_on_actions_instability = {
 	trigger = {
 		current_date > 900.1.1
 		num_of_cities >= 1
@@ -13,29 +12,26 @@ c3rd_custom_on_actions_instability = {
 }
 
 c3rd_custom_on_actions_low_stab_event = {
-
 	trigger = {
-        
-        has_country_modifier = internal_collapse
-        NOT = {
-            stability >= 25
-        }
-
-    }
+		has_country_modifier = internal_collapse
+		NOT = {
+			stability >= 25
+		}
+	}
 	random_events = {
 		60 = 0
-        15 = low_stab_event.4
+		15 = low_stab_event.4
 		20 = low_stab_event.7
 		20 = low_stab_event.8
-		5 = low_stab_event.9 #duchy expanding
+		5 = low_stab_event.9		#duchy expanding
 		5 = low_stab_event.10
 		15 = low_stab_event.11
 		5 = low_stab_event.12
 		1 = low_stab_event.13
-        45 = low_stab_event.3
+		45 = low_stab_event.3
 		40 = low_stab_event.16
 		3 = low_stab_event.14
-        15 = low_stab_event.15
+		15 = low_stab_event.15
 	}
 }
 
@@ -46,7 +42,6 @@ c3rd_custom_on_actions_subject_leaving = {
 		NOT = {
 			tag = BAR
 		}
-		
 	}
 	events = {
 		c3rd_events.1
@@ -60,12 +55,10 @@ c3rd_custom_on_actions_third_century = {
 		NOT = {
 			tag = BAR
 		}
-		
 	}
 	events = {
 		c3rd_events.2
 	}
-	
 	random_events = {
 		500 = 0
 		100 = tribal_flavour_events.41
@@ -130,7 +123,7 @@ c3rd_custom_on_actions_rival_empire_opinion = {
 			}
 		}
 		if = {
-			limit = { 
+			limit = {
 				num_of_provinces >= var:mother_empire.num_of_provinces
 			}
 			change_variable = {
@@ -145,14 +138,17 @@ c3rd_custom_on_actions_rival_empire_civil_war = {
 	trigger = {
 		has_variable = mother_empire
 		has_variable = unification_value
-		NOT = {has_variable = civil_war_help}
-		NOT = {war_with = var:mother_empire}
+		NOT = {
+			has_variable = civil_war_help
+		}
+		NOT = {
+			war_with = var:mother_empire
+		}
 		var:mother_empire = {
 			has_land = yes
 		}
 		towards_civil_war = yes
 	}
-
 	effect = {
 		save_scope_as = rival_empire
 		random_list = {
@@ -161,7 +157,7 @@ c3rd_custom_on_actions_rival_empire_civil_war = {
 			20 = {
 				set_variable = {
 					name = civil_war_help
-					days = 730 #2years
+					days = 730					#2years
 				}
 				var:mother_empire = {
 					trigger_event = {
@@ -174,16 +170,19 @@ c3rd_custom_on_actions_rival_empire_civil_war = {
 	}
 }
 
-
 c3rd_custom_on_actions_rival_empire_in_war = {
 	trigger = {
 		has_variable = mother_empire
 		has_variable = unification_value
-		NOT = {has_variable = war_aid_asked}
+		NOT = {
+			has_variable = war_aid_asked
+		}
 		var:mother_empire = {
 			has_land = yes
 		}
-		NOT = {war_with = var:mother_empire}
+		NOT = {
+			war_with = var:mother_empire
+		}
 		any_current_war = {
 			NOT = {
 				any_war_participant = {
@@ -191,12 +190,11 @@ c3rd_custom_on_actions_rival_empire_in_war = {
 				}
 			}
 			war_score = {
-                target = root
-                value <= -30
+				target = root
+				value <= -30
 			}
 		}
 	}
-
 	effect = {
 		save_scope_as = rival_empire
 		random_current_war = {
@@ -219,7 +217,7 @@ c3rd_custom_on_actions_rival_empire_in_war = {
 			30 = {
 				set_variable = {
 					name = war_aid_asked
-					days = 1825 #5years
+					days = 1825					#5years
 				}
 				var:mother_empire = {
 					trigger_event = {
@@ -232,19 +230,21 @@ c3rd_custom_on_actions_rival_empire_in_war = {
 	}
 }
 
-
 c3rd_custom_on_actions_rival_unstable = {
 	trigger = {
 		has_variable = mother_empire
 		has_variable = unification_value
-		NOT = {has_variable = stab_asked}
+		NOT = {
+			has_variable = stab_asked
+		}
 		var:mother_empire = {
 			has_land = yes
 		}
-		NOT = {war_with = var:mother_empire}
+		NOT = {
+			war_with = var:mother_empire
+		}
 		stability < 20
 	}
-
 	effect = {
 		save_scope_as = rival_empire
 		random_list = {
@@ -257,7 +257,7 @@ c3rd_custom_on_actions_rival_unstable = {
 				}
 				set_variable = {
 					name = stab_asked
-					days = 730 #2years
+					days = 730					#2years
 				}
 				var:mother_empire = {
 					trigger_event = {
@@ -274,14 +274,17 @@ c3rd_custom_on_actions_rival_legitimate = {
 	trigger = {
 		has_variable = mother_empire
 		has_variable = unification_value
-		NOT = {has_variable = legitimy_problem}
+		NOT = {
+			has_variable = legitimy_problem
+		}
 		var:mother_empire = {
 			has_land = yes
 		}
-		NOT = {war_with = var:mother_empire}
+		NOT = {
+			war_with = var:mother_empire
+		}
 		legitimacy < 30
 	}
-
 	effect = {
 		save_scope_as = rival_empire
 		random_list = {
@@ -294,7 +297,7 @@ c3rd_custom_on_actions_rival_legitimate = {
 				}
 				set_variable = {
 					name = legitimy_problem
-					days = 3650 #10years
+					days = 3650					#10years
 				}
 				var:mother_empire = {
 					trigger_event = {
@@ -307,7 +310,8 @@ c3rd_custom_on_actions_rival_legitimate = {
 	}
 }
 
-c3rd_events_monthly_pulse = { #check if people in country can fuck shit up
+c3rd_events_monthly_pulse = {
+	#check if people in country can fuck shit up
 	trigger = {
 		num_of_cities >= 1
 		NOR = {
@@ -318,8 +322,9 @@ c3rd_events_monthly_pulse = { #check if people in country can fuck shit up
 	}
 	effect = {
 		if = {
-			limit = { #enrich the generals
-				has_country_modifier = military_anarchy 
+			limit = {
+				#enrich the generals
+				has_country_modifier = military_anarchy
 				any_character = {
 					is_general = yes
 					wealth < 1000
@@ -327,7 +332,6 @@ c3rd_events_monthly_pulse = { #check if people in country can fuck shit up
 						wealth >= 100
 					}
 					popularity >= 40
-
 				}
 			}
 			random_character = {
@@ -341,7 +345,6 @@ c3rd_events_monthly_pulse = { #check if people in country can fuck shit up
 						wealth >= 100
 					}
 					popularity >= 40
-					
 				}
 				save_temporary_scope_as = give_me_gold
 				every_friend = {
@@ -354,33 +357,31 @@ c3rd_events_monthly_pulse = { #check if people in country can fuck shit up
 					}
 				}
 			}
-
-			
 		}
 	}
 	random_events = {
 		500 = 0
-		40 = c3rd_events.30 #military coup *3 civilwar *2low leg
-		50 = c3rd_events.5 #general intervention *3 civilwar *2neg leg *2 dislgen
-		10 = c3rd_events.32 #kingmaker emprison rival
-		15 = c3rd_events.33 #general glose
-		20 = c3rd_events.34 #general rivalry
-		25 = c3rd_events.35 #general ask his friend governor
-		20 = c3rd_events.36 #general new king maker
-		20 = c3rd_events.37 #king maker clash
-		7 = c3rd_events.7 #generals asking for war
-		20 = c3rd_events.8 #generals asking for law
-		20 = c3rd_events.81 #only general take some powa
-		20 = c3rd_events.45 #republican leader push reforms
-		50 = c3rd_events.39 #kingmaker no office
-		5 = c3rd_events.391 #kingmaker unloyal
-		5 = c3rd_events.48 #Republic above 1000 territories
-		40 = c3rd_events.21 #governor defect to rival
+		40 = c3rd_events.30		#military coup *3 civilwar *2low leg
+		50 = c3rd_events.5		#general intervention *3 civilwar *2neg leg *2 dislgen
+		10 = c3rd_events.32		#kingmaker emprison rival
+		15 = c3rd_events.33		#general glose
+		20 = c3rd_events.34		#general rivalry
+		25 = c3rd_events.35		#general ask his friend governor
+		20 = c3rd_events.36		#general new king maker
+		20 = c3rd_events.37		#king maker clash
+		7 = c3rd_events.7		#generals asking for war
+		20 = c3rd_events.8		#generals asking for law
+		20 = c3rd_events.81		#only general take some powa
+		20 = c3rd_events.45		#republican leader push reforms
+		50 = c3rd_events.39		#kingmaker no office
+		5 = c3rd_events.391		#kingmaker unloyal
+		5 = c3rd_events.48		#Republic above 1000 territories
+		40 = c3rd_events.21		#governor defect to rival
 	}
-	
 }
 
-c3rd_other_events_monthly_pulse = { #check if events can happen
+c3rd_other_events_monthly_pulse = {
+	#check if events can happen
 	trigger = {
 		num_of_cities >= 1
 		NOR = {
@@ -406,7 +407,9 @@ c3rd_other_events_monthly_pulse = { #check if events can happen
 							count >= 3
 							is_adult = yes
 							employer = root
-							NOT = {this = scope:main_heir_landowner1}
+							NOT = {
+								this = scope:main_heir_landowner1
+							}
 						}
 					}
 				}
@@ -429,6 +432,12 @@ c3rd_other_events_monthly_pulse = { #check if events can happen
 					modifier = {
 						add = 1
 						wealth >= 5000
+					}
+					modifier = {
+						add = 1
+						employer = {
+							has_law = constantine_reform_law
+						}
 					}
 					modifier = {
 						add = 1
@@ -460,13 +469,153 @@ c3rd_other_events_monthly_pulse = { #check if events can happen
 								modifier = {
 									factor = 10
 									governorship = {
-										NOT = {has_variable = governorship_owner}
+										NOT = {
+											has_variable = governorship_owner
+										}
 									}
 								}
 							}
 							scope:consolidating_head = {
 								add_holding = prev
 								add_gold = -250
+							}
+						}
+					}
+				}
+			}
+		}
+		every_character = {
+			#basically same as upside, but with governors
+			limit = {
+				is_governor = yes
+				is_ruler = no
+				exists = family
+				is_head_of_family = no
+				family = {
+					exists = head_of_family
+					head_of_family = {
+						has_variable = head_intent_consolidate
+						wealth >= 1000
+					}
+				}
+				wealth >= 2000
+				OR = {
+					corruption >= 10
+					employer = {
+						has_law = constantine_reform_law
+					}
+					employer = {
+						has_law = decentralized_administration_law
+					}
+				}
+				save_temporary_scope_as = consolidating_governor_tmp
+				employer = {
+					any_governorships = {
+						governor = scope:consolidating_governor_tmp
+						NOT = {
+							has_variable = governorship_owner
+						}
+					}
+				}
+			}
+			save_scope_as = consolidating_governor
+			employer = {
+				random_governorships = {
+					limit = {
+						governor = scope:consolidating_governor
+					}
+					save_scope_as = consolidating_governorship
+				}
+			}
+			random_list = {
+				10 = {
+				}
+				1 = {
+					modifier = {
+						add = 1
+						wealth >= 6000
+					}
+					modifier = {
+						add = 1
+						employer = {
+							has_law = constantine_reform_law
+						}
+					}
+					modifier = {
+						add = 1
+						employer = {
+							OR = {
+								has_country_modifier = law_advantages_1
+								has_country_modifier = law_advantages_2
+								has_country_modifier = law_advantages_3
+							}
+						}
+					}
+					modifier = {
+						add = 2
+						employer = {
+							OR = {
+								has_country_modifier = law_advantages_4
+								has_country_modifier = law_advantages_5
+							}
+						}
+					}
+					employer = {
+						if = {
+							limit = {
+								any_owned_province = {
+									governor = scope:consolidating_governor
+									NOT = {
+										exists = holding_owner
+									}
+								}
+							}
+							random_owned_province = {
+								limit = {
+									governorship = {
+										this = scope:consolidating_governorship
+										NOT = {
+											has_variable = governorship_owner
+										}
+									}
+									NOT = {
+										exists = holding_owner
+									}
+								}
+								scope:consolidating_governor = {
+									add_holding = prev
+									add_gold = -200
+									family = {
+										head_of_family = {
+											add_gold = -100
+										}
+									}
+								}
+							}
+						}
+						else = {
+							random_owned_province = {
+								limit = {
+									governorship = {
+										this = scope:consolidating_governorship
+										NOT = {
+											has_variable = governorship_owner
+										}
+									}
+									exists = holding_owner
+								}
+								holding_owner = {
+									remove_holding = prev
+								}
+								scope:consolidating_governor = {
+									add_holding = prev
+									add_gold = -300
+									family = {
+										head_of_family = {
+											add_gold = -200
+										}
+									}
+								}
 							}
 						}
 					}
@@ -515,7 +664,9 @@ c3rd_other_events_monthly_pulse = { #check if events can happen
 						random_character = {
 							limit = {
 								family = scope:disloyal_head.family
-								NOT = {this = scope:disloyal_head}
+								NOT = {
+									this = scope:disloyal_head
+								}
 								power_base > 0
 							}
 							weight = {
@@ -544,34 +695,33 @@ c3rd_other_events_monthly_pulse = { #check if events can happen
 	}
 	random_events = {
 		500 = 0
-		20 = c3rd_other_events.4 #too few nobles culture pop
-		18 = c3rd_other_events.8 #powerful characters asking to stop the tax controls
-		4 = c3rd_other_events.9 #powerful characters asking for census
-		5 = c3rd_other_events.12 #games
-		3 = c3rd_other_events.30 #slave culture revolt
-		3 = c3rd_other_events.321 #ex-noble culture revolt
-		20 = c3rd_other_events.31 #slave culture uprising
-		15 = c3rd_other_events.32 #noble revoked culture uprising
-		30 = c3rd_other_events.50 #wonder threatened
-		5 = c3rd_other_events.52 #stabhit from wonders pillaged
-		4 = c3rd_other_events.60 #stabhit from barbarians
-		5 = c3rd_other_events.70 #aristocratic reforms
-		4 = c3rd_other_events.71 #revolt of the freemen against inflation
-		5 = c3rd_other_events.72 #act against silver crash
-		7 = c3rd_other_events.73 #rpeople trying to escape taxes
-		2 = c3rd_other_events.74 #Decuriones fleeing
-		2 = c3rd_other_events.84 #nobles escaping tax through land
-		8 = c3rd_other_events.90 #political character doing his things
-		15 = c3rd_other_events.91 #coup from political character
-		8 = c3rd_other_events.92 #governor holding clash
-		8 = c3rd_other_events.93 #governor holding clash ruler
-		2 = c3rd_other_events.101 #ruler reform constantine
-		30 = c3rd_other_events.106 #coveted governor
-		15 = c3rd_other_events.107 #holdings clash with heads
-		9 = c3rd_other_events.110 #intervention *5 toward civil war
-		15 = c3rd_other_events.120 #leader corruption, up to *2 *4 *12
-		10 = c3rd_other_events.130 #epidemy owner take action 
-		
+		20 = c3rd_other_events.4		#too few nobles culture pop
+		18 = c3rd_other_events.8		#powerful characters asking to stop the tax controls
+		4 = c3rd_other_events.9		#powerful characters asking for census
+		5 = c3rd_other_events.12		#games
+		3 = c3rd_other_events.30		#slave culture revolt
+		3 = c3rd_other_events.321		#ex-noble culture revolt
+		20 = c3rd_other_events.31		#slave culture uprising
+		15 = c3rd_other_events.32		#noble revoked culture uprising
+		30 = c3rd_other_events.50		#wonder threatened
+		5 = c3rd_other_events.52		#stabhit from wonders pillaged
+		4 = c3rd_other_events.60		#stabhit from barbarians
+		5 = c3rd_other_events.70		#aristocratic reforms
+		4 = c3rd_other_events.71		#revolt of the freemen against inflation
+		5 = c3rd_other_events.72		#act against silver crash
+		7 = c3rd_other_events.73		#rpeople trying to escape taxes
+		2 = c3rd_other_events.74		#Decuriones fleeing
+		2 = c3rd_other_events.84		#nobles escaping tax through land
+		8 = c3rd_other_events.90		#political character doing his things
+		15 = c3rd_other_events.91		#coup from political character
+		8 = c3rd_other_events.92		#governor holding clash
+		8 = c3rd_other_events.93		#governor holding clash ruler
+		2 = c3rd_other_events.101		#ruler reform constantine
+		30 = c3rd_other_events.106		#coveted governor
+		15 = c3rd_other_events.107		#holdings clash with heads
+		9 = c3rd_other_events.110		#intervention *5 toward civil war
+		15 = c3rd_other_events.120		#leader corruption, up to *2 *4 *12
+		10 = c3rd_other_events.130		#epidemy owner take action 
 	}
 }
 
@@ -579,7 +729,9 @@ c3rd_culture_noble_assimilation = {
 	effect = {
 		every_country_culture = {
 			limit = {
-				NOT = {this.culture = root.culture}
+				NOT = {
+					this.culture = root.culture
+				}
 				has_pop_type_right = nobles
 			}
 			save_scope_as = that_noble_culture
@@ -629,20 +781,17 @@ c3rd_culture_noble_assimilation = {
 							}
 							random_pops_in_province = {
 								limit = {
-									pop_culture = root.culture 
+									pop_culture = root.culture
 								}
 								set_pop_culture = scope:that_noble_culture.culture
 							}
-		
 						}
 					}
 				}
 			}
 		}
 	}
-
 }
-
 
 c3rd_mines_exhaustion_pulse = {
 	trigger = {
@@ -659,11 +808,15 @@ c3rd_mines_exhaustion_pulse = {
 				35 = {
 					modifier = {
 						add = 20
-						root = {is_ai = yes}
+						root = {
+							is_ai = yes
+						}
 					}
 					modifier = {
 						add = 20
-						root = {has_law = monetary_reform_law}
+						root = {
+							has_law = monetary_reform_law
+						}
 					}
 					modifier = {
 						add = 10
@@ -711,17 +864,25 @@ c3rd_mines_exhaustion_pulse = {
 					}
 					modifier = {
 						add = 5
-						root = {has_law = basic_monetary_law}
+						root = {
+							has_law = basic_monetary_law
+						}
 					}
 					if = {
-						limit = { NOT = {has_variable = mine_exhaustion} }
+						limit = {
+							NOT = {
+								has_variable = mine_exhaustion
+							}
+						}
 						set_variable = {
 							name = mine_exhaustion
 							value = 1
 						}
 					}
 					else_if = {
-						limit = {has_variable = mine_exhaustion }
+						limit = {
+							has_variable = mine_exhaustion
+						}
 						change_variable = {
 							name = mine_exhaustion
 							add = 1
@@ -762,13 +923,16 @@ c3rd_calculate_deflation = {
 	effect = {
 		if = {
 			limit = {
-				NOT = {has_variable = monetary_mechanics_available_event}
+				NOT = {
+					has_variable = monetary_mechanics_available_event
+				}
 			}
 			trigger_event = {
 				id = c3rd_other_events.1005
 			}
 		}
-		if = { #calculation of this year economy
+		if = {
+			#calculation of this year economy
 			limit = {
 				NOT = {
 					has_variable = country_economy
@@ -779,14 +943,16 @@ c3rd_calculate_deflation = {
 				value = c3rd_economic_value
 			}
 		}
-		else = { #recalculation
+		else = {
+			#recalculation
 			remove_variable = country_economy
 			set_variable = {
 				name = country_economy
 				value = c3rd_economic_value
 			}
 		}
-		if = { #create the deflation variable
+		if = {
+			#create the deflation variable
 			limit = {
 				NOT = {
 					has_variable = deflation_value
@@ -807,7 +973,8 @@ c3rd_calculate_deflation = {
 				add = c3rd_deflation_increase
 			}
 		}
-		if = { #creation of the silver unvalue variable
+		if = {
+			#creation of the silver unvalue variable
 			limit = {
 				NOT = {
 					has_variable = silver_unvalue
@@ -843,7 +1010,9 @@ c3rd_economic_warning = {
 		if = {
 			limit = {
 				var:deflation_value >= 5
-				NOT = { has_variable = deflation_is_happening} 
+				NOT = {
+					has_variable = deflation_is_happening
+				}
 			}
 			trigger_event = {
 				id = c3rd_other_events.5
@@ -860,13 +1029,10 @@ c3rd_economic_warning = {
 			}
 		}
 	}
-
-
-
-
 }
 
-c3rd_apply_deflation = { #applying deflation modifiers events
+c3rd_apply_deflation = {
+	#applying deflation modifiers events
 	trigger = {
 		has_land = yes
 		is_ai = no
@@ -878,7 +1044,7 @@ c3rd_apply_deflation = { #applying deflation modifiers events
 	}
 	effect = {
 		if = {
-			limit = { 
+			limit = {
 				NOR = {
 					has_country_modifier = small_deflation
 					has_country_modifier = medium_deflation
@@ -961,11 +1127,11 @@ c3rd_apply_deflation = { #applying deflation modifiers events
 				id = c3rd_other_events.23
 			}
 		}
-
 	}
 }
 
-c3rd_apply_silver_unvalue = { #applying silver modifiers events
+c3rd_apply_silver_unvalue = {
+	#applying silver modifiers events
 	trigger = {
 		has_land = yes
 		is_ai = no
@@ -977,7 +1143,7 @@ c3rd_apply_silver_unvalue = { #applying silver modifiers events
 	}
 	effect = {
 		if = {
-			limit = { 
+			limit = {
 				NOR = {
 					has_country_modifier = small_monetary_crash
 					has_country_modifier = medium_monetary_crash
@@ -1060,7 +1226,6 @@ c3rd_apply_silver_unvalue = { #applying silver modifiers events
 				id = c3rd_other_events.291
 			}
 		}
-
 	}
 }
 
@@ -1116,9 +1281,7 @@ c3rd_province_revolt_gain = {
 			}
 		}
 	}
-
 }
-
 
 c3rd_state_mass_revolt_gain = {
 	trigger = {
@@ -1126,7 +1289,9 @@ c3rd_state_mass_revolt_gain = {
 		is_ai = no
 		current_date >= 700.1.1
 		any_country_culture = {
-			NOT = {has_pop_type_right = nobles }
+			NOT = {
+				has_pop_type_right = nobles
+			}
 			has_country_culture_modifier = on_going_mass_revolt
 		}
 	}
@@ -1157,7 +1322,6 @@ c3rd_state_mass_revolt_gain = {
 							has_country_culture_modifier = on_going_mass_revolt
 						}
 					}
-
 				}
 			}
 			random_list = {
@@ -1182,15 +1346,21 @@ c3rd_state_mass_revolt_gain = {
 					}
 					modifier = {
 						add = 1
-						root={num_of_cities >= 500}
+						root = {
+							num_of_cities >= 500
+						}
 					}
 					modifier = {
 						add = 1
-						root={num_of_cities >= 2000}
+						root = {
+							num_of_cities >= 2000
+						}
 					}
 					modifier = {
 						factor = 0.5
-						root={stability >= 70}
+						root = {
+							stability >= 70
+						}
 					}
 					add_state_modifier = {
 						name = secess_preparation
@@ -1258,15 +1428,21 @@ c3rd_state_mass_revolt_gain = {
 					}
 					modifier = {
 						add = 1
-						root={num_of_cities >= 500}
+						root = {
+							num_of_cities >= 500
+						}
 					}
 					modifier = {
 						add = 1
-						root={num_of_cities >= 2000}
+						root = {
+							num_of_cities >= 2000
+						}
 					}
 					modifier = {
 						factor = 0.5
-						root={stability >= 70}
+						root = {
+							stability >= 70
+						}
 					}
 					add_state_modifier = {
 						name = secess_preparation
@@ -1276,7 +1452,6 @@ c3rd_state_mass_revolt_gain = {
 			}
 		}
 	}
-
 }
 
 c3rd_really_rich_country = {
@@ -1290,7 +1465,6 @@ c3rd_really_rich_country = {
 		50 = c3rd_other_events.41
 		500 = c3rd_other_events.42
 	}
-
 }
 
 c3rd_no_more_wonder = {
@@ -1314,19 +1488,20 @@ c3rd_no_more_wonder = {
 			remove_province_modifier = wonder_destroyed_modifier
 		}
 	}
-
 }
 
 c3rd_barbarian_sack = {
 	trigger = {
 		has_land = yes
 		NOT = {
-			government = duchy #Duchies are protected
+			government = duchy			#Duchies are protected
 		}
 		any_owned_province = {
 			exists = controller
 			is_previous_controller = root
-			controller = { tag = BAR }
+			controller = {
+				tag = BAR
+			}
 			is_state_capital = yes
 			state = {
 				NOT = {
@@ -1335,7 +1510,9 @@ c3rd_barbarian_sack = {
 				any_state_province = {
 					count <= 4
 					NOT = {
-						controller = { tag = BAR }
+						controller = {
+							tag = BAR
+						}
 					}
 				}
 			}
@@ -1346,13 +1523,17 @@ c3rd_barbarian_sack = {
 			limit = {
 				exists = controller
 				is_previous_controller = root
-				controller = { tag = BAR }
+				controller = {
+					tag = BAR
+				}
 				is_state_capital = yes
 				state = {
 					any_state_province = {
 						count <= 4
 						NOT = {
-							controller = { tag = BAR }
+							controller = {
+								tag = BAR
+							}
 						}
 					}
 					NOT = {
@@ -1368,10 +1549,10 @@ c3rd_barbarian_sack = {
 			}
 		}
 	}
-
 }
 
-c3rd_holding_control = { #governor gain control of region
+c3rd_holding_control = {
+	#governor gain control of region
 	trigger = {
 		has_land = yes
 		OR = {
@@ -1402,11 +1583,15 @@ c3rd_holding_control = { #governor gain control of region
 			OR = {
 				AND = {
 					region_control_value >= 25
-					root={has_law = decentralized_administration_law}
+					root = {
+						has_law = decentralized_administration_law
+					}
 				}
 				AND = {
 					region_control_value >= 35
-					root={has_country_modifier = solidus_introduced}
+					root = {
+						has_country_modifier = solidus_introduced
+					}
 				}
 				region_control_value >= 45
 			}
@@ -1439,11 +1624,15 @@ c3rd_holding_control = { #governor gain control of region
 					OR = {
 						AND = {
 							region_control_value >= 25
-							root={has_law = decentralized_administration_law}
+							root = {
+								has_law = decentralized_administration_law
+							}
 						}
 						AND = {
 							region_control_value >= 35
-							root={has_country_modifier = solidus_introduced}
+							root = {
+								has_country_modifier = solidus_introduced
+							}
 						}
 						region_control_value >= 45
 					}
@@ -1472,11 +1661,15 @@ c3rd_holding_control = { #governor gain control of region
 					OR = {
 						AND = {
 							region_control_value >= 30
-							root={has_law = decentralized_administration_law}
+							root = {
+								has_law = decentralized_administration_law
+							}
 						}
 						AND = {
 							region_control_value >= 40
-							root={has_country_modifier = solidus_introduced}
+							root = {
+								has_country_modifier = solidus_introduced
+							}
 						}
 						region_control_value >= 50
 					}
@@ -1494,7 +1687,8 @@ c3rd_holding_control = { #governor gain control of region
 						factor = 5
 						region_control_value >= 90
 					}
-					modifier = { #less chances close to the capital
+					modifier = {
+						#less chances close to the capital
 						factor = 0.4
 						any_governorship_state = {
 							any_state_province = {
@@ -1509,7 +1703,8 @@ c3rd_holding_control = { #governor gain control of region
 							}
 						}
 					}
-					modifier = { #more chances near foreign countries
+					modifier = {
+						#more chances near foreign countries
 						factor = 2
 						any_governorship_state = {
 							any_state_province = {
@@ -1581,16 +1776,16 @@ c3rd_holding_control = { #governor gain control of region
 							}
 							trigger_event = {
 								id = c3rd_other_events.80
-								days = { 30 360 }
+								days = {
+									30
+									360
+								}
 							}
-							
 						}
 					}
-
 				}
 			}
 		}
-
 	}
 }
 
@@ -1601,7 +1796,9 @@ c3rd_holding_clear = {
 			var:governorship_owner = {
 				OR = {
 					is_alive = no
-					NOT = {employer = root}
+					NOT = {
+						employer = root
+					}
 				}
 			}
 		}
@@ -1613,13 +1810,15 @@ c3rd_holding_clear = {
 				var:governorship_owner = {
 					OR = {
 						is_alive = no
-						NOT = {employer = root}
+						NOT = {
+							employer = root
+						}
 					}
 				}
 			}
 			if = {
 				limit = {
-					var:governorship_owner = {	
+					var:governorship_owner = {
 						is_head_of_family = no
 						exists = family.head_of_family
 						family.head_of_family = {
@@ -1641,7 +1840,7 @@ c3rd_holding_clear = {
 			}
 			else_if = {
 				limit = {
-					var:governorship_owner = {	
+					var:governorship_owner = {
 						is_head_of_family = yes
 						exists = next_in_family
 						next_in_family = {
@@ -1685,7 +1884,6 @@ c3rd_country_control_check = {
 			any_character = {
 				has_variable = country_ownership
 			}
-
 		}
 	}
 	effect = {
@@ -1739,8 +1937,8 @@ c3rd_country_calculate_the_gov_ownership = {
 	}
 }
 
-
-c3rd_holding_gain_owner = { #owner gain control in his region
+c3rd_holding_gain_owner = {
+	#owner gain control in his region
 	trigger = {
 		has_land = yes
 		OR = {
@@ -1749,7 +1947,8 @@ c3rd_holding_gain_owner = { #owner gain control in his region
 			}
 			has_country_modifier = solidus_introduced
 		}
-		any_governorships = { #check available governorship (thus owner)
+		any_governorships = {
+			#check available governorship (thus owner)
 			exists = governor
 			governor = {
 				is_ruler = no
@@ -1775,9 +1974,8 @@ c3rd_holding_gain_owner = { #owner gain control in his region
 		}
 	}
 	effect = {
-
-        every_governorships = {
-            limit = {
+		every_governorships = {
+			limit = {
 				exists = governor
 				governor = {
 					is_ruler = no
@@ -1803,19 +2001,24 @@ c3rd_holding_gain_owner = { #owner gain control in his region
 				var:governorship_owner = {
 					wealth >= 100
 				}
-            }
-            save_scope_as = new_holding_governorship
-			random_list = { #
+			}
+			save_scope_as = new_holding_governorship
+			random_list = {
+				#
 				6 = {
 					modifier = {
 						add = 4
-						root = {num_of_cities <= 200}
+						root = {
+							num_of_cities <= 200
+						}
 					}
 				}
 				1 = {
 					modifier = {
 						add = 1
-						root = {stability >= 75}
+						root = {
+							stability >= 75
+						}
 					}
 					modifier = {
 						add = 1
@@ -1847,19 +2050,27 @@ c3rd_holding_gain_owner = { #owner gain control in his region
 					}
 					modifier = {
 						add = 1
-						root = {num_of_cities >= 1000}
+						root = {
+							num_of_cities >= 1000
+						}
 					}
 					modifier = {
 						add = 1
-						root = {num_of_cities >= 2000}
+						root = {
+							num_of_cities >= 2000
+						}
 					}
 					modifier = {
 						factor = 2
-						root = {has_country_modifier = solidus_introduced}
+						root = {
+							has_country_modifier = solidus_introduced
+						}
 					}
 					modifier = {
 						factor = 2
-						root = {has_law = decentralized_administration_law}
+						root = {
+							has_law = decentralized_administration_law
+						}
 					}
 					root = {
 						random_owned_province = {
@@ -1889,12 +2100,12 @@ c3rd_holding_gain_owner = { #owner gain control in his region
 					}
 				}
 			}
-        }
+		}
 	}
 }
 
-
-c3rd_holding_tax_evasion = { #when tax evasion is on but also when you have the law advantage modifier 3+
+c3rd_holding_tax_evasion = {
+	#when tax evasion is on but also when you have the law advantage modifier 3+
 	trigger = {
 		has_land = yes
 		OR = {
@@ -1903,7 +2114,8 @@ c3rd_holding_tax_evasion = { #when tax evasion is on but also when you have the 
 			has_country_modifier = law_advantages_4
 			has_country_modifier = law_advantages_5
 		}
-		any_governorships = { #check available governorship (thus owner)
+		any_governorships = {
+			#check available governorship (thus owner)
 			exists = governor
 			governor = {
 				is_ruler = no
@@ -1918,9 +2130,8 @@ c3rd_holding_tax_evasion = { #when tax evasion is on but also when you have the 
 		}
 	}
 	effect = {
-
-        every_governorships = {
-            limit = {
+		every_governorships = {
+			limit = {
 				exists = governor
 				governor = {
 					is_ruler = no
@@ -1939,15 +2150,18 @@ c3rd_holding_tax_evasion = { #when tax evasion is on but also when you have the 
 				var:governorship_owner = {
 					wealth >= 50
 				}
-            }
-            save_scope_as = new_holding_governorship
-			random_list = { #base 16% up 82%
+			}
+			save_scope_as = new_holding_governorship
+			random_list = {
+				#base 16% up 82%
 				5 = {
 				}
 				1 = {
 					modifier = {
 						add = 1
-						owner = {stability >= 75}
+						owner = {
+							stability >= 75
+						}
 					}
 					modifier = {
 						add = 1
@@ -1958,11 +2172,21 @@ c3rd_holding_tax_evasion = { #when tax evasion is on but also when you have the 
 					modifier = {
 						add = 1
 						OR = {
-							root = {has_country_modifier = law_advantages_1}
-							root = {has_country_modifier = law_advantages_2}
-							root = {has_country_modifier = law_advantages_3}
-							root = {has_country_modifier = law_advantages_4}
-							root = {has_country_modifier = law_advantages_5}
+							root = {
+								has_country_modifier = law_advantages_1
+							}
+							root = {
+								has_country_modifier = law_advantages_2
+							}
+							root = {
+								has_country_modifier = law_advantages_3
+							}
+							root = {
+								has_country_modifier = law_advantages_4
+							}
+							root = {
+								has_country_modifier = law_advantages_5
+							}
 						}
 					}
 					modifier = {
@@ -2028,7 +2252,7 @@ c3rd_holding_tax_evasion = { #when tax evasion is on but also when you have the 
 					}
 				}
 			}
-        }
+		}
 	}
 }
 
@@ -2043,21 +2267,25 @@ c3rd_variables_clear = {
 					}
 					has_land = no
 				}
-				
 			}
 			remove_variable = owner_from_another_empire
 		}
 		random_subject = {
 			limit = {
 				is_subject_type = autonomous_domain
-				NOT = {has_variable = owner_from_another_empire}
+				NOT = {
+					has_variable = owner_from_another_empire
+				}
 				has_land = yes
 			}
 			save_scope_as = subject_without_owner
 			root = {
 				trigger_event = {
 					id = c3rd_other_events.88
-					days = { 10 100}
+					days = {
+						10
+						100
+					}
 				}
 			}
 		}
@@ -2067,7 +2295,9 @@ c3rd_variables_clear = {
 				has_variable = owner_from_another_empire
 				has_land = yes
 				var:owner_from_another_empire = {
-					NOT = {employer = root}
+					NOT = {
+						employer = root
+					}
 					exists = family
 					family = {
 						any_family_member = {
@@ -2100,9 +2330,11 @@ c3rd_variables_clear = {
 			}
 			trigger_event = {
 				id = c3rd_other_events.102
-				days = { 10 100}
+				days = {
+					10
+					100
+				}
 			}
-
 		}
 		random_subject = {
 			limit = {
@@ -2110,19 +2342,24 @@ c3rd_variables_clear = {
 				has_variable = owner_from_another_empire
 				has_land = yes
 				var:owner_from_another_empire = {
-					NOT = {employer = root}
+					NOT = {
+						employer = root
+					}
 				}
 			}
-
 			save_scope_as = subject_with_foreign_owner
 			root = {
 				trigger_event = {
 					id = c3rd_other_events.89
-					days = { 10 100}
+					days = {
+						10
+						100
+					}
 				}
 			}
 		}
-		if = { #2 domains of same guy
+		if = {
+			#2 domains of same guy
 			limit = {
 				any_character = {
 					save_temporary_scope_as = tmp_char
@@ -2163,7 +2400,9 @@ c3rd_variables_clear = {
 					has_variable = owner_from_another_empire
 					is_subject_type = autonomous_domain
 					var:owner_from_another_empire = scope:dual_owner
-					NOT = {this = scope:domain_1}
+					NOT = {
+						this = scope:domain_1
+					}
 				}
 				save_scope_as = domain_2
 			}
@@ -2209,20 +2448,19 @@ c3rd_urgent_variables_clean = {
 				id = c3rd_other_events.103
 				days = 3
 			}
-
 		}
 	}
 }
 
-
-c3rd_political_general_rampup = { #if general with political power and uunloyal, tick the unworthy leader and try to coup
+c3rd_political_general_rampup = {
+	#if general with political power and uunloyal, tick the unworthy leader and try to coup
 	trigger = {
-        NOR = {
-            has_country_modifier = military_anarchy
-            has_variable = recent_military_anarchy
-            has_variable = on_going_rep_thingy
-            has_country_modifier = political_unstability
-        }
+		NOR = {
+			has_country_modifier = military_anarchy
+			has_variable = recent_military_anarchy
+			has_variable = on_going_rep_thingy
+			has_country_modifier = political_unstability
+		}
 	}
 	effect = {
 		if = {
@@ -2240,10 +2478,13 @@ c3rd_political_general_rampup = { #if general with political power and uunloyal,
 				}
 			}
 			random_list = {
-				50 = {}
+				50 = {
+				}
 				50 = {
 					if = {
-						limit = { has_variable = unworthy_leader}
+						limit = {
+							has_variable = unworthy_leader
+						}
 						change_variable = {
 							name = unworthy_leader
 							add = 1
@@ -2269,10 +2510,12 @@ c3rd_political_general_rampup = { #if general with political power and uunloyal,
 					}
 					loyalty < 15
 					is_general = yes
-				} 
+				}
 			}
 			if = {
-				limit = { has_variable = unworthy_leader}
+				limit = {
+					has_variable = unworthy_leader
+				}
 				change_variable = {
 					name = unworthy_leader
 					add = 1
@@ -2286,7 +2529,7 @@ c3rd_political_general_rampup = { #if general with political power and uunloyal,
 			}
 		}
 		if = {
-			limit = { 
+			limit = {
 				any_character = {
 					has_character_modifier = political_power_character
 					is_alive = yes
@@ -2299,20 +2542,22 @@ c3rd_political_general_rampup = { #if general with political power and uunloyal,
 				}
 			}
 			random_list = {
-                20 = {
-                    modifier = {
-                        add = 20
-                        has_variable = unworthy_leader
-                        var:unworthy_leader <= 2
-                    }
-                    modifier = {
-                        add = 20
-                        NOT = {has_variable = unworthy_leader}
-                    }
-                    modifier = {
-                        add = 2
-                        legitimacy >= 85
-                    }
+				20 = {
+					modifier = {
+						add = 20
+						has_variable = unworthy_leader
+						var:unworthy_leader <= 2
+					}
+					modifier = {
+						add = 20
+						NOT = {
+							has_variable = unworthy_leader
+						}
+					}
+					modifier = {
+						add = 2
+						legitimacy >= 85
+					}
 					modifier = {
 						factor = 2
 						OR = {
@@ -2320,38 +2565,37 @@ c3rd_political_general_rampup = { #if general with political power and uunloyal,
 							has_law = decentralized_administration_law
 						}
 					}
-                }
-                1 = {
-                    modifier = {
-                        add = var:unworthy_leader
-                        has_variable = unworthy_leader
-                    }
-                    modifier = {
-                        add = 1
-                        legitimacy < 50
-                    }
-                    modifier = {
-                        add = 1
-                        legitimacy < 25
-                    }
-                    modifier = {
-                        add = 2
-                        legitimacy < 0
-                    }
-                    modifier = {
-                        add = 2
-                        stability < 25
-                    }
-                    trigger_event = {
-                        id = c3rd_events.9
-                        days = 15
-                    }
-                }
-            }
+				}
+				1 = {
+					modifier = {
+						add = var:unworthy_leader
+						has_variable = unworthy_leader
+					}
+					modifier = {
+						add = 1
+						legitimacy < 50
+					}
+					modifier = {
+						add = 1
+						legitimacy < 25
+					}
+					modifier = {
+						add = 2
+						legitimacy < 0
+					}
+					modifier = {
+						add = 2
+						stability < 25
+					}
+					trigger_event = {
+						id = c3rd_events.9
+						days = 15
+					}
+				}
+			}
 		}
 	}
 }
-
 
 c3rd_apply_pol_inf_ruler_ownership = {
 	trigger = {
@@ -2367,7 +2611,9 @@ c3rd_apply_pol_inf_ruler_ownership = {
 			}
 			AND = {
 				current_ruler = {
-					NOT = {has_character_modifier = major_influence_aristocrat}
+					NOT = {
+						has_character_modifier = major_influence_aristocrat
+					}
 				}
 				OR = {
 					has_country_modifier = polinf_ruler_owner20
@@ -2379,7 +2625,6 @@ c3rd_apply_pol_inf_ruler_ownership = {
 					has_country_modifier = polinf_ruler_owner80
 				}
 			}
-			
 		}
 	}
 	effect = {
@@ -2394,7 +2639,9 @@ c3rd_apply_pol_inf_ruler_ownership = {
 		else_if = {
 			limit = {
 				current_ruler = {
-					NOT = {has_character_modifier = major_influence_aristocrat}
+					NOT = {
+						has_character_modifier = major_influence_aristocrat
+					}
 				}
 				OR = {
 					has_country_modifier = polinf_ruler_owner20
@@ -2411,19 +2658,21 @@ c3rd_apply_pol_inf_ruler_ownership = {
 	}
 }
 
-c3rd_barbarian_occupying_land = { #natural expansion of tribals on lands VERY SPECIFIC CONDITIONS
+c3rd_barbarian_occupying_land = {
+	#natural expansion of tribals on lands VERY SPECIFIC CONDITIONS
 	trigger = {
 		is_tribal = no
 		num_of_cities >= 1
 		current_date >= 900.1.1
 		NOR = {
 			tag = BAR
-			government = duchy #Duchies are protected
+			government = duchy			#Duchies are protected
 		}
 		any_country_state = {
-			has_state_modifier = barbarians_border #is under attack
+			has_state_modifier = barbarians_border			#is under attack
 			any_state_province = {
-				any_neighbor_province = { #border a tribal or a barbarian stronghold
+				any_neighbor_province = {
+					#border a tribal or a barbarian stronghold
 					OR = {
 						has_province_modifier = barbarian_invasion_war
 						has_province_modifier = barbarian_invasion_skirmish
@@ -2432,17 +2681,22 @@ c3rd_barbarian_occupying_land = { #natural expansion of tribals on lands VERY SP
 						has_province_modifier = major_barbarian_spawn_place
 						AND = {
 							exists = owner
-							NOT = {owner = root}
+							NOT = {
+								owner = root
+							}
 							owner = {
 								is_tribal = yes
-								NOT = {is_subject_of = root}
+								NOT = {
+									is_subject_of = root
+								}
 							}
 						}
 					}
 				}
-				owner = { #the dominant local culture is not integrated -> might be the barbarian one OR anything not integrated, even greeks or italian if possible, why not
+				owner = {
+					#the dominant local culture is not integrated -> might be the barbarian one OR anything not integrated, even greeks or italian if possible, why not
 					OR = {
-						has_country_modifier = internal_collapse #this bypasses the dominant culture requirement
+						has_country_modifier = internal_collapse						#this bypasses the dominant culture requirement
 						any_country_culture = {
 							is_integrated = no
 							this.culture = prev.prev.culture
@@ -2455,7 +2709,9 @@ c3rd_barbarian_occupying_land = { #natural expansion of tribals on lands VERY SP
 					any_neighbor_province = {
 						owner = root
 						state = {
-							NOT = {has_state_modifier = barbarians_border}
+							NOT = {
+								has_state_modifier = barbarians_border
+							}
 						}
 					}
 				}
@@ -2475,10 +2731,14 @@ c3rd_barbarian_occupying_land = { #natural expansion of tribals on lands VERY SP
 							has_province_modifier = generic_barbarian_spawn_place
 							has_province_modifier = major_barbarian_spawn_place
 							AND = {
-								NOT = {owner = root}
+								NOT = {
+									owner = root
+								}
 								owner = {
 									is_tribal = yes
-									NOT = {is_subject_of = root}
+									NOT = {
+										is_subject_of = root
+									}
 								}
 							}
 						}
@@ -2503,7 +2763,9 @@ c3rd_barbarian_occupying_land = { #natural expansion of tribals on lands VERY SP
 						any_neighbor_province = {
 							owner = root
 							state = {
-								NOT = {has_state_modifier = barbarians_border}
+								NOT = {
+									has_state_modifier = barbarians_border
+								}
 							}
 						}
 					}
@@ -2519,19 +2781,27 @@ c3rd_barbarian_occupying_land = { #natural expansion of tribals on lands VERY SP
 							has_province_modifier = generic_barbarian_spawn_place
 							has_province_modifier = major_barbarian_spawn_place
 							AND = {
-								NOT = {owner = root}
+								NOT = {
+									owner = root
+								}
 								owner = {
 									is_tribal = yes
-									NOT = {is_subject_of = root}
+									NOT = {
+										is_subject_of = root
+									}
 								}
 							}
 						}
 					}
 					OR = {
 						AND = {
-							owner = {has_country_modifier = internal_collapse}
+							owner = {
+								has_country_modifier = internal_collapse
+							}
 							any_pops_in_province = {
-								NOT = { pop_culture = root.culture}
+								NOT = {
+									pop_culture = root.culture
+								}
 							}
 						}
 						owner = {
@@ -2552,7 +2822,9 @@ c3rd_barbarian_occupying_land = { #natural expansion of tribals on lands VERY SP
 			scope:new_tribal_prov = {
 				random_pops_in_province = {
 					limit = {
-						NOT = {pop_culture = root.culture}
+						NOT = {
+							pop_culture = root.culture
+						}
 					}
 					root = {
 						random_country_culture = {
@@ -2624,13 +2896,17 @@ c3rd_barbarian_occupying_land = { #natural expansion of tribals on lands VERY SP
 						name = barbarian_border_tribal_country
 					}
 					if = {
-						limit = {current_date >= 1100.1.1 }
+						limit = {
+							current_date >= 1100.1.1
+						}
 						add_country_modifier = {
 							name = c3rd_barbarian_fury_discipline_2
 						}
 					}
 					else_if = {
-						limit = {current_date >= 1000.1.1 }
+						limit = {
+							current_date >= 1000.1.1
+						}
 						add_country_modifier = {
 							name = c3rd_barbarian_fury_discipline_1
 						}
@@ -2640,27 +2916,29 @@ c3rd_barbarian_occupying_land = { #natural expansion of tribals on lands VERY SP
 			}
 		}
 	}
-
 }
 
-c3rd_barbarian_changing_pop = { #barbarian occupation enslave and migrate pops
+c3rd_barbarian_changing_pop = {
+	#barbarian occupation enslave and migrate pops
 	trigger = {
 		is_tribal = no
 		num_of_cities >= 1
 		current_date >= 900.1.1
 		NOR = {
 			tag = BAR
-			government = duchy #Duchies are protected
+			government = duchy			#Duchies are protected
 		}
 		any_country_state = {
-			has_state_modifier = barbarians_border #is under attack
+			has_state_modifier = barbarians_border			#is under attack
 		}
 	}
 	effect = {
 		random_country = {
 			limit = {
 				is_tribal = yes
-				NOT = {is_subject_of = root}
+				NOT = {
+					is_subject_of = root
+				}
 			}
 			weight = {
 				modifier = {
@@ -2701,7 +2979,8 @@ c3rd_barbarian_changing_pop = { #barbarian occupation enslave and migrate pops
 					}
 				}
 				random_list = {
-					5 = {}
+					5 = {
+					}
 					1 = {
 						modifier = {
 							add = total_population
@@ -2716,7 +2995,9 @@ c3rd_barbarian_changing_pop = { #barbarian occupation enslave and migrate pops
 							}
 							if = {
 								limit = {
-									NOT = { pop_type = slaves }
+									NOT = {
+										pop_type = slaves
+									}
 								}
 								set_pop_type = slaves
 							}
@@ -2742,7 +3023,6 @@ c3rd_barbarian_changing_pop = { #barbarian occupation enslave and migrate pops
 			}
 		}
 	}
-
 }
 
 c3rd_head_of_family_shenanigans = {
@@ -2755,14 +3035,14 @@ c3rd_head_of_family_shenanigans = {
 		}
 		has_country_modifier = solidus_introduced
 	}
-
 	effect = {
 		every_character = {
 			limit = {
 				is_head_of_family = yes
 				is_ruler = no
 			}
-			random_list = {  #roll the intent for head of family
+			random_list = {
+				#roll the intent for head of family
 				20 = {
 					#nothing
 					modifier = {
@@ -2792,7 +3072,7 @@ c3rd_head_of_family_shenanigans = {
 					modifier = {
 						factor = 0.8
 						root = {
-            				treasury >= 90000
+							treasury >= 90000
 						}
 					}
 				}
@@ -2801,12 +3081,16 @@ c3rd_head_of_family_shenanigans = {
 					modifier = {
 						factor = 2
 						root = {
-							NOT = {has_law = basic_administrative_law}
+							NOT = {
+								has_law = basic_administrative_law
+							}
 						}
 					}
 					modifier = {
 						factor = 1.5
-						NOT = {has_character_modifier = major_influence_aristocrat}
+						NOT = {
+							has_character_modifier = major_influence_aristocrat
+						}
 						root = {
 							any_character = {
 								has_character_modifier = major_influence_aristocrat
@@ -2868,7 +3152,7 @@ c3rd_head_of_family_shenanigans = {
 					modifier = {
 						factor = 1.2
 						root = {
-            				treasury >= 90000
+							treasury >= 90000
 						}
 					}
 					set_variable = {
@@ -2891,7 +3175,8 @@ c3rd_head_of_family_shenanigans = {
 						has_character_modifier = major_influence_aristocrat
 						loyalty <= 33
 					}
-					modifier = { #the more decentralize, the less they care
+					modifier = {
+						#the more decentralize, the less they care
 						factor = 0.9
 						root = {
 							has_country_modifier = law_advantages_3
@@ -2940,11 +3225,11 @@ c3rd_head_of_family_shenanigans = {
 						}
 					}
 					set_variable = {
-						name = head_intent_disloyal #trigger disloyal event easily, and intervention easier
+						name = head_intent_disloyal						#trigger disloyal event easily, and intervention easier
 						days = 350
 					}
 				}
-				5 = { 
+				5 = {
 					#loyal
 					modifier = {
 						factor = 4
@@ -2968,36 +3253,31 @@ c3rd_head_of_family_shenanigans = {
 	}
 }
 
-
 c3rd_custom_on_actions_corruption_events = {
-
 	trigger = {
-        
 		OR = {
-        	has_country_modifier = encourage_global_corruption
+			has_country_modifier = encourage_global_corruption
 			has_variable = ruler_goes_corruption_unchecked
 		}
-
-    }
+	}
 	random_events = {
 		60 = 0
-        5 = c3rd_other_events.121 #heads
-        5 = c3rd_other_events.122 #office
-        3 = c3rd_other_events.123 #governors
-        2 = c3rd_other_events.124 #generals
-        5 = c3rd_other_events.125 #heads
-        5 = c3rd_other_events.126 #office
-        3 = c3rd_other_events.127 #governors
-        2 = c3rd_other_events.128 #generals
+		5 = c3rd_other_events.121		#heads
+		5 = c3rd_other_events.122		#office
+		3 = c3rd_other_events.123		#governors
+		2 = c3rd_other_events.124		#generals
+		5 = c3rd_other_events.125		#heads
+		5 = c3rd_other_events.126		#office
+		3 = c3rd_other_events.127		#governors
+		2 = c3rd_other_events.128		#generals
 	}
 }
 
-
 c3rd_barbarian_related_events = {
 	trigger = {
-		
 	}
-	events = { #and plague related ones, because they're as good here as anywhere
+	events = {
+		#and plague related ones, because they're as good here as anywhere
 		c3rd_barbarian_events.1
 		c3rd_barbarian_events.2
 		c3rd_other_events.131
@@ -3007,13 +3287,12 @@ c3rd_barbarian_related_events = {
 	}
 	random_events = {
 		500 = 0
-        9 = c3rd_barbarian_events.10
+		9 = c3rd_barbarian_events.10
 		4 = c3rd_barbarian_events.11
 		4 = c3rd_barbarian_events.12
 		2 = c3rd_barbarian_events.13
 	}
 }
-
 
 c3rd_traits_cumulation_balance = {
 	trigger = {
@@ -3025,17 +3304,16 @@ c3rd_traits_cumulation_balance = {
 		}
 		is_ai = no
 	}
-
 	effect = {
 		every_character = {
 			limit = {
 				age = 0
 				has_many_bloodlines >= 3
 			}
-			random_list = {  #roll the inbred chance
+			random_list = {
+				#roll the inbred chance
 				16 = {
 					#nothing
-					
 				}
 				1 = {
 					#inbred, from 20% chance at 3, 36% at 5, 55% at 8, 75% at 10+
@@ -3063,10 +3341,10 @@ c3rd_traits_cumulation_balance = {
 				age = 10
 				has_many_bloodlines >= 3
 			}
-			random_list = {  #roll the disease chances
+			random_list = {
+				#roll the disease chances
 				12 = {
 					#nothing
-					
 				}
 				1 = {
 					#sick, 25% at 3, 43% at 5, 63% at 8, 80% at 10
@@ -3104,10 +3382,10 @@ c3rd_traits_cumulation_balance = {
 				age = 20
 				has_many_bloodlines >= 3
 			}
-			random_list = {  #roll the disease
+			random_list = {
+				#roll the disease
 				8 = {
 					#nothing
-					
 				}
 				1 = {
 					#vsick 33% at 3, 53% at 5, 71% at 8, 86% at 10
@@ -3145,10 +3423,10 @@ c3rd_traits_cumulation_balance = {
 				age = 30
 				has_many_bloodlines >= 3
 			}
-			random_list = {  #roll the health damage
+			random_list = {
+				#roll the health damage
 				4 = {
 					#nothing
-					
 				}
 				1 = {
 					#health, 50% at 3, 69% at 5, 83% at 8, 92% at 10
