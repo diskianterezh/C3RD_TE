@@ -7835,6 +7835,10 @@ c3rd_other_events.83 = {
 		}
 		scope:ex_owner_calc_purp = {
 			recalculate_ownership_char = yes
+			set_variable = {
+				name = recently_lost_control
+				days = 1825				#5years
+			}
 		}
 		custom_tooltip = c3rd_other_events.83.a.tt2
 	}
@@ -7862,6 +7866,10 @@ c3rd_other_events.83 = {
 		}
 		scope:ex_owner_calc_purp = {
 			recalculate_ownership_char = yes
+			set_variable = {
+				name = recently_lost_control
+				days = 1825				#5years
+			}
 		}
 		custom_tooltip = c3rd_other_events.83.a.tt2
 	}
@@ -7897,6 +7905,10 @@ c3rd_other_events.83 = {
 		}
 		scope:ex_owner_calc_purp = {
 			recalculate_ownership_char = yes
+			set_variable = {
+				name = recently_lost_control
+				days = 1825				#5years
+			}
 		}
 		custom_tooltip = c3rd_other_events.83.a.tt2
 	}
@@ -7939,6 +7951,10 @@ c3rd_other_events.83 = {
 		}
 		scope:ex_owner_calc_purp = {
 			recalculate_ownership_char = yes
+			set_variable = {
+				name = recently_lost_control
+				days = 1825				#5years
+			}
 		}
 		custom_tooltip = c3rd_other_events.83.a.tt2
 	}
@@ -7978,6 +7994,10 @@ c3rd_other_events.83 = {
 		}
 		scope:ex_owner_calc_purp = {
 			recalculate_ownership_char = yes
+			set_variable = {
+				name = recently_lost_control
+				days = 1825				#5years
+			}
 		}
 		custom_tooltip = c3rd_other_events.83.a.tt2
 	}

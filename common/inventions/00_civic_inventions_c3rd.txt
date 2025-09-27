@@ -5,14 +5,14 @@
     # Level 0
     commerce_inv_1 = { 
         modifier = { global_import_commerce_modifier = 0.05 }
-		# Civic Left Branch, World Port + School of Philosophy and Silent Trade trees
+		# Civic Left Branch, School of Philosophy and Silent Trade trees
 		ai_will_do = {
 			modifier = {
 				factor = {
-					value = cdt_civic_left_branch_15_to_75
-					min = cdt_silent_trade_80
-					min = cdt_world_port_school_of_philosophy_90
-					min = cdt_clock_mechanics_80 # For a few early Greek inventions
+					value = cdt_civic_left_branch_25_to_75
+					min = cdt_silent_trade_85
+					min = cdt_school_of_philosophy_50_to_90
+					min = cdt_clock_mechanics_85_to_90 # For a few early Greek inventions
 				}
 			}
 		}
@@ -26,8 +26,8 @@
 		ai_will_do = {
 			modifier = {
 				factor = {
-					value = cdt_civic_left_branch_15_to_75
-					min = cdt_silent_trade_80
+					value = cdt_civic_left_branch_25_to_75
+					min = cdt_silent_trade_85
 				}
 			}
 		}
@@ -35,12 +35,12 @@
     global_tax_modifier_inv_1 = { 
         modifier = { global_tax_modifier = 0.025 }
         requires = { commerce_inv_1 }
-		# Civic Left Branch and World Port + School of Philosophy trees
+		# Civic Left Branch and School of Philosophy trees
 		ai_will_do = {
 			modifier = {
 				factor = {
-					value = cdt_civic_left_branch_15_to_75
-					min = cdt_world_port_school_of_philosophy_90
+					value = cdt_civic_left_branch_25_to_75
+					min = cdt_school_of_philosophy_50_to_90
 				}
 			}
 		}
@@ -68,7 +68,7 @@
 		ai_will_do = {
 			modifier = {
 				factor = {
-					value = cdt_clock_mechanics_80 # For a few early Greek inventions
+					value = cdt_clock_mechanics_85_to_90 # For a few early Greek inventions
 				}
 			}
 		}
@@ -86,7 +86,7 @@
 		ai_will_do = {
 			modifier = {
 				factor = {
-					value = cdt_clock_mechanics_80 # For a few early Greek inventions
+					value = cdt_clock_mechanics_85_to_90 # For a few early Greek inventions
 				}
 			}
 		}
@@ -102,8 +102,8 @@
 		ai_will_do = {
 			modifier = {
 				factor = {
-					value = cdt_civic_left_branch_15_to_75
-					min = cdt_silent_trade_80
+					value = cdt_civic_left_branch_25_to_75
+					min = cdt_silent_trade_85
 				}
 			}
 		}
@@ -131,12 +131,12 @@
         modifier = { build_time = -0.2 }
         
         requires = { global_tax_modifier_inv_1 }
-		# Civic Left Branch and World Port + School of Philosophy trees
+		# Civic Left Branch and School of Philosophy trees
 		ai_will_do = {
 			modifier = {
 				factor = {
-					value = cdt_civic_left_branch_15_to_75
-					min = cdt_world_port_school_of_philosophy_90
+					value = cdt_civic_left_branch_25_to_75
+					min = cdt_school_of_philosophy_50_to_90
 				}
 			}
 		}
@@ -209,8 +209,8 @@
 		ai_will_do = {
 			modifier = {
 				factor = {
-					value = cdt_civic_left_branch_15_to_75
-					min = cdt_silent_trade_80
+					value = cdt_civic_left_branch_25_to_75
+					min = cdt_silent_trade_85
 				}
 			}
 		}
@@ -224,12 +224,12 @@
 		}
         keystone = yes
         requires_or = { build_time_inv civic_tech_investment_inv_2 } 
-		# Civic Left Branch and World Port + School of Philosophy trees
+		# Civic Left Branch and School of Philosophy trees
 		ai_will_do = {
 			modifier = {
 				factor = {
-					value = cdt_civic_left_branch_15_to_75
-					min = cdt_world_port_school_of_philosophy_90
+					value = cdt_civic_left_branch_25_to_75
+					min = cdt_school_of_philosophy_50_to_90
 				}
 			}
 		}
@@ -242,7 +242,7 @@
 		# Civic Left Branch
 		ai_will_do = {
 			modifier = {
-				factor = cdt_civic_left_branch_15_to_75
+				factor = cdt_civic_left_branch_25_to_75
 			}
 		}
     }
@@ -318,8 +318,8 @@
 		ai_will_do = {
 			modifier = {
 				factor = {
-					value = cdt_civic_left_branch_15_to_75
-					min = cdt_silent_trade_80
+					value = cdt_civic_left_branch_25_to_75
+					min = cdt_silent_trade_85
 				}
 			}
 		}
@@ -329,12 +329,12 @@
         modifier = { enact_law_cost_modifier = -0.15 }
         
         requires_or = { capital_trade_inv_1 global_tax_modifier_inv_2 } 
-		# Civic Left Branch and World Port + School of Philosophy trees
+		# Civic Left Branch and School of Philosophy trees
 		ai_will_do = {
 			modifier = {
 				factor = {
-					value = cdt_civic_left_branch_15_to_75
-					min = cdt_world_port_school_of_philosophy_90
+					value = cdt_civic_left_branch_25_to_75
+					min = cdt_school_of_philosophy_50_to_90
 				}
 			}
 		}
@@ -366,7 +366,7 @@
 			modifier = {
 				factor = {
 					value = irc_25
-					min = cds_global_monthly_food_60
+					min = cds_global_monthly_food_65
 				}
 			}
 		}
@@ -468,7 +468,7 @@
 			modifier = {
 				factor = {
 					value = irc_15
-					min = cds_global_monthly_food_60
+					min = cds_global_monthly_food_65
 				}
 			}
 		}
@@ -496,7 +496,7 @@
 			modifier = {
 				factor = {
 					value = irc_15
-					min = cds_global_monthly_food_60
+					min = cds_global_monthly_food_65
 				}
 			}
 		}
@@ -511,7 +511,7 @@
 		# Civic Left Branch
 		ai_will_do = {
 			modifier = {
-				factor = cdt_civic_left_branch_15_to_75
+				factor = cdt_civic_left_branch_25_to_75
 			}
 		}
     }
@@ -527,8 +527,8 @@
 		ai_will_do = {
 			modifier = {
 				factor = {
-					value = cdt_civic_left_branch_15_to_75
-					min = cdt_silent_trade_80
+					value = cdt_civic_left_branch_25_to_75
+					min = cdt_silent_trade_85
 				}
 			}
 		}
@@ -549,10 +549,13 @@
 		keystone = yes
         
         requires = { enact_law_cost_modifier_inv }
-		# It's Civic Left Branch, it's World Port + School of Philosophy tree, it's lots of money, it's everything
+		# Civic Left Branch and School of Philosophy trees
 		ai_will_do = {
 			modifier = {
-				factor = irc_99
+				factor = {
+					value = cdt_civic_left_branch_25_to_75
+					min = cdt_school_of_philosophy_subtarget_99
+				}
 			}
 		}
     }
@@ -677,7 +680,10 @@
 		# Civic Left Branch
 		ai_will_do = {
 			modifier = {
-				factor = cdt_civic_left_branch_15_to_75
+				factor = {
+					value = cdt_civic_left_branch_25_to_75
+					min = cdt_school_of_philosophy_subtarget_99
+				}
 			}
 		}
     }
@@ -710,8 +716,8 @@
 		ai_will_do = {
 			modifier = {
 				factor = {
-					value = cdt_civic_left_branch_15_to_75
-					min = cdt_world_port_school_of_philosophy_90
+					value = cdt_civic_left_branch_25_to_75
+					min = cdt_school_of_philosophy_50_to_90
 				}
 			}
 		} 
@@ -754,7 +760,7 @@
 		# Silent Trade tree
 		ai_will_do = {
 			modifier = {
-				factor = cdt_silent_trade_80
+				factor = cdt_silent_trade_85
 			}
 		} 
     }
@@ -866,7 +872,7 @@
 		# Civic Left Branch
 		ai_will_do = {
 			modifier = {
-				factor = cdt_civic_left_branch_15_to_75
+				factor = cdt_civic_left_branch_25_to_75
 			}
 		}
     }
@@ -895,7 +901,7 @@
 		# Civic Left Branch
 		ai_will_do = {
 			modifier = {
-				factor = cdt_civic_left_branch_15_to_75
+				factor = cdt_civic_left_branch_25_to_75
 			}
 		} 
     } 
@@ -930,8 +936,8 @@
 		ai_will_do = {
 			modifier = {
 				factor = {
-					value = cdt_civic_left_branch_15_to_75
-					min = cdt_world_port_school_of_philosophy_90
+					value = cdt_civic_left_branch_25_to_75
+					min = cdt_school_of_philosophy_50_to_90
 				}
 			}
 		}
@@ -958,7 +964,7 @@
 		# Silent Trade tree
 		ai_will_do = {
 			modifier = {
-				factor = cdt_silent_trade_80
+				factor = cdt_silent_trade_85
 			}
 		} 
     }
@@ -1093,7 +1099,7 @@
 		# Civic Left Branch
 		ai_will_do = {
 			modifier = {
-				# factor = cdt_civic_left_branch_15_to_75
+				# factor = cdt_civic_left_branch_25_to_75
 				factor = irc_99 # Very good for stability and stuff
 			}
 		}
@@ -1107,8 +1113,8 @@
 		ai_will_do = {
 			modifier = {
 				factor = {
-					value = cdt_civic_left_branch_15_to_75
-					min = cdt_world_port_school_of_philosophy_90
+					value = cdt_civic_left_branch_25_to_75
+					min = cdt_school_of_philosophy_50_to_90
 				}
 			}
 		}
@@ -1138,7 +1144,7 @@
 		# Silent Trade tree
 		ai_will_do = {
 			modifier = {
-				factor = cdt_silent_trade_80
+				factor = cdt_silent_trade_85
 			}
 		}
     }
@@ -1183,7 +1189,7 @@
 		# Civic Left Branch
 		ai_will_do = {
 			modifier = {
-				factor = cdt_civic_left_branch_15_to_75
+				factor = cdt_civic_left_branch_25_to_75
 			}
 		}
     }
@@ -1196,8 +1202,8 @@
 		ai_will_do = {
 			modifier = {
 				factor = {
-					value = cdt_civic_left_branch_15_to_75
-					min = cdt_world_port_school_of_philosophy_90
+					value = cdt_civic_left_branch_25_to_75
+					min = cdt_school_of_philosophy_50_to_90
 				}
 			}
 		}
@@ -1210,7 +1216,7 @@
 		# Civic Left Branch
 		ai_will_do = {
 			modifier = {
-				factor = cdt_civic_left_branch_15_to_75
+				factor = cdt_civic_left_branch_25_to_75
 			}
 		}
     }
@@ -1239,7 +1245,7 @@
 		# Silent Trade tree
 		ai_will_do = {
 			modifier = {
-				factor = cdt_silent_trade_80
+				factor = cdt_silent_trade_85
 			}
 		}
     }
@@ -1305,7 +1311,7 @@
 		# World Port + School of Philosophy tree - target
 		ai_will_do = {
 			modifier = {
-				factor = cdt_world_port_school_of_philosophy_target_100
+				factor = cdt_school_of_philosophy_target_100
 			}
 		}
     } 
@@ -1348,7 +1354,7 @@
 		# World Port + School of Philosophy tree - target
 		ai_will_do = {
 			modifier = {
-				factor = cdt_world_port_school_of_philosophy_target_100
+				factor = cdt_school_of_philosophy_target_100
 			}
 		}
     }

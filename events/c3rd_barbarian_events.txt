@@ -1516,8 +1516,7 @@ c3rd_barbarian_events.12 = { #barbarian admin law 2 magister militum taking cont
 	}
 }
 
-c3rd_barbarian_events.13 = {
-	# admin law 1 disloyal influent landowner takes advantage of the army This is a medium coup scale bad event that happens if he's owner of a governorship with especially strong legion
+c3rd_barbarian_events.13 = { # admin law 1 disloyal influent landowner takes advantage of the army This is a medium coup scale bad event that happens if he's owner of a governorship with especially strong legion
 	type = country_event
 	title = "c3rd_barbarian_events.13.t"
 	desc = "c3rd_barbarian_events.13.desc"

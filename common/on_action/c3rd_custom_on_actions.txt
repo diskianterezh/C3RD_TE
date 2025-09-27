@@ -1565,6 +1565,9 @@ c3rd_holding_control = {
 			exists = governor
 			governor = {
 				is_ruler = no
+				NOT = {
+					has_variable = recently_lost_control
+				}
 			}
 			save_temporary_scope_as = governorship_tmp_scope
 			NOR = {
@@ -1605,6 +1608,9 @@ c3rd_holding_control = {
 					exists = governor
 					governor = {
 						is_ruler = no
+						NOT = {
+							has_variable = recently_lost_control
+						}
 					}
 					save_temporary_scope_as = governorship_tmp_scope
 					NOR = {
@@ -1643,6 +1649,9 @@ c3rd_holding_control = {
 					exists = governor
 					governor = {
 						is_ruler = no
+						NOT = {
+							has_variable = recently_lost_control
+						}
 					}
 					save_temporary_scope_as = governorship_tmp_scope
 					NOR = {
