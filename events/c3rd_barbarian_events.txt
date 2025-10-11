@@ -115,6 +115,7 @@ c3rd_barbarian_events.2 = {
 			}
 			any_owned_province = {
 				any_neighbor_province = {
+					exists = owner
 					NOT = {
 						owner = root
 					}

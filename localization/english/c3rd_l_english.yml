@@ -215,6 +215,8 @@
  desc_epidemy_modifier_solidus_2:0 "One of the consequences of the Gold Standard was that it allowed the upper aristocracy to become much more independent... when the need arose."
  event_5_civil_war:0 "Military loyalty"
  desc_event_5_civil_war:0 "Military support was assured during the civil war"
+ c3rd_barbarian_fury_discipline_1:0 "Barbarian waves"
+ c3rd_barbarian_fury_discipline_2:0 "Barbarian waves"
 
  #opinion:
  empire_rivals:0 "Rivals Empires"
@@ -296,6 +298,8 @@
  desc_major_influence_aristocrat:0 "This character has established his authority over a large part of the country's governorates, making him one of the most influential figures in the country."
  political_power_character:0 "Major politician"
  desc_political_power_character:0 "This character has been established as one of the most politically powerful character in the country. His influence can make him dangerous if he is found to be disloyal"
+ takes_governorships_control:0 "Governor involved"
+ desc_takes_governorships_control:0 "This governor is strangely involved in the life of his region, seeking to build alliances and ensure control over institutions..."
 
  #Decisions
  stop_political_unstability_small:0 "Stopping the political instability"

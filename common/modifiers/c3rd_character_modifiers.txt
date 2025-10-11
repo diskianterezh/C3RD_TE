@@ -24,3 +24,7 @@ political_power_character = {
 	monthly_character_popularity = 0.25
 	monthly_character_prominence = 0.1
 }
+
+takes_governorships_control = {
+	monthly_corruption = 0.05
+}

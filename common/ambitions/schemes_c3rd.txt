@@ -1119,6 +1119,10 @@ scheme_steal_holding = {
 			wealth >= 3000
 		}
 		modifier = {
+			factor = 5
+			has_character_modifier = takes_governorships_control
+		}
+		modifier = {
 			factor = 10
 			is_governor = yes
 			OR = {

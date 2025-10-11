@@ -4422,7 +4422,7 @@ c3rd_other_events.41 = {
 }
 
 c3rd_other_events.42 = {
-	#corruption from gold -- the military now wants more
+	#corruption from gold -- renewal
 	type = country_event
 	title = "c3rd_other_events.42.t"
 	desc = "c3rd_other_events.42.desc"
@@ -12103,6 +12103,15 @@ c3rd_other_events.106 = {
 			factor = 2
 			num_of_cities >= 1000
 		}
+		modifier = {
+			factor = 2
+			any_owned_province = {
+				count <= country_size_ratio
+				NOT = {
+					exists = holding_owner
+				}
+			}
+		}
 	}
 	immediate = {
 		random_character = {
@@ -12429,11 +12438,16 @@ c3rd_other_events.107 = {
 		add_political_influence = -5
 	}
 	after = {
-		scope:first_head_disloyal = {
-			remove_variable = head_intent_disloyal
-		}
-		scope:second_head_disloyal = {
-			remove_variable = head_intent_disloyal
+		if = {
+			limit = {
+				num_of_cities <= 1000
+			}
+			scope:first_head_disloyal = {
+				remove_variable = head_intent_disloyal
+			}
+			scope:second_head_disloyal = {
+				remove_variable = head_intent_disloyal
+			}
 		}
 	}
 }

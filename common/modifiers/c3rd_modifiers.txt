@@ -309,12 +309,13 @@ wonder_destroyed_modifier = {
 
 barbarians_border = {
 	local_monthly_civilization = -0.05
+	local_output_modifier = -0.5
 	local_unrest = 2
 	local_migration_attraction = -5
 	local_migration_speed = 2
 	local_pop_assimilation_speed = -1
 	local_goods_from_slaves = 5
-	local_defensive = -0.5
+	local_defensive = -0.75
 }
 
 secess_preparation = {
@@ -651,6 +652,7 @@ c3rd_border_pressure = {
 	stability_cost_modifier = 0.5
 	fort_maintenance_cost = 0.5
 	army_maintenance_cost = 0.25
+	global_commerce_modifier = -0.20
 }
 
 humiliated_army = {
@@ -725,6 +727,8 @@ c3rd_barbarian_fury_discipline_1 = {
     land_morale_modifier = 0.75
     land_morale_recovery = 0.15
     monthly_experience_gain = 0.1
+	army_weight_modifier = -0.75
+	global_tribesmen_output = 0.1
 }
 
 c3rd_barbarian_fury_discipline_2 = {
@@ -751,6 +755,8 @@ c3rd_barbarian_fury_discipline_2 = {
     land_morale_modifier = 1.5
     land_morale_recovery = 0.25
     monthly_experience_gain = 0.2
+	army_weight_modifier = -0.75
+	global_tribesmen_output = 0.2
 }
 
 epidemy_modifier_solidus_1 = {

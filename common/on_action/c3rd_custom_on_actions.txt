@@ -384,6 +384,13 @@ c3rd_other_events_monthly_pulse = {
 	#check if events can happen
 	trigger = {
 		num_of_cities >= 1
+		any_character = {
+			OR = {
+				has_variable = head_intent_consolidate
+				has_variable = head_intent_disloyal
+			}
+			wealth >= 1000
+		}
 		NOR = {
 			tag = REB
 			tag = BAR
@@ -459,25 +466,89 @@ c3rd_other_events_monthly_pulse = {
 						}
 					}
 					employer = {
-						random_owned_province = {
+						if = {
 							limit = {
-								NOT = {
-									exists = holding_owner
-								}
-							}
-							weight = {
-								modifier = {
-									factor = 10
-									governorship = {
-										NOT = {
-											has_variable = governorship_owner
-										}
+								any_owned_province = {
+									NOT = {
+										exists = holding_owner
 									}
 								}
 							}
-							scope:consolidating_head = {
-								add_holding = prev
-								add_gold = -250
+							random_owned_province = {
+								limit = {
+									NOT = {
+										exists = holding_owner
+									}
+								}
+								weight = {
+									modifier = {
+										factor = 10
+										governorship = {
+											NOT = {
+												has_variable = governorship_owner
+											}
+										}
+									}
+								}
+								scope:consolidating_head = {
+									add_holding = prev
+									add_gold = -250
+								}
+							}
+						}
+						else = {
+							if = {
+								limit = {
+									any_character = {
+										is_governor = yes
+										is_head_of_family = no
+										family = scope:consolidating_head.family
+										save_temporary_scope_as = temp_gov
+										root = {
+											any_governorships = {
+												exists = governor
+												governor = scope:temp_gov
+												has_variable = governorship_owner
+												var:governorship_owner = {
+													family = root.current_ruler.family
+												}
+											}
+										}
+									}
+								}
+								random_character = {
+									limit = {
+										is_governor = yes
+										is_head_of_family = no
+										family = scope:consolidating_head.family
+										save_temporary_scope_as = temp_gov
+										root = {
+											any_governorships = {
+												exists = governor
+												governor = scope:temp_gov
+												has_variable = governorship_owner
+												var:governorship_owner = {
+													family = root.current_ruler.family
+												}
+											}
+										}
+									}
+									add_gold = 500
+									if = {
+										limit = {
+											NOT = {
+												has_character_modifier = takes_governorships_control
+											}
+										}
+										add_character_modifier = {
+											name = takes_governorships_control
+											duration = 730
+										}
+									}
+								}
+								scope:consolidating_head = {
+									add_gold = -1000
+								}
 							}
 						}
 					}
@@ -2702,15 +2773,18 @@ c3rd_barbarian_occupying_land = {
 						}
 					}
 				}
-				owner = {
-					#the dominant local culture is not integrated -> might be the barbarian one OR anything not integrated, even greeks or italian if possible, why not
-					OR = {
-						has_country_modifier = internal_collapse						#this bypasses the dominant culture requirement
-						any_country_culture = {
-							is_integrated = no
-							this.culture = prev.prev.culture
+				OR = {
+					owner = {
+						#the dominant local culture is not integrated -> might be the barbarian one OR anything not integrated, even greeks or italian if possible, why not
+						OR = {
+							has_country_modifier = internal_collapse							#this bypasses the dominant culture requirement
+							any_country_culture = {
+								is_integrated = no
+								this.culture = prev.prev.culture
+							}
 						}
 					}
+					civilization_value < 1
 				}
 			}
 			NOT = {
@@ -2757,14 +2831,17 @@ c3rd_barbarian_occupying_land = {
 							pop_culture = root.culture
 						}
 					}
-					owner = {
-						OR = {
-							has_country_modifier = internal_collapse
-							any_country_culture = {
-								is_integrated = no
-								this.culture = prev.prev.culture
+					OR = {
+						owner = {
+							OR = {
+								has_country_modifier = internal_collapse
+								any_country_culture = {
+									is_integrated = no
+									this.culture = prev.prev.culture
+								}
 							}
 						}
+						civilization_value < 1
 					}
 				}
 				NOT = {
@@ -2819,6 +2896,7 @@ c3rd_barbarian_occupying_land = {
 								this.culture = prev.prev.culture
 							}
 						}
+						civilization_value < 1
 					}
 				}
 				save_scope_as = new_tribal_prov
@@ -2826,27 +2904,11 @@ c3rd_barbarian_occupying_land = {
 		}
 		if = {
 			limit = {
-				has_country_modifier = internal_collapse
-			}
-			scope:new_tribal_prov = {
-				random_pops_in_province = {
-					limit = {
-						NOT = {
-							pop_culture = root.culture
-						}
-					}
-					root = {
-						random_country_culture = {
-							limit = {
-								this.culture = prev.prev.pop_culture
-							}
-							save_scope_as = new_culture_tribal
-						}
-					}
+				any_country_culture = {
+					is_integrated = no
+					this.culture = scope:new_tribal_prov.culture
 				}
 			}
-		}
-		else = {
 			random_country_culture = {
 				limit = {
 					this.culture = scope:new_tribal_prov.culture
@@ -2854,25 +2916,92 @@ c3rd_barbarian_occupying_land = {
 				save_scope_as = new_culture_tribal
 			}
 		}
+		else = {
+			scope:new_tribal_prov = {
+				if = {
+					limit = {
+						any_pops_in_province = {
+							NOT = {
+								pop_culture = root.culture
+							}
+						}
+					}
+					random_pops_in_province = {
+						limit = {
+							NOT = {
+								pop_culture = root.culture
+							}
+						}
+						root = {
+							random_country_culture = {
+								limit = {
+									this.culture = prev.prev.pop_culture
+								}
+								save_scope_as = new_culture_tribal
+							}
+						}
+					}
+				}
+				else = {
+					random_neighbor_province = {
+						limit = {
+							OR = {
+								has_province_modifier = barbarian_invasion_war
+								has_province_modifier = barbarian_invasion_skirmish
+								has_province_modifier = minor_barbarian_spawn_place
+								has_province_modifier = generic_barbarian_spawn_place
+								has_province_modifier = major_barbarian_spawn_place
+								AND = {
+									NOT = {
+										owner = root
+									}
+									owner = {
+										is_tribal = yes
+										NOT = {
+											is_subject_of = root
+										}
+									}
+								}
+							}
+						}
+						random_pops_in_province = {
+							limit = {
+								NOT = {
+									pop_culture = root.culture
+								}
+							}
+							root = {
+								random_country_culture = {
+									limit = {
+										this.culture = prev.prev.pop_culture
+									}
+									save_scope_as = new_culture_tribal
+								}
+							}
+						}
+					}
+				}
+			}
+		}
 		if = {
 			limit = {
 				any_country = {
+					this.culture = scope:new_culture_tribal.culture
 					any_owned_province = {
 						any_neighbor_province = {
 							this = scope:new_tribal_prov
 						}
 					}
-					this.culture = scope:new_culture_tribal.culture
 				}
 			}
 			random_country = {
 				limit = {
+					this.culture = scope:new_culture_tribal.culture
 					any_owned_province = {
 						any_neighbor_province = {
 							this = scope:new_tribal_prov
 						}
 					}
-					this.culture = scope:new_culture_tribal.culture
 				}
 				save_scope_as = tribal_expanding
 			}
@@ -3084,6 +3213,24 @@ c3rd_head_of_family_shenanigans = {
 							treasury >= 90000
 						}
 					}
+					modifier = {
+						factor = 0.8
+						root = {
+							stability >= 60
+						}
+					}
+					modifier = {
+						factor = 0.8
+						root = {
+							stability >= 70
+						}
+					}
+					modifier = {
+						factor = 0.8
+						root = {
+							stability >= 80
+						}
+					}
 				}
 				10 = {
 					#consolidate
@@ -3172,7 +3319,7 @@ c3rd_head_of_family_shenanigans = {
 				10 = {
 					#disloyal
 					modifier = {
-						factor = 0.1
+						factor = 0.2
 						loyalty >= 60
 					}
 					modifier = {
@@ -3231,6 +3378,24 @@ c3rd_head_of_family_shenanigans = {
 									has_character_modifier = major_influence_aristocrat
 								}
 							}
+						}
+					}
+					modifier = {
+						factor = 1.2
+						root = {
+							stability >= 60
+						}
+					}
+					modifier = {
+						factor = 1.3
+						root = {
+							stability >= 70
+						}
+					}
+					modifier = {
+						factor = 1.5
+						root = {
+							stability >= 80
 						}
 					}
 					set_variable = {
