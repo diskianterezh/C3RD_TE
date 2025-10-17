@@ -13,6 +13,7 @@ yearly_country_pulse = {
 		c3rd_country_calculate_the_gov_ownership
 		c3rd_holding_tax_evasion
 		c3rd_head_of_family_shenanigans
+		c3rd_traits_cumulation_balance
 		c3rd_barbarian_changing_pop
 		c3rd_variables_clear
 		c3rd_country_control_check
