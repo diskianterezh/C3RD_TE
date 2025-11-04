@@ -1,4 +1,4 @@
-﻿namespace = c3rd_other_events
+namespace = c3rd_other_events
 #Some event to add changes
 c3rd_other_events.1 = {
 	#Empire leader has too low martial in a war
@@ -1057,6 +1057,14 @@ c3rd_other_events.9 = {
 				}
 				modifier = {
 					add = corruption
+				}
+				modifier = {
+					factor = 2
+					is_head_of_family = yes
+				}
+				modifier = {
+					factor = 0.2
+					is_friend = root.current_ruler
 				}
 				modifier = {
 					factor = 0.5
