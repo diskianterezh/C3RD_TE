@@ -3482,62 +3482,64 @@ c3rd_traits_cumulation_balance = {
 		every_character = {
 			limit = {
 				age = 0
-				has_many_bloodlines >= 3
+				has_many_bloodlines >= 5
 			}
 			random_list = {
-				#roll the inbred chance
-				16 = {
+				26 = {
 					#nothing
 				}
 				1 = {
-					#inbred, from 20% chance at 3, 36% at 5, 55% at 8, 75% at 10+
+					#health hit
 					modifier = {
 						add = has_many_bloodlines
-					}
-					modifier = {
-						factor = 1.5
-						has_many_bloodlines >= 5
 					}
 					modifier = {
 						factor = 1.5
 						has_many_bloodlines >= 8
 					}
 					modifier = {
-						factor = 2
+						factor = 1.2
 						has_many_bloodlines >= 10
 					}
-					add_trait = inbred
+					modifier = {
+						factor = 1.5
+						has_many_bloodlines >= 15
+					}
+					add_health = -5
 				}
 			}
 		}
 		every_character = {
 			limit = {
 				age = 10
-				has_many_bloodlines >= 3
+				has_many_bloodlines >= 5
 			}
 			random_list = {
 				#roll the disease chances
-				12 = {
+				26 = {
 					#nothing
 				}
 				1 = {
-					#sick, 25% at 3, 43% at 5, 63% at 8, 80% at 10
+					#
 					modifier = {
 						add = has_many_bloodlines
-					}
-					modifier = {
-						factor = 1.5
-						has_many_bloodlines >= 5
 					}
 					modifier = {
 						factor = 1.5
 						has_many_bloodlines >= 8
 					}
 					modifier = {
-						factor = 2
+						factor = 1.2
 						has_many_bloodlines >= 10
 					}
+					modifier = {
+						factor = 1.5
+						has_many_bloodlines >= 15
+					}
 					random_list = {
+						3 = {
+							add_health = -10
+						}
 						1 = {
 							add_trait = stutter
 						}
@@ -3554,39 +3556,38 @@ c3rd_traits_cumulation_balance = {
 		every_character = {
 			limit = {
 				age = 20
-				has_many_bloodlines >= 3
+				has_many_bloodlines >= 5
 			}
 			random_list = {
 				#roll the disease
-				8 = {
+				26 = {
 					#nothing
 				}
 				1 = {
-					#vsick 33% at 3, 53% at 5, 71% at 8, 86% at 10
 					modifier = {
 						add = has_many_bloodlines
-					}
-					modifier = {
-						factor = 1.5
-						has_many_bloodlines >= 5
 					}
 					modifier = {
 						factor = 1.5
 						has_many_bloodlines >= 8
 					}
 					modifier = {
-						factor = 2
+						factor = 1.2
 						has_many_bloodlines >= 10
 					}
+					modifier = {
+						factor = 1.5
+						has_many_bloodlines >= 15
+					}
 					random_list = {
+						3 = {
+							add_health = -10
+						}
 						1 = {
 							add_trait = epileptic
 						}
 						1 = {
 							add_trait = cancer
-						}
-						1 = {
-							add_trait = pox
 						}
 					}
 				}
@@ -3595,31 +3596,31 @@ c3rd_traits_cumulation_balance = {
 		every_character = {
 			limit = {
 				age = 30
-				has_many_bloodlines >= 3
+				has_many_bloodlines >= 5
 			}
 			random_list = {
 				#roll the health damage
-				4 = {
+				26 = {
 					#nothing
 				}
 				1 = {
-					#health, 50% at 3, 69% at 5, 83% at 8, 92% at 10
+					#
 					modifier = {
 						add = has_many_bloodlines
-					}
-					modifier = {
-						factor = 1.5
-						has_many_bloodlines >= 5
 					}
 					modifier = {
 						factor = 1.5
 						has_many_bloodlines >= 8
 					}
 					modifier = {
-						factor = 2
+						factor = 1.2
 						has_many_bloodlines >= 10
 					}
-					add_health = -20
+					modifier = {
+						factor = 1.5
+						has_many_bloodlines >= 15
+					}
+					add_health = -10
 				}
 			}
 		}
