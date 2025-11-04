@@ -1059,6 +1059,14 @@ c3rd_other_events.9 = {
 					add = corruption
 				}
 				modifier = {
+					factor = 2
+					is_head_of_family = yes
+				}
+				modifier = {
+					factor = 0.2
+					is_friend = root.current_ruler
+				}
+				modifier = {
 					factor = 0.5
 					has_trait = righteous
 				}
