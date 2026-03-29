@@ -1,4 +1,4 @@
-﻿namespace = c3rd_other_events
+namespace = c3rd_other_events
 #Some event to add changes
 c3rd_other_events.1 = {
 	#Empire leader has too low martial in a war
@@ -475,6 +475,7 @@ c3rd_other_events.6 = {
 	#gold mine exhaustion
 	type = country_event
 	title = "c3rd_other_events.6.t"
+	goto_location = scope:exhausted_mine
 	desc = {
 		desc = "c3rd_other_events.6.desc"
 		triggered_desc = {
@@ -13272,7 +13273,7 @@ c3rd_other_events.110 = {
 					}
 				}
 			}
-			custom_tooltip = c3rd_other_events.86.tt13			#same loc, same variables
+			custom_tooltip = c3rd_other_events.86.tt13			#same loc, same variables --> asked_landowner and the family_domain_gov list are defined in the Immediate, so we can reuse them here
 			every_governorships = {
 				limit = {
 					is_in_list = family_domain_govs
@@ -15621,7 +15622,7 @@ c3rd_other_events.130 = {
 }
 
 c3rd_other_events.131 = {
-	#EPIDEMY modifier event when solidus (you enacted solidus too soon event type)
+	#EPIDEMY modifier event when solidus (solidus makes these events more devastating)
 	type = country_event
 	title = "c3rd_other_events.131.t"
 	desc = "c3rd_other_events.131.desc"
@@ -15660,7 +15661,7 @@ c3rd_other_events.131 = {
 }
 
 c3rd_other_events.132 = {
-	#EPIDEMY modifier 2 event when solidus (you enacted solidus too soon event type)
+	#EPIDEMY modifier 2 event when solidus (solidus makes these events more devastating)
 	type = country_event
 	title = "c3rd_other_events.132.t"
 	desc = "c3rd_other_events.132.desc"

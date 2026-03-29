@@ -1,0 +1,663 @@
+namespace = c3rd_epidemy_events
+# ============================================================================
+# EPIDEMIC + SOLIDUS EVENT CHAIN
+# Event 1: Initial crisis (base penalties only)
+# Events 2-4: Follow-up crises with player choices
+# Variables: epidemy_political (0=none,1=full,2=half), epidemy_military (0=none,1=full,2=half), epidemy_social (0=none,1=full)
+# ============================================================================
+c3rd_epidemy_events.1 = {
+	type = country_event
+	title = "c3rd_epidemy_events.1.t"
+	desc = "c3rd_epidemy_events.1.desc"
+	picture = great_work_riot
+	left_portrait = current_ruler
+	trigger = {
+		has_land = yes
+		is_tribal = no
+		has_civil_war = no
+		current_date >= 700.1.1
+		has_country_modifier = solidus_introduced
+		any_owned_province = {
+			count >= 10
+			OR = {
+				has_province_modifier = "antonine_plague_epidemic_outbreak_city"
+				has_province_modifier = "antonine_plague_epidemic_quarantine"
+			}
+		}
+		NOR = {
+			has_variable = already_epidemy_modifier_solidus_1
+			has_variable = first_epidemy_modifier_solidus_1
+			has_country_modifier = c3rd_epidemy_solidus_base
+			has_country_modifier = c3rd_epidemy_solidus_s
+			has_country_modifier = c3rd_epidemy_solidus_m
+			has_country_modifier = c3rd_epidemy_solidus_m_s
+			has_country_modifier = c3rd_epidemy_solidus_mh
+			has_country_modifier = c3rd_epidemy_solidus_mh_s
+			has_country_modifier = c3rd_epidemy_solidus_p
+			has_country_modifier = c3rd_epidemy_solidus_p_s
+			has_country_modifier = c3rd_epidemy_solidus_p_m
+			has_country_modifier = c3rd_epidemy_solidus_p_m_s
+			has_country_modifier = c3rd_epidemy_solidus_p_mh
+			has_country_modifier = c3rd_epidemy_solidus_p_mh_s
+			has_country_modifier = c3rd_epidemy_solidus_ph
+			has_country_modifier = c3rd_epidemy_solidus_ph_s
+			has_country_modifier = c3rd_epidemy_solidus_ph_m
+			has_country_modifier = c3rd_epidemy_solidus_ph_m_s
+			has_country_modifier = c3rd_epidemy_solidus_ph_mh
+			has_country_modifier = c3rd_epidemy_solidus_ph_mh_s
+		}
+	}
+	immediate = {
+		set_variable = {
+			name = epidemy_political
+			value = 0
+		}
+		set_variable = {
+			name = epidemy_military
+			value = 0
+		}
+		set_variable = {
+			name = epidemy_social
+			value = 0
+		}
+		set_variable = {
+			name = solidus_epidemy_delay_timer
+			days = 365
+		}
+		set_variable = {
+			name = first_epidemy_modifier_solidus_1
+			days = 3000			#8 years, in order to prevent next events to trigger to late 
+		}
+		set_variable = {
+			name = already_epidemy_modifier_solidus_1
+		}
+		c3rd_update_epidemy_solidus_modifier = yes
+	}
+	option = {
+		name = "c3rd_epidemy_events.1.a"
+		custom_tooltip = c3rd_epidemy_events.1.a.tt1
+	}
+}
+
+c3rd_epidemy_events.2 = {
+	# Political Crisis
+	type = country_event
+	title = "c3rd_epidemy_events.2.t"
+	desc = "c3rd_epidemy_events.2.desc"
+	picture = senate_debate
+	trigger = {
+		is_ai = no
+		has_variable = first_epidemy_modifier_solidus_1
+		has_variable = epidemy_political
+		var:epidemy_political = 0
+		NOR = {
+			has_variable = solidus_epidemy1_political_triggered
+			has_variable = solidus_epidemy_delay_timer
+		}
+		OR = {
+			any_character = {
+				is_ruler = no
+				has_character_modifier = major_influence_aristocrat
+				loyalty < 50
+			}
+			AND = {
+				stability < 40
+				current_ruler = {
+					corruption > 35
+				}
+			}
+		}
+	}
+	immediate = {
+		set_variable = {
+			name = solidus_epidemy1_political_triggered
+		}
+		set_variable = {
+			name = solidus_epidemy_delay_timer
+			days = 365
+		}
+		#variables for the domain one 
+		if = {
+			limit = {
+				any_character = {
+					has_variable = country_ownership
+					save_temporary_scope_as = temp_potential_domain_owner
+					employer = {
+						any_governorships = {
+							count > country_gov_ratio_number
+							has_variable = governorship_owner
+							var:governorship_owner = scope:temp_potential_domain_owner
+						}
+					}
+				}
+			}
+			random_character = {
+				limit = {
+					has_variable = country_ownership
+					save_temporary_scope_as = temp_potential_domain_owner2
+					employer = {
+						any_governorships = {
+							count > country_gov_ratio_number
+							has_variable = governorship_owner
+							var:governorship_owner = scope:temp_potential_domain_owner2
+						}
+					}
+				}
+				save_scope_as = asked_landowner				#need this name for the scripts
+			}
+			while = {
+				#here i'm copying the same as in event 86
+				count = landowner_asked_ratio_number
+				random_governorships = {
+					limit = {
+						has_variable = governorship_owner
+						var:governorship_owner = scope:asked_landowner
+						NOT = {
+							is_in_list = family_domain_govs
+						}
+						OR = {
+							NOT = {
+								exists = governor
+							}
+							governor = {
+								is_ruler = no
+							}
+						}
+					}
+					weight = {
+						modifier = {
+							factor = 10
+							any_governorship_state = {
+								any_state_province = {
+									any_neighbor_province = {
+										has_owner = yes
+										governorship = {
+											is_in_list = family_domain_govs
+										}
+									}
+								}
+							}
+						}
+						modifier = {
+							factor = 10
+							any_governorship_state = {
+								any_state_province = {
+									any_neighbor_province = {
+										has_owner = yes
+										owner = {
+											has_variable = owner_from_another_empire
+											var:owner_from_another_empire = scope:asked_landowner
+										}
+									}
+								}
+							}
+						}
+						modifier = {
+							factor = 3
+							any_governorship_state = {
+								any_state_province = {
+									any_neighbor_province = {
+										has_owner = yes
+										NOT = {
+											owner = root
+										}
+									}
+								}
+							}
+						}
+						modifier = {
+							factor = 0.1
+							any_governorship_state = {
+								any_state_province = {
+									any_neighbor_province = {
+										has_owner = yes
+										governor = {
+											is_ruler = yes
+										}
+									}
+								}
+							}
+						}
+					}
+					add_to_list = family_domain_govs
+				}
+			}
+		}
+	}
+	option = {
+		# Pay to avoid
+		name = "c3rd_epidemy_events.2.a"
+		custom_tooltip = c3rd_epidemy_events.2.a.tt1
+		add_political_influence = -50
+		if = {
+			limit = {
+				stability >= 80
+			}
+			add_stability = -30
+		}
+		else_if = {
+			limit = {
+				stability >= 70
+			}
+			add_stability = -25
+		}
+		else_if = {
+			limit = {
+				stability >= 60
+			}
+			add_stability = -20
+		}
+		else_if = {
+			limit = {
+				stability >= 50
+			}
+			add_stability = -17
+		}
+		else = {
+			add_stability = -15
+		}
+	}
+	option = {
+		# Let it happen - full penalties
+		name = "c3rd_epidemy_events.2.b"
+		custom_tooltip = c3rd_epidemy_events.2.b.tt1
+		change_variable = {
+			name = epidemy_political
+			add = 1
+		}
+		show_as_tooltip = {
+			add_country_modifier = {
+				name = c3rd_epidemy_political_full
+				duration = 7300
+			}
+		}
+		c3rd_update_epidemy_solidus_modifier = yes
+	}
+	option = {
+		# Half penalties with tyranny
+		trigger = {
+			NOT = {
+				any_character = {
+					is_ruler = no
+					has_character_modifier = political_power_character
+				}
+			}
+			OR = {
+				tyranny >= 20
+				current_ruler = {
+					has_character_modifier = major_influence_aristocrat
+				}
+			}
+		}
+		name = "c3rd_epidemy_events.2.c"
+		custom_tooltip = c3rd_epidemy_events.2.c.tt1
+		highlight = yes
+		if = {
+			limit = {
+				tyranny < 90
+			}
+			add_tyranny = 10
+		}
+		else_if = {
+			limit = {
+				current_ruler = {
+					corruption < 80
+				}
+			}
+			current_ruler = {
+				add_corruption = 20
+			}
+		}
+		else = {
+			add_stability = -10
+		}
+		change_variable = {
+			name = epidemy_political
+			add = 2
+		}
+		show_as_tooltip = {
+			add_country_modifier = {
+				name = c3rd_epidemy_political_half
+				duration = 7300
+			}
+		}
+		c3rd_update_epidemy_solidus_modifier = yes
+	}
+	option = {
+		# Half penalties with political concessions
+		name = "c3rd_epidemy_events.2.d"
+		custom_tooltip = c3rd_epidemy_events.2.d.tt1
+		if = {
+			limit = {
+				is_monarchy = yes
+			}
+			add_legitimacy = -20
+		}
+		else_if = {
+			limit = {
+				is_republic = yes
+			}
+			republic_proligarch30_10 = yes
+		}
+		else_if = {
+			limit = {
+				is_tribal = yes
+			}
+			add_centralization = -25
+		}
+		else = {
+			add_stability = -5
+		}
+		change_variable = {
+			name = epidemy_political
+			add = 2
+		}
+		if = {
+			limit = {
+				any_character = {
+					has_variable = country_ownership
+					save_temporary_scope_as = temp_potential_domain_owner
+					employer = {
+						any_governorships = {
+							count > country_gov_ratio_number
+							has_variable = governorship_owner
+							var:governorship_owner = scope:temp_potential_domain_owner
+						}
+					}
+				}
+			}
+			custom_tooltip = c3rd_other_events.86.tt13			#same loc, same variables
+			every_governorships = {
+				limit = {
+					is_in_list = family_domain_govs
+				}
+				save_scope_as = gov_tooltip
+				custom_tooltip = c3rd_other_events.86.a.tt2
+			}
+			hidden_effect = {
+				create_domain = yes
+				every_character = {
+					limit = {
+						has_variable = country_ownership
+					}
+					recalculate_ownership_char = yes
+				}
+			}
+		}
+		else = {
+			law_change_pol = yes
+		}
+		show_as_tooltip = {
+			add_country_modifier = {
+				name = c3rd_epidemy_political_half
+				duration = 7300
+			}
+		}
+		c3rd_update_epidemy_solidus_modifier = yes
+	}
+}
+
+c3rd_epidemy_events.3 = {
+	# Military Crisis
+	type = country_event
+	title = "c3rd_epidemy_events.3.t"
+	desc = "c3rd_epidemy_events.3.desc"
+	picture = persia_marching
+	trigger = {
+		is_ai = no
+		has_variable = first_epidemy_modifier_solidus_1
+		has_variable = epidemy_military
+		var:epidemy_military = 0
+		NOR = {
+			has_variable = solidus_epidemy_military_triggered
+			has_variable = solidus_epidemy_delay_timer
+		}
+		OR = {
+			war = yes
+			manpower_percentage < 50
+			any_character = {
+				loyalty < 40
+				is_general = yes
+			}
+		}
+	}
+	immediate = {
+		set_variable = {
+			name = solidus_epidemy_military_triggered
+		}
+		set_variable = {
+			name = solidus_epidemy_delay_timer
+			days = 365
+		}
+	}
+	option = {
+		# Pay stability to avoid
+		name = "c3rd_epidemy_events.3.a"
+		custom_tooltip = c3rd_epidemy_events.3.a.tt1
+		add_manpower = {
+			value = root.max_manpower
+			divide = -3
+		}
+		if = {
+			limit = {
+				stability >= 80
+			}
+			add_stability = -30
+		}
+		else_if = {
+			limit = {
+				stability >= 70
+			}
+			add_stability = -25
+		}
+		else_if = {
+			limit = {
+				stability >= 60
+			}
+			add_stability = -20
+		}
+		else_if = {
+			limit = {
+				stability >= 50
+			}
+			add_stability = -17
+		}
+		else = {
+			add_stability = -15
+		}
+	}
+	option = {
+		# Let it happen - full penalties
+		name = "c3rd_epidemy_events.3.b"
+		custom_tooltip = c3rd_epidemy_events.3.b.tt1
+		change_variable = {
+			name = epidemy_military
+			add = 1
+		}
+		show_as_tooltip = {
+			add_country_modifier = {
+				name = c3rd_epidemy_military_full
+				duration = 7300
+			}
+		}
+		c3rd_update_epidemy_solidus_modifier = yes
+	}
+	option = {
+		# Half penalties with angering the military
+		name = "c3rd_epidemy_events.3.c"
+		custom_tooltip = c3rd_epidemy_events.3.c.tt1
+		trigger = {
+			NOT = {
+				any_character = {
+					is_ruler = no
+					is_general = yes
+					has_character_modifier = political_power_character
+				}
+			}
+			OR = {
+				tyranny >= 20
+				current_ruler = {
+					has_character_modifier = major_influence_aristocrat
+				}
+			}
+		}
+		highlight = yes
+		hidden_effect = {
+			every_character = {
+				limit = {
+					is_ruler = no
+					is_general = yes
+				}
+				add_loyalty = humiliated_powerful_general
+			}
+		}
+		show_as_tooltip = {
+			random_general = {
+				limit = {
+					is_ruler = no
+					is_general = yes
+				}
+				add_loyalty = humiliated_powerful_general
+			}
+		}
+		change_variable = {
+			name = epidemy_military
+			add = 2
+		}
+		show_as_tooltip = {
+			add_country_modifier = {
+				name = c3rd_epidemy_military_half
+				duration = 7300
+			}
+		}
+		c3rd_update_epidemy_solidus_modifier = yes
+	}
+	option = {
+		# Half penalties with concessions to the military
+		name = "c3rd_epidemy_events.3.d"
+		custom_tooltip = c3rd_epidemy_events.3.d.tt1
+		trigger = {
+			NOT = {
+				has_country_modifier = military_advantages
+			}
+			tyranny < 30
+		}
+		highlight = yes
+		if = {
+			limit = {
+				has_variable = unworthy_leader
+			}
+			change_variable = {
+				name = unworthy_leader
+				add = 2
+			}
+		}
+		else = {
+			set_variable = {
+				name = unworthy_leader
+				value = 2
+			}
+		}
+		add_country_modifier = {
+			name = military_advantages
+			duration = 3650
+		}
+		change_variable = {
+			name = epidemy_military
+			add = 2
+		}
+		show_as_tooltip = {
+			add_country_modifier = {
+				name = c3rd_epidemy_military_half
+				duration = 7300
+			}
+		}
+		c3rd_update_epidemy_solidus_modifier = yes
+	}
+}
+
+c3rd_epidemy_events.4 = {
+	# Social Crisis - ONLY 2 CHOICES (no half option)
+	type = country_event
+	title = "c3rd_epidemy_events.4.t"
+	desc = "c3rd_epidemy_events.4.desc"
+	picture = successors
+	trigger = {
+		is_ai = no
+		has_variable = first_epidemy_modifier_solidus_1
+		has_variable = epidemy_social
+		var:epidemy_social = 0
+		NOR = {
+			has_variable = solidus_epidemy_social_triggered
+			has_variable = solidus_epidemy_delay_timer
+		}
+		any_governorships = {
+			has_variable = governorship_owner
+			var:governorship_owner = {
+				is_ruler = no
+				OR = {
+					loyalty < 40
+					corruption > 50
+				}
+			}
+		}
+	}
+	immediate = {
+		set_variable = {
+			name = solidus_epidemy_social_triggered
+		}
+		set_variable = {
+			name = solidus_epidemy_delay_timer
+			days = 365
+		}
+	}
+	option = {
+		# Pay stability to avoid
+		name = "c3rd_epidemy_events.4.a"
+		custom_tooltip = c3rd_epidemy_events.4.a.tt1
+		add_political_influence = -75
+		if = {
+			limit = {
+				stability >= 80
+			}
+			add_stability = -15
+		}
+		else_if = {
+			limit = {
+				stability >= 70
+			}
+			add_stability = -12
+		}
+		else_if = {
+			limit = {
+				stability >= 60
+			}
+			add_stability = -10
+		}
+		else_if = {
+			limit = {
+				stability >= 50
+			}
+			add_stability = -8
+		}
+		else = {
+			add_stability = -7
+		}
+	}
+	option = {
+		# Let it happen
+		name = "c3rd_epidemy_events.4.b"
+		custom_tooltip = c3rd_epidemy_events.4.b.tt1
+		change_variable = {
+			name = epidemy_social
+			add = 1
+		}
+		show_as_tooltip = {
+			add_country_modifier = {
+				name = c3rd_epidemy_social_full
+				duration = 7300
+			}
+		}
+		c3rd_update_epidemy_solidus_modifier = yes
+	}
+}

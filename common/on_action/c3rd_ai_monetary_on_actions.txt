@@ -1,0 +1,244 @@
+
+c3rd_ai_monetary_crisis_pulse = {
+	trigger = {
+		current_date >= 900.1.1
+		is_ai = yes
+		has_land = yes
+		num_of_cities >= 1
+		NOR = {
+			tag = BAR
+			has_variable = c3rd_ai_monetary_crisis_cooldown
+			has_country_modifier = solidus_introduced
+		}
+		# Check if this AI is close to a player and threatening
+		any_country = {
+			is_ai = no
+			has_land = yes
+			any_owned_province = {
+				any_neighbor_province = {
+					has_owner = yes
+					owner = root
+				}
+			}
+			country_half_cities <= root.num_of_cities
+		}
+	}
+	effect = {
+		# Find the player country that triggered this
+		random_country = {
+			limit = {
+				is_ai = no
+				has_land = yes
+				any_owned_province = {
+					any_neighbor_province = {
+						has_owner = yes
+						owner = root
+					}
+				}
+				country_half_cities <= root.num_of_cities
+			}
+			save_scope_as = nearby_player
+		}
+		set_variable = {
+			name = c3rd_ai_crisis_chance
+			value = 0
+		}
+		change_variable = {
+			name = c3rd_ai_crisis_chance
+			add = 1
+		}
+		if = {
+			limit = {
+				num_of_cities >= 2000
+			}
+			change_variable = {
+				name = c3rd_ai_crisis_chance
+				add = 5
+			}
+		}
+		else_if = {
+			limit = {
+				num_of_cities >= 1000
+			}
+			change_variable = {
+				name = c3rd_ai_crisis_chance
+				add = 3
+			}
+		}
+		else_if = {
+			limit = {
+				num_of_cities >= 500
+			}
+			change_variable = {
+				name = c3rd_ai_crisis_chance
+				add = 2
+			}
+		}
+		else_if = {
+			limit = {
+				num_of_cities >= 200
+			}
+			change_variable = {
+				name = c3rd_ai_crisis_chance
+				add = 1
+			}
+		}
+		
+		# Player's deflation increases chance for AI to get deflation modifier
+		if = {
+			limit = {
+				scope:nearby_player = {
+					has_variable = deflation_value
+					var:deflation_value >= 130
+				}
+			}
+			change_variable = {
+				name = c3rd_ai_crisis_chance
+				add = 5
+			}
+		}
+		else_if = {
+			limit = {
+				scope:nearby_player = {
+					has_variable = deflation_value
+					var:deflation_value >= 75
+				}
+			}
+			change_variable = {
+				name = c3rd_ai_crisis_chance
+				add = 2
+			}
+		}
+		else_if = {
+			limit = {
+				scope:nearby_player = {
+					has_variable = deflation_value
+					var:deflation_value >= 30
+				}
+			}
+			change_variable = {
+				name = c3rd_ai_crisis_chance
+				add = 1
+			}
+		}
+		
+		# Player's silver unvalue increases chance for AI to get monetary crash
+		
+		if = {
+			limit = {
+				scope:nearby_player = {
+					has_variable = silver_unvalue
+					var:silver_unvalue >= 130
+				}
+			}
+			change_variable = {
+				name = c3rd_ai_crisis_chance
+				add = 5
+			}
+		}
+		else_if = {
+			limit = {
+				scope:nearby_player = {
+					has_variable = silver_unvalue
+					var:silver_unvalue >= 95
+				}
+			}
+			change_variable = {
+				name = c3rd_ai_crisis_chance
+				add = 3
+			}
+		}
+		else_if = {
+			limit = {
+				scope:nearby_player = {
+					has_variable = silver_unvalue
+					var:silver_unvalue >= 60
+				}
+			}
+			change_variable = {
+				name = c3rd_ai_crisis_chance
+				add = 2
+			}
+		}
+		
+		# Player's economy score affects chances - worse economy = higher chance for AI
+		if = {
+			limit = {
+				scope:nearby_player = {
+					c3rd_economic_value < 0.5
+				}
+			}
+			change_variable = {
+				name = c3rd_ai_crisis_chance
+				add = 3
+			}
+		}
+		else_if = {
+			limit = {
+				scope:nearby_player = {
+					c3rd_economic_value < 1
+				}
+			}
+			change_variable = {
+				name = c3rd_ai_crisis_chance
+				add = 1
+			}
+		}
+		
+		# Player's stability affects chances
+		if = {
+			limit = {
+				stability < 25
+			}
+			change_variable = {
+				name = c3rd_ai_crisis_chance
+				add = 2
+			}
+		}
+		else_if = {
+			limit = {
+				stability < 50
+			}
+			change_variable = {
+				name = c3rd_ai_crisis_chance
+				add = 1
+			}
+		}
+		if = {
+			limit = {
+				var:c3rd_ai_crisis_chance > 25
+			}
+			set_variable = {
+				name = c3rd_ai_crisis_chance
+				value = 25
+			}
+		}
+		
+		set_variable = {
+			name = c3rd_ai_monetary_crisis_cooldown
+			days = 36500 #100y
+		}
+		
+		random_list = {
+			1 = {
+				modifier = {
+					add = var:c3rd_ai_crisis_chance
+				}
+				trigger_event = {
+					id = c3rd_ai_monetary_events.1
+					days = { 1 364 }
+				}
+			}
+			100 = {
+				modifier = {
+					add = {
+						value = var:c3rd_ai_crisis_chance
+						multiply = -1
+					}
+				}
+			}
+		}
+		
+		remove_variable = c3rd_ai_crisis_chance
+	}
+}

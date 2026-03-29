@@ -1,4 +1,4 @@
-﻿monthly_country_pulse = {
+monthly_country_pulse = {
 
 	events = {
 		low_stab_event.2
@@ -18,6 +18,7 @@
 		c3rd_apply_pol_inf_ruler_ownership
 		c3rd_urgent_variables_clean
 		c3rd_custom_on_actions_corruption_events
+		c3rd_epidemy_solidus_cleanup
 		delay = { days = { 1 15 } }
 		c3rd_custom_on_actions_instability
 		delay = { days = { 1 20 } }

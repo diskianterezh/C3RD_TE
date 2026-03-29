@@ -938,7 +938,7 @@ country_gov_ratio_number = {
 country_gov_ratio_number_minus = { #to get how many governorships should the landowner keep once the domain is created -
 	value = country_gov_ratio_number
 	add = 1
-	if = {
+	if = { 
 		limit = { 
 			num_of_cities >= 1000
 		}
@@ -957,12 +957,12 @@ country_gov_ratio_number_minus = { #to get how many governorships should the lan
 		add = 1
 	}
 }
-landowner_asked_ratio_number = { #scope country, need asked_landowner
+landowner_asked_ratio_number = { #scope country, need asked_landowner, this seem to work, and i don't remember why. please dont touch.
 	value = 0
 	if = {
 		limit = {
-			any_governorships = { #check if too small
-				count < country_gov_ratio_number
+			any_governorships = { #basically for a small country, he should have 1 more governorships than domain gov; 1000+ 2 more, 2000+ 3 more, ect... this to keep their power in a big country
+				count < country_gov_ratio_number_minus
 				has_variable = governorship_owner
 				var:governorship_owner = scope:asked_landowner
 			}
@@ -974,34 +974,6 @@ landowner_asked_ratio_number = { #scope country, need asked_landowner
 			}
 			add = 1
 		}
-		if = {
-			limit = { 
-				num_of_cities >= 1000
-			}
-			add = -1
-		}
-		if = {
-			limit = { 
-				num_of_cities >= 2000
-			}
-			add = -1
-		}
-		if = {
-			limit = { 
-				num_of_cities >= 5000
-			}
-			add = -1
-		}
-	}
-	else_if = {
-		limit = {
-			any_governorships = { #basically for a small country, he should have 1 more governorships than domain gov; 1000+ 2 more, 2000+ 3 more, ect... this to keep their power in a big country
-				count < country_gov_ratio_number_minus
-				has_variable = governorship_owner
-				var:governorship_owner = scope:asked_landowner
-			}
-		}
-		add = country_gov_ratio_number
 		if = {
 			limit = { 
 				num_of_cities >= 1000
@@ -1040,6 +1012,13 @@ subject_third_cities = {
 	value = 0
 	add = num_of_cities
 	divide = 3 
+	ceiling = yes
+}
+
+country_half_cities = {
+	value = 0
+	add = num_of_cities
+	divide = 2 
 	ceiling = yes
 }
 

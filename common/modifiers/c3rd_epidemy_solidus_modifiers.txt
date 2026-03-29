@@ -1,0 +1,210 @@
+# ============================================================================
+# EPIDEMIC + SOLIDUS EVENT CHAIN MODIFIERS (18 combinations)
+# Triggered by c3rd_epidemy_events.1 -> 2/3/4 chain
+# Variables: epidemy_political (0=none, 1=full, 2=half), epidemy_military (0=none, 1=full, 2=half), epidemy_social (0=none, 1=full)
+# ============================================================================
+
+#decoy modifiers for display in the event tooltip, not actually applied to the country : 
+
+c3rd_epidemy_political_full = {
+	monthly_political_influence_modifier = -0.35
+	stability_cost_modifier = 0.5
+	monthly_corruption = 0.2
+}
+
+c3rd_epidemy_political_half = {
+	monthly_political_influence_modifier = -0.175
+	stability_cost_modifier = 0.25
+	monthly_corruption = 0.1
+}
+
+c3rd_epidemy_military_full = {
+	land_morale_modifier = -0.25
+	land_morale_recovery = -0.05
+}
+
+c3rd_epidemy_military_half = {
+	land_morale_modifier = -0.125
+	land_morale_recovery = -0.025
+}
+
+c3rd_epidemy_social_full = {
+	character_loyalty = -5
+}
+
+# Base modifier 
+c3rd_epidemy_solidus_base = {
+	stability_monthly_change = -0.05
+	civil_war_threshold = -0.02
+}
+
+# Base + Social (0/0/1)
+c3rd_epidemy_solidus_s = {
+	stability_monthly_change = -0.05
+	civil_war_threshold = -0.02
+	character_loyalty = -5
+}
+
+# Base + Military full (0/1/0)
+c3rd_epidemy_solidus_m = {
+	stability_monthly_change = -0.05
+	civil_war_threshold = -0.02
+	land_morale_modifier = -0.25
+	land_morale_recovery = -0.05
+}
+
+# Base + Military full + Social (0/1/1)
+c3rd_epidemy_solidus_m_s = {
+	stability_monthly_change = -0.05
+	civil_war_threshold = -0.02
+	land_morale_modifier = -0.25
+	land_morale_recovery = -0.05
+	character_loyalty = -5
+}
+
+# Base + Military half (0/2/0)
+c3rd_epidemy_solidus_mh = {
+	stability_monthly_change = -0.05
+	civil_war_threshold = -0.02
+	land_morale_modifier = -0.125
+	land_morale_recovery = -0.025
+}
+
+# Base + Military half + Social (0/2/1)
+c3rd_epidemy_solidus_mh_s = {
+	stability_monthly_change = -0.05
+	civil_war_threshold = -0.02
+	land_morale_modifier = -0.125
+	land_morale_recovery = -0.025
+	character_loyalty = -5
+}
+
+# Base + Political full (1/0/0)
+c3rd_epidemy_solidus_p = {
+	stability_monthly_change = -0.05
+	civil_war_threshold = -0.02
+	monthly_political_influence_modifier = -0.35
+	stability_cost_modifier = 0.5
+	monthly_corruption = 0.2
+}
+
+# Base + Political full + Social (1/0/1)
+c3rd_epidemy_solidus_p_s = {
+	stability_monthly_change = -0.05
+	civil_war_threshold = -0.02
+	monthly_political_influence_modifier = -0.35
+	stability_cost_modifier = 0.5
+	monthly_corruption = 0.2
+	character_loyalty = -5
+}
+
+# Base + Political full + Military full (1/1/0)
+c3rd_epidemy_solidus_p_m = {
+	stability_monthly_change = -0.05
+	civil_war_threshold = -0.02
+	monthly_political_influence_modifier = -0.35
+	stability_cost_modifier = 0.5
+	monthly_corruption = 0.2
+	land_morale_modifier = -0.25
+	land_morale_recovery = -0.05
+}
+
+# Base + Political full + Military full + Social (1/1/1) - FULL
+c3rd_epidemy_solidus_p_m_s = {
+	stability_monthly_change = -0.05
+	civil_war_threshold = -0.02
+	monthly_political_influence_modifier = -0.35
+	stability_cost_modifier = 0.5
+	monthly_corruption = 0.2
+	land_morale_modifier = -0.25
+	land_morale_recovery = -0.05
+	character_loyalty = -5
+}
+
+# Base + Political full + Military half (1/2/0)
+c3rd_epidemy_solidus_p_mh = {
+	stability_monthly_change = -0.05
+	civil_war_threshold = -0.02
+	monthly_political_influence_modifier = -0.35
+	stability_cost_modifier = 0.5
+	monthly_corruption = 0.2
+	land_morale_modifier = -0.125
+	land_morale_recovery = -0.025
+}
+
+# Base + Political full + Military half + Social (1/2/1)
+c3rd_epidemy_solidus_p_mh_s = {
+	stability_monthly_change = -0.05
+	civil_war_threshold = -0.02
+	monthly_political_influence_modifier = -0.35
+	stability_cost_modifier = 0.5
+	monthly_corruption = 0.2
+	land_morale_modifier = -0.125
+	land_morale_recovery = -0.025
+	character_loyalty = -5
+}
+
+# Base + Political half (2/0/0)
+c3rd_epidemy_solidus_ph = {
+	stability_monthly_change = -0.05
+	civil_war_threshold = -0.02
+	monthly_political_influence_modifier = -0.175
+	stability_cost_modifier = 0.25
+	monthly_corruption = 0.1
+}
+
+# Base + Political half + Social (2/0/1)
+c3rd_epidemy_solidus_ph_s = {
+	stability_monthly_change = -0.05
+	civil_war_threshold = -0.02
+	monthly_political_influence_modifier = -0.175
+	stability_cost_modifier = 0.25
+	monthly_corruption = 0.1
+	character_loyalty = -5
+}
+
+# Base + Political half + Military full (2/1/0)
+c3rd_epidemy_solidus_ph_m = {
+	stability_monthly_change = -0.05
+	civil_war_threshold = -0.02
+	monthly_political_influence_modifier = -0.175
+	stability_cost_modifier = 0.25
+	monthly_corruption = 0.1
+	land_morale_modifier = -0.25
+	land_morale_recovery = -0.05
+}
+
+# Base + Political half + Military full + Social (2/1/1)
+c3rd_epidemy_solidus_ph_m_s = {
+	stability_monthly_change = -0.05
+	civil_war_threshold = -0.02
+	monthly_political_influence_modifier = -0.175
+	stability_cost_modifier = 0.25
+	monthly_corruption = 0.1
+	land_morale_modifier = -0.25
+	land_morale_recovery = -0.05
+	character_loyalty = -5
+}
+
+# Base + Political half + Military half (2/2/0)
+c3rd_epidemy_solidus_ph_mh = {
+	stability_monthly_change = -0.05
+	civil_war_threshold = -0.02
+	monthly_political_influence_modifier = -0.175
+	stability_cost_modifier = 0.25
+	monthly_corruption = 0.1
+	land_morale_modifier = -0.125
+	land_morale_recovery = -0.025
+}
+
+# Base + Political half + Military half + Social (2/2/1) - ALL HALF + SOCIAL
+c3rd_epidemy_solidus_ph_mh_s = {
+	stability_monthly_change = -0.05
+	civil_war_threshold = -0.02
+	monthly_political_influence_modifier = -0.175
+	stability_cost_modifier = 0.25
+	monthly_corruption = 0.1
+	land_morale_modifier = -0.125
+	land_morale_recovery = -0.025
+	character_loyalty = -5
+}

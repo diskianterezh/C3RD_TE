@@ -11,6 +11,17 @@
 	}
 }
 
+# Epidemic + Solidus cleanup - runs monthly to clean variables when modifiers expire
+c3rd_epidemy_solidus_cleanup = {
+	trigger = {
+		has_variable = epidemy_political
+	}
+	effect = {
+		c3rd_cleanup_epidemy_solidus = yes
+	}
+}
+
+
 c3rd_custom_on_actions_low_stab_event = {
 	trigger = {
 		has_country_modifier = internal_collapse
@@ -787,7 +798,7 @@ c3rd_other_events_monthly_pulse = {
 		15 = c3rd_other_events.91		#coup from political character
 		8 = c3rd_other_events.92		#governor holding clash
 		8 = c3rd_other_events.93		#governor holding clash ruler
-		2 = c3rd_other_events.101		#ruler reform constantine
+		4 = c3rd_other_events.101		#ruler reform constantine
 		30 = c3rd_other_events.106		#coveted governor
 		15 = c3rd_other_events.107		#holdings clash with heads
 		9 = c3rd_other_events.110		#intervention *5 toward civil war
@@ -2932,10 +2943,13 @@ c3rd_barbarian_occupying_land = {
 								pop_culture = root.culture
 							}
 						}
+						save_temporary_scope_as = tmp_pop
 						root = {
 							random_country_culture = {
 								limit = {
-									this.culture = prev.prev.pop_culture
+									scope:tmp_pop = {
+										pop_culture = prev.culture
+									}
 								}
 								save_scope_as = new_culture_tribal
 							}
@@ -2970,10 +2984,13 @@ c3rd_barbarian_occupying_land = {
 									pop_culture = root.culture
 								}
 							}
+							save_temporary_scope_as = tmp_pop
 							root = {
 								random_country_culture = {
 									limit = {
-										this.culture = prev.prev.pop_culture
+										scope:tmp_pop = {
+											pop_culture = prev.culture
+										}
 									}
 									save_scope_as = new_culture_tribal
 								}
@@ -3454,7 +3471,10 @@ c3rd_barbarian_related_events = {
 		#and plague related ones, because they're as good here as anywhere
 		c3rd_barbarian_events.1
 		c3rd_barbarian_events.2
-		c3rd_other_events.131
+		c3rd_epidemy_events.1
+		c3rd_epidemy_events.2
+		c3rd_epidemy_events.3
+		c3rd_epidemy_events.4
 		c3rd_other_events.132
 		c3rd_other_events.141
 		c3rd_other_events.142
