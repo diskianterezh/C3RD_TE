@@ -1,0 +1,5 @@
+﻿
+event_crowd_speech_celebration = {
+	theme = Uncategorized
+	picture = "gfx/interface/event_window/event_crowd_speech_celebration.dds"
+}

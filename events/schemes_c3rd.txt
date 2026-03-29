@@ -91,10 +91,13 @@ scheme.12 = {
 			if = {
 				limit = {
 					exists = scope:ownership_target
+					num_holdings_owned > 0
 				}
 				while = {
 					limit = { num_holdings_owned > 0 }
-					random_holdings = { save_scope_as = holding_transfer }
+					random_holdings = { 
+						save_scope_as = holding_transfer 
+					}
 					remove_holding = scope:holding_transfer
 					scope:ownership_target = { add_holding = scope:holding_transfer }
 				}

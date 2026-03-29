@@ -786,34 +786,44 @@ widget = {
 			}
 		}
 		###########################
-		#C3RD - Political Instability
+		#C3RD - Republican Tension (Yellow - tier 1/2)
 		###########################
 		alert = {
-			datacontext = "[GetScriptedGui('c3rd_polinstability_alert')]"
-			visible = "[And(ScriptedGui.IsShown(GuiScope.SetRoot(AlertManager.GetPlayer.MakeScope).End), AlertManager.ShowAlert('c3rd_polinstability_alert'))]"
-			tooltip = "ALERT_POLITICAL_INSTABILITY"
-			blockoverride "Color"
-			{
-				frame = 7
+			datacontext = "[GetScriptedGui('c3rd_rep_tension_alert_yellow')]"
+			visible = "[And(ScriptedGui.IsShown(GuiScope.SetRoot(AlertManager.GetPlayer.MakeScope).End), AlertManager.ShowAlert('c3rd_rep_tension_alert_yellow'))]"
+			tooltip = "ALERT_REP_TENSION_YELLOW"
+			blockoverride "Color" { frame = 5 }
+			using = yellow_alert
+			blockoverride "On_click" {
+				enabled = "[Not(GetVariableSystem.Exists('c3rd_rep_tension_window_opened'))]"
+				onclick = "[ExecuteConsoleCommand('gui.createwidget gui/c3rd_rep_tension_window.gui c3rd_rep_tension_window')]"
+				onclick = "[GetVariableSystem.Toggle('c3rd_rep_tension_window_opened')]"
+				onrightclick = "[AlertManager.ToggleShowAlert('c3rd_rep_tension_alert_yellow')]"
 			}
-			using = red_alert
-			blockoverride "On_click"
-			{
-				onclick = "[OpenGameView('overview')]"
-				onrightclick = "[AlertManager.ToggleShowAlert('c3rd_polinstability_alert')]"
-			}
-				
-				
-			blockoverride "Icon"
-			{
-				texture = "gfx/interface/icons/shared_icons/disloyal_power_base.dds"
-			}
+			blockoverride "Icon" { texture = "gfx/interface/icons/shared_icons/senate_power.dds" }
 		}
 
-		
+		###########################
+		#C3RD - Republican Tension (Red - tier 3/crisis)
+		###########################
+		alert = {
+			datacontext = "[GetScriptedGui('c3rd_rep_tension_alert_red')]"
+			visible = "[And(ScriptedGui.IsShown(GuiScope.SetRoot(AlertManager.GetPlayer.MakeScope).End), AlertManager.ShowAlert('c3rd_rep_tension_alert_red'))]"
+			tooltip = "ALERT_REP_TENSION_RED"
+			blockoverride "Color" { frame = 7 }
+			using = red_alert
+			blockoverride "On_click" {
+				enabled = "[Not(GetVariableSystem.Exists('c3rd_rep_tension_window_opened'))]"
+				onclick = "[ExecuteConsoleCommand('gui.createwidget gui/c3rd_rep_tension_window.gui c3rd_rep_tension_window')]"
+				onclick = "[GetVariableSystem.Toggle('c3rd_rep_tension_window_opened')]"
+				onrightclick = "[AlertManager.ToggleShowAlert('c3rd_rep_tension_alert_red')]"
+			}
+			blockoverride "Icon" { texture = "gfx/interface/icons/shared_icons/disloyal_power_base.dds" }
+		}
+
 		###########################################################################
 		# YELLOW ALERTS
-		###########################################################################	
+		###########################################################################
 
 		###########################
 		#Weak In research

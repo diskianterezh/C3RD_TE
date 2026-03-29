@@ -58,7 +58,7 @@
 		}
 		modifier = {
 			character_loyalty = 5
-			monthly_corruption = 0.05
+			monthly_corruption = 0.1
 			global_nobles_output = 0.1
 			global_tax_modifier = -0.2
 			stability_monthly_change = 0.03

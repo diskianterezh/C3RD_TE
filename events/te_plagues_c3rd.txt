@@ -32,7 +32,19 @@ te_plagues.11 = {
 	}
 
 	immediate = {
-		add_stability = -10 #halved from TE, because i add other events 
+		if = {
+			limit = {
+				is_ai = yes
+				any_neighbour_country = {
+					is_ai = no
+					num_of_cities <= root.num_of_cities
+				}
+			}
+			add_stability = -20 #strong AI will suffer more
+		}
+		else = {
+			add_stability = -10 #halved from TE, because i add other events 
+		}
 		random_owned_province = {
 			limit = {
 				NOT = { total_population < 20 }
@@ -111,7 +123,19 @@ te_plagues.21 = {
 	}
 
 	immediate = {
-		add_stability = -15 #halved from TE, because i add other events 
+		if = {
+			limit = {
+				is_ai = yes
+				any_neighbour_country = {
+					is_ai = no
+					num_of_cities <= root.num_of_cities
+				}
+			}
+			add_stability = -30 #strong AI will suffer more
+		}
+		else = {
+			add_stability = -15 #halved from TE, because i add other events 
+		}
 		if = {
 			limit = {
 				any_owned_province = { total_population >= 30 }

@@ -1,0 +1,74 @@
+﻿release_prisoner = {
+
+	on_other_nation = no
+	on_own_nation = yes
+	
+	sound = "event:/SFX/UI/Character/Unique/sfx_ui_character_release_prisoner"
+	
+	potential_trigger = {
+		hidden:scope:target = {
+			is_alive = yes
+			NOT = { employer = { tag = REB } }
+			NOT = { employer = { tag = BAR } }
+			prisoner = yes
+		}
+	}
+	
+	allowed_trigger = {
+		hidden:scope:target = {
+			prisoner = yes
+			NOT = {
+				has_character_modifier = debt_payoff_toggle
+			}
+		}
+		custom_tooltip = {
+			text = prisoner_from_kingmaker_tt
+			NOT = {
+				has_variable = prison_by_kingmaker
+				var:prison_by_kingmaker = {
+					is_alive = yes
+					employer = scope:actor
+					has_character_modifier = king_maker
+				}
+			}
+		}
+	}
+	
+	
+	effect = {
+		if = {
+			limit = {
+				scope:target = {
+					has_variable = imprisoned_manually
+				}
+			}
+			scope:actor = {
+				add_tyranny = -1
+			}
+		}
+		scope:actor = {
+			release_prisoner = { target = scope:target }
+		}
+		custom_tooltip = release_prisoner_tooltip
+		if = {
+			limit = {
+				scope:target = {
+					has_loyalty = imprisoned_l
+				}
+			}
+			scope:target = {
+				remove_loyalty = imprisoned_l
+			}
+		}
+		scope:target = {
+			if = {
+				limit = {
+					has_variable = imprisoned_manually
+				}
+				remove_variable = imprisoned_manually
+			}
+		}
+		
+	}
+	
+}	

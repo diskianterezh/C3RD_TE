@@ -1,0 +1,37 @@
+﻿ l_english:
+
+
+ c3rd_politic_events.1.t:0 "Knives in the Shadows"
+ c3rd_politic_events.1.desc:0 "Whispers reach the court: several noble families have turned their eyes, and their ambitions, upon each others. In violents schemes and preparation, in order to survive in a country where the ruler family control so much, they are circling one another, searching for the weakest prey. It was thanks to an excellent network of informants that we were fortunate enough to be tipped off about an imminent plot against [head_plot_target.GetName]. Several families are quietly sharpening their knives, plotting to devour his holdings and displace him from his station. The struggle for dominance among our aristocracy may soon spill into the open."
+ c3rd_politic_events.1.a:0 "Let them have their way"
+ c3rd_politic_events.1.a.tt1:0 "You tacitly condone the conspiracy. When the coup unfolds, the inevitable blow to the country stability will be softened."
+ c3rd_politic_events.1.b:0 "Warn [head_plot_target.GetName]. He deserves a fighting chance."
+ c3rd_politic_events.1.b.tt1:0 "Without giving protection to the target, You will warn him of this move, which might have a greater impact on internal stability, but will prevent the purging of his family and the strengthening of his enemies."
+ c3rd_politic_events.1.c:0 "Let's remind them who truly owns this land."
+ c3rd_politic_events.1.c.tt1:0 "You leverage your dominance over the country's wealth to suffocate the conspiracy before it blossoms. The plot have a great chance to fail, and and you will delay subsequent attempts."
+ c3rd_politic_events.1.d:0 "How dare they ?"
+ c3rd_politic_events.1.d.tt1:0 "Fear is a language all nobles understand. The conspirators will not dare move against anyone for half a decade, but your subjects will not forget the iron fist that silenced them."
+ c3rd_politic_events.1.e:0 "May they kill each other, we profit from the chaos."
+ c3rd_politic_events.1.e.tt1:0 "You stand aside and let the noble families exhaust themselves in their scheming."
+
+
+ c3rd_politic_events.2.t:0 "The Feast of Wolves"
+ c3rd_politic_events.2.desc:0 "The incident unfolded suddenly and violently during the night. Whilst [head_plot_target.GetName] was relaxing at his home with his family, an angry mob stormed the property, ransacking everything and slaughtering the servants. [head_plot_target.GetName] was seized and dragged through the town, jeered and booed by everyone. Strangely, none of the guards took any action to quell the public fury, absent from their posts. Even more worrying was the fact that the residence had been thoroughly cleared of all documents, and most of his family members were found dead across the country in the days that followed.\nThe Senate, shocked, declared a day of mourning, and heads of families expressed their support for the survivors and [head_plot_target.GetName], who had been narrowly saved and was being sheltered in the capital. Curiously, these very same figures naturally found themselves now managing many of his former estates.\n\nWhat a strange coincidence."
+ c3rd_politic_events.2.a:0 "Let the dust settle."
+ c3rd_politic_events.2.a.tt1:0 "[head_plot_target.GetName] and his family were wiped out by an aristocratic conspiracy. His estates were seized by other heads of families"
+ c3rd_politic_events.2.b:0 "Seize the remaining domains"
+ c3rd_politic_events.2.b.tt1:0 "[head_plot_target.GetName] has autonomous territories within the country. By taking advantage of his weakness, we can organise an operation to reintegrate all his territories into the empire.\n#G Every#! #Y Autonomous domain #! #G of [head_plot_target.GetName] will be reintegrated#!"
+ c3rd_politic_events.2.tt1:0 "#Y Your support for this plot has significantly reduced the penalties#!"
+
+
+ c3rd_politic_events.3.t:0 "Blood Dept"
+ c3rd_politic_events.3.desc:0 "Forewarned, [head_plot_target.GetName] did not flee, nor did he beg for mercy. When the agitators began haranguing the crowds and tried to direct their anger towards [head_plot_target.GetName]’s estates, his agents quickly silenced them. In the days that followed, a series of murders, counter-murders and disappearances plunged the country into bloodshed. The conspirators, expecting an easy kill, found themselves ambushed by the lamb they wanted to sacrifice.\nThe Senate murmurs uneasily at the violence, and the common folk grow restless at the sight of bodies in the streets, and although he acted in self-defence, [head_plot_target.GetName] soon became little more than a pawn in a deadly and endless feud that tore the country apart.\n\nAlthough our role in this matter has remained a secret, [head_plot_target.GetName] is fully aware that he owes his life to us, and that we have ensured his family’s continued prominence. Such a debt is not easily repaid, and he will remember it for as long as he draws breath."
+ c3rd_politic_events.3.a:0 "A debt that shall not be forgotten."
+ c3rd_politic_events.3.a.tt1:0 "[head_plot_target.GetName] and his household survived the conspiracy and defended their holdings, at the cost of a huge feud which plunged the country into bloodshed.\n[head_plot_target.GetName] will have a lot more chance to have a loyal stance, as long as our family is leading the country."
+
+ c3rd_politic_events.4.t:0 "The Herald of the Republic"
+ c3rd_politic_events.4.desc:0 "[ROOT.GetCountry.GetRuler.GetName], elected as head of the republic, has consistently demonstrated a rare commitment to democratic principles. Recently, his selfless actions,  notably the handover to the State of the regions under his direct control, have earned him immense popularity. The people are delighted by these actions, which run counter to the current aristocratic trend, and the Senate has no choice but to follow suit. \n\n[ROOT.GetCountry.GetRuler.GetName] is now enjoying unparalleled political glory... perhaps too much?"
+ c3rd_politic_events.4.a:0 "Everyone should follow his example"
+ c3rd_politic_events.4.a.tt1:0 "Our ruler will be regarded as a leading political figure for the next 15 years, even after he has left office.\n#R This will make him a dangerous political figure for the stability of the republic#!"
+ c3rd_politic_events.4.b:0 "It s all just smoke and mirrors"
+ c3rd_politic_events.4.b.tt1:0 "You will oppose the ruler newfound popularity"

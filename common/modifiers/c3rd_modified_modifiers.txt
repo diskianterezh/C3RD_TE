@@ -1,4 +1,4 @@
-
+﻿
 
 late_appointed_bureaucracy = {
 	global_monthly_state_loyalty = -0.05 # downside

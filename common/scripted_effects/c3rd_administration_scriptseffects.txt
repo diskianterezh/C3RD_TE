@@ -39,7 +39,26 @@ recalculate_ownership_char = {#scopechar
 		remove_variable = country_ownership
 	}
 	if = {
-		limit = { 
+		limit = {
+			country_region_control >= 17
+			employer = {
+				any_character = {
+					count >= 5
+					is_alive = yes
+					is_head_of_family = yes
+				}
+			}
+			NOT = {
+				has_character_modifier = major_influence_aristocrat
+			}
+		}
+		add_character_modifier = {
+			name = major_influence_aristocrat
+			duration = -1
+		}
+	}
+	else_if = {
+		limit = {
 			country_region_control >= 20
 			NOT = {
 				has_character_modifier = major_influence_aristocrat
@@ -248,6 +267,14 @@ give_law_change_pol = {
 			}
 			if = {
 				limit = {
+					is_republic = yes
+					has_variable = republican_tension
+					has_law = lex_sempronia
+				}
+				change_law = lex_de_provinciis		# silent transition — no political cost in automatic context
+			}
+			else_if = {
+				limit = {
 					has_law = republic_corruption_2
 				}
 				change_law = republic_corruption_3
@@ -333,6 +360,7 @@ give_law_change_pol = {
 						name = law_advantages_1
 						duration = 5500
 					}
+					set_law_advantage_decrease_var = yes
 				}
 				else_if = {
 					limit = {
@@ -346,6 +374,7 @@ give_law_change_pol = {
 						name = law_advantages_2
 						duration = 5500
 					}
+					set_law_advantage_decrease_var = yes
 				}
 				else_if = {
 					limit = {
@@ -359,6 +388,7 @@ give_law_change_pol = {
 						name = law_advantages_3
 						duration = 5500
 					}
+					set_law_advantage_decrease_var = yes
 				}
 				else_if = {
 					limit = {
@@ -372,6 +402,7 @@ give_law_change_pol = {
 						name = law_advantages_4
 						duration = 5500
 					}
+					set_law_advantage_decrease_var = yes
 				}
 				else_if = {
 					limit = {
@@ -385,6 +416,7 @@ give_law_change_pol = {
 						name = law_advantages_5
 						duration = 5500
 					}
+					set_law_advantage_decrease_var = yes
 				}
 				else = {
 					add_stability = -2
@@ -456,6 +488,7 @@ give_law_change_pol = {
 						name = law_advantages_1
 						duration = 5500
 					}
+					set_law_advantage_decrease_var = yes
 				}
 				else_if = {
 					limit = {
@@ -469,6 +502,7 @@ give_law_change_pol = {
 						name = law_advantages_2
 						duration = 5500
 					}
+					set_law_advantage_decrease_var = yes
 				}
 				else_if = {
 					limit = {
@@ -482,6 +516,7 @@ give_law_change_pol = {
 						name = law_advantages_3
 						duration = 5500
 					}
+					set_law_advantage_decrease_var = yes
 				}
 				else_if = {
 					limit = {
@@ -495,6 +530,7 @@ give_law_change_pol = {
 						name = law_advantages_4
 						duration = 5500
 					}
+					set_law_advantage_decrease_var = yes
 				}
 				else_if = {
 					limit = {
@@ -508,6 +544,7 @@ give_law_change_pol = {
 						name = law_advantages_5
 						duration = 5500
 					}
+					set_law_advantage_decrease_var = yes
 				}
 				else = {
 					add_stability = -2
@@ -539,6 +576,7 @@ give_law_change_pol = {
 				name = law_advantages_2
 				duration = 5500
 			}
+			set_law_advantage_decrease_var = yes
 		}
 		else_if = {
 			limit = {
@@ -552,6 +590,7 @@ give_law_change_pol = {
 				name = law_advantages_3
 				duration = 5500
 			}
+			set_law_advantage_decrease_var = yes
 		}
 		else_if = {
 			limit = {
@@ -565,6 +604,7 @@ give_law_change_pol = {
 				name = law_advantages_4
 				duration = 5500
 			}
+			set_law_advantage_decrease_var = yes
 		}
 		else_if = {
 			limit = {
@@ -578,6 +618,7 @@ give_law_change_pol = {
 				name = law_advantages_5
 				duration = 5500
 			}
+			set_law_advantage_decrease_var = yes
 		}
 		else_if = {
 			limit = {
@@ -591,6 +632,7 @@ give_law_change_pol = {
 				name = law_advantages_5
 				duration = 7300
 			}
+			set_law_advantage_decrease_var = yes
 		}
 		else_if = { #big bad law
 			limit = {
@@ -631,6 +673,7 @@ give_law_change_pol = {
 				name = law_advantages_3
 				duration = 5500
 			}
+			set_law_advantage_decrease_var = yes
 		}
 		else_if = {
 			limit = {
@@ -644,6 +687,7 @@ give_law_change_pol = {
 				name = law_advantages_4
 				duration = 5500
 			}
+			set_law_advantage_decrease_var = yes
 		}
 		else_if = {
 			limit = {
@@ -657,6 +701,7 @@ give_law_change_pol = {
 				name = law_advantages_5
 				duration = 5500
 			}
+			set_law_advantage_decrease_var = yes
 		}
 		else_if = {
 			limit = {
@@ -670,6 +715,7 @@ give_law_change_pol = {
 				name = law_advantages_5
 				duration = 7300
 			}
+			set_law_advantage_decrease_var = yes
 		}
 		else_if = {
 			limit = {
@@ -683,6 +729,7 @@ give_law_change_pol = {
 				name = law_advantages_5
 				duration = 9125
 			}
+			set_law_advantage_decrease_var = yes
 		}
 		else_if = { #big bad law
 			limit = {
@@ -708,6 +755,7 @@ give_law_change_pol = {
 }
 
 law_change_pol = {
+	#gives 2 steps
 		if = {
 			limit = {
 				NOR = {
@@ -722,6 +770,7 @@ law_change_pol = {
 				name = law_advantages_2
 				duration = 5500
 			}
+			set_law_advantage_decrease_var = yes
 		}
 		else_if = {
 			limit = {
@@ -735,6 +784,7 @@ law_change_pol = {
 				name = law_advantages_3
 				duration = 5500
 			}
+			set_law_advantage_decrease_var = yes
 		}
 		else_if = {
 			limit = {
@@ -748,6 +798,7 @@ law_change_pol = {
 				name = law_advantages_4
 				duration = 5500
 			}
+			set_law_advantage_decrease_var = yes
 		}
 		else_if = {
 			limit = {
@@ -763,6 +814,7 @@ law_change_pol = {
 				name = law_advantages_5
 				duration = 5500
 			}
+			set_law_advantage_decrease_var = yes
 		}
 		else_if = {
 			limit = {
@@ -777,6 +829,17 @@ law_change_pol = {
 				name = law_advantages_5
 				duration = 5500
 			}
+			set_law_advantage_decrease_var = yes
+			change_law = decentralized_administration_law
+			set_variable = {
+				name = recent_decentralization
+				days = 1850
+			}
+		}
+		else_if = {
+			limit = {
+				NOT = { has_law = decentralized_administration_law}
+			}
 			change_law = decentralized_administration_law
 			set_variable = {
 				name = recent_decentralization
@@ -784,10 +847,9 @@ law_change_pol = {
 			}
 		}
 		else = {
-			change_law = decentralized_administration_law
-			set_variable = {
-				name = recent_decentralization
-				days = 1850
+			add_country_modifier = {
+				name = aristocratic_exemptions
+				duration = 3650
 			}
 		}
 
@@ -817,6 +879,38 @@ reduce_landowner_domain = {
 			}
 		}
 	}
+}
+
+reduce_landowner_domain_to_general = {
+	#scope country
+	#need a asked_landowner scope
+	#need a king_maker_negociator scope 
+	hidden_effect = {
+		every_owned_province = {
+			limit = {
+				exists = holding_owner
+				holding_owner = scope:asked_landowner
+			}
+			random_list = {
+				2 = {}
+				1 = {
+					modifier = {
+						add = 2
+						owner = {
+							has_variable = negociated_better
+						}
+					}
+					holding_owner = {
+						remove_holding = prev
+					}
+					scope:king_maker_negociator = {
+						add_holding = prev
+					}
+				}
+			}
+		}
+	}
+
 }
 
 apply_landowner_bonuses = {
@@ -878,6 +972,47 @@ apply_landowner_bonuses = {
 		else = {
 			root = {
 				add_political_influence = 25
+			}
+		}
+	}
+}
+
+apply_defense_against_barb_bonuses = {
+	hidden_effect = {
+		every_owned_province = {
+			limit = {
+				exists = holding_owner
+				holding_owner = scope:asked_landowner
+				governorship = {
+					NOT = {
+						any_governorship_state = {
+							has_state_modifier = barbarians_border
+						}
+					}
+				}
+			}
+			add_province_modifier = {
+				name = extract_to_defense
+				duration = 2800
+			}
+		}
+		every_governorships = {
+			limit = {
+				any_governorship_state = {
+					has_state_modifier = barbarians_border
+				}
+			}
+			every_governorship_state = {
+				add_state_modifier = {
+					name = local_gov_defense
+					duration = 2800
+				}
+			}
+		}
+		scope:asked_landowner = {
+			set_variable = {
+				name = got_extract_more
+				days = 3650
 			}
 		}
 	}
@@ -966,5 +1101,126 @@ create_duchy = { #scope country,
 		target = scope:new_duchy
 		type = duchy_subject
 	}
+}
 
+set_law_advantage_decrease_var = {
+	if = {
+		limit = {
+			has_variable = law_adv_2_setup
+		}
+		remove_variable = law_adv_2_setup
+	}if = {
+		limit = {
+			has_variable = law_adv_3_setup
+		}
+		remove_variable = law_adv_3_setup
+	}if = {
+		limit = {
+			has_variable = law_adv_4_setup
+		}
+		remove_variable = law_adv_4_setup
+	}if = {
+		limit = {
+			has_variable = law_adv_5_setup
+		}
+		remove_variable = law_adv_5_setup
+	}
+	if = {
+		limit = {
+			has_country_modifier = law_advantages_2
+		}
+		set_variable = {
+			name = law_adv_2_setup
+			days = 10000
+		}
+	}
+	else_if = {
+		limit = {
+			has_country_modifier = law_advantages_3
+		}
+		set_variable = {
+			name = law_adv_3_setup
+			days = 10000
+		}
+	}
+	else_if = {
+		limit = {
+			has_country_modifier = law_advantages_4
+		}
+		set_variable = {
+			name = law_adv_4_setup
+			days = 10000
+		}
+	}
+	else_if = {
+		limit = {
+			has_country_modifier = law_advantages_5
+		}
+		set_variable = {
+			name = law_adv_5_setup
+			days = 10000
+		}
+	}
+}
+
+reset_law_advantages = {
+	if = {
+		limit = {
+			NOR = {
+				has_country_modifier = law_advantages_1
+				has_country_modifier = law_advantages_2
+			}
+			has_variable = law_adv_2_setup
+		}
+		remove_variable = law_adv_2_setup
+		add_country_modifier = {
+			name = law_advantages_1
+			duration = 1850
+		}
+	}
+	else_if = {
+		limit = {
+			NOR = {
+				has_country_modifier = law_advantages_2
+				has_country_modifier = law_advantages_3
+			}
+			has_variable = law_adv_3_setup
+		}
+		remove_variable = law_adv_3_setup
+		add_country_modifier = {
+			name = law_advantages_2
+			duration = 1850
+		}
+		set_law_advantage_decrease_var = yes
+	}
+	else_if = {
+		limit = {
+			NOR = {
+				has_country_modifier = law_advantages_3
+				has_country_modifier = law_advantages_4
+			}
+			has_variable = law_adv_4_setup
+		}
+		remove_variable = law_adv_4_setup
+		add_country_modifier = {
+			name = law_advantages_3
+			duration = 1850
+		}
+		set_law_advantage_decrease_var = yes
+	}
+	else_if = {
+		limit = {
+			NOR = {
+				has_country_modifier = law_advantages_4
+				has_country_modifier = law_advantages_5
+			}
+			has_variable = law_adv_5_setup
+		}
+		remove_variable = law_adv_5_setup
+		add_country_modifier = {
+			name = law_advantages_4
+			duration = 1850
+		}
+		set_law_advantage_decrease_var = yes
+	}
 }

@@ -1,4 +1,4 @@
-namespace = low_stab_event
+﻿namespace = low_stab_event
 low_stab_event.1 = {
 	#oh noes, bad stability
 	type = country_event
@@ -2672,7 +2672,7 @@ low_stab_event.15 = {
 	title = "low_stab_event.15.t"
 	desc = "low_stab_event.15.desc"
 	left_portrait = current_ruler
-	goto_location = problems_governorship.capital_scope
+	goto_location = scope:problems_governorship.capital_scope
 	picture = road_construction
 	trigger = {
 		has_land = yes
@@ -3003,6 +3003,10 @@ low_stab_event.16 = {
 		}
 		any_current_war = {
 			is_civil_war = yes
+		}
+		any_neighbour_country = {
+			civil_war_with = root
+			num_of_cities >= 50
 		}
 		any_governorships = {
 			exists = governor
