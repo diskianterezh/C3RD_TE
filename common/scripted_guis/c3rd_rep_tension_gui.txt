@@ -1,0 +1,652 @@
+﻿# common/scripted_guis/c3rd_rep_tension_gui.txt
+# All scripted GUIs for the Republican Tension window and alerts
+
+###########################
+# ALERTS
+###########################
+
+c3rd_rep_tension_alert_yellow = {
+	scope = country
+	ai_is_valid = { always = no }
+	is_shown = {
+		is_ai = no
+		has_variable = republican_tension
+		var:republican_tension >= 25
+		var:republican_tension < 75
+	}
+}
+
+c3rd_rep_tension_alert_red = {
+	scope = country
+	ai_is_valid = { always = no }
+	is_shown = {
+		is_ai = no
+		has_variable = republican_tension
+		var:republican_tension >= 75
+	}
+}
+
+###########################
+# WINDOW BUTTON
+###########################
+
+c3rd_rep_tension_window_button = {
+	scope = country
+	ai_is_valid = { always = no }
+	is_shown = {
+		is_republic = yes
+	}
+	is_valid = {
+		is_republic = yes
+		current_date >= 800.1.1
+		has_variable = republican_tension
+	}
+}
+
+###########################
+# WINDOW BACKGROUND STATES
+###########################
+
+c3rd_rep_win_calm = {
+	scope = country
+	is_shown = {
+		has_variable = republican_tension
+		var:republican_tension < 25
+	}
+}
+
+c3rd_rep_win_rising = {
+	scope = country
+	is_shown = {
+		has_variable = republican_tension
+		var:republican_tension >= 25
+		var:republican_tension < 75
+	}
+}
+
+c3rd_rep_win_crisis = {
+	scope = country
+	is_shown = {
+		has_variable = republican_tension
+		var:republican_tension >= 75
+	}
+}
+
+###########################
+# ACTIVE MODIFIER DISPLAY
+###########################
+
+c3rd_rep_mod_none = {
+	scope = country
+	is_shown = {
+		has_variable = republican_tension
+		NOR = {
+			has_country_modifier = rep_tension_1
+			has_country_modifier = rep_tension_2
+			has_country_modifier = rep_tension_3
+		}
+	}
+}
+
+c3rd_rep_mod_1 = {
+	scope = country
+	is_shown = {
+		has_country_modifier = rep_tension_1
+		NOT = { has_country_modifier = rep_tension_2 }
+		NOT = { has_country_modifier = rep_tension_3 }
+	}
+}
+
+c3rd_rep_mod_2 = {
+	scope = country
+	is_shown = { has_country_modifier = rep_tension_2 }
+}
+
+c3rd_rep_mod_3 = {
+	scope = country
+	is_shown = { has_country_modifier = rep_tension_3 }
+}
+
+###########################
+# TREND ARROWS
+###########################
+
+c3rd_rep_arrow_up1 = {
+	scope = country
+	is_shown = {
+		has_variable = republican_tension
+		has_variable = c3rd_rep_tension_cumu
+		var:c3rd_rep_tension_cumu > 0
+	}
+}
+
+c3rd_rep_arrow_up2 = {
+	scope = country
+	is_shown = {
+		has_variable = republican_tension
+		has_variable = c3rd_rep_tension_cumu
+		var:c3rd_rep_tension_cumu >= 0.10
+	}
+}
+
+c3rd_rep_arrow_up3 = {
+	scope = country
+	is_shown = {
+		has_variable = republican_tension
+		has_variable = c3rd_rep_tension_cumu
+		var:c3rd_rep_tension_cumu >= 0.30
+	}
+}
+
+c3rd_rep_arrow_dn1 = {
+	scope = country
+	is_shown = {
+		has_variable = republican_tension
+		has_variable = c3rd_rep_tension_cumu
+		var:c3rd_rep_tension_cumu < 0
+	}
+}
+
+c3rd_rep_arrow_dn2 = {
+	scope = country
+	is_shown = {
+		has_variable = republican_tension
+		has_variable = c3rd_rep_tension_cumu
+		var:c3rd_rep_tension_cumu <= -0.1
+	}
+}
+
+
+###########################
+# SENATE APPROVAL STATES
+###########################
+
+c3rd_rep_senate_good = {
+	scope = country
+	is_shown = {
+		has_variable = republican_tension
+		has_senate_approval >= 0.80
+	}
+}
+
+c3rd_rep_senate_neutral = {
+	scope = country
+	is_shown = {
+		has_variable = republican_tension
+		has_senate_approval >= 0.50
+		has_senate_approval < 0.80
+	}
+}
+
+c3rd_rep_senate_bad = {
+	scope = country
+	is_shown = {
+		has_variable = republican_tension
+		has_senate_approval < 0.50
+	}
+}
+
+###########################
+# UNWORTHY LEADER STATES
+###########################
+
+c3rd_rep_unworthy_present = {
+	scope = country
+	is_shown = {
+		has_variable = republican_tension
+		has_variable = unworthy_leader
+		var:unworthy_leader >= 1
+	}
+}
+
+c3rd_rep_unworthy_low = {
+	scope = country
+	is_shown = {
+		has_variable = unworthy_leader
+		var:unworthy_leader >= 1
+		var:unworthy_leader < 4
+	}
+}
+
+c3rd_rep_unworthy_high = {
+	scope = country
+	is_shown = {
+		has_variable = unworthy_leader
+		var:unworthy_leader >= 4
+	}
+}
+
+###########################
+# SOURCE ICONS — RISING (red)
+###########################
+
+
+c3rd_rep_cities_medium = {
+	scope = country
+	is_shown = {
+		has_variable = republican_tension
+		num_of_cities >= 300
+		num_of_cities < 1000
+	}
+}
+
+c3rd_rep_cities_high = {
+	scope = country
+	is_shown = {
+		has_variable = republican_tension
+		num_of_cities >= 1000
+	}
+}
+
+c3rd_rep_src_deflation = {
+	scope = country
+	is_shown = {
+		has_variable = republican_tension
+		OR = {
+			has_country_modifier = small_deflation
+			has_country_modifier = medium_deflation
+			has_country_modifier = high_deflation
+		}
+	}
+}
+
+c3rd_rep_src_crash = {
+	scope = country
+	is_shown = {
+		has_variable = republican_tension
+		OR = {
+			has_country_modifier = small_monetary_crash
+			has_country_modifier = medium_monetary_crash
+			has_country_modifier = high_monetary_crash
+		}
+	}
+}
+
+c3rd_rep_src_solidus = {
+	scope = country
+	is_shown = {
+		has_variable = republican_tension
+		has_country_modifier = solidus_introduced
+	}
+}
+
+c3rd_rep_src_low_stab = {
+	scope = country
+	is_shown = {
+		has_variable = republican_tension
+		stability < 30
+	}
+}
+
+
+c3rd_rep_src_low_senate = {
+	scope = country
+	is_shown = {
+		has_variable = republican_tension
+		has_senate_approval < 0.50
+	}
+}
+
+c3rd_rep_src_unworthy = {
+	scope = country
+	is_shown = {
+		has_variable = republican_tension
+		has_variable = unworthy_leader
+		var:unworthy_leader >= 1
+	}
+}
+
+c3rd_rep_cities_any = {
+	scope = country
+	is_shown = {
+		has_variable = republican_tension
+		num_of_cities >= 300
+	}
+}
+
+###########################
+# SOURCE ICONS — REDUCING (green)
+###########################
+
+c3rd_rep_src_small = {
+	scope = country
+	is_shown = {
+		has_variable = republican_tension
+		num_of_cities < 150
+	}
+}
+
+c3rd_rep_src_high_stab = {
+	scope = country
+	is_shown = {
+		has_variable = republican_tension
+		stability >= 70
+	}
+}
+
+c3rd_rep_src_good_senate = {
+	scope = country
+	is_shown = {
+		has_variable = republican_tension
+		has_senate_approval >= 0.80
+	}
+}
+
+c3rd_rep_src_law_frum = {
+	scope = country
+	is_shown = {
+		has_variable = republican_tension
+		has_law = lex_frumentaria
+	}
+}
+
+c3rd_rep_src_law_prov = {
+	scope = country
+	is_shown = {
+		has_variable = republican_tension
+		has_law = lex_de_provinciis
+	}
+}
+
+c3rd_rep_src_law_semp = {
+	scope = country
+	is_shown = {
+		has_variable = republican_tension
+		has_law = lex_sempronia
+	}
+}
+
+c3rd_rep_src_rep_stab = {
+	scope = country
+	is_shown = {
+		has_variable = republican_tension
+		has_country_modifier = c3rd_rep_relief
+	}
+}
+
+###########################
+# ACTIVE LAW DISPLAY
+###########################
+
+c3rd_rep_law_basic = {
+	scope = country
+	is_shown = {
+		has_variable = republican_tension
+		has_law = basic_republican_law
+	}
+}
+
+c3rd_rep_law_frum = {
+	scope = country
+	is_shown = {
+		has_variable = republican_tension
+		has_law = lex_frumentaria
+	}
+}
+
+c3rd_rep_law_prov = {
+	scope = country
+	is_shown = {
+		has_variable = republican_tension
+		has_law = lex_de_provinciis
+	}
+}
+
+c3rd_rep_law_semp = {
+	scope = country
+	is_shown = {
+		has_variable = republican_tension
+		has_law = lex_sempronia
+	}
+}
+
+c3rd_rep_law_vill = {
+	scope = country
+	is_shown = {
+		has_variable = republican_tension
+		has_law = lex_villia_annalis
+	}
+}
+
+c3rd_rep_law_treb = {
+	scope = country
+	is_shown = {
+		has_variable = republican_tension
+		has_law = lex_trebonia
+	}
+}
+
+c3rd_rep_law_hort = {
+	scope = country
+	is_shown = {
+		has_variable = republican_tension
+		has_law = lex_hortensia
+	}
+}
+
+c3rd_rep_law_is_tension = {
+	scope = country
+	is_shown = {
+		has_variable = republican_tension
+		OR = {
+			has_law = lex_villia_annalis
+			has_law = lex_trebonia
+		}
+	}
+}
+
+c3rd_rep_law_small_tension = {
+	scope = country
+	is_shown = {
+		has_variable = republican_tension
+		has_law = lex_hortensia
+	}
+}
+c3rd_rep_law_decr_tension = {
+	scope = country
+	is_shown = {
+		has_variable = republican_tension
+		OR = {
+			has_law = lex_frumentaria
+			AND = {
+				has_law = lex_de_provinciis
+				has_variable = unworthy_leader
+				var:unworthy_leader >= 4
+			}
+		}
+	}
+}
+c3rd_rep_law_sdecr_tension = {
+	scope = country
+	is_shown = {
+		has_variable = republican_tension
+		OR = {
+			has_law = lex_sempronia
+			AND = {
+				has_law = lex_de_provinciis
+				OR = {
+					AND = {
+						has_variable = unworthy_leader
+						var:unworthy_leader < 4
+					}
+					NOT = {
+						has_variable = unworthy_leader
+					}
+				}
+			}
+		}
+	}
+}
+c3rd_start_monarch_reform = {
+	scope = country
+
+	is_valid = {
+		custom_tooltip = {
+			text = "has_already_reform"
+			NOT = { has_variable = on_going_rep_thingy }
+		}
+		
+		OR = {
+			custom_tooltip = {
+				text = has_stab_and_pop
+				AND = {
+					NOT = { has_law = lex_hortensia }
+					stability >= 60
+					current_ruler = { popularity >= 80 }
+					has_senate_approval >= 0.80
+				}
+			}
+			custom_tooltip = {
+				text = has_stab_and_pop_hort
+				AND = {
+					has_law = lex_hortensia
+					stability >= 60
+					current_ruler = { popularity >= 60 }
+					has_senate_approval >= 0.65
+				}
+			}
+			
+		}
+	}
+
+	effect = {
+		custom_tooltip = "c3rd_rep_reform_attempt_tt"
+		add_political_influence = -80
+		add_stability = -5
+		
+			random_list = {
+				# Failure weight — decreases as tension rises (higher tension = easier reform)
+				80 = {
+					modifier = { add = 10  var:republican_tension <= 30 }
+					modifier = { add = -5  var:republican_tension >= 50 }
+					modifier = { add = -5  var:republican_tension >= 60 }
+					modifier = { add = -5 var:republican_tension >= 70 }
+					modifier = { add = -10  var:republican_tension >= 80 }
+					modifier = { add = -10  current_ruler = { has_trait = orator } }
+					modifier = { add = -8   current_ruler = { has_trait = prominent } }
+					modifier = { add = -5   current_ruler = { has_trait = assertive } }
+					modifier = { add = -5   current_ruler = { charisma >= 8 } }
+					modifier = { add = -10  current_ruler = { charisma >= 12 } }
+					modifier = { add = 10   current_ruler = { has_trait = submissive } }
+					modifier = { add = 8    current_ruler = { has_trait = corrupt } }
+					# Failure result
+					change_variable = { name = republican_tension add = 10 }
+					if = { limit = { var:republican_tension > 100 }
+						remove_variable = republican_tension
+						set_variable = { name = republican_tension value = 100 } }
+					add_stability = -10
+					set_variable = { name = recent_rep_reform  days = 3650 }
+					custom_tooltip = "c3rd_rep_reform_fail_tt"
+					trigger_event = { id = c3rd_events.50  days = 1 }
+				}
+				20 = {
+					modifier = { add = 5  var:republican_tension >= 55 }
+					modifier = { add = 10  var:republican_tension >= 65 }
+					modifier = { add = 10  var:republican_tension >= 75 }
+					modifier = { add = 15  var:republican_tension >= 85 }
+					modifier = { add = 20  var:republican_tension >= 95 }
+					# Success result
+					custom_tooltip = "c3rd_rep_reform_success_tt"
+					set_variable = { name = on_going_rep_thingy  days = 600 }
+					trigger_event = { id = c3rd_events.41  days = 90 }
+				}
+			}
+		
+
+	}
+
+}
+
+c3rd_split_the_empire = {
+	scope = country
+	is_valid = {
+		custom_tooltip = {
+			text = size_requirement
+			num_of_cities >= 1000
+		}
+		custom_tooltip = {
+			text = time_requirement
+			current_date >= 900.1.1
+		}
+		custom_tooltip = {
+			text = split_empire_any_capital
+			any_owned_province = {
+				dominant_province_culture = root.culture
+				governorship = {
+					NOT = {
+						this = root.capital_scope.governorship
+					}
+				}
+			}
+		}
+	}
+
+	effect = {
+		custom_tooltip = "c3rd_split_empire"
+		trigger_event = c3rd_other_events.76
+	}
+
+}
+
+
+c3rd_convocatio_populi = {
+	scope = country
+	is_valid = {
+		custom_tooltip = {
+			text = has_lex_hortensia
+			has_law = lex_hortensia
+		}
+		
+		political_influence >= 60
+		custom_tooltip = {
+			text = has_recent_convocatio
+			NOT = { has_variable = recent_convocatio_populi }
+		}
+	}
+
+	effect = {
+		custom_tooltip = "convocatio_populi"
+		custom_tooltip = convocatio_populi_desc
+		add_political_influence = -60
+		change_variable = { name = republican_tension add = -5 }
+		custom_tooltip = c3rd_rep_tension_minus_5
+		if = { 
+			limit = { var:republican_tension < 0 }
+			remove_variable = republican_tension
+			set_variable = { name = republican_tension value = 0 } 
+		}
+		set_variable = { name = recent_convocatio_populi  days = 3650 }
+	}
+
+}
+
+c3rd_rep_char_norm = {
+	scope = character
+	is_shown = {
+		is_ruler = no
+	}
+}
+
+c3rd_rep_char_ruler = {
+	scope = character
+	is_shown = {
+		is_ruler = yes
+	}
+}
+
+c3rd_rep_char_polinf = {
+	scope = character
+	is_shown = {
+		OR = {
+			has_character_modifier = political_power_character
+			is_ruler = yes
+		}
+	}
+}
+
+c3rd_rep_relief_scr = {
+	scope = country
+	is_shown = {
+		has_country_modifier = c3rd_rep_relief
+	}
+}

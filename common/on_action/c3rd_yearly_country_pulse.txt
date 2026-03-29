@@ -35,6 +35,8 @@ yearly_country_pulse = {
 		c3rd_political_general_rampup
 		delay = { days = { 1 364 } }
 		c3rd_barbarian_occupying_land
+		delay = { days = { 1 364 } }
+		c3rd_ai_monetary_crisis_pulse
 
 	}
 }

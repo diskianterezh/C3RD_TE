@@ -37,7 +37,17 @@ te_barbarians.1 = {
     }
 
     immediate = {
-        if = {
+		if = {
+			limit = {
+				is_ai = yes
+				any_neighbour_country = {
+					is_ai = no
+					num_of_cities <= root.num_of_cities
+				}
+			}
+			add_stability = -50 #strong AI will suffer more
+		}
+        else_if = {
             limit = {
                 num_of_cities >= 100
                 is_tribal = no
@@ -166,7 +176,17 @@ te_barbarians.10 = {
     }
 
     immediate = {
-        if = {
+		if = {
+			limit = {
+				is_ai = yes
+				any_neighbour_country = {
+					is_ai = no
+					num_of_cities <= root.num_of_cities
+				}
+			}
+			add_stability = -50 #strong AI will suffer more
+		}
+        else_if = {
             limit = {
                 is_tribal = no
                 num_of_cities >= 100
@@ -241,7 +261,17 @@ te_barbarians.11 = {
     }
 
     immediate = {
-        if = {
+		if = {
+			limit = {
+				is_ai = yes
+				any_neighbour_country = {
+					is_ai = no
+					num_of_cities <= root.num_of_cities
+				}
+			}
+			add_stability = -50 #strong AI will suffer more
+		}
+        else_if = {
             limit = {
                 is_tribal = no
                 num_of_cities >= 100
@@ -370,7 +400,17 @@ te_barbarians.12 = {
     }
     
     immediate = {
-        if = {
+		if = {
+			limit = {
+				is_ai = yes
+				any_neighbour_country = {
+					is_ai = no
+					num_of_cities <= root.num_of_cities
+				}
+			}
+			add_stability = -50 #strong AI will suffer more
+		}
+        else_if = {
             limit = {
                 is_tribal = no
                 num_of_cities >= 100
@@ -615,7 +655,17 @@ te_barbarians.13 = {
 
     option = {
     	name = "te_barbarians.13.a"
-	    if = {
+		if = {
+			limit = {
+				is_ai = yes
+				any_neighbour_country = {
+					is_ai = no
+					num_of_cities <= root.num_of_cities
+				}
+			}
+			add_stability = -30 #strong AI will suffer more
+		}
+	    else_if = {
             limit = {
                 #is_tribal = no
                 num_of_cities >= 100
@@ -697,7 +747,17 @@ te_barbarians.2 = {
     }
 
     immediate = {    
-        if = {
+		if = {
+			limit = {
+				is_ai = yes
+				any_neighbour_country = {
+					is_ai = no
+					num_of_cities <= root.num_of_cities
+				}
+			}
+			add_stability = -50 #strong AI will suffer more
+		}
+        else_if = {
             limit = {
                 is_tribal = no
                 num_of_cities > 100
@@ -774,7 +834,17 @@ te_barbarians.3 = {
     }
 
     immediate = { 
-        if = {
+		if = {
+			limit = {
+				is_ai = yes
+				any_neighbour_country = {
+					is_ai = no
+					num_of_cities <= root.num_of_cities
+				}
+			}
+			add_stability = -50 #strong AI will suffer more
+		}
+        else_if = {
             limit = {
                 is_tribal = no
                 num_of_cities > 100
@@ -873,7 +943,17 @@ te_barbarians.4 = {
     }
 
     immediate = {
-        if = {
+		if = {
+			limit = {
+				is_ai = yes
+				any_neighbour_country = {
+					is_ai = no
+					num_of_cities <= root.num_of_cities
+				}
+			}
+			add_stability = -50 #strong AI will suffer more
+		}
+        else_if = {
             limit = {
                 is_tribal = no
                 num_of_cities > 100
@@ -1017,7 +1097,17 @@ te_barbarians.5 = {
     }
 
     immediate = {
-        if = {
+		if = {
+			limit = {
+				is_ai = yes
+				any_neighbour_country = {
+					is_ai = no
+					num_of_cities <= root.num_of_cities
+				}
+			}
+			add_stability = -60 #strong AI will suffer more
+		}
+        else_if = {
             limit = {
                 is_tribal = no
                 num_of_cities > 100
@@ -1189,7 +1279,17 @@ te_barbarians.60 = {
     }
 
     immediate = {
-        if = {
+		if = {
+			limit = {
+				is_ai = yes
+				any_neighbour_country = {
+					is_ai = no
+					num_of_cities <= root.num_of_cities
+				}
+			}
+			add_stability = -50 #strong AI will suffer more
+		}
+        else_if = {
             limit = {
                 is_tribal = no
                 num_of_cities >= 500
@@ -1291,7 +1391,17 @@ te_barbarians.6 = {
     }
     
     immediate = {
-        if = {
+		if = {
+			limit = {
+				is_ai = yes
+				any_neighbour_country = {
+					is_ai = no
+					num_of_cities <= root.num_of_cities
+				}
+			}
+			add_stability = -50 #strong AI will suffer more
+		}
+        else_if = {
             limit = {
                 is_tribal = no
                 num_of_cities >= 100
@@ -1515,7 +1625,17 @@ te_barbarians.7 = {
     }
 
     immediate = {
-        if = {
+		if = {
+			limit = {
+				is_ai = yes
+				any_neighbour_country = {
+					is_ai = no
+					num_of_cities <= root.num_of_cities
+				}
+			}
+			add_stability = -60 #strong AI will suffer more
+		}
+        else_if = {
             limit = {
                 is_tribal = no
                 num_of_cities >= 100
@@ -1634,6 +1754,16 @@ te_barbarians.90 = {
 
     option = {
     	name = "te_barbarians.90.a"
+		if = {
+			limit = {
+				is_ai = yes
+				any_neighbour_country = {
+					is_ai = no
+					num_of_cities <= root.num_of_cities
+				}
+			}
+			add_stability = -40 #strong AI will suffer more
+		}
 	    if = {
             limit = {
                 #is_tribal = no

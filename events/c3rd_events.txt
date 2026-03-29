@@ -549,6 +549,10 @@ c3rd_events.5 = {
 			has_law = constantine_reform_law
 		}
 		modifier = {
+			factor = 0.2
+			has_law = decentralized_administration_law
+		}
+		modifier = {
 			factor = 0.7
 			num_of_cities <= 800
 		}
@@ -557,8 +561,12 @@ c3rd_events.5 = {
 			num_of_cities <= 700
 		}
 		modifier = {
+			factor = 1.5
+			has_country_modifier = rep_tension_2
+		}
+		modifier = {
 			factor = 2
-			has_country_modifier = political_unstability
+			has_country_modifier = rep_tension_3
 		}
 		modifier = {
 			factor = 2
@@ -797,6 +805,16 @@ c3rd_events.5 = {
 						}
 					}
 					modifier = {
+						add = 25
+						has_variable = republican_tension
+						var:republican_tension >= 50
+					}
+					modifier = {
+						add = 25
+						has_variable = republican_tension
+						var:republican_tension >= 75
+					}
+					modifier = {
 						factor = 0.5
 						OR = {
 							has_law = constantine_reform_law
@@ -899,7 +917,17 @@ c3rd_events.6 = {
 			limit = {
 				is_republic = yes
 			}
-			add_tyranny = 10
+			add_tyranny = 5
+			if = {
+				limit = {
+					has_variable = republican_tension
+				}
+				change_variable = {
+					name = republican_tension
+					add = 10
+				}
+				custom_tooltip = c3rd_rep_tension_plus_10
+			}
 			scope:volontary_general = {
 				add_loyalty = humiliated_powerful_general
 			}
@@ -964,6 +992,19 @@ c3rd_events.6 = {
 			is_republic = yes
 		}
 	}
+	after = {
+		if = {
+			limit = {
+				has_variable = republican_tension
+				var:republican_tension >= 100
+			}
+			remove_variable = republican_tension
+			set_variable = {
+				name = republican_tension
+				value = 100
+			}
+		}
+	}
 }
 
 #Generals kill Severe Alexandre
@@ -1002,7 +1043,6 @@ c3rd_events.7 = {
 			has_variable = recent_military_anarchy
 			has_variable = recent_general_asking
 			has_variable = on_going_rep_thingy
-			has_country_modifier = political_unstability
 			has_law = constantine_reform_law
 			has_law = decentralized_administration_law
 		}
@@ -1029,6 +1069,7 @@ c3rd_events.7 = {
 				has_truce_with = root
 				alliance_with = root
 				is_subject_of = root
+				war_with = root
 			}
 			OR = {
 				is_tribal = yes
@@ -1083,6 +1124,24 @@ c3rd_events.7 = {
 		modifier = {
 			factor = 0.7
 			num_of_cities <= 700
+		}
+		modifier = {
+			factor = 0.5
+			war = yes
+		}
+		modifier = {
+			factor = 0.5
+			war = yes
+			any_countries_at_war_with = {
+				count >= 3
+			}
+		}
+		modifier = {
+			factor = 0.5
+			war = yes
+			any_countries_at_war_with = {
+				count >= 6
+			}
 		}
 	}
 	immediate = {
@@ -1299,6 +1358,7 @@ c3rd_events.75 = {
 				has_law = basic_administrative_law
 			}
 		}
+		exists = scope:target_neighbour
 		NOR = {
 			war_with = scope:target_neighbour
 			scope:target_neighbour = {
@@ -1415,7 +1475,6 @@ c3rd_events.8 = {
 			has_variable = recent_general_asking
 			has_variable = on_going_rep_thingy
 			has_country_modifier = military_advantages
-			has_country_modifier = political_unstability
 		}
 		num_of_cities >= 900
 		any_character = {
@@ -1490,6 +1549,11 @@ c3rd_events.8 = {
 	option = {
 		name = c3rd_events.8.a
 		custom_tooltip = c3rd_events.8.a.tt1
+		trigger = {
+			NOT = {
+				has_country_modifier = military_advantages
+			}
+		}
 		add_country_modifier = {
 			name = military_advantages
 			duration = 3650
@@ -1562,7 +1626,6 @@ c3rd_events.81 = {
 			has_variable = recent_military_anarchy
 			has_variable = recent_general_asking
 			has_variable = on_going_rep_thingy
-			has_country_modifier = political_unstability
 			has_law = decentralized_administration_law
 			has_law = constantine_reform_law
 		}
@@ -1789,7 +1852,6 @@ c3rd_events.9 = {
 			has_country_modifier = military_anarchy
 			has_variable = recent_military_anarchy
 			has_variable = on_going_rep_thingy
-			has_country_modifier = political_unstability
 		}
 		current_ruler = {
 			popularity < 85
@@ -3373,6 +3435,7 @@ c3rd_events.30 = {
 									OR = {
 										is_friend = scope:ambitious_general
 										is_disloyal = yes
+										is_in_list = other_empire_govs
 									}
 								}
 							}
@@ -3414,7 +3477,10 @@ c3rd_events.30 = {
 					}
 					has_variable = governorship_owner
 					var:governorship_owner = {
-						is_in_list = other_empire_govs
+						OR = {
+							is_in_list = other_empire_govs
+							this = scope:rival_emperor
+						}
 					}
 				}
 				add_to_list = other_empire_governorship
@@ -3571,6 +3637,12 @@ c3rd_events.30 = {
 							}
 						}
 					}
+					modifier = {
+						add = 20
+						scope:rival_emperor = {
+							has_character_modifier = major_influence_aristocrat
+						}
+					}
 					trigger_event = {
 						id = c3rd_events.10
 						days = 6
@@ -3680,6 +3752,12 @@ c3rd_events.32 = {
 		}
 		imprison = {
 			target = scope:king_maker_rival
+		}
+		scope:king_maker_rival = {
+			set_variable = {
+				name = prison_by_kingmaker
+				value = scope:king_maker_exige
+			}
 		}
 		add_tyranny = 2
 		add_legitimacy = -5
@@ -4175,6 +4253,14 @@ c3rd_events.35 = {
 					}
 				}
 			}
+			random_governorship_state = {
+				random_state_province = {
+					limit = {
+						owner = root
+					}
+					save_scope_as = p_asked_govship
+				}
+			}
 			save_scope_as = asked_governorship
 		}
 		set_variable = {
@@ -4185,11 +4271,12 @@ c3rd_events.35 = {
 	option = {
 		name = c3rd_events.35.a
 		custom_tooltip = c3rd_events.35.a.tt1
-		scope:asked_governorship = {
-			random_governorship_state = {
-				random_state_province = {
-					set_as_governor = scope:asking_friend
-				}
+		if = {
+			limit = {
+				exists = scope:p_asked_govship.governor
+			}
+			scope:p_asked_govship.governor = {
+				remove_as_governor = yes
 			}
 		}
 		scope:asking_general = {
@@ -4206,6 +4293,19 @@ c3rd_events.35 = {
 			add_gold = 500
 		}
 		add_treasury = 500
+		
+		scope:asked_governorship = {
+			random_governorship_state = {
+				if = {
+					limit = {
+						has_governor = no
+					}
+					random_state_province = {
+						set_as_governor = scope:asking_friend
+					}
+				}
+			}
+		}
 	}
 	option = {
 		name = c3rd_events.35.b
@@ -4333,9 +4433,11 @@ c3rd_events.36 = {
 					add = power_base
 				}
 			}
-			add_character_modifier = {
-				name = king_maker
-				duration = 7300
+			hidden_effect = { #this is not displaying, so we'll make a tt
+				add_character_modifier = {
+					name = king_maker
+					duration = 7300
+				}
 			}
 			save_scope_as = new_king_maker
 		}
@@ -4343,6 +4445,7 @@ c3rd_events.36 = {
 			name = recent_new_king_maker
 			days = 730			#2 years
 		}
+		custom_tooltip = c3rd_events.36.tt2
 	}
 	option = {
 		name = c3rd_events.36.a
@@ -4789,7 +4892,7 @@ c3rd_events.391 = {
 
 #Republic reforms and crisis pushing to monarchy
 c3rd_events.40 = {
-	#Senate aftermath of the assassination, political unstability or reform to monarchy ?
+	#Senate aftermath of the assassination, republican tension or reform to monarchy ?
 	type = country_event
 	title = "c3rd_events.40.t"
 	desc = {
@@ -4834,11 +4937,10 @@ c3rd_events.40 = {
 		is_tribal = no
 		is_ai = no
 		current_date >= 900.1.1
-		has_country_modifier = crisis_of_the_third_century
 		is_republic = yes
+		has_variable = republican_tension		# replaces has_country_modifier = crisis_of_the_third_century
 		has_variable = on_going_rep_thingy
 		NOR = {
-			#just in case, but should not come here anyway if not
 			has_country_modifier = military_anarchy
 			has_variable = recent_military_anarchy
 		}
@@ -4872,41 +4974,54 @@ c3rd_events.40 = {
 			}
 		}
 		add_tyranny = 10
-		add_stability = -10
-		if = {
+		add_stability = -5
+		
+		every_party = {
 			limit = {
-				has_party_type = optimates_party
+				NOT = {
+					this = scope:general_leader.character_party
+				}
 			}
-			add_party_approval = {
-				party_type = boni_party
-				value = -50
-			}
-			add_party_approval = {
-				party_type = populares_party
-				value = -50
-			}
-			add_party_approval = {
-				party_type = optimates_party
-				value = -50
+			scope:actor = {
+				add_party_approval = {
+					party = PREV
+					value = -25
+				}
 			}
 		}
-		else = {
-			add_party_approval = {
-				party_type = traditionalist_party
-				value = -50
-			}
-			add_party_approval = {
-				party_type = democratic_party
-				value = -50
-			}
-			add_party_approval = {
-				party_type = oligarchic_party
-				value = -50
-			}
+		add_party_approval = {
+			party = scope:general_leader.character_party
+			value = -80
 		}
 		current_ruler = {
 			add_popularity = -20
 		}
+		custom_tooltip = c3rd_rep_tension_minus_10
+		change_variable = { name = republican_tension add = -10 }
+		if = {
+			limit = {
+				has_variable = unworthy_leader
+			}
+			change_variable = {
+				name = unworthy_leader
+				add = 1
+			}
+		}
+		else = {
+			set_variable = {
+				name = unworthy_leader
+				value = 1
+			}
+		}
+		if = { 
+			limit = { var:republican_tension < 0 }
+			remove_variable = republican_tension
+			set_variable = { 
+				name = republican_tension 
+				value = 0 
+			}
+		}
+		remove_variable = on_going_rep_thingy
 	}
 	option = {
 		#general is the leader : makes things way easier in excahnge of tyranny
@@ -4916,20 +5031,25 @@ c3rd_events.40 = {
 		trigger = {
 			current_ruler = scope:general_leader
 		}
-		scope:general_leader = {
-			add_character_modifier = {
-				name = king_maker
-				duration = 7300
+		if = {
+			limit = { var:republican_tension >= 75 }
+			custom_tooltip = c3rd_rep_will_start_reform_desc
+			scope:general_leader = {
+				add_character_modifier = {
+					name = king_maker
+					duration = 7300
+				}
 			}
+			add_tyranny = 10
+			trigger_event = { id = c3rd_events.41  days = 90 }
 		}
-		add_tyranny = 10
-		add_country_modifier = {
-			name = political_unstability
-			duration = -1
-		}
-		trigger_event = {
-			id = c3rd_events.41
-			days = 90
+		else = {
+			add_stability = 7
+			custom_tooltip = c3rd_rep_tension_plus_20
+			change_variable = { name = republican_tension add = 20 }
+			if = { limit = { var:republican_tension > 100 }
+				remove_variable = republican_tension
+				set_variable = { name = republican_tension value = 100 } }
 		}
 	}
 	option = {
@@ -4943,29 +5063,63 @@ c3rd_events.40 = {
 				is_ruler = no
 			}
 		}
-		scope:general_leader = {
-			add_character_modifier = {
-				name = king_maker
-				duration = 7300
-			}
-			add_corruption = 10
-			add_popularity = 10
-		}
 		set_as_ruler = scope:general_leader
-		add_tyranny = 10
-		add_country_modifier = {
-			name = political_unstability
-			duration = -1
+		every_party = {
+			limit = {
+				NOT = {
+					this = scope:general_leader.character_party
+				}
+			}
+			scope:actor = {
+				add_party_approval = {
+					party = PREV
+					value = -25
+				}
+			}
 		}
-		trigger_event = {
-			id = c3rd_events.41
-			days = 90
+		if = {
+			limit = { var:republican_tension >= 75 }
+			custom_tooltip = c3rd_rep_will_start_reform_desc
+			scope:general_leader = {
+				add_character_modifier = {
+					name = king_maker
+					duration = 7300
+				}
+				add_corruption = 10
+				add_popularity = 10
+			}
+			add_tyranny = 10
+			trigger_event = { id = c3rd_events.41  days = 90 }
+		}
+		else = {
+			add_stability = 5
+			custom_tooltip = c3rd_rep_tension_plus_20
+			change_variable = { name = republican_tension add = 20 }
+			if = { limit = { var:republican_tension > 100 }
+				remove_variable = republican_tension
+				set_variable = { name = republican_tension value = 100 } }
 		}
 	}
 	option = {
 		#let's make the reforms
 		name = c3rd_events.40.d
 		custom_tooltip = c3rd_events.40.d.tt1
+		trigger = {
+			NOT = {
+				has_law = lex_trebonia
+			}
+		}
+		if = {
+			limit = {
+				scope:general_leader = {
+					is_alive = yes
+					employer = root
+				}
+			}
+			scope:general_leader = {
+				add_corruption = 10
+			}
+		}
 		if = {
 			limit = {
 				has_senate_approval < 0.4
@@ -4973,25 +5127,50 @@ c3rd_events.40 = {
 			add_tyranny = 5
 		}
 		add_stability = -5
-		add_country_modifier = {
-			name = political_unstability
-			duration = -1
+		if = {
+			limit = {
+				has_variable = republican_tension
+				var:republican_tension < 50
+			}
+			custom_tooltip = c3rd_rep_tension_plus_10
+			change_variable = { name = republican_tension add = 10 }
 		}
-		trigger_event = {
-			id = c3rd_events.41
-			days = 90
-		}
+		change_law = lex_trebonia
+		remove_variable = on_going_rep_thingy
 	}
 	option = {
-		#better not touch anything and keep that awful modifier forever
+		#better not touch anything and penalties
 		name = c3rd_events.40.e
 		custom_tooltip = c3rd_events.40.e.tt1
-		add_stability = 5
-		add_country_modifier = {
-			name = political_unstability
-			duration = -1
-		}
 		remove_variable = on_going_rep_thingy
+		add_stability = -15
+		if = {
+			limit = {
+				scope:general_leader = {
+					is_alive = yes
+					employer = root
+					is_ruler = no
+				}
+			}
+			scope:general_leader = {
+				add_loyalty = humiliated_general
+			}
+		}
+		else_if = {
+			limit = {
+				scope:general_leader = {
+					is_alive = yes
+					employer = root
+					is_ruler = yes
+				}
+			}
+			add_political_influence = -25
+			custom_tooltip = c3rd_rep_tension_plus_5
+			change_variable = { name = republican_tension add = 5 }
+			if = { limit = { var:republican_tension > 100 }
+				remove_variable = republican_tension
+				set_variable = { name = republican_tension value = 100 } }
+		}
 	}
 	after = {
 		add_country_modifier = {
@@ -5011,8 +5190,6 @@ c3rd_events.41 = {
 	trigger = {
 		has_land = yes
 		is_tribal = no
-		current_date >= 900.1.1
-		has_country_modifier = crisis_of_the_third_century
 		is_republic = yes
 		has_variable = on_going_rep_thingy
 	}
@@ -5081,8 +5258,6 @@ c3rd_events.42 = {
 	trigger = {
 		has_land = yes
 		is_tribal = no
-		current_date >= 900.1.1
-		has_country_modifier = crisis_of_the_third_century
 		is_republic = yes
 		has_variable = on_going_rep_thingy
 	}
@@ -5134,8 +5309,6 @@ c3rd_events.43 = {
 	trigger = {
 		has_land = yes
 		is_tribal = no
-		current_date >= 900.1.1
-		has_country_modifier = crisis_of_the_third_century
 		is_republic = yes
 		has_variable = on_going_rep_thingy
 	}
@@ -5202,44 +5375,12 @@ c3rd_events.44 = {
 	trigger = {
 		has_land = yes
 		is_tribal = no
-		current_date >= 900.1.1
-		has_country_modifier = crisis_of_the_third_century
 		is_republic = yes
 		has_variable = on_going_rep_thingy
 	}
 	left_portrait = current_ruler
 	immediate = {
 		remove_variable = on_going_rep_thingy
-		if = {
-			limit = {
-				has_country_modifier = political_unstability
-			}
-			remove_country_modifier = political_unstability
-		}
-		if = {
-			limit = {
-				has_country_modifier = too_grand_republic
-			}
-			remove_country_modifier = too_grand_republic
-		}
-		if = {
-			limit = {
-				has_country_modifier = too_huge_republic
-			}
-			remove_country_modifier = too_huge_republic
-		}
-		if = {
-			limit = {
-				has_country_modifier = too_giant_republic
-			}
-			remove_country_modifier = too_giant_republic
-		}
-		if = {
-			limit = {
-				has_country_modifier = provinces_republican_reforms
-			}
-			remove_country_modifier = provinces_republican_reforms
-		}
 		remove_country_modifier = dictatorial_extension_c3rd
 		add_country_modifier = {
 			name = deep_reforms
@@ -5265,710 +5406,42 @@ c3rd_events.44 = {
 	}
 }
 
-c3rd_events.45 = {
-	#powerful republic leader want to reform
-	type = country_event
-	title = "c3rd_events.45.t"
-	desc = "c3rd_events.45.desc"
-	picture = throneroom
-	trigger = {
-		has_land = yes
-		num_of_cities >= 10
-		is_tribal = no
-		current_date >= 900.1.1
-		has_country_modifier = crisis_of_the_third_century
-		is_republic = yes
-		NOR = {
-			has_variable = on_going_rep_thingy
-			has_variable = recent_rep_reform
-		}
-		current_ruler = {
-			popularity >= 80
-			NOT = {
-				has_trait = content
-			}
-		}
-		OR = {
-			has_senate_approval >= 0.75
-			has_country_modifier = political_unstability
-		}
-		has_civil_war = no
-	}
-	left_portrait = current_ruler
-	weight_multiplier = {
-		modifier = {
-			factor = 2
-			current_ruler = {
-				has_trait = ambitious
-			}
-		}
-		modifier = {
-			factor = 1.5
-			current_ruler = {
-				has_trait = founder
-			}
-		}
-		modifier = {
-			factor = 0.7
-			current_ruler = {
-				has_trait = incapable
-			}
-		}
-		modifier = {
-			factor = 1.5
-			current_date >= 1000.1.1
-		}
-		modifier = {
-			factor = 1.5
-			current_date >= 1100.1.1
-		}
-		modifier = {
-			factor = 1.5
-			tyranny >= 25
-		}
-		modifier = {
-			factor = 2
-			tyranny >= 50
-		}
-		modifier = {
-			factor = 2
-			tyranny >= 75
-		}
-		modifier = {
-			factor = 2
-			has_country_modifier = political_unstability
-		}
-		modifier = {
-			factor = 0.1
-			towards_civil_war = yes
-		}
-	}
-	immediate = {
-		current_ruler = {
-			save_scope_as = adored_ruler
-		}
-		set_variable = {
-			name = recent_rep_reform
-			days = 3650
-		}
-	}
-	option = {
-		#ok, let's help him
-		name = c3rd_events.45.a
-		custom_tooltip = c3rd_events.45.a.tt1
-		ai_chance = {
-			factor = 100
-		}
-		set_variable = {
-			name = on_going_rep_thingy
-			days = 600
-		}
-		add_country_modifier = {
-			name = dictatorial_extension_c3rd
-			duration = 720
-		}
-		trigger_event = {
-			id = c3rd_events.41
-			days = 90
-		}
-	}
-	option = {
-		#no way
-		name = c3rd_events.45.b
-		custom_tooltip = c3rd_events.45.b.tt1
-		if = {
-			limit = {
-				has_country_modifier = political_unstability
-			}
-			add_stability = -5
-		}
-		else = {
-			hidden_effect = {
-				random_list = {
-					100 = {
-						modifier = {
-							add = 10
-							current_ruler = {
-								has_trait = submissive
-							}
-						}
-						modifier = {
-							add = 10
-							current_ruler = {
-								has_trait = corrupt
-							}
-						}
-						modifier = {
-							add = current_ruler.corruption
-						}
-						modifier = {
-							add = 10
-							current_ruler = {
-								has_trait = unnoticeable
-							}
-						}
-						trigger_event = {
-							id = c3rd_events.47
-							days = 15
-						}
-					}
-					1 = {
-						modifier = {
-							add = current_ruler.popularity
-						}
-						modifier = {
-							add = current_ruler.charisma
-						}
-						modifier = {
-							add = current_ruler.martial
-						}
-						modifier = {
-							add = 10
-							current_ruler = {
-								has_trait = assertive
-							}
-						}
-						modifier = {
-							add = 10
-							current_ruler = {
-								has_trait = assertive
-							}
-						}
-						modifier = {
-							add = 50
-							has_country_modifier = political_unstability
-						}
-						modifier = {
-							add = 10
-							current_ruler = {
-								has_trait = righteous
-							}
-						}
-						modifier = {
-							add = 20
-							current_ruler = {
-								has_trait = prominent
-							}
-						}
-						modifier = {
-							add = 20
-							current_ruler = {
-								has_trait = orator
-							}
-						}
-						modifier = {
-							add = 10
-							current_ruler = {
-								has_trait = victorious
-							}
-						}
-						modifier = {
-							add = 10
-							current_ruler = {
-								has_trait = conqueror
-							}
-						}
-						trigger_event = {
-							id = c3rd_events.46
-							days = 5
-						}
-					}
-				}
-			}
-		}
-	}
-}
 
-c3rd_events.46 = {
-	#unstability made by ruler
-	type = country_event
-	title = "c3rd_events.46.t"
-	desc = "c3rd_events.46.desc"
-	picture = roman_trial
-	trigger = {
-		has_land = yes
-		is_tribal = no
-		current_date >= 900.1.1
-		has_country_modifier = crisis_of_the_third_century
-		is_republic = yes
-	}
-	left_portrait = current_ruler
-	immediate = {
-		if = {
-			limit = {
-				has_country_modifier = political_unstability
-			}
-			add_stability = -15
-		}
-		else = {
-			add_stability = -5
-			add_country_modifier = {
-				name = political_unstability
-				duration = -1
-			}
-		}
-	}
-	option = {
-		name = c3rd_events.46.a
-		custom_tooltip = c3rd_events.46.a.tt1
-	}
-}
 
-c3rd_events.47 = {
-	#ruler stopped
-	type = country_event
-	title = "c3rd_events.47.t"
-	desc = "c3rd_events.47.desc"
-	picture = roman_trial
-	trigger = {
-		has_land = yes
-		is_tribal = no
-		current_date >= 900.1.1
-		has_country_modifier = crisis_of_the_third_century
-		is_republic = yes
-	}
-	left_portrait = current_ruler
-	immediate = {
-		current_ruler = {
-			add_popularity = -50
-		}
-	}
-	option = {
-		name = c3rd_events.47.a
-		custom_tooltip = c3rd_events.47.a.tt1
-	}
-}
+# c3rd_events.45 (ruler wish to be monarch) REMOVED — replaced by republican tension system
+# c3rd_events.46 (ruler have been stopped and now do instability) REMOVED — replaced by republican tension system
+# c3rd_events.47 (ruler have been stopped) REMOVED — replaced by republican tension system
+# c3rd_events.48 (huge country) REMOVED — replaced by republican tension system
+# c3rd_events.49 (reform done) REMOVED — replaced by republican tension system
 
-c3rd_events.48 = {
-	#huge republican empire , too huge for a functionnal republic
-	type = country_event
-	title = "c3rd_events.48.t"
-	desc = "c3rd_events.48.desc"
-	picture = road_construction
-	trigger = {
-		has_land = yes
-		num_of_cities >= 1000
-		is_tribal = no
-		current_date >= 900.1.1
-		is_republic = yes
-		NOR = {
-			has_variable = on_going_rep_thingy
-			has_variable = recent_rep_huge
-			has_country_modifier = political_unstability
-			has_country_modifier = provinces_republican_reforms
-		}
-		has_civil_war = no
-	}
-	left_portrait = current_ruler
-	weight_multiplier = {
-		modifier = {
-			factor = 0.5
-			has_variable = pretty_recent_rep_huge
-		}
-		modifier = {
-			factor = 1.2
-			current_ruler = {
-				finesse <= 5
-			}
-		}
-		modifier = {
-			factor = 1.3
-			current_ruler = {
-				finesse <= 1
-			}
-		}
-		modifier = {
-			factor = 1.3
-			current_ruler = {
-				has_trait = incapable
-			}
-		}
-		modifier = {
-			factor = 1.2
-			current_ruler = {
-				has_trait = lazy
-			}
-		}
-		modifier = {
-			factor = 0.7
-			current_ruler = {
-				has_trait = founder
-			}
-		}
-		modifier = {
-			factor = 0.8
-			current_ruler = {
-				has_trait = energetic
-			}
-		}
-		modifier = {
-			factor = 1.2
-			current_date >= 1000.1.1
-		}
-		modifier = {
-			factor = 1.5
-			current_date >= 1100.1.1
-		}
-		modifier = {
-			factor = 0.1
-			towards_civil_war = yes
-		}
-		modifier = {
-			factor = 1.2
-			num_of_cities >= 1500
-		}
-		modifier = {
-			factor = 1.3
-			num_of_cities >= 2000
-		}
-		modifier = {
-			factor = 1.4
-			num_of_cities >= 2500
-		}
-		modifier = {
-			factor = 0.8
-			has_country_modifier = too_grand_republic
-		}
-		modifier = {
-			factor = 0.65
-			has_country_modifier = too_huge_republic
-		}
-		modifier = {
-			factor = 0.5
-			has_country_modifier = too_giant_republic
-		}
-	}
-	immediate = {
-		current_ruler = {
-			save_scope_as = adored_ruler
-		}
-		set_variable = {
-			name = recent_rep_huge
-			days = 3650
-		}
-	}
-	option = {
-		#ok, let's throw money
-		name = c3rd_events.48.a
-		custom_tooltip = c3rd_events.48.a.tt1
-		add_treasury = {
-			value = num_of_cities
-			multiply = -11
-		}
-		set_variable = {
-			name = pretty_recent_rep_huge
-			days = 7300			#10 more years after the 10 years with half the chances
-		}
-	}
-	option = {
-		#ok, let's make some reforms
-		name = c3rd_events.48.b
-		custom_tooltip = c3rd_events.48.b.tt1
-		add_political_influence = -50
-		hidden_effect = {
-			random_list = {
-				10 = {
-					modifier = {
-						add = 10
-						current_ruler = {
-							has_trait = submissive
-						}
-					}
-					modifier = {
-						add = 10
-						current_ruler = {
-							has_trait = corrupt
-						}
-					}
-					modifier = {
-						add = current_ruler.corruption
-					}
-					modifier = {
-						add = 10
-						current_ruler = {
-							has_trait = unnoticeable
-						}
-					}
-					modifier = {
-						add = 10
-						current_date >= 1000.1.1
-					}
-					modifier = {
-						add = 10
-						current_date >= 1100.1.1
-					}
-					modifier = {
-						add = 20
-						current_date >= 1200.1.1
-					}
-					trigger_event = {
-						#failure, political instability
-						id = c3rd_events.50
-						days = 15
-					}
-				}
-				1 = {
-					modifier = {
-						add = current_ruler.popularity
-					}
-					modifier = {
-						add = current_ruler.charisma
-					}
-					modifier = {
-						add = 10
-						current_ruler = {
-							has_trait = assertive
-						}
-					}
-					modifier = {
-						add = 10
-						current_ruler = {
-							has_trait = righteous
-						}
-					}
-					modifier = {
-						add = 20
-						current_ruler = {
-							has_trait = prominent
-						}
-					}
-					modifier = {
-						add = 20
-						current_ruler = {
-							has_trait = orator
-						}
-					}
-					trigger_event = {
-						#reform the republic, get a modifier to keep things ok for 20 years
-						id = c3rd_events.49
-						days = 15
-					}
-				}
-			}
-		}
-	}
-	option = {
-		#let's not do anything
-		name = c3rd_events.48.c
-		custom_tooltip = c3rd_events.48.c.tt1
-		if = {
-			limit = {
-				has_country_modifier = too_giant_republic
-			}
-			add_stability = -10
-		}
-		else_if = {
-			limit = {
-				has_country_modifier = too_huge_republic
-			}
-			remove_country_modifier = too_huge_republic
-			add_country_modifier = {
-				name = too_giant_republic
-				duration = -1
-			}
-		}
-		else_if = {
-			limit = {
-				has_country_modifier = too_grand_republic
-			}
-			remove_country_modifier = too_grand_republic
-			add_country_modifier = {
-				name = too_huge_republic
-				duration = -1
-			}
-		}
-		else = {
-			add_country_modifier = {
-				name = too_grand_republic
-				duration = -1
-			}
-		}
-	}
-}
 
-c3rd_events.49 = {
-	#republic reformed
+c3rd_events.50 = {
+	#reform failed, this event is here to inform you.
 	type = country_event
-	title = "c3rd_events.49.t"
-	desc = "c3rd_events.49.desc"
+	title = "c3rd_events.50.t"
+	desc = "c3rd_events.50.desc"
 	picture = senate_debate
 	trigger = {
 		has_land = yes
 		is_tribal = no
-		current_date >= 900.1.1
-		has_country_modifier = crisis_of_the_third_century
 		is_republic = yes
 	}
 	left_portrait = current_ruler
 	immediate = {
-		current_ruler = {
-			add_popularity = 30
+		traditionalist_approval_effect = {
+			VALUE = -10
 		}
-		add_country_modifier = {
-			name = provinces_republican_reforms
-			duration = 7300			#20years
-		}
-		set_variable = {
-			name = pretty_recent_rep_huge
-			days = 10000			#30 years so 10 years after the first modifier
-		}
-		if = {
-			limit = {
-				has_country_modifier = too_giant_republic
-			}
-			remove_country_modifier = too_giant_republic
-		}
-		if = {
-			limit = {
-				has_country_modifier = too_huge_republic
-			}
-			remove_country_modifier = too_huge_republic
-		}
-		if = {
-			limit = {
-				has_country_modifier = too_grand_republic
-			}
-			remove_country_modifier = too_grand_republic
+		oligarchic_approval_effect = {
+			VALUE = -20
 		}
 	}
 	option = {
-		name = c3rd_events.49.a
-		custom_tooltip = c3rd_events.49.a.tt1
-	}
-}
-
-c3rd_events.50 = {
-	#reforms failed
-	type = country_event
-	title = "c3rd_events.50.t"
-	desc = "c3rd_events.50.desc"
-	picture = roman_trial
-	trigger = {
-		has_land = yes
-		is_tribal = no
-		current_date >= 900.1.1
-		has_country_modifier = crisis_of_the_third_century
-		is_republic = yes
-	}
-	left_portrait = current_ruler
-	immediate = {
-		current_ruler = {
-			add_popularity = -20
-		}
-		add_country_modifier = {
-			name = political_unstability
-			duration = -1
-		}
-		if = {
-			limit = {
-				has_country_modifier = too_giant_republic
-			}
-			remove_country_modifier = too_giant_republic
-		}
-		if = {
-			limit = {
-				has_country_modifier = too_huge_republic
-			}
-			remove_country_modifier = too_huge_republic
-		}
-		if = {
-			limit = {
-				has_country_modifier = too_grand_republic
-			}
-			remove_country_modifier = too_grand_republic
-		}
-	}
-	option = {
+		#just the localization
 		name = c3rd_events.50.a
 		custom_tooltip = c3rd_events.50.a.tt1
 	}
 }
 
-c3rd_events.51 = {
-	#no more overextension if too small or not republic
-	type = country_event
-	title = "c3rd_events.51.t"
-	desc = "c3rd_events.51.desc"
-	picture = road_construction
-	trigger = {
-		has_land = yes
-		OR = {
-			has_country_modifier = too_grand_republic
-			has_country_modifier = too_huge_republic
-			has_country_modifier = too_giant_republic
-		}
-		OR = {
-			num_of_cities <= 900
-			is_republic = no
-		}
-	}
-	left_portrait = current_ruler
-	immediate = {
-		if = {
-			limit = {
-				has_country_modifier = too_giant_republic
-			}
-			remove_country_modifier = too_giant_republic
-		}
-		if = {
-			limit = {
-				has_country_modifier = too_huge_republic
-			}
-			remove_country_modifier = too_huge_republic
-		}
-		if = {
-			limit = {
-				has_country_modifier = too_grand_republic
-			}
-			remove_country_modifier = too_grand_republic
-		}
-	}
-	option = {
-		name = c3rd_events.51.a
-		custom_tooltip = c3rd_events.51.a.tt1
-	}
-}
-
-c3rd_events.52 = {
-	#no more overextension if political instability against a cost
-	type = country_event
-	title = "c3rd_events.52.t"
-	desc = "c3rd_events.52.desc"
-	picture = road_construction
-	trigger = {
-		has_land = yes
-		OR = {
-			has_country_modifier = too_grand_republic
-			has_country_modifier = too_huge_republic
-			has_country_modifier = too_giant_republic
-		}
-	}
-	left_portrait = current_ruler
-	immediate = {
-		if = {
-			limit = {
-				has_country_modifier = too_giant_republic
-			}
-			remove_country_modifier = too_giant_republic
-		}
-		if = {
-			limit = {
-				has_country_modifier = too_huge_republic
-			}
-			remove_country_modifier = too_huge_republic
-		}
-		if = {
-			limit = {
-				has_country_modifier = too_grand_republic
-			}
-			remove_country_modifier = too_grand_republic
-		}
-	}
-	option = {
-		name = c3rd_events.51.a
-		custom_tooltip = c3rd_events.51.a.tt1
-	}
-}
 
 c3rd_events.100 = {
 	#debug event
@@ -5980,6 +5453,25 @@ c3rd_events.100 = {
 	trigger = {
 	}
 	immediate = {
+		if = {
+			limit = {
+				has_country_modifier = c3rd_civil_war_republic_ae
+				any_country = { 
+					has_country_modifier = c3rd_rebel_republic_mod 
+					has_variable = c3rd_cw_mother_republic
+					var:c3rd_cw_mother_republic = root
+				}
+			}
+			random_country = {
+				limit = { 
+					has_country_modifier = c3rd_rebel_republic_mod 
+					has_variable = c3rd_cw_mother_republic
+					var:c3rd_cw_mother_republic = root
+				}
+				save_scope_as = rebel_republic
+			}
+				
+			}
 	}
 	option = {
 		name = c3rd_events.100.a
