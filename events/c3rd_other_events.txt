@@ -15660,46 +15660,7 @@ c3rd_other_events.131 = {
 	}
 }
 
-c3rd_other_events.132 = {
-	#EPIDEMY modifier 2 event when solidus (solidus makes these events more devastating)
-	type = country_event
-	title = "c3rd_other_events.132.t"
-	desc = "c3rd_other_events.132.desc"
-	left_portrait = current_ruler
-	picture = successors
-	trigger = {
-		has_land = yes
-		is_tribal = no
-		has_civil_war = no
-		current_date >= 800.1.1
-		has_country_modifier = solidus_introduced
-		any_owned_province = {
-			count >= 10
-			OR = {
-				has_province_modifier = "cyprian_plague_epidemic_outbreak_city"
-				has_province_modifier = "cyprian_plague_epidemic_quarantine"
-				has_province_modifier = "cyprian_plague_epidemic_outbreak_town"
-				has_province_modifier = "cyprian_plague_epidemic_quarantown"
-			}
-		}
-		NOT = {
-			has_variable = already_epidemy_modifier_solidus_2
-		}
-	}
-	immediate = {
-		add_country_modifier = {
-			name = epidemy_modifier_solidus_2
-			duration = 14600			#40 years
-		}
-		set_variable = {
-			name = already_epidemy_modifier_solidus_2
-		}
-	}
-	option = {
-		name = c3rd_other_events.132.a
-		custom_tooltip = c3rd_other_events.132.a.tt1
-	}
-}
+# c3rd_other_events.132 replaced by c3rd_epidemy_events.5-8 (graduated modifiers chain)
 
 c3rd_other_events.140 = {
 	#losing permanent modifiers

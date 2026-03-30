@@ -712,10 +712,284 @@ c3rd_cleanup_epidemy_solidus = {
 		remove_variable = epidemy_political
 		remove_variable = epidemy_military
 		remove_variable = epidemy_social
-		remove_variable = solidus_epidemy_start_date
 		remove_variable = solidus_epidemy1_political_triggered
 		remove_variable = solidus_epidemy_military_triggered
 		remove_variable = solidus_epidemy_social_triggered
+	}
+}
+
+c3rd_update_epidemy_solidus2_modifier = {
+	# Remove all possible series-2 modifiers first
+	hidden_effect = {
+		remove_country_modifier = c3rd_epidemy_solidus2_base
+		remove_country_modifier = c3rd_epidemy_solidus2_s
+		remove_country_modifier = c3rd_epidemy_solidus2_m
+		remove_country_modifier = c3rd_epidemy_solidus2_m_s
+		remove_country_modifier = c3rd_epidemy_solidus2_mh
+		remove_country_modifier = c3rd_epidemy_solidus2_mh_s
+		remove_country_modifier = c3rd_epidemy_solidus2_p
+		remove_country_modifier = c3rd_epidemy_solidus2_p_s
+		remove_country_modifier = c3rd_epidemy_solidus2_p_m
+		remove_country_modifier = c3rd_epidemy_solidus2_p_m_s
+		remove_country_modifier = c3rd_epidemy_solidus2_p_mh
+		remove_country_modifier = c3rd_epidemy_solidus2_p_mh_s
+		remove_country_modifier = c3rd_epidemy_solidus2_ph
+		remove_country_modifier = c3rd_epidemy_solidus2_ph_s
+		remove_country_modifier = c3rd_epidemy_solidus2_ph_m
+		remove_country_modifier = c3rd_epidemy_solidus2_ph_m_s
+		remove_country_modifier = c3rd_epidemy_solidus2_ph_mh
+		remove_country_modifier = c3rd_epidemy_solidus2_ph_mh_s
+
+		# Apply correct modifier based on variable combination (18 cases)
+		# Duration: 20 years (7300 days)
+		# 0/0/0 - Base only
+		if = {
+			limit = {
+				has_variable = epidemy2_political
+				var:epidemy2_political = 0
+				has_variable = epidemy2_military
+				var:epidemy2_military = 0
+				has_variable = epidemy2_social
+				var:epidemy2_social = 0
+			}
+			add_country_modifier = {
+				name = c3rd_epidemy_solidus2_base
+				duration = 7300
+			}
+		}
+		# 0/0/1 - Base + Social
+		else_if = {
+			limit = {
+				var:epidemy2_political = 0
+				var:epidemy2_military = 0
+				var:epidemy2_social = 1
+			}
+			add_country_modifier = {
+				name = c3rd_epidemy_solidus2_s
+				duration = 7300
+			}
+		}
+		# 0/1/0 - Base + Military full
+		else_if = {
+			limit = {
+				var:epidemy2_political = 0
+				var:epidemy2_military = 1
+				var:epidemy2_social = 0
+			}
+			add_country_modifier = {
+				name = c3rd_epidemy_solidus2_m
+				duration = 7300
+			}
+		}
+		# 0/1/1 - Base + Military full + Social
+		else_if = {
+			limit = {
+				var:epidemy2_political = 0
+				var:epidemy2_military = 1
+				var:epidemy2_social = 1
+			}
+			add_country_modifier = {
+				name = c3rd_epidemy_solidus2_m_s
+				duration = 7300
+			}
+		}
+		# 0/2/0 - Base + Military half
+		else_if = {
+			limit = {
+				var:epidemy2_political = 0
+				var:epidemy2_military = 2
+				var:epidemy2_social = 0
+			}
+			add_country_modifier = {
+				name = c3rd_epidemy_solidus2_mh
+				duration = 7300
+			}
+		}
+		# 0/2/1 - Base + Military half + Social
+		else_if = {
+			limit = {
+				var:epidemy2_political = 0
+				var:epidemy2_military = 2
+				var:epidemy2_social = 1
+			}
+			add_country_modifier = {
+				name = c3rd_epidemy_solidus2_mh_s
+				duration = 7300
+			}
+		}
+		# 1/0/0 - Base + Political full
+		else_if = {
+			limit = {
+				var:epidemy2_political = 1
+				var:epidemy2_military = 0
+				var:epidemy2_social = 0
+			}
+			add_country_modifier = {
+				name = c3rd_epidemy_solidus2_p
+				duration = 7300
+			}
+		}
+		# 1/0/1 - Base + Political full + Social
+		else_if = {
+			limit = {
+				var:epidemy2_political = 1
+				var:epidemy2_military = 0
+				var:epidemy2_social = 1
+			}
+			add_country_modifier = {
+				name = c3rd_epidemy_solidus2_p_s
+				duration = 7300
+			}
+		}
+		# 1/1/0 - Base + Political full + Military full
+		else_if = {
+			limit = {
+				var:epidemy2_political = 1
+				var:epidemy2_military = 1
+				var:epidemy2_social = 0
+			}
+			add_country_modifier = {
+				name = c3rd_epidemy_solidus2_p_m
+				duration = 7300
+			}
+		}
+		# 1/1/1 - Base + Political full + Military full + Social (FULL)
+		else_if = {
+			limit = {
+				var:epidemy2_political = 1
+				var:epidemy2_military = 1
+				var:epidemy2_social = 1
+			}
+			add_country_modifier = {
+				name = c3rd_epidemy_solidus2_p_m_s
+				duration = 7300
+			}
+		}
+		# 1/2/0 - Base + Political full + Military half
+		else_if = {
+			limit = {
+				var:epidemy2_political = 1
+				var:epidemy2_military = 2
+				var:epidemy2_social = 0
+			}
+			add_country_modifier = {
+				name = c3rd_epidemy_solidus2_p_mh
+				duration = 7300
+			}
+		}
+		# 1/2/1 - Base + Political full + Military half + Social
+		else_if = {
+			limit = {
+				var:epidemy2_political = 1
+				var:epidemy2_military = 2
+				var:epidemy2_social = 1
+			}
+			add_country_modifier = {
+				name = c3rd_epidemy_solidus2_p_mh_s
+				duration = 7300
+			}
+		}
+		# 2/0/0 - Base + Political half
+		else_if = {
+			limit = {
+				var:epidemy2_political = 2
+				var:epidemy2_military = 0
+				var:epidemy2_social = 0
+			}
+			add_country_modifier = {
+				name = c3rd_epidemy_solidus2_ph
+				duration = 7300
+			}
+		}
+		# 2/0/1 - Base + Political half + Social
+		else_if = {
+			limit = {
+				var:epidemy2_political = 2
+				var:epidemy2_military = 0
+				var:epidemy2_social = 1
+			}
+			add_country_modifier = {
+				name = c3rd_epidemy_solidus2_ph_s
+				duration = 7300
+			}
+		}
+		# 2/1/0 - Base + Political half + Military full
+		else_if = {
+			limit = {
+				var:epidemy2_political = 2
+				var:epidemy2_military = 1
+				var:epidemy2_social = 0
+			}
+			add_country_modifier = {
+				name = c3rd_epidemy_solidus2_ph_m
+				duration = 7300
+			}
+		}
+		# 2/1/1 - Base + Political half + Military full + Social
+		else_if = {
+			limit = {
+				var:epidemy2_political = 2
+				var:epidemy2_military = 1
+				var:epidemy2_social = 1
+			}
+			add_country_modifier = {
+				name = c3rd_epidemy_solidus2_ph_m_s
+				duration = 7300
+			}
+		}
+		# 2/2/0 - Base + Political half + Military half
+		else_if = {
+			limit = {
+				var:epidemy2_political = 2
+				var:epidemy2_military = 2
+				var:epidemy2_social = 0
+			}
+			add_country_modifier = {
+				name = c3rd_epidemy_solidus2_ph_mh
+				duration = 7300
+			}
+		}
+		# 2/2/1 - Base + Political half + Military half + Social (ALL HALF + SOCIAL)
+		else = {
+			add_country_modifier = {
+				name = c3rd_epidemy_solidus2_ph_mh_s
+				duration = 7300
+			}
+		}
+	}
+}
+
+c3rd_cleanup_epidemy_solidus2 = {
+	# Only clean variables if no series-2 epidemic modifiers are present (they expired naturally)
+	if = {
+		limit = {
+			NOR = {
+				has_country_modifier = c3rd_epidemy_solidus2_base
+				has_country_modifier = c3rd_epidemy_solidus2_s
+				has_country_modifier = c3rd_epidemy_solidus2_m
+				has_country_modifier = c3rd_epidemy_solidus2_m_s
+				has_country_modifier = c3rd_epidemy_solidus2_mh
+				has_country_modifier = c3rd_epidemy_solidus2_mh_s
+				has_country_modifier = c3rd_epidemy_solidus2_p
+				has_country_modifier = c3rd_epidemy_solidus2_p_s
+				has_country_modifier = c3rd_epidemy_solidus2_p_m
+				has_country_modifier = c3rd_epidemy_solidus2_p_m_s
+				has_country_modifier = c3rd_epidemy_solidus2_p_mh
+				has_country_modifier = c3rd_epidemy_solidus2_p_mh_s
+				has_country_modifier = c3rd_epidemy_solidus2_ph
+				has_country_modifier = c3rd_epidemy_solidus2_ph_s
+				has_country_modifier = c3rd_epidemy_solidus2_ph_m
+				has_country_modifier = c3rd_epidemy_solidus2_ph_m_s
+				has_country_modifier = c3rd_epidemy_solidus2_ph_mh
+				has_country_modifier = c3rd_epidemy_solidus2_ph_mh_s
+			}
+		}
+		remove_variable = epidemy2_political
+		remove_variable = epidemy2_military
+		remove_variable = epidemy2_social
+		remove_variable = solidus_epidemy2_political_triggered
+		remove_variable = solidus_epidemy2_military_triggered
+		remove_variable = solidus_epidemy2_social_triggered
 	}
 }
 

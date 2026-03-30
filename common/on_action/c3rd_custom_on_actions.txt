@@ -11,13 +11,36 @@
 	}
 }
 
-# Epidemic + Solidus cleanup - runs monthly to clean variables when modifiers expire
+# Runs monthly. Fires only once the event window is closed (first_epidemy_modifier_solidus_X expired).
+# The cleanup effects guard against removing variables while the modifier is still active.
 c3rd_epidemy_solidus_cleanup = {
 	trigger = {
-		has_variable = epidemy_political
+		OR = {
+			AND = {
+				has_variable = epidemy_political
+				NOT = { has_variable = first_epidemy_modifier_solidus_1 }
+			}
+			AND = {
+				has_variable = epidemy2_political
+				NOT = { has_variable = first_epidemy_modifier_solidus_2 }
+			}
+		}
 	}
 	effect = {
-		c3rd_cleanup_epidemy_solidus = yes
+		if = {
+			limit = {
+				has_variable = epidemy_political
+				NOT = { has_variable = first_epidemy_modifier_solidus_1 }
+			}
+			c3rd_cleanup_epidemy_solidus = yes
+		}
+		if = {
+			limit = {
+				has_variable = epidemy2_political
+				NOT = { has_variable = first_epidemy_modifier_solidus_2 }
+			}
+			c3rd_cleanup_epidemy_solidus2 = yes
+		}
 	}
 }
 
@@ -3475,6 +3498,10 @@ c3rd_barbarian_related_events = {
 		c3rd_epidemy_events.2
 		c3rd_epidemy_events.3
 		c3rd_epidemy_events.4
+		c3rd_epidemy_events.5
+		c3rd_epidemy_events.6
+		c3rd_epidemy_events.7
+		c3rd_epidemy_events.8
 		c3rd_other_events.132
 		c3rd_other_events.141
 		c3rd_other_events.142
