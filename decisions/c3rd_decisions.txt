@@ -9,6 +9,10 @@
 		}
 		effect = {
 			remove_country_modifier = political_unstability
+			set_variable = {
+				name = recent_pol_unstability_resolved
+				days = 1825	# 5 years cooldown before instability events can refire
+			}
 		}
 		
 		ai_will_do = {
@@ -28,6 +32,10 @@
 		}
 		effect = {
 			remove_country_modifier = political_unstability
+			set_variable = {
+				name = recent_pol_unstability_resolved
+				days = 1825	# 5 years cooldown before instability events can refire
+			}
 		}
 		
 		ai_will_do = {
@@ -46,6 +54,10 @@
 		}
 		effect = {
 			remove_country_modifier = political_unstability
+			set_variable = {
+				name = recent_pol_unstability_resolved
+				days = 1825	# 5 years cooldown before instability events can refire
+			}
 		}
 		
 		ai_will_do = {

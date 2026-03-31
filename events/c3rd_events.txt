@@ -5281,6 +5281,7 @@ c3rd_events.45 = {
 		NOR = {
 			has_variable = on_going_rep_thingy
 			has_variable = recent_rep_reform
+			has_variable = recent_pol_unstability_resolved
 		}
 		current_ruler = {
 			popularity >= 80
@@ -5554,6 +5555,7 @@ c3rd_events.48 = {
 		NOR = {
 			has_variable = on_going_rep_thingy
 			has_variable = recent_rep_huge
+			has_variable = recent_pol_unstability_resolved
 			has_country_modifier = political_unstability
 			has_country_modifier = provinces_republican_reforms
 		}
@@ -5737,6 +5739,14 @@ c3rd_events.48 = {
 						current_ruler = {
 							has_trait = orator
 						}
+					}
+					modifier = {
+						add = 10
+						has_senate_approval >= 0.75
+					}
+					modifier = {
+						add = 10
+						has_senate_approval >= 0.90
 					}
 					trigger_event = {
 						#reform the republic, get a modifier to keep things ok for 20 years
