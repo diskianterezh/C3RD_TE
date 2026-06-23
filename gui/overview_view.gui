@@ -181,7 +181,7 @@ base_window = {
 									icon_and_text = {
 										size = { 228 36 }
 
-										blockoverride "Icon" 
+										blockoverride "Icon"
 										{
 											size = { 34 34 }
 											texture = "gfx/interface/icons/menu_buttons/menu_government.dds"

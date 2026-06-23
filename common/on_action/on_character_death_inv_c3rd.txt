@@ -2743,6 +2743,53 @@ on_character_death = {
 				}
 			}
 		}
-		
+
+		###Section C3RD: Republican tension on aristocrat death
+		if = {
+			limit = {
+				has_character_modifier = major_influence_aristocrat
+				employer = {
+					is_republic = yes
+					has_variable = republican_tension
+				}
+			}
+			save_scope_as = dead_aristocrat
+			if = {
+				limit = {
+					has_variable = country_ownership
+					var:country_ownership >= 50
+				}
+				employer = {
+					set_variable = {
+						name = dead_aristocrat_influence
+						value = 2
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					has_variable = country_ownership
+					var:country_ownership >= 35
+				}
+				employer = {
+					set_variable = {
+						name = dead_aristocrat_influence
+						value = 1
+					}
+				}
+			}
+			else = {
+				employer = {
+					set_variable = {
+						name = dead_aristocrat_influence
+						value = 0
+					}
+				}
+			}
+			employer = {
+				trigger_event = { id = c3rd_rep_tension.10  days = 1 }
+			}
+		}
+
 	}
 }

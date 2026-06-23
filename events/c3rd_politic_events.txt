@@ -1,0 +1,852 @@
+﻿namespace = c3rd_politic_events
+
+
+c3rd_politic_events.1 = {
+	# ruler (player) is prevented of the coup
+	type = country_event
+	title = "c3rd_politic_events.1.t"
+	desc = "c3rd_politic_events.1.desc"
+	picture = assassination
+	left_portrait = current_ruler
+	right_portrait = scope:head_plot_target
+	trigger = {
+		is_ai = no
+		exists = scope:head_plot_target
+		scope:head_plot_target = {
+			is_head_of_family = yes
+			is_ruler = no
+			NOT = {
+				has_character_modifier = major_influence_aristocrat
+			}
+			has_variable = country_ownership
+			var:country_ownership >= 0
+		}
+		any_character = {
+			count >= 2
+			is_head_of_family = yes
+			is_ruler = no
+			NOR = {
+				has_character_modifier = major_influence_aristocrat
+				this = scope:head_plot_target
+			}
+			has_variable = head_intent_plot
+			var:head_intent_plot >= 10	
+		}
+	}
+
+	immediate = {
+	}
+	option = {#give your benediction -> less maluses when the plot happens
+		name = c3rd_politic_events.1.a
+		custom_tooltip = c3rd_politic_events.1.a.tt1
+		add_political_influence = -15
+		add_legitimacy = -10
+		set_variable = {
+			name = head_plot_benediction
+			days = 360
+		}
+		trigger_event = {
+			id = c3rd_politic_events.2
+			days = { 15 90 }
+		}
+	}
+	option = {#oppose them beware the target
+		name = c3rd_politic_events.1.b
+		custom_tooltip = c3rd_politic_events.1.b.tt1
+		scope:head_plot_target = {
+			add_loyalty = holding_protected
+		}
+		hidden_effect = {
+			random_list = {
+				10 = {
+					modifier = {
+						add = current_ruler.finesse
+					}
+					modifier = {
+						factor = 2
+						current_ruler = {
+							has_character_modifier = major_influence_aristocrat
+						}
+					}
+					trigger_event = {
+						id = c3rd_politic_events.3
+						days = { 15 90 }
+					}
+				}
+				10 = {
+					trigger_event = {
+						id = c3rd_politic_events.2
+						days = { 15 90 }
+					}
+				}
+			}
+		}
+	}
+	option = {#oppose them big country ownership
+		name = c3rd_politic_events.1.c
+		custom_tooltip = c3rd_politic_events.1.c.tt1
+		trigger = {
+			current_ruler = {
+				has_variable = country_ownership
+				var:country_ownership >= 30
+			}
+			political_influence >= 40
+		}
+		highlight = yes
+		add_political_influence = -40
+		hidden_effect = {
+			set_variable = {
+				name = head_intent_plot_noplot
+				days = 730
+			}
+			if = {
+				limit = {
+					current_ruler = {
+						has_variable = country_ownership
+						var:country_ownership >= 80
+					}
+				}
+				add_tyranny = 8
+				every_character = {
+					limit = {
+						has_variable = head_intent_plot
+					}
+					change_variable = {
+						name = head_intent_plot
+						add = -5
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					current_ruler = {
+						has_variable = country_ownership
+						var:country_ownership >= 60
+					} 
+				}
+				add_tyranny = 6
+				every_character = {
+					limit = {
+						has_variable = head_intent_plot
+					}
+					change_variable = {
+						name = head_intent_plot
+						add = -4
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					current_ruler = {
+						has_variable = country_ownership
+						var:country_ownership >= 40
+					} 
+				}
+				add_tyranny = 4
+				every_character = {
+					limit = {
+						has_variable = head_intent_plot
+					}
+					change_variable = {
+						name = head_intent_plot
+						add = -3
+					}
+				}
+			}
+			else = {
+				add_tyranny = 3
+				every_character = {
+					limit = {
+						has_variable = head_intent_plot
+					}
+					change_variable = {
+						name = head_intent_plot
+						add = -2
+					}
+				}
+			}
+		}
+		trigger_event = {
+			id = c3rd_politic_events.2
+			days = { 15 90 }
+		}
+	}
+	option = {#oppose them tyranny
+		name = c3rd_politic_events.1.d
+		custom_tooltip = c3rd_politic_events.1.d.tt1
+		trigger = {
+			tyranny >= 30
+		}
+		highlight = yes
+		add_tyranny = 8
+		current_ruler = {
+			add_popularity = -10
+		}
+		set_variable = {
+			name = head_intent_plot_noplot
+			days = 1825
+		}
+	}
+	option = {#do nothing, gain pi
+		name = c3rd_politic_events.1.e
+		custom_tooltip = c3rd_politic_events.1.e.tt1
+		add_political_influence = 40
+		trigger_event = {
+			id = c3rd_politic_events.2
+			days = { 15 90 }
+		}
+	}
+}
+
+
+c3rd_politic_events.2 = {
+	# plot : head of families cannibalize each others to try to become a major landowner
+	type = country_event
+	title = "c3rd_politic_events.2.t"
+	desc = "c3rd_politic_events.2.desc"
+	picture = great_work_riot
+	left_portrait = current_ruler
+	right_portrait = scope:head_plot_target
+	trigger = {
+		is_ai = no
+		exists = scope:head_plot_target
+		scope:head_plot_target = {
+			is_head_of_family = yes
+			is_ruler = no
+			NOT = {
+				has_character_modifier = major_influence_aristocrat
+			}
+			has_variable = country_ownership
+			var:country_ownership >= 0
+		}
+		any_character = {
+			count >= 2
+			is_head_of_family = yes
+			is_ruler = no
+			NOR = {
+				has_character_modifier = major_influence_aristocrat
+				this = scope:head_plot_target
+			}
+			has_variable = head_intent_plot
+			var:head_intent_plot >= 10	
+		}
+	}
+
+	immediate = {
+		random_character = {
+			limit = {
+				is_head_of_family = yes
+				is_ruler = no
+				NOR = {
+					has_character_modifier = major_influence_aristocrat
+					this = scope:head_plot_target
+				}
+				has_variable = head_intent_plot
+				var:head_intent_plot >= 10	
+			}
+			save_scope_as = head_plotter_1
+		}
+		random_character = {
+			limit = {
+				is_head_of_family = yes
+				is_ruler = no
+				NOR = {
+					has_character_modifier = major_influence_aristocrat
+					this = scope:head_plot_target
+					this = scope:head_plotter_1
+				}
+				has_variable = head_intent_plot
+				var:head_intent_plot >= 10	
+			}
+			save_scope_as = head_plotter_2
+		}
+		if = {
+			limit = {
+				any_character = {
+					is_head_of_family = yes
+					is_ruler = no
+					NOR = {
+						has_character_modifier = major_influence_aristocrat
+						this = scope:head_plot_target
+						this = scope:head_plotter_1
+						this = scope:head_plotter_2
+					}
+					has_variable = head_intent_plot
+					var:head_intent_plot >= 10	
+				}
+			}
+			random_character = {
+				limit = {
+					is_head_of_family = yes
+					is_ruler = no
+					NOR = {
+						has_character_modifier = major_influence_aristocrat
+						this = scope:head_plot_target
+						this = scope:head_plotter_1
+						this = scope:head_plotter_2
+					}
+					has_variable = head_intent_plot
+					var:head_intent_plot >= 10	
+				}
+				save_scope_as = head_plotter_3
+			}
+		}
+		if = {
+			limit = {
+				has_variable = head_plot_benediction
+			}
+			if = {
+				limit = {
+					stability >= 80
+				}
+				add_stability = -12
+			}
+			else_if = {
+				limit = {
+					stability >= 70
+				}
+				add_stability = -10
+			}
+			else_if = {
+				limit = {
+					stability >= 60
+				}
+				add_stability = -7
+			}
+			else = {
+				add_stability = -5
+			}
+			custom_tooltip = c3rd_politic_events.2.tt1
+		}
+		else = {
+			if = {
+				limit = {
+					stability >= 80
+				}
+				add_stability = -25
+			}
+			else_if = {
+				limit = {
+					stability >= 70
+				}
+				add_stability = -20
+			}
+			else_if = {
+				limit = {
+					stability >= 60
+				}
+				add_stability = -15
+			}
+			else = {
+				add_stability = -10
+			}
+		}
+		every_governorships = {
+			limit = {
+				has_variable = governorship_owner
+				var:governorship_owner = {
+					family = scope:head_plot_target.family
+				}
+			}
+			remove_variable = governorship_owner
+			if = {
+				limit = {
+					exists = scope:head_plotter_3
+				}
+				random_list = {
+					10 = {
+						modifier = {
+							factor = 3
+							governor = {
+								family = scope:head_plotter_1.family
+							}
+						}
+						set_variable = {
+							name = governorship_owner
+							value = scope:head_plotter_1
+						}
+					}
+					10 = {
+						modifier = {
+							factor = 3
+							governor = {
+								family = scope:head_plotter_2.family
+							}
+						}
+						set_variable = {
+							name = governorship_owner
+							value = scope:head_plotter_2
+						}
+					}
+					10 = {
+						modifier = {
+							factor = 3
+							governor = {
+								family = scope:head_plotter_3.family
+							}
+						}
+						set_variable = {
+							name = governorship_owner
+							value = scope:head_plotter_3
+						}
+					}
+				}
+			}
+			else = {
+				random_list = {
+					10 = {
+						modifier = {
+							factor = 3
+							governor = {
+								family = scope:head_plotter_1.family
+							}
+						}
+						set_variable = {
+							name = governorship_owner
+							value = scope:head_plotter_1
+						}
+					}
+					10 = {
+						modifier = {
+							factor = 3
+							governor = {
+								family = scope:head_plotter_2.family
+							}
+						}
+						set_variable = {
+							name = governorship_owner
+							value = scope:head_plotter_2
+						}
+					}
+				}			
+			}
+		}
+		every_character = {
+			limit = {
+				is_ruler = no
+				family = scope:head_plot_target.family
+				NOT = {this = scope:head_plot_target}
+			}
+			if = {
+				limit = {
+					exists = scope:head_plotter_3
+				}
+				random_list = {
+					10 = {
+						every_holdings = {
+							holding_owner = {
+								remove_holding = prev
+							}
+							scope:head_plotter_1 = {
+								add_holding = prev
+							}
+						}
+					}
+					10 = {
+						every_holdings = {
+							holding_owner = {
+								remove_holding = prev
+							}
+							scope:head_plotter_2 = {
+								add_holding = prev
+							}
+						}
+					}
+					10 = {
+						every_holdings = {
+							holding_owner = {
+								remove_holding = prev
+							}
+							scope:head_plotter_3 = {
+								add_holding = prev
+							}
+						}
+					}
+				}
+			}
+			else = {
+				random_list = {
+					10 = {
+						every_holdings = {
+							holding_owner = {
+								remove_holding = prev
+							}
+							scope:head_plotter_1 = {
+								add_holding = prev
+							}
+						}
+					}
+					10 = {
+						every_holdings = {
+							holding_owner = {
+								remove_holding = prev
+							}
+							scope:head_plotter_2 = {
+								add_holding = prev
+							}
+						}
+					}
+				}			
+			}
+			random_list = {
+				10 = {
+					modifier = {
+						factor = 2
+						is_governor = yes
+					}
+					modifier = {
+						factor = 1.5
+						has_any_office = yes
+					}
+					modifier = {
+						factor = 2
+						is_general = yes
+					}
+				}
+				20 = {
+					death = {
+						death_reason = death_assassinated
+					}
+				}
+			}
+		}
+		scope:head_plot_target = {
+			every_holdings = {
+				if = {
+					limit = {
+						exists = scope:head_plotter_3
+					}
+					random_list = {
+						10 = {
+							modifier = {
+								factor = 3
+								governor = {
+									family = scope:head_plotter_1.family
+								}
+							}
+							holding_owner = {
+								remove_holding = prev
+							}
+							scope:head_plotter_1 = {
+								add_holding = prev
+							}
+						}
+					
+						10 = {
+							modifier = {
+								factor = 3
+								governor = {
+									family = scope:head_plotter_2.family
+								}
+							}
+							holding_owner = {
+								remove_holding = prev
+							}
+							scope:head_plotter_2 = {
+								add_holding = prev
+							}
+						}
+						10 = {
+							modifier = {
+								factor = 3
+								governor = {
+									family = scope:head_plotter_3.family
+								}
+							}
+							holding_owner = {
+								remove_holding = prev
+							}
+							scope:head_plotter_3 = {
+								add_holding = prev
+							}
+						}
+						15 = {}
+					}
+				}
+				else = {
+					random_list = {
+						10 = {
+							modifier = {
+								factor = 3
+								governor = {
+									family = scope:head_plotter_1.family
+								}
+							}
+							holding_owner = {
+								remove_holding = prev
+							}
+							scope:head_plotter_1 = {
+								add_holding = prev
+							}
+						}
+						10 = {
+							modifier = {
+								factor = 3
+								governor = {
+									family = scope:head_plotter_2.family
+								}
+							}
+							holding_owner = {
+								remove_holding = prev
+							}
+							scope:head_plotter_2 = {
+								add_holding = prev
+							}
+						}
+						10 = {}
+					}
+				}	
+			}
+		}
+		
+	}
+	option = {#ok
+		name = c3rd_politic_events.2.a
+		custom_tooltip = c3rd_politic_events.2.a.tt1
+	}
+	option = {#take his domains
+		name = c3rd_politic_events.2.b
+		custom_tooltip = c3rd_politic_events.2.b.tt1
+		trigger = {
+			any_subject = {
+				is_subject_type = autonomous_domain
+				has_variable = owner_from_another_empire
+				var:owner_from_another_empire = scope:head_plot_target
+			}
+		}
+		add_stability = -5
+		add_tyranny = 8
+		hidden_effect = {
+			every_subject = {
+				limit = {
+					is_subject_type = autonomous_domain
+					has_variable = owner_from_another_empire
+					var:owner_from_another_empire = scope:head_plot_target	
+				}
+				every_owned_province = {
+					set_owned_by = root
+					random_list = {
+						2 = {
+						}
+						1 = {
+							modifier = {
+								add = 1
+								root = {
+									has_law = decentralized_administration_law
+								}
+							}
+							scope:head_plot_target = {
+								add_holding = prev
+							}
+						}
+					}
+				}
+			}
+		}
+		scope:head_plot_target = {
+			add_loyalty = reintegrated_domain
+		}
+	}
+	after = {
+		if = {
+			limit = {
+				has_variable = head_plot_benediction
+			}
+			remove_variable = head_plot_benediction
+		}
+		scope:head_plotter_1 = {
+			remove_variable = head_intent_plot
+		}
+		scope:head_plotter_2 = {
+			remove_variable = head_intent_plot
+		}
+		if = {
+			limit = {
+				exists = scope:head_plotter_3
+			}
+			scope:head_plotter_3 = {
+				remove_variable = head_intent_plot
+			}
+		}
+		if = {
+			limit = {
+				scope:head_plot_target = {
+					has_variable = head_intent_plot
+				}
+			}
+			scope:head_plot_target = {
+				change_variable = {
+					name = head_intent_plot
+					add = -5
+				}
+			}
+		}
+	}
+}
+
+
+c3rd_politic_events.3 = {
+	# plot : the target was warned and fight back
+	type = country_event
+	title = "c3rd_politic_events.3.t"
+	desc = "c3rd_politic_events.3.desc"
+	picture = assassination
+	left_portrait = current_ruler
+	right_portrait = scope:head_plot_target
+	trigger = {
+		is_ai = no
+		exists = scope:head_plot_target
+		scope:head_plot_target = {
+			is_head_of_family = yes
+			is_ruler = no
+			NOT = {
+				has_character_modifier = major_influence_aristocrat
+			}
+			has_variable = country_ownership
+			var:country_ownership >= 0
+		}
+		any_character = {
+			count >= 2
+			is_head_of_family = yes
+			is_ruler = no
+			NOR = {
+				has_character_modifier = major_influence_aristocrat
+				this = scope:head_plot_target
+			}
+			has_variable = head_intent_plot
+			var:head_intent_plot >= 10	
+		}
+	}
+
+	immediate = {
+		random_character = {
+			limit = {
+				is_head_of_family = yes
+				is_ruler = no
+				NOR = {
+					has_character_modifier = major_influence_aristocrat
+					this = scope:head_plot_target
+				}
+				has_variable = head_intent_plot
+				var:head_intent_plot >= 10	
+			}
+			save_scope_as = head_plotter_1
+		}
+		random_character = {
+			limit = {
+				is_head_of_family = yes
+				is_ruler = no
+				NOR = {
+					has_character_modifier = major_influence_aristocrat
+					this = scope:head_plot_target
+					this = scope:head_plotter_1
+				}
+				has_variable = head_intent_plot
+				var:head_intent_plot >= 10	
+			}
+			save_scope_as = head_plotter_2
+		}
+		if = {
+			limit = {
+				any_character = {
+					is_head_of_family = yes
+					is_ruler = no
+					NOR = {
+						has_character_modifier = major_influence_aristocrat
+						this = scope:head_plot_target
+						this = scope:head_plotter_1
+						this = scope:head_plotter_2
+					}
+					has_variable = head_intent_plot
+					var:head_intent_plot >= 10	
+				}
+			}
+			random_character = {
+				limit = {
+					is_head_of_family = yes
+					is_ruler = no
+					NOR = {
+						has_character_modifier = major_influence_aristocrat
+						this = scope:head_plot_target
+						this = scope:head_plotter_1
+						this = scope:head_plotter_2
+					}
+					has_variable = head_intent_plot
+					var:head_intent_plot >= 10	
+				}
+				save_scope_as = head_plotter_3
+			}
+		}
+		if = {
+			limit = {
+				stability >= 80
+			}
+			add_stability = -30
+		}
+		else_if = {
+			limit = {
+				stability >= 70
+			}
+			add_stability = -24
+		}
+		else_if = {
+			limit = {
+				stability >= 60
+			}
+			add_stability = -18
+		}
+		else = {
+			add_stability = -12
+		}
+		add_political_influence = 50
+		add_tyranny = -2
+		scope:head_plot_target = {
+			add_loyalty = family_saved
+			set_variable = {
+				name = blood_dept
+				value = root.current_ruler
+				days = 9125 #25y
+			}
+		}
+		
+	}
+	option = {#ok
+		name = c3rd_politic_events.3.a
+		custom_tooltip = c3rd_politic_events.3.a.tt1
+	}
+	after = {
+		if = {
+			limit = {
+				has_variable = head_plot_benediction
+			}
+			remove_variable = head_plot_benediction
+		}
+		scope:head_plotter_1 = {
+			remove_variable = head_intent_plot
+		}
+		scope:head_plotter_2 = {
+			remove_variable = head_intent_plot
+		}
+		if = {
+			limit = {
+				exists = scope:head_plotter_3
+			}
+			scope:head_plotter_3 = {
+				remove_variable = head_intent_plot
+			}
+		}
+		if = {
+			limit = {
+				scope:head_plot_target = {
+					has_variable = head_intent_plot
+				}
+			}
+			scope:head_plot_target = {
+				change_variable = {
+					name = head_intent_plot
+					add = -5
+				}
+			}
+		}
+	}
+}

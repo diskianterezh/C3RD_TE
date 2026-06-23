@@ -1,0 +1,531 @@
+
+
+@rep_window_x = 675
+@rep_window_y = 600
+
+
+message_window = {
+	name = "c3rd_rep_tension_window"
+	size = { @rep_window_x @rep_window_y }
+	position = { 531 150 }
+	movable = yes
+
+	state = {
+		name = _show
+		start_sound = {
+			soundeffect = "event:/SFX/UI/Generic/2.0/sfx_ui_window_tab_close"
+		}
+	}
+	state = {
+		name = _hide
+		start_sound = {
+			soundeffect = "event:/SFX/UI/Generic/2.0/sfx_ui_window_tab_close"
+		}
+	}
+	
+	icon = {
+		texture = "gfx/interface/event_window/Event_dagger_behind_back.dds"
+		visible = "[GetScriptedGui('c3rd_monetary_is_normal').IsShown( GuiScope.SetRoot( Player.MakeScope ).End )]"
+		scale = 0.45
+		alpha = 1
+		parentanchor = top|center
+		position = { 0 20 }
+	}
+	margin_widget = {
+		parentanchor = center
+		name = "data1"
+		size = { 600 70 }
+		using = NoninteractableBG
+		position = { 0 -70 }
+		blockoverride "Margins"
+		{
+			margin = { 0 0 }
+		}
+	}
+	
+	flowcontainer = {
+		parentanchor = center
+		position = { 10 -80 }
+		spacing = 0
+		direction = horizontal
+		icon_and_text = {
+			size = { 210 0 }
+			scale = 0.7
+			blockoverride "Text" { 
+				text = "c3rd_rep_size"
+				scale = 1.1
+			}
+			blockoverride "Icon" { 
+				texture = "gfx/interface/icons/shared_icons/city.dds" 
+			}
+			tooltip = "c3rd_rep_src_cities_tt"
+			
+		}
+		icon_and_text = {
+			size = { 150 0 }
+			scale = 0.7
+			blockoverride "Text" { 
+				text = "c3rd_rep_stab" 
+				scale = 1.2
+			}
+			blockoverride "Icon" { texture = "gfx/interface/icons/shared_icons/stability.dds" }
+			tooltip = "c3rd_rep_src_stab_tt"
+			
+		}
+		icon_and_text = {
+			size = { 150 0 }
+			scale = 0.7
+			visible = "[GetScriptedGui('c3rd_monetary_enslaved_culture').IsValid( GuiScope.SetRoot( Player.MakeScope ).End )]"
+			blockoverride "Text" { 
+				text = "c3rd_rep_senate_approval" 
+				scale = 1.2
+			}
+			blockoverride "Icon" { texture = "gfx/interface/icons/modifiers/senate_approval.dds" }
+			tooltip = "c3rd_rep_src_low_senate_tt"
+			
+		}
+		
+	}
+
+	flowcontainer = {
+		parentanchor = center
+		position = { 10 -50 }
+		spacing = 0
+		direction = horizontal
+		icon_and_text = {
+			size = { 190 0 }
+			scale = 0.7
+			blockoverride "Text" { 
+				text = "c3rd_rep_time" 
+				scale = 1.1
+			}
+			blockoverride "Icon" { texture = "gfx/interface/icons/shared_icons/time.dds" }
+			tooltip = "c3rd_rep_time_tt"
+			
+		}
+		icon_and_text = {
+			size = { 170 0 }
+			scale = 0.7
+			blockoverride "Text" { 
+				text = "c3rd_rep_monetary" 
+				scale = 1.2
+			}
+			blockoverride "Icon" { 
+				texture = "gfx/interface/icons/shared_icons/leader.dds" 
+				scale = 1.1
+			}
+			tooltip = "c3rd_rep_monetary_tt"
+			
+		}
+		icon_and_text = {
+			size = { 150 0 }
+			scale = 0.7
+			visible = "[GetScriptedGui('c3rd_monetary_enslaved_culture').IsValid( GuiScope.SetRoot( Player.MakeScope ).End )]"
+			blockoverride "Text" { 
+				text = "c3rd_rep_military" 
+				scale = 1.2
+			}
+			blockoverride "Icon" { texture = "gfx/interface/icons/shared_icons/military_tradition.dds" }
+			tooltip = "c3rd_rep_military_tt"
+			
+		}
+		
+	}
+
+
+	blockoverride "Title_text" { text = "c3rd_rep_tension_window_TITLE" }
+
+	blockoverride "White_buttons"
+	{
+		button_close = {
+			tooltip = "CLOSE"
+			onclick = "[ExecuteConsoleCommand('gui.ClearWidgets c3rd_rep_tension_window')]"
+			onclick = "[GetVariableSystem.Clear('c3rd_rep_tension_window_opened')]"
+		}
+	}
+	
+	
+			vbox = {
+				name = "Tension tab"
+				layoutpolicy_horizontal = expanding
+				layoutpolicy_vertical = expanding
+				margin = { 25 250 }
+
+
+				margin_widget = { #Unique Mechanics for Republic
+					size = { 0 528 }
+					layoutpolicy_horizontal = expanding
+					margin_top = 12
+					hbox = {
+						margin = { 200 0 }
+						layoutpolicy_horizontal = expanding
+						spacing = 10
+						parentanchor = top|hcenter
+						position = { 0 -190 }
+						
+						icon = {
+							size = { 35 35 }
+							visible = "[GetScriptedGui('c3rd_divided_empire').IsShown( GuiScope.SetRoot( Player.MakeScope ).End )]"
+							texture = "gfx/interface/icons/shared_icons/reputation.dds"
+							tooltip = "c3rd_rep_divided_empire_tt"
+							color = { 0.5 1 0.5 1 }
+						}
+						icon = {
+							size = { 35 35 }
+							visible = "[GetScriptedGui('c3rd_rep_relief_scr').IsShown( GuiScope.SetRoot( Player.MakeScope ).End )]"
+							texture = "gfx/interface/icons/shared_icons/decision.dds"
+							tooltip = "c3rd_c3rd_rep_relief_tt"
+							color = { 0.5 1 0.5 1 }
+						}
+					}
+					
+					
+					
+					margin_widget = {
+						size = { 100% 100% }
+						
+							
+						sub_header = {
+							size = { 100% 24 }
+							blockoverride "Title_text" { 
+								text = "c3rd_rep_title"
+							}
+						}
+						icon = {
+							texture = "gfx/interface/event_window/Event_test.dds"
+							visible = "[GetScriptedGui('c3rd_rep_win_calm').IsShown( GuiScope.SetRoot( Player.MakeScope ).End )]"
+							scale = 0.6
+							parentanchor = top|hcenter
+							position = { 0 40 }
+							alpha = 0.4
+						}
+						icon = {
+							texture = "gfx/interface/event_window/Event_senate_debate.dds"
+							visible = "[GetScriptedGui('c3rd_rep_win_rising').IsShown( GuiScope.SetRoot( Player.MakeScope ).End )]"
+							scale = 0.47
+							parentanchor = top|hcenter
+							position = { 0 52 }
+							alpha = 0.4
+						}
+						icon = {
+							texture = "gfx/interface/event_window/Event_roman_trial.dds"
+							visible = "[GetScriptedGui('c3rd_rep_win_crisis').IsShown( GuiScope.SetRoot( Player.MakeScope ).End )]"
+							scale = 0.47
+							parentanchor = top|hcenter
+							position = { 0 52 }
+							alpha = 0.4
+						}
+
+						#The Tension
+						icon_and_text = {
+							position = { -10 130 }
+							parentanchor = hcenter
+							scale = 1.5
+							size = { 100 0 }
+							blockoverride "Text" { text = "c3rd_republican_tension_num" }
+							blockoverride "Icon" { 
+								using = "icon_roman_eagle"
+								scale = 0.8 
+							}
+							tooltip = "republican_tension_desc"
+						}
+						# Fleches de tendance — hausse (rouge)
+						icon = { 
+							size = { 20 20 }  
+							parentanchor = hcenter
+							position = { 80 150 }
+							visible = "[GetScriptedGui('c3rd_rep_arrow_up1').IsShown( GuiScope.SetRoot( Player.MakeScope ).End )]"
+							texture = "gfx/interface/icons/shared_icons/arrow_up.dds"
+							tooltip = "c3rd_rep_arrow_up"
+							color = { 1 0.5 0.5 1 } 
+						}
+						icon = { 
+							size = { 20 20 }  
+							parentanchor = hcenter
+							position = { 80 157 }
+							visible = "[GetScriptedGui('c3rd_rep_arrow_up2').IsShown( GuiScope.SetRoot( Player.MakeScope ).End )]"
+							texture = "gfx/interface/icons/shared_icons/arrow_up.dds"
+							tooltip = "c3rd_rep_arrow_up"
+							color = { 1 0.5 0.5 1 } 
+						}
+						icon = { 
+							size = { 20 20 }  
+							parentanchor = hcenter
+							position = { 80 165 }
+							visible = "[GetScriptedGui('c3rd_rep_arrow_up3').IsShown( GuiScope.SetRoot( Player.MakeScope ).End )]"
+							texture = "gfx/interface/icons/shared_icons/arrow_up.dds"
+							tooltip = "c3rd_rep_arrow_up"
+							color = { 1 0.5 0.5 1 } }
+						# Fleches de tendance — baisse (vert)
+						icon = { 
+							size = { 20 20 }  
+							parentanchor = hcenter
+							position = { 80 150 }
+							visible = "[GetScriptedGui('c3rd_rep_arrow_dn1').IsShown( GuiScope.SetRoot( Player.MakeScope ).End )]"
+							texture = "gfx/interface/icons/shared_icons/arrow_down.dds"
+							tooltip = "c3rd_rep_arrow_down"
+							color = { 0.5 1 0.5 1 } }
+						icon = { 
+							size = { 20 20 }  
+							parentanchor = hcenter
+							position = { 80 155 }
+							visible = "[GetScriptedGui('c3rd_rep_arrow_dn2').IsShown( GuiScope.SetRoot( Player.MakeScope ).End )]"
+							texture = "gfx/interface/icons/shared_icons/arrow_down.dds"
+							tooltip = "c3rd_rep_arrow_down"
+							color = { 0.5 1 0.5 1 } 
+						}
+						icon_and_text = {
+							position = { -10 270 }
+							parentanchor = hcenter
+							visible = "[GetScriptedGui('c3rd_rep_law_basic').IsShown( GuiScope.SetRoot( Player.MakeScope ).End )]"
+							size = { 180 0 }
+							blockoverride "Text" { text = "#bold Mos Maiorum" }
+							blockoverride "Icon" { texture = "gfx/interface/icons/party_types/traditionalist_party.dds" }
+							tooltip = "basic_republican_law_desc"
+						}
+						icon_and_text = {
+							position = { -10 270 }
+							parentanchor = hcenter
+							visible = "[GetScriptedGui('c3rd_rep_law_frum').IsShown( GuiScope.SetRoot( Player.MakeScope ).End )]"
+							size = { 180 0 }
+							blockoverride "Text" { text = "#bold Lex Frumentaria" }
+							blockoverride "Icon" { texture = "gfx/interface/icons/tradegoods/grain.dds" }
+							tooltip = "lex_frumentaria_desc"
+						}
+						icon_and_text = {
+							position = { -10 270 }
+							parentanchor = hcenter
+							visible = "[GetScriptedGui('c3rd_rep_law_prov').IsShown( GuiScope.SetRoot( Player.MakeScope ).End )]"
+							size = { 180 0 }
+							blockoverride "Text" { text = "#bold Lex de Provinciis" }
+							blockoverride "Icon" { texture = "gfx/interface/icons/modifiers/monthly_governor_wage.dds" }
+							tooltip = "lex_de_provinciis_desc"
+						}
+						icon_and_text = {
+							position = { -10 270 }
+							parentanchor = hcenter
+							visible = "[GetScriptedGui('c3rd_rep_law_semp').IsShown( GuiScope.SetRoot( Player.MakeScope ).End )]"
+							size = { 180 0 }
+							blockoverride "Text" { text = "#bold Lex Sempronia" }
+							blockoverride "Icon" { texture = "gfx/interface/icons/governor_policies/acquisition_of_wealth.dds" }
+							tooltip = "lex_sempronia_desc"
+						}
+						icon_and_text = {
+							position = { -10 270 }
+							parentanchor = hcenter
+							visible = "[GetScriptedGui('c3rd_rep_law_vill').IsShown( GuiScope.SetRoot( Player.MakeScope ).End )]"
+							size = { 180 0 }
+							blockoverride "Text" { text = "#bold Lex Villia Annalis" }
+							blockoverride "Icon" { texture = "gfx/interface/icons/shared_icons/election_term.dds" }
+							tooltip = "lex_villia_annalis_desc"
+						}
+						icon_and_text = {
+							position = { -10 270 }
+							parentanchor = hcenter
+							visible = "[GetScriptedGui('c3rd_rep_law_treb').IsShown( GuiScope.SetRoot( Player.MakeScope ).End )]"
+							size = { 180 0 }
+							blockoverride "Text" { text = "#bold Lex Trebonia" }
+							blockoverride "Icon" { texture = "gfx/interface/icons/shared_icons/military_tradition.dds" }
+							tooltip = "lex_trebonia_desc"
+						}
+						icon_and_text = {
+							position = { -10 270 }
+							parentanchor = hcenter
+							visible = "[GetScriptedGui('c3rd_rep_law_hort').IsShown( GuiScope.SetRoot( Player.MakeScope ).End )]"
+							size = { 180 0 }
+							blockoverride "Text" { text = "#bold Lex Hortensia" }
+							blockoverride "Icon" { texture = "gfx/interface/icons/shared_icons/curiate_assembly.dds" }
+							tooltip = "lex_hortensia_desc"
+						}
+						icon = {
+							position = { 100 270 }
+							visible = "[GetScriptedGui('c3rd_rep_law_is_tension').IsShown( GuiScope.SetRoot( Player.MakeScope ).End )]"
+							using = "icon_roman_eagle"
+							scale = 0.6
+							parentanchor = hcenter
+							color = { 1 0.4 0.4 1 }
+							tooltip = "c3rd_rep_incr_tension_tt"
+						}
+						icon = {
+							position = { 100 270 }
+							visible = "[GetScriptedGui('c3rd_rep_law_small_tension').IsShown( GuiScope.SetRoot( Player.MakeScope ).End )]"
+							using = "icon_roman_eagle"
+							scale = 0.6
+							parentanchor = hcenter
+							color = { 1 0.7 0.7 1 }
+							tooltip = "c3rd_rep_law_small_tension_tt"
+						}
+						icon = {
+							position = { 100 270 }
+							visible = "[GetScriptedGui('c3rd_rep_law_decr_tension').IsShown( GuiScope.SetRoot( Player.MakeScope ).End )]"
+							using = "icon_roman_eagle"
+							scale = 0.6
+							parentanchor = hcenter
+							color = { 0.4 1 0.4 1 }
+							tooltip = "c3rd_rep_law_decr_tension_tt"
+						}
+						icon = {
+							position = { 100 270 }
+							visible = "[GetScriptedGui('c3rd_rep_law_sdecr_tension').IsShown( GuiScope.SetRoot( Player.MakeScope ).End )]"
+							using = "icon_roman_eagle"
+							scale = 0.6
+							parentanchor = hcenter
+							color = { 0.7 1 0.7 1 }
+							tooltip = "c3rd_rep_law_sdecr_tension_tt"
+						}
+						icon = {
+							position = { 135 270 }
+							visible = "[GetScriptedGui('c3rd_rep_law_treb').IsShown( GuiScope.SetRoot( Player.MakeScope ).End )]"
+							texture = "gfx/interface/icons/shared_icons/military_tradition.dds"
+							scale = 0.6
+							parentanchor = hcenter
+							color = { 0.8 1 0.8 1 }
+							tooltip = "c3rd_rep_law_decr_mil_tt"
+						}
+						icon = {
+							position = { 135 270 }
+							visible = "[GetScriptedGui('c3rd_rep_law_frum').IsShown( GuiScope.SetRoot( Player.MakeScope ).End )]"
+							texture = "gfx/interface/monetary/monetary_crisis.dds"
+							scale = 0.3
+							parentanchor = hcenter
+							color = { 1 0.5 0.5 1 }
+							tooltip = "c3rd_rep_law_mon_effect_tt"
+						}
+						
+
+			
+					}
+					margin_widget = {
+						size = { 150 276 }
+						position = { -0 40 }
+						margin = { 2 25 }
+						allow_outside = yes
+						
+						icon_card = {
+							blockoverride "Icon" {}
+							datacontext = "[Player.MakeScope.GetVariable('c3rd_rep_tension_leader').GetCharacter]"
+							size = { 100% 100% }
+							visible = "[Player.MakeScope.HasVariable('c3rd_rep_tension_leader')]"
+							tooltip = "c3rd_rep_dangerous_leader_tt"
+							tag = {
+								parentanchor = hcenter
+								position = { 0 10 }
+								scale = 0.8
+								text = "c3rd_dangerous_leader_text"
+
+							}
+							icon_and_text = {
+								size = { 70 0 }
+								scale = 1
+								position = { -5 50 }
+								parentanchor = hcenter
+								blockoverride "Icon"
+								{
+									texture = "gfx/interface/icons/shared_icons/loyalty.dds"
+									tooltip = "[Character.GetLoyaltyToolTip]"
+									framesize = { 50 50 }
+									size = { 34 34 }
+								}
+								blockoverride "Text" { text = "[Character.GetLoyalty|0]" }
+								visible = "[GetScriptedGui('c3rd_rep_char_norm').IsShown( GuiScope.SetRoot( Character.MakeScope ).End )]"
+							}
+							icon_and_text = {
+								size = { 70 0 }
+								scale = 1
+								position = { -5 50 }
+								parentanchor = hcenter
+								blockoverride "Icon"
+								{
+									texture = "gfx/interface/icons/shared_icons/popularity.dds"
+									framesize = { 50 50 }
+									size = { 34 34 }
+								}
+								blockoverride "Text" { text = "[Character.GetPopularity|0]" }
+								tooltip = "[Character.GetPopularityToolTip]"
+								visible = "[GetScriptedGui('c3rd_rep_char_ruler').IsShown( GuiScope.SetRoot( Character.MakeScope ).End )]"
+							}
+							cpt_button = {
+								parentanchor = hcenter
+								position = { 0 102 }
+								size = { 60 90 }
+								blockoverride "ShowIcons" { visible = no }
+								blockoverride "PortraitTexture" { portrait_texture = "[Character.GetPortrait('default', 'head')]" }
+
+							}
+						}
+						icon = {
+							texture = "gfx/interface/tiles/senate_frame.dds"
+							size = { 158 240 }
+							datacontext = "[Player.MakeScope.GetVariable('c3rd_rep_tension_leader').GetCharacter]"
+							spriteType = corneredtiled
+							spriteborder = { 65 65 }
+							position = { 0 -8 }
+							parentanchor = hcenter
+							visible = "[GetScriptedGui('c3rd_rep_char_polinf').IsShown( GuiScope.SetRoot( Character.MakeScope ).End )]"
+						}
+
+					}
+					flowcontainer = {
+						parentanchor = top|right
+						position = { -10 70 }
+						spacing = 50
+						direction = vertical
+						icon_button_square = {
+							size = { 40 40 }
+							position = { 0 0 }
+							tooltip = "[GetScriptedGui('c3rd_start_monarch_reform').BuildTooltip( GuiScope.SetRoot( Player.MakeScope ).End )]"
+							enabled = "[GetScriptedGui('c3rd_start_monarch_reform').IsValid( GuiScope.SetRoot( Player.MakeScope ).End )]"
+							
+							blockoverride "ClickSound" { clicksound = "event:/SFX/UI/Actions/sfx_ui_action_goverment_interactions" }
+			
+							blockoverride "Icon" { 
+								texture = "gfx/interface/icons/shared_icons/legitimacy.dds" 
+								scale = 1				
+							}
+							blockoverride "On_click"
+							{
+								onclick = "[GetScriptedGui('c3rd_start_monarch_reform').Execute( GuiScope.SetRoot( Player.MakeScope ).End )]"
+							}
+
+						}
+						icon_button_square = {
+							size = { 40 40 }
+							position = { 0 0 }
+							tooltip = "[GetScriptedGui('c3rd_split_the_empire').BuildTooltip( GuiScope.SetRoot( Player.MakeScope ).End )]"
+							enabled = "[GetScriptedGui('c3rd_split_the_empire').IsValid( GuiScope.SetRoot( Player.MakeScope ).End )]"
+			
+							blockoverride "ClickSound" { clicksound = "event:/SFX/UI/Actions/sfx_ui_action_goverment_interactions" }
+			
+							blockoverride "Icon" { 
+								texture = "gfx/interface/icons/governor_policies/civilization_effort.dds" 
+								scale = 1					
+							}
+							blockoverride "On_click"
+							{
+								onclick = "[GetScriptedGui('c3rd_split_the_empire').Execute( GuiScope.SetRoot( Player.MakeScope ).End )]"
+							}
+						}
+						icon_button_square = {
+							size = { 40 40 }
+							position = { 0 0 }
+							tooltip = "[GetScriptedGui('c3rd_convocatio_populi').BuildTooltip( GuiScope.SetRoot( Player.MakeScope ).End )]"
+							enabled = "[GetScriptedGui('c3rd_convocatio_populi').IsValid( GuiScope.SetRoot( Player.MakeScope ).End )]"
+			
+							blockoverride "ClickSound" { clicksound = "event:/SFX/UI/Actions/sfx_ui_action_goverment_interactions" }
+			
+							blockoverride "Icon" { 
+								texture = "gfx/interface/icons/shared_icons/curiate_assembly.dds" 
+								scale = 1					
+							}
+							blockoverride "On_click"
+							{
+								onclick = "[GetScriptedGui('c3rd_convocatio_populi').Execute( GuiScope.SetRoot( Player.MakeScope ).End )]"
+							}
+						}
+					}
+
+				}
+				
+				
+			}
+}

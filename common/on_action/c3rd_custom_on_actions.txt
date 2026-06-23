@@ -406,10 +406,8 @@ c3rd_events_monthly_pulse = {
 		7 = c3rd_events.7		#generals asking for war
 		20 = c3rd_events.8		#generals asking for law
 		20 = c3rd_events.81		#only general take some powa
-		20 = c3rd_events.45		#republican leader push reforms
 		50 = c3rd_events.39		#kingmaker no office
 		5 = c3rd_events.391		#kingmaker unloyal
-		5 = c3rd_events.48		#Republic above 1000 territories
 		40 = c3rd_events.21		#governor defect to rival
 	}
 }
@@ -814,9 +812,10 @@ c3rd_other_events_monthly_pulse = {
 		5 = c3rd_other_events.70		#aristocratic reforms
 		4 = c3rd_other_events.71		#revolt of the freemen against inflation
 		5 = c3rd_other_events.72		#act against silver crash
-		7 = c3rd_other_events.73		#rpeople trying to escape taxes
+		7 = c3rd_other_events.73		#people trying to escape taxes
 		2 = c3rd_other_events.74		#Decuriones fleeing
 		2 = c3rd_other_events.84		#nobles escaping tax through land
+		60 = c3rd_other_events.861		#king_maker doing his own deal with major aristocrat
 		8 = c3rd_other_events.90		#political character doing his things
 		15 = c3rd_other_events.91		#coup from political character
 		8 = c3rd_other_events.92		#governor holding clash
@@ -2573,7 +2572,6 @@ c3rd_political_general_rampup = {
 			has_country_modifier = military_anarchy
 			has_variable = recent_military_anarchy
 			has_variable = on_going_rep_thingy
-			has_country_modifier = political_unstability
 		}
 	}
 	effect = {
@@ -3298,6 +3296,7 @@ c3rd_head_of_family_shenanigans = {
 						root = {
 							NOT = {
 								any_character = {
+									is_ruler = no
 									has_character_modifier = major_influence_aristocrat
 								}
 							}
@@ -3349,6 +3348,12 @@ c3rd_head_of_family_shenanigans = {
 						factor = 1.2
 						root = {
 							treasury >= 90000
+						}
+					}
+					modifier = {
+						factor = 0.6
+						root = {
+							has_variable = head_intent_plot_noplot
 						}
 					}
 					set_variable = {
@@ -3421,6 +3426,36 @@ c3rd_head_of_family_shenanigans = {
 						}
 					}
 					modifier = {
+						factor = 1.5
+						root = {
+							has_variable = head_intent_plot_noplot
+						}
+					}
+					modifier = {
+						factor = 1.2
+						root = {
+							tyranny >= 20
+						}
+					}
+					modifier = {
+						factor = 1.2
+						root = {
+							tyranny >= 30
+						}
+					}
+					modifier = {
+						factor = 1.2
+						root = {
+							tyranny >= 40
+						}
+					}
+					modifier = {
+						factor = 1.2
+						root = {
+							tyranny >= 50
+						}
+					}
+					modifier = {
 						factor = 1.2
 						root = {
 							stability >= 60
@@ -3457,9 +3492,214 @@ c3rd_head_of_family_shenanigans = {
 						factor = 2
 						is_friend = root.current_ruler
 					}
+					modifier = {
+						factor = 2
+						has_variable = blood_dept
+						var:blood_dept = {
+							family = current_ruler.family
+						}
+					}
+					modifier = {
+						factor = 0.5
+						root = {
+							has_variable = head_intent_plot_noplot
+						}
+					}
 					set_variable = {
 						name = head_intent_loyal
 						days = 350
+					}
+				}
+			}
+		}
+		if = {#low influence heads are canibalizing each others in order to become a player
+			limit = {
+				NOT = {
+					has_variable = head_intent_plot_noplot
+				}
+				current_ruler = {
+					has_character_modifier = major_influence_aristocrat
+				}
+				any_character = {
+					count >= 3
+					is_head_of_family = yes
+					is_ruler = no
+					NOT = {
+						has_character_modifier = major_influence_aristocrat
+					}
+					has_variable = country_ownership
+					var:country_ownership >= 0
+				}
+			}
+			if = {#are enough to start plotting together
+				limit = {
+					any_character = {
+						count >= 2
+						is_head_of_family = yes
+						is_ruler = no
+						NOT = {
+							has_character_modifier = major_influence_aristocrat
+						}
+						has_variable = country_ownership
+						var:country_ownership >= 0	
+						has_variable = head_intent_consolidate
+					}
+				}
+				every_character = {
+					limit = {
+						is_head_of_family = yes
+						is_ruler = no
+						NOT = {
+							has_character_modifier = major_influence_aristocrat
+						}
+						has_variable = country_ownership
+						var:country_ownership >= 0	
+						has_variable = head_intent_consolidate
+					}
+					if = {
+						limit = {
+							has_variable = head_intent_plot
+						}
+						change_variable = {
+							name = head_intent_plot
+							add = 1
+						}
+					}
+					else = {
+						set_variable = {
+							name = head_intent_plot
+							value = 0
+						}
+					}
+				}
+			}
+			if = {#plot ready to take off
+				limit = {
+					any_character = {
+						count >= 2
+						is_head_of_family = yes
+						is_ruler = no
+						NOT = {
+							has_character_modifier = major_influence_aristocrat
+						}
+						has_variable = head_intent_plot
+						var:head_intent_plot >= 10	
+					}
+				}
+				if = {
+					limit = {
+						any_character = {
+							is_head_of_family = yes
+							is_ruler = no
+							NOT = {
+								has_character_modifier = major_influence_aristocrat
+							}
+							has_variable = country_ownership
+							var:country_ownership >= 0
+							NOT = {
+								has_variable = head_intent_plot
+								var:head_intent_plot >= 10
+							}
+						}
+					}
+					random_character = {
+						limit = {
+							is_head_of_family = yes
+							is_ruler = no
+							NOT = {
+								has_character_modifier = major_influence_aristocrat
+							}
+							has_variable = country_ownership
+							var:country_ownership >= 0
+							NOT = {
+								has_variable = head_intent_plot
+								var:head_intent_plot >= 10
+							}
+						}
+						save_scope_as = head_plot_target
+					}
+				}
+				else = {
+					random_character = {
+						limit = {
+							is_head_of_family = yes
+							is_ruler = no
+							NOT = {
+								has_character_modifier = major_influence_aristocrat
+							}
+							has_variable = country_ownership
+							var:country_ownership >= 0
+						}
+						weight = {
+							modifier = {
+								factor = 2
+								has_variable = head_intent_plot
+								var:head_intent_plot <= 10
+							}
+							modifier = {
+								factor = 2
+								has_variable = head_intent_plot
+								var:head_intent_plot <= 11
+							}
+							modifier = {
+								factor = 2
+								has_variable = head_intent_plot
+								var:head_intent_plot <= 12
+							}
+							modifier = {
+								factor = 2
+								has_variable = head_intent_plot
+								var:head_intent_plot <= 13
+							}
+							modifier = {
+								factor = 2
+								has_variable = head_intent_plot
+								var:head_intent_plot <= 14
+							}
+						}
+						save_scope_as = head_plot_target
+					}
+				}
+				if = {
+					limit = {
+						exists = scope:head_plot_target
+					}
+					if = {#is the ruler aware ?
+						limit = {
+							current_ruler = {
+								OR = {
+									AND = {
+										popularity >= 90
+										charisma >= 6
+									}
+									finesse >= 10
+									AND = {
+										has_character_modifier = major_influence_aristocrat
+										finesse >= 8
+									}
+									AND = {
+										has_variable  = country_ownership
+										var:country_ownership >= 50
+										finesse >= 6
+									}
+									AND = {
+										has_variable  = country_ownership
+										var:country_ownership >= 75
+										finesse >= 4
+									}
+								}
+							}
+						}
+						trigger_event = {
+							id = c3rd_politic_events.1
+							days = { 30 360 }
+						}
+					}
+					else = {
+						trigger_event = {
+							id = c3rd_politic_events.2
+							days = { 30 360 }
+						}
 					}
 				}
 			}
@@ -3502,7 +3742,6 @@ c3rd_barbarian_related_events = {
 		c3rd_epidemy_events.6
 		c3rd_epidemy_events.7
 		c3rd_epidemy_events.8
-		c3rd_other_events.132
 		c3rd_other_events.141
 		c3rd_other_events.142
 	}

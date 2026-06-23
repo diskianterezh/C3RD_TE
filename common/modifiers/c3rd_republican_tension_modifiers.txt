@@ -1,0 +1,41 @@
+rep_tension_1 = {
+	global_nobles_output = -0.10
+	monthly_political_influence_modifier = -0.25
+}
+
+rep_tension_2 = {
+	global_nobles_output = -0.10
+	monthly_political_influence_modifier = -0.25
+	monthly_corruption = 0.05
+	character_loyalty = -5
+	stability_monthly_change = -0.02
+}
+
+rep_tension_3 = {
+	global_nobles_output = -0.20
+	monthly_political_influence_modifier = -0.40
+	monthly_corruption = 0.05
+	character_loyalty = -7
+	stability_monthly_change = -0.05
+	global_tax_modifier = -0.25
+	subject_loyalty = -10
+	global_monthly_state_loyalty = -0.01
+}
+
+c3rd_civil_war_republic_ae = {
+	# Applied during the republican war to reduce AE accumulation
+	agressive_expansion_impact = -0.5
+}
+
+c3rd_rebel_republic_mod = {
+	# Applied to the rebel republican tag during civil war
+	land_morale_modifier = 0.10
+	manpower_recovery_speed = 0.15
+}
+
+c3rd_rep_relief = {
+	# Applied after a republican victory — slows tension accumulation for 5 years
+	stability_monthly_change = 0.01
+	character_loyalty = 3
+}
+

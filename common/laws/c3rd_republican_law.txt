@@ -1,0 +1,130 @@
+republican_law = {
+	potential = {
+		is_republic = yes
+		is_tribal = no
+		current_date >= 800.1.1
+	}
+
+	basic_republican_law = {
+		allow = {
+			always = yes
+		}
+	}
+
+	lex_frumentaria = {
+		allow = {
+			custom_tooltip = {
+				text = c3rd_rep_law_req_active
+				has_variable = republican_tension
+			}
+			custom_tooltip = {
+				text = c3rd_rep_law_req_25
+				var:republican_tension >= 25
+			}
+			NOT = { has_country_modifier = solidus_introduced }
+		}
+		modifier = {
+			global_commerce_modifier = -0.10		# cost of grain distribution
+			global_freemen_happyness = 0.05
+			global_nobles_happyness = -0.05
+		}
+		# Tension: -0.10/month + 1 economic effect 
+	}
+
+	lex_de_provinciis = {
+		allow = {
+			num_of_cities >= 300
+		}
+		modifier = {
+			monthly_governor_wage = -0.05
+			global_tax_modifier = -0.10
+			governor_loyalty = -3
+		}
+		# Tension: -0.06/month (up to -0.12 with unworthy_leader)
+	}
+
+	lex_sempronia = {
+		allow = {
+			custom_tooltip = {
+				text = c3rd_rep_law_req_active
+				has_variable = republican_tension
+			}
+			custom_tooltip = {
+				text = c3rd_rep_law_req_50
+				var:republican_tension >= 50
+			}
+			NOT = { has_country_modifier = solidus_introduced }
+		}
+		modifier = {
+			global_nobles_output = -0.15
+			global_freemen_output = 0.05
+		}
+		# Tension: -0.08/month — computed in pulse
+	}
+
+	lex_villia_annalis = {
+		allow = {
+			custom_tooltip = {
+				text = c3rd_rep_law_req_active
+				has_variable = republican_tension
+			}
+			custom_tooltip = {
+				text = c3rd_rep_law_req_max_25
+				var:republican_tension <= 25
+			}
+		}
+		modifier = {
+			stability_monthly_change = 0.02
+			monthly_corruption = -0.01
+			character_loyalty = 5
+		}
+		# Tension: +0.03/month — computed in pulse (deliberate cost of this law)
+	}
+
+	lex_trebonia = {
+		allow = {
+			custom_tooltip = {
+				text = c3rd_rep_law_req_active
+				has_variable = republican_tension
+			}
+			custom_tooltip = {
+				text = c3rd_rep_law_req_50
+				var:republican_tension >= 50
+			}
+			custom_tooltip = {
+				text = c3rd_rep_law_req_general
+				any_character = {
+					is_general = yes
+					martial >= 10
+					employer = root
+				}
+			}
+		}
+		modifier = {
+			land_morale_modifier = 0.15
+			general_loyalty = 10
+		}
+		# Tension: +0.03/month — computed in pulse
+		# Also: decrements unworthy_leader by 1/33/month if present — computed in pulse
+	}
+
+	lex_hortensia = {
+		allow = {
+			custom_tooltip = {
+				text = c3rd_rep_law_req_active
+				has_variable = republican_tension
+			}
+			custom_tooltip = {
+				text = c3rd_rep_law_req_25
+				var:republican_tension >= 25
+			}
+		}
+		modifier = {
+			monthly_corruption = -0.02
+			monthly_political_influence_modifier = 0.10
+			global_nobles_happyness = -0.1
+		}
+		# Tension: +0.01/month — computed in pulse
+		# Also unlocks: c3rd_start_monarch_reform at reduced thresholds + convocatio_populi decision
+	}
+}

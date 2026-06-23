@@ -669,11 +669,7 @@ c3rd_other_events.8 = {
 		}
 		modifier = {
 			factor = 2
-			has_country_modifier = political_unstability
-		}
-		modifier = {
-			factor = 1.5
-			has_country_modifier = provinces_republican_reforms
+			has_country_modifier = rep_tension_3
 		}
 		modifier = {
 			factor = 1.5
@@ -968,12 +964,8 @@ c3rd_other_events.9 = {
 			towards_civil_war = yes
 		}
 		modifier = {
-			factor = 1.5
-			has_country_modifier = provinces_republican_reforms
-		}
-		modifier = {
 			factor = 2
-			has_country_modifier = political_unstability
+			has_country_modifier = rep_tension_3
 		}
 		modifier = {
 			factor = 1.5
@@ -1312,7 +1304,6 @@ c3rd_other_events.10 = {
 					has_country_modifier = citizen_exemption_from_census_tax
 					has_country_modifier = aristocratic_exemptions
 					has_country_modifier = military_advantages
-					has_country_modifier = political_unstability
 					has_country_modifier = tax_inspection
 					has_law = second_reform_law
 					has_law = subject_exploitation_law
@@ -1340,12 +1331,6 @@ c3rd_other_events.10 = {
 				has_country_modifier = military_advantages
 			}
 			desc = "c3rd_other_events.10.desc.6"
-		}
-		triggered_desc = {
-			trigger = {
-				has_country_modifier = political_unstability
-			}
-			desc = "c3rd_other_events.10.desc.7"
 		}
 		triggered_desc = {
 			trigger = {
@@ -4099,7 +4084,6 @@ c3rd_other_events.40 = {
 		trigger = {
 			NOR = {
 				has_country_modifier = political_turmoils
-				has_country_modifier = political_unstability
 				scope:first_consolidate_more_gold = {
 					has_character_modifier = political_power_character
 				}
@@ -4350,11 +4334,10 @@ c3rd_other_events.41 = {
 		}
 	}
 	option = {
-		#mine mine !
+		#no 
 		trigger = {
 			NOR = {
 				has_country_modifier = political_turmoils
-				has_country_modifier = political_unstability
 				has_country_modifier = military_anarchy
 				scope:first_consolidate_more_gold = {
 					has_character_modifier = political_power_character
@@ -5373,7 +5356,6 @@ c3rd_other_events.60 = {
 						has_country_modifier = military_anarchy
 						has_variable = recent_military_anarchy
 						has_variable = on_going_rep_thingy
-						has_country_modifier = political_unstability
 					}
 					has_variable = unworthy_leader
 				}
@@ -6606,6 +6588,9 @@ c3rd_other_events.76 = {
 		#choice 1
 		name = c3rd_other_events.76.a
 		custom_tooltip = c3rd_other_events.76.a.tt1
+		trigger = {
+			exists = scope:first_split_capital
+		}
 		add_stability = 20
 		scope:first_split_capital = {
 			save_scope_as = split_empire_capital
@@ -6649,6 +6634,9 @@ c3rd_other_events.76 = {
 		#choice2
 		name = c3rd_other_events.76.b
 		custom_tooltip = c3rd_other_events.76.b.tt1
+		trigger = {
+			exists = scope:second_split_capital
+		}
 		add_stability = 20
 		scope:second_split_capital = {
 			save_scope_as = split_empire_capital
@@ -6692,6 +6680,9 @@ c3rd_other_events.76 = {
 		#choice3
 		name = c3rd_other_events.76.c
 		custom_tooltip = c3rd_other_events.76.c.tt1
+		trigger = {
+			exists = scope:third_split_capital
+		}
 		add_stability = 20
 		scope:third_split_capital = {
 			save_scope_as = split_empire_capital
@@ -6735,7 +6726,6 @@ c3rd_other_events.76 = {
 		#byzantion
 		name = c3rd_other_events.76.d
 		custom_tooltip = c3rd_other_events.76.d.tt1
-		add_stability = 20
 		trigger = {
 			root.culture_group = culture_group:latin
 			exists = p:1453
@@ -6754,6 +6744,7 @@ c3rd_other_events.76 = {
 		p:1453 = {
 			save_scope_as = split_empire_capital
 		}
+		
 		add_country_modifier = {
 			name = divided_empire
 			duration = 18250
@@ -6812,6 +6803,31 @@ c3rd_other_events.77 = {
 	option = {
 		name = c3rd_other_events.77.a
 		custom_tooltip = c3rd_other_events.77.a.tt1
+		add_stability = 20
+		hidden_effect = {
+			if = {
+				limit = {
+					has_variable = republican_tension
+				}
+				change_variable = {
+					name = republican_tension
+					add = -50
+				}
+				if = {
+					limit = {
+						var:republican_tension < 0
+					}
+					remove_variable = republican_tension
+					set_variable = {
+						name = republican_tension
+						value = 0
+					}
+				}
+				add_country_modifier = {
+					name = province_razed_ua
+				}
+			}
+		}
 		if = {
 			limit = {
 				exists = scope:split_empire_capital
@@ -6830,6 +6846,7 @@ c3rd_other_events.77 = {
 	option = {
 		name = c3rd_other_events.77.b
 		custom_tooltip = c3rd_other_events.77.b.tt1
+		remove_country_modifier = divided_empire
 		every_governorships = {
 			limit = {
 				is_in_list = old_empire
@@ -6933,6 +6950,25 @@ c3rd_other_events.80 = {
 						value = country_region_control
 					}
 					if = {
+						limit = {
+							country_region_control >= 15
+							employer = {
+								any_character = {
+									count >= 5
+									is_alive = yes
+									is_head_of_family = yes
+								}
+							}
+							NOT = {
+								has_character_modifier = major_influence_aristocrat
+							}
+						}
+						add_character_modifier = {
+							name = major_influence_aristocrat
+							duration = -1
+						}
+					}
+					else_if = {
 						limit = {
 							country_region_control >= 20
 							NOT = {
@@ -8178,7 +8214,7 @@ c3rd_other_events.85 = {
 		if = {
 			limit = {
 				scope:target = {
-					var:country_ownership >= 20
+					var:country_ownership >= 15
 				}
 			}
 			change_variable = {
@@ -8278,6 +8314,17 @@ c3rd_other_events.85 = {
 			limit = {
 				scope:target = {
 					has_character_modifier = political_power_character
+				}
+			}
+			change_variable = {
+				name = landowner_demands
+				add = 1
+			}
+		}
+		if = {
+			limit = {
+				scope:target = {
+					has_character_modifier = king_maker
 				}
 			}
 			change_variable = {
@@ -9252,6 +9299,859 @@ c3rd_other_events.86 = {
 				has_variable = negociated_better
 			}
 			remove_variable = negociated_better
+		}
+		every_governorships = {
+			limit = {
+				is_in_list = family_domain_govs
+			}
+			remove_from_list = family_domain_govs
+		}
+		scope:asked_landowner = {
+			recalculate_ownership_char = yes
+		}
+	}
+}
+
+
+c3rd_other_events.861 = {
+	#in military anarchy, the king_maker is making negociations by  himself
+	type = country_event
+	title = "c3rd_other_events.861.t"
+	desc = {
+		#the king_maker is not the asked_landowner
+		triggered_desc = {
+			trigger = {
+				NOT = {scope:king_maker_negociator = scope:asked_landowner}
+			}
+			desc = "c3rd_other_events.861.desc.1"
+		}
+		#the king_maker is the asked_landowner
+		triggered_desc = {
+			trigger = {
+				scope:king_maker_negociator = scope:asked_landowner
+			}
+			desc = "c3rd_other_events.861.desc.2"
+		}
+		#What is the king_maker trying to do
+		triggered_desc = {
+			#civil_war
+			trigger = {
+				toward_civil_war = yes
+			}
+			desc = "c3rd_other_events.861.desc.3"
+		}
+		triggered_desc = {
+			#stability
+			trigger = {
+				stability < 35
+			}
+			desc = "c3rd_other_events.861.desc.4"
+		}
+		triggered_desc = {
+			#barbarians
+			trigger = {
+				any_governorships = {
+					any_governorship_state = {
+						count >= 3
+						has_state_modifier = barbarians_border
+					}
+				}
+			}
+			desc = "c3rd_other_events.861.desc.5"
+		}
+		triggered_desc = {
+			#just taking holdings
+			trigger = {
+				NOR = {
+					scope:king_maker_negociator = scope:asked_landowner
+					any_governorships = {
+						any_governorship_state = {
+							count >= 3
+							has_state_modifier = barbarians_border
+						}
+					}
+					stability < 35
+					toward_civil_war = yes
+				}
+			}
+			desc = "c3rd_other_events.861.desc.6"
+		}
+		#what he ask of us
+		triggered_desc = {
+			#political power
+			trigger = {
+				NOT = {scope:king_maker_negociator = scope:asked_landowner}
+				has_variable = landowner_demands
+				has_variable = answer_landowner
+				var:answer_landowner = 2
+				scope:asked_landowner = {
+					is_alive = yes
+				}
+			}
+			desc = "c3rd_other_events.861.desc.12"
+		}
+		triggered_desc = {
+			#domain
+			trigger = {
+				NOT = {scope:king_maker_negociator = scope:asked_landowner}
+				has_variable = landowner_demands
+				has_variable = answer_landowner
+				var:answer_landowner = 3
+				scope:asked_landowner = {
+					is_alive = yes
+				}
+			}
+			desc = "c3rd_other_events.861.desc.13"
+		}
+		triggered_desc = {
+			#law and bonuses
+			trigger = {
+				NOT = {scope:king_maker_negociator = scope:asked_landowner}
+				has_variable = landowner_demands
+				has_variable = answer_landowner
+				var:answer_landowner = 4
+				scope:asked_landowner = {
+					is_alive = yes
+				}
+			}
+			desc = "c3rd_other_events.861.desc.14"
+		}
+	}
+	left_portrait = scope:king_maker_negociator
+	right_portrait = scope:asked_landowner
+	picture = senator_conversing
+	trigger = {
+		has_land = yes
+		has_country_modifier = military_anarchy
+		OR = {
+			is_monarchy = yes
+			is_republic = yes
+		}
+		any_character = {
+			has_character_modifier = king_maker
+			is_ruler = no
+			NOT = {
+				has_variable = king_maker_negociated_recently
+			}
+		}
+		OR = {
+			toward_civil_war = yes
+			stability < 35
+			any_governorships = {
+				any_governorship_state = {
+					count >= 3
+					has_state_modifier = barbarians_border
+				}
+			}
+			any_character = {
+				is_ruler = no
+				has_character_modifier = major_influence_aristocrat
+				NOR = {
+					has_variable = got_negociated_recently
+					has_character_modifier = king_maker  #avoid the case where he reduce his own domain
+				}
+				has_variable = country_ownership
+				var:country_ownership >= 50
+			}
+
+		}
+		any_character = {
+			has_character_modifier = major_influence_aristocrat
+			NOT = {
+				has_variable = got_negociated_recently
+			}
+			save_temporary_scope_as = tmp_landowner
+			root = {
+				OR = {
+					any_governorships = {
+						has_variable = governorship_owner
+						var:governorship_owner = scope:tmp_landowner
+					}
+					any_subject = {
+						is_subject_type = autonomous_domain
+						has_variable = owner_from_another_empire
+						var:owner_from_another_empire = scope:tmp_landowner
+					}
+				}
+			}
+			is_ruler = no
+			is_alive = yes
+		}
+		NOR = {
+			has_variable = negociating_no_duplicate
+		}
+	}
+	immediate = {
+		hidden_effect = {
+			random_character = {
+				limit = {
+					has_character_modifier = king_maker
+					is_ruler = no
+					NOT = {
+						has_variable = king_maker_negociated_recently
+					}
+				}
+				save_scope_as = king_maker_negociator
+				set_variable = {
+					name = king_maker_negociated_recently
+					days = 1850
+				}
+			}
+			random_character = {
+				limit = {
+					is_ruler = no
+					has_character_modifier = major_influence_aristocrat
+					NOT = {
+						has_variable = got_negociated_recently
+					}
+				}
+				weight = {
+					modifier = {
+						factor = 10
+						has_variable = country_ownership
+						var:country_ownership >= 50
+					}
+				}
+				save_scope_as = asked_landowner
+				set_variable = {
+					name = got_negociated_recently
+					days = 1800
+				}
+			}
+			set_variable = { #to prevent negociating with several landowners at the same time
+				name = negociating_no_duplicate
+				days = 5
+			}
+			set_variable = {
+				#calculation of the landowner's power : 0-2 = weak ; 3-5 = powerful ; 6+ = omnipotent 
+				name = landowner_demands
+				value = 0
+			}
+			if = {
+				limit = {
+					scope:asked_landowner = {
+						var:country_ownership >= 20
+					}
+				}
+			change_variable = {
+				name = landowner_demands
+				add = 1
+			}
+			}
+			if = {
+				limit = {
+					scope:asked_landowner = {
+						var:country_ownership >= 35
+					}
+				}
+				change_variable = {
+					name = landowner_demands
+					add = 1
+				}
+			}
+			if = {
+				limit = {
+					scope:asked_landowner = {
+						var:country_ownership >= 45
+					}
+				}
+				change_variable = {
+					name = landowner_demands
+					add = 1
+				}
+			}
+			if = {
+				limit = {
+					scope:asked_landowner = {
+						var:country_ownership >= 60
+					}
+				}
+				change_variable = {
+					name = landowner_demands
+					add = 1
+				}
+			}
+			if = {
+				limit = {
+					scope:asked_landowner = {
+						var:country_ownership >= 75
+					}
+				}
+				change_variable = {
+					name = landowner_demands
+					add = 2
+				}
+			}
+			if = {
+				limit = {
+					scope:asked_landowner = {
+						power_base >= 30
+					}
+				}
+				change_variable = {
+					name = landowner_demands
+					add = 1
+				}
+			}
+			if = {
+				limit = {
+					scope:asked_landowner = {
+						power_base >= 50
+					}
+				}
+				change_variable = {
+					name = landowner_demands
+					add = 1
+				}
+			}
+			if = {
+				limit = {
+					scope:asked_landowner = {
+						power_base >= 70
+					}
+				}
+				change_variable = {
+					name = landowner_demands
+					add = 2
+				}
+			}
+			if = {
+				limit = {
+					scope:asked_landowner = {
+						corruption >= 50
+					}
+				}
+				change_variable = {
+					name = landowner_demands
+					add = 1
+				}
+			}
+			if = {
+				limit = {
+					scope:asked_landowner = {
+						has_character_modifier = political_power_character
+					}
+				}
+				change_variable = {
+					name = landowner_demands
+					add = 1
+				}
+			}
+			if = {
+				limit = {
+					scope:asked_landowner = {
+						OR = {
+							has_trait = crafty
+							has_trait = prominent
+							has_trait = assertive
+						}
+					}
+				}
+				change_variable = {
+					name = landowner_demands
+					add = 1
+				}
+			}
+			if = {
+				limit = {
+					towards_civil_war = yes
+				}
+				if = {
+					limit = {
+						scope:target = {
+							is_disloyal = yes
+						}
+					}
+					change_variable = {
+						name = landowner_demands
+						add = 1
+					}
+				}
+				set_variable = {
+					name = what_are_we_asking
+					value = 4
+				}
+			}
+			else_if = {
+				limit = {
+					stability <= 35
+				}
+				set_variable = {
+					name = what_are_we_asking
+					value = 2
+				}
+			}
+			else_if = {
+				limit = {
+					any_governorships = {
+						any_governorship_state = {
+							count >= 3
+							has_state_modifier = barbarians_border
+						}
+					}
+				}
+				set_variable = {
+					name = what_are_we_asking
+					value = 3
+				}
+			}
+			else = {
+				set_variable = {
+					name = what_are_we_asking
+					value = 1
+				}
+			}
+			#define landowner answer
+			
+			random_list = {
+				4 = {
+					#demand political power
+					modifier = {
+						add = 2
+						scope:asked_landowner = {
+							has_trait = ambitious
+						}
+					}
+					modifier = {
+						add = -1
+						scope:asked_landowner = {
+							has_trait = cautious
+						}
+					}
+					modifier = {
+						add = 1
+						scope:asked_landowner = {
+							has_trait = crafty
+						}
+					}
+					modifier = {
+						factor = 2
+						scope:asked_landowner = {
+							var:country_ownership >= 60
+						}
+					}
+					modifier = {
+						factor = 2
+						scope:asked_landowner = {
+							loyalty < 33
+						}
+						var:what_are_we_asking = 4
+					}
+					modifier = {
+						#already have the modifier
+						factor = 0.3
+						scope:asked_landowner = {
+							has_character_modifier = political_power_character
+						}
+					}
+					set_variable = {
+						name = answer_landowner
+						value = 2
+					}
+				}
+				5 = {
+					#demand independant domain
+					modifier = {
+						add = 2
+						scope:asked_landowner = {
+							has_trait = corrupt
+						}
+					}
+					modifier = {
+						add = 2
+						scope:asked_landowner = {
+							has_trait = founder
+						}
+					}
+					modifier = {
+						add = 1
+						scope:asked_landowner = {
+							has_trait = selfish
+						}
+					}
+					modifier = {
+						factor = 1.5
+						num_of_cities >= 1000
+					}
+					modifier = {
+						factor = 1.5
+						num_of_cities >= 2000
+					}
+					modifier = {
+						factor = 2
+						num_of_cities >= 5000
+					}
+					modifier = {
+						factor = 0.2
+						any_governorships = {
+							count < country_gov_ratio_number
+							has_variable = governorship_owner
+							var:governorship_owner = scope:asked_landowner
+						}
+					}
+					modifier = {
+						factor = 2
+						NOT = {
+							any_subject = {
+								is_subject_type = autonomous_domain
+								has_variable = owner_from_another_empire
+								var:owner_from_another_empire = scope:asked_landowner
+							}
+						}
+					}
+					set_variable = {
+						name = answer_landowner
+						value = 3
+					}
+				}
+				5 = {
+					#demand special laws - right
+					modifier = {
+						add = 2
+						scope:asked_landowner = {
+							has_trait = assertive
+						}
+					}
+					modifier = {
+						add = 1
+						scope:asked_landowner = {
+							has_trait = crafty
+						}
+					}
+					modifier = {
+						add = 1
+						scope:asked_landowner = {
+							has_trait = proud
+						}
+					}
+					modifier = {
+						add = -1
+						has_country_modifier = law_advantages_4
+					}
+					modifier = {
+						add = -3
+						has_country_modifier = law_advantages_5
+					}
+					modifier = {
+						factor = 0.1
+						has_law = decentralized_administration_law
+					}
+					set_variable = {
+						name = answer_landowner
+						value = 4
+					}
+				}
+			}
+
+			#actions
+			if = {
+				limit = {
+					#choose the governorships to be given as domain
+					has_variable = answer_landowner
+					var:answer_landowner = 3
+				}
+				while = {
+					count = landowner_asked_ratio_number
+					random_governorships = {
+						limit = {
+							has_variable = governorship_owner
+							var:governorship_owner = scope:asked_landowner
+							NOT = {
+								is_in_list = family_domain_govs
+							}
+							OR = {
+								NOT = {
+									exists = governor
+								}
+								governor = {
+									is_ruler = no
+								}
+							}
+						}
+						weight = {
+							modifier = {
+								factor = 10
+								any_governorship_state = {
+									any_state_province = {
+										any_neighbor_province = {
+											exists = governorship
+											governorship = {
+												is_in_list = family_domain_govs
+											}
+										}
+									}
+								}
+							}
+							modifier = {
+								factor = 10
+								any_governorship_state = {
+									any_state_province = {
+										any_neighbor_province = {
+											exists = owner
+											owner = {
+												has_variable = owner_from_another_empire
+												var:owner_from_another_empire = scope:asked_landowner
+											}
+										}
+									}
+								}
+							}
+							modifier = {
+								factor = 3
+								any_governorship_state = {
+									any_state_province = {
+										any_neighbor_province = {
+											has_owner = yes
+											NOT = {
+												owner = root
+											}
+										}
+									}
+								}
+							}
+							modifier = {
+								factor = 0.1
+								any_governorship_state = {
+									any_state_province = {
+										any_neighbor_province = {
+											exists = governor
+											governor = {
+												is_ruler = yes
+											}
+										}
+									}
+								}
+							}
+						}
+						add_to_list = family_domain_govs
+					}
+				}
+			}
+		}
+	}
+	option = {
+		#accept these actions
+		name = c3rd_other_events.861.a
+		custom_tooltip = c3rd_other_events.861.a.tt1
+		trigger = {
+			has_variable = answer_landowner
+		}
+		if = {
+			limit = {
+				has_variable = landowner_demands
+				has_variable = answer_landowner
+				var:answer_landowner = 3
+				scope:asked_landowner = {
+					is_alive = yes
+				}
+			}
+			custom_tooltip = c3rd_other_events.86.tt13
+			every_governorships = {
+				limit = {
+					is_in_list = family_domain_govs
+				}
+				save_scope_as = gov_tooltip
+				custom_tooltip = c3rd_other_events.86.a.tt2
+			}
+			hidden_effect = {
+				create_domain = yes
+			}
+		}
+		else_if = {
+			limit = {
+				has_variable = landowner_demands
+				has_variable = answer_landowner
+				var:answer_landowner = 2
+				scope:asked_landowner = {
+					is_alive = yes
+				}
+			}
+			add_political_influence = -25
+			current_ruler = {
+				add_popularity = -20
+			}
+			if = {
+				limit = {
+					is_monarchy = yes
+				}
+				add_legitimacy = -10
+			}
+			give_political_power_modifier = yes
+		}
+		else_if = {
+			limit = {
+				has_variable = landowner_demands
+				has_variable = answer_landowner
+				var:answer_landowner = 4
+				scope:asked_landowner = {
+					is_alive = yes
+				}
+			}
+			give_law_change_pol = yes
+		}
+		if = {#general takes his assets
+			limit = {
+				var:what_are_we_asking = 1
+			}
+			custom_tooltip = c3rd_other_events.861.tt1_1
+			reduce_landowner_domain_to_general = yes
+		}
+		else_if = {#here it's just more stability
+			limit = {
+				var:what_are_we_asking = 2
+			}
+			if = {
+				limit = {
+					scope:asked_landowner = {
+						has_variable = country_ownership
+						var:country_ownership >= 80
+					}
+				}
+				add_stability = 25
+			}
+			else_if = {
+				limit = {
+					scope:asked_landowner = {
+						has_variable = country_ownership
+						var:country_ownership >= 60
+					}
+				}
+				add_stability = 20
+			}
+			else_if = {
+				limit = {
+					scope:asked_landowner = {
+						has_variable = country_ownership
+						var:country_ownership >= 40
+					}
+				}
+				add_stability = 15
+			}
+			else_if = {
+				limit = {
+					scope:asked_landowner = {
+						has_variable = country_ownership
+						var:country_ownership >= 30
+					}
+				}
+				add_stability = 7
+			}
+			else = {
+				add_stability = 5
+			}
+		}
+		else_if = {#here it's bonus to defense
+			limit = {
+				var:what_are_we_asking = 3
+			}
+			custom_tooltip = c3rd_other_events.861.tt1_3
+			apply_defense_against_barb_bonuses = yes
+		}
+		else_if = {#stop the civil war
+			limit = {
+				var:what_are_we_asking = 4
+			}
+			if = {
+				limit = {
+					var:landowner_demands < 3
+				}
+				custom_tooltip = c3rd_other_events.86.tt1_41
+				hidden_effect = {
+					every_character = {
+						limit = {
+							loyalty <= 33
+						}
+						add_loyalty = political_intervention1
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					var:landowner_demands < 6
+				}
+				custom_tooltip = c3rd_other_events.86.tt1_42
+				hidden_effect = {
+					every_character = {
+						limit = {
+							loyalty <= 33
+						}
+						add_loyalty = political_intervention2
+					}
+				}
+			}
+			else = {
+				custom_tooltip = c3rd_other_events.86.tt1_43
+				hidden_effect = {
+					every_character = {
+						limit = {
+							loyalty <= 33
+						}
+						add_loyalty = political_intervention3
+					}
+				}
+			}
+		}
+	}
+	option = {
+		#say no
+		name = c3rd_other_events.861.b
+		custom_tooltip = c3rd_other_events.861.b.tt1
+		if = {
+			limit = {
+				scope:asked_landowner = scope:king_maker_negociator
+			}
+			add_tyranny = 5
+		}
+		else = {
+			scope:asked_landowner = {
+				add_loyalty = disappointed
+			}	
+			add_tyranny = 2
+		}
+		scope:king_maker_negociator = {
+			add_loyalty = humiliated_powerful_general
+		}
+		add_stability = -5
+		current_ruler = {
+			add_popularity = -20
+		}
+	}
+	option = {
+		#case when he is dead/bug/refuses
+		name = c3rd_other_events.86.e
+		custom_tooltip = c3rd_other_events.86.e.tt1
+		trigger = {
+			OR = {
+				scope:asked_landowner = {
+					#dead
+					is_alive = no
+				}
+				NOR = {
+					#bug
+					has_variable = landowner_demands
+					has_variable = answer_landowner
+				}
+			}
+		}
+	}
+	after = {
+		if = {
+			limit = {
+				has_variable = landowner_demands
+			}
+			remove_variable = landowner_demands
+		}
+		if = {
+			limit = {
+				has_variable = answer_landowner
+			}
+			remove_variable = answer_landowner
+		}
+		if = {
+			limit = {
+				has_variable = what_are_we_asking
+			}
+			remove_variable = what_are_we_asking
 		}
 		every_governorships = {
 			limit = {
@@ -10343,9 +11243,9 @@ c3rd_other_events.91 = {
 		random_character = {
 			limit = {
 				has_character_modifier = political_power_character
-				loyalty <= 87
+				loyalty <= 30
 				is_ruler = no
-				popularity >= 20
+				popularity >= 80
 				NOT = {
 					has_variable = pol_coup
 				}
@@ -10426,6 +11326,16 @@ c3rd_other_events.91 = {
 				is_republic = yes
 			}
 			add_political_influence = -100
+			if = {
+				limit = {
+					has_variable = republican_tension
+				}
+				change_variable = {
+					name = republican_tension
+					add = 15
+				}
+				custom_tooltip = c3rd_rep_tension_plus_15
+			}
 		}
 		scope:pol_target_c = {
 			add_corruption = 25
@@ -10506,7 +11416,27 @@ c3rd_other_events.91 = {
 			}
 			add_loyalty = requests_fulfilled
 		}
-		add_legitimacy = -10
+		if = {
+			limit = {
+				is_monarchy = yes
+			}
+			add_legitimacy = -10
+		}
+		else_if = {
+			limit = {
+				is_republic = yes
+			}
+			if = {
+				limit = {
+					has_variable = republican_tension
+				}
+				change_variable = {
+					name = republican_tension
+					add = 15
+				}
+				custom_tooltip = c3rd_rep_tension_plus_15
+			}
+		}
 		if = {
 			limit = {
 				NOT = {
@@ -10595,7 +11525,23 @@ c3rd_other_events.91 = {
 						}
 					}
 				}
-				add_legitimacy = 5
+				if = {
+					limit = {
+						is_monarchy = yes
+					}
+					add_legitimacy = 5
+				}
+				else_if = {
+					limit = {
+						is_republic = yes
+						has_variable = republican_tension
+					}
+					change_variable = {
+						name = republican_tension
+						add = -5
+					}
+					custom_tooltip = c3rd_rep_tension_minus_5
+				}
 			}
 			50 = {
 				custom_tooltip = c3rd_other_events.91.c.tt3
@@ -10606,6 +11552,17 @@ c3rd_other_events.91 = {
 							killer = scope:pol_target_c
 						}
 					}
+				}
+				if = {
+					limit = {
+						is_republic = yes
+						has_variable = republican_tension
+					}
+					change_variable = {
+						name = republican_tension
+						add = 15
+					}
+					custom_tooltip = c3rd_rep_tension_plus_15
 				}
 			}
 		}
@@ -10638,6 +11595,32 @@ c3rd_other_events.91 = {
 				else = {
 					add_loyalty = coup_loyal
 				}
+			}
+		}
+	}
+	after = {
+		if = {
+			limit = {
+				is_republic = yes
+				has_variable = republican_tension
+				var:republican_tension > 100
+			}
+			remove_variable = republican_tension
+			set_variable = {
+				name = republican_tension
+				value = 100
+			}
+		}
+		else_if = {
+			limit = {
+				is_republic = yes
+				has_variable = republican_tension
+				var:republican_tension <0
+			}
+			remove_variable = republican_tension
+			set_variable = {
+				name = republican_tension
+				value = 0
 			}
 		}
 	}
@@ -12984,6 +13967,7 @@ c3rd_other_events.110 = {
 		name = c3rd_other_events.110.a
 		custom_tooltip = c3rd_other_events.110.a.tt1
 		trigger = {
+			is_monarchy = yes
 			NOR = {
 				has_country_modifier = military_anarchy
 				has_variable = recent_military_anarchy
@@ -13166,6 +14150,7 @@ c3rd_other_events.110 = {
 					}
 				}
 				has_variable = recent_military_anarchy
+				is_monarchy = no
 				NOT = {
 					has_variable = unworthy_leader
 				}

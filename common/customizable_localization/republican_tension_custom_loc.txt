@@ -1,0 +1,401 @@
+﻿c3rd_republican_tension_num_custom_loc = {
+	type = country
+	text = { #green
+		localization_key = c3rd_republican_tension_num_custom_loc1
+		trigger = {
+			has_variable = republican_tension
+			var:republican_tension < 25
+		}
+	}
+	text = { #red
+		localization_key = c3rd_republican_tension_num_custom_loc2
+		trigger = {
+			has_variable = republican_tension
+			var:republican_tension >= 75
+		}
+	}
+	text = { #white
+		localization_key = c3rd_republican_tension_num_custom_loc3
+		trigger = {
+			has_variable = republican_tension
+			var:republican_tension >= 25
+			var:republican_tension < 75
+		}
+	}
+}
+
+republican_tension_desc_custom_loc = {
+	type = country
+	text = { #gree
+		localization_key = republican_tension_desc_custom_loc2
+		trigger = {
+			has_variable = republican_tension
+			var:republican_tension >= 25
+			var:republican_tension < 50
+		}
+	}
+	text = { #white
+		localization_key = republican_tension_desc_custom_loc3
+		trigger = {
+			has_variable = republican_tension
+			var:republican_tension >= 50
+			var:republican_tension < 75
+		}
+	}
+	text = { #white
+		localization_key = republican_tension_desc_custom_loc4
+		trigger = {
+			has_variable = republican_tension
+			var:republican_tension >= 75
+		}
+	}
+}
+
+c3rd_rep_size_custom_loc = {
+	type = country
+	text = { #green
+		localization_key = c3rd_rep_size_custom_loc1
+		trigger = {
+			num_of_cities < 50
+		}
+	}
+	text = { #green
+		localization_key = c3rd_rep_size_custom_loc2
+		trigger = {
+			num_of_cities >= 50
+			num_of_cities < 150
+		}
+	}
+	text = { #white
+		localization_key = c3rd_rep_size_custom_loc3
+		trigger = {
+			num_of_cities >= 150
+			num_of_cities < 500
+		}
+	}
+	text = { #red
+		localization_key = c3rd_rep_size_custom_loc4
+		trigger = {
+			num_of_cities >= 500
+			num_of_cities < 1500
+		}
+	}
+	text = { #red
+		localization_key = c3rd_rep_size_custom_loc5
+		trigger = {
+			num_of_cities >= 1500
+			num_of_cities < 3000
+		}
+	}
+	text = { #red
+		localization_key = c3rd_rep_size_custom_loc6
+		trigger = {
+			num_of_cities >= 3000
+		}
+	}
+}
+
+c3rd_rep_dangerous_leader_custom_loc = {
+	type = country
+	text = { 
+		localization_key = c3rd_rep_dangerous_leader_custom_loc1
+		trigger = {
+			var:c3rd_rep_tension_leader ={ 
+				is_ruler = no
+				has_character_modifier = political_power_character
+			}
+		}
+	}
+	text = { 
+		localization_key = c3rd_rep_dangerous_leader_custom_loc2
+		trigger = {
+			var:c3rd_rep_tension_leader ={
+				NOT = {has_character_modifier = political_power_character}
+				is_ruler = no
+				is_general = yes
+			}
+		}
+	}
+	text = { 
+		localization_key = c3rd_rep_dangerous_leader_custom_loc3
+		trigger = {
+			var:c3rd_rep_tension_leader ={
+				is_ruler = yes
+			}
+		}
+	}
+}
+c3rd_dangerous_leader_custom_loc = {
+	type = country
+	text = { 
+		localization_key = c3rd_dangerous_leader_custom_loc1
+		trigger = {
+			has_variable = c3rd_rep_tension_leader
+		}
+	}
+	text = { 
+		localization_key = c3rd_dangerous_leader_custom_loc2
+		trigger = {
+			NOT = {has_variable = c3rd_rep_tension_leader}
+		}
+	}
+}
+c3rd_rep_stab_custom_loc = {
+	type = country
+	text = { #red
+		localization_key = c3rd_rep_stab_custom_loc1
+		trigger = {
+			stability < 15
+		}
+	}
+	text = { #red
+		localization_key = c3rd_rep_stab_custom_loc2
+		trigger = {
+			stability >= 15
+			stability < 35
+		}
+	}
+	text = { #white
+		localization_key = c3rd_rep_stab_custom_loc3
+		trigger = {
+			stability >= 35
+			stability < 70
+		}
+	}
+	text = { #green
+		localization_key = c3rd_rep_stab_custom_loc4
+		trigger = {
+			stability >= 70
+			stability < 90
+		}
+	}
+	text = { #green
+		localization_key = c3rd_rep_stab_custom_loc5
+		trigger = {
+			stability >= 90
+		}
+	}
+}
+c3rd_rep_senate_approval_custom_loc = {
+	type = country
+	text = { #red
+		localization_key = c3rd_rep_senate_approval_custom_loc1
+		trigger = {
+			has_senate_approval < 0.20
+		}
+	}
+	text = { #red
+		localization_key = c3rd_rep_senate_approval_custom_loc2
+		trigger = {
+			has_senate_approval >= 0.20
+			has_senate_approval < 0.50
+		}
+	}
+	text = { #white
+		localization_key = c3rd_rep_senate_approval_custom_loc3
+		trigger = {
+			has_senate_approval >= 0.50
+			has_senate_approval < 0.80
+		}
+	}
+	text = { #green
+		localization_key = c3rd_rep_senate_approval_custom_loc4
+		trigger = {
+			has_senate_approval >= 0.80
+			has_senate_approval < 0.95
+		}
+	}
+	text = { #green
+		localization_key = c3rd_rep_senate_approval_custom_loc5
+		trigger = {
+			has_senate_approval >= 0.95
+		}
+	}
+}
+c3rd_rep_time_custom_loc = {
+	type = country
+	text = { #green
+		localization_key = c3rd_rep_time_custom_loc1
+		trigger = {
+			current_date < 1000.1.1
+		}
+	}
+	text = { #red
+		localization_key = c3rd_rep_time_custom_loc2
+		trigger = {
+			current_date >= 1000.1.1
+			current_date < 1150.1.1
+		}
+	}
+	text = { #red
+		localization_key = c3rd_rep_time_custom_loc3
+		trigger = {
+			current_date >= 1150.1.1
+		}
+	}
+}
+c3rd_rep_monetary_custom_loc = {
+	type = country
+	text = { #red
+		localization_key = c3rd_rep_monetary_custom_loc1
+		trigger = {
+			NOT = {has_country_modifier = solidus_introduced}
+			OR = {
+				AND = {
+					has_country_modifier = small_monetary_crash
+					NOT={ has_country_modifier = small_deflation }
+				}
+				AND = {
+					has_country_modifier = small_deflation
+					NOT={ has_country_modifier = small_monetary_crash }
+				}
+			}
+		}
+	}
+	text = { #red
+		localization_key = c3rd_rep_monetary_custom_loc2
+		trigger = {
+			NOT = {has_country_modifier = solidus_introduced}
+			OR = {
+				AND = {
+					has_country_modifier = medium_monetary_crash
+					NOT={ has_country_modifier = medium_deflation }
+				}
+				AND = {
+					has_country_modifier = medium_deflation
+					NOT={ has_country_modifier = medium_monetary_crash }
+				}
+				AND = {
+					has_country_modifier = small_deflation
+					has_country_modifier = small_monetary_crash
+				}
+			}
+		}
+	}
+	text = { #red
+		localization_key = c3rd_rep_monetary_custom_loc3
+		trigger = {
+			NOT = {has_country_modifier = solidus_introduced}
+			OR = {
+				AND = {
+					has_country_modifier = high_monetary_crash
+				}
+				AND = {
+					has_country_modifier = high_deflation
+				}
+				AND = {
+					has_country_modifier = medium_deflation
+					has_country_modifier = medium_monetary_crash
+				}
+			}
+		}
+	}
+	text = { #white
+		localization_key = c3rd_rep_monetary_custom_loc4
+		trigger = {
+			NOR={
+				has_country_modifier = small_monetary_crash
+				has_country_modifier = medium_monetary_crash
+				has_country_modifier = high_monetary_crash
+				has_country_modifier = small_deflation
+				has_country_modifier = medium_deflation
+				has_country_modifier = high_deflation
+				has_country_modifier = solidus_introduced
+			}
+		}
+	}
+	text = {
+		localization_key = c3rd_rep_monetary_custom_loc5
+		trigger = {
+			has_country_modifier = solidus_introduced
+		}
+	}
+}
+c3rd_rep_military_custom_loc = {
+	type = country
+	text = { #white
+		localization_key = c3rd_rep_military_custom_loc1
+		trigger = {
+			OR = {
+				NOT = {has_variable = unworthy_leader}
+				AND = {
+					has_variable = unworthy_leader
+					var:unworthy_leader = 0
+				}
+			}
+		}
+	}
+	text = { #red
+		localization_key = c3rd_rep_military_custom_loc2
+		trigger = {
+			has_variable = unworthy_leader
+			var:unworthy_leader >= 1
+			var:unworthy_leader < 4
+		}
+	}
+	text = { #red
+		localization_key = c3rd_rep_military_custom_loc3
+		trigger = {
+			has_variable = unworthy_leader
+			var:unworthy_leader >= 4
+			var:unworthy_leader < 8
+		}
+	}
+	text = { #red
+		localization_key = c3rd_rep_military_custom_loc4
+		trigger = {
+			has_variable = unworthy_leader
+			var:unworthy_leader >= 8
+			var:unworthy_leader < 12
+		}
+	}
+	text = { #red
+		localization_key = c3rd_rep_military_custom_loc5
+		trigger = {
+			has_variable = unworthy_leader
+			var:unworthy_leader >= 12
+		}
+	}
+}
+c3rd_rep_arrow_up_custom_loc = {
+	type = country
+	text = { 
+		localization_key = c3rd_rep_arrow_up_custom_loc1
+		trigger = {
+			has_variable = c3rd_rep_tension_cumu
+			var:c3rd_rep_tension_cumu < 0.10
+		}
+	}
+	text = { 
+		localization_key = c3rd_rep_arrow_up_custom_loc2
+		trigger = {
+			has_variable = c3rd_rep_tension_cumu
+			var:c3rd_rep_tension_cumu >= 0.10
+			var:c3rd_rep_tension_cumu < 0.30
+		}
+	}
+	text = { 
+		localization_key = c3rd_rep_arrow_up_custom_loc3
+		trigger = {
+			has_variable = c3rd_rep_tension_cumu
+			var:c3rd_rep_tension_cumu >= 0.30
+		}
+	}
+}
+c3rd_rep_arrow_down_custom_loc = {
+	type = country
+	text = { 
+		localization_key = c3rd_rep_arrow_down_custom_loc1
+		trigger = {
+			has_variable = c3rd_rep_tension_cumu
+			var:c3rd_rep_tension_cumu < 0.10
+		}
+	}
+	text = { 
+		localization_key = c3rd_rep_arrow_down_custom_loc2
+		trigger = {
+			has_variable = c3rd_rep_tension_cumu
+			var:c3rd_rep_tension_cumu >= 0.10
+		}
+	}
+}

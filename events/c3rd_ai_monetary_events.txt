@@ -1,4 +1,4 @@
-namespace = c3rd_ai_monetary_events
+﻿namespace = c3rd_ai_monetary_events
 
 # AI Monetary Crisis Event - hidden for AI, sends notification to players
 c3rd_ai_monetary_events.1 = {

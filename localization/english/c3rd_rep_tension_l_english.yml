@@ -1,0 +1,339 @@
+﻿ l_english:
+
+ ###########################
+ # MODIFIERS
+ ###########################
+ rep_tension_1:0 "Nascent Tensions"
+ desc_rep_tension_1:0 "The republican institutions are beginning to show signs of strain. Senate debates grow heated, old alliances crack under new pressures, and whispers of reform circulate through the corridors of power."
+ rep_tension_2:0 "Latent Instability"
+ desc_rep_tension_2:0 "The cracks in the Republic's foundations are now visible to all. Corruption spreads through the administration, commanders grumble in their camps, and the popular assemblies have become arenas of partisan violence."
+ rep_tension_3:0 "Institutional Crisis"
+ desc_rep_tension_3:0 "The Republican system is buckling under the weight of an empire it was never designed to govern. Provincial governors act as independent rulers, the treasury is emptied by factionalism, and no law passes the Senate without violence."
+ c3rd_civil_war_republic_ae:0 "Republican War"
+ desc_c3rd_civil_war_republic_ae:0 "The country is torn by an internal republican conflict."
+ c3rd_rep_relief:0 "Republican Consolidation"
+ desc_c3rd_rep_relief:0 "The Republic has survived its civil war. The factions have drawn back from the brink, and the Senate, however grudgingly, has closed ranks. This hard-won stability will not last forever : the structural tensions remain, but it provides a breathing space in which to rebuild.\n\n#G Slows the monthly accumulation of republican tension.#!"
+
+ ###########################
+ # REPUBLICAN LAWS
+ ###########################
+ republican_law:0 "Republican Laws"
+ republican_law_desc:0 "The laws governing the functioning of the Republic date back to a time when the state was a city. As the empire has grown, these laws have become both the foundation and the weakness of our system, each reform opening new cracks even as it closes others.\n\n#G These laws are only active after 800 AUC for Republican country.#!"
+
+ basic_republican_law:0 "Mos Maiorum"
+ basic_republican_law_desc:0 "The ancestral custom, "mos maiorum", is the unwritten backbone of the Republic. \nNo single law defines it, yet every citizen knows it: the traditions of the Senate, the rights of tribunes, the dignity of the consulate. \nIn times of stability, it is enough. In times of crisis, it merely delays the reckoning."
+
+ lex_frumentaria:0 "Lex Frumentaria"
+ lex_frumentaria_desc:0 "The distribution of subsidised grain to the citizens of the capital was one of the most powerful instruments of popular loyalty. The Lex Frumentaria institutionalises this practice across the empire, at no small cost to the treasury, but to considerable effect on the morale of the urban populace.\n\n#G Significantly reduces republican tension monthly#!\n#R Places a burden on the monetary balance#!"
+
+ lex_de_provinciis:0 "Lex de Provinciis"
+ lex_de_provinciis_desc:0 "A law governing the conduct of provincial governors: their terms are limited, their accounts are audited, and their armies may not cross the boundaries of their province. It was once the bulwark against military ambition. In an empire of this scale, enforcing it requires... flexibility.\n\n#G Reduces republican tension monthly\nReduce even more when military loyalty is uncertain#!"
+
+ lex_sempronia:0 "Lex Sempronia"
+ lex_sempronia_desc:0 "Originally championed by the Gracchi as a land reform, the Lex Sempronia in this age takes the form of a redistribution of state revenues, diverting a portion of the great estates' income toward public works and the freemen class. The aristocracy despises it. The people adore it.\n\n#G Significantly reduces republican tension monthly#!"
+
+ lex_villia_annalis:0 "Lex Villia Annalis"
+ lex_villia_annalis_desc:0 "This old law establishes minimum ages and mandatory intervals for the holding of magistracies, a check against the concentration of power in ambitious hands. In practice, it forces experienced officers out of command at the worst moments, and binds capable men to wait while less qualified ones fill the rosters.\n\n#R Increases republican tension#!"
+
+ lex_trebonia:0 "Lex Trebonia"
+ lex_trebonia_desc:0 "The law that prolonged the provincial commands of Pompey and Crassus, granting them five more years of military authority beyond their consulship. Revived in the spirit of the age, it allows the Senate to confer extended command over a seasoned general, binding the legions to a single capable hand. The security it provides has a cost : normalising personal military power erodes the republican foundations that hold the state together.\n\n#G Help decrease military discontent#!\n#R Increases republican tension#!"
+
+ lex_hortensia:0 "Lex Hortensia"
+ lex_hortensia_desc:0 "The ancient law that made plebiscites binding on all citizens regardless of senatorial approval. Revived in spirit, it empowers the popular assemblies to act more directly on institutional questions, reducing the threshold for reform, at the price of handing more leverage to the popular factions.\n\n#G Reduces the conditions required to attempt the monarchical reform.#!\n#G Unlocks the#! #Y Convocatio Populi#! #G decision.#!\n#R A slow monthly increases in republican tension.#!"
+
+ ###########
+ # EVENTS
+ ###########
+
+ # Tier 1 
+
+ c3rd_rep_tension.1.t:0 "Due Demands"
+ c3rd_rep_tension.1.desc:0 "The great families of the Senate have grown restless. \nIn a private audience, a delegation of the most prominent optimates presented their grievances with unusual directness: they have funded campaigns, sustained armies, managed provinces, and they demand a formal recognition of their services, in the form of tax exemptions and privileged access to state contracts. The message, though delivered with perfect senatorial decorum, could not have been clearer."
+ c3rd_rep_tension.1.a:0 "A reasonable request from invaluable allies"
+ c3rd_rep_tension.1.a.tt1:0 "The optimates will be satisfied and their support secured."
+ c3rd_rep_tension.1.b:0 "The Republic does not make deals of this kind"
+ c3rd_rep_tension.1.b.tt1:0 "The optimates will not forget this refusal."
+
+ c3rd_rep_tension.2.t:0 "The Price of Bread"
+ c3rd_rep_tension.2.desc:0 "In the marketplaces, prices have climbed again. \nThe popular tribunes have jumped on this issue with unusual ferocity : their speeches in the assembly halls drew enormous crowds and several near-riots. They demand a formal programme of grain subsidies : "Not as charity, but as a right." \nThe Senate debates in hushed tones whether the cost of refusal outweighs the cost of compliance."
+ c3rd_rep_tension.2.a:0 "The people must eat, open the granaries"
+ c3rd_rep_tension.2.a.tt1:0 "The populares will be satisfied."
+ c3rd_rep_tension.2.b:0 "The Republic cannot feed every idle mouth in the empire"
+ c3rd_rep_tension.2.b.tt1:0 "The populares will not be satisfied."
+
+ c3rd_rep_tension.3.t:0 "The Rites of Our Ancestors"
+ c3rd_rep_tension.3.desc:0 "A traditionalist delegation has arrived with a petition signed by priests, veterans, and old families from half the provinces: a great public celebration of the ancient rites has not been held in some years. They ask, with quiet insistence, that the old ceremonies be observed, the calendar respected, the sacrifices performed publicly, the memory of the founding honoured. They speak of duty to the past. Their real concern, of course, is their own influence in the present."
+ c3rd_rep_tension.3.a:0 "We will honour the old ways"
+ c3rd_rep_tension.3.a.tt1:0 "The ancient rites will be publicly observed for five years. The old families will be satisfied, but those who do not share in the ancestral tradition will feel the weight of its restoration."
+ c3rd_rep_tension.3.b:0 "We have more pressing concerns than ceremonies"
+ c3rd_rep_tension.3.b.tt1:0 "The traditionalists will interpret this as contempt for their values and their influence."
+ c3rd_rep_tension.3.c:0 "Restore the traditions of our ancestors"
+ c3rd_rep_tension.3.c.tt1:0 "The traditionalists will be satisfied, but the republican laws will be reset."
+
+ # Tier 2 
+
+ c3rd_rep_tension.4.t:0 "The Soldiers' Wages"
+ c3rd_rep_tension.4.desc:0 "A delegation of officers, careful to appear as petitioners and not to seem threatening, arrived at the Senate. The men have not been paid in full; the campaign season was costly and the treasury strained. They do not demand, they remind: an army that is not paid does not lose its loyalty overnight, but it does begin to ask questions. [general_leader_rt.GetName], who delivered the message personally, smiled throughout, but that smile does not hide this crude attempt at extortion, which takes advantage of the political tensions."
+ c3rd_rep_tension.4.a:0 "Honour our soldiers' service, pay them"
+ c3rd_rep_tension.4.a.tt1:0 "You will pay the soldiers and please the generals\n#G Military discontent will be reduced.#!"
+ c3rd_rep_tension.4.b:0 "You are soldiers, not merchants"
+ c3rd_rep_tension.4.b.tt1:0 "You are refusing these absurd claims.\n#R Military discontent will be increased.#!"
+
+ c3rd_rep_tension.5.t:0 "The Senate Rallies Behind a General"
+ c3rd_rep_tension.5.desc:0 "Alarming political developments are emerging in the capital. It began with a dinner at [general_leader_rt2.GetName]'s estate, a private gathering, nothing unusual. But the names of those present leaked: three prominent senators, two former consuls, a treasurer. \nThe next day, [general_leader_rt2.GetName]'s proposals for a special military command were presented to the Senate with an unusual number of enthusiastic sponsors. The optimates have decided to back a general. \nThere's no need to ask, we know what's going on...."
+ c3rd_rep_tension.5.a:0 "A capable general is an asset"
+ c3rd_rep_tension.5.a.tt1:0 "The optimates' support will be acknowledged. Their general will be accommodated.\n#R [general_leader_rt2.GetName] will gain greater political power than he already has#!"
+ c3rd_rep_tension.5.b:0 "No man rises exceptional on senatorial backing alone"
+ c3rd_rep_tension.5.b.tt1:0 "The optimates will not forgive this public humiliation of their chosen ally."
+
+ c3rd_rep_tension.6.t:0 "The Great Redistribution"
+ c3rd_rep_tension.6.desc:0 "Dissatisfaction is growing among the country, fuelled by the loss of legitimacy of the representative Senate.\nThe popular tribunes have proposed a sweeping and ambitious agrarian reform : a reallocation of uncultivated public lands to landless citizens, combined with caps on private ownership of state-managed estates. It is, in principle, quite constitutional and this proposal has already received widespread support from the public, but the great landowners have reacted as if it were a declaration of war. \nBoth sides look to us for a decision."
+ c3rd_rep_tension.6.a:0 "A just redistribution is the foundation of the Republic"
+ c3rd_rep_tension.6.a.tt1:0 "The people will be satisfied, but the senate will be highly divided, increasing the tension."
+ c3rd_rep_tension.6.b:0 "We will not allow the Republic's estates to be scattered"
+ c3rd_rep_tension.6.b.tt1:0 "A consensual answer that will preserve the status quo, but the popular assemblies will not forgive this."
+
+ # Tier 3 
+
+ c3rd_rep_tension.7.t:0 "A Saviour for the Republic"
+ c3rd_rep_tension.7.desc_ruler:0 "The murmurs have become a chorus. [general_leader_rt3.GetName]'s popularity has outgrown the institutions that gave him his mandate. Veterans invoke his name. The popular tribunes cite his decisions as precedents. Even his opponents in the Senate have stopped arguing that he is wrong : they argue only that his methods are dangerous.\n\nHe has not asked for extraordinary powers. He does not need to. The question has asked itself."
+ c3rd_rep_tension.7.desc:0 "[general_leader.GetName] has made himself impossible to ignore. His presence in the capital, surrounded by veterans, his name on the lips of the street, is no longer that of a general awaiting orders. In a speech before the full Senate that lasted two hours, he laid out his vision with precision: the institutions are broken, the Senate is paralysed, and only a man of extraordinary mandate can restore the Republic's greatness. He does not call it kingship. He calls it salvation."
+ c3rd_rep_tension.7.a:0 "Let him begin the reform, the Republic will survive it"
+ c3rd_rep_tension.7.a.tt1:0 "#R This will set you irrevocably on the path to monarchical reform.#!\n#G The reform chain begins immediately.#!"
+ c3rd_rep_tension.7.b:0 "The Republic does not need saving by one man"
+ c3rd_rep_tension.7.b.tt1:0 "#R His frustration will rebound heavily on the institutions.#!\n#R His military support will begin to turn inward.#!"
+
+ c3rd_rep_tension.8.t:0 "The Threat of Secession"
+ c3rd_rep_tension.8.desc:0 "A consortium of the most powerful senatorial families has delivered a private ultimatum, courteous in form but unmistakable in intent. \nIf the special provisions they have requested are not codified into law within the season, they will withdraw their governors, their armies, and their financial contributions from the common treasury. They know perfectly well that the state cannot function without them. \nThis is nothing more than despicable blackmail that threatens the unity of the nation for personal gain."
+ c3rd_rep_tension.8.a:0 "We will formalise their privileges, this time"
+ c3rd_rep_tension.8.a.tt1:0 "The aristocrats are appeased.\n#R Law advantages for aristocrats will be gained.#!"
+ c3rd_rep_tension.8.b:0 "No Republic can survive those who hold it hostage"
+ c3rd_rep_tension.8.b.tt1:0 "#R States governed by oligarchs will lose 20 loyalty.#!\n#R [SCOPE.GetRootScope.GetCountry.MakeScope.GetVariable('numb_olig_states').GetValue|0]#! states are affected."
+
+ c3rd_rep_tension.9.t:0 "The Factions at Each Other's Throats"
+ c3rd_rep_tension.9.desc:0 "Nowhere is the pressure on our republican system more evident than in the Senate, where the divisions are becoming more glaring by the day.\nThe tensions that had simmered through months of bitter debate finally erupted in the assembly hall: a populist tribune struck a traditionalist senator across the face with a rolled document, sparking a brawl that required armed intervention to end. Three men were seriously injured. \nThe incident has been reported across the empire, fuelling rumours and plans for revenge. \nBoth factions have come to us demanding satisfaction, each convinced that we will take their side."
+ c3rd_rep_tension.9.a:0 "The traditionalists represent order and continuity"
+ c3rd_rep_tension.9.a.tt1:0 "The traditionalists will be satisfied. \nThe populares will interpret this as a declaration of partisan preference."
+ c3rd_rep_tension.9.b:0 "The people's cause is the Republic's cause"
+ c3rd_rep_tension.9.b.tt1:0 "The populares will be satisfied. \nThe traditionalists will withdraw their cooperation."
+ c3rd_rep_tension.9.c:0 "We will hear both sides, this is not a war"
+ c3rd_rep_tension.9.c.tt1:0 "A compromise reduces tension more than either partisan option."
+ c3rd_rep_tension.9.d:0 "You WILL behave in the Senate!"
+ c3rd_rep_tension.9.d.tt1:0 "#G This is possible because you have high tyranny.#!"
+
+ # on death
+
+ c3rd_rep_tension.10.t:0 "The Death of [dead_aristocrat.GetName]"
+ c3rd_rep_tension.10.desc:0 "The news arrived with little ceremony: [dead_aristocrat.GetName] is dead. In the Senate, in the camps, in the estates of half the empire, the question that follows is always the same, not who mourns him, but who profits. A man of his stature leaves behind obligations, alliances, rivalries, and ambitions that no single successor can simply inherit. The vacuum he leaves is already beginning to pull."
+ c3rd_rep_tension.10.a:0 "Let us build on his political legacy"
+ c3rd_rep_tension.10.a.tt1:0 "The death of a major landowner will weaken senatorial cohesion and accelerate institutional tensions.\nBy claiming his legacy, we'll gain political influence at the cost of higher tension."
+ c3rd_rep_tension.10.b:0 "Let us not meddle in the affairs of the dead"
+ c3rd_rep_tension.10.b.tt1:0 "The death of a major landowner will weaken senatorial cohesion and accelerate institutional tensions.\nBy distancing ourselves from his legacy, we'll lose political influence but avoid further aggravating tensions."
+
+ c3rd_rep_tension.11.t:0 "Political Pressure"
+ c3rd_rep_tension.11.desc:0 "In the Senate, [c3rd_rep_t11_target_char.GetName] has been making an increasingly prominent figure of himself in recent weeks. With his fiery speeches, relentless tirades, and unwavering support from his political camp are putting pressure on our government..\nWe can no longer sit idly by and let him gain more supporters. He has significant political capital that it would be foolish to ignore, and a gesture  towards him might dampen his enthusiasm, but we could also choose to publicly denounce his intentions, which are dangerous for our institutions."
+ c3rd_rep_tension.11.a:0 "It is wiser to come to an agreement"
+ c3rd_rep_tension.11.a.tt1:0 "You will give in to the [char_t11_party.GetName] political demands in exchange for political power. But such an intervention, which falls outside the legal framework, will have a destabilising effect on our institutions."
+ c3rd_rep_tension.11.b:0 "Condemn his autocratic intentions"
+ c3rd_rep_tension.11.b.tt1:0 "That will put an end to the pressure, but his reaction won’t exactly be a calm one..."
+ c3rd_rep_tension.11.c:0 "Ignore all this posturing"
+ c3rd_rep_tension.11.c.tt1:0 "You will do nothing and ignore him, leaving him to his disruptive behaviour."
+ 
+
+ c3rd_rep_tension.12.t:0 "Political stances"
+ c3rd_rep_tension.12.desc:0 "[c3rd_rep_t12_target_char.GetName]’s grandstanding is causing a stir in the Senate, and his influence is hampering our efforts. Should we oppose him, even at the risk of escalating tensions?"
+ c3rd_rep_tension.12.a:0 "Shut him up"
+ c3rd_rep_tension.12.a.tt1:0 "This will exacerbate tensions and contain his ambitions."
+ c3rd_rep_tension.12.b:0 "Ignore him"
+ c3rd_rep_tension.12.b.tt1:0 "Let him undermine our government"
+
+
+ c3rd_rep_tension.13.t:0 "Military pressure"
+ c3rd_rep_tension.13.desc:0 "[c3rd_rep_t13_target_char.GetName], a powerful general, is demanding additional funds. For the men, he proclaims, but we both know that it is wealthy politicians who will pocket this money"
+ c3rd_rep_tension.13.a:0 "*sigh* All right then"
+ c3rd_rep_tension.13.a.tt1:0 "A sum that will no doubt be put to use in furthering his political ambitions"
+ c3rd_rep_tension.13.b:0 "Condemn his actions"
+ c3rd_rep_tension.13.b.tt1:0 "We might gain some influence from this... or make new enemies"
+ ###########################
+ # EVENTS REP CRISIS
+ ###########################
+
+ c3rd_rep_crisis.1.t:0 "The Republic at the Brink"
+ c3rd_rep_crisis.1.desc:0 "The Senate session that should have been the last has lasted three days. Food was brought in. People slept on the benches. Outside, a crowd that had grown from curious to anxious to openly angry pressed against the doors. Inside, voices are rising, threats are flying, and the institutional crisis has reached its peak. \nAlready, the powerful families are plotting, preparing for what comes next. We must stand firm on our principles, our democracy, and defend it by force if necessary. \nBut we can take the initiative, accelerate the transition that is already taking shape, and play on their aristocratic appetites to maintain control: reform, centralize, and... reign."
+ c3rd_rep_crisis.1.a:0 "Begin the reform, the Republic must evolve"
+ c3rd_rep_crisis.1.a.tt1:0 "#R This will transform the Republic into a monarchy.#!\n#G The reform chain begins, accompanied by a powerful deep reforms modifier.#!\n#G Republican tension is cleared.#!"
+ c3rd_rep_crisis.1.b:0 "Defend the Republic, let it be decided by war"
+ c3rd_rep_crisis.1.b.tt1:0 "#R A republican war begins immediately. Rebel provinces will secede under a rival republican banner#!.\nThe civil war stops with a #G Victory#! if you manage to halve their size and a #R Defeat#! if your size is halved\n#G Victory will allow the Republic to survive, weakened but intact.#!\n#R Defeat will end the Republic under worse terms.#!"
+ c3rd_rep_crisis.1.b.tt2:0 "\n\nThe rebels are #R stronger#! than you"
+ c3rd_rep_crisis.1.b.tt3:0 "\n\nThe rebels are #G weaker#! than you"
+ c3rd_rep_crisis.1.b.tt4:0 "\n\nThe rebels are #Y about equal#! to you"
+ c3rd_rep_crisis.1.c:0 "Use every possible lever to win time"
+ c3rd_rep_crisis.1.c.tt1:0 "You realise that the rebels are not yet strong enough to start a revolt, and you use this to your advantage to thwart their attempts.#!\nAll provinces will lose #R 10#! loyalty.\n #R A significant number of governors will lose loyalty.#!"
+
+
+ c3rd_rep_crisis.2.t:0 "The Republic Stands"
+ c3rd_rep_crisis.2.desc:0 "Victory, decisive as ever, is ours: after suffering numerous setbacks and faced with the unyielding strength of our resolve, the enemy forces have fled, and their pitiful tyranny is crumbling.\n\nThe rebel provinces have been reintegrated, their armies scattered, their alternative government dissolved. It was not a clean victory, few civil wars are, but it is a decisive one. \n\nThe Republic has survived, this time."
+ c3rd_rep_crisis.2.a:0 "The Republic endures. For now."
+ c3rd_rep_crisis.2.a.tt1:0 "#G Republican tension is reset to 20.#!\n You gain a #G Republican Consolidation#! modifier for 5 years, that will slow or even decrease the tension\nThe Republic survives."
+
+ c3rd_rep_crisis.3.t:0 "The Empire That Grew Beyond Its Laws"
+ c3rd_rep_crisis.3.desc:0 "Defeat is inevitable; our armies are falling apart in the face of an enemy that has masked its mediocrity with sheer numbers.\nThe numbers indeed did not lie, even if we refused to read them for months. Province after province shifted its allegiance, not out of hatred for the Republic, but out of simple calculation: the rebel's authority was present, ours was not. The assembly voted, in the end, not as a concession to defeat, but as the only means of preserving anything at all. The Republic is ended.\n\nHistory will judge whether it was killed by its enemies, or by its own ambitions."
+ c3rd_rep_crisis.3.a:0 "So it ends."
+ c3rd_rep_crisis.3.a.tt1:0 "#R The Republic has failed. A monarchical transition is forced upon us.#!"
+
+ c3rd_rep_crisis.4.t:0 "An unfinished business"
+ c3rd_rep_crisis.4.desc:0 "Neither defeat nor victory: our conflict with the rebels of [rebel_country.GetName] has left its mark and a bitter taste in the mouth. \nNeither side has been able to impose its vision on the other, and the situation has become deadlocked. Treaties, agreements : mere words scrawled on papyrus, signifying nothing more than the admission of a collective failure. \nTwo countries now stand opposed, two claimants to our heritage, symbolising the decline of what was once a proud republic... But the future is not yet written, and who knows, perhaps a shared future is still possible.."
+ c3rd_rep_crisis.4.a:0 "They are nothing but false pretenders"
+ c3rd_rep_crisis.4.a.tt1:0 "The Republican War ended without a clear winner. Your adversary is now a #Y Rival Empire#!, governed by these rules.\nWith both our empires claiming the main title, later events may allow for a peaceful reunification. \nIf the two empires remain separated for too long, the schism will be complete."
+
+
+ c3rd_rep_crisis.5.t:0 "The Future Of The Republic"
+ c3rd_rep_crisis.5.desc:0 "The institutions that have governed our political life for many years are facing a mounting number of obstacles. Case laws, traditions, exceptions, democratic breakdown… all these factors contribute to the sluggishness and signs of our model running out of steam. \nThis reality has not escaped the notice of many key characters, who are seeking either to preserve what can be preserved, or to steer this change in a direction that works to their advantage. \n\nWhatever the outcome, the Republic will doubtless never be the same again... if indeed it survives."
+ c3rd_rep_crisis.5.a:0 "Politics, always politics..."
+ c3rd_rep_crisis.5.a.tt1:0 "The #Y Republican Tension#! mechanic is active. The relevant interface can be accessed via the #Y Government#! tab."
+
+ ###########################
+ # GUI WINDOW & ALERTS
+ ###########################
+
+ c3rd_rep_tension_window_TITLE:0 "Republican Tension"
+ rep_tension_none_active:0 "Republican Order"
+
+ ALERT_REP_TENSION_YELLOW:0 "#T Republican Tensions#!\nThe Republican institutions are under strain, the factions are dissatisfied and the Senate is losing its grip.\nOpen the Republican Tension window to understand the sources and manage the situation."
+ ALERT_REP_TENSION_RED:0 "#T Institutional Crisis#!\nThe Republic is on the verge of collapse. The situation demands immediate action, manage the factions or accept the inevitable reform.\nOpen the Republican Tension window."
+
+ ###########################
+ # GUI SOURCE ICON TOOLTIPS
+ ###########################
+ c3rd_rep_size:0 "[Player.Custom('c3rd_rep_size_custom_loc')]"
+ c3rd_rep_size_custom_loc1:0 "#bold #G Small Republic#!#!"
+ c3rd_rep_size_custom_loc2:0 "#bold #G Significant Republic#!#!"
+ c3rd_rep_size_custom_loc3:0 "#bold Major Republic#!"
+ c3rd_rep_size_custom_loc4:0 "#bold #R Oversized Republic#!#!"
+ c3rd_rep_size_custom_loc5:0 "#bold #R Imperialist Republic#!#!"
+ c3rd_rep_size_custom_loc6:0 "#bold #R Unmanageable Republic#!#!"
+ c3rd_rep_stab:0 "[Player.Custom('c3rd_rep_stab_custom_loc')]"
+ c3rd_rep_stab_custom_loc1:0 "#bold #R Collapsing#!#!"
+ c3rd_rep_stab_custom_loc2:0 "#bold #R Unstable#!#!"
+ c3rd_rep_stab_custom_loc3:0 "#bold Stable#!"
+ c3rd_rep_stab_custom_loc4:0 "#bold #G Very Stable#!#!"
+ c3rd_rep_stab_custom_loc5:0 "#bold #G Indestructible#!#!"
+ c3rd_rep_senate_approval:0 "[Player.Custom('c3rd_rep_senate_approval_custom_loc')]"
+ c3rd_rep_senate_approval_custom_loc1:0 "#bold #R Very Low#!#!"
+ c3rd_rep_senate_approval_custom_loc2:0 "#bold #R Low#!#!"
+ c3rd_rep_senate_approval_custom_loc3:0 "#bold Consensus#!"
+ c3rd_rep_senate_approval_custom_loc4:0 "#bold #G High#!#!"
+ c3rd_rep_senate_approval_custom_loc5:0 "#bold #G Very High#!#!"
+ c3rd_rep_time:0 "[Player.Custom('c3rd_rep_time_custom_loc')]"
+ c3rd_rep_time_custom_loc1:0 "#bold Classical Era#!"
+ c3rd_rep_time_custom_loc2:0 "#bold #R Imperial Era#!#!"
+ c3rd_rep_time_custom_loc3:0 "#bold #R Post-classical Era#!#!"
+ c3rd_rep_monetary:0 "[Player.Custom('c3rd_rep_monetary_custom_loc')]"
+ c3rd_rep_monetary_custom_loc1:0 "#bold #R Imbalance#!#!"
+ c3rd_rep_monetary_custom_loc2:0 "#bold #R Crisis#!#!"
+ c3rd_rep_monetary_custom_loc3:0 "#bold #R Collapse#!#!"
+ c3rd_rep_monetary_custom_loc4:0 "#bold Balanced#!"
+ c3rd_rep_monetary_custom_loc5:0 "#bold #R Gold Standard#!#!""
+ c3rd_rep_military:0 "[Player.Custom('c3rd_rep_military_custom_loc')]"
+ c3rd_rep_military_custom_loc1:0 "#bold Disciplined#!"
+ c3rd_rep_military_custom_loc2:0 "#bold #R Annoyed#!#!"
+ c3rd_rep_military_custom_loc3:0 "#bold #R Discontent#!#!"
+ c3rd_rep_military_custom_loc4:0 "#bold #R Angry#!#!"
+ c3rd_rep_military_custom_loc5:0 "#bold #R Enraged#!#!"
+ c3rd_rep_arrow_up:0 "[Player.Custom('c3rd_rep_arrow_up_custom_loc')]"
+ c3rd_rep_arrow_up_custom_loc1:0 "The state of the republic is changing slowly but surely. We can still keep it under control and act accordingly, if we so choose... \n\nAt this rate, the republic will last another century, or two, perhaps even longer?"
+ c3rd_rep_arrow_up_custom_loc2:0 "Tensions within the republic are mounting, and difficult choices lie ahead. \n\nAt this rate, the republic will last less than a century, or perhaps just a few decades at most..."
+ c3rd_rep_arrow_up_custom_loc3:0 "Institutions are rushing headlong towards the republic’s imminent demise. Is it a total loss of control or the will of its leaders? Who can say? \n\nAt this rate, the republic will last another twenty years at most."
+ c3rd_rep_arrow_down:0 "[Player.Custom('c3rd_rep_arrow_down_custom_loc')]"
+ c3rd_rep_arrow_down_custom_loc1:0 "Republican institutions are being restored. A slight and perhaps temporary change, but a welcome one. \n\nAt this rate, however, it would be impossible to completely eliminate the tension in less than a century... or three"
+ c3rd_rep_arrow_down_custom_loc2:0 "Republican tensions are steadily and surely easing. \n\nAt this rate, it will take less than a century, or even just a few decades, to eliminate all tensions!"
+ # Rising tension (red)
+ c3rd_rep_src_cities_tt:0 "#T Size of the Empire#!\nThe Republican system was not built for empires. Every new province stretches its institutions further, #R increasing#! Republican Tension."
+ c3rd_rep_src_deflation_tt:0 "#T Monetary Deflation#!\nEconomic crisis erodes the population's confidence in the state's ability to govern, fuelling factional agitation."
+ c3rd_rep_src_crash_tt:0 "#T Monetary Collapse#!\nA severe devaluation of the currency is generating social unrest and direct pressure on the Republican institutions."
+ c3rd_rep_src_solidus_tt:0 "#T Gold Standard#!\nThe introduction of the Gold Standard has concentrated wealth in the hands of the aristocracy, fuelling factional ambitions and separatist impulses."
+ c3rd_rep_src_unworthy_tt:0 "#T Unworthy Leadership#!\nThe generals' growing contempt for the current leadership is undermining the constitutional authority of the magistrates."
+ c3rd_rep_src_stab_tt:0 "#T Stability : [Player.GetStability|2]#!\nLow and very low stability #R increases#! Republican Tension considerably, while high and very high stability #G reduces#! it moderately."
+ c3rd_rep_src_low_senate_tt:0 "#T Support in the Senate : [Player.GetSenateApproval|2]#!\nThe various factions might have their own different reasons to be dissatisfied, but the global satisfaction is the key to limit Republican Tension.\nThe more #R dissatisfied#! the Senate is, the more it will #R increase#! tension.\nA #G satisfied#! Senate will #G reduce#! tension moderately."
+ c3rd_rep_time_tt:0 "#T Time Pressure#!\nIn times of larges empires, autocracy and decline of democracy, the pressure on the republican institutions grows. Senates, councils and representations are considered remnants of the past, and the need for a strong hand to guide the state is more and more accepted.\n\n #Y Republican Tension#! will #R increase#! over time passively."
+ c3rd_rep_monetary_tt:0 "#T Monetary Effect#! \nThe state of  the monetary balance has a direct effect on the Republican Tension. #Y Deflation#! or #Y Silver Devaluation#! will #R increase#! tension, in proportion to the scale of the crisis.\n#bold However#!, establishing the #Y Gold standard#! will also #R increase#! tension, symbolising the concentration of wealth and the erosion of the middle class that fuels factional ambitions and separatist impulses."
+ c3rd_rep_military_tt:0 "#T Military Discontent#!\nThe generals' growing contempt for the current leadership is undermining the constitutional authority of the magistrates, and increasing the pressure on the republican institutions.\nYou can only have a vague idea of this discontent, but it can greatly #R increase#! Republican Tension, create crises, and even coups if left unchecked."
+ c3rd_rep_title:0 "#T Status of Institutions#!"
+ c3rd_c3rd_rep_relief_tt:0 "#G Republic Preserved#!\nFollowing a violent civil war against supporters of the monarchy, the republic was preserved\n\nThis is #G decreasing#! #Y Republican Tension#!"
+ c3rd_rep_divided_empire_tt:0 "#G Divided Empire#!\nThe empire has been divided, ensuring batter stability and endurance.\n\nThis is #G decreasing#! #Y Republican Tension#!"
+
+ c3rd_rep_incr_tension_tt:0 "#R Increasing Tension#!\nThis law is increasing Republican Tension."
+ c3rd_rep_law_small_tension_tt:0 "#R Increasing Tension#!\nThis law is slowly increasing Republican Tension."
+ c3rd_rep_law_decr_tension_tt:0 "#G Reducing Tension#!\nThis law is reducing Republican Tension."
+ c3rd_rep_law_sdecr_tension_tt:0 "#G Reducing Tension#!\nThis law is slowly reducing Republican Tension."
+ c3rd_rep_law_decr_mil_tt:0 "#G Reducing Military Discontent#!\nThis law is slowly reducing military discontent."
+ c3rd_rep_law_mon_effect_tt:0 "#R Decrease Monetary balance#!\nThis law has a negative effect on the monetary balance.\n\nReforming the #Y Solidus#! will change this law back to #Y Mos Maiorum#! ."
+
+
+ ###########################
+ # GUI DIVERS
+ ###########################
+
+ c3rd_rep_senate_approval_tt:0 "#T Senate Approval#!\nThe combined approval of the three Republican factions. #G Above 80% it actively reduces tension.#! #R Below 50% it actively increases it.#!"
+ c3rd_rep_unworthy_leader_tt:0 "#T Military Discontent#!\nThe degree of contempt the generals hold for the current political leadership. The higher this value, the stronger the pressure on Republican institutions."
+
+
+ ###########################
+ # CUSTOM TOOLTIPS
+ ###########################
+ c3rd_republican_tension_num:0 "[Player.Custom('c3rd_republican_tension_num_custom_loc')]"
+ c3rd_republican_tension_num_custom_loc1:0 "[SCOPE.GetRootScope.GetCountry.MakeScope.GetVariable('republican_tension').GetValue|Y] #!"
+ c3rd_republican_tension_num_custom_loc2:0 "[SCOPE.GetRootScope.GetCountry.MakeScope.GetVariable('republican_tension').GetValue|R] #!"
+ c3rd_republican_tension_num_custom_loc3:0 "[SCOPE.GetRootScope.GetCountry.MakeScope.GetVariable('republican_tension').GetValue] #!"
+ republican_tension_desc:0 "#T Republican Tension#!\nA measure of the institutional strain on the Republic. At 25, 50, and 75, increasingly severe penalties are applied to the state. At 100, a choice between monarchical reform and republican war becomes unavoidable. \n[Player.Custom('republican_tension_desc_custom_loc')]"
+ republican_tension_desc_custom_loc2:0 "The tension is growing and some effects are becoming apparent. \n\n [Player.GetTimedModifier( 'rep_tension_1' ).GetTooltip]"
+ republican_tension_desc_custom_loc3:0 "The tension is high and its effects are severe. \n\n [Player.GetTimedModifier( 'rep_tension_2' ).GetTooltip]"
+ republican_tension_desc_custom_loc4:0 "The tension is critical and the Republic is on the verge of collapse. \n\n [Player.GetTimedModifier( 'rep_tension_3' ).GetTooltip]"
+ c3rd_rep_tension_pulse_desc:0 "The Republican tension pulse calculates the monthly evolution of institutional pressure."
+ c3rd_rep_tension_check_var:0 "Republican tension is only tracked for Republic governments past 800 AUC."
+ c3rd_rep_will_start_reform_desc:0 "The conditions for starting the monarchical reform are met, this will definitely set you on the path to monarchy.\n #G At the end of the reform, you will solve the political instability and will gain a powerful modifier to face the problems of this era #!"
+ c3rd_dangerous_leader_text:0 "[Player.Custom('c3rd_dangerous_leader_custom_loc')]"
+ c3rd_dangerous_leader_custom_loc1:0 "#bold Dangerous Character#!"
+ c3rd_dangerous_leader_custom_loc2:0 "#bold No Threat#!"
+ c3rd_rep_dangerous_leader_tt:0 "[Player.Custom('c3rd_rep_dangerous_leader_custom_loc')]"
+ c3rd_rep_dangerous_leader_custom_loc1:0 "#bold #T Major Politician#!#!\nThis character is the biggest threat to the Republic. His political ambitions are a source of tension. Keep his loyalty high to prevent him from creating more turmoils."
+ c3rd_rep_dangerous_leader_custom_loc2:0 "#bold #T Important General#!#!\nThis character is the most powerful general in the Republic. His military support might become a source of tension. Keep his loyalty high to prevent him from creating any turmoils."
+ c3rd_rep_dangerous_leader_custom_loc3:0 "#bold #T Dangerous Leader#!#!\nOur leader is a source of tension. His political ambitions and his military support might increase republican tension. Keep his popularity in check to prevent him from creating more turmoils.\n\n#Y High Charisma or Martial leaders are more likely to increase tension#!"
+ c3rd_rep_tension_minus_25:0 "The #Y Republican tension#! will be #G reduced#! by 25 points."
+ c3rd_rep_tension_minus_10:0 "The #Y Republican tension#! will be #G reduced#! by 10 points."
+ c3rd_rep_tension_minus_5:0 "The #Y Republican tension#! will be #G reduced#! by 5 points."
+ c3rd_rep_tension_minus_3:0 "The #Y Republican tension#! will be #G reduced#! by 3 points."
+ c3rd_rep_tension_minus_2:0 "The #Y Republican tension#! will be #G reduced#! by 2 points."
+ c3rd_rep_tension_plus_2:0 "The #Y Republican tension#! will be #R increased#! by 2 points."
+ c3rd_rep_tension_plus_5:0 "The #Y Republican tension#! will be #R increased#! by 5 points."
+ c3rd_rep_tension_plus_10:0 "The #Y Republican tension#! will be #R increased#! by 10 points."
+ c3rd_rep_tension_plus_15:0 "The #Y Republican tension#! will be #R increased#! by 15 points."
+ c3rd_rep_tension_plus_20:0 "The #Y Republican tension#! will be #R increased#! by 20 points."
+
+
+ ###########################
+ # DECISIONS
+ ###########################
+ c3rd_rep_reform_attempt_tt:0 "#bold #T Attempt Monarchical Reform#!#!"
+ has_already_reform:0 "Monarchical reform is not already underway"
+ has_stab_and_pop:0 "Stability is at least #Y 60#!, Ruler popularity is at least #Y 80#!, and Senate approval is at least #Y 80%#!"
+ has_stab_and_pop_hort:0 "Stability is at least #Y 60#!, Ruler popularity is at least #Y 60#!, and Senate approval is at least #Y 65%#! and the law #Y Lex Hortensia#! is active"
+ c3rd_rep_reform_fail_tt:0 "The reform attempt #R fails#!. Ruler #Y Charisma#! and #Y Republican tension#! can increase the chances of success."
+ c3rd_rep_reform_success_tt:0 "The reform attempt #G succeeds#!. The monarchical reform is underway."
+
+ size_requirement:0 "The country must be large enough."
+ time_requirement:0 "We are at least in the second part of the IInd century."
+ c3rd_split_empire:0 "#Bold Attempt to #T Split the Empire#!#! \nThe empire will be divided into two separate countries, each with its own government and institutions. This will greatly reduce the strain on the Republican system, but it will also weaken our overall power and influence."
+
+ has_lex_hortensia:0 "The law #Y Lex Hortensia#! must be active to call the #Y Convocatio Populi#! decision."
+ has_recent_convocatio:0 "The #Y Convocatio Populi#! decision has not been used in the last ten years."
+
+ convocatio_populi:0 "#bold #T Convocatio Populi#!#!"
+ convocatio_populi_desc:0 "The Lex Hortensia authorises us to call a direct assembly of the people, bypassing the Senate's usual procedural delays. It is an exceptional measure, appropriate only for exceptional times. The popular factions will receive it with enthusiasm; the senatorial families, with deep suspicion.\n#G Reduces republican tension#!\n#R Can only be convened once every ten years.#!"
+
+ # LAW ALLOW TOOLTIPS
+ c3rd_rep_law_req_active:0 "Republican Tension system is active"
+ c3rd_rep_law_req_25:0 "Republican Tension is at least 25%"
+ c3rd_rep_law_req_50:0 "Republican Tension is at least 50%"
+ c3rd_rep_law_req_max_25:0 "Republican Tension is at most 25%"
+ c3rd_rep_law_req_general:0 "A general with at least 10 Martial is available"

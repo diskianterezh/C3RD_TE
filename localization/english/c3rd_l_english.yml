@@ -14,8 +14,6 @@
  desc_military_anarchy:0 "Power in this country tends to be decided by powerful and popular generals"
  stability_boosted_mother:0 "Stability_boost"
  desc_stability_boosted_mother:0 "An external intervention has had a beneficial effect on the stability of the country"
- political_unstability:0 "Political Instability"
- desc_political_unstability:0 "The democratic institutions are deficient in these troubled times, and would need a deep reform"
  military_advantages:0 "Military Benefits"
  desc_military_advantages:0 "The recruitment and the military statutes have been modified to comply with the officers' opinions\n This has a negative impact on the monetary balance"
  deep_reforms:0 "Deep reforms"
@@ -42,6 +40,8 @@
  desc_collapse_avoided_decdec:0 "Great concessions were made to the clan elites to keep the country together"
  deep_mining:0 "Deep mining"
  desc_deep_mining:0 "To find more minerals, it is necessary to dig deeper and more dangerously"
+ c3rd_mos_maiorum_restored:0 "Mos Maiorum Restored"
+ desc_c3rd_mos_maiorum_restored:0 "The ancient rites are publicly observed and the ancestral calendar followed. The old families are satisfied... but those who do not share in this tradition are reminded of their place."
  tax_inspection:0 "Tax Inspection Policy"
  desc_tax_inspection:0 "The tax collectors spare no rank, nor any family in their search for the slightest trace of an attempt to evade the tax\n This has a positive impact on the monetary balance"
  government_support_movement:0 "Government support"
@@ -90,14 +90,6 @@
  desc_more_gold_for_peoples:0 "All salaries have been increased to match the incredible ressources of our nation"
  more_gold_help_yourself:0 "Economic largesse"
  desc_more_gold_help_yourself:0 "The country's vast wealth is redistributed to the population"
- provinces_republican_reforms:0 "Reforms of the republican administration "
- desc_provinces_republican_reforms:0 "Republican institutions are difficult to maintain as the empire expands"
- too_grand_republic:0 "Republican over-expansion"
- desc_too_grand_republic:0 "It would be a good idea to reform the republic to better correspond to the new size of our territory"
- too_huge_republic:0 "Republican over-expansion"
- desc_too_huge_republic:0 "We should reform the republic to better correspond to the new size of our territory"
- too_giant_republic:0 "Republican over-expansion"
- desc_too_giant_republic:0 "It is urgent to reform the republic to better correspond to the new size of our territory"
  wonder_defended_weapons:0 "Great Work harshly defended"
  desc_wonder_defended_weapons:0 "This province was violently repressed to defend the great work"
  wonder_destroyed_modifier:0 "Great work pillaged"
@@ -325,6 +317,7 @@
  governorship_lost_collapse:0 "Properties ceded to a governor"
  supported_action:0 "Action supported"
  state_interference:0 "State interference"
+ family_saved:0 "Family saved from a deadly plot"
 
  #character modifiers
  king_maker:0 "Kingmaker"
@@ -341,14 +334,6 @@
  desc_takes_governorships_control:0 "This governor is strangely involved in the life of his region, seeking to build alliances and ensure control over institutions..."
 
  #Decisions
- stop_political_unstability_small:0 "Stopping the political instability"
- stop_political_unstability_small_desc:0 "A small state is much easier to manage than a large one."
- stop_political_unstability_huge:0 "Stabilizing the government"
- stop_political_unstability_huge_desc:0 "Once the government is stabilized and back in control, the period of unrest will be over"
- stop_political_unstability_what:0 "Resolving instability"
- stop_political_unstability_what_desc:0 "You are not supposed to have this modifier ... click here to fix the problem"
- start_the_reform:0 "Reform the government"
- start_the_reform_desc:0 "It is time to abandon these old systems and enter a new era.\n#R You will take the path of a monarchy #! \n#G This will solve any political instability #!"
  resolve_administrative_problem:0 "Resolve Administrative Problems"
  resolve_administrative_problem_desc:0 "An efficient distribution of the administrative burden should solve many of our previous problems."
  has_noble_decision:0 "At least 20% of your population is part of a culture with noble rights"
@@ -375,6 +360,9 @@
  tutela_limitum_desc:0 "The borders of the empire must be defended, and what better defence than attack?"
  split_empire:0 "Split the empire"
  split_empire_desc:0 "Our empire face many challenges because of its great size, maybe an administrative split would be in order ?"
+ split_empire_any_capital:0 "A province of #Y our culture#!, and #Y not#! in our #Y capital region#!, is available to be the new capital of the second empire"
+ surrender_to_republican_war:0 "Surrender to Monarchists"
+ surrender_to_republican_war_desc:0 "This war has gone on for far too long, and our country’s blood is filling the rivers. All this must stop, whatever the cost."
 
  #schemes
  scheme_care_of_relatives_effect_tt:1 "[SCOPE.GetRootScope.GetCharacter.GetName] Will share his wealth with his family."
@@ -392,7 +380,6 @@
  ALERT_MILITARY_ANARCHY:0 "#T Military Anarchy#!\nThe country is in a phase of military anarchy. As long as this continues, the generals will demand more important concessions and decisions.\n [Player.GetTimedModifier( 'military_anarchy' ).GetTooltip]"
  ALERT_MILITARY_ANARCHY_TT1:0 "\nSome characters are influent generals :\n"
  ALERT_MILITARY_ANARCHY_TT2:0 "[king_maker_parse.GetName]"
- ALERT_POLITICAL_INSTABILITY:0 "#T Political Instability#!\nThe country is in a phase of political instability, applying several penalties. You can solve this by using the decisions to either reform the country or stopping the political instability.\n[GetModifier( 'political_unstability' ).GetDesc]"
  c3rd_influent_characters_owners_tt1:0 "#T Powerful Landowners#!\nSome people in your country are considered to be #T major landowners#! because of the number of regions they control."
  c3rd_influent_characters_owners_tt2:0 "[influent_character_parse.GetName] owns #R [influent_character_parse.MakeScope.GetVariable('country_ownership').GetValue]% #!"
  c3rd_influent_characters_owners_tt2_1:0 "#G [influent_character_parse.GetName]#! owns #T [influent_character_parse.MakeScope.GetVariable('country_ownership').GetValue]% #!"
@@ -443,6 +430,7 @@
  c3rd_aristocratic_reforms_tt:0 "Tough reforms imposed by your aristocracy are consolidating the economy as they can\n\n#G This has a very positive impact on your economy#!"
  c3rd_monetary_political_unstability_tt:0 "A political instability is affecting your country\n\n#R This has a negative impact on your economy#!"
  c3rd_monetary_political_second_reform_law_tt:0 "The #Y Aurelian's reforms#! law has been enacted\n\n#G This has a positive impact on your economy#!"
+ c3rd_monetary_lex_frumentaria_tt:0 "The #Y Lex Frumentaria#! is in action — subsidised grain is distributed to the urban populace\n\n#R This places a burden on the monetary balance#!"
  c3rd_divided_empire_tt:0 "The Empire has been recently #Y Divided#! \n\n#G This has a very positive impact on your economy#!"
  c3rd_small_country_tt:0 "Your country is modest in size\n\n#G This has a positive impact on your economy#!"
  c3rd_epidemic_outbreak_tt:0 "The plague is spreading through the country\n\n#R This has a negative impact on your economy#!"
@@ -893,9 +881,9 @@ low_stab_event.9.b.tt1:0 "You will garrison the [state_duchy_grab.GetName] in or
  c3rd_events.10.a:0 "Only one fate for traitors ; death."
  c3rd_events.10.a.tt1:0 "Immediate war will be declared on the secessionists"
  c3rd_events.10.b:0 "If they think they are better protected by this parvenu..."
- c3rd_events.10.b.tt1:0 "The rival empire secedes and things remain as they are for the time being. \nWith both our empires claiming the main title, later events may allow for a peaceful reunification. \nIf the two empires remain separated for too long, the schism will be complete."
+ c3rd_events.10.b.tt1:0 "The #Y Rival Empire#! secedes and things remain as they are for the time being. \nWith both our empires claiming the main title, later events may allow for a peaceful reunification. \nIf the two empires remain separated for too long, the schism will be complete."
  c3rd_events.10.c:0 "Our administrators and trustworthy men are always on site...."
- c3rd_events.10.c.tt1:0 "This option is available because your empire is way larger. \nWe can set up some administrative path which will make future reunification easier.\nWith both our empires claiming the main title, later events may allow for a peaceful reunification. \nIf the two empires remain separated for too long, the schism will be complete."
+ c3rd_events.10.c.tt1:0 "This option is available because your empire is way larger. \nWe can set up some administrative path which will make future reunification easier.\nWith both our empires claiming the main title, later events may allow for a peaceful reunification. \nIf the two #Y Rival Empires#! remain separated for too long, the schism will be complete."
 
  c3rd_events.11.t:0 "Reunification"
  c3rd_events.11.desc:0 "After the death of our ruler, the diligent council decided that we should stop this nonsense and comply to the real empire's exigencies."
@@ -1056,13 +1044,13 @@ low_stab_event.9.b.tt1:0 "You will garrison the [state_duchy_grab.GetName] in or
  c3rd_events.40.a:0 "Let's seize the offenders and restore order!"
  c3rd_events.40.a.tt1:0 " #G This choice is possible thanks to your high stability and your high senate approval #!\n You will lock up the culprits and end the crisis by force of will"
  c3rd_events.40.b:0 "[general_leader.GetName] is right and will guide us!"
- c3rd_events.40.b.tt1:0 "[general_leader.GetName] will take control of the institutions to resolve the institutional crisis.\n #R This will put you irrevocably on the path of reform towards a monarchy #!\n #G At the end of the reform, you will solve the political instability and will gain a powerful modifier to face the problems of this era #!"
+ c3rd_events.40.b.tt1:0 "[general_leader.GetName] will take control of the institutions to resolve the institutional crisis.\n"
  c3rd_events.40.c:0 "[general_leader.GetName] is right and should guide us!"
- c3rd_events.40.c.tt1:0 "[general_leader.GetName] will take control of the institutions to resolve the institutional crisis.\n #R This will put you irrevocably on the path of reform towards a monarchy #!\n #G At the end of the reform, you will solve the political instability and will gain a powerful modifier to face the problems of this era #!"
+ c3rd_events.40.c.tt1:0 "[general_leader.GetName] will take control of the institutions to resolve the institutional crisis.\n"
  c3rd_events.40.d:0 "We will reform indeed"
- c3rd_events.40.d.tt1:0 "You will make violent institutional changes to resolve the crisis.\n #R This will put you irrevocably on the path of reform towards a monarchy #!\n #G At the end of the reform, you will solve the political instability and will gain a powerful modifier to face the problems of this era #!"
+ c3rd_events.40.d.tt1:0 "You will make violent institutional changes to resolve the crisis.\n"
  c3rd_events.40.e:0 "And change our ways? Never!"
- c3rd_events.40.e.tt1:0 " #R You lose the opportunity to solve the crisis #!\n #G You will keep your republican system and will have a decision to solve the institutional crisis #!"
+ c3rd_events.40.e.tt1:0 "You will make no institutional change, and try to resolve the crisis with the current institutions.\n"
 
 
  c3rd_events.41.t:0 "Restoring authority"
@@ -1099,59 +1087,18 @@ low_stab_event.9.b.tt1:0 "You will garrison the [state_duchy_grab.GetName] in or
  c3rd_events.44.a:0 "Let us sing this day forever!"
  c3rd_events.44.a.tt1:0 "Your reform is completed"
 
-
- c3rd_events.45.t:0 "An adored leader"
- c3rd_events.45.desc:0 "[adored_ruler.GetName] is a popular and powerful leader. Few of his predecessors have ever held so much power in their hands. It is natural that such a character feels a more... perennial ambition at the head of the state... He has recently taken steps that some might call autocratic, and is planning a major reform to reduce counter-powers and extend his term. \nSuch an evolution of our institutions would certainly be undemocratic, but it would represent definite advantages in the face of the challenges of this era."
- c3rd_events.45.a:0 "Let's help him in these reforms"
- c3rd_events.45.a.tt1:0 " #R This will put you irrevocably on the path of reform towards a monarchy #!\n #G At the end of the reform, you will solve any political instability and will gain a powerful modifier to face the problems of this era #!"
- c3rd_events.45.b:0 "Let's prevent it!"
- c3rd_events.45.b.tt1:0 "You will try to prevent the leader's reform attempt.\n #R This has a risk to provoke a political instability #!"
-
- c3rd_events.46.t:0 "Political Instability"
- c3rd_events.46.desc:0 "[adored_ruler.GetName] reacted very strongly to our attempt to oppose his reforms. Our intervention in the Senate to denounce his measures resulted in a near-riot as his supporters and various opposition groups threw ancient measures and other proscriptions back in their face. Calm has not yet returned and there are fears of more violence. It may be some time before our constitution recovers."
- c3rd_events.46.a:0 "Curses!"
- c3rd_events.46.a.tt1:0 "The reform has been stopped, but a difficult period is beginning"
-
- c3rd_events.47.t:0 "Stopped reforms"
- c3rd_events.47.desc:0 "The tension was palpable in the Senate as a long line of opponents followed one another to denounce [adored_ruler.GetName]'s outrageous reform desires. This one, furious, rushed to ask for the imprisonment of all these adversaries, but quickly felt the wind of the room turning in his disadvantage... In front of the risk of proscription against him, he quickly understood that it was better to give up..."
- c3rd_events.47.a:0 "This is done"
- c3rd_events.47.a.tt1:0 "The reform has been stopped"
-
-
- c3rd_events.48.t:0 "Republican administration"
- c3rd_events.48.desc:0 "No one can dispute the perfection of our republican institutions. All over the world, people envy the solidity of our system. \nHowever, the continuous extension of our territory is beginning to pose serious management problems, as the influx of new citizens from the conquered territories swells the ranks of the assemblies, causing the political institutions to falter. It is obvious that indispensable amendments must be considered in order to adapt to this new situation. But it is possible that these changes, targeting many privileges, will not be easily accepted by a large part of our elites."
- c3rd_events.48.a:0 "Let's stabilise the situation"
- c3rd_events.48.a.tt1:0 "A substantial investment will allow us to postpone the problem for some time"
- c3rd_events.48.b:0 "No matter the risks, reform is needed"
- c3rd_events.48.b.tt1:0 "Successful reform will further slow down these administrative problems at the cost of some friction. \n#R If this fails, political instability will occur #!\n Popularity of your leader increase the chances while corruption decrease them. \n#G Any Republican overexpansion modifier will be removed #!"
- c3rd_events.48.c:0 "It doesn't matter"
- c3rd_events.48.c.tt1:0 "Nothing will be done"
-
- c3rd_events.49.t:0 "Success of the reform"
- c3rd_events.49.desc:0 "After much discussion, a compromise was reached to substantially reform the institutions. This agreement will certainly cause some friction while some privileges will be better regulated, but this should allow democracy to last a few more years."
- c3rd_events.49.a:0 "This is good news"
- c3rd_events.49.a.tt1:0 "The republic will adapt for the next few years, after which the chances of further over-expansion will be diminished for some time"
-
  c3rd_events.50.t:0 "Failure of the reform"
- c3rd_events.50.desc:0 "Just as the debates seemed likely to succeed, a violent conservative movement eventually built up enough support to oppose any attempt at reform head-on. The few texts that were passed to solve our problems of representation were violently criticised, while the lack of consensus has forced the executive to impose their application without democratic legitimacy. The Republic is now extremely unstable."
- c3rd_events.50.a:0 "A troubling period is opening up for our republic"
- c3rd_events.50.a.tt1:0 "Overexpansion has been solved, but at the cost of chronic instability of republican institutions"
+ c3rd_events.50.desc:0 "Just as the debates seemed likely to succeed, a violent conservative movement eventually built up enough support to oppose any attempt at reform head-on. The few texts that were passed to solve our problems of representation were violently criticised, while the lack of consensus has forced the executive to cancel all further attempts."
+ c3rd_events.50.a:0 "Democracy at its finest ..."
+ c3rd_events.50.a.tt1:0 "The path to monarchy is advancing, at the cost of stability.\nThe #Y Republican tension#! has been #R increased#! by 10 points.\nThe Stability has been #R decreased#! by 10 points."
 
 
- c3rd_events.51.t:0 "Stabilization of the institutions"
- c3rd_events.51.desc:0 "The smaller size of our empire has allowed us to regain a healthy administrative base."
- c3rd_events.51.a:0 "Good news"
- c3rd_events.51.a.tt1:0 "Any overexpansion has been removed"
-
-
- c3rd_events.52.t:0 "Stabilization of the institutions"
- c3rd_events.52.desc:0 "Political instability at least has the advantage of simplifying procedures...  A flexible reform of the provincial and republican administration will undoubtedly solve our institutional worries."
 
 
  c3rd_events.100.t:0 "Debug"
- c3rd_events.100.desc:0 "This is a debug event for coding purposes only . beep boop"
+ c3rd_events.100.desc:0 "This is a debug event for coding purposes only . beep boop.\n Country is [rebel_republic.GetName], number is [rebel_republic.MakeScope.GetVariable('c3rd_cw_initial_cities').GetValue]\n we are [ROOT.GetCountry.GetName] with [ROOT.GetCountry.MakeScope.GetVariable('c3rd_cw_initial_cities').GetValue]"
  c3rd_events.100.a:0 "COMPUTER NOISES"
- c3rd_events.100.a.tt1:0 "[char_tooltip.GetName] : [char_tooltip.MakeScope.GetVariable('country_ownership').GetValue]%"
+ c3rd_events.100.a.tt1:0 "[rebel_republic.GetName] : [rebel_republic.MakeScope.GetVariable('c3rd_cw_initial_cities').GetValue]"
 
  #1.2 Events
 
@@ -1583,8 +1530,8 @@ low_stab_event.9.b.tt1:0 "You will garrison the [state_duchy_grab.GetName] in or
 
  c3rd_other_events.77.t:0 "A very performance heavy choice"
  c3rd_other_events.77.desc:0 "#R Salvete Imperator\n\n This is a confirmation event to make sure you've read the fine print of the previous choice: the empire split will be created dynamically, which may cause a freeze of a few seconds, or even a crash. If you're playing multiplayer, this can be a very unpleasant effect. This here gives you a chance to save (or warn your friends/pause), so you're prepared for any eventuality. #!"
- c3rd_other_events.77.a:0 "Yes, strange voice in my head, I'm aware of my choices"
- c3rd_other_events.77.a.tt1:0 "Fasten your seatbelts"
+ c3rd_other_events.77.a:0 "Yes, strange voice in my head, I am aware of my choices"
+ c3rd_other_events.77.a.tt1:0 "Fasten your seatbelts\n#T The split proceeds#!\n\n #B Que Dieu vous garde#!"
  c3rd_other_events.77.b:0 "Lags? In my paradox game? NEVER!"
  c3rd_other_events.77.b.tt1:0 "My CPU is hot enough ...."
 
@@ -1697,6 +1644,25 @@ low_stab_event.9.b.tt1:0 "You will garrison the [state_duchy_grab.GetName] in or
  c3rd_other_events.86.tt1_42:0 "All disloyal characters gain #G 15#! loyalty"
  c3rd_other_events.86.tt1_43:0 "All disloyal characters gain #G 20#! loyalty"
  c3rd_other_events.86.tt1_44:0 "All disloyal characters gain #G 30#! loyalty"
+
+ c3rd_other_events.861.t:0 "Parallel Negotiations"
+ c3rd_other_events.861.desc.1:0 "Without warning, [king_maker_negociator.GetName] burst into the antechambers, clutching a few papyri annotated in his own hand. Having been unable to help but notice a few… irregularities in our country, he had taken it upon himself to negotiate directly with [asked_landowner.GetName], promising him far-reaching concessions..."
+ c3rd_other_events.861.desc.2:0 "Without announcing his arrival, [king_maker_negociator.GetName] burst into the antechambers, clutching a few papyri annotated in his own hand. Just a few trifles, he claimed, without going into too much detail: having been unable to help but notice a few... irregularities in our nation, he had taken the initiative to use his influence and power to resolve the issue. As these documents indicate, he will be granted enormous benefits... "
+ c3rd_other_events.861.desc.3:0 "in order to save our country from civil war and to reconcile the rebels"
+ c3rd_other_events.861.desc.4:0 "in order to restore stability to our country."
+ c3rd_other_events.861.desc.5:0 "in order to raise the funds needed to defend our border against the barbarians waves."
+ c3rd_other_events.861.desc.5:0 "in exchange for a significant reduction in its holdings in the country, which is, of course, to his own advantage."
+ c3rd_other_events.861.desc.12:0 "\nThe proposal was accepted, but in exchange [asked_landowner.GetName] asked for major political advantages and public recognition of his influence. Enough to allow him many future machinations, if his intriguing look is anything to go by."
+ c3rd_other_events.861.desc.13:0 "The proposal was accepted, but in exchange [asked_landowner.GetName] asked that the many governorates under his influence be recognised as his personal domain. Giving him such control is unprecedented, but no doubt that is the price we have to pay?"
+ c3rd_other_events.861.desc.14:0 "The proposal was accepted, but in exchange [asked_landowner.GetName] asked that the laws of the land be amended in favour of the aristocracy. Quite a common political demand!"
+ c3rd_other_events.861.desc.20:0 "\n\nOne final thing is needed to confer legitimate authority upon this unilateral action: our seal, which [king_maker_negociator.GetName] urges us to affix without delay."
+ c3rd_other_events.861.a:0 "Do we really have a choice?"
+ c3rd_other_events.861.a.tt1:0 "You confirm the actions taken by [king_maker_negociator.GetName], as if they had come from the government"
+ c3rd_other_events.861.b:0 "You are not negotiating on my behalf!"
+ c3rd_other_events.861.b.tt1:0 "You are criticising this agreement, which was concluded without your approval, a move that will upset the parties concerned."
+ c3rd_other_events.861.tt1_1:0 "A part of the character's holdings will be removed, [king_maker_negociator.GetName] will acquire some of them"
+ c3rd_other_events.861.tt1_3:0 "States threatened by barbarians will get defense and garnison bonuses"
+
 
 
  c3rd_other_events.87.t:0 "Back to administration"

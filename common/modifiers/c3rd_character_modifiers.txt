@@ -21,7 +21,7 @@ major_influence_aristocrat = {
 }
 
 political_power_character = {
-	monthly_character_popularity = 0.25
+	monthly_character_popularity = 0.30
 	monthly_character_prominence = 0.1
 }
 

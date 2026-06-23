@@ -414,7 +414,7 @@ c3rd_economic_factor = {
 	}
 	if = {
 		limit = {
-			has_country_modifier = political_unstability
+			has_country_modifier = rep_tension_3
 		}
 		add = 1
 	}
@@ -495,6 +495,10 @@ c3rd_economic_factor = {
 			num_of_cities <= 200
 		}
 		add = -1
+	}
+	if = {
+		limit = { has_law = lex_frumentaria }
+		add = 1
 	}
 	#epidemy penalty
 	if = {
@@ -957,7 +961,9 @@ country_gov_ratio_number_minus = { #to get how many governorships should the lan
 		add = 1
 	}
 }
-landowner_asked_ratio_number = { #scope country, need asked_landowner, this seem to work, and i don't remember why. please dont touch.
+landowner_asked_ratio_number = { 
+	#scope country 
+	#need asked_landowner, this seem to work, and i don't remember why. please dont touch.
 	value = 0
 	if = {
 		limit = {
@@ -1416,6 +1422,40 @@ count_reclaim = {
 		} 
 		add = 2
 	}
+}
+precount_potential_civil_war = {
+	value = 0
+	every_owned_province = {
+		limit = {
+			NOT = {
+				is_capital = yes
+			}
+			OR = {
+				AND = {
+					exists = governor
+					governor = {
+						loyalty < 35
+					}
+				}
+				NOT = {exists = governor}
+				state_loyalty < 35
+			}
+		}
+		add = 1
+	}
+}
+count_potential_civil_war = {
+	value = precount_potential_civil_war
+	multiply = 100
+	divide = num_of_cities
+}
+
+third_of_governors = {
+	value = 0
+	every_governorships = {
+		add = 1
+	}
+	divide = 3
 }
 
 has_many_bloodlines = { #scope character

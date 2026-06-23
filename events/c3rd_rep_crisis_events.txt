@@ -1,0 +1,343 @@
+namespace = c3rd_rep_crisis
+
+c3rd_rep_crisis.1 = {
+	# The Republic at the brink — choice: reform or war
+	type = country_event
+	title = "c3rd_rep_crisis.1.t"
+	desc = "c3rd_rep_crisis.1.desc"
+	picture = roman_trial
+
+	trigger = {
+		is_ai = no
+		has_variable = republican_tension
+		var:republican_tension >= 100
+		NOT = { has_variable = c3rd_rep_crisis_fired }
+		NOT = { has_variable = on_going_rep_thingy }
+	}
+
+	immediate = {
+		# Guard against re-firing during resolution
+		set_variable = { name = c3rd_rep_crisis_fired}
+	}
+
+	option = {
+		#Accept monarchy
+		name = c3rd_rep_crisis.1.a
+		custom_tooltip = c3rd_rep_crisis.1.a.tt1
+		highlight = yes
+		add_stability = -10
+		#Clean up tension system
+		remove_variable = republican_tension
+		remove_variable = c3rd_rep_tension_cumu
+		if = {
+			limit = {
+				has_country_modifier = rep_tension_1
+			}
+			remove_country_modifier = rep_tension_1
+		}
+		if = {
+			limit = {
+				has_country_modifier = rep_tension_2
+			}
+			remove_country_modifier = rep_tension_2
+		}
+		if = {
+			limit = {
+				has_country_modifier = rep_tension_3
+			}
+			remove_country_modifier = rep_tension_3
+		}
+		remove_variable = c3rd_rep_crisis_fired
+		set_variable = { name = on_going_rep_thingy  days = 600 }
+		trigger_event = { id = c3rd_events.41  days = 90 }
+	}
+
+	option = {
+		#Defend the Republic and trigger civil war
+		name = c3rd_rep_crisis.1.b
+		custom_tooltip = c3rd_rep_crisis.1.b.tt1
+		trigger = {
+			AND = {
+				count_potential_civil_war >= 10
+				OR = {
+					count_potential_civil_war >= 25
+					precount_potential_civil_war >= 100
+				}
+			}
+		}
+		if = {
+			limit = {
+				count_potential_civil_war >= 60
+			}
+			custom_tooltip = c3rd_rep_crisis.1.b.tt2
+		}
+		else_if = {
+			limit = {
+				count_potential_civil_war <= 40
+			}
+			custom_tooltip = c3rd_rep_crisis.1.b.tt3
+		}
+		else = {
+			custom_tooltip = c3rd_rep_crisis.1.b.tt4
+		}
+		c3rd_civil_war_republic_effect = yes
+	}
+
+	option = {
+		#revolt is too small, they cannot revolt yet
+		name = c3rd_rep_crisis.1.c
+		custom_tooltip = c3rd_rep_crisis.1.c.tt1
+		trigger = {
+			OR = {
+				count_potential_civil_war < 10
+				AND = {
+					count_potential_civil_war < 25
+					precount_potential_civil_war < 100
+				}
+			}
+		}
+		add_tyranny = 5
+		hidden_effect = {
+			ordered_character = {
+				limit = {
+					loyalty > 35
+					is_governor = yes
+					is_ruler = no
+					NOT = {
+						is_friend = root.current_ruler
+					}
+				}
+				max = third_of_governors
+				add_loyalty = coup_unloyal
+			}
+			every_country_state = {
+				random_state_province = {
+					add_state_loyalty = -10
+				}
+			}
+		}
+		remove_variable = c3rd_rep_crisis_fired
+		change_variable = {
+			name = republican_tension
+			add = -10
+		}
+		custom_tooltip = c3rd_rep_tension_minus_10
+	}
+}
+
+c3rd_rep_crisis.2 = {
+	# Victory — Republic survives
+	type = country_event
+	title = "c3rd_rep_crisis.2.t"
+	desc = "c3rd_rep_crisis.2.desc"
+	picture = romans_marching
+
+	trigger = {
+		# Fired ONLY via trigger_event from the monthly pulse.
+		
+	}
+
+	immediate = {
+		# Absorb all rebel provinces first
+		if = {
+			limit = {
+				has_variable = c3rd_cw_rebel_republic
+			}
+			var:c3rd_cw_rebel_republic = {
+				every_owned_province = { set_owned_by = root }
+			}
+		}
+		remove_variable = republican_tension
+		# Reset tension to 20 (bruised but surviving republic)
+		set_variable = { name = republican_tension  value = 20 }
+	}
+
+	option = {
+		name = c3rd_rep_crisis.2.a
+		custom_tooltip = c3rd_rep_crisis.2.a.tt1
+		add_stability = 10
+		if = {
+			limit = {
+				has_country_modifier = rep_tension_1
+			}
+			remove_country_modifier = rep_tension_1
+		}
+		if = {
+			limit = {
+				has_country_modifier = rep_tension_2
+			}
+			remove_country_modifier = rep_tension_2
+		}
+		if = {
+			limit = {
+				has_country_modifier = rep_tension_3
+			}
+			remove_country_modifier = rep_tension_3
+		}
+		# (pulse will update modifiers on next tick)
+		remove_country_modifier = c3rd_civil_war_republic_ae
+		add_aggressive_expansion = -15
+		add_country_modifier = { name = c3rd_rep_relief  duration = 1825 }
+		remove_variable = c3rd_cw_initial_cities
+		remove_variable = c3rd_rep_crisis_fired
+		remove_variable = c3rd_cw_rebel_republic
+	}
+}
+
+c3rd_rep_crisis.3 = {
+	# Defeat — forced monarchical transition
+	type = country_event
+	title = "c3rd_rep_crisis.3.t"
+	desc = "c3rd_rep_crisis.3.desc"
+	picture = proscription
+
+	trigger = {
+		# Fired ONLY via trigger_event from the monthly pulse.
+		
+	}
+
+	immediate = {
+		# Absorb all rebel provinces first
+		if = {
+			limit = {
+				has_variable = c3rd_cw_rebel_republic
+			}
+			
+			var:c3rd_cw_rebel_republic = {
+				current_ruler = {
+					root = {
+						set_as_ruler = prev
+					}
+				}
+				every_owned_province = { set_owned_by = root }
+			}
+		}
+	}
+
+	option = {
+		name = c3rd_rep_crisis.3.a
+		custom_tooltip = c3rd_rep_crisis.3.a.tt1
+		#Forced monarchy
+		add_stability = -30
+		# Clean up
+		if = {
+			limit = {
+				has_country_modifier = rep_tension_1
+			}
+			remove_country_modifier = rep_tension_1
+		}
+		if = {
+			limit = {
+				has_country_modifier = rep_tension_2
+			}
+			remove_country_modifier = rep_tension_2
+		}
+		if = {
+			limit = {
+				has_country_modifier = rep_tension_3
+			}
+			remove_country_modifier = rep_tension_3
+		}
+		remove_country_modifier = c3rd_civil_war_republic_ae
+		add_aggressive_expansion = -10
+		remove_variable = republican_tension
+		remove_variable = c3rd_rep_tension_cumu
+		remove_variable = c3rd_cw_initial_cities
+		remove_variable = c3rd_rep_crisis_fired
+		remove_variable = c3rd_cw_rebel_republic
+		republic_to_monarchy_law_variable_effect = yes		# decide which legion law should be transferred
+		change_government = dictatorship
+		republic_to_monarchy_law_change_effect = yes		# change legion law based on variable if present
+	}
+}
+
+
+c3rd_rep_crisis.4 = {
+	# Peace has been made without victory of defeat
+	type = country_event
+	title = "c3rd_rep_crisis.4.t"
+	desc = "c3rd_rep_crisis.4.desc"
+	picture = persia_marching
+
+	trigger = {
+		is_ai = no
+		has_variable = republican_tension
+		has_variable = c3rd_cw_rebel_republic
+		any_country = {
+			this = root.var:c3rd_cw_rebel_republic
+			has_land = yes
+		}
+		NOT = {war_with = var:c3rd_cw_rebel_republic}
+	}
+
+	immediate = {
+		change_variable = { 
+			name = republican_tension  
+			value = -25
+		}
+		var:c3rd_cw_rebel_republic = {
+			save_scope_as = rebel_country
+		}
+		custom_tooltip = c3rd_rep_tension_minus_25
+		# (pulse will update modifiers on next tick)
+		remove_country_modifier = c3rd_civil_war_republic_ae
+		remove_variable = c3rd_cw_initial_cities
+		remove_variable = c3rd_rep_crisis_fired
+		remove_variable = c3rd_cw_rebel_republic
+		scope:rebel_country = {
+			remove_variable = c3rd_cw_initial_cities
+			remove_country_modifier = c3rd_rebel_republic_mod
+			remove_country_modifier = c3rd_civil_war_republic_ae
+			add_military_experience_to_new_country_effect = yes
+			set_variable = {
+				name = mother_empire
+				value = root
+			}
+			set_variable = {
+				name = unification_value
+				value = 0
+				days = 36500
+			}
+			set_variable = {
+				name = recent_empire_split
+				days = 9125					#25 years
+			}
+			add_opinion = {
+				modifier = empire_rivals
+				target = root
+			}
+		}
+
+	}
+
+	option = {
+		#They are now a rival empire
+		name = c3rd_rep_crisis.4.a
+		custom_tooltip = c3rd_rep_crisis.4.a.tt1
+	}
+}
+
+c3rd_rep_crisis.5 = {
+	type = country_event
+	title = "c3rd_rep_crisis.5.t"
+	desc = "c3rd_rep_crisis.5.desc"
+	picture = senate_debate
+
+	
+	trigger = {
+		is_ai = no
+		has_variable = republican_tension
+		is_republic = yes
+	}
+
+	immediate = {
+		
+	}
+
+	option = {
+		name = c3rd_rep_crisis.5.a
+		custom_tooltip = c3rd_rep_crisis.5.a.tt1
+	}
+}
+
+

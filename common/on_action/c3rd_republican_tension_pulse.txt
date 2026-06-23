@@ -1,0 +1,438 @@
+c3rd_republican_tension_pulse = {
+	trigger = {
+		is_tribal = no
+	}
+
+	effect = {
+		if = {
+			limit = {
+				has_variable = c3rd_cw_rebel_republic
+				var:c3rd_cw_rebel_republic = {
+					has_land = yes
+					has_variable = c3rd_cw_mother_republic
+					var:c3rd_cw_mother_republic = root
+				}
+				NOT = {
+					war_with = var:c3rd_cw_rebel_republic
+				}
+			}
+			trigger_event = {
+				id = c3rd_rep_crisis.4
+			}
+		}
+		if = {
+			limit = {
+				is_republic = yes
+				current_date >= 800.1.1
+			}
+
+			# INITIALIZATION 
+			if = {
+				limit = { NOR = { 
+					has_variable = republican_tension
+					has_variable = c3rd_rep_crisis_fired
+					has_variable = on_going_rep_thingy
+				} }
+				set_variable = { name = republican_tension value = 0 }
+				set_variable = { name = c3rd_rep_tension_cumu value = 0 }
+				trigger_event = {
+					id = c3rd_rep_crisis.5
+					days = 1
+				}
+			}
+
+			# GUI stuff
+			if = {
+				limit = {
+					has_variable = c3rd_rep_tension_cumu
+				}
+				remove_variable = c3rd_rep_tension_cumu
+			}
+			set_variable = { name = c3rd_rep_tension_cumu value = 0 }
+
+			# character important
+			if = {
+				limit = {
+					any_character = {
+						has_character_modifier = political_power_character
+						is_ruler = no
+					}
+				}
+				ordered_character = {
+					limit = { 
+						is_ruler = no
+						has_character_modifier = political_power_character 
+					}
+					max = 1
+					order_by = power_base
+					save_scope_as = c3rd_rep_leader_scope
+				}
+			}
+			else_if = {
+				limit = {
+					current_ruler = {
+						OR = {
+							martial >= 10
+							charisma >= 10
+						}
+					}
+				}
+				current_ruler = {
+					save_scope_as = c3rd_rep_leader_scope
+				}
+			}
+			else = {
+				ordered_character = {
+					limit = {
+						is_general = yes
+						is_ruler = no
+					}
+					max = 1
+					order_by = popularity
+					save_scope_as = c3rd_rep_leader_scope
+				}
+			}
+			if = {
+				limit = { exists = scope:c3rd_rep_leader_scope }
+				set_variable = {
+					name = c3rd_rep_tension_leader
+					value = scope:c3rd_rep_leader_scope
+				}
+			}
+			else = {
+				if = {
+					limit = { has_variable = c3rd_rep_tension_leader }
+					remove_variable = c3rd_rep_tension_leader
+				}
+			}
+
+			if = { limit = { num_of_cities >= 300 }
+				change_variable = { name = c3rd_rep_tension_cumu add = 0.01 } }
+			if = { limit = { num_of_cities >= 500 }
+				change_variable = { name = c3rd_rep_tension_cumu add = 0.02 } }
+			if = { limit = { num_of_cities >= 1000 }
+				change_variable = { name = c3rd_rep_tension_cumu add = 0.03 } }
+			if = { limit = { num_of_cities >= 1500 }
+				change_variable = { name = c3rd_rep_tension_cumu add = 0.04 } }
+			if = { limit = { num_of_cities >= 2000 }
+				change_variable = { name = c3rd_rep_tension_cumu add = 0.04 } }
+			if = { limit = { num_of_cities >= 3000 }
+				change_variable = { name = c3rd_rep_tension_cumu add = 0.04 } }
+			if = { limit = { num_of_cities >= 4000 }
+				change_variable = { name = c3rd_rep_tension_cumu add = 0.04 } }
+			if = { limit = { num_of_cities >= 5000 }
+				change_variable = { name = c3rd_rep_tension_cumu add = 0.05 } }
+			if = { limit = { current_date >= 900.1.1 }
+				change_variable = { name = c3rd_rep_tension_cumu add = 0.01 } }
+			if = { limit = { current_date >= 1000.1.1 }
+				change_variable = { name = c3rd_rep_tension_cumu add = 0.02 } }
+			if = { limit = { current_date >= 1100.1.1 }
+				change_variable = { name = c3rd_rep_tension_cumu add = 0.02 } }
+			if = { limit = { current_date >= 1150.1.1 }
+				change_variable = { name = c3rd_rep_tension_cumu add = 0.01 } }
+			if = { limit = { current_date >= 1200.1.1 }
+				change_variable = { name = c3rd_rep_tension_cumu add = 0.02 } }
+			if = { limit = { has_country_modifier = small_deflation }
+				change_variable = { name = c3rd_rep_tension_cumu add = 0.02 } }
+			if = { limit = { has_country_modifier = medium_deflation }
+				change_variable = { name = c3rd_rep_tension_cumu add = 0.04 } }
+			if = { limit = { has_country_modifier = high_deflation }
+				change_variable = { name = c3rd_rep_tension_cumu add = 0.06 } }
+			if = { limit = { has_country_modifier = small_monetary_crash }
+				change_variable = { name = c3rd_rep_tension_cumu add = 0.02 } }
+			if = { limit = { has_country_modifier = medium_monetary_crash }
+				change_variable = { name = c3rd_rep_tension_cumu add = 0.04 } }
+			if = { limit = { has_country_modifier = high_monetary_crash }
+				change_variable = { name = c3rd_rep_tension_cumu add = 0.06 } }
+			if = { limit = { has_country_modifier = solidus_introduced }
+				change_variable = { name = c3rd_rep_tension_cumu add = 0.05 } }
+
+			# unworthy_leader
+			if = { limit = { has_variable = unworthy_leader  var:unworthy_leader >= 1 }
+				change_variable = { name = c3rd_rep_tension_cumu add = 0.02 } }
+			if = { limit = { has_variable = unworthy_leader  var:unworthy_leader >= 2 }
+				change_variable = { name = c3rd_rep_tension_cumu add = 0.01 } }
+			if = { limit = { has_variable = unworthy_leader  var:unworthy_leader >= 4 }
+				change_variable = { name = c3rd_rep_tension_cumu add = 0.02 } }
+			if = { limit = { has_variable = unworthy_leader  var:unworthy_leader >= 6 }
+				change_variable = { name = c3rd_rep_tension_cumu add = 0.02 } }
+			if = { limit = { has_variable = unworthy_leader  var:unworthy_leader >= 8 }
+				change_variable = { name = c3rd_rep_tension_cumu add = 0.02 } }
+			if = { limit = { has_variable = unworthy_leader  var:unworthy_leader >= 10 }
+				change_variable = { name = c3rd_rep_tension_cumu add = 0.02 } }
+			if = { limit = { has_variable = unworthy_leader  var:unworthy_leader >= 12 }
+				change_variable = { name = c3rd_rep_tension_cumu add = 0.02 } }
+
+			# stability
+			if = { limit = { stability < 45 }
+				change_variable = { name = c3rd_rep_tension_cumu add = 0.01 } }
+			if = { limit = { stability < 35 }
+				change_variable = { name = c3rd_rep_tension_cumu add = 0.01 } }
+			if = { limit = { stability < 30 }
+				change_variable = { name = c3rd_rep_tension_cumu add = 0.02 } }
+			if = { limit = { stability < 20 }
+				change_variable = { name = c3rd_rep_tension_cumu add = 0.02 } }
+			if = { limit = { stability < 15 }
+				change_variable = { name = c3rd_rep_tension_cumu add = 0.02 } }
+			if = { limit = { stability < 10 }
+				change_variable = { name = c3rd_rep_tension_cumu add = 0.03 } }
+
+			# senate_approval — graduated descente
+			if = { limit = { has_senate_approval < 0.50 }
+				change_variable = { name = c3rd_rep_tension_cumu add = 0.02 } }
+			if = { limit = { has_senate_approval < 0.35 }
+				change_variable = { name = c3rd_rep_tension_cumu add = 0.02 } }
+			if = { limit = { has_senate_approval < 0.20 }
+				change_variable = { name = c3rd_rep_tension_cumu add = 0.03 } }
+			if = { limit = { has_senate_approval < 0.10 }
+				change_variable = { name = c3rd_rep_tension_cumu add = 0.03 } }
+
+			# ——————————————————————————————————————
+			# DESCENTE PASSIVE
+			# ——————————————————————————————————————
+			if = { limit = { num_of_cities < 150 }
+				change_variable = { name = c3rd_rep_tension_cumu add = -0.02 } }
+			if = { limit = { num_of_cities < 100 }
+				change_variable = { name = c3rd_rep_tension_cumu add = -0.02 } }
+			if = { limit = { num_of_cities < 50 }
+				change_variable = { name = c3rd_rep_tension_cumu add = -0.02 } }
+			if = { limit = { num_of_cities < 25 }
+				change_variable = { name = c3rd_rep_tension_cumu add = -0.02 } }
+			if = { limit = { stability >= 70 }
+				change_variable = { name = c3rd_rep_tension_cumu add = -0.01 } }
+			if = { limit = { stability >= 75 }
+				change_variable = { name = c3rd_rep_tension_cumu add = -0.01 } }
+			if = { limit = { stability >= 80 }
+				change_variable = { name = c3rd_rep_tension_cumu add = -0.01 } }
+			if = { limit = { stability >= 90 }
+				change_variable = { name = c3rd_rep_tension_cumu add = -0.02 } }
+			if = { limit = { has_senate_approval >= 0.80 }
+				change_variable = { name = c3rd_rep_tension_cumu add = -0.02 } }
+			if = { limit = { has_senate_approval >= 0.90 }
+				change_variable = { name = c3rd_rep_tension_cumu add = -0.02 } }
+			if = { limit = { has_senate_approval >= 0.95 }
+				change_variable = { name = c3rd_rep_tension_cumu add = -0.02 } }
+			if = { limit = { has_country_modifier = c3rd_rep_relief }
+				change_variable = { name = c3rd_rep_tension_cumu add = -0.10 } }
+			if = { limit = { has_country_modifier = divided_empire }
+				change_variable = { name = c3rd_rep_tension_cumu add = -0.05 } }	
+
+			# Lois
+			if = { limit = { has_law = lex_frumentaria }
+				change_variable = { name = c3rd_rep_tension_cumu add = -0.10 } }
+			if = { limit = { has_law = lex_de_provinciis }
+				change_variable = { name = c3rd_rep_tension_cumu add = -0.06 } }
+			if = { limit = { has_law = lex_de_provinciis  has_variable = unworthy_leader  var:unworthy_leader >= 4 }
+				change_variable = { name = c3rd_rep_tension_cumu add = -0.06 } }	# bonus extra, cap at -0.12 total
+			if = { limit = { has_law = lex_sempronia }
+				change_variable = { name = c3rd_rep_tension_cumu add = -0.08 } }
+			if = { limit = { has_law = lex_villia_annalis }
+				change_variable = { name = c3rd_rep_tension_cumu add = 0.05 } }		# montée
+			if = { limit = { has_law = lex_trebonia }
+				change_variable = { name = c3rd_rep_tension_cumu add = 0.05 } }		# montée
+			if = { limit = { has_law = lex_hortensia }
+				change_variable = { name = c3rd_rep_tension_cumu add = 0.01 } }		# montée légère	
+			
+
+			# lex_trebonia: decrease unworthy_leader 
+			if = {
+				limit = {
+					has_law = lex_trebonia
+					has_variable = unworthy_leader
+					var:unworthy_leader >= 1
+				}
+				random_list = {
+					30 = {}
+					1 = {
+						change_variable = { name = unworthy_leader add = -1 }
+					}
+				}
+			}
+			if = {
+				limit = {
+					has_country_modifier = solidus_introduced
+					has_law = lex_frumentaria
+				}
+				change_law = basic_republican_law		# revert to base law
+			}
+			if = {
+				limit = {
+					has_country_modifier = solidus_introduced
+					has_law = lex_sempronia
+				}
+				change_law = basic_republican_law
+			}
+			
+			if = {
+				limit = {
+					has_variable = republican_tension
+					has_variable = c3rd_rep_tension_cumu
+				}
+				change_variable = {
+					name = republican_tension
+					add = var:c3rd_rep_tension_cumu
+				}
+			}
+
+			if = { 
+				limit = { 
+					has_variable = republican_tension
+					var:republican_tension < 0 
+				}
+				remove_variable = republican_tension
+				set_variable = { 
+					name = republican_tension value = 0 
+				} 
+			}
+			if = { 
+				limit = { 
+					has_variable = republican_tension
+					var:republican_tension > 100 
+				}
+				remove_variable = republican_tension
+				set_variable = { 
+					name = republican_tension 
+					value = 100 
+				} 
+			}
+
+			if = {
+				limit = { 
+					has_variable = republican_tension
+					var:republican_tension >= 75 
+				}
+				if = { 
+					limit = { 
+						NOT = { has_country_modifier = rep_tension_3 } 
+					}
+					remove_country_modifier = rep_tension_2
+					remove_country_modifier = rep_tension_1
+					add_country_modifier = { 
+						name = rep_tension_3 
+						duration = -1 
+					}
+				}
+			}
+			else_if = {
+				limit = { 
+					has_variable = republican_tension
+					var:republican_tension >= 50 
+				}
+				if = { 
+					limit = { 
+						NOT = { has_country_modifier = rep_tension_2 } 
+					}
+					remove_country_modifier = rep_tension_3
+					remove_country_modifier = rep_tension_1
+					add_country_modifier = { name = rep_tension_2 duration = -1 }
+				}
+			}
+			else_if = {
+				limit = { 
+					has_variable = republican_tension
+					var:republican_tension >= 25 
+				}
+				if = {
+					limit = { 
+						NOT = { has_country_modifier = rep_tension_1 } 
+					}
+					remove_country_modifier = rep_tension_3
+					remove_country_modifier = rep_tension_2
+					add_country_modifier = { name = rep_tension_1 duration = -1 }
+				}
+			}
+			else = {
+				remove_country_modifier = rep_tension_3
+				remove_country_modifier = rep_tension_2
+				remove_country_modifier = rep_tension_1
+			}
+			# ——————————————————————————————————————
+			# check end civil war
+			# ——————————————————————————————————————
+			if = {
+				limit = {
+					has_country_modifier = c3rd_civil_war_republic_ae
+					any_country = { 
+						has_country_modifier = c3rd_rebel_republic_mod 
+						has_variable = c3rd_cw_mother_republic
+						var:c3rd_cw_mother_republic = root
+					}
+				}
+				random_country = {
+					limit = { 
+						has_country_modifier = c3rd_rebel_republic_mod 
+						has_variable = c3rd_cw_mother_republic
+						var:c3rd_cw_mother_republic = root
+					}
+					save_scope_as = rebel_republic
+				}
+				if = {
+					#Victory
+					limit = {
+						exists = scope:rebel_republic
+						scope:rebel_republic = {
+							has_variable = c3rd_cw_initial_cities
+							var:c3rd_cw_initial_cities > num_of_cities
+							num_of_cities < root.num_of_cities
+						}
+					}
+					trigger_event = { id = c3rd_rep_crisis.2 }
+				}
+				else_if = {
+					#Defeat
+					limit = {
+						exists = scope:rebel_republic
+						has_variable = c3rd_cw_initial_cities
+						var:c3rd_cw_initial_cities > num_of_cities
+						scope:rebel_republic = { num_of_cities > root.num_of_cities }
+					}
+					trigger_event = { id = c3rd_rep_crisis.3 }
+				}
+			}
+
+			# DÉCLENCHEMENT CRISE À 100
+			if = {
+				limit = {
+					has_variable = republican_tension
+					var:republican_tension >= 100
+					NOR = { 
+						has_variable = c3rd_rep_crisis_fired 
+						has_variable = on_going_rep_thingy 
+					}
+				}
+				trigger_event = { id = c3rd_rep_crisis.1 }
+			}
+		}
+		else = {
+			#clean
+			if = {
+				limit = { has_variable = republican_tension }
+				remove_variable = republican_tension
+				remove_variable = c3rd_rep_tension_cumu
+				remove_country_modifier = rep_tension_1
+				remove_country_modifier = rep_tension_2
+				remove_country_modifier = rep_tension_3
+			}
+			if = {
+				limit = { has_variable = c3rd_rep_tension_leader }
+				remove_variable = c3rd_rep_tension_leader
+			}
+		}
+	}
+
+	random_events = {
+		600 = 0
+		15 = c3rd_rep_tension.1 #oligarch demands
+		15 = c3rd_rep_tension.2 #democrats demands
+		15 = c3rd_rep_tension.3 #traditionalists
+		15 = c3rd_rep_tension.4 #military wages
+		20 = c3rd_rep_tension.5 #optimates back a general
+		30 = c3rd_rep_tension.6 #populare reforms
+		50 = c3rd_rep_tension.7 #general want to seize power
+		50 = c3rd_rep_tension.8 #optimates threaten secession
+		15 = c3rd_rep_tension.9 # Factions brawl in the assembly
+		15 = c3rd_rep_tension.11 #political power character pressure 
+		60 = c3rd_rep_tension.12 #minor political power character pressure 
+		20 = c3rd_rep_tension.13 #minor general pressure 
+	}
+}

@@ -5,7 +5,6 @@ monthly_country_pulse = {
 		c3rd_events.19
 		low_stab_event.5
 		low_stab_event.6
-		c3rd_events.51
 	}
 	on_actions = {
 		c3rd_custom_on_actions_rival_empire_civil_war
@@ -19,6 +18,7 @@ monthly_country_pulse = {
 		c3rd_urgent_variables_clean
 		c3rd_custom_on_actions_corruption_events
 		c3rd_epidemy_solidus_cleanup
+		c3rd_republican_tension_pulse
 		delay = { days = { 1 15 } }
 		c3rd_custom_on_actions_instability
 		delay = { days = { 1 20 } }
