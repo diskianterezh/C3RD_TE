@@ -1,4 +1,4 @@
-
+﻿
 
 yearly_country_pulse = {
 	on_actions = {

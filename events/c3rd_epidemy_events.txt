@@ -1,4 +1,4 @@
-namespace = c3rd_epidemy_events
+﻿namespace = c3rd_epidemy_events
 # ============================================================================
 # EPIDEMIC + SOLIDUS EVENT CHAIN
 # Event 1: Initial crisis (base penalties only)
@@ -512,7 +512,7 @@ c3rd_epidemy_events.3 = {
 			}
 		}
 		show_as_tooltip = {
-			random_general = {
+			random_character = {
 				limit = {
 					is_ruler = no
 					is_general = yes
@@ -1176,7 +1176,7 @@ c3rd_epidemy_events.7 = {
 			}
 		}
 		show_as_tooltip = {
-			random_general = {
+			random_character = {
 				limit = {
 					is_ruler = no
 					is_general = yes

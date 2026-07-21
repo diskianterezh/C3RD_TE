@@ -1,4 +1,4 @@
-c3rd_civil_war_republic_effect = {
+﻿c3rd_civil_war_republic_effect = {
 	# Called from country scope
 	# Creates a rebel republican tag, transfers weak-loyalty provinces, declares war
 	hidden_effect = {
@@ -286,31 +286,30 @@ c3rd_civil_war_republic_effect = {
 				divide = 2
 			}
 			scope:c3rd_rebel_tag_scope = {
-				
 				change_variable = {
 					name = c3rd_cw_initial_cities
 					divide = 2
 				}
 			}
 		}
-	}
-	else = {
-		# Fallback: no low-loyalty province found — apply tension penalty instead
-		change_variable = {
-			name = republican_tension
-			add = -20
-		}
-		if = {
-			limit = {
-				var:republican_tension < 0
-			}
-			remove_variable = republican_tension
-			set_variable = {
+		else = {
+			# Fallback: no low-loyalty province found — apply tension penalty instead. 
+			# This is a security but should theorically never happen
+			change_variable = {
 				name = republican_tension
-				value = 0
+				add = -20
 			}
+			if = {
+				limit = {
+					var:republican_tension < 0
+				}
+				remove_variable = republican_tension
+				set_variable = {
+					name = republican_tension
+					value = 0
+				}
+			}
+			add_stability = -5
 		}
-		add_stability = -5
-		custom_tooltip = c3rd_rep_civil_war_no_province_tt
 	}
 }

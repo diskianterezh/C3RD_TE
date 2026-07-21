@@ -1,4 +1,4 @@
-
+﻿
 
 internal_collapse = {
 	global_population_happiness = -0.2

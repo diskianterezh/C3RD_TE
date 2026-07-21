@@ -1,4 +1,4 @@
-
+﻿
 
 king_maker = {
 	monthly_character_popularity = 0.50

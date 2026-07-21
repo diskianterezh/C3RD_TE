@@ -1,4 +1,4 @@
-republican_law = {
+﻿republican_law = {
 	potential = {
 		is_republic = yes
 		is_tribal = no

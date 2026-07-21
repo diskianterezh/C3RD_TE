@@ -1,4 +1,4 @@
-# common/scripted_guis/c3rd_rep_tension_gui.txt
+﻿# common/scripted_guis/c3rd_rep_tension_gui.txt
 # All scripted GUIs for the Republican Tension window and alerts
 
 ###########################
@@ -33,6 +33,9 @@ c3rd_rep_tension_alert_red = {
 c3rd_rep_tension_window_button = {
 	scope = country
 	ai_is_valid = { always = no }
+	is_shown = {
+		is_republic = yes
+	}
 	is_valid = {
 		is_republic = yes
 		current_date >= 800.1.1
@@ -477,12 +480,6 @@ c3rd_rep_law_sdecr_tension = {
 c3rd_start_monarch_reform = {
 	scope = country
 
-		ai_will_do = {
-			modifier = {
-				factor = 10
-				current_date >= 1100.1.1
-			}
-		}
 	is_valid = {
 		custom_tooltip = {
 			text = "has_already_reform"

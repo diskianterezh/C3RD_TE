@@ -337,3 +337,7 @@
  c3rd_rep_law_req_50:0 "Republican Tension is at least 50%"
  c3rd_rep_law_req_max_25:0 "Republican Tension is at most 25%"
  c3rd_rep_law_req_general:0 "A general with at least 10 Martial is available"
+
+
+ republican_civil_wargoal:0 "Republican civil war"
+ war_goal_republican_civil_wargoal:0 "Republican civil war"

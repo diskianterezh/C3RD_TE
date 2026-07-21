@@ -1,4 +1,4 @@
-# Normalized tension for progress bar (0.0 - 1.0)
+﻿# Normalized tension for progress bar (0.0 - 1.0)
 c3rd_rep_tension_normalized = {
 	value = var:republican_tension
 }

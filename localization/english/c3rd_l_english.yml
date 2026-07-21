@@ -1651,7 +1651,7 @@ low_stab_event.9.b.tt1:0 "You will garrison the [state_duchy_grab.GetName] in or
  c3rd_other_events.861.desc.3:0 "in order to save our country from civil war and to reconcile the rebels"
  c3rd_other_events.861.desc.4:0 "in order to restore stability to our country."
  c3rd_other_events.861.desc.5:0 "in order to raise the funds needed to defend our border against the barbarians waves."
- c3rd_other_events.861.desc.5:0 "in exchange for a significant reduction in its holdings in the country, which is, of course, to his own advantage."
+ c3rd_other_events.861.desc.6:0 "in exchange for a significant reduction in his holdings in the country, which is, of course, to [king_maker_negociator.GetName] own advantage."
  c3rd_other_events.861.desc.12:0 "\nThe proposal was accepted, but in exchange [asked_landowner.GetName] asked for major political advantages and public recognition of his influence. Enough to allow him many future machinations, if his intriguing look is anything to go by."
  c3rd_other_events.861.desc.13:0 "The proposal was accepted, but in exchange [asked_landowner.GetName] asked that the many governorates under his influence be recognised as his personal domain. Giving him such control is unprecedented, but no doubt that is the price we have to pay?"
  c3rd_other_events.861.desc.14:0 "The proposal was accepted, but in exchange [asked_landowner.GetName] asked that the laws of the land be amended in favour of the aristocracy. Quite a common political demand!"

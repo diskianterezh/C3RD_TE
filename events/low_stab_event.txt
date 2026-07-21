@@ -1,4 +1,4 @@
-namespace = low_stab_event
+﻿namespace = low_stab_event
 low_stab_event.1 = {
 	#oh noes, bad stability
 	type = country_event

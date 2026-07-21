@@ -1,4 +1,4 @@
-c3rd_republican_tension_pulse = {
+﻿c3rd_republican_tension_pulse = {
 	trigger = {
 		is_tribal = no
 	}

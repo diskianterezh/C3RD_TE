@@ -1,4 +1,4 @@
-namespace = c3rd_events
+﻿namespace = c3rd_events
 #Notes for Military Anarchy :
 # Military anarchy is called by c3rd_events.9 - ruler assassinated by generals. Rulers above 85 popularity are immune - THIS IS WHY POPULARITY MUST BE TANKED BY NEGATIVE EVENTS TO AVOID PLAYERS BEING INVULNERABLE TO THE ANARCHY
 # Chances to be called when :
@@ -5371,8 +5371,12 @@ c3rd_events.50 = {
 	}
 	left_portrait = current_ruler
 	immediate = {
-		traditionalist_approval_effect = -10
-		oligarchic_approval_effect = -20
+		traditionalist_approval_effect = {
+			VALUE = -10
+		}
+		oligarchic_approval_effect = {
+			VALUE = -20
+		}
 	}
 	option = {
 		#just the localization

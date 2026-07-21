@@ -1,4 +1,4 @@
-namespace = c3rd_rep_crisis
+﻿namespace = c3rd_rep_crisis
 
 c3rd_rep_crisis.1 = {
 	# The Republic at the brink — choice: reform or war
@@ -271,9 +271,14 @@ c3rd_rep_crisis.4 = {
 	}
 
 	immediate = {
-		change_variable = { 
-			name = republican_tension  
-			value = -25
+		if = {
+			limit = {
+				has_variable = republican_tension
+			}
+			change_variable = { 
+				name = republican_tension  
+				add = -25
+			}
 		}
 		var:c3rd_cw_rebel_republic = {
 			save_scope_as = rebel_country

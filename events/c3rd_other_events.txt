@@ -1,4 +1,4 @@
-namespace = c3rd_other_events
+﻿namespace = c3rd_other_events
 #Some event to add changes
 c3rd_other_events.1 = {
 	#Empire leader has too low martial in a war
@@ -9336,7 +9336,7 @@ c3rd_other_events.861 = {
 		triggered_desc = {
 			#civil_war
 			trigger = {
-				toward_civil_war = yes
+				towards_civil_war = yes
 			}
 			desc = "c3rd_other_events.861.desc.3"
 		}
@@ -9371,7 +9371,7 @@ c3rd_other_events.861 = {
 						}
 					}
 					stability < 35
-					toward_civil_war = yes
+					towards_civil_war = yes
 				}
 			}
 			desc = "c3rd_other_events.861.desc.6"
@@ -9435,7 +9435,7 @@ c3rd_other_events.861 = {
 			}
 		}
 		OR = {
-			toward_civil_war = yes
+			towards_civil_war = yes
 			stability < 35
 			any_governorships = {
 				any_governorship_state = {
@@ -16606,44 +16606,7 @@ c3rd_other_events.130 = {
 	}
 }
 
-c3rd_other_events.131 = {
-	#EPIDEMY modifier event when solidus (solidus makes these events more devastating)
-	type = country_event
-	title = "c3rd_other_events.131.t"
-	desc = "c3rd_other_events.131.desc"
-	left_portrait = current_ruler
-	picture = successors
-	trigger = {
-		has_land = yes
-		is_tribal = no
-		has_civil_war = no
-		current_date >= 700.1.1
-		has_country_modifier = solidus_introduced
-		any_owned_province = {
-			count >= 10
-			OR = {
-				has_province_modifier = "antonine_plague_epidemic_outbreak_city"
-				has_province_modifier = "antonine_plague_epidemic_quarantine"
-			}
-		}
-		NOT = {
-			has_variable = already_epidemy_modifier_solidus_1
-		}
-	}
-	immediate = {
-		add_country_modifier = {
-			name = epidemy_modifier_solidus_1
-			duration = 14600			#40 years
-		}
-		set_variable = {
-			name = already_epidemy_modifier_solidus_1
-		}
-	}
-	option = {
-		name = c3rd_other_events.131.a
-		custom_tooltip = c3rd_other_events.131.a.tt1
-	}
-}
+# c3rd_other_events.131 replaced by c3rd_epidemy_events.1-4 (graduated modifiers chain)
 
 # c3rd_other_events.132 replaced by c3rd_epidemy_events.5-8 (graduated modifiers chain)
 

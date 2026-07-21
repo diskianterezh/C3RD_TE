@@ -1,4 +1,4 @@
-namespace = c3rd_rep_tension
+﻿namespace = c3rd_rep_tension
 # ——————————————————————————
 # TIER 1 — tension >= 25
 # ——————————————————————————
@@ -429,10 +429,11 @@ c3rd_rep_tension.3 = {
 					has_any_office = yes
 					is_head_of_family = yes
 					is_governor = yes
+					save_temporary_scope_as = tmp_gov
 					root = {
 						any_governorships = {
 							has_variable = governorship_owner
-							var:governorship_owner = prevprev
+							var:governorship_owner = scope:tmp_gov
 						}
 					}
 				}
@@ -1863,7 +1864,7 @@ c3rd_rep_tension.11 = {
 			add = -2
 		}
 		custom_tooltip = c3rd_rep_tension_minus_2
-		scop:char_t11_party = {
+		scope:char_t11_party = {
 			root = {
 				add_party_approval = {
 					party = PREV

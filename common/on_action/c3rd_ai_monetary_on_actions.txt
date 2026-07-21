@@ -1,4 +1,4 @@
-
+﻿
 c3rd_ai_monetary_crisis_pulse = {
 	trigger = {
 		current_date >= 900.1.1
