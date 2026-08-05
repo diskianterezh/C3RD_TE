@@ -682,7 +682,7 @@ num_vassal_provinces = {
 	}
 }
 
-region_owned_provinces = {
+region_owned_provinces = { #scope govship
 	value = 0
 	every_governorship_state = {
 		every_state_province = {
@@ -1065,7 +1065,10 @@ disloyal_country_part = {#scope country
 	every_character = {
 		limit = {
 			has_variable = country_ownership
-			loyalty < 33
+			OR = {
+				loyalty < 33
+				has_variable = head_intent_disloyal
+			}
 		}
 		add = var:country_ownership
 	}

@@ -15,8 +15,9 @@ c3rd_rep_tension.1 = {
 		has_variable = republican_tension
 		var:republican_tension >= 25
 		var:republican_tension < 65
-		NOT = {
+		NOR = {
 			has_variable = c3rd_rep_t1_cooldown
+			has_variable = c3rd_rep_crisis_fired
 		}
 		OR = {
 			any_character = {
@@ -184,14 +185,16 @@ c3rd_rep_tension.2 = {
 	title = "c3rd_rep_tension.2.t"
 	desc = "c3rd_rep_tension.2.desc"
 	picture = hellenic_marketplace
+	left_portrait = current_ruler
 	right_portrait = scope:c3rd_rep_t2_target_char
 	trigger = {
 		is_ai = no
 		has_variable = republican_tension
 		var:republican_tension >= 25
 		var:republican_tension < 65
-		NOT = {
+		NOR = {
 			has_variable = c3rd_rep_t2_cooldown
+			has_variable = c3rd_rep_crisis_fired
 		}
 		OR = {
 			any_character = {
@@ -360,6 +363,7 @@ c3rd_rep_tension.3 = {
 	title = "c3rd_rep_tension.3.t"
 	desc = "c3rd_rep_tension.3.desc"
 	picture = greek_religious_rite
+	left_portrait = current_ruler
 	right_portrait = scope:c3rd_rep_t3_target_char
 	trigger = {
 		is_ai = no
@@ -369,6 +373,7 @@ c3rd_rep_tension.3 = {
 		NOR = {
 			has_variable = c3rd_rep_t3_cooldown
 			has_country_modifier = c3rd_mos_maiorum_restored
+			has_variable = c3rd_rep_crisis_fired
 		}
 		OR = {
 			any_character = {
@@ -561,12 +566,13 @@ c3rd_rep_tension.4 = {
 	trigger = {
 		is_ai = no
 		has_variable = republican_tension
-		var:republican_tension >= 50
+		var:republican_tension >= 40
 		var:republican_tension < 85
 		has_variable = unworthy_leader
 		var:unworthy_leader >= 1
-		NOT = {
+		NOR = {
 			has_variable = c3rd_rep_t4_cooldown
+			has_variable = c3rd_rep_crisis_fired
 		}
 		war = no
 		any_character = {
@@ -609,7 +615,7 @@ c3rd_rep_tension.4 = {
 			days = 1825
 		}
 	}
-	option = { #cede 
+	option = {#cede 
 		name = c3rd_rep_tension.4.a
 		custom_tooltip = c3rd_rep_tension.4.a.tt1
 		add_treasury = {
@@ -689,7 +695,7 @@ c3rd_rep_tension.5 = {
 	trigger = {
 		is_ai = no
 		has_variable = republican_tension
-		var:republican_tension >= 50
+		var:republican_tension >= 40
 		var:republican_tension < 85
 		any_character = {
 			count >= 2
@@ -720,8 +726,9 @@ c3rd_rep_tension.5 = {
 				has_character_modifier = political_power_character
 			}
 		}
-		NOT = {
+		NOR = {
 			has_variable = c3rd_rep_t5_cooldown
+			has_variable = c3rd_rep_crisis_fired
 		}
 	}
 	immediate = {
@@ -820,14 +827,17 @@ c3rd_rep_tension.6 = {
 	type = country_event
 	title = "c3rd_rep_tension.6.t"
 	desc = "c3rd_rep_tension.6.desc"
+	left_portrait = current_ruler
+	right_portrait = scope:party_leader_char_6
 	picture = proscription
 	trigger = {
 		is_ai = no
 		has_variable = republican_tension
-		var:republican_tension >= 50
+		var:republican_tension >= 40
 		var:republican_tension < 85
-		NOT = {
+		NOR = {
 			has_variable = c3rd_rep_t6_cooldown
+			has_variable = c3rd_rep_crisis_fired
 		}
 		OR = {
 			stability <= 50
@@ -874,6 +884,18 @@ c3rd_rep_tension.6 = {
 		}
 	}
 	immediate = {
+		random_character = {
+			limit = {
+				is_party_leader = yes
+				character_party = {
+					OR = {
+						is_party_type = democratic_party
+						is_party_type = populares_party
+					}
+				}
+			}
+			save_scope_as = party_leader_char_6
+		}
 		set_variable = {
 			name = c3rd_rep_t6_cooldown
 			days = 1825
@@ -964,23 +986,44 @@ c3rd_rep_tension.7 = {
 		NOT = {
 			has_variable = on_going_rep_thingy
 		}
-		NOT = {
+		NOR = {
 			has_variable = c3rd_rep_t7_cooldown
+			has_variable = c3rd_rep_crisis_fired
 		}
 		OR = {
 			any_character = {
 				is_general = yes
 				martial >= 10
 				employer = root
-				popularity >= 75
+				OR = {
+					has_character_modifier = political_power_character
+					AND = {
+						popularity >= 65
+						has_character_modifier = major_influence_aristocrat
+					}
+					popularity >= 75
+				}
 				OR = {
 					is_ruler = yes
 					loyalty <= 50
 				}
+				NOT = {
+					has_variable = c3rd_rep_t7_target
+				}
 			}
 			current_ruler = {
-				popularity >= 75
+				OR = {
+					has_character_modifier = political_power_character
+					AND = {
+						popularity >= 65
+						has_character_modifier = major_influence_aristocrat
+					}
+					popularity >= 75
+				}
 				charisma >= 10
+				NOT = {
+					has_variable = c3rd_rep_t7_target
+				}
 			}
 		}
 	}
@@ -1051,11 +1094,17 @@ c3rd_rep_tension.7 = {
 					employer = root
 					popularity >= 75
 				}
-				NOT = {
+				NOR = {
 					current_ruler = {
 						popularity >= 75
 						charisma >= 10
-						martial >= 10
+					}
+					current_ruler = {
+						popularity >= 75
+						AND = {
+							is_general = yes
+							martial >= 10
+						}
 					}
 				}
 			}
@@ -1067,11 +1116,19 @@ c3rd_rep_tension.7 = {
 					popularity >= 75
 				}
 				save_scope_as = general_leader_rt3
+				set_variable = {
+					name = c3rd_rep_t7_target
+					days = 3650
+				}
 			}
 		}
 		else = {
 			current_ruler = {
 				save_scope_as = general_leader_rt3
+				set_variable = {
+					name = c3rd_rep_t7_target
+					days = 3650
+				}
 			}
 		}
 		set_variable = {
@@ -1169,13 +1226,15 @@ c3rd_rep_tension.8 = {
 	title = "c3rd_rep_tension.8.t"
 	desc = "c3rd_rep_tension.8.desc"
 	picture = roman_trial
+	left_portrait = current_ruler
 	right_portrait = scope:c3rd_rep_t8_target_char
 	trigger = {
 		is_ai = no
 		has_variable = republican_tension
 		var:republican_tension >= 75
-		NOT = {
+		NOR = {
 			has_variable = c3rd_rep_t8_cooldown
+			has_variable = c3rd_rep_crisis_fired
 		}
 		any_character = {
 			is_ruler = no
@@ -1372,8 +1431,9 @@ c3rd_rep_tension.9 = {
 		is_ai = no
 		has_variable = republican_tension
 		var:republican_tension >= 75
-		NOT = {
+		NOR = {
 			has_variable = c3rd_rep_t9_cooldown
+			has_variable = c3rd_rep_crisis_fired
 		}
 		OR = {
 			stability <= 60
@@ -1559,6 +1619,9 @@ c3rd_rep_tension.10 = {
 	trigger = {
 		is_ai = no
 		has_variable = republican_tension
+		NOT = {
+			has_variable = c3rd_rep_crisis_fired
+		}
 	}
 	immediate = {
 		# Tension spike scales with current tier
@@ -1698,8 +1761,9 @@ c3rd_rep_tension.11 = {
 				has_variable = pol_coup #the cd of the coup from other_events
 			}
 		}
-		NOT = {
+		NOR = {
 			has_variable = c3rd_rep_t11_cooldown
+			has_variable = c3rd_rep_crisis_fired
 		}
 	}
 	weight_multiplier = {
@@ -1967,8 +2031,9 @@ c3rd_rep_tension.12 = {
 				has_variable = pol_coup #the cd of the coup from other_events
 			}
 		}
-		NOT = {
+		NOR = {
 			has_variable = c3rd_rep_t12_cooldown
+			has_variable = c3rd_rep_crisis_fired
 		}
 	}
 	immediate = {
@@ -2081,8 +2146,9 @@ c3rd_rep_tension.13 = {
 				has_variable = c3rd_rep_t4_target
 			}
 		}
-		NOT = {
+		NOR = {
 			has_variable = c3rd_rep_t13_cooldown
+			has_variable = c3rd_rep_crisis_fired
 		}
 	}
 	weight_multiplier = {
@@ -2210,5 +2276,142 @@ c3rd_rep_tension.13 = {
 			}
 		}
 		
+	}
+}
+
+
+c3rd_rep_tension.14 = {
+	#powerful and popular leader pressure
+	type = country_event
+	title = "c3rd_rep_tension.14.t"
+	desc = "c3rd_rep_tension.14.desc"
+	picture = event_crowd_speech_celebration
+	left_portrait = current_ruler
+	trigger = {
+		is_ai = no
+		has_variable = republican_tension
+		var:republican_tension >= 10
+		var:republican_tension < 75
+		has_variable = c3rd_rep_tension_leader
+		var:c3rd_rep_tension_leader = root.current_ruler
+		current_ruler = {
+			OR = {
+				has_character_modifier = political_power_character
+				AND = {
+					popularity >= 65
+					has_character_modifier = major_influence_aristocrat
+				}
+				popularity >= 75
+			}
+			OR = {
+				charisma >= 10
+				AND = {
+					is_general = yes
+					martial >= 10
+				}
+			}
+			NOR = {
+				has_variable = c3rd_rep_t14_target
+				has_variable = c3rd_rep_t7_target
+			}
+		}
+		NOR = {
+			has_variable = c3rd_rep_t14_cooldown
+			has_variable = c3rd_rep_crisis_fired
+		}
+	}
+	weight_multiplier = {
+		modifier = {
+			factor = 1.3
+			has_variable = republican_tension
+			var:republican_tension >= 25
+		}
+		modifier = {
+			factor = 1.5
+			has_variable = republican_tension
+			var:republican_tension >= 50
+		}
+		modifier = {
+			factor = 1.3
+			current_ruler = {
+				popularity >= 90
+			}
+		}
+	}
+	immediate = {
+		set_variable = {
+			name = c3rd_rep_t14_cooldown
+			days = 3650
+		}
+		current_ruler = {
+			set_variable = {
+				name = c3rd_rep_t14_target
+				days = 3650
+			}
+		}
+	}
+	option = {#let him gain power
+		name = c3rd_rep_tension.14.a
+		custom_tooltip = c3rd_rep_tension.14.a.tt1
+		add_political_influence = 35
+		change_variable = {
+			name = republican_tension
+			add = 5
+		}
+		custom_tooltip = c3rd_rep_tension_plus_5
+		every_party = {
+			limit = {
+				NOT = {
+					this = root.current_ruler.character_party
+				}
+			}
+			root = {
+				add_party_approval = {
+					party = PREV
+					value = -10
+				}
+			}
+		}
+	}
+	option = {#refuse and decrease his popularity
+		name = c3rd_rep_tension.14.b
+		custom_tooltip = c3rd_rep_tension.14.b.tt1
+		random_party = {
+			limit = {
+				this = root.current_ruler.character_party
+			}
+			root = {
+				add_party_approval = {
+					party = PREV
+					value = -10
+				}
+			}
+		}
+		add_stability = -5
+		current_ruler = {
+			add_popularity = -25
+		}
+	}
+	after = {
+		if = {
+			limit = {
+				var:republican_tension > 100
+			}
+			remove_variable = republican_tension
+			set_variable = {
+				name = republican_tension
+				value = 100
+			}
+		}
+		else_if = {
+			limit = {
+				var:republican_tension < 0
+			}
+			remove_variable = republican_tension
+			set_variable = {
+				name = republican_tension
+				value = 0
+			}
+		}
 	}
 }

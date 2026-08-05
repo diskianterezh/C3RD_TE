@@ -944,6 +944,10 @@ scheme_buy_holding = {
 			}
 		}
 		modifier = {
+			factor = 1.5
+			has_variable = head_intent_consolidate
+		}
+		modifier = {
 			factor = 4
 			is_governor = yes
 			is_head_of_family = no
@@ -1204,6 +1208,10 @@ scheme_steal_holding = {
 			employer = {
 				has_country_modifier = law_advantages_5
 			}
+		}
+		modifier = {
+			factor = 1.5
+			has_variable = head_intent_consolidate
 		}
 		modifier = {
 			factor = 2

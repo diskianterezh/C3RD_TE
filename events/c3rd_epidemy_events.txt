@@ -76,6 +76,12 @@ c3rd_epidemy_events.1 = {
 	option = {
 		name = "c3rd_epidemy_events.1.a"
 		custom_tooltip = c3rd_epidemy_events.1.a.tt1
+		show_as_tooltip = {
+			add_country_modifier = {
+				name = c3rd_epidemy_solidus_base
+				duration = 7300
+			}
+		}
 	}
 }
 
@@ -266,6 +272,7 @@ c3rd_epidemy_events.2 = {
 			add = 1
 		}
 		show_as_tooltip = {
+			custom_tooltip = epidemy_modifier_change.tt
 			add_country_modifier = {
 				name = c3rd_epidemy_political_full
 				duration = 7300
@@ -316,6 +323,7 @@ c3rd_epidemy_events.2 = {
 			add = 2
 		}
 		show_as_tooltip = {
+			custom_tooltip = epidemy_modifier_change.tt
 			add_country_modifier = {
 				name = c3rd_epidemy_political_half
 				duration = 7300
@@ -388,6 +396,7 @@ c3rd_epidemy_events.2 = {
 			law_change_pol = yes
 		}
 		show_as_tooltip = {
+			custom_tooltip = epidemy_modifier_change.tt
 			add_country_modifier = {
 				name = c3rd_epidemy_political_half
 				duration = 7300
@@ -475,6 +484,7 @@ c3rd_epidemy_events.3 = {
 			add = 1
 		}
 		show_as_tooltip = {
+			custom_tooltip = epidemy_modifier_change.tt
 			add_country_modifier = {
 				name = c3rd_epidemy_military_full
 				duration = 7300
@@ -525,6 +535,7 @@ c3rd_epidemy_events.3 = {
 			add = 2
 		}
 		show_as_tooltip = {
+			custom_tooltip = epidemy_modifier_change.tt
 			add_country_modifier = {
 				name = c3rd_epidemy_military_half
 				duration = 7300
@@ -567,6 +578,7 @@ c3rd_epidemy_events.3 = {
 			add = 2
 		}
 		show_as_tooltip = {
+			custom_tooltip = epidemy_modifier_change.tt
 			add_country_modifier = {
 				name = c3rd_epidemy_military_half
 				duration = 7300
@@ -653,6 +665,7 @@ c3rd_epidemy_events.4 = {
 			add = 1
 		}
 		show_as_tooltip = {
+			custom_tooltip = epidemy_modifier_change.tt
 			add_country_modifier = {
 				name = c3rd_epidemy_social_full
 				duration = 7300
@@ -741,6 +754,12 @@ c3rd_epidemy_events.5 = {
 	option = {
 		name = "c3rd_epidemy_events.5.a"
 		custom_tooltip = c3rd_epidemy_events.5.a.tt1
+		show_as_tooltip = {
+			add_country_modifier = {
+				name = c3rd_epidemy_solidus2_base
+				duration = 7300
+			}
+		}
 	}
 }
 
@@ -930,6 +949,7 @@ c3rd_epidemy_events.6 = {
 			add = 1
 		}
 		show_as_tooltip = {
+			custom_tooltip = epidemy_modifier_change.tt
 			add_country_modifier = {
 				name = c3rd_epidemy2_political_full
 				duration = 7300
@@ -980,6 +1000,7 @@ c3rd_epidemy_events.6 = {
 			add = 2
 		}
 		show_as_tooltip = {
+			custom_tooltip = epidemy_modifier_change.tt
 			add_country_modifier = {
 				name = c3rd_epidemy2_political_half
 				duration = 7300
@@ -1052,6 +1073,7 @@ c3rd_epidemy_events.6 = {
 			law_change_pol = yes
 		}
 		show_as_tooltip = {
+			custom_tooltip = epidemy_modifier_change.tt
 			add_country_modifier = {
 				name = c3rd_epidemy2_political_half
 				duration = 7300
@@ -1139,6 +1161,7 @@ c3rd_epidemy_events.7 = {
 			add = 1
 		}
 		show_as_tooltip = {
+			custom_tooltip = epidemy_modifier_change.tt
 			add_country_modifier = {
 				name = c3rd_epidemy2_military_full
 				duration = 7300
@@ -1189,6 +1212,7 @@ c3rd_epidemy_events.7 = {
 			add = 2
 		}
 		show_as_tooltip = {
+			custom_tooltip = epidemy_modifier_change.tt
 			add_country_modifier = {
 				name = c3rd_epidemy2_military_half
 				duration = 7300
@@ -1231,6 +1255,7 @@ c3rd_epidemy_events.7 = {
 			add = 2
 		}
 		show_as_tooltip = {
+			custom_tooltip = epidemy_modifier_change.tt
 			add_country_modifier = {
 				name = c3rd_epidemy2_military_half
 				duration = 7300
@@ -1317,6 +1342,7 @@ c3rd_epidemy_events.8 = {
 			add = 1
 		}
 		show_as_tooltip = {
+			custom_tooltip = epidemy_modifier_change.tt
 			add_country_modifier = {
 				name = c3rd_epidemy2_social_full
 				duration = 7300

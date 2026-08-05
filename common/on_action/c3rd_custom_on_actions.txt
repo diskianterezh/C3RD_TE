@@ -2531,6 +2531,24 @@ c3rd_variables_clear = {
 
 c3rd_urgent_variables_clean = {
 	effect = {
+		if = { #law_advantage decrease mechanic
+			limit = {
+				OR = {
+					has_variable = law_adv_2_setup
+					has_variable = law_adv_3_setup
+					has_variable = law_adv_4_setup
+					has_variable = law_adv_5_setup
+				}
+				NOR = {
+					has_country_modifier = law_advantages_1
+					has_country_modifier = law_advantages_2
+					has_country_modifier = law_advantages_3
+					has_country_modifier = law_advantages_4
+					has_country_modifier = law_advantages_5
+				}
+			}
+			reset_law_advantages = yes
+		}
 		every_country = {
 			limit = {
 				has_variable = owner_from_another_empire

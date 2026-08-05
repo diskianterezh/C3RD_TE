@@ -27,7 +27,7 @@
  lex_frumentaria_desc:0 "The distribution of subsidised grain to the citizens of the capital was one of the most powerful instruments of popular loyalty. The Lex Frumentaria institutionalises this practice across the empire, at no small cost to the treasury, but to considerable effect on the morale of the urban populace.\n\n#G Significantly reduces republican tension monthly#!\n#R Places a burden on the monetary balance#!"
 
  lex_de_provinciis:0 "Lex de Provinciis"
- lex_de_provinciis_desc:0 "A law governing the conduct of provincial governors: their terms are limited, their accounts are audited, and their armies may not cross the boundaries of their province. It was once the bulwark against military ambition. In an empire of this scale, enforcing it requires... flexibility.\n\n#G Reduces republican tension monthly\nReduce even more when military loyalty is uncertain#!"
+ lex_de_provinciis_desc:0 "A law governing the conduct of provincial governors: their terms are limited, their accounts are audited, and their armies may not cross the boundaries of their province. It was once the bulwark against military ambition. In an empire of this scale, enforcing it requires... flexibility.\n\n#G Reduces republican tension monthly\nCan cancel the tension of military up to Discontent level#!"
 
  lex_sempronia:0 "Lex Sempronia"
  lex_sempronia_desc:0 "Originally championed by the Gracchi as a land reform, the Lex Sempronia in this age takes the form of a redistribution of state revenues, diverting a portion of the great estates' income toward public works and the freemen class. The aristocracy despises it. The people adore it.\n\n#G Significantly reduces republican tension monthly#!"
@@ -150,10 +150,20 @@
 
  c3rd_rep_tension.13.t:0 "Military pressure"
  c3rd_rep_tension.13.desc:0 "[c3rd_rep_t13_target_char.GetName], a powerful general, is demanding additional funds. For the men, he proclaims, but we both know that it is wealthy politicians who will pocket this money"
- c3rd_rep_tension.13.a:0 "*sigh* All right then"
+ c3rd_rep_tension.13.a:0 "All right then"
  c3rd_rep_tension.13.a.tt1:0 "A sum that will no doubt be put to use in furthering his political ambitions"
  c3rd_rep_tension.13.b:0 "Condemn his actions"
  c3rd_rep_tension.13.b.tt1:0 "We might gain some influence from this... or make new enemies"
+
+
+ c3rd_rep_tension.14.t:0 "A highly committed leader"
+ c3rd_rep_tension.14.desc:0 "Since his election, [ROOT.GetCountry.GetRuler.GetName] s comings and goings have never ceased to amaze. With terrifying efficiency, his term in office has so far been devoted to numerous appointments, reshuffles and the creation of new posts with vague remit, all filled by his loyal supporters. Always there, he takes centre stage at many of our traditional celebrations, and his popularity makes him almost untouchable.\nNo one can yet say whether the running of the republic will benefit greatly from these changes, but [ROOT.GetCountry.GetRuler.GetName] himself is seeing his influence and power grow undeniably."
+ c3rd_rep_tension.14.a:0 "These reforms are necessary"
+ c3rd_rep_tension.14.a.tt1:0 "The absolutism of the highest office will increase the tension on the institutions"
+ c3rd_rep_tension.14.b:0 "Nullus tyrannus in urbe"
+ c3rd_rep_tension.14.b.tt1:0 "Open opposition to the leader’s reforms will curb the drift towards authoritarianism."
+
+
  ###########################
  # EVENTS REP CRISIS
  ###########################
@@ -197,8 +207,9 @@
  ###########################
 
  c3rd_rep_tension_window_TITLE:0 "Republican Tension"
- rep_tension_none_active:0 "Republican Order"
-
+ c3rd_rep_tension_window_TITLE_tt:0 "[Player.Custom('c3rd_republican_tension_title_tt_custom_loc')]"
+ c3rd_republican_tension_title_tt_custom_loc1:0 "#T Republican Tension#! \n\nThere are currently no active Republican tensions"
+ c3rd_republican_tension_title_tt_custom_loc2:0 "#T Republican Tension#! \n\nView information on the Republican tension"
  ALERT_REP_TENSION_YELLOW:0 "#T Republican Tensions#!\nThe Republican institutions are under strain, the factions are dissatisfied and the Senate is losing its grip.\nOpen the Republican Tension window to understand the sources and manage the situation."
  ALERT_REP_TENSION_RED:0 "#T Institutional Crisis#!\nThe Republic is on the verge of collapse. The situation demands immediate action, manage the factions or accept the inevitable reform.\nOpen the Republican Tension window."
 
@@ -233,7 +244,7 @@
  c3rd_rep_monetary_custom_loc2:0 "#bold #R Crisis#!#!"
  c3rd_rep_monetary_custom_loc3:0 "#bold #R Collapse#!#!"
  c3rd_rep_monetary_custom_loc4:0 "#bold Balanced#!"
- c3rd_rep_monetary_custom_loc5:0 "#bold #R Gold Standard#!#!""
+ c3rd_rep_monetary_custom_loc5:0 "#bold #R Gold Standard#!#!"
  c3rd_rep_military:0 "[Player.Custom('c3rd_rep_military_custom_loc')]"
  c3rd_rep_military_custom_loc1:0 "#bold Disciplined#!"
  c3rd_rep_military_custom_loc2:0 "#bold #R Annoyed#!#!"
@@ -304,6 +315,7 @@
  c3rd_rep_tension_minus_5:0 "The #Y Republican tension#! will be #G reduced#! by 5 points."
  c3rd_rep_tension_minus_3:0 "The #Y Republican tension#! will be #G reduced#! by 3 points."
  c3rd_rep_tension_minus_2:0 "The #Y Republican tension#! will be #G reduced#! by 2 points."
+ c3rd_rep_tension_minus_1:0 "The #Y Republican tension#! will be #G reduced#! by 1 points."
  c3rd_rep_tension_plus_2:0 "The #Y Republican tension#! will be #R increased#! by 2 points."
  c3rd_rep_tension_plus_5:0 "The #Y Republican tension#! will be #R increased#! by 5 points."
  c3rd_rep_tension_plus_10:0 "The #Y Republican tension#! will be #R increased#! by 10 points."

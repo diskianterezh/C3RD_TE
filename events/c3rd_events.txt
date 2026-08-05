@@ -1069,6 +1069,7 @@ c3rd_events.7 = {
 				has_truce_with = root
 				alliance_with = root
 				is_subject_of = root
+				war_with = root
 			}
 			OR = {
 				is_tribal = yes
@@ -1123,6 +1124,24 @@ c3rd_events.7 = {
 		modifier = {
 			factor = 0.7
 			num_of_cities <= 700
+		}
+		modifier = {
+			factor = 0.5
+			war = yes
+		}
+		modifier = {
+			factor = 0.5
+			war = yes
+			any_countries_at_war_with = {
+				count >= 3
+			}
+		}
+		modifier = {
+			factor = 0.5
+			war = yes
+			any_countries_at_war_with = {
+				count >= 6
+			}
 		}
 	}
 	immediate = {
@@ -1339,6 +1358,7 @@ c3rd_events.75 = {
 				has_law = basic_administrative_law
 			}
 		}
+		exists = scope:target_neighbour
 		NOR = {
 			war_with = scope:target_neighbour
 			scope:target_neighbour = {
@@ -1529,6 +1549,11 @@ c3rd_events.8 = {
 	option = {
 		name = c3rd_events.8.a
 		custom_tooltip = c3rd_events.8.a.tt1
+		trigger = {
+			NOT = {
+				has_country_modifier = military_advantages
+			}
+		}
 		add_country_modifier = {
 			name = military_advantages
 			duration = 3650
@@ -3410,6 +3435,7 @@ c3rd_events.30 = {
 									OR = {
 										is_friend = scope:ambitious_general
 										is_disloyal = yes
+										is_in_list = other_empire_govs
 									}
 								}
 							}

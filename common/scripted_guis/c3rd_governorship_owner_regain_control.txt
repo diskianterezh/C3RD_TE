@@ -76,6 +76,38 @@
 				}
 				custom_tooltip = c3rd_governorship_owner_regain_control_tt3_3
 			}
+			if = {
+				limit = {
+					owner = { has_variable = republican_tension }
+					region_owned_provinces < 20
+				}
+				owner = {
+					change_variable = {
+						name = republican_tension
+						add = -1
+					}
+				}
+				custom_tooltip = c3rd_rep_tension_minus_1
+				var:governorship_owner = {
+					add_popularity = 10
+				}
+			}
+			else_if = {
+				limit = {
+					owner = { has_variable = republican_tension }
+					region_owned_provinces >= 20
+				}
+				owner = {
+					change_variable = {
+						name = republican_tension
+						add = -2
+					}
+				}
+				var:governorship_owner = {
+					add_popularity = 20
+				}
+				custom_tooltip = c3rd_rep_tension_minus_2
+			}
 		}
 		else_if = {
 			# owner of the family of the ruler 
@@ -93,8 +125,16 @@
 					region_control_value_owner_only > 75
 				}
 				owner = {
-					add_legitimacy = -10
-					add_tyranny = 2
+					if = {
+						limit = {
+							is_monarchy = yes
+						}
+						add_legitimacy = -10
+						add_tyranny = 2
+					}
+					else = {
+						add_tyranny = 1
+					}
 				}
 			}
 			else_if = {
@@ -102,8 +142,16 @@
 					region_control_value_owner_only > 50
 				}
 				owner = {
-					add_legitimacy = -5
-					add_tyranny = 1
+					if = {
+						limit = {
+							is_monarchy = yes
+						}
+						add_legitimacy = -5
+						add_tyranny = 1
+					}
+					else = {
+						add_tyranny = 0.5
+					}
 				}
 			}
 			else_if = {
@@ -111,7 +159,12 @@
 					region_control_value_owner_only > 25
 				}
 				owner = {
-					add_legitimacy = -5
+					if = {
+						limit = {
+							is_monarchy = yes
+						}
+						add_legitimacy = -5
+					}
 				}
 			}
 		}

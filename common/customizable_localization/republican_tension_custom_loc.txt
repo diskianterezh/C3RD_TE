@@ -399,3 +399,24 @@ c3rd_rep_arrow_down_custom_loc = {
 		}
 	}
 }
+
+c3rd_republican_tension_title_tt_custom_loc = {
+	type = country
+	text = {
+		localization_key = c3rd_republican_tension_title_tt_custom_loc1
+		trigger = {
+			OR = {
+				current_date <= 800.1.1
+				NOT = {has_variable = republican_tension}
+			}
+		}
+	}
+	text = {
+		localization_key = c3rd_republican_tension_title_tt_custom_loc2
+		trigger = {
+			is_republic = yes
+			current_date >= 800.1.1
+			has_variable = republican_tension
+		}
+	}
+}

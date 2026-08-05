@@ -1592,7 +1592,7 @@ base_window = {
 						position = { -10 10 }
 						visible = "[GetScriptedGui('c3rd_rep_tension_window_button').IsShown( GuiScope.SetRoot( Player.MakeScope ).End )]"
 						enabled = "[And(Not(GetVariableSystem.Exists('c3rd_rep_tension_window_opened')),GetScriptedGui('c3rd_rep_tension_window_button').IsValid( GuiScope.SetRoot( Player.MakeScope ).End ))]"
-						tooltip = "c3rd_rep_tension_window_TITLE"
+						tooltip = "c3rd_rep_tension_window_TITLE_tt"
 						blockoverride "ClickSound"
 						{
 							oversound = "event:/SFX/UI/Generic/sfx_ui_generic_mouse_over"

@@ -74,6 +74,7 @@
 						OR = {
 							martial >= 10
 							charisma >= 10
+							has_character_modifier = political_power_character
 						}
 					}
 				}
@@ -222,8 +223,14 @@
 				change_variable = { name = c3rd_rep_tension_cumu add = -0.10 } }
 			if = { limit = { has_law = lex_de_provinciis }
 				change_variable = { name = c3rd_rep_tension_cumu add = -0.06 } }
+			if = { limit = { has_law = lex_de_provinciis  has_variable = unworthy_leader  var:unworthy_leader >= 1 }
+				change_variable = { name = c3rd_rep_tension_cumu add = -0.01 } }	# bonus extra,  -0.07 total
+			if = { limit = { has_law = lex_de_provinciis  has_variable = unworthy_leader  var:unworthy_leader >= 2 }
+				change_variable = { name = c3rd_rep_tension_cumu add = -0.01 } }	# bonus extra,  -0.08 total
 			if = { limit = { has_law = lex_de_provinciis  has_variable = unworthy_leader  var:unworthy_leader >= 4 }
-				change_variable = { name = c3rd_rep_tension_cumu add = -0.06 } }	# bonus extra, cap at -0.12 total
+				change_variable = { name = c3rd_rep_tension_cumu add = -0.02 } }	# bonus extra,  -0.10 total
+			if = { limit = { has_law = lex_de_provinciis  has_variable = unworthy_leader  var:unworthy_leader >= 6 }
+				change_variable = { name = c3rd_rep_tension_cumu add = -0.02 } }	# bonus extra, cap at -0.12 total
 			if = { limit = { has_law = lex_sempronia }
 				change_variable = { name = c3rd_rep_tension_cumu add = -0.08 } }
 			if = { limit = { has_law = lex_villia_annalis }
@@ -431,8 +438,9 @@
 		50 = c3rd_rep_tension.7 #general want to seize power
 		50 = c3rd_rep_tension.8 #optimates threaten secession
 		15 = c3rd_rep_tension.9 # Factions brawl in the assembly
-		15 = c3rd_rep_tension.11 #political power character pressure 
+		15 = c3rd_rep_tension.11 #political power character pressure *1.5 ten>50 *1.5 loy<30 *2pop>95
 		60 = c3rd_rep_tension.12 #minor political power character pressure 
 		20 = c3rd_rep_tension.13 #minor general pressure 
+		25 = c3rd_rep_tension.14 #popular leader pressure *1.3>25 *1.5>50 *1.3pop95
 	}
 }

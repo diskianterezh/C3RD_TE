@@ -6951,7 +6951,7 @@ c3rd_other_events.80 = {
 					}
 					if = {
 						limit = {
-							country_region_control >= 15
+							country_region_control >= 17
 							employer = {
 								any_character = {
 									count >= 5
@@ -7017,11 +7017,12 @@ c3rd_other_events.801 = {
 		current_date > 750.1.1
 	}
 	immediate = {
-		current_ruler = {
-			set_variable = {
-				name = bloodlinenumber
-				value = has_many_bloodlines
+		every_character = {
+			limit = {
+				has_variable = head_intent_plot
 			}
+			save_scope_as = target_801
+			custom_tooltip = c3rd_other_events.801.tt2
 		}
 	}
 	option = {
@@ -8384,7 +8385,12 @@ c3rd_other_events.85 = {
 		name = c3rd_other_events.85.b
 		custom_tooltip = c3rd_other_events.85.b.tt1
 		trigger = {
-			towards_civil_war = no
+			OR = {
+				towards_civil_war = no
+				scope:target = {
+					is_disloyal = yes
+				}
+			}
 		}
 		set_variable = {
 			name = what_are_we_asking
@@ -8408,12 +8414,31 @@ c3rd_other_events.85 = {
 		}
 	}
 	option = {
+		#ask for political intervention
+		name = c3rd_other_events.85.f
+		custom_tooltip = c3rd_other_events.85.f.tt1
+		trigger = {
+			scope:target = {
+				NOT = {
+					has_variable = got_extract_more
+				}
+			}
+		}
+		set_variable = {
+			name = what_are_we_asking
+			value = 5
+		}
+	}
+	option = {
 		#save the country from civil war !
 		name = c3rd_other_events.85.d
 		custom_tooltip = c3rd_other_events.85.d.tt1
 		highlight = yes
 		trigger = {
 			towards_civil_war = yes
+			scope:target = {
+				loyalty > 33
+			}
 		}
 		if = {
 			limit = {
@@ -8476,10 +8501,14 @@ c3rd_other_events.85 = {
 							}
 						}
 						modifier = {
-							add = -1
+							factor = 0.5
 							scope:target = {
 								has_trait = benefactor
 							}
+						}
+						modifier = {
+							factor = 0.5
+							var:what_are_we_asking = 5
 						}
 						set_variable = {
 							name = answer_landowner
@@ -8518,6 +8547,10 @@ c3rd_other_events.85 = {
 								loyalty < 33
 							}
 							var:what_are_we_asking = 4
+						}
+						modifier = {
+							factor = 1.5
+							var:what_are_we_asking = 5
 						}
 						modifier = {
 							#already have the modifier
@@ -8617,6 +8650,10 @@ c3rd_other_events.85 = {
 						modifier = {
 							factor = 0.1
 							has_law = decentralized_administration_law
+						}
+						modifier = {
+							factor = 1.5
+							var:what_are_we_asking = 5
 						}
 						set_variable = {
 							name = answer_landowner
@@ -8973,6 +9010,139 @@ c3rd_other_events.86 = {
 				}
 			}
 		}
+		else_if = {
+			limit = {
+				var:what_are_we_asking = 5
+			}
+			if = {
+				limit = {
+					scope:asked_landowner = {
+						is_alive = yes
+						has_variable = country_ownership
+						OR = {
+							var:country_ownership >= 66
+							AND = {
+								has_character_modifier = political_power_character
+								var:country_ownership >= 33
+							}
+						}
+					}
+				}
+				add_political_influence = 120
+				if = {
+					limit = {
+						is_monarchy = yes
+					}
+					add_legitimacy = 40
+				}
+				else_if = {
+					limit = {
+						is_republic = yes
+					}
+					random_party = {
+						limit = {
+							this = scope:asked_landowner.character_party
+						}
+						root = {
+							add_party_approval = {
+								party = PREV
+								value = 40
+							}
+						}
+					}
+					if = {
+						limit = {
+							has_variable = republican_tension
+						}
+						change_variable = {
+							name = republican_tension
+							add = -10
+						}
+						custom_tooltip = c3rd_rep_tension_minus_10
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					scope:asked_landowner = {
+						is_alive = yes
+						has_variable = country_ownership
+						OR = {
+							var:country_ownership >= 33
+							has_character_modifier = political_power_character
+						}
+					}
+				}
+				add_political_influence = 75
+				if = {
+					limit = {
+						is_monarchy = yes
+					}
+					add_legitimacy = 25
+				}
+				else_if = {
+					limit = {
+						is_republic = yes
+					}
+					random_party = {
+						limit = {
+							this = scope:asked_landowner.character_party
+						}
+						root = {
+							add_party_approval = {
+								party = PREV
+								value = 20
+							}
+						}
+					}
+					if = {
+						limit = {
+							has_variable = republican_tension
+						}
+						change_variable = {
+							name = republican_tension
+							add = -5
+						}
+						custom_tooltip = c3rd_rep_tension_minus_5
+					}
+				}
+			}
+			else = {
+				add_political_influence = 40
+				if = {
+					limit = {
+						is_monarchy = yes
+					}
+					add_legitimacy = 10
+				}
+				else_if = {
+					limit = {
+						is_republic = yes
+					}
+					random_party = {
+						limit = {
+							this = scope:asked_landowner.character_party
+						}
+						root = {
+							add_party_approval = {
+								party = PREV
+								value = 10
+							}
+						}
+					}
+					if = {
+						limit = {
+							has_variable = republican_tension
+						}
+						change_variable = {
+							name = republican_tension
+							add = -2
+						}
+						custom_tooltip = c3rd_rep_tension_minus_2
+					}
+				}
+			}
+		}
 	}
 	option = {
 		#offer gold
@@ -9076,6 +9246,139 @@ c3rd_other_events.86 = {
 							loyalty <= 33
 						}
 						add_loyalty = political_intervention3
+					}
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				var:what_are_we_asking = 5
+			}
+			if = {
+				limit = {
+					scope:asked_landowner = {
+						is_alive = yes
+						has_variable = country_ownership
+						OR = {
+							var:country_ownership >= 66
+							AND = {
+								has_character_modifier = political_power_character
+								var:country_ownership >= 33
+							}
+						}
+					}
+				}
+				add_political_influence = 100
+				if = {
+					limit = {
+						is_monarchy = yes
+					}
+					add_legitimacy = 35
+				}
+				else_if = {
+					limit = {
+						is_republic = yes
+					}
+					random_party = {
+						limit = {
+							this = scope:asked_landowner.character_party
+						}
+						root = {
+							add_party_approval = {
+								party = PREV
+								value = 40
+							}
+						}
+					}
+					if = {
+						limit = {
+							has_variable = republican_tension
+						}
+						change_variable = {
+							name = republican_tension
+							add = -10
+						}
+						custom_tooltip = c3rd_rep_tension_minus_10
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					scope:asked_landowner = {
+						is_alive = yes
+						has_variable = country_ownership
+						OR = {
+							var:country_ownership >= 33
+							has_character_modifier = political_power_character
+						}
+					}
+				}
+				add_political_influence = 65
+				if = {
+					limit = {
+						is_monarchy = yes
+					}
+					add_legitimacy = 25
+				}
+				else_if = {
+					limit = {
+						is_republic = yes
+					}
+					random_party = {
+						limit = {
+							this = scope:asked_landowner.character_party
+						}
+						root = {
+							add_party_approval = {
+								party = PREV
+								value = 20
+							}
+						}
+					}
+					if = {
+						limit = {
+							has_variable = republican_tension
+						}
+						change_variable = {
+							name = republican_tension
+							add = -5
+						}
+						custom_tooltip = c3rd_rep_tension_minus_5
+					}
+				}
+			}
+			else = {
+				add_political_influence = 35
+				if = {
+					limit = {
+						is_monarchy = yes
+					}
+					add_legitimacy = 10
+				}
+				else_if = {
+					limit = {
+						is_republic = yes
+					}
+					random_party = {
+						limit = {
+							this = scope:asked_landowner.character_party
+						}
+						root = {
+							add_party_approval = {
+								party = PREV
+								value = 10
+							}
+						}
+					}
+					if = {
+						limit = {
+							has_variable = republican_tension
+						}
+						change_variable = {
+							name = republican_tension
+							add = -2
+						}
+						custom_tooltip = c3rd_rep_tension_minus_2
 					}
 				}
 			}
@@ -9227,6 +9530,139 @@ c3rd_other_events.86 = {
 							loyalty <= 33
 						}
 						add_loyalty = political_intervention4
+					}
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				var:what_are_we_asking = 5
+			}
+			if = {
+				limit = {
+					scope:asked_landowner = {
+						is_alive = yes
+						has_variable = country_ownership
+						OR = {
+							var:country_ownership >= 66
+							AND = {
+								has_character_modifier = political_power_character
+								var:country_ownership >= 33
+							}
+						}
+					}
+				}
+				add_political_influence = 115
+				if = {
+					limit = {
+						is_monarchy = yes
+					}
+					add_legitimacy = 45
+				}
+				else_if = {
+					limit = {
+						is_republic = yes
+					}
+					random_party = {
+						limit = {
+							this = scope:asked_landowner.character_party
+						}
+						root = {
+							add_party_approval = {
+								party = PREV
+								value = 45
+							}
+						}
+					}
+					if = {
+						limit = {
+							has_variable = republican_tension
+						}
+						change_variable = {
+							name = republican_tension
+							add = -10
+						}
+						custom_tooltip = c3rd_rep_tension_minus_10
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					scope:asked_landowner = {
+						is_alive = yes
+						has_variable = country_ownership
+						OR = {
+							var:country_ownership >= 33
+							has_character_modifier = political_power_character
+						}
+					}
+				}
+				add_political_influence = 75
+				if = {
+					limit = {
+						is_monarchy = yes
+					}
+					add_legitimacy = 27
+				}
+				else_if = {
+					limit = {
+						is_republic = yes
+					}
+					random_party = {
+						limit = {
+							this = scope:asked_landowner.character_party
+						}
+						root = {
+							add_party_approval = {
+								party = PREV
+								value = 25
+							}
+						}
+					}
+					if = {
+						limit = {
+							has_variable = republican_tension
+						}
+						change_variable = {
+							name = republican_tension
+							add = -5
+						}
+						custom_tooltip = c3rd_rep_tension_minus_5
+					}
+				}
+			}
+			else = {
+				add_political_influence = 40
+				if = {
+					limit = {
+						is_monarchy = yes
+					}
+					add_legitimacy = 12
+				}
+				else_if = {
+					limit = {
+						is_republic = yes
+					}
+					random_party = {
+						limit = {
+							this = scope:asked_landowner.character_party
+						}
+						root = {
+							add_party_approval = {
+								party = PREV
+								value = 12
+							}
+						}
+					}
+					if = {
+						limit = {
+							has_variable = republican_tension
+						}
+						change_variable = {
+							name = republican_tension
+							add = -2
+						}
+						custom_tooltip = c3rd_rep_tension_minus_2
 					}
 				}
 			}
@@ -10087,6 +10523,139 @@ c3rd_other_events.861 = {
 							loyalty <= 33
 						}
 						add_loyalty = political_intervention3
+					}
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				var:what_are_we_asking = 5
+			}
+			if = {
+				limit = {
+					scope:asked_landowner = {
+						is_alive = yes
+						has_variable = country_ownership
+						OR = {
+							var:country_ownership >= 66
+							AND = {
+								has_character_modifier = political_power_character
+								var:country_ownership >= 33
+							}
+						}
+					}
+				}
+				add_political_influence = 120
+				if = {
+					limit = {
+						is_monarchy = yes
+					}
+					add_legitimacy = 40
+				}
+				else_if = {
+					limit = {
+						is_republic = yes
+					}
+					random_party = {
+						limit = {
+							this = scope:asked_landowner.character_party
+						}
+						root = {
+							add_party_approval = {
+								party = PREV
+								value = 40
+							}
+						}
+					}
+					if = {
+						limit = {
+							has_variable = republican_tension
+						}
+						change_variable = {
+							name = republican_tension
+							add = -10
+						}
+						custom_tooltip = c3rd_rep_tension_minus_10
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					scope:asked_landowner = {
+						is_alive = yes
+						has_variable = country_ownership
+						OR = {
+							var:country_ownership >= 33
+							has_character_modifier = political_power_character
+						}
+					}
+				}
+				add_political_influence = 75
+				if = {
+					limit = {
+						is_monarchy = yes
+					}
+					add_legitimacy = 25
+				}
+				else_if = {
+					limit = {
+						is_republic = yes
+					}
+					random_party = {
+						limit = {
+							this = scope:asked_landowner.character_party
+						}
+						root = {
+							add_party_approval = {
+								party = PREV
+								value = 20
+							}
+						}
+					}
+					if = {
+						limit = {
+							has_variable = republican_tension
+						}
+						change_variable = {
+							name = republican_tension
+							add = -5
+						}
+						custom_tooltip = c3rd_rep_tension_minus_5
+					}
+				}
+			}
+			else = {
+				add_political_influence = 40
+				if = {
+					limit = {
+						is_monarchy = yes
+					}
+					add_legitimacy = 10
+				}
+				else_if = {
+					limit = {
+						is_republic = yes
+					}
+					random_party = {
+						limit = {
+							this = scope:asked_landowner.character_party
+						}
+						root = {
+							add_party_approval = {
+								party = PREV
+								value = 10
+							}
+						}
+					}
+					if = {
+						limit = {
+							has_variable = republican_tension
+						}
+						change_variable = {
+							name = republican_tension
+							add = -2
+						}
+						custom_tooltip = c3rd_rep_tension_minus_2
 					}
 				}
 			}
@@ -11205,14 +11774,13 @@ c3rd_other_events.91 = {
 			is_ruler = no
 			OR = {
 				has_character_modifier = political_power_character
-				power_base >= 10
 				has_character_modifier = king_maker				#in case
 				has_character_modifier = major_influence_aristocrat
 				AND = {
 					is_general = yes
 					is_mercenary = no
 					is_governor = no
-					power_base >= 5
+					power_base >= 10
 				}
 			}
 		}
@@ -11265,14 +11833,13 @@ c3rd_other_events.91 = {
 				}
 				OR = {
 					has_character_modifier = political_power_character
-					power_base >= 10
 					has_character_modifier = king_maker					#in case
 					has_character_modifier = major_influence_aristocrat
 					AND = {
 						is_general = yes
 						is_mercenary = no
 						is_governor = no
-						power_base >= 5
+						power_base >= 10
 					}
 				}
 			}
@@ -11292,14 +11859,13 @@ c3rd_other_events.91 = {
 				}
 				OR = {
 					has_character_modifier = political_power_character
-					power_base >= 10
 					has_character_modifier = king_maker					#in case
 					has_character_modifier = major_influence_aristocrat
 					AND = {
 						is_general = yes
 						is_mercenary = no
 						is_governor = no
-						power_base >= 5
+						power_base >= 10
 					}
 				}
 			}
@@ -11354,14 +11920,13 @@ c3rd_other_events.91 = {
 				}
 				OR = {
 					has_character_modifier = political_power_character
-					power_base >= 10
 					has_character_modifier = king_maker					#in case
 					has_character_modifier = major_influence_aristocrat
 					AND = {
 						is_general = yes
 						is_mercenary = no
 						is_governor = no
-						power_base >= 5
+						power_base >= 10
 					}
 				}
 			}
@@ -11403,14 +11968,13 @@ c3rd_other_events.91 = {
 				}
 				OR = {
 					has_character_modifier = political_power_character
-					power_base >= 10
 					has_character_modifier = king_maker					#in case
 					has_character_modifier = major_influence_aristocrat
 					AND = {
 						is_general = yes
 						is_mercenary = no
 						is_governor = no
-						power_base >= 5
+						power_base >= 10
 					}
 				}
 			}
@@ -11575,14 +12139,13 @@ c3rd_other_events.91 = {
 					OR = {
 						is_friend = scope:pol_target_c
 						has_character_modifier = political_power_character
-						power_base >= 10
 						has_character_modifier = king_maker						#in case
 						has_character_modifier = major_influence_aristocrat
 						AND = {
 							is_general = yes
 							is_mercenary = no
 							is_governor = no
-							power_base >= 5
+							power_base >= 10
 						}
 					}
 				}
@@ -13362,7 +13925,17 @@ c3rd_other_events.107 = {
 		#okay
 		name = c3rd_other_events.107.a
 		custom_tooltip = c3rd_other_events.107.a.tt1
-		add_legitimacy = -5
+		if = {
+			limit = {
+				is_monarchy = yes
+			}
+			add_legitimacy = -5
+		}
+		else = {
+			current_ruler = {
+				add_popularity = 20
+			}
+		}
 		scope:target_governorship = {
 			hidden_effect = {
 				set_variable = {
@@ -13469,7 +14042,16 @@ c3rd_other_events.110 = {
 			loyalty < 33
 		}
 		OR = {
-			disloyal_country_part >= 60
+			AND = {
+				any_character = {
+					has_character_modifier = major_influence_aristocrat
+					OR = {
+						loyalty < 33
+						has_variable = head_intent_disloyal
+					}
+				}
+				disloyal_country_part >= 50
+			}
 			any_character = {
 				#we need 3 characters at the very least that are disloyal and either : heavy general in milanarch, king maker, own 25% of the country, powerbase >10 no general, powerbase >10 general with milanarch possible and unworthy_leader > 3
 				count >= 3
@@ -13485,13 +14067,13 @@ c3rd_other_events.110 = {
 					AND = {
 						is_general = yes
 						is_governor = no
-						power_base > 5
+						power_base > 10
 						employer = {
 							has_country_modifier = military_anarchy
 						}
 					}
 					AND = {
-						power_base >= 10
+						power_base >= 15
 						OR = {
 							#si général, ne doit pas être sous la loi anti militaires, ou avoir récemment eu une milanarch
 							is_general = no
@@ -13585,7 +14167,7 @@ c3rd_other_events.110 = {
 						is_friend = scope:first_inter_char
 						is_ruler = no
 						employer = {
-							disloyal_country_part >= 60
+							disloyal_country_part >= 50
 						}
 					}
 				}
@@ -13622,13 +14204,13 @@ c3rd_other_events.110 = {
 						OR = {
 							var:country_ownership > 25
 							employer = {
-								disloyal_country_part >= 60
+								disloyal_country_part >= 50
 							}
 						}
 					}
 					AND = {
 						employer = {
-							disloyal_country_part >= 60
+							disloyal_country_part >= 50
 						}
 						is_friend = scope:first_inter_char
 						is_ruler = no
@@ -13719,7 +14301,7 @@ c3rd_other_events.110 = {
 						is_friend = scope:first_inter_char
 						is_ruler = no
 						employer = {
-							disloyal_country_part >= 60
+							disloyal_country_part >= 50
 						}
 					}
 				}
@@ -13756,13 +14338,13 @@ c3rd_other_events.110 = {
 						OR = {
 							var:country_ownership > 25
 							employer = {
-								disloyal_country_part >= 60
+								disloyal_country_part >= 50
 							}
 						}
 					}
 					AND = {
 						employer = {
-							disloyal_country_part >= 60
+							disloyal_country_part >= 50
 						}
 						is_friend = scope:first_inter_char
 						is_ruler = no
@@ -13987,15 +14569,25 @@ c3rd_other_events.110 = {
 			has_variable = unworthy_leader
 			var:unworthy_leader >= 3
 		}
-		if = {
-			limit = {
-				is_monarchy = yes
-			}
-			add_legitimacy = -5
-		}
-		else = {
-			current_ruler = {
-				add_popularity = -20
+		add_legitimacy = {
+			value = -5
+			if = {
+				limit = {
+					OR = {
+						scope:first_inter_char = {
+							has_character_modifier = major_influence_aristocrat
+						}							scope:second_inter_char = {
+							has_character_modifier = major_influence_aristocrat
+						}
+						scope:third_inter_char = {
+							has_character_modifier = major_influence_aristocrat
+						}
+					}
+				}
+				add = {
+					value = disloyal_country_part
+					divide = -6
+				}
 			}
 		}
 		scope:first_inter_char = {
@@ -14008,19 +14600,25 @@ c3rd_other_events.110 = {
 			add_loyalty = requests_fulfilled
 		}
 		custom_tooltip = c3rd_other_events.110.a.tt2
+		random_character = {
+			limit = {
+				is_general = yes
+				OR = {
+					this = scope:first_inter_char
+					this = scope:second_inter_char
+					this = scope:third_inter_char
+				}
+				NOT = {
+					has_character_modifier = king_maker
+				}
+				has_character_modifier = major_influence_aristocrat
+			}
+			add_character_modifier = {
+				name = king_maker
+				duration = 7300
+			}
+		}
 		hidden_effect = {
-			if = {
-				limit = {
-					has_variable = recent_military_anarchy
-				}
-				remove_variable = recent_military_anarchy
-			}
-			if = {
-				limit = {
-					has_country_modifier = military_anarchy
-				}
-				remove_country_modifier = military_anarchy
-			}
 			if = {
 				limit = {
 					has_variable = unworthy_leader
@@ -14105,10 +14703,10 @@ c3rd_other_events.110 = {
 			limit = {
 				is_monarchy = yes
 			}
-			add_legitimacy = -25
+			add_legitimacy = -50
 		}
 		else = {
-			add_political_influence = -50
+			add_political_influence = -75
 		}
 		if = {
 			limit = {
@@ -14123,7 +14721,28 @@ c3rd_other_events.110 = {
 			}
 		}
 		else = {
-			add_political_influence = -25
+			add_political_influence = {
+				value = -15
+				if = {
+					limit = {
+						OR = {
+							scope:first_inter_char = {
+								has_character_modifier = major_influence_aristocrat
+							}
+							scope:second_inter_char = {
+								has_character_modifier = major_influence_aristocrat
+							}
+							scope:third_inter_char = {
+								has_character_modifier = major_influence_aristocrat
+							}
+						}
+					}
+					add = {
+						value = disloyal_country_part
+						divide = -2
+					}
+				}
+			}
 		}
 	}
 	option = {
@@ -14279,73 +14898,8 @@ c3rd_other_events.110 = {
 		else = {
 			if = {
 				limit = {
-					NOR = {
-						has_country_modifier = law_advantages_1
-						has_country_modifier = law_advantages_2
-						has_country_modifier = law_advantages_3
-						has_country_modifier = law_advantages_4
-						has_country_modifier = law_advantages_5
-					}
+					has_country_modifier = law_advantages_5
 				}
-				add_country_modifier = {
-					name = law_advantages_2
-					duration = 5500
-				}
-				custom_tooltip = give_law_change_set_tt1
-			}
-			else_if = {
-				limit = {
-					has_country_modifier = law_advantages_1
-				}
-				custom_tooltip = give_law_change_evolve_tt1
-				hidden_effect = {
-					remove_country_modifier = law_advantages_1
-				}
-				add_country_modifier = {
-					name = law_advantages_3
-					duration = 5500
-				}
-			}
-			else_if = {
-				limit = {
-					has_country_modifier = law_advantages_2
-				}
-				custom_tooltip = give_law_change_evolve_tt1
-				hidden_effect = {
-					remove_country_modifier = law_advantages_2
-				}
-				add_country_modifier = {
-					name = law_advantages_4
-					duration = 5500
-				}
-			}
-			else_if = {
-				limit = {
-					has_country_modifier = law_advantages_3
-				}
-				custom_tooltip = give_law_change_evolve_tt1
-				hidden_effect = {
-					remove_country_modifier = law_advantages_3
-				}
-				add_country_modifier = {
-					name = law_advantages_5
-					duration = 5500
-				}
-			}
-			else_if = {
-				limit = {
-					has_country_modifier = law_advantages_4
-				}
-				custom_tooltip = give_law_change_evolve_tt1
-				hidden_effect = {
-					remove_country_modifier = law_advantages_4
-				}
-				add_country_modifier = {
-					name = law_advantages_5
-					duration = 7300
-				}
-			}
-			else = {
 				add_stability = -5
 				current_ruler = {
 					add_corruption = 15
@@ -14360,12 +14914,36 @@ c3rd_other_events.110 = {
 					add_corruption = 35
 				}
 			}
+			else = {
+				law_change_pol = yes
+			}
 		}
 		if = {
 			limit = {
 				is_monarchy = yes
 			}
-			add_legitimacy = -5
+			add_legitimacy = {
+				value = -5
+				if = {
+					limit = {
+						OR = {
+							scope:first_inter_char = {
+								has_character_modifier = major_influence_aristocrat
+							}
+							scope:second_inter_char = {
+								has_character_modifier = major_influence_aristocrat
+							}
+							scope:third_inter_char = {
+								has_character_modifier = major_influence_aristocrat
+							}
+						}
+					}
+					add = {
+						value = disloyal_country_part
+						divide = -5
+					}
+				}
+			}
 		}
 		else = {
 			current_ruler = {
@@ -14411,13 +14989,55 @@ c3rd_other_events.110 = {
 			limit = {
 				is_monarchy = yes
 			}
-			add_legitimacy = -5
+			add_legitimacy = {
+				value = -5
+				if = {
+					limit = {
+						OR = {
+							scope:first_inter_char = {
+								has_character_modifier = major_influence_aristocrat
+							}
+							scope:second_inter_char = {
+								has_character_modifier = major_influence_aristocrat
+							}
+							scope:third_inter_char = {
+								has_character_modifier = major_influence_aristocrat
+							}
+						}
+					}
+					add = {
+						value = disloyal_country_part
+						divide = -5
+					}
+				}
+			}
 			current_ruler = {
 				add_popularity = -20
 			}
 		}
 		else = {
-			add_political_influence = -10
+			add_political_influence = {
+				value = -10
+				if = {
+					limit = {
+						OR = {
+							scope:first_inter_char = {
+								has_character_modifier = major_influence_aristocrat
+							}
+							scope:second_inter_char = {
+								has_character_modifier = major_influence_aristocrat
+							}
+							scope:third_inter_char = {
+								has_character_modifier = major_influence_aristocrat
+							}
+						}
+					}
+					add = {
+						value = disloyal_country_part
+						divide = -3
+					}
+				}
+			}
 			current_ruler = {
 				add_popularity = -20
 			}
@@ -14445,6 +15065,7 @@ c3rd_other_events.110 = {
 				name = law_advantages_1
 				duration = 5500
 			}
+			set_law_advantage_decrease_var = yes
 			custom_tooltip = give_law_change_set_tt1
 		}
 		else_if = {
@@ -14459,6 +15080,7 @@ c3rd_other_events.110 = {
 				name = law_advantages_2
 				duration = 5500
 			}
+			set_law_advantage_decrease_var = yes
 		}
 		else_if = {
 			limit = {
@@ -14472,6 +15094,7 @@ c3rd_other_events.110 = {
 				name = law_advantages_3
 				duration = 5500
 			}
+			set_law_advantage_decrease_var = yes
 		}
 		else_if = {
 			limit = {
@@ -14485,6 +15108,7 @@ c3rd_other_events.110 = {
 				name = law_advantages_4
 				duration = 5500
 			}
+			set_law_advantage_decrease_var = yes
 		}
 		else_if = {
 			limit = {
@@ -14498,9 +15122,31 @@ c3rd_other_events.110 = {
 				name = law_advantages_5
 				duration = 5500
 			}
+			set_law_advantage_decrease_var = yes
 		}
 		else = {
-			add_stability = -2
+			add_stability = {
+				value = -2
+				if = {
+					limit = {
+						OR = {
+							scope:first_inter_char = {
+								has_character_modifier = major_influence_aristocrat
+							}
+							scope:second_inter_char = {
+								has_character_modifier = major_influence_aristocrat
+							}
+							scope:third_inter_char = {
+								has_character_modifier = major_influence_aristocrat
+							}
+						}
+					}
+					add = {
+						value = disloyal_country_part
+						divide = -10
+					}
+				}
+			}
 			current_ruler = {
 				add_corruption = 10
 			}
@@ -14625,6 +15271,7 @@ c3rd_other_events.110 = {
 					name = law_advantages_3
 					duration = 5500
 				}
+				set_law_advantage_decrease_var = yes
 				custom_tooltip = give_law_change_set_tt1
 			}
 			else_if = {
@@ -14639,6 +15286,7 @@ c3rd_other_events.110 = {
 					name = law_advantages_4
 					duration = 5500
 				}
+				set_law_advantage_decrease_var = yes
 			}
 			else_if = {
 				limit = {
@@ -14652,6 +15300,7 @@ c3rd_other_events.110 = {
 					name = law_advantages_5
 					duration = 5500
 				}
+				set_law_advantage_decrease_var = yes
 			}
 			else_if = {
 				limit = {
@@ -14665,6 +15314,7 @@ c3rd_other_events.110 = {
 					name = law_advantages_5
 					duration = 7300
 				}
+				set_law_advantage_decrease_var = yes
 			}
 			else_if = {
 				limit = {
@@ -14678,6 +15328,7 @@ c3rd_other_events.110 = {
 					name = law_advantages_5
 					duration = 9125
 				}
+				set_law_advantage_decrease_var = yes
 			}
 			else_if = {
 				#big bad law
@@ -14730,7 +15381,28 @@ c3rd_other_events.110 = {
 			limit = {
 				is_monarchy = yes
 			}
-			add_legitimacy = -5
+			add_legitimacy = {
+				value = -5
+				if = {
+					limit = {
+						OR = {
+							scope:first_inter_char = {
+								has_character_modifier = major_influence_aristocrat
+							}
+							scope:second_inter_char = {
+								has_character_modifier = major_influence_aristocrat
+							}
+							scope:third_inter_char = {
+								has_character_modifier = major_influence_aristocrat
+							}
+						}
+					}
+					add = {
+						value = disloyal_country_part
+						divide = -5
+					}
+				}
+			}
 		}
 		else = {
 			current_ruler = {
@@ -14761,7 +15433,28 @@ c3rd_other_events.110 = {
 			limit = {
 				is_monarchy = yes
 			}
-			add_legitimacy = -5
+			add_legitimacy = {
+				value = -5
+				if = {
+					limit = {
+						OR = {
+							scope:first_inter_char = {
+								has_character_modifier = major_influence_aristocrat
+							}
+							scope:second_inter_char = {
+								has_character_modifier = major_influence_aristocrat
+							}
+							scope:third_inter_char = {
+								has_character_modifier = major_influence_aristocrat
+							}
+						}
+					}
+					add = {
+						value = disloyal_country_part
+						divide = -5
+					}
+				}
+			}
 		}
 		else = {
 			current_ruler = {
@@ -14815,7 +15508,28 @@ c3rd_other_events.110 = {
 			}
 		}
 		else = {
-			add_stability = -7
+			add_stability = {
+				value = -7
+				if = {
+					limit = {
+						OR = {
+							scope:first_inter_char = {
+								has_character_modifier = major_influence_aristocrat
+							}
+							scope:second_inter_char = {
+								has_character_modifier = major_influence_aristocrat
+							}
+							scope:third_inter_char = {
+								has_character_modifier = major_influence_aristocrat
+							}
+						}
+					}
+					add = {
+						value = disloyal_country_part
+						divide = -5
+					}
+				}
+			}
 			current_ruler = {
 				add_corruption = 20
 			}
@@ -15009,23 +15723,62 @@ c3rd_other_events.110 = {
 		#refusing
 		name = c3rd_other_events.110.h
 		custom_tooltip = c3rd_other_events.110.h.tt1
-		if = {
-			limit = {
-				has_country_modifier = solidus_introduced
+		add_stability = {
+			value = -10
+			if = {
+				limit = {
+					has_country_modifier = solidus_introduced
+				}
+				add = -5
 			}
-			add_stability = -15
-		}
-		else = {
-			add_stability = -10
-		}
-		if = {
-			limit = {
-				has_law = constantine_reform_law
+			if = {
+				limit = {
+					OR = {
+						scope:first_inter_char = {
+							has_character_modifier = major_influence_aristocrat
+						}
+						scope:second_inter_char = {
+							has_character_modifier = major_influence_aristocrat
+						}
+						scope:third_inter_char = {
+							has_character_modifier = major_influence_aristocrat
+						}
+					}
+				}
+				add = {
+					value = disloyal_country_part
+					divide = -4
+				}
 			}
-			add_tyranny = 8
+
 		}
-		else = {
-			add_tyranny = 5
+		add_tyranny = {
+			value = 5
+			if = {
+				limit = {
+					has_law = constantine_reform_law
+				}
+				add = 3
+			}
+			if = {
+				limit = {
+					OR = {
+						scope:first_inter_char = {
+							has_character_modifier = major_influence_aristocrat
+						}
+						scope:second_inter_char = {
+							has_character_modifier = major_influence_aristocrat
+						}
+						scope:third_inter_char = {
+							has_character_modifier = major_influence_aristocrat
+						}
+					}
+				}
+				add = {
+					value = disloyal_country_part
+					divide = 7
+				}
+			}
 		}
 		hidden_effect = {
 			if = {

@@ -7,7 +7,7 @@
 				any_owned_province = {
 					owner = root
 					NOR = {
-						is_capital = yes
+						this = root.capital_scope
 						AND = {
 							exists = governor
 							governor = {
@@ -30,7 +30,7 @@
 				limit = {
 					owner = root
 					NOR = {
-						is_capital = yes
+						this = root.capital_scope
 						AND = {
 							exists = governor
 							governor = {
@@ -73,7 +73,7 @@
 				any_owned_province = {
 					owner = root
 					NOR = {
-						is_capital = yes
+						this = root.capital_scope
 						AND = {
 							exists = governor
 							governor = {
@@ -87,7 +87,7 @@
 				limit = {
 					owner = root
 					NOR = {
-						is_capital = yes
+						this = root.capital_scope
 						AND = {
 							exists = governor
 							governor = {
@@ -121,7 +121,7 @@
 				limit = {
 					owner = root
 					NOT = {
-						is_capital = yes
+						this = root.capital_scope
 					}
 				}
 				weight = {
@@ -219,7 +219,14 @@
 			every_governorships = {
 				limit = {
 					owner = root
-					NOT = {exists = governor}
+					NOR = {
+						exists = governor
+						any_governorship_state = {
+							any_state_province = {
+								this = root.capital_scope
+							}
+						}
+					}
 				}
 				every_governorship_state = {
 					every_state_province = {

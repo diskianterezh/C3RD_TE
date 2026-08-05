@@ -75,7 +75,6 @@ message_window = {
 		icon_and_text = {
 			size = { 150 0 }
 			scale = 0.7
-			visible = "[GetScriptedGui('c3rd_monetary_enslaved_culture').IsValid( GuiScope.SetRoot( Player.MakeScope ).End )]"
 			blockoverride "Text" { 
 				text = "c3rd_rep_senate_approval" 
 				scale = 1.2
