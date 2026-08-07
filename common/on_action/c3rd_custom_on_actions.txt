@@ -3586,7 +3586,7 @@ c3rd_head_of_family_shenanigans = {
 					else = {
 						set_variable = {
 							name = head_intent_plot
-							value = 0
+							value = 1
 						}
 					}
 				}
@@ -3601,7 +3601,7 @@ c3rd_head_of_family_shenanigans = {
 							has_character_modifier = major_influence_aristocrat
 						}
 						has_variable = head_intent_plot
-						var:head_intent_plot >= 10	
+						var:head_intent_plot >= 8	
 					}
 				}
 				if = {
@@ -3616,7 +3616,7 @@ c3rd_head_of_family_shenanigans = {
 							var:country_ownership >= 0
 							NOT = {
 								has_variable = head_intent_plot
-								var:head_intent_plot >= 10
+								var:head_intent_plot >= 8
 							}
 						}
 					}
@@ -3631,7 +3631,7 @@ c3rd_head_of_family_shenanigans = {
 							var:country_ownership >= 0
 							NOT = {
 								has_variable = head_intent_plot
-								var:head_intent_plot >= 10
+								var:head_intent_plot >= 8
 							}
 						}
 						save_scope_as = head_plot_target
@@ -3652,12 +3652,12 @@ c3rd_head_of_family_shenanigans = {
 							modifier = {
 								factor = 2
 								has_variable = head_intent_plot
-								var:head_intent_plot <= 10
+								var:head_intent_plot <= 8
 							}
 							modifier = {
 								factor = 2
 								has_variable = head_intent_plot
-								var:head_intent_plot <= 11
+								var:head_intent_plot <= 10
 							}
 							modifier = {
 								factor = 2

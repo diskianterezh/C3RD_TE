@@ -89,7 +89,72 @@
 				}
 				custom_tooltip = c3rd_rep_tension_minus_1
 				var:governorship_owner = {
-					add_popularity = 10
+					set_variable = {
+						name = tmp_pop_region
+						days = 20
+					}
+					if = {
+						limit = {
+							popularity <= 30
+						}
+						add_popularity = 15
+					}
+					else_if = {
+						limit = {
+							popularity <= 60
+						}
+						add_popularity = 10
+					}
+					else = {
+						add_popularity = 5
+					}
+				}
+				hidden_effect = {
+					random_list = {
+						100 = {
+						}
+						1 = {
+							modifier = {
+								add = var:governorship_owner.popularity
+							}
+							modifier = {
+								add = var:governorship_owner.charisma
+							}
+							modifier = {
+								factor = owner.country_total_regions_5th
+							}
+							modifier = {
+								factor = 1.5
+								var:governorship_owner = {
+									has_trait = ambitious
+								}
+							}
+							modifier = {
+								factor = 0.5
+								var:governorship_owner = {
+									popularity <= 25
+								}
+							}
+							modifier = {
+								factor = 1.2
+								var:governorship_owner = {
+									popularity >= 50
+								}
+							}
+							modifier = {
+								factor = 1.5
+								var:governorship_owner = {
+									popularity >= 75
+								}
+							}
+							owner = {
+								trigger_event = {
+									id = c3rd_politic_events.4
+									days = 2
+								}
+							}
+						}
+					}	
 				}
 			}
 			else_if = {
@@ -104,9 +169,80 @@
 					}
 				}
 				var:governorship_owner = {
-					add_popularity = 20
+					set_variable = {
+						name = tmp_pop_region
+						days = 20
+					}
+					if = {
+						limit = {
+							popularity <= 20
+						}
+						add_popularity = 25
+					}
+					else_if = {
+						limit = {
+							popularity <= 40
+						}
+						add_popularity = 20
+					}
+					else_if = {
+						limit = {
+							popularity <= 60
+						}
+						add_popularity = 15
+					}
+					else = {
+						add_popularity = 15
+					}
 				}
 				custom_tooltip = c3rd_rep_tension_minus_2
+				hidden_effect = {
+					random_list = {
+						50 = {
+						}
+						1 = {
+							modifier = {
+								add = var:governorship_owner.popularity
+							}
+							modifier = {
+								add = var:governorship_owner.charisma
+							}
+							modifier = {
+								factor = owner.country_total_regions_5th
+							}
+							modifier = {
+								factor = 1.5
+								var:governorship_owner = {
+									has_trait = ambitious
+								}
+							}
+							modifier = {
+								factor = 0.5
+								var:governorship_owner = {
+									popularity <= 25
+								}
+							}
+							modifier = {
+								factor = 1.2
+								var:governorship_owner = {
+									popularity >= 50
+								}
+							}
+							modifier = {
+								factor = 1.5
+								var:governorship_owner = {
+									popularity >= 75
+								}
+							}
+							owner = {
+								trigger_event = {
+									id = c3rd_politic_events.4
+									days = 2
+								}
+							}
+						}
+					}	
+				}
 			}
 		}
 		else_if = {
@@ -122,50 +258,102 @@
 			}
 			if = {
 				limit = {
-					region_control_value_owner_only > 75
+					region_control_value_owner_only > 70
 				}
 				owner = {
 					if = {
 						limit = {
 							is_monarchy = yes
 						}
-						add_legitimacy = -10
+						add_legitimacy = {
+							value = -20
+							multiply = country_total_regions_5th
+						}
 						add_tyranny = 2
 					}
 					else = {
 						add_tyranny = 1
+						random_party = {
+							limit = {
+								this = root.governor.character_party
+							}
+							root.owner = {
+								add_party_approval = {
+									party = PREV
+									value = {
+										value = -25
+										multiply = country_total_regions_5th
+									}
+								}
+							}
+						}
 					}
 				}
 			}
 			else_if = {
 				limit = {
-					region_control_value_owner_only > 50
+					region_control_value_owner_only > 40
 				}
 				owner = {
 					if = {
 						limit = {
 							is_monarchy = yes
 						}
-						add_legitimacy = -5
+						add_legitimacy = {
+							value = -15
+							multiply = country_total_regions_5th
+						}
 						add_tyranny = 1
 					}
 					else = {
 						add_tyranny = 0.5
+						random_party = {
+							limit = {
+								this = root.governor.character_party
+							}
+							root.owner = {
+								add_party_approval = {
+									party = PREV
+									value = {
+										value = -20
+										multiply = country_total_regions_5th
+									}
+								}
+							}
+						}
 					}
 				}
 			}
-			else_if = {
-				limit = {
-					region_control_value_owner_only > 25
-				}
+			else = {
 				owner = {
 					if = {
 						limit = {
 							is_monarchy = yes
 						}
-						add_legitimacy = -5
+						
+						add_legitimacy = {
+							value = -10
+							multiply = country_total_regions_5th
+						}
+					}
+					else = {
+						random_party = {
+							limit = {
+								this = root.governor.character_party
+							}
+							root.owner = {
+								add_party_approval = {
+									party = PREV
+									value = {
+										value = -15
+										multiply = country_total_regions_5th
+									}
+								}
+							}
+						}
 					}
 				}
+				
 			}
 		}
 		if = {

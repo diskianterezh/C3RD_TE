@@ -844,6 +844,12 @@ scheme_adopt_governor_finish = {
 				modifier = {
 					add = scope:ongoing_scheme_target.corruption
 				}
+				modifier = {
+					add = 5
+					scope:ongoing_scheme_target = {
+						wealth <= 100
+					}
+				}
 				scope:ongoing_scheme_target = {
 					set_family = root.family
 					add_gold = 1000

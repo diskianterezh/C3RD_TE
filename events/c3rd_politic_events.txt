@@ -30,7 +30,7 @@ c3rd_politic_events.1 = {
 				this = scope:head_plot_target
 			}
 			has_variable = head_intent_plot
-			var:head_intent_plot >= 10	
+			var:head_intent_plot >= 8	
 		}
 	}
 
@@ -228,7 +228,7 @@ c3rd_politic_events.2 = {
 				this = scope:head_plot_target
 			}
 			has_variable = head_intent_plot
-			var:head_intent_plot >= 10	
+			var:head_intent_plot >= 8
 		}
 	}
 
@@ -242,7 +242,7 @@ c3rd_politic_events.2 = {
 					this = scope:head_plot_target
 				}
 				has_variable = head_intent_plot
-				var:head_intent_plot >= 10	
+				var:head_intent_plot >= 8
 			}
 			save_scope_as = head_plotter_1
 		}
@@ -256,7 +256,7 @@ c3rd_politic_events.2 = {
 					this = scope:head_plotter_1
 				}
 				has_variable = head_intent_plot
-				var:head_intent_plot >= 10	
+				var:head_intent_plot >= 8
 			}
 			save_scope_as = head_plotter_2
 		}
@@ -272,7 +272,7 @@ c3rd_politic_events.2 = {
 						this = scope:head_plotter_2
 					}
 					has_variable = head_intent_plot
-					var:head_intent_plot >= 10	
+					var:head_intent_plot >= 8
 				}
 			}
 			random_character = {
@@ -286,7 +286,7 @@ c3rd_politic_events.2 = {
 						this = scope:head_plotter_2
 					}
 					has_variable = head_intent_plot
-					var:head_intent_plot >= 10	
+					var:head_intent_plot >= 8
 				}
 				save_scope_as = head_plotter_3
 			}
@@ -510,6 +510,7 @@ c3rd_politic_events.2 = {
 				}
 			}
 		}
+		hidden_effect = {
 		scope:head_plot_target = {
 			every_holdings = {
 				if = {
@@ -597,6 +598,8 @@ c3rd_politic_events.2 = {
 					}
 				}	
 			}
+		}
+			
 		}
 		
 	}
@@ -714,7 +717,7 @@ c3rd_politic_events.3 = {
 				this = scope:head_plot_target
 			}
 			has_variable = head_intent_plot
-			var:head_intent_plot >= 10	
+			var:head_intent_plot >= 8
 		}
 	}
 
@@ -728,7 +731,7 @@ c3rd_politic_events.3 = {
 					this = scope:head_plot_target
 				}
 				has_variable = head_intent_plot
-				var:head_intent_plot >= 10	
+				var:head_intent_plot >= 8
 			}
 			save_scope_as = head_plotter_1
 		}
@@ -742,7 +745,7 @@ c3rd_politic_events.3 = {
 					this = scope:head_plotter_1
 				}
 				has_variable = head_intent_plot
-				var:head_intent_plot >= 10	
+				var:head_intent_plot >= 8
 			}
 			save_scope_as = head_plotter_2
 		}
@@ -758,7 +761,7 @@ c3rd_politic_events.3 = {
 						this = scope:head_plotter_2
 					}
 					has_variable = head_intent_plot
-					var:head_intent_plot >= 10	
+					var:head_intent_plot >= 8
 				}
 			}
 			random_character = {
@@ -772,7 +775,7 @@ c3rd_politic_events.3 = {
 						this = scope:head_plotter_2
 					}
 					has_variable = head_intent_plot
-					var:head_intent_plot >= 10	
+					var:head_intent_plot >= 8
 				}
 				save_scope_as = head_plotter_3
 			}
@@ -846,6 +849,100 @@ c3rd_politic_events.3 = {
 					name = head_intent_plot
 					add = -5
 				}
+			}
+		}
+	}
+}
+
+
+c3rd_politic_events.4 = {
+	# leader gain a lot of popularity
+	type = country_event
+	title = "c3rd_politic_events.4.t"
+	desc = "c3rd_politic_events.4.desc"
+	picture = greek_court
+	left_portrait = current_ruler
+	trigger = {
+		is_ai = no
+		current_ruler = {
+			has_variable = tmp_pop_region
+		}
+		has_variable = republican_tension
+	}
+
+	immediate = {
+		
+	}
+	option = {#ok political power to ruler
+		name = c3rd_politic_events.4.a
+		custom_tooltip = c3rd_politic_events.4.a.tt1
+		change_variable = {
+			name = republican_tension
+			add = -5
+		}
+		custom_tooltip = c3rd_rep_tension_minus_5
+		current_ruler = {
+			add_character_modifier = {
+				name = political_power_character
+				duration = 3650					#10 years
+			}
+		}
+		add_political_influence = 30
+	}
+	option = {#no, stop it
+		name = c3rd_politic_events.4.b
+		custom_tooltip = c3rd_politic_events.4.b.tt1
+		change_variable = {
+			name = republican_tension
+			add = 5
+		}
+		custom_tooltip = c3rd_rep_tension_plus_5
+		random_party = {
+			limit = {
+				this = root.current_ruler.character_party
+			}
+			root = {
+				add_party_approval = {
+					party = PREV
+					value = -40
+				}
+			}
+		}
+		add_stability = -5
+		add_political_influence = {
+			value = -25
+			if = {
+				limit = {
+					current_ruler = {
+						has_character_modifier = major_influence_aristocrat
+					}
+				}
+				add = {
+					value = disloyal_country_part
+					divide = -2
+				}
+			}
+		}
+	}
+	after = {
+		if = {
+			limit = {
+				var:republican_tension > 100
+			}
+			remove_variable = republican_tension
+			set_variable = {
+				name = republican_tension
+				value = 100
+			}
+		}
+		else_if = {
+			limit = {
+				var:republican_tension < 0
+			}
+			remove_variable = republican_tension
+			set_variable = {
+				name = republican_tension
+				value = 0
 			}
 		}
 	}

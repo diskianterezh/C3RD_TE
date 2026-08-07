@@ -830,6 +830,23 @@ country_total_regions = { #scope COUNTRY
 		}
 	}
 }
+country_total_regions_5th = { #scope COUNTRY 5 regions = 1 ; 20 regions = 0.25
+	value = 5
+	divide = {
+		value = 0.1
+		every_governorships = {
+			if = {
+				limit = { #if the region is a small one, it count as half
+					region_owned_provinces < 20
+				}
+				add = 0.5
+			}
+			else = {
+				add= 1
+			}
+		}
+	}
+}
 country_region_control = { #scope CHAR
 	value = 0
 	employer = { 

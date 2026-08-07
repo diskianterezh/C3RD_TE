@@ -1023,6 +1023,7 @@ low_stab_event.9.b.tt1:0 "You will garrison the [state_duchy_grab.GetName] in or
  c3rd_events.32.desc:0 "[king_maker_exige.GetName] suddenly burst into the throne room, furious and trembling with rage; 'the actions of this scoundrel [king_maker_rival.GetName] must stop, I demand his immediate arrest' he proclaimed without further explanation, his gaze heavy with meaning. The eyes turn to the king; what will he decide?."
  c3rd_events.32.a:0 "Better not to upset [king_maker_exige.GetName]."
  c3rd_events.32.a.tt1:0 "[king_maker_exige.GetName]'s influence will allow the arrest of his rival without a hitch"
+ prisoner_from_kingmaker_tt: "A powerful kingmaker is opposed to his release"
  c3rd_events.32.b:0 "You are not the king here!"
  c3rd_events.32.b.tt1:0 "You will not submit to the demands of the entitled man."
 
@@ -1056,6 +1057,7 @@ low_stab_event.9.b.tt1:0 "You will garrison the [state_duchy_grab.GetName] in or
  c3rd_events.36.a.tt1:0 "You choose not to upset the general, even if it means enduring humiliation"
  c3rd_events.36.b:0 "It is necessary to reduce its influence while there is still time!"
  c3rd_events.36.b.tt1:0 "A few well-placed words should offend the hubris of this powerful man."
+ c3rd_events.36.tt2:0 "[new_king_maker.GetName] has risen to the status of #Y Kingmaker#!"
 
 
  c3rd_events.37.t:0 "Military anarchy"

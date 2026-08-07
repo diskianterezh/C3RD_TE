@@ -3753,6 +3753,12 @@ c3rd_events.32 = {
 		imprison = {
 			target = scope:king_maker_rival
 		}
+		scope:king_maker_rival = {
+			set_variable = {
+				name = prison_by_kingmaker
+				value = scope:king_maker_exige
+			}
+		}
 		add_tyranny = 2
 		add_legitimacy = -5
 	}
@@ -4247,6 +4253,14 @@ c3rd_events.35 = {
 					}
 				}
 			}
+			random_governorship_state = {
+				random_state_province = {
+					limit = {
+						owner = root
+					}
+					save_scope_as = p_asked_govship
+				}
+			}
 			save_scope_as = asked_governorship
 		}
 		set_variable = {
@@ -4257,11 +4271,12 @@ c3rd_events.35 = {
 	option = {
 		name = c3rd_events.35.a
 		custom_tooltip = c3rd_events.35.a.tt1
-		scope:asked_governorship = {
-			random_governorship_state = {
-				random_state_province = {
-					set_as_governor = scope:asking_friend
-				}
+		if = {
+			limit = {
+				exists = scope:p_asked_govship.governor
+			}
+			scope:p_asked_govship.governor = {
+				remove_as_governor = yes
 			}
 		}
 		scope:asking_general = {
@@ -4278,6 +4293,19 @@ c3rd_events.35 = {
 			add_gold = 500
 		}
 		add_treasury = 500
+		
+		scope:asked_governorship = {
+			random_governorship_state = {
+				if = {
+					limit = {
+						has_governor = no
+					}
+					random_state_province = {
+						set_as_governor = scope:asking_friend
+					}
+				}
+			}
+		}
 	}
 	option = {
 		name = c3rd_events.35.b
@@ -4405,9 +4433,11 @@ c3rd_events.36 = {
 					add = power_base
 				}
 			}
-			add_character_modifier = {
-				name = king_maker
-				duration = 7300
+			hidden_effect = { #this is not displaying, so we'll make a tt
+				add_character_modifier = {
+					name = king_maker
+					duration = 7300
+				}
 			}
 			save_scope_as = new_king_maker
 		}
@@ -4415,6 +4445,7 @@ c3rd_events.36 = {
 			name = recent_new_king_maker
 			days = 730			#2 years
 		}
+		custom_tooltip = c3rd_events.36.tt2
 	}
 	option = {
 		name = c3rd_events.36.a

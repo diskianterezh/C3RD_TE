@@ -7042,12 +7042,32 @@ c3rd_other_events.802 = {
 		current_date > 750.1.1
 	}
 	immediate = {
-		random_character = {
-			limit = {
-				has_variable = country_ownership
-			}
-			save_scope_as = owner_target_for_number
-		}
+		every_character = {
+					limit = {
+						is_head_of_family = yes
+						is_ruler = no
+						NOT = {
+							has_character_modifier = major_influence_aristocrat
+						}
+						has_variable = country_ownership
+						var:country_ownership >= 0	
+					}
+					if = {
+						limit = {
+							has_variable = head_intent_plot
+						}
+						change_variable = {
+							name = head_intent_plot
+							add = 1
+						}
+					}
+					else = {
+						set_variable = {
+							name = head_intent_plot
+							value = 1
+						}
+					}
+				}
 	}
 	option = {
 		name = "c3rd_other_events.80.a"
