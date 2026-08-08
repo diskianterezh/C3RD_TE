@@ -33,5 +33,5 @@
  c3rd_politic_events.4.desc:0 "[ROOT.GetCountry.GetRuler.GetName], elected as head of the republic, has consistently demonstrated a rare commitment to democratic principles. Recently, his selfless actions,  notably the handover to the State of the regions under his direct control, have earned him immense popularity. The people are delighted by these actions, which run counter to the current aristocratic trend, and the Senate has no choice but to follow suit. \n\n[ROOT.GetCountry.GetRuler.GetName] is now enjoying unparalleled political glory... perhaps too much?"
  c3rd_politic_events.4.a:0 "Everyone should follow his example"
  c3rd_politic_events.4.a.tt1:0 "Our ruler will be regarded as a leading political figure for the next 15 years, even after he has left office.\n#R This will make him a dangerous political figure for the stability of the republic#!"
- c3rd_politic_events.4.b:0 "It’s all just smoke and mirrors"
+ c3rd_politic_events.4.b:0 "It s all just smoke and mirrors"
  c3rd_politic_events.4.b.tt1:0 "You will oppose the ruler newfound popularity"
