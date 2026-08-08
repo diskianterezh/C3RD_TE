@@ -884,7 +884,7 @@ c3rd_politic_events.4 = {
 		current_ruler = {
 			add_character_modifier = {
 				name = political_power_character
-				duration = 3650					#10 years
+				duration = 5500				#15 years
 			}
 		}
 		add_political_influence = 30

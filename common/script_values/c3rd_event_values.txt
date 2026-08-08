@@ -830,8 +830,8 @@ country_total_regions = { #scope COUNTRY
 		}
 	}
 }
-country_total_regions_5th = { #scope COUNTRY 5 regions = 1 ; 20 regions = 0.25
-	value = 5
+country_total_regions_5th = { #scope COUNTRY 7 regions = 1 ; 28 regions = 0.25 ; from 5 to 7 because it was too low, yes the name is wrong now, nevermind
+	value = 7
 	divide = {
 		value = 0.1
 		every_governorships = {
