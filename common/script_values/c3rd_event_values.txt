@@ -414,7 +414,7 @@ c3rd_economic_factor = {
 	}
 	if = {
 		limit = {
-			has_country_modifier = political_unstability
+			has_country_modifier = rep_tension_3
 		}
 		add = 1
 	}
@@ -495,6 +495,10 @@ c3rd_economic_factor = {
 			num_of_cities <= 200
 		}
 		add = -1
+	}
+	if = {
+		limit = { has_law = lex_frumentaria }
+		add = 1
 	}
 	#epidemy penalty
 	if = {
@@ -678,7 +682,7 @@ num_vassal_provinces = {
 	}
 }
 
-region_owned_provinces = {
+region_owned_provinces = { #scope govship
 	value = 0
 	every_governorship_state = {
 		every_state_province = {
@@ -826,6 +830,23 @@ country_total_regions = { #scope COUNTRY
 		}
 	}
 }
+country_total_regions_5th = { #scope COUNTRY 7 regions = 1 ; 28 regions = 0.25 ; from 5 to 7 because it was too low, yes the name is wrong now, nevermind
+	value = 7
+	divide = {
+		value = 0.1
+		every_governorships = {
+			if = {
+				limit = { #if the region is a small one, it count as half
+					region_owned_provinces < 20
+				}
+				add = 0.5
+			}
+			else = {
+				add= 1
+			}
+		}
+	}
+}
 country_region_control = { #scope CHAR
 	value = 0
 	employer = { 
@@ -938,7 +959,7 @@ country_gov_ratio_number = {
 country_gov_ratio_number_minus = { #to get how many governorships should the landowner keep once the domain is created -
 	value = country_gov_ratio_number
 	add = 1
-	if = {
+	if = { 
 		limit = { 
 			num_of_cities >= 1000
 		}
@@ -957,12 +978,14 @@ country_gov_ratio_number_minus = { #to get how many governorships should the lan
 		add = 1
 	}
 }
-landowner_asked_ratio_number = { #scope country, need asked_landowner
+landowner_asked_ratio_number = { 
+	#scope country 
+	#need asked_landowner, this seem to work, and i don't remember why. please dont touch.
 	value = 0
 	if = {
 		limit = {
-			any_governorships = { #check if too small
-				count < country_gov_ratio_number
+			any_governorships = { #basically for a small country, he should have 1 more governorships than domain gov; 1000+ 2 more, 2000+ 3 more, ect... this to keep their power in a big country
+				count < country_gov_ratio_number_minus
 				has_variable = governorship_owner
 				var:governorship_owner = scope:asked_landowner
 			}
@@ -974,34 +997,6 @@ landowner_asked_ratio_number = { #scope country, need asked_landowner
 			}
 			add = 1
 		}
-		if = {
-			limit = { 
-				num_of_cities >= 1000
-			}
-			add = -1
-		}
-		if = {
-			limit = { 
-				num_of_cities >= 2000
-			}
-			add = -1
-		}
-		if = {
-			limit = { 
-				num_of_cities >= 5000
-			}
-			add = -1
-		}
-	}
-	else_if = {
-		limit = {
-			any_governorships = { #basically for a small country, he should have 1 more governorships than domain gov; 1000+ 2 more, 2000+ 3 more, ect... this to keep their power in a big country
-				count < country_gov_ratio_number_minus
-				has_variable = governorship_owner
-				var:governorship_owner = scope:asked_landowner
-			}
-		}
-		add = country_gov_ratio_number
 		if = {
 			limit = { 
 				num_of_cities >= 1000
@@ -1043,6 +1038,13 @@ subject_third_cities = {
 	ceiling = yes
 }
 
+country_half_cities = {
+	value = 0
+	add = num_of_cities
+	divide = 2 
+	ceiling = yes
+}
+
 owned_governorship_num_of_cities = { #scope CHAR need a tmp_owner char scope
 	value = 0
 	employer = {
@@ -1080,7 +1082,10 @@ disloyal_country_part = {#scope country
 	every_character = {
 		limit = {
 			has_variable = country_ownership
-			loyalty < 33
+			OR = {
+				loyalty < 33
+				has_variable = head_intent_disloyal
+			}
 		}
 		add = var:country_ownership
 	}
@@ -1437,6 +1442,40 @@ count_reclaim = {
 		} 
 		add = 2
 	}
+}
+precount_potential_civil_war = {
+	value = 0
+	every_owned_province = {
+		limit = {
+			NOT = {
+				is_capital = yes
+			}
+			OR = {
+				AND = {
+					exists = governor
+					governor = {
+						loyalty < 35
+					}
+				}
+				NOT = {exists = governor}
+				state_loyalty < 35
+			}
+		}
+		add = 1
+	}
+}
+count_potential_civil_war = {
+	value = precount_potential_civil_war
+	multiply = 100
+	divide = num_of_cities
+}
+
+third_of_governors = {
+	value = 0
+	every_governorships = {
+		add = 1
+	}
+	divide = 3
 }
 
 has_many_bloodlines = { #scope character

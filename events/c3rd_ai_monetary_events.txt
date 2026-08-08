@@ -1,0 +1,259 @@
+﻿namespace = c3rd_ai_monetary_events
+
+# AI Monetary Crisis Event - hidden for AI, sends notification to players
+c3rd_ai_monetary_events.1 = {
+	type = country_event
+	hidden = yes
+	
+	trigger = {
+		has_land = yes
+	}
+	
+	immediate = {
+		# Player = scope:nearby_player
+		
+		save_scope_as = affected_ai_country
+		
+		# Determine which crisis type to apply
+		if = {
+			limit = {
+				scope:nearby_player = {
+					has_variable = deflation_value
+					var:deflation_value >= 30
+				}
+			}
+			
+			
+			if = {
+				limit = {
+					scope:nearby_player = {
+						var:deflation_value >= 100
+					}
+				}
+				add_country_modifier = {
+					name = medium_deflation
+					duration = 7200
+				}
+			}
+			else = {
+				add_country_modifier = {
+					name = small_deflation
+					duration = 7200  # 25 years
+				}
+			}
+			
+			# Chance to also get silver unvalue if player has it
+			random_list = {
+				1 = {
+					modifier = {
+						add = 24
+						scope:nearby_player = {
+							has_variable = silver_unvalue
+							var:silver_unvalue >= 60
+						}
+					}
+					add_country_modifier = {
+						name = small_monetary_crash
+						duration = 3600
+					}
+				}
+				75 = {
+				}
+			}
+			
+			# Notify all neighboring players
+			every_country = {
+				limit = {
+					is_ai = no
+					has_land = yes
+					any_owned_province = {
+						any_neighbor_province = {
+							has_owner = yes
+							owner = root
+						}
+					}
+				}
+				root = {
+					save_scope_as = affected_ai_country
+				}
+				trigger_event = {
+					id = c3rd_ai_monetary_events.10
+					days = 1
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				scope:nearby_player = {
+					has_variable = silver_unvalue
+					var:silver_unvalue >= 60
+				}
+			}
+			
+			if = {
+				limit = {
+					scope:nearby_player = {
+						var:silver_unvalue >= 130
+					}
+				}
+				add_country_modifier = {
+					name = high_monetary_crash
+					duration = 7300
+				}
+			}
+			else = {
+				add_country_modifier = {
+					name = medium_monetary_crash
+					duration = 7300  # 20 years
+				}
+
+			}
+			random_list = {
+				1 = {
+					modifier = {
+						add = 24
+						scope:nearby_player = {
+							has_variable = deflation_value
+							var:deflation_value >= 60
+						}
+					}
+					add_country_modifier = {
+						name = small_deflation
+						duration = 3600
+					}
+				}
+				75 = {
+				}
+			}
+			# Notify all neighboring players
+			every_country = {
+				limit = {
+					is_ai = no
+					has_land = yes
+					is_ai = no
+					has_land = yes
+					any_owned_province = {
+						any_neighbor_province = {
+							has_owner = yes
+							owner = root
+						}
+					}
+				}
+				root = {
+					save_scope_as = affected_ai_country
+				}
+				trigger_event = {
+					id = c3rd_ai_monetary_events.11
+					days = 1
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				scope:nearby_player = {
+					has_country_modifier = solidus_introduced
+				}
+				NOT = {
+					has_country_modifier = solidus_introduced
+				}
+			}
+			
+			add_country_modifier = {
+				name = solidus_introduced
+				duration = -1 
+			}
+			
+			if = {
+				limit = {
+					is_tribal = no
+				}
+				add_stability = -10
+				add_legitimacy = -10
+			}
+			
+			# Notify all neighboring players
+			every_country = {
+				limit = {
+					is_ai = no
+					has_land = yes
+					root = {
+						any_owned_province = {
+							any_neighbor_province = {
+								has_owner = yes
+								owner = prev
+							}
+						}
+					}
+				}
+				root = {
+					save_scope_as = affected_ai_country
+				}
+				trigger_event = {
+					id = c3rd_ai_monetary_events.12
+					days = 1
+				}
+			}
+		}
+		else = {
+			add_country_modifier = {
+				name = small_deflation
+				duration = 3600  
+			}
+			
+			add_stability = -5
+		}
+	}
+}
+
+
+# Notification event for players - AI deflation crisis
+c3rd_ai_monetary_events.10 = {
+	type = country_event
+	title = "c3rd_ai_monetary_events.10.t"
+	desc = "c3rd_ai_monetary_events.10.desc"
+	picture = successors
+	
+	trigger = {
+		has_land = yes
+		is_ai = no
+	}
+	
+	option = {
+		name = "c3rd_ai_monetary_events.10.a"
+	}
+}
+
+# Notification event for players - AI monetary crash
+c3rd_ai_monetary_events.11 = {
+	type = country_event
+	title = "c3rd_ai_monetary_events.11.t"
+	desc = "c3rd_ai_monetary_events.11.desc"
+	picture = successors
+	
+	trigger = {
+		has_land = yes
+		is_ai = no
+	}
+	
+	option = {
+		name = "c3rd_ai_monetary_events.11.a"
+	}
+}
+
+# Notification event for players - AI solidus reform
+c3rd_ai_monetary_events.12 = {
+	type = country_event
+	title = "c3rd_ai_monetary_events.12.t"
+	desc = "c3rd_ai_monetary_events.12.desc"
+	picture = successors
+	
+	trigger = {
+		has_land = yes
+		is_ai = no
+	}
+	
+	option = {
+		name = "c3rd_ai_monetary_events.12.a"
+	}
+}
+

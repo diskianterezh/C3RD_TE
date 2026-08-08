@@ -1,4 +1,4 @@
-﻿l_french:
+l_french:
 internal_collapse:0 "Internal collapse"
 desc_internal_collapse:0 "The catastrophic instability of the country has triggered a spiral that could well lead to the outright collapse of the country!"
 general_corruption:0 "General corruption"
@@ -40,3 +40,4 @@ low_stab_event.4.b:0 "Nice try but no!"
 low_stab_event.4.b.tt1:0 "Things remain as they are, but [independent_current_governor.GetName] will resent you"
 low_stab_event.4.c:0 "You traitor!"
 low_stab_event.4.c.tt1:0 "Things remain as they are, but [independent_current_governor.GetName]'s resentment will have deleterious effects on the unity of the country"
+ 

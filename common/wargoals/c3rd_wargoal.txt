@@ -30,3 +30,24 @@ duchy_wargoal = {
 	ticking_war_score = 1
 }
 
+
+republican_civil_wargoal = {
+	type = superiority
+	uses_civil_war_conquest = yes
+	allow = { #Will this show up in the declare war window.
+		is_subject = no
+		has_variable = c3rd_cw_rebel_republic
+		scope:defender = var:c3rd_cw_rebel_republic
+		is_republic = yes
+	}
+	
+	attacker = {
+		conquer_cost = -0.2
+	}
+	defender = {
+		conquer_cost = -0.2
+	}
+	ticking_war_score = 0.2
+
+}
+

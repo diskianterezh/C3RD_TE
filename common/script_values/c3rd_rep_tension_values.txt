@@ -1,0 +1,35 @@
+﻿# Normalized tension for progress bar (0.0 - 1.0)
+c3rd_rep_tension_normalized = {
+	value = var:republican_tension
+}
+
+# Raw tension value (0-100) for text display
+c3rd_rep_tension_value = {
+	value = var:republican_tension
+}
+
+# Senate approval as 0-100 integer for GUI text display
+c3rd_rep_senate_pct = {
+	value = has_senate_approval
+	multiply = 100
+}
+
+numb_olig_states_value = {
+	value = 0
+	
+	every_country_state = {
+		limit = {
+			governor = {
+				is_ruler = no
+				loyalty <= 50
+				character_party = {
+					OR = {
+						is_party_type = oligarchic_party
+						is_party_type = optimates_party
+					}
+				}
+			}
+		}
+		add = 1
+	}
+}

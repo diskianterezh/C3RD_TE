@@ -1,0 +1,322 @@
+﻿c3rd_civil_war_republic_effect = {
+	# Called from country scope
+	# Creates a rebel republican tag, transfers weak-loyalty provinces, declares war
+	hidden_effect = {
+		if = {
+			limit = {
+				any_owned_province = {
+					owner = root
+					NOR = {
+						this = root.capital_scope
+						AND = {
+							exists = governor
+							governor = {
+								is_ruler = yes
+							}
+						}
+					}
+					OR = {
+						state_loyalty < 35
+						AND = {
+							exists = governor
+							governor = {
+								loyalty < 35
+							}
+						}
+					}
+				}
+			}
+			random_owned_province = {
+				limit = {
+					owner = root
+					NOR = {
+						this = root.capital_scope
+						AND = {
+							exists = governor
+							governor = {
+								is_ruler = yes
+							}
+						}
+					}
+					OR = {
+						state_loyalty < 35
+						AND = {
+							exists = governor
+							governor = {
+								loyalty < 35
+							}
+						}
+					}
+				}
+				weight = {
+					modifier = {
+						add = total_population
+					}
+					modifier = {
+						factor = 2
+						governor = {
+							loyalty < 35
+						}
+					}
+					modifier = {
+						factor = 2
+						governor = {
+							loyalty < 20
+						}
+					}
+				}
+				save_scope_as = c3rd_rebel_capital_province
+			}
+		}
+		else_if = {
+			limit = {
+				any_owned_province = {
+					owner = root
+					NOR = {
+						this = root.capital_scope
+						AND = {
+							exists = governor
+							governor = {
+								is_ruler = yes
+							}
+						}
+					}
+				}
+			}
+			random_owned_province = {
+				limit = {
+					owner = root
+					NOR = {
+						this = root.capital_scope
+						AND = {
+							exists = governor
+							governor = {
+								is_ruler = yes
+							}
+						}
+					}
+				}
+				weight = {
+					modifier = {
+						add = total_population
+					}
+					modifier = {
+						factor = 2
+						governor = {
+							loyalty < 35
+						}
+					}
+					modifier = {
+						factor = 2
+						governor = {
+							loyalty < 20
+						}
+					}
+				}
+				save_scope_as = c3rd_rebel_capital_province
+			}
+		}
+		else = {
+			random_owned_province = {
+				limit = {
+					owner = root
+					NOT = {
+						this = root.capital_scope
+					}
+				}
+				weight = {
+					modifier = {
+						add = total_population
+					}
+					modifier = {
+						factor = 2
+						governor = {
+							loyalty < 35
+						}
+					}
+					modifier = {
+						factor = 2
+						governor = {
+							loyalty < 20
+						}
+					}
+				}
+				save_scope_as = c3rd_rebel_capital_province
+			}
+		}
+		if = {
+			limit = {
+				exists = scope:c3rd_rebel_capital_province
+			}
+			scope:c3rd_rebel_capital_province = {
+				governorship = {
+					save_scope_as = c3rd_rebel_capital_governorship
+				}
+				create_country = {
+					save_scope_as = c3rd_rebel_tag_scope
+				}
+			}
+			scope:c3rd_rebel_tag_scope = {
+				set_variable = {
+					name = c3rd_cw_initial_cities
+					value = 1
+				}
+			}
+			scope:c3rd_rebel_capital_governorship = {
+				if = {
+					limit = {
+						NOT = {
+							governor = {
+								is_ruler = yes
+							}
+						}
+					}
+					every_governorship_state = {
+						every_state_province = {
+							set_owned_by = scope:c3rd_rebel_tag_scope
+							scope:c3rd_rebel_tag_scope = {
+								change_variable = {
+									name = c3rd_cw_initial_cities
+									add = 1
+								}
+							}
+						}
+					}
+					governor = {
+						remove_all_positions = yes
+						move_country = scope:c3rd_rebel_tag_scope
+						set_home_country = scope:c3rd_rebel_tag_scope
+						save_scope_as = cw_rebel_leader
+					}
+				}
+			}
+			every_governorships = {
+				limit = {
+					owner = root
+					exists = governor
+					governor = {
+						is_ruler = no
+						loyalty < 35
+					}
+				}
+				governor = {
+					remove_all_positions = yes
+					move_country = scope:c3rd_rebel_tag_scope
+					set_home_country = scope:c3rd_rebel_tag_scope
+				}
+				every_governorship_state = {
+					every_state_province = {
+						set_owned_by = scope:c3rd_rebel_tag_scope
+						scope:c3rd_rebel_tag_scope = {
+							change_variable = {
+								name = c3rd_cw_initial_cities
+								add = 1
+							}
+						}
+					}
+				}
+			}
+			every_governorships = {
+				limit = {
+					owner = root
+					NOR = {
+						exists = governor
+						any_governorship_state = {
+							any_state_province = {
+								this = root.capital_scope
+							}
+						}
+					}
+				}
+				every_governorship_state = {
+					every_state_province = {
+						set_owned_by = scope:c3rd_rebel_tag_scope
+						scope:c3rd_rebel_tag_scope = {
+							change_variable = {
+								name = c3rd_cw_initial_cities
+								add = 1
+							}
+						}
+					}
+				}
+			}
+			every_owned_province = {
+				limit = {
+					owner = root
+					NOT = {
+						is_capital = yes
+					}
+					state_loyalty < 35
+				}
+				scope:c3rd_rebel_tag_scope = {
+					change_variable = {
+						name = c3rd_cw_initial_cities
+						add = 1
+					}
+				}
+				set_owned_by = scope:c3rd_rebel_tag_scope
+			}
+			#cities count after swap
+			set_variable = {
+				name = c3rd_cw_rebel_republic
+				value = scope:c3rd_rebel_tag_scope
+			}
+			add_country_modifier = {
+				name = c3rd_civil_war_republic_ae
+				duration = -1
+			}
+			scope:c3rd_rebel_tag_scope = {
+				set_as_ruler = scope:cw_rebel_leader
+				set_variable = {
+					name = c3rd_cw_mother_republic
+					value = root
+				}
+				add_country_modifier = {
+					name = c3rd_rebel_republic_mod
+					duration = -1
+				}
+				add_country_modifier = {
+					name = c3rd_civil_war_republic_ae
+					duration = -1
+				}
+			}
+			declare_war_with_wargoal = {
+				war_goal = imperial_conquest_wargoal
+				target = scope:c3rd_rebel_tag_scope
+			}
+			set_variable = {
+				name = c3rd_cw_initial_cities
+				value = num_of_cities
+			}
+			change_variable = {
+				name = c3rd_cw_initial_cities
+				divide = 2
+			}
+			scope:c3rd_rebel_tag_scope = {
+				change_variable = {
+					name = c3rd_cw_initial_cities
+					divide = 2
+				}
+			}
+		}
+		else = {
+			# Fallback: no low-loyalty province found — apply tension penalty instead. 
+			# This is a security but should theorically never happen
+			change_variable = {
+				name = republican_tension
+				add = -20
+			}
+			if = {
+				limit = {
+					var:republican_tension < 0
+				}
+				remove_variable = republican_tension
+				set_variable = {
+					name = republican_tension
+					value = 0
+				}
+			}
+			add_stability = -5
+		}
+	}
+}

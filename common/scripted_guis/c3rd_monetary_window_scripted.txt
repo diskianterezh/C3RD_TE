@@ -145,13 +145,19 @@ c3rd_aristocratic_reforms = {
 
 c3rd_monetary_political_unstability = {
 	is_shown = {
-		has_country_modifier = political_unstability
+		has_country_modifier = rep_tension_3
 	}
 }
 
 c3rd_monetary_second_reform_law = {
 	is_shown = {
 		has_law = second_reform_law
+	}
+}
+
+c3rd_monetary_lex_frumentaria = {
+	is_shown = {
+		has_law = lex_frumentaria
 	}
 }
 

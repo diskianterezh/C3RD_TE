@@ -1,4 +1,4 @@
-namespace = country_diplomacy_c3rd
+﻿namespace = country_diplomacy_c3rd
 
 
 #Tributary wants more - c3rd version to prevent immediate independence
